@@ -27,9 +27,6 @@ You can also pass in a string as an argument to have the pop up box contain that
 
 ```js
 var age = prompt("How old are you?")
-// ES6 String Interpolation
-alert(`You are ${age} years old.`)
-// ES5 Version
 alert("You are " + age + " years old.")
 ```
 
@@ -90,3 +87,20 @@ Nice to meet you, `Sean`. What year would you like to go to? **(YYYY)**
 
 
 ### Part 2: Make Your Game More Complex
+
+* Create a series of enemies for your player to face. (perhaps an array of objects)
+  * Each enemy can attack your player. (Or your player can recieve powerups or points from other characters)
+  * the enemies can (given some randomness- `Math.random`) hit or miss your player
+  * Your player should have **hit points** that you keep track of in a variable
+  * Give your game the ability to enter a "battle loop" between your player and enemy in which the player can fight back, and hurt the enemy.
+    * start your enemies with one hit, one kill
+  * Randomize your player's "hits" and "misses" on the enemy.
+  * Add hit points to the enemies.
+
+* create weapons that your player can use on the enemies.
+  * make those weapons work on many enemies at once.
+
+### Part 3: Go Further
+* How would you make your game completely dynamic?
+* Create a game that when started up, the user is presented with a different set of choices than before.
+* Those can be the choices from the earlier version of the game, or they can each be different for every game start. (For example, if the player goes from room to room, randomize which room is next to which room every time.)
