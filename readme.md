@@ -92,10 +92,19 @@ Nice to meet you, `Sean`. What year would you like to go to? **(YYYY)**
                     * Smart choice. Unfortunately the Doc was deeply in love with Clara, and when he gets back to 1985 he becomes very depressed.
 
 
-### Part 2: Further: Make Your Game Repeat as many times as the player wants 
-* Have your player repeat a set of challenges or questions over again- if a player enters a situation or room, allow them to leave and come back if they want. 
+### Part 2: Further: Name
+* Ask the player for their name at the beggining of the game and use it in the game.
 
-### Part 3: Further: Make Your Game More Complex
+### Part 3: Further: Keep Score
+* Assign a score for each task in the game. Report the player's score at the end of the game.
+
+### Part 4: Further: Make Your Game Repeat as many times as the player wants 
+* Have your player repeat a set of challenges or questions over again- if a player enters a situation or room, allow them to leave and come back if they want. 
+#### Pseudo-coded Example
+* You are in a dark room. Would you like to enter the left door or the right door?
+   * You enter a drawing room with heavy curtains. A mage is sitting on the sofa. Would You like to talk to him? Y/Leave through the right door/Leave through the left door -----> **Left door leads to the dark room**
+
+### Part 5: Further: Make Your Game More Complex
 
 * Create a series of enemies for your player to face. (perhaps an array of objects)
   * Each enemy can attack your player. (Or your player can recieve powerups or points from other characters)
@@ -109,7 +118,7 @@ Nice to meet you, `Sean`. What year would you like to go to? **(YYYY)**
 * create weapons that your player can use on the enemies.
   * make those weapons work on many enemies at once.
 
-### Part 4: Further: Dynamic Game
+### Part 6: Further: Dynamic Game
 * How would you make your game completely dynamic?
 * Create a game that when started up, the user is presented with a different set of choices than before.
 * Those can be a set of possible choices, or they can each be completely different for every game start. (For example, if the player goes from room to room, randomize which room is next to which room every time.)
