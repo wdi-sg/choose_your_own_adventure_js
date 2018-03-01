@@ -11,6 +11,13 @@ Using what you know about data types, variables, operators, conditional blocks, 
 
 > **Hint:** You may need `parseInt()` and `toString()`
 
+> **Hint:** if you finish your code, clean it up by putting certain parts inside functions. If needed they can be used again later as well.
+
+> **Hint:** Need a [random number? ](https://www.freecodecamp.org/challenges/generate-random-whole-numbers-with-javascript)
+```
+var randomNumberBetween0and19 = Math.floor(Math.random() * 20);
+```
+
 ## How to Get User Input
 
 At any point in our JS code, if we write prompt(), a pop up box will open in our browser for a user to enter in text.
@@ -85,7 +92,10 @@ Nice to meet you, `Sean`. What year would you like to go to? **(YYYY)**
                     * Smart choice. Unfortunately the Doc was deeply in love with Clara, and when he gets back to 1985 he becomes very depressed.
 
 
-### Part 2: Make Your Game More Complex
+### Part 2: Further: Make Your Game Repeat as many times as the player wants 
+* Have your player repeat a set of challenges or questions over again- if a player enters a situation or room, allow them to leave and come back if they want. 
+
+### Part 3: Further: Make Your Game More Complex
 
 * Create a series of enemies for your player to face. (perhaps an array of objects)
   * Each enemy can attack your player. (Or your player can recieve powerups or points from other characters)
@@ -99,7 +109,7 @@ Nice to meet you, `Sean`. What year would you like to go to? **(YYYY)**
 * create weapons that your player can use on the enemies.
   * make those weapons work on many enemies at once.
 
-### Part 3: Go Further
+### Part 4: Further: Dynamic Game
 * How would you make your game completely dynamic?
 * Create a game that when started up, the user is presented with a different set of choices than before.
-* Those can be the choices from the earlier version of the game, or they can each be different for every game start. (For example, if the player goes from room to room, randomize which room is next to which room every time.)
+* Those can be a set of possible choices, or they can each be completely different for every game start. (For example, if the player goes from room to room, randomize which room is next to which room every time.)
