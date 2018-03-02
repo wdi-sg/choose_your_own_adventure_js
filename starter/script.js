@@ -33,16 +33,25 @@ function generateQuestionAndAnswer(difficulty="normal") {
 function generateWrongAnswers(answer) {
     const errorPercent = 30/100;
     let errorRange = Math.ceil(answer*errorPercent);
-    let wrongAns1 = answer - Math.floor(Math.random() * errorRange);
-    let wrongAns2 = answer + Math.floor(Math.random() * errorRange);
+    const numberWrongAnswers = 2;
+    let wrongAns = [0,0];
+    for (let i = 0; i < numberWrongAnswers; i++) {
+        let offsetSign = Math.floor(Math.random() * 2);
+        if (offsetSign === 0) {
+            wrongAns[i] = answer - Math.floor(Math.random() * errorRange);
+            if (wrongAns[i] === answer) {
+                wrongAns[i]--;
+            }
+        }
+        else if (offsetSign === 1) {
+            wrongAns[i] = answer + Math.floor(Math.random() * errorRange);
+            if (wrongAns[i] === answer) {
+                wrongAns[i]++;
+            }
+        }
 
-    if (wrongAns1 === answer) {
-        wrongAns1--;
     }
-    if (wrongAns2 === answer) {
-        wrongAns2++;
-    }
-    console.log(wrongAns1, wrongAns2);
+    console.log(wrongAns);
 }
 
 // input: Number
@@ -57,4 +66,4 @@ function generateScore(answer) {
     return Math.ceil(answer); 
 }
 
-generateScore(-50);
+generateWrongAnswers(50);
