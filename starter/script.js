@@ -1,11 +1,5 @@
 
-//     - 1 correct answer, other 2 use random number 30% away from correct answer, rounded away from answer to avoid same answers
-//     - Score from 1-10. 
-//         - If negative, abs(ans) first
-//         - If abs(ans) > 10, mod the value
-//         - If value is not integer, ceil to next int
-
-// input: difficulty [string]
+// input: String
 // output: {"question": String,
 //          "answer": Number}
 function generateQuestionAndAnswer(difficulty="normal") {
@@ -34,7 +28,7 @@ function generateQuestionAndAnswer(difficulty="normal") {
             "answer": answer}
 }
 
-// input: answer [Number]
+// input: Number
 // output: [Number,Number]
 function generateWrongAnswers(answer) {
     const errorPercent = 30/100;
@@ -51,6 +45,16 @@ function generateWrongAnswers(answer) {
     console.log(wrongAns1, wrongAns2);
 }
 
-generateWrongAnswers(10);
-generateWrongAnswers(100);
-generateWrongAnswers(500);
+// input: Number
+// output: Number
+// generates an integer score betwee 1-10 (inclusive)
+function generateScore(answer) {
+    answer = Math.abs(answer);
+    while (10 <= answer) {
+        answer /= 10;
+    }
+    console.log(Math.ceil(answer));
+    return Math.ceil(answer); 
+}
+
+generateScore(-50);
