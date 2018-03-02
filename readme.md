@@ -9,6 +9,8 @@ Using what you know about data types, variables, operators, conditional blocks, 
 * Your code must contain **at least one loop**.
 * Your code must make use of **both string and number user inputs**.
 
+> **Hint:** For each small milestone you reach in your program, make a git commit
+
 > **Hint:** You may need `parseInt()` and `toString()`
 
 > **Hint:** if you finish your code, clean it up by putting certain parts inside functions. If needed they can be used again later as well.
@@ -106,7 +108,7 @@ Nice to meet you, `Sean`. What year would you like to go to? **(YYYY)**
 
 ### Part 5: Further: Make Your Game More Complex
 
-* Create a series of enemies for your player to face. (perhaps an array of objects)
+* Create enemies for your player to face. (Or a series of enemies - perhaps an array of objects)
   * Each enemy can attack your player. (Or your player can recieve powerups or points from other characters)
   * the enemies can (given some randomness- `Math.random`) hit or miss your player
   * Your player should have **hit points** that you keep track of in a variable
