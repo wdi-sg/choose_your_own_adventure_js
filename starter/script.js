@@ -1,3 +1,4 @@
+let heroHP = 10;
 // ## Battle System
 // - Arithmatic question appears
 // - Enemy HP and Hero HP appear
@@ -23,7 +24,6 @@
 Battle System
 *************************
 *************************/
-let heroHP = 10;
 let enemyHP = 10;
 
 // input: Number, Number
@@ -61,7 +61,7 @@ function battleRound(heroHP, enemyHP) {
     }
 }
 
-battleRound(heroHP, enemyHP);
+heroHP = battleRound(heroHP, enemyHP);
 /************************
 Countdown Timer (KIV)
 *************************/
