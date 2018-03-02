@@ -2,24 +2,42 @@ let heroHP = 10;
 let numberOfLevels = 10 + Math.floor(Math.random() * 15);
 let prevLevels = [];
 
-// ## Level Generation Rules
-// - random selection of levels (between 10 and 25, unreported to user)
-// - at least 1 Smonster in first 3 levels
-// - Item and Stats stores appear after 7 levels
-// - Each Mini boss must be preceded by at least 3 Smonsters
-// - Super boss appears at the end only
-// - random generation of levels based on above rules
+/************************
+*************************
+Main Game
+*************************
+*************************/
+function startGame() {
+    let name = prompt("What is your name?");
+    alert(name+", you are a super smart mathemagician who turns coins into bundles of cash, just using your mind! You have a very unique job - you create cash for your government! (how else can a country get money?)\n\n*Scary Noise* One Tuesday evening, while going back home from work, a mysterious black van stops next to you and abducts you. (The government should have put more protection planned for you right?). Oh no!\n\n");
+    
+    alert("\"Don't worry "+name+", we aren't bad guys. In fact, we are fellow mathemagicians, but we can only create a few coins from loads of cash. Obviously our mathemagical powers are inferior to yours. Anyways, WE NEED YOU TO SAVE OUR WORLD!\n\nThe secret parallel world, StashOverflow, the place where our powers draw new money from, is under attack by strange smart monsters! Hundreds of us mathemagicians have fallen to these monsters. We now have found you, "+name+", the greatest of us all, to save us! Find the Giant Scroll of Knowledge, which we can use to get rid of all the monsters at once!\"\n\n");
 
-// ### 7 Destinations
-// - Treasure room
-// - Smonster
-// - Mini boss
-// - Super boss
-// - Healing spring
-// - Item store
-// - Stats store
-// - Default Left/Right choice
-// - I smell something nice Left/Right choice for Treasure,Item,Stats,Healing Spring; else any other based on rules
+    alert("[Enter Training Centre]");
+
+    alert("*Robotic Voice* Welcome "+name+", thank you for volunteering to be our sacrifice *ahem* I mean Hero. You will be moving around StashOverflow by choosing options listed to you. Occasionally you will meet smart monsters that stop your progress. You must get rid of them in order to move on. In order to get to the Giant Scroll of Knowledge, you will need to know how to use your smartness to get rid of the smart monsters. \n\nIn this training centre, you will learn the basics of fighting to ensure (yea right...) your success! After this training, you will be teleported to the land of StashOverflow, where smart monsters and bosses lurk. We call smart monsters, Smonsters, because it is a smart thing to do.\n\n")
+
+    alert("While I can sense you are a physical weakling, your math skills is all you will need in StashOverflow. In StashOverflow, your mental energy can be channelled to damage Smonsters. The Smonsters can do the same to you though, and remember, the ARE smart. Try not to die. For starters, this is the basic weapon, the \"Lousy Number Wand\", which helps to channel your mental energy.\n\n");
+ 
+    alert("When in battle, the world of StashOverflow randomly displays math questions and three options as answers. Choosing the right answer within the time limit channels your mental energy to your \"Lousy Number Wand\", which shoots a rainbow laser at the Smonster, damaging them. Weapons such as the \"Lousy Number Wand\" might also amplify the damage done to a Smonster. \n\nIf you select a wrong answer, or are too slow, the Smonster will attack you and you lose HP. We are not sure how damage is really calculated in StashOverflow, but we have a sense that it is related to the actual value of your answers. If you find out, we have bonus questions after you have retrieved the Giant Scroll of Knowledge, to test out your hypothesis (by which you would be super duper smarter right?). Now, fight a bag of harmless potatoes. You won't die in this fight.\n\n");
+
+    battleRound(9999,10);
+
+    alert("Great job on defeating the potato! Now try this baby Smonster we managed to catch in the dustbin! You will only have your normal HP now.");
+
+    battleRound(30,20);
+
+    alert("Great job on defeating the baby Smonster! Time to teleport you StashOverflow!");
+
+    mainGame();
+}
+
+function mainGame(name) {
+    while (true) {
+        level(levelGenerator);
+    }
+    
+}
 
 /************************
 *************************
@@ -29,8 +47,6 @@ Level Generation
 
 // input nil
 // output String
-
-
 function levelGenerator() {
     let roomTypes = [
         "Treasure Room",
@@ -47,8 +63,9 @@ function levelGenerator() {
         return "Super Boss";
     }
     else if (prevLevels.length + 1 === 1) {
-        prevLevels = prevLevels.concat("Forked Path");
-        return "Forked Path";
+        let nextLevel = ["Smonster","Forked Path"][Math.floor(Math.random() * 2)];
+        prevLevels = prevLevels.concat(nextLevel);
+        return nextLevel;
     }
     else if (prevLevels[prevLevels.length - 1] === "Forked Path") {
         let nextLevel = ["Smonster","Forked Path"][Math.floor(Math.random() * 2)];
@@ -61,12 +78,6 @@ function levelGenerator() {
         return nextLevel;
     }
 }
-
-
-
-
-
-
 
 /************************
 *************************
@@ -110,7 +121,9 @@ function battleRound(heroHP, enemyHP) {
     }
 }
 
-heroHP = battleRound(heroHP, enemyHP);
+// heroHP = battleRound(heroHP, enemyHP);
+
+
 /************************
 Countdown Timer (KIV)
 *************************/
@@ -153,8 +166,7 @@ Countdown Timer (KIV)
 END
 *************************/
 
-
-
+startGame();
 
 
 
