@@ -1,22 +1,71 @@
 let heroHP = 10;
-// ## Battle System
-// - Arithmatic question appears
-// - Enemy HP and Hero HP appear
-// - Countdown timer starts (KIV)
-// - 3 options (1 correct) appear
-//     - select options using 1,2,3
-// - if correct option selected within time, damage enemy * amplifier
-//     - else damage on self * DEF formula
-// - if enemy HP = 0
-//     - stop game
-//     - declare winner
-//     - distribute random slimes based on enemy HP
-//     - continue with next destination
-// - if hero HP = 0
-//     - stop game
-//     - END GAME page
-//     - Try again? 
-//     - bring to start of current adventure
+let numberOfLevels = 10 + Math.floor(Math.random() * 15);
+let prevLevels = [];
+
+// ## Level Generation Rules
+// - random selection of levels (between 10 and 25, unreported to user)
+// - at least 1 Smonster in first 3 levels
+// - Item and Stats stores appear after 7 levels
+// - Each Mini boss must be preceded by at least 3 Smonsters
+// - Super boss appears at the end only
+// - random generation of levels based on above rules
+
+// ### 7 Destinations
+// - Treasure room
+// - Smonster
+// - Mini boss
+// - Super boss
+// - Healing spring
+// - Item store
+// - Stats store
+// - Default Left/Right choice
+// - I smell something nice Left/Right choice for Treasure,Item,Stats,Healing Spring; else any other based on rules
+
+/************************
+*************************
+Level Generation
+*************************
+*************************/
+
+// input nil
+// output String
+
+
+function levelGenerator() {
+    let roomTypes = [
+        "Treasure Room",
+        "Smonster",
+        "Mini Boss",
+        "Healing Spring",
+        "Item Store",
+        "Stats Store",
+        "Forked Path",
+        "Good Stuff Path"
+    ]
+    if (prevLevels.length + 1 === numberOfLevels) {
+        prevLevels = prevLevels.concat("Super Boss");
+        return "Super Boss";
+    }
+    else if (prevLevels.length + 1 === 1) {
+        prevLevels = prevLevels.concat("Forked Path");
+        return "Forked Path";
+    }
+    else if (prevLevels[prevLevels.length - 1] === "Forked Path") {
+        let nextLevel = ["Smonster","Forked Path"][Math.floor(Math.random() * 2)];
+        prevLevels = prevLevels.concat(nextLevel);
+        return nextLevel;
+    }
+    else {
+        let nextLevel = roomTypes[Math.floor(Math.random() * roomTypes.length)];
+        prevLevels = prevLevels.concat(nextLevel);
+        return nextLevel;
+    }
+}
+
+
+
+
+
 
 
 /************************
