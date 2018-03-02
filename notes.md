@@ -80,5 +80,5 @@ You are a super smart mathemagician, finding the Giant Scroll of Knowledge. Figh
     - 1 correct answer, other 2 use random number 30% away from correct answer, rounded away from answer to avoid same answers
     - Score from 1-10. 
         - If negative, abs(ans) first
-        - If abs(ans) > 10, mod the value
+        - If abs(ans) > 10, divide the value by 10
         - If value is not integer, ceil to next int
