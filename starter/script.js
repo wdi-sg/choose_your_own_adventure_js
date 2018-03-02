@@ -1,8 +1,4 @@
-// put code here!
 
-// ## Question and Answer Generation and Score Calculation
-// - Questions
-//     - Random 1-2 digit number, Random operator (+,-,*,% only), Random 1-2 digit number
 //     - 1 correct answer, other 2 use random number 30% away from correct answer, rounded away from answer to avoid same answers
 //     - Score from 1-10. 
 //         - If negative, abs(ans) first
@@ -10,8 +6,8 @@
 //         - If value is not integer, ceil to next int
 
 // input: difficulty [string]
-// output: object {"question": [String]}
-//                 "answer": [Number]
+// output: {"question": String,
+//          "answer": Number}
 function generateQuestionAndAnswer(difficulty="normal") {
     // get random number from 1-99
     let numRand1 = Math.floor(Math.random() * 99) + 1;
@@ -37,3 +33,24 @@ function generateQuestionAndAnswer(difficulty="normal") {
     return {"question": question,
             "answer": answer}
 }
+
+// input: answer [Number]
+// output: [Number,Number]
+function generateWrongAnswers(answer) {
+    const errorPercent = 30/100;
+    let errorRange = Math.ceil(answer*errorPercent);
+    let wrongAns1 = answer - Math.floor(Math.random() * errorRange);
+    let wrongAns2 = answer + Math.floor(Math.random() * errorRange);
+
+    if (wrongAns1 === answer) {
+        wrongAns1--;
+    }
+    if (wrongAns2 === answer) {
+        wrongAns2++;
+    }
+    console.log(wrongAns1, wrongAns2);
+}
+
+generateWrongAnswers(10);
+generateWrongAnswers(100);
+generateWrongAnswers(500);
