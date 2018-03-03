@@ -21,17 +21,17 @@ const getNumber = (start, end) => {
 let gameState = true;
 // let gameSteps = 3;
 const animals = ["cat", "dog", "fish"];
-// let user = {
-// 	name: "",
-// 	str: 0,
-// 	dec: 0,
-// 	cp: 0,
-// 	unallocated: 0,
-// 	hp: 10,
-// 	fuel: getNumber(4, 10), // random fuel between 5 to 10
-// 	location: "",
-// 	fightsToFight: ""
-// };
+let user = {
+	name: "",
+	str: 0,
+	dex: 0,
+	cp: 0,
+	unallocated: 0,
+	hp: 10,
+	fuel: getNumber(4, 10), // random fuel between 5 to 10
+	location: "",
+	fightsToFight: ""
+};
 let userCountry;
 let totalPoints;
 let inputStr;
@@ -128,7 +128,7 @@ const allocationPrompt = () => {
 
 const allocationAssign = () => {
 	// continue game
-	user.dex += user.unallocated - inputStr;
+	user.dex += user.unallocated - parseInt(inputStr);
 	user.str += parseInt(inputStr);
 	user.unallocated = 0;
 	console.log(`- ${user.name} attributes -\nCOMBAT POWER: ${user.cp}\nHP: ${user.hp}\nSTR: ${user.str}\nDEX: ${user.dex}`);
@@ -157,7 +157,7 @@ const planeLogic = () => {
 	return false;
 };
 
-/*
+
 // step 1 - setup
 setup();
 
@@ -181,7 +181,7 @@ if (planeLogic()) {
 		// call end game
 	};
 };
-*/
+
 
 // STEP 5 // fight time
 /* 
@@ -190,10 +190,10 @@ zombie str and dex is based on hash and allocated randomly
 user gain points after each win and allocate points
 // */
 
-const generateZombie = (name) => {
-	const cp = name.hashCode() + 2;
-	const str = getNumber(0, cp);
-	const dex = cp - str;
+const generateZombie = (name, rank) => {
+	const cp = name.hashCode() + (rank * 2);
+	const str = getNumber(1, cp);
+	const dex = 1 + cp - str + (rank * 2);
 	const zomb = {
 		name,
 		cp,
@@ -206,17 +206,17 @@ const generateZombie = (name) => {
 
 
 // dummy data
-let user = {
-	cp: 8,
-	hp: 10,
-	str: 4,
-	dex: 4,
-	fightsToFight: 3,
-	fuel: 10,
-	location: "",
-	name: "junwei",
-	unallocated: 0
-};
+// let user = {
+// 	cp: 8,
+// 	hp: 10,
+// 	str: 4,
+// 	dex: 2,
+// 	fightsToFight: 5,
+// 	fuel: 10,
+// 	location: "",
+// 	name: "junwei",
+// 	unallocated: 0
+// };
 
 const fight = () => {
 	let fightNumber;
@@ -264,13 +264,13 @@ const fight = () => {
 	} else {
 		// RUN SEQUENCE
 		let runSuccess = false;
-		while (!runSuccess || user.hp<=0) {
+		while (!runSuccess && user.hp>0) {
 			fightNumber = getNumber(1, 100);
 			if (runPercent > fightNumber) {
 				runSuccess = true;
 			} else {
-				console.log(`${user.name} got hurt while running away. ${user.name} loses 1 HP.`);
-				user.hp += -1;
+				console.log(`${user.name} got hurt while running away. ${user.name} loses 2 HP.`);
+				user.hp += -2;
 			}
 		}
 		if (user.hp > 0) {
@@ -294,7 +294,7 @@ for (i=0; i<user.fightsToFight; i++) {
 	console.log("fight number: ", i)
 	// console.log(`there are ${enemies.length} left in the pool.`);
 	// generate enemy from pool bu random
-	enemy = generateZombie(enemies[getNumber(0, enemies.length-1)]);
+	enemy = generateZombie(enemies[getNumber(0, enemies.length-1)], i);
 	enemy.hp = i + 1;
 	// console.log(enemy);
 	// remove enemy from pool
