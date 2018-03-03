@@ -1,0 +1,142 @@
+html, body {
+    margin:0;
+    box-sizing: border-box;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background:darkslategrey;
+}
+
+header {
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px 0 0 0;
+    color:white;
+}
+
+#output {
+    font-size: 18px;
+    width: 75%;
+    margin: 10px auto;
+    background:bisque;
+    border-radius:12px;
+    height:55vh;
+    text-align:left;
+    line-height:1.5em;
+    padding: 20px;
+    position: relative;
+    overflow: auto;
+}
+
+#game-message {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,128,1);
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    width: 100%;
+    height: 2em;
+    text-align:center;
+    color: white;
+    line-height: 2em;
+    font-size: 28px;
+}
+
+#statusbar {
+    font-size: 18px;
+    font-weight: bold;
+    width: 75%;
+    margin: 10px auto;
+    color: white;
+    height: 20vh;
+    text-align:left;
+    line-height:1.5em;
+    padding: 20px;
+}
+
+#character, #enemies {
+    border: 3px solid rgb(92, 87, 87);
+    border-radius: 12px;
+    padding: 20px
+}
+
+#character {
+    background:rgb(0, 81, 255);
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+#enemies {
+    background:rgb(117, 53, 0);
+    width: 30%;
+    height: 100%;
+    float: right;
+}
+
+#input {
+    width: 70%;
+    margin: 10px auto;
+    position: fixed;
+    bottom:2px;
+    left: 15%;
+    height: 2em;
+    line-height: 2em;
+}
+
+#character-name, #inventory-title, #enemy-header {
+    text-decoration:underline;
+    font-size: 24px;
+}
+
+#character-info {
+    float:left;
+    width: 50%;
+}
+
+#inventory {
+    float:right;
+    width: 40%;
+}
+
+#inventory-list {
+    list-style: none;
+}
+
+input {
+    height: 1.5em;
+    line-height: 1.5em;
+}
+
+#playermove {
+    width: 75%;
+}
+
+.actionResponse {
+    color:blue;
+}
+
+.hotkey {
+    font-weight: bold;
+    color: red;
+}
+
+.navError {
+    color:red;
+}
+
+p {
+    margin-top: 8px;
+}
+
+@media (max-width: 800px) {
+    #output {
+        font-size: 18px;
+        width: 85%;
+    }
+
+    #character, #enemies, #inventory, #character-info {
+        float:none;
+        margin:0 auto;
+    }
+}
