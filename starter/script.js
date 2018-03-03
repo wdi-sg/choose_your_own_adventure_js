@@ -1,8 +1,9 @@
 // put code here!
 var map = [
-		[".", ".", "."], 
-		[".", ".", "."], 
-		[".", ".", "."]
+		[".", ".", ".","."], 
+		[".", ".", ".", "."], 
+		[".", ".", ".", "."],
+		[".", ".", ".", "."]
 	];
 
 var statusQuestion = ["Homework assignment!" + "\n" + "Do you stay and complete or hide til class is over?" + "\n" + "(Input stay or hide)",
@@ -12,6 +13,7 @@ var fightQuestion = ["You have encountered Akira!" + "\n" + "Do you fight or run
 						"You have encountered Nick!" + "\n" + "Do you fight or run away?" + "\n" + "(Input fight or run)", 
 						"You have encountered Ray!" + "\n" + "Do you fight or run away?" + "\n" + "(Input fight or run)"];
 var moveQuestion = ["Which direction would you like to move?" + "\n" + "(Input n, s, e or w)"];
+
 
 function buildMap() {
 	var mapOutput = "";
@@ -34,9 +36,15 @@ function gameStart() {
 	window.playerStatus = {
 		boredom: 0,
 		laziness: 0,
-		health: 10,
+		health: 5,
 		fright: 0
-	}
+	};
+	playerStatus["boredom"] = 0;
+	playerStatus["laziness"] = 0;
+	playerStatus["health"] = 5;
+	playerStatus["fright"] = 0;
+	window.endRow = Math.floor((Math.random() * (map.length - 1)) + 1);
+	window.endCol = Math.floor((Math.random() * (map.length - 1)) + 1);
 	buildMap();
 }
 
@@ -62,7 +70,7 @@ function newRoom() {
 		while (fightError) {
 			switch(prompt(fightQuestion[Math.floor(Math.random() * 3)])) {
 				case "fight":
-					playerStatus["health"] = playerStatus["health"] + 1;
+					playerStatus["health"] = playerStatus["health"] - 1;
 					console.log("Your health has decreased by 1");
 					fightError = false;
 					break;
@@ -129,6 +137,38 @@ function newRoom() {
 		buildMap();
 }
 gameStart();
+
+// gameEnd when destination reached OR health = 0
+function gameEnd() {
+	if (currentPlayerRow === endRow && currentPlayerCol === endCol) {
+		gameStarted = false;
+		console.log("You've reached the exit!");
+		for (var stat in playerStatus) {
+			console.log("Your " + stat + " is " + playerStatus[stat]);
+		}
+		var playAgain = confirm("Would you like to play again?");
+		if (playAgain === true) {
+			map[currentPlayerRow][currentPlayerCol] = ".";
+			gameStart();
+		} else {
+			throw "Bye!";
+		}
+	} else if (playerStatus["health"] === 0) {
+		gameStarted = false;
+		console.log("You have died. Try again!");
+		for (var stat in playerStatus) {
+			console.log("Your " + stat + " is " + playerStatus[stat]);
+		}
+		var playAgain = confirm("Would you like to play again?");
+		if (playAgain === true) {
+			map[currentPlayerRow][currentPlayerCol] = ".";
+			gameStart();
+		} else {
+			throw "Bye!";
+		}
+	}
+}
 while(gameStarted) {
+	gameEnd();
 	newRoom();
 }
