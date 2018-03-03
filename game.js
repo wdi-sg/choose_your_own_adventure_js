@@ -1,3 +1,15 @@
+// Tasks left:
+// 1. Get character name from player
+// 2. Add ability to restart the game (you will need to be able to randomize enemies somewhat in the rooms)
+// 3. Keep score for things? Maybe?
+// 4. Randomize rooms?
+// 5. Re-organize data structures. Use classes for enemies, loot, character.
+// 6. Good to have as a stepping stone: a game timer system.
+// 6. Moonshot: implement spell system and an active time battle system.
+// 7. Moonshot: implement NPC eventing system?
+// 8. Moonshot: convert the thing to a PWA with the JS game engine downloaded and the data to be pulled from the backend via a service worker.
+// 9. Moonshot: once the game data (loot, room, character, spell) has been converted to external JSON files, write a game editor and turn it into an Electron app.
+
 const START_HP = 20;
 const START_MAXHP = 30;
 const START_MINDMG = 1;
@@ -31,6 +43,11 @@ var lootData = {
         name: "Cotton Shirt",
         class: "armour",
         hpbonus: 3
+    },
+    soda: {
+        name: "Can of Coke",
+        class: "consumable",
+        hprestore: 10
     }
 };
 
@@ -43,7 +60,7 @@ var enemyData = {
         maxdmg: 3,
         cooldown: 1000,
         canFlee: false,
-        loot: lootData.dagger
+        loot: "dagger"
     },
     rat: {
         name: "Rat",
