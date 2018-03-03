@@ -32,6 +32,12 @@ var monsterList = {
 		armour:5,
 		damage:20,
 		description: "RARE ENCOUNTER! FIRE-BREATHING DRAGON!"
+	},
+	queenDragon:{
+		health:30000,
+		armour:20,
+		damage:200,
+		description: "BIG AND SCARY!"
 	}
 }
 
@@ -48,6 +54,7 @@ if(checkGameStart(gameStart)==true){
 //check gameStart direct accordingly on what was keyed in
 function checkGameStart(gameStart){
   if(gameStart=="Y"){
+  	alert("Tutorial: \n The game is caps-sensitive. For optimal gameplay, please input correctly \n For food, please input its name i.e. bread \n Thanks. Hope you enjoy the game!");
     return true;
   }
   else if (gameStart == "N"){
@@ -92,8 +99,8 @@ function gamePlay(statsDisplay,monstDisplay){
 	//Part2: the map
 	choice = prompt("You brushed off the dust on your body and feel ready to go. Upon opening the shack, you found yourself in a valley. There is a map on the shack. Do you want to read it?[Y/N]");
 	if(choice=="Y"){
-		alert("Head east to priff [->] \n Head west to ardougne [<-]");
-		alert("You found a wooden sword and armour! This will come in handy. \n ");
+		alert("Head east to SeaPort [->] \n Head west to Haunted Woods [<-]");
+		alert("You found a wooden sword and armour near the map! This will come in handy. \n ");
 		playDamage = 13;
 		playArmour = 3;
 		alert(statsDisplay(playHp,playArmour,playDamage));
@@ -108,10 +115,44 @@ function gamePlay(statsDisplay,monstDisplay){
 	var monstDamage = monsterList[monster]["damage"];
 	alert("As you are walking, you got attacked by a " + monster + " !");
 	alert(monstDisplay(monster,monstHp,monstArmour,monstDamage));
-	var whoWins = fight(player,playHp,playArmour,playDamage,monster,monstHp,monstArmour,monstDamage);	
-	if(whoWins==player){
+	playHp = fight(player,playHp,playArmour,playDamage,monster,monstHp,monstArmour,monstDamage);	
+	if(playHp>0){
 		alert("Good fight! But this is just the first of many challenges ahead...");
-		alert("Content still in development. Thanks for playing =)")
+		choice = prompt("Content still in development. \n For now, do you want to fight again in an endless battle? [Y/N]");
+		if(choice=="Y"){
+			alert("Your health is boosted and you are given an excalibur that grows stronger with every battle! You can now receive occasional food drops from monster! Good luck =)");
+			playHp = 400;
+			//store battles won
+			var score = 0;
+			//excalibur mechanic that increment after every battle
+			var excaliburDamage = 1;
+			while(true){
+				if(playHp>0){
+					playDamage += excaliburDamage;
+					monster = monsterFreq();
+					monstHp = monsterList[monster]["health"];
+					monstArmour = monsterList[monster]["armour"];
+					monstDamage = monsterList[monster]["damage"];
+					alert("Round " + (score+1) + "! You faced " + monster + "!");
+					alert(monstDisplay(monster,monstHp,monstArmour,monstDamage));
+					playHp = fight(player,playHp,playArmour,playDamage,monster,monstHp,monstArmour,monstDamage);
+					foodDrops();
+					//increment excalibur damage
+					excaliburDamage++;
+					alert("Excalibur has leveled up. It is now level " + excaliburDamage);
+					//update score
+					score++;
+				}
+				else{
+					alert("You completed " + (score) + " rounds. Well done!");
+					alert("Hope you enjoy playing!");
+					break;
+				}
+			}
+		}
+		else{
+			alert("Content still in development. Thanks for playing =)");
+		}
 	}
 	else{
 		alert("Hope you enjoy playing!");
@@ -128,14 +169,17 @@ function monsterFreq(){
 	var dice = Math.random();
 	console.log("monster probability: " + dice);
 	//if certain proability, certain mobs will appear,
-	if (dice>0.6){
+	if (dice>0.7){
 		monster = "chicken";
 	}
-	else if (dice<=0.6&dice>0.2){
+	else if (dice<=0.7&dice>0.3){
 		monster = "goblin";
 	}
-	else if (dice<=0.2){
+	else if (dice<=0.3&dice>0.05){
 		monster = "dragon";
+	}
+	else if (dice<=0.05){
+		monster = "queenDragon";
 	}
 	return monster;
 }
@@ -159,12 +203,8 @@ function fight(player,playHp,playArmour,playDamage,monster,monstHp,monstArmour,m
 	turn = fightFirst(player,monster);
 	alert(turn + " will begin first!");
 
-	//store the winner of battle
-	var winner = "";
-	var running = true;
-
 	//loop until the fight end. i.e. hp of one of them drop to 0
-	while(running){
+	while(true){
 		if(turn==player){
 			alert("It's " + player + " turn!");
 			var input = menu(playHp,playArmour,playDamage,monster,monstHp,monstArmour,monstDamage);
@@ -184,10 +224,15 @@ function fight(player,playHp,playArmour,playDamage,monster,monstHp,monstArmour,m
 				alert("You ate/drank " + whatFood + "\n your health is now " + playHp + " .");
 			}
 			else if(input=="R"){
-				//100% escape but can be changed later
-				alert("You escaped from battle!");
-				winner=player;
-				break;
+				var escape = Math.random();
+				console.log("Escape probability: " + escape);
+				if(escape<=0.7){
+					alert("You escaped from battle sucessfully!");
+					break;
+				}
+				else{
+					alert("You tried but failed to escape from " + monster + "!");
+				}
 			}
 			turn=monster;
 		}
@@ -205,16 +250,14 @@ function fight(player,playHp,playArmour,playDamage,monster,monstHp,monstArmour,m
 		//check for who dies
 		if(playHp==0){
 			alert("GAME OVER! YOU DIED!");
-			winner=monster;
 			break;
 		}
 		if(monstHp==0){
 			alert("You defeated " + monster + " !");
-			winner=player;
 			break;
 		}
 	}
-	return winner;
+	return playHp;
 }
 
 //menu that display player and monster hp, as well as options to run,fight or eat food
@@ -228,11 +271,10 @@ function menu(playHp,playArmour,playDamage,monster,monstHp,monstArmour,monstDama
 
 //target refers to the subject being attacked
 function attack(target,player,playHp,playArmour,playDamage,monster,monstHp,monstArmour,monstDamage){
-
+	var hitOrMiss = Math.random();
+	console.log("Probability of hitting:" + hitOrMiss);
 	//roll and add two dice(for player). add damage - armour --> health change
 	if(target==monster){
-		var hitOrMiss = Math.random();
-		console.log("Probability of hitting the monster:" + hitOrMiss);
 		//successful hit
 		if(hitOrMiss<0.8){
 			var bonusDamage = Math.floor((Math.random()*6)+1) + Math.floor((Math.random()*6)+1);
@@ -250,11 +292,20 @@ function attack(target,player,playHp,playArmour,playDamage,monster,monstHp,monst
 		}
 	}
 	else if(target==player){
-		var p_finalHp = playHp + playArmour - (monstDamage)-(Math.floor(Math.random()*4));
-		var difference = playHp - p_finalHp;
-		//return modified player health
-		alert("Ouch! That monster hurts! You got damaged by " + difference);
-		return p_finalHp;
+
+		if(hitOrMiss<0.8){
+			var p_finalHp = playHp + playArmour - (monstDamage)-(Math.floor(Math.random()*4));
+			var difference = playHp - p_finalHp;
+			//return modified player health
+			alert("Ouch! That monster hurts! You got damaged by " + difference);
+			return p_finalHp;
+		}
+		//miss
+		else {
+			//return starting player health			
+			alert("You dodged the enemy's attack!");
+			return playHp;
+		}
 	}
 }
 
@@ -277,6 +328,60 @@ function eatFood(choice,item,playHp){
 	}
 }
 
+//drop mechanics
+function foodDrops(){
+	var drop = Math.random();
+	console.log("Food probability: " + drop);
+	var accessBag = stats["bag"];
+	if(drop<=0.05){
+		alert("You found an epic exilir!");
+		if(accessBag["exilir"]!=null){
+			alert("You mixed the exilir with the one left in your bag for a more potent one.");
+			accessBag["exilir"]+=300;
+		}
+		else{
+			accessBag["exilir"]=300;
+		}
+		checkBag();
+	}
+	else if(drop>0.05 && drop<=0.10){
+		alert("You found a whiskey!");
+		if(accessBag["exilir"]!=null){
+			alert("You mixed the whiskey with the one left in your bag for a more potent one");
+			accessBag["whiskey"]+=100;
+		}
+		else{
+			accessBag["whiskey"]=100;
+		}
+		checkBag();
+	}
+	else if(drop>0.20 && drop<=0.30){
+		alert("You found a restore!");
+		if(accessBag["restore"]!=null){
+			alert("Viola! You mixed the restore with the one left in your bag for a more potent one");
+			accessBag["restore"]+=80;
+		}
+		else{
+			accessBag["restore"]=80;
+		}
+		checkBag();
+	}
+	else if(drop>0.30 && drop<=0.70){
+		alert("You found an apple!");
+		if(accessBag["apple"]!=null){
+			alert("Some apple magic with the one in your bag left you with one big apple.");
+			accessBag["apple"]+=50;
+		}
+		else{
+			accessBag["apple"]=50;
+		}
+		checkBag();
+	}
+	else if(drop>0.7){
+		alert("No food drops. Better luck next time!");
+	} 
+}
+
 /** <<<<<<<<<<<<<<<< DISPLAY FUNCTIONS >>>>>>>>>>>>>>>>> */
 
 //Display the status of player in a more readable format;
@@ -285,8 +390,8 @@ function statsDisplay(playHp,playArmour,playDamage){
 	var heartSyb = "\uD83D\uDC9B";
 
 	var health = heartSyb + ": " + playHp;  
-	var armour = "armour: " + playArmour;
-	var damage = "damage: " + playDamage;
+	var armour = "Base armour: " + playArmour;
+	var damage = "Base damage: " + playDamage;
 
 	var backpack = "";
 	//packCounter is for listing in numeric
@@ -309,9 +414,9 @@ function monstDisplay(monster,monstHp,monstArmour,monstDamage){
 	var heartSyb = "\uD83D\uDC9B";
 
 	var m_health = heartSyb + ": " + monstHp;  
-	var m_armour = "armour: " + monstArmour;
-	var m_damage = "damage: " + monstDamage;
-	var m_description = "description: " + monsterList[monster]["description"];
+	var m_armour = "Base armour: " + monstArmour;
+	var m_damage = "Base damage: " + monstDamage;
+	var m_description = "Description: " + monsterList[monster]["description"];
 
 	m_display = m_health + "\n" + m_armour + "\n" + m_damage + "\n" + m_description + "\n";	
 	var output = "Enemy: " + monster + "\n" + m_display;
