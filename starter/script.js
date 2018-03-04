@@ -29,7 +29,8 @@ function buildMap() {
 // Function on game start/game reset. 
 function gameStart() {
 	var initialText = "Welcome to Classes & Teachers! Make sure to type in your inputs accurately!" + "\n" + 
-					"To begin, type in your name!";
+						"The goal of the game is to find the exit (without dying!)" + "\n" +
+						"To begin, type in your name!";
 	console.log(initialText);
 	window.playerName = prompt("Enter name here!");
 	window.currentPlayerRow = 0;
