@@ -162,10 +162,6 @@ const planeLogic = () => {
 	return false;
 };
 
-
-
-
-
 // STEP 5 // fight time
 /* 
 zombie health increase +1 after every fight
@@ -236,6 +232,7 @@ const fight = () => {
 		}
 		// console.log(`--- ${user.name} ---\nHP: ${user.hp} \n\n--- ${enemy.name} ---\nHP: ${enemy.hp}`);
 		if (enemy.hp === 0) {
+			user.fights += 1;
 			alert(`${user.name} killed ${enemy.name}.`);
 			consumeLevel(enemy.name);
 			allocationPrompt();
@@ -282,12 +279,13 @@ while (gameState === "play"){
 		unallocated: 0,
 		hp: 10,
 		fuel: getNumber(4, 10), // random fuel between 5 to 10
-		location: "",
-		fightsToFight: ""
+		location: "plane",
+		fightsToFight: "",
+		fights: 0
 	};
 
 	// step 1 - setup
-	animal = setup();
+	animal = setup(); // initial character build
 
 	if (gameState === "play") {
 
@@ -295,12 +293,13 @@ while (gameState === "play"){
 		consumeLevel(animal);
 
 		// call allocation func
-		allocationPrompt();
+		allocationPrompt(); // allocation input
 
 		console.log("game state", gameState);
 		if (gameState === "play") {
-			allocationAssign();
+			allocationAssign(); // assign points
 			console.log(`The plane seems be running out of fuel and the fuel gauge is broken. ${user.name} needs to jump out of the plane before it crashes!`);
+		// user choose destination
 		if (planeLogic()) {
 				console.log(`${user.name} parachutes into ${user.location}.`);
 			} else {
@@ -336,9 +335,13 @@ while (gameState === "play"){
 	};
 
 	if (gameState === "win") {
-		alert(`Congrats! You completed the game.`);
+		if (confirm(`Congrats! You completed the game.\n\n- ${user.name} attributes -\nCOMBAT POWER: ${user.cp}\nHP: ${user.hp}\nSTR: ${user.str}\nDEX: ${user.dex}\nFIGHTS WON: ${user.fights}\nRETIRED IN: ${user.location}\n\nDo you want to play again?`)) {
+			gameState = "play";
+		} else {
+			gameState = "quit";
+		}
 	} else if (gameState === "lost") {
-		if (confirm(`Sorry, you lost.\n\nDo you want to play again?`)) {
+		if (confirm(`Sorry, you lost.\n\n- ${user.name} attributes -\nCOMBAT POWER: ${user.cp}\nHP: ${user.hp}\nSTR: ${user.str}\nDEX: ${user.dex}\nFIGHTS WON: ${user.fights}\nRETIRED IN: ${user.location}\n\nDo you want to play again?`)) {
 			gameState = "play";
 		} else {
 			gameState = "quit";
