@@ -261,10 +261,10 @@ function battleRound(heroHP, enemyHP) {
         choice = parseInt(choice) - 1;
         let roundScore = generateScore(answer);
         if (choice === correctOption) {
-            enemyHP -= roundScore;
-            alert("The ENEMY lost " + roundScore + "HP!\nThe ENEMY has " + enemyHP + "HP remaining.");
+            enemyHP -= (roundScore * weaponDamage[equippedWeapon]);
+            alert("The ENEMY lost " + (roundScore * weaponDamage[equippedWeapon]) + "HP!\nThe ENEMY has " + enemyHP + "HP remaining.");
             if (enemyHP <= 0) {
-                alert("The ENEMY is destroyed!")
+                alert("The ENEMY is destroyed!");
                 return heroHP;
             }
         }
