@@ -1,6 +1,11 @@
-let heroHP = 10;
+let currentHP = 30;
+let maxHP = 30;
 let numberOfLevels = 10 + Math.floor(Math.random() * 15);
 let prevLevels = [];
+let name = "";
+let weapons = [];
+let equipped = "";
+
 
 /************************
 *************************
@@ -8,7 +13,7 @@ Main Game
 *************************
 *************************/
 function startGame() {
-    let name = prompt("What is your name?");
+    name = prompt("What is your name?");
     alert(name+", you are a super smart mathemagician who turns coins into bundles of cash, just using your mind! You have a very unique job - you create cash for your government! (how else can a country get money?)\n\n*Scary Noise* One Tuesday evening, while going back home from work, a mysterious black van stops next to you and abducts you. (The government should have put more protection planned for you right?). Oh no!\n\n");
     
     alert("\"Don't worry "+name+", we aren't bad guys. In fact, we are fellow mathemagicians, but we can only create a few coins from loads of cash. Obviously our mathemagical powers are inferior to yours. Anyways, WE NEED YOU TO SAVE OUR WORLD!\n\nThe secret parallel world, StashOverflow, the place where our powers draw new money from, is under attack by strange smart monsters! Hundreds of us mathemagicians have fallen to these monsters. We now have found you, "+name+", the greatest of us all, to save us! Find the Giant Scroll of Knowledge, which we can use to get rid of all the monsters at once!\"\n\n");
@@ -25,18 +30,79 @@ function startGame() {
 
     alert("Great job on defeating the potato! Now try this baby Smonster we managed to catch in the dustbin! You will only have your normal HP now.");
 
-    battleRound(30,20);
+    battleRound(currentHP,20);
 
     alert("Great job on defeating the baby Smonster! Time to teleport you StashOverflow!");
 
+    alert("[Teleported to StashOverflow] You are now all alone...");
+
     mainGame();
+
+    // possible endings
+    
+    if (currentHP > 0) {
+        alert("Congrats! You have slayed the final SUPER BOSS and obtained the Great Scroll of Knowledge! Smonsters don't stand a chance now!");
+        alert("On returning to Earth, you find that the Great Scroll of Knowledge gave all humans Mathemagical powers equal to yours./n/nEveryone is a Billionaire now!");
+        alert("THE END");
+        // add end stats here
+    }
 }
 
-function mainGame(name) {
-    while (true) {
-        level(levelGenerator);
+function mainGame() {
+    let levelChoice = 0;
+    while (prevLevels.length < numberOfLevels) {
+        let generatedLevel = levelGenerator(levelChoice);
+        if (generatedLevel === "Smonster") {
+            alert("You come face to face with an evil Smonster. Kill it!");
+            let enemyHP = 30;
+            currentHP = battleRound(currentHP,enemyHP);
+        }
+        else if (generatedLevel === "Mini Boss") {
+            alert("You come face to face with an Mini Boss. Kill it!");
+        }
+        else if (generatedLevel === "Item Store") {
+            alert("Welcome to the Item Store. Feel free to give me all your money.");
+        }
+        else if (generatedLevel === "Stats Store") {
+            alert("Welcome to the Stats Store. Here you can trade slimes for HP or DEF.");
+        }
+        else if (generatedLevel === "Forked Path") {
+            levelChoice = prompt("You approach a path that splits in two. Should you take the Left or Right path?");
+            while (!(levelChoice === "Left" || levelChoice === "Right")) {
+                alert("Please select Left or Right only.");
+                levelChoice = prompt("You approach a path that splits in two. Should you take the Left or Right path?");
+            }
+        }
+        else if (generatedLevel === "Good Stuff Path") {
+            levelChoice = prompt("You have a good feeling today. The path seems to be full of life. You see a sign: \"Go Left to find treasure, or Right to take a swim.\"\n\nDo you go Left or Right?");
+            while (!(levelChoice === "Left" || levelChoice === "Right")) {
+                alert("Please select Left or Right only.");
+                levelChoice = prompt("You see a sign: \"Go Left to find treasure, or Right to take a swim.\"\n\nDo you go Left or Right?");
+            }
+            if (levelChoice === "Left") {
+                levelChoice = 1;
+            }
+            else if (levelChoice === "Right") {
+                levelChoice = 2;
+            }
+        }
+        else if (generatedLevel === "Treasure Room"){
+            alert("You see a treasure chest in the shadows.");
+            alert("You open it and find... nonsense!");
+        }
+        else if (generatedLevel === "Healing Spring") {
+            alert("You dive head first into the Healing Spring, only to fracture your skull, and get it healed up immediately. You HP has been fully restored.");
+        }
+        else if (generatedLevel === "Super Boss") {
+            alert("This is the final SUPER BOSS. Kill it to get the Great Scroll of Knowledge!");
+            
+        }
+
+        if (currentHP <= 0) {
+            alert("You have died :'(  \n\n...restart the browser to start again.");
+            break;
+        }
     }
-    
 }
 
 /************************
@@ -47,7 +113,7 @@ Level Generation
 
 // input nil
 // output String
-function levelGenerator() {
+function levelGenerator(levelChoice) {
     let roomTypes = [
         "Treasure Room",
         "Smonster",
@@ -71,6 +137,18 @@ function levelGenerator() {
         let nextLevel = ["Smonster","Forked Path"][Math.floor(Math.random() * 2)];
         prevLevels = prevLevels.concat(nextLevel);
         return nextLevel;
+    }
+    else if (prevLevels[prevLevels.length - 1] === "Good Stuff Path") {
+        if (levelChoice === 1) {
+            let nextLevel = "Treasure Room";
+            prevLevels = prevLevels.concat(nextLevel);
+            return nextLevel;
+        }
+        else if (levelChoice === 2) {
+            let nextLevel = "Healing Spring";
+            prevLevels = prevLevels.concat(nextLevel);
+            return nextLevel;
+        }
     }
     else {
         let nextLevel = roomTypes[Math.floor(Math.random() * roomTypes.length)];
