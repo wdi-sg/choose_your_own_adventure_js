@@ -1,3 +1,5 @@
+# URL for my version of this project: [https://ckkok.github.io/cyoa]
+
 # Choose Your Own Adventure!
 
 Using what you know about data types, variables, operators, conditional blocks, and accepting user input, create a text-based game that allows the user to arrive at different "destinations" based on the inputs they type.
