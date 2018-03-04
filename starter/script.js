@@ -171,6 +171,7 @@ function mainGame() {
         }
         else if (generatedLevel === "Healing Spring") {
             alert("You dive head first into the Healing Spring, only to fracture your skull, and get it healed up immediately. You HP has been fully restored.");
+            currentHP = maxHP;
         }
         else if (generatedLevel === "Super Boss") {
             alert("This is the final SUPER BOSS. Kill it to get the Great Scroll of Knowledge!");
