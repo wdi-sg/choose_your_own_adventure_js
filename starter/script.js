@@ -4,7 +4,16 @@ let numberOfLevels = 10 + Math.floor(Math.random() * 15);
 let prevLevels = [];
 let name = "";
 let weapons = [];
-let equipped = "";
+let equippedWeapon = "";
+let slimes = 0;
+let defense = 0;
+let weaponType = ["Lousy Number Wand","Good Wand","Super Good Wand"];
+let weaponInventory = [];
+let weaponDamage = {
+    "Lousy Number Wand": 1,
+    "Good Wand": 2,
+    "Super Good Wand": 3
+}
 
 
 /************************
@@ -23,7 +32,11 @@ function startGame() {
     alert("*Robotic Voice* Welcome "+name+", thank you for volunteering to be our sacrifice *ahem* I mean Hero. You will be moving around StashOverflow by choosing options listed to you. Occasionally you will meet smart monsters that stop your progress. You must get rid of them in order to move on. In order to get to the Giant Scroll of Knowledge, you will need to know how to use your smartness to get rid of the smart monsters. \n\nIn this training centre, you will learn the basics of fighting to ensure (yea right...) your success! After this training, you will be teleported to the land of StashOverflow, where smart monsters and bosses lurk. We call smart monsters, Smonsters, because it is a smart thing to do.\n\n")
 
     alert("While I can sense you are a physical weakling, your math skills is all you will need in StashOverflow. In StashOverflow, your mental energy can be channelled to damage Smonsters. The Smonsters can do the same to you though, and remember, the ARE smart. Try not to die. For starters, this is the basic weapon, the \"Lousy Number Wand\", which helps to channel your mental energy.\n\n");
- 
+    
+    weapons = weapons.concat("Lousy Number Wand");
+    equippedWeapon = "Lousy Number Wand";
+    weaponInventory = weaponInventory.concat("Lousy Number Wand");
+
     alert("When in battle, the world of StashOverflow randomly displays math questions and three options as answers. Choosing the right answer within the time limit channels your mental energy to your \"Lousy Number Wand\", which shoots a rainbow laser at the Smonster, damaging them. Weapons such as the \"Lousy Number Wand\" might also amplify the damage done to a Smonster. \n\nIf you select a wrong answer, or are too slow, the Smonster will attack you and you lose HP. We are not sure how damage is really calculated in StashOverflow, but we have a sense that it is related to the actual value of your answers. If you find out, we have bonus questions after you have retrieved the Giant Scroll of Knowledge, to test out your hypothesis (by which you would be super duper smarter right?). Now, fight a bag of harmless potatoes. You won't die in this fight.\n\n");
 
     battleRound(9999,10);
@@ -53,12 +66,22 @@ function mainGame() {
     while (prevLevels.length < numberOfLevels) {
         let generatedLevel = levelGenerator(levelChoice);
         if (generatedLevel === "Smonster") {
-            alert("You come face to face with an evil Smonster. Kill it!");
+            alert("HP: " + currentHP + "/" + maxHP + "   DEF: " + defense + "   Slimes: " + slimes + "   Weapon: " + equippedWeapon + "\n\n" + "You come face to face with an evil Smonster. Kill it!");
             let enemyHP = 30;
             currentHP = battleRound(currentHP,enemyHP);
+            if (currentHP > 0) {
+                slimes += enemyHP;
+                alert("The Smonster dissolve into slimes.\n\nYou pick up " + enemyHP + " slimes.\n\nTotal slimes in owned: " + slimes);
+            }
         }
         else if (generatedLevel === "Mini Boss") {
             alert("You come face to face with an Mini Boss. Kill it!");
+            let enemyHP = 75;
+            currentHP = battleRound(currentHP,enemyHP);
+            if (currentHP > 0) {
+                slimes += enemyHP;
+                alert("The Mini Boss dissolves into slimes.\n\nYou pick up " + enemyHP + " slimes.\n\nTotal slimes in owned: " + slimes);
+            }
         }
         else if (generatedLevel === "Item Store") {
             alert("Welcome to the Item Store. Feel free to give me all your money.");
@@ -88,14 +111,30 @@ function mainGame() {
         }
         else if (generatedLevel === "Treasure Room"){
             alert("You see a treasure chest in the shadows.");
-            alert("You open it and find... nonsense!");
+            let treasure = weaponType[Math.floor(Math.random() * 3)];
+            alert("You open it and find..." + treasure + "!");
+            if (weaponType.indexOf(treasure) === weaponType.indexOf(equippedWeapon)) {
+                alert("You already have this weapon!");
+            }
+            else if (weaponType.indexOf(treasure) < weaponType.indexOf(equippedWeapon)) {
+                alert("This weapon is lousier than your current weapon. You throw it away.");
+            }
+            else {
+                alert("Awesome! A better item. Gonna equip it right now!");
+                equippedWeapon = treasure;
+            }
         }
         else if (generatedLevel === "Healing Spring") {
             alert("You dive head first into the Healing Spring, only to fracture your skull, and get it healed up immediately. You HP has been fully restored.");
         }
         else if (generatedLevel === "Super Boss") {
             alert("This is the final SUPER BOSS. Kill it to get the Great Scroll of Knowledge!");
-            
+            let enemyHP = 100;
+            currentHP = battleRound(currentHP,enemyHP);
+            if (currentHP > 0) {
+                slimes += enemyHP;
+                alert("The SUPER BOSS dissolves into slimes.\n\nYou pick up " + enemyHP + " slimes.\n\nTotal slimes in owned: " + slimes);
+            }
         }
 
         if (currentHP <= 0) {
