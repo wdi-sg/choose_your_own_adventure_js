@@ -3,18 +3,18 @@
 Notes if you're checking it out at the above URL. There's no tutorial for navigating the thing, but you can move around using the displayed navigation options. Additional commands include "look" to check out what's around the room. Use "get <item>" to well, get an item in the room, and "attack <enemy>" to attack an enemy. For a better fighting chance, you'll want to get the short sword and maybe the soda before leaving the starting room, though it's possible to win the battle ahead without them (very hard).
 
 # Ideas for future work
-> Get the nav-option function to output to the nav div instead of appending to the room text
-> Add images to the room context
-> Have enemies drop loot when killed
-> Dialogue system
-> NPC system
-> Spell system
-> Damage/armour system
-> Keypress navigation using arrow keys, with action hotkeys displayed on the nav panel
-> Have enemies follow the player through rooms
-> Electron app for creating rooms
-> Implement localStorage to save the game state
-> PWA the thing, and transition the game data to JSON stored on a server to be fetched via a service worker
+* Get the nav-option function to output to the nav div instead of appending to the room text
+* Add images to the room context
+* Have enemies drop loot when killed
+* Dialogue system
+* NPC system
+* Spell system
+* Damage/armour system
+* Keypress navigation using arrow keys, with action hotkeys displayed on the nav panel
+* Have enemies follow the player through rooms
+* Electron app for creating rooms
+* Implement localStorage to save the game state
+* PWA the thing, and transition the game data to JSON stored on a server to be fetched via a service worker
 
 # Choose Your Own Adventure!
 
