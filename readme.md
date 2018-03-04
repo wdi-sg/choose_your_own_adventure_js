@@ -4,6 +4,7 @@ Notes if you're checking it out at the above URL. There's no tutorial for naviga
 
 # Ideas for future work
 * Get the nav-option function to output to the nav div instead of appending to the room text
+* Use proxies for enemy / character hp and inventory systems
 * Add images to the room context
 * Have enemies drop loot when killed
 * Dialogue system
