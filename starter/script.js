@@ -85,6 +85,51 @@ function mainGame() {
         }
         else if (generatedLevel === "Item Store") {
             alert("Welcome to the Item Store. Feel free to give me all your money.");
+            let option = prompt("What would you like to buy?/n/n1. Lousy Number Wand (10 Slimes)\n\n2. Good Wand (100 Slimes)/n/n3. Super Good Wand (300 Slimes)/n/nPlease enter an option 1 - 3:/n/n");
+            while (!(option === "1" || option === "2" || option === "3")) {
+                alert("Please select 1 - 3 only.");
+                option = prompt("What would you like to buy?/n/n1. Lousy Number Wand (10 Slimes)\n\n2. Good Wand (100 Slimes)/n/n3. Super Good Wand (300 Slimes)/n/nPlease enter an option 1 - 3:/n/n");
+            }
+            if (option === "1") {
+                slimes -= 10;
+                if (slimes >= 0) {
+                    alert("Since you already have a Lousy Number Wand, I will replace it with this shiny new one. Use your Lousy Number Wand wisely.");
+                    if (!weaponInventory.includes("Lousy Number Wand")) {
+                        weaponInventory = weaponInventory.concat("Lousy Number Wand");
+                    }
+                }
+            }
+            else if (option === "2") {
+                slimes -= 100;
+                if (slimes >= 0) {
+                    alert("If you already have a Good Wand, I will replace it with this shiny new one. Use your Good Wand wisely.");
+                    if (!weaponInventory.includes("Good Wand")) {
+                        weaponInventory = weaponInventory.concat("Good Wand");
+                    }
+                    if (equippedWeapon === "Lousy Number Wand") {
+                        equippedWeapon = "Good Wand";
+                        alert('Good Wand equipped.');
+                    }
+                }
+            }
+            else {
+                slimes -= 300;
+                if (slimes >= 0) {
+                    alert("If you already have a Good Wand, I will replace it with this shiny new one. Use your Lousy Number Wand wisely.");
+                    if (!weaponInventory.includes("Super Good Wand")) {
+                        weaponInventory = weaponInventory.concat("Super Good Wand");
+                    }
+                    if (equippedWeapon !== "Super Good Wand") {
+                        equippedWeapon = "Super Good Wand";
+                        alert('Super Good Wand equipped.');
+                    }
+                }
+            }
+
+            if (slimes < 0) {
+                alert("YOU DO NOT HAVE ENOUGH SLIMES. DIE YOU CHEATER!/n/nThe Store owner attacks you for 20 damage and throws you out of the shop.");
+                currentHP -= 20;
+            }
         }
         else if (generatedLevel === "Stats Store") {
             alert("Welcome to the Stats Store. Here you can trade slimes for HP or DEF.");
@@ -113,7 +158,7 @@ function mainGame() {
             alert("You see a treasure chest in the shadows.");
             let treasure = weaponType[Math.floor(Math.random() * 3)];
             alert("You open it and find..." + treasure + "!");
-            if (weaponType.indexOf(treasure) === weaponType.indexOf(equippedWeapon)) {
+            if (weaponInventory.includes(treasure)) {
                 alert("You already have this weapon!");
             }
             else if (weaponType.indexOf(treasure) < weaponType.indexOf(equippedWeapon)) {
