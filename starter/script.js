@@ -54,9 +54,9 @@ function startGame() {
     
     if (currentHP > 0) {
         alert("Congrats! You have slayed the final SUPER BOSS and obtained the Great Scroll of Knowledge! Smonsters don't stand a chance now!");
-        alert("On returning to Earth, you find that the Great Scroll of Knowledge gave all humans Mathemagical powers equal to yours./n/nEveryone is a Billionaire now!");
+        alert("On returning to Earth, you find that the Great Scroll of Knowledge gave all humans Mathemagical powers equal to yours.\n\nEveryone is a Billionaire now!");
         alert("THE END");
-        alert("Hope you enjoyed the game!/n/n" + "Levels completed: " + numberOfLevels + "/nFinal HP: " + currentHP + "/nSlimes: " + slimes + "/nBest weapon: " + equippedWeapon);
+        alert("Hope you enjoyed the game!\n\n" + "Levels completed: " + numberOfLevels + "\nFinal HP: " + currentHP + "\nSlimes: " + slimes + "\nBest weapon: " + equippedWeapon);
     }
 }
 
@@ -70,7 +70,7 @@ function mainGame() {
             currentHP = battleRound(currentHP,enemyHP);
             if (currentHP > 0) {
                 slimes += enemyHP;
-                alert("The Smonster dissolve into slimes.\n\nYou pick up " + enemyHP + " slimes.\n\nTotal slimes in owned: " + slimes);
+                alert("The Smonster dissolve into slimes.\n\nYou pick up " + enemyHP + " slimes.\n\nTotal slimes in owned: " + slimes + "\n");
             }
         }
         else if (generatedLevel === "Mini Boss") {
@@ -79,15 +79,15 @@ function mainGame() {
             currentHP = battleRound(currentHP,enemyHP);
             if (currentHP > 0) {
                 slimes += enemyHP;
-                alert("The Mini Boss dissolves into slimes.\n\nYou pick up " + enemyHP + " slimes.\n\nTotal slimes in owned: " + slimes);
+                alert("The Mini Boss dissolves into slimes.\n\nYou pick up " + enemyHP + " slimes.\n\nTotal slimes in owned: " + slimes + "\n");
             }
         }
         else if (generatedLevel === "Item Store") {
             alert("HP: " + currentHP + "/" + maxHP + "   Slimes: " + slimes + "   Weapon: " + equippedWeapon + "\n\n" + "Welcome to the Item Store. Feel free to give me all your money.");
-            let option = prompt("What would you like to buy?/n/n1. Lousy Number Wand (10 Slimes)\n\n2. Good Wand (100 Slimes)/n/n3. Super Good Wand (300 Slimes)/n/nPlease enter an option 1 - 3:/n/n");
+            let option = prompt("What would you like to buy?\n\n1. Lousy Number Wand (10 Slimes)\n\n2. Good Wand (100 Slimes)\n\n3. Super Good Wand (300 Slimes)\n\nPlease enter an option 1 - 3:\n\n");
             while (!(option === "1" || option === "2" || option === "3")) {
                 alert("Please select 1 - 3 only.");
-                option = prompt("What would you like to buy?/n/n1. Lousy Number Wand (10 Slimes)\n\n2. Good Wand (100 Slimes)/n/n3. Super Good Wand (300 Slimes)/n/nPlease enter an option 1 - 3:/n/n");
+                option = prompt("What would you like to buy?\n\n1. Lousy Number Wand (10 Slimes)\n\n2. Good Wand (100 Slimes)\n\n3. Super Good Wand (300 Slimes)\n\nPlease enter an option 1 - 3:\n\n");
             }
             if (option === "1") {
                 slimes -= 10;
@@ -114,7 +114,7 @@ function mainGame() {
             else {
                 slimes -= 300;
                 if (slimes >= 0) {
-                    alert("If you already have a Good Wand, I will replace it with this shiny new one. Use your Lousy Number Wand wisely.");
+                    alert("If you already have a Super Good Wand, I will replace it with this shiny new one. Use your Super Good Wand wisely.");
                     if (!weaponInventory.includes("Super Good Wand")) {
                         weaponInventory = weaponInventory.concat("Super Good Wand");
                     }
@@ -126,7 +126,7 @@ function mainGame() {
             }
 
             if (slimes < 0) {
-                alert("YOU DO NOT HAVE ENOUGH SLIMES. DIE YOU CHEATER!/n/nThe Store owner attacks you for 20 damage and throws you out of the shop.");
+                alert("YOU DO NOT HAVE ENOUGH SLIMES. DIE YOU CHEATER!\n\nThe Store owner attacks you for 20 damage and throws you out of the shop.");
                 currentHP -= 20;
             }
         }
@@ -175,7 +175,7 @@ function mainGame() {
             currentHP = battleRound(currentHP,enemyHP);
             if (currentHP > 0) {
                 slimes += enemyHP;
-                alert("The SUPER BOSS dissolves into slimes.\n\nYou pick up " + enemyHP + " slimes.\n\nTotal slimes in owned: " + slimes);
+                alert("The SUPER BOSS dissolves into slimes.\n\nYou pick up " + enemyHP + " slimes.\n\nTotal slimes in owned: " + slimes + "\n");
             }
         }
 
