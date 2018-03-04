@@ -3,6 +3,7 @@
 Notes if you're checking it out at the above URL. There's no tutorial for navigating the thing, but you can move around using the displayed navigation options. Additional commands include "look" to check out what's around the room. Use "get <item>" to well, get an item in the room, and "attack <enemy>" to attack an enemy. For a better fighting chance, you'll want to get the short sword and maybe the soda before leaving the starting room, though it's possible to win the battle ahead without them (very hard).
 
 # Ideas for future work
+* Responsive layout using CSS grids
 * Get the nav-option function to output to the nav div instead of appending to the room text
 * Use proxies for enemy / character hp and inventory systems
 * Add images to the room context
