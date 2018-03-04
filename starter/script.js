@@ -57,7 +57,7 @@ function startGame() {
         alert("Congrats! You have slayed the final SUPER BOSS and obtained the Great Scroll of Knowledge! Smonsters don't stand a chance now!");
         alert("On returning to Earth, you find that the Great Scroll of Knowledge gave all humans Mathemagical powers equal to yours./n/nEveryone is a Billionaire now!");
         alert("THE END");
-        // add end stats here
+        alert("Hope you enjoyed the game!/n/n" + "Levels completed: " + numberOfLevels + "/nFinal HP: " + currentHP + "/nSlimes: " + slimes + "/nBest weapon: " + equippedWeapon);
     }
 }
 
@@ -75,7 +75,7 @@ function mainGame() {
             }
         }
         else if (generatedLevel === "Mini Boss") {
-            alert("You come face to face with an Mini Boss. Kill it!");
+            alert("HP: " + currentHP + "/" + maxHP + "   DEF: " + defense + "   Slimes: " + slimes + "   Weapon: " + equippedWeapon + "\n\n" + "You come face to face with an Mini Boss. Kill it!");
             let enemyHP = 75;
             currentHP = battleRound(currentHP,enemyHP);
             if (currentHP > 0) {
@@ -84,7 +84,7 @@ function mainGame() {
             }
         }
         else if (generatedLevel === "Item Store") {
-            alert("Welcome to the Item Store. Feel free to give me all your money.");
+            alert("HP: " + currentHP + "/" + maxHP + "   DEF: " + defense + "   Slimes: " + slimes + "   Weapon: " + equippedWeapon + "\n\n" + "Welcome to the Item Store. Feel free to give me all your money.");
             let option = prompt("What would you like to buy?/n/n1. Lousy Number Wand (10 Slimes)\n\n2. Good Wand (100 Slimes)/n/n3. Super Good Wand (300 Slimes)/n/nPlease enter an option 1 - 3:/n/n");
             while (!(option === "1" || option === "2" || option === "3")) {
                 alert("Please select 1 - 3 only.");
@@ -131,18 +131,15 @@ function mainGame() {
                 currentHP -= 20;
             }
         }
-        else if (generatedLevel === "Stats Store") {
-            alert("Welcome to the Stats Store. Here you can trade slimes for HP or DEF.");
-        }
         else if (generatedLevel === "Forked Path") {
-            levelChoice = prompt("You approach a path that splits in two. Should you take the Left or Right path?");
+            levelChoice = prompt("HP: " + currentHP + "/" + maxHP + "   DEF: " + defense + "   Slimes: " + slimes + "   Weapon: " + equippedWeapon + "\n\n" + "You approach a path that splits in two. Should you take the Left or Right path?");
             while (!(levelChoice === "Left" || levelChoice === "Right")) {
                 alert("Please select Left or Right only.");
                 levelChoice = prompt("You approach a path that splits in two. Should you take the Left or Right path?");
             }
         }
         else if (generatedLevel === "Good Stuff Path") {
-            levelChoice = prompt("You have a good feeling today. The path seems to be full of life. You see a sign: \"Go Left to find treasure, or Right to take a swim.\"\n\nDo you go Left or Right?");
+            levelChoice = prompt("HP: " + currentHP + "/" + maxHP + "   DEF: " + defense + "   Slimes: " + slimes + "   Weapon: " + equippedWeapon + "\n\n" + "You have a good feeling today. The path seems to be full of life. You see a sign: \"Go Left to find treasure, or Right to take a swim.\"\n\nDo you go Left or Right?");
             while (!(levelChoice === "Left" || levelChoice === "Right")) {
                 alert("Please select Left or Right only.");
                 levelChoice = prompt("You see a sign: \"Go Left to find treasure, or Right to take a swim.\"\n\nDo you go Left or Right?");
@@ -155,7 +152,7 @@ function mainGame() {
             }
         }
         else if (generatedLevel === "Treasure Room"){
-            alert("You see a treasure chest in the shadows.");
+            alert("HP: " + currentHP + "/" + maxHP + "   DEF: " + defense + "   Slimes: " + slimes + "   Weapon: " + equippedWeapon + "\n\n" + "You see a treasure chest in the shadows.");
             let treasure = weaponType[Math.floor(Math.random() * 3)];
             alert("You open it and find..." + treasure + "!");
             if (weaponInventory.includes(treasure)) {
@@ -170,11 +167,11 @@ function mainGame() {
             }
         }
         else if (generatedLevel === "Healing Spring") {
-            alert("You dive head first into the Healing Spring, only to fracture your skull, and get it healed up immediately. You HP has been fully restored.");
+            alert("HP: " + currentHP + "/" + maxHP + "   DEF: " + defense + "   Slimes: " + slimes + "   Weapon: " + equippedWeapon + "\n\n" + "You dive head first into the Healing Spring, only to fracture your skull, and get it healed up immediately. You HP has been fully restored.");
             currentHP = maxHP;
         }
         else if (generatedLevel === "Super Boss") {
-            alert("This is the final SUPER BOSS. Kill it to get the Great Scroll of Knowledge!");
+            alert("HP: " + currentHP + "/" + maxHP + "   DEF: " + defense + "   Slimes: " + slimes + "   Weapon: " + equippedWeapon + "\n\n" + "This is the final SUPER BOSS. Kill it to get the Great Scroll of Knowledge!");
             let enemyHP = 100;
             currentHP = battleRound(currentHP,enemyHP);
             if (currentHP > 0) {
@@ -205,7 +202,6 @@ function levelGenerator(levelChoice) {
         "Mini Boss",
         "Healing Spring",
         "Item Store",
-        "Stats Store",
         "Forked Path",
         "Good Stuff Path"
     ]
