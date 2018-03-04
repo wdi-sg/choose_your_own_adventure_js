@@ -2,9 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="styles.css">
   <title>Document</title>
 </head>
 <body>
+  <h1>Ire-con-man-land</h1>
+  <p>You are on your way to the other side of the rainbow, where the leprechauns hide their pot of gold. But these playful leprechauns won't let you get to their treasure so easily. Outsmart them whenever you encounter a leprechaun to be one step closer to that coveted pot of gold. Good luck, mate!</p>
+  <div id="game-intro"></div>
+  <div id="game-results"></div>
+  <input id="start-game" type="button" value="Start" onclick="startGame()">
+  <div id="black-jack">
+    <label>Your Answer: <input type="text" id="user-input-black-jack"></label>
+    <input type="button" value="Submit" onclick="drawCardBlackJack()">
+  </div>
+  <div id="know-leper">
+    <label>Your Answer: <input type="text" id="user-input-know-leper"></label>
+    <input type="button" value="Submit" onclick="checkAnswerKnowLeper()">
+  </div>
+  <div id="riddle">
+    <label>Your Answer: <input type="text" id="user-input-riddle"></label>
+    <input type="button" value="Submit" onclick="submitAnswerRiddle()">
+  </div>
+  <input id="move-on" type="button" value="Move On" onclick="moveOn()">
+  <input id="reset-game" type="button" value="Reset" onclick="resetGame()">
   <script src="script.js"></script>
+  <script src="blackJack.js"></script>
+  <script src="knowLeper.js"></script>
+  <script src="riddle.js"></script>
 </body>
 </html>
