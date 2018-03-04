@@ -1,4 +1,6 @@
 // put code here!
+
+//Creating Map
 var map = [
 		[".", ".", ".","."], 
 		[".", ".", ".", "."], 
@@ -6,6 +8,7 @@ var map = [
 		[".", ".", ".", "."]
 	];
 
+//Establishing encounters
 var statusQuestion = ["Homework assignment!" + "\n" + "Do you stay and complete or hide til class is over?" + "\n" + "(Input stay or hide)",
 						"Lab work!" + "\n" + "Do you stay and complete or hide til class is over?" + "\n" + "(Input stay or hide)", 
 						"Lecture!" + "\n" + "Do you stay and complete or hide til class is over?" + "\n" + "(Input stay or hide)"];
@@ -14,7 +17,7 @@ var fightQuestion = ["You have encountered Akira!" + "\n" + "Do you fight or run
 						"You have encountered Ray!" + "\n" + "Do you fight or run away?" + "\n" + "(Input fight or run)"];
 var moveQuestion = ["Which direction would you like to move?" + "\n" + "(Input n, s, e or w)"];
 
-
+// Print Map function
 function buildMap() {
 	var mapOutput = "";
 	for (i = 0; i < map[0].length; i++) {
@@ -23,7 +26,7 @@ function buildMap() {
 	console.log(mapOutput);
 }
 
-
+// Function on game start/game reset. 
 function gameStart() {
 	var initialText = "Welcome to Classes & Teachers! Make sure to type in your inputs accurately!" + "\n" + 
 					"To begin, type in your name!";
@@ -48,6 +51,7 @@ function gameStart() {
 	buildMap();
 }
 
+// What happens everytime the player enters a new room
 function newRoom() {
 	var statusError = true;
 		while (statusError) {
@@ -83,7 +87,7 @@ function newRoom() {
 					console.log("Enter a valid input!");
 			}
 	}
-	var moveError = true;
+	var moveError = true;	//Movement across map
 		while (moveError) {
 			 switch(prompt(moveQuestion[0])) {
 				case "n":
@@ -136,6 +140,8 @@ function newRoom() {
 		map[currentPlayerRow][currentPlayerCol] = "X";
 		buildMap();
 }
+
+//Initialise game
 gameStart();
 
 // gameEnd when destination reached OR health = 0
@@ -168,6 +174,8 @@ function gameEnd() {
 		}
 	}
 }
+
+//Loops to run while game is started.
 while(gameStarted) {
 	gameEnd();
 	newRoom();
