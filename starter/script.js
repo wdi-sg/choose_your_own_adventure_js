@@ -28,7 +28,7 @@ gameBoard[0] = {q1: "You are in front of a lion which has not eaten in weeks. Wh
 				a4: "You are a smart one. This is your best bet of surviving. Pray to God while you back away!"
 }
 
-gameBoard[1] = {q1: "You see the love of your life in front of you. You might not get a chance to see here again. What will you do? Enter number 1,2,3 or 4\n 1: Do nothing and hope he/she talks to me\n 2: Go up to him/her and drop a fancy pick-up line\n 3: Freak out and run away",
+gameBoard[1] = {q1: "You see the love of your life in front of you. You might not get a chance to see him/her again. What will you do? Enter number 1,2 or 3\n 1: Do nothing and hope he/she talks to me\n 2: Go up to him/her and drop a fancy pick-up line\n 3: Freak out and run away",
 				a1: "Oh come on, do something instead of leaving it up to fate!",
 				a2: "Nice, you got game. Now, go show him/her your moves. All the best!",
 				a3: "You need to get therapy to remove this fear!"
