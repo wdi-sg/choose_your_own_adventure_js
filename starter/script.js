@@ -255,9 +255,15 @@ function battleRound(heroHP, enemyHP) {
         let correctOption = mixedOptions[0];
         let options = mixedOptions[1];
         
+        // for testing
+        // let choice = prompt("Enemy: "+enemyHP + "HP   Hero: " + heroHP+"HP\n\n" +
+        // "Choose your answer wisely.\n\nWhat is \n\n" + question + " = " + answer + "\n\n" +
+        // "[1]  " + options[0] + "     [2]  " + options[1] + "     [3]  " + options[2]);
+
         let choice = prompt("Enemy: "+enemyHP + "HP   Hero: " + heroHP+"HP\n\n" +
-        "Choose your answer wisely.\n\nWhat is \n\n" + question + " = " + answer + "\n\n" +
+        "Choose your answer wisely.\n\nWhat is \n\n" + question + " = " + "\n\n" +
         "[1]  " + options[0] + "     [2]  " + options[1] + "     [3]  " + options[2]);
+
         choice = parseInt(choice) - 1;
         let roundScore = generateScore(answer);
         if (choice === correctOption) {
