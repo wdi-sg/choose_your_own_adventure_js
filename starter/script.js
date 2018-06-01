@@ -20,7 +20,7 @@ function th() {
   }
 }
 
-
+// select door, start of loop, if you didn't pick the correct door it will eject() (see eject function on line 48)
 function pickDoor() {
   console.log("you are on floor " + currentFloor)
   var doorVal = prompt(getUsername + " is currently on floor " + currentFloor + "\n" + "Pick a door: 1 2 3");
@@ -44,7 +44,7 @@ function goToNextFloor() {
   th();
   //made a mistake here, instead of checking for currentFloor, used pickDoor so it just keeps going to 7 floors and beyond
 }
-
+// didn't make it to 7th currentFloor
 function eject() {
   var countTotal = lootScore + currentFloor;
   var answer = prompt("Lady luck does not shine on " + getUsername + ", your highest floor was: " + currentFloor + "\n" + "Your total score is: " + countTotal + "\n" + "Try again?");
@@ -55,7 +55,7 @@ function eject() {
     alert("Thanks for playing! " + getUsername );
   }
 }
-
+// win function
 function win() {
   var countTotal = lootScore + currentFloor;
   var answer = prompt("Congratulations " + getUsername + " you've reached floor " + currentFloor + "\n" + "Your total points is: " + countTotal + "\n" + "Feeling Lucky?");
@@ -66,7 +66,7 @@ function win() {
     alert("Thanks for playing! " + getUsername );
   }
 }
-
+// loot scoring
 function loot(){
   lootVal = Math.floor(Math.random() * 20);
   if (lootVal >= 15){
@@ -78,9 +78,32 @@ function loot(){
   }
 }
 
+//battle logic
+var hp = 20;
+
+var monsterHp = Math.floor(Math.random() * 20);
+
+if(monsterHp > 1){
+  attackMon();
+  if (attackMon <= 0){
+    console.log("You killed the monster");
+  }else if (hp <= 0){
+    console.log("You died");
+  }
+}
+
+function battleStart(){
+  var attackNum = Math.floor(Math.random() * 20);
+  var battle = attackNum - Math.floor(Math.random() * 20);
+  return battle;
+}
+
+//restart game here
 function resetGame(){
   lootScore = 0;
   currentFloor = 1;
   userHp = 7;
 }
+
+//run the function to start the game
 th();
