@@ -15,48 +15,58 @@ var controlObj = {
 //game stats
 var wpnArray = [];
 var userHp = [1,2,3,4,5];
-var totalScore = [];
+var totalScore = 0;
 var userHpCheck = [];
 
 //store username in global var, only asks for your name once
 var getUsername = prompt("What is your name?");
+//unable to put in one function, need to resuse
+var gameQuest = "Go Left, Right or Middle?";
 
+//reset and start game functions
 function startGame(){
-  var gameQuest = "Left, Right or Middle?";
-  userResponse = prompt("" + "\n" + gameQuest).toLowerCase();
+  var userResponse = prompt(gameQuest).toLowerCase();
   return firstLevel(userResponse);
 }
 
 //1st level
 function firstLevel(x){
+  //add randomizer here to generate a number for monster to appear
   if(x == "left"){
-    firstLevelLeft = prompt("You went left and only found a treasure! Open it?");
-    totalScore.push(1);
-    return firstLevelLeft;
+    firstLevelLeft = prompt("You went left and found a treasure containing the weapon Misteltein" + "\n" + gameQuest);
+    wpnArray.push("Misteltein");
+    totalScore ++
+    return secondLevel(firstLevelLeft);
   }else if(x == "right"){
-    firstLevelRight = prompt("You went right and found another door way...Proceed?");
-    totalScore.push(1);
-    return firstLevelRight;
+    firstLevelRight = prompt("You found a bottle of potion on the floor." + "\n" + gameQuest);
+    wpnArray.push("Potion")
+    totalScore ++
+    return secondLevel(firstLevelRight);
   }else if(x == "middle"){
-    answer = prompt("You are died. Retry?");
+    answer = prompt("You are died. Your score is " + totalScore + " Retry?");
     if(answer == "yes"){
       startGame();
-      //reset here
+      totalScore = 0;
+      //reset score and run startGame() again
+      //first ending here
     }
+  }
+}
+
+//2nd level
+function secondLevel(x){
+  if(x == "left"){
+    var treasureOne = prompt("")
+    totalScore ++
+  }else if(x == "right"){
+    prompt("");
+  }else if(x == "middle"){
+    var trapOne = prompt("");
   }
 }
 
 startGame();
 
-//2nd level
-// if(firstLevelLeft == "yes"){
-//   var treasureOne = prompt("You found a weapon Misteltein! Upon Opening the chest a door opens...proceed?")
-//   wpnArray.push("Misteltein");
-// }else if(firstLevelLeft == "no"){
-//   prompt("You discard the treasure, a trap door opens and you DIE");
-// }else if(firstLevelRight == "yes"){
-//   var trapOne = prompt("You stepped on a trap! Do you jump or roll to avoid?");
-// }
 //
 // //last level
 // if(treasureOne == "yes" || trapOne == "roll"){
