@@ -1,0 +1,17 @@
+Pokemon battle
+
+1) Prompt name
+2) Choose pokemon - Charmander, Squirtle, Bulbasaur
+3) Once chosen pokemon, choose to battle wild ratata / magikarp
+4) Battles wild ratata / magikarp
+5) Defeats Or Loses wild ratata / magikarp
+
+End
+
+Charmander, Squirtle, Bulbasaur - HP = 20, Attack = 5
+
+wild ratata / magikarp - HP = 15, Attack = 3
+
+Pokemon faints when HP = 0
+
+while HP != 0, battle continues.
