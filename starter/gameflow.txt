@@ -1,0 +1,79 @@
+You are trapped in a room. What do you want to inspect first?
+> door, window, floor
+
+	DOOR 
+	"The door is locked. Do you want to: "
+	> use force to break door, pick the key hole (optional: listen on what's on the other side)
+		
+			USE FORCE
+			"The door is made of wood. Choose your weapon: "
+			> use your arms, use leg power
+
+				USE ARMS
+				"you dead1"
+
+				USE LEGS
+				"you dead2"
+
+
+			PICK KEY HOLE
+			"You need something long and thin"
+			> search the floor for something, USE FORCE instead
+
+				SEARCH FLOOR
+				"you dead3"
+
+				USE FORCE
+				"feeling impatient, you change your mind"
+				goes to USE FORCE
+
+
+	WINDOW
+	"The window is made of glass, painted black. What now?"
+	> break the glass, inspect closely
+
+			BREAK GLASS
+			"You broke the glass. But it's totally dark outside, you can't see anything. Now what?"
+			> jump out, scream for help
+
+				JUMP DOWN
+				"you dead 4"
+
+				SCREAM
+				"you dead 5"
+
+			INSPECT
+			"You touch the window. It's warm"
+			> break glass, continue inspecting
+
+				BREAK GLASS
+				"trusting that the window will lead you outside"
+				goes to BREAK GLASS
+
+				CONTINUE
+				"you dead6"
+
+
+	FLOOR
+	"Old wooden floor with a lot of holes"
+	> inspect, jump
+
+
+			INSPECT
+			"You see a trapped door"
+			> open it
+
+				OPEN IT
+				"you dead7"
+
+
+			JUMP
+			"How many times do you want to jump?"
+			> more or less than 5 (number input)
+
+				MORE THAN 5
+				"you dead8"
+
+				LESS THAN 5
+				"nothing happens, you go back to inspecting the floor"
+				goes to INSPECT
