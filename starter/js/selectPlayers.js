@@ -1,5 +1,11 @@
 var myName = prompt("what's your name?");
+user.myName = myName;
+user.wins = 0;
+user.losses = 0;
+
 var side;
+var heroes = [];
+var villains = [];
 var chooseSide = function() {
 	side = prompt('do you want to join the dark or light side?');
 };
@@ -26,6 +32,7 @@ if (side == "light") {
 		} else {
 			arrLength--;
 			hero1 = h1;
+			heroes.push(h1);
 		};
 	};
 
@@ -42,6 +49,7 @@ if (side == "light") {
 		} else {
 			arrLength--;
 			hero2 = h2;
+			heroes.push(h2);
 		};
 	};
 	
@@ -58,6 +66,7 @@ if (side == "light") {
 		} else {
 			arrLength--;
 			hero3 = h3;
+			heroes.push(h3);
 		};
 	};
 	
@@ -67,12 +76,15 @@ if (side == "light") {
 	var rand1 = Math.floor(Math.random() * badArr.length);
 		var vil1 = badArr[rand1];
 		badArr.splice(rand1,1);
+		villains.push(vil1);
 	var rand2 = Math.floor(Math.random() * badArr.length);
 		var vil2 = badArr[rand2];
 		badArr.splice(rand2,1);
+		villains.push(vil2);
 	var rand3 = Math.floor(Math.random() * badArr.length);
 		var vil3 = badArr[rand3];
 		badArr.splice(rand3,1);
+		villains.push(vil3);
 	alert('Watch out! The dark side has ' + vil1 +' and ' + vil2 + ' and ' + vil3 + '!O:');
 
 } else if (side == "dark") {
@@ -95,6 +107,7 @@ if (side == "light") {
 		} else {
 			arrLength--;
 			vil1 = v1;
+			villains.push(v1);
 		};
 	};
 
@@ -111,6 +124,7 @@ if (side == "light") {
 		} else {
 			arrLength--;
 			vil2 = v2;
+			villains.push(v2);
 		};
 	};
 	
@@ -127,6 +141,7 @@ if (side == "light") {
 		} else {
 			arrLength--;
 			vil3 = v3;
+			villains.push(v3);
 		};
 	};
 	
@@ -137,12 +152,15 @@ if (side == "light") {
 	var rand1 = Math.floor(Math.random() * goodArr.length);
 		var hero1 = goodArr[rand1];
 		goodArr.splice(rand1,1);
+		heroes.push(hero1);
 	var rand2 = Math.floor(Math.random() * goodArr.length);
 		var hero2 = goodArr[rand2];
 		goodArr.splice(rand2,1);
+		heroes.push(hero2);
 	var rand3 = Math.floor(Math.random() * goodArr.length);
 		var hero3 = goodArr[rand3];
 		goodArr.splice(rand3,1);
+		heroes.push(hero3);
 	alert('Darn it! The light side has ' + hero1 +' and ' + hero2 + ' and ' + hero3 + '!O:');
 } else {
 	//repeat prompt till either light or dark is entered
@@ -150,9 +168,3 @@ if (side == "light") {
 };
 
 
-var fight = function () {
-
-
-
-
-}
