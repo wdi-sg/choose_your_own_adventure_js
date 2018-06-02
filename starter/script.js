@@ -6,7 +6,7 @@ function roll() {
 
 //Getting player name
 var playerName = prompt("Hello there! What is your name?");
-alert("Hello " + playerName + "! \nWelcome to WASTE WORLD!")
+alert("Hello " + playerName + "! \nWelcome to WasteWorld!")
 
 //Restart Game function
 // var restart = function() {
@@ -19,7 +19,7 @@ alert("Hello " + playerName + "! \nWelcome to WASTE WORLD!")
 // }
 
 //Choose an experience.
-var experience = prompt(" So... " + playerName + "! What would you like to do in Waste World?\n Would you like \na (L)Leisurely Tour or \nan (A)Action Adventure?")
+var experience = prompt(" So... " + playerName + "! What would you like to do in WasteWorld?\n Would you like \na (L)Leisurely Tour or \nan (A)Action Adventure?")
 // var promptText = "Would you like a (L)Leisurely Tour or an (A)Action Adventure?";
 // var experience = prompt(promptText);
 // while(experience.toLowerCase() !== "l" || experience.toLowerCase() !== "a") {
@@ -60,37 +60,47 @@ var experience = prompt(" So... " + playerName + "! What would you like to do in
             }   //Rob a Bank -> Steal Gold or Cash.
                 if (outlawActivity.toLowerCase() == "r") {
                  var robBank = prompt("You bust into the bank, guns a blazin and you head straight for the\n (G)old Bars \nStacks of (C)Cash");   
-                } if (robBank.toLowerCase() == "g") {
-                    var loot = "gold";
-                } else if (robBank.toLowerCase() == "c") {
-                    loot = "cash";
-                }
+                    } if (robBank.toLowerCase() == "g") {
+                      var loot = "gold";
+                    } else if (robBank.toLowerCase() == "c") {
+                      loot = "cash";
+                    }
 
-                var escapeMethod = prompt("You grab the " + loot + " and fire a shot in the air. \n\nRunning outside, you see the Town Sheriff running towards the bank. \n\nDo you: \n(R)Run for it, or do you \n(S)Steal a horse?")
+                      var escapeMethod = prompt("You grab the " + loot + " and fire a shot in the air. \n\nRunning outside, you see the Town Sheriff running towards the bank. \n\nDo you: \n(R)Run for it, or do you \n(S)Steal a horse?")
+                        
+                        //Steal a horse
+                        if (escapeMethod.toLowerCase() == "s") {
+                            alert("You decide to steal a horse hitched right outside the bank. \nAs you try to mount the horse, it suddenly rears up on its hind legs. \nClick to find out what happens to you.");
+                            var rollHorse = roll();
+                               //(>5) Success! -> Get Away.
+                               //(<=5) Horse Uncooperative -> Game Over.
+                               if (rollHorse >5) {
+                               alert("Good thing you had one foot in the stirrups. You hang on to the saddle and manage to hoist yourself on it and within seconds, you are riding into the sunset with your hard earned " + loot + ".")
+                               alert("Congratulations " + playerName + "! You are now rich! \n\nDisclaimer: \nWasteWorld " + loot + " has no value as real currency and is only legal tender in the WasteWorld gift store. \nWasteWorld does not condone crime or violence outside this experience.");
+                            } else if (rollHorse <= 5) {
+                               alert("You get thrown off the horse and as you struggle to stand up, it aims a well aimed kick at your face. \nThe last thing you see is the Sheriff looming over you as he cocks his gun and points it at your head.");
+                               alert("GAME OVER");
+                            }
                         //Make a run for it
                             //Stole Cash -> Get away.
-                            if (escapeMethod.toLowerCase() == "r" && loot == "cash") {
-                                alert("You decide to high tail it out of here on foot. Thank goodness you grabbed something lightweight.\nCongratulations! You are now rich! \nDisclaimer: \nWasteWorld Cash has no value as real currency and is only legal tender in the WasteWorld gift store. \nWasteWorld does not condone crime or violence outside this experience.");
-                            } 
-                            //Stole Gold 
-                              else if (escapeMethod.toLowerCase() == "r" && loot == "gold") {
-                                //Overburdened - Gunfight with Sheriff. (Roll Random Number)
-                                } alert("Oh no! The gold you stole is slowing you down. \n\nThe Sheriff gets within shooting distance and draws his gun... \n\nCLICK TO SEE IF YOU SURVIVE...");
-                                  var roll = roll();  
-                                    //Win (>5) -> Get Away.
-                                    //Lose (<=5) -> Game Over
-                                    if (roll > 5) {
-                                      alert("You hear a gunshot and feel the bullet whizz past your ear. \n\nYou keep running as fast as you can with the gold and manage to outrun the Sheriff who stopped to reload. \n\nCongratulations! You are now rich! \n\nDisclaimer: \nWasteWorld Gold can be exchanged for WasteWorld Cash in the WasteWorld Gift Shop. \nWasteWorld Cash has no value as real currency and is only legal tender in the WasteWorld gift store. \nWasteWorld does not condone crime or violence outside this experience.");
-                                      alert("GAME OVER");
-                                    } else { 
-                                        alert("You hear a gunshot and feel a sharp pain in your right leg as you stumble and crash into the dirt. The last thing you see is the Sheriff looming above you as he cocks his gun and points it in your face.");
-                                        alert("GAME OVER"); 
-                                    }
- 
-                        //Steal a horse
-                            //Roll Random Number
-                                //(>5) Success! -> Get Away.
-                                //(<=5) Sheriff shoots the horse -> Game Over.
+                        if (escapeMethod.toLowerCase() == "r" && loot == "cash") {
+                           alert("You decide to high tail it out of here on foot. Thank goodness you grabbed something lightweight.");
+                           alert("Congratulations! You are now rich! \nDisclaimer: \nWasteWorld " + loot + " has no value as real currency and is only legal tender in the WasteWorld gift store. \nWasteWorld does not condone crime or violence outside this experience.");
+                        }  //Stole Gold 
+                           else if (escapeMethod.toLowerCase() == "r" && loot == "gold") {
+                           //Overburdened - Gunfight with Sheriff. (Roll Random Number)
+                           } alert("Oh no! The gold you stole is slowing you down. \n\nThe Sheriff gets within shooting distance and draws his gun... \n\nCLICK TO SEE IF YOU SURVIVE...");
+                            var rollGun = roll();
+                            //Win (>5) -> Get Away.
+                            //Lose (<=5) -> Game Over
+                            if (rollGun > 5) {
+                              alert("You hear a gunshot and feel the bullet whizz past your ear. \n\nYou keep running as fast as you can with the gold and manage to outrun the Sheriff who stopped to reload.");
+                              alert("Congratulations " + playerName + "! You are now rich! \n\nDisclaimer: \nWasteWorld " + loot + " has no value as real currency and is only legal tender in the WasteWorld gift store. \nWasteWorld does not condone crime or violence outside this experience.");
+                              alert("GAME OVER");
+                            } else if (rollGun <=5) { 
+                              alert("You hear a gunshot and feel a sharp pain in your right leg as you stumble and crash into the dirt. The last thing you see is the Sheriff looming above you as he cocks his gun and points it in your face.");
+                              alert("GAME OVER"); 
+                            }
 
                 //Tavern Brawl
                 // else if (outlawActivity.toLowerCase() == "t") {
@@ -99,11 +109,12 @@ var experience = prompt(" So... " + playerName + "! What would you like to do in
                     //Shootout with Black Bart (Roll random number)
                         //Win (>5) -> The town belongs to you now.
                         //Lose (<=5) -> Game Over   
+                        
 
             //As Sheriff
-            if (actionAdventure.toLowerCase() == "s") {
-            var outlawActivity = prompt("Howdy Sheriff! Time to indulge your hero fantasy and protect the townsfolks. Where should we start fighting crime? \nCheck on the (B)Bank or \nVisit the (T)Tavern");
-            }
+            // if (actionAdventure.toLowerCase() == "s") {
+            // var outlawActivity = prompt("Howdy Sheriff! Time to indulge your hero fantasy and protect the townsfolks. Where should we start fighting crime? \nCheck on the (B)Bank or \nVisit the (T)Tavern");
+            // }
                 //Check on the Bank -> Robbery in progress!
                         //Reach for a weapon (Roll random number)
                           //(10) Ironman suit > Robbers Give up.
@@ -120,9 +131,9 @@ var experience = prompt(" So... " + playerName + "! What would you like to do in
                             //Close shave. Try something else. -> Head back to Start.
 
             //As a Tourist
-             if (actionAdventure.toLowerCase() == "t") {
-            var outlawActivity = prompt("Howdy Visitor! Come to experience the Wild West? Be careful where you poke your head. \nWhere would you like to visit? \nThe (B)Bank or \nThe (T)Tavern");
-            }
+            // if (actionAdventure.toLowerCase() == "t") {
+            // var outlawActivity = prompt("Howdy Visitor! Come to experience the Wild West? Be careful where you poke your head. \nWhere would you like to visit? \nThe (B)Bank or \nThe (T)Tavern");
+            // }
                 //Go to the Bank
                     //Robbery in progress!
                         //Try to escape (Roll random number)
