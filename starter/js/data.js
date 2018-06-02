@@ -28,7 +28,7 @@ var goodGuys = {
 				'strength': 120
 			},
 			'leviOsar': {
-				'specs': 'flying',
+				'specs': 'charms',
 				'strength': 130
 			},
 			'dracoPunch': {
@@ -124,7 +124,7 @@ var goodGuys = {
 		'luckStat': 0.8,
 		'attacks': {
 			'loveHarrylove': {
-				'specs': 'DA',
+				'specs': 'DADA',
 				'strength': 180
 			},
 			'flickWand': {
@@ -216,7 +216,7 @@ var badGuys = {
 				'specs': 'DA',
 				'strength': 180
 			},
-			'Legilimens': {
+			'legilimens': {
 				'specs': 'DA',
 				'strength': 190
 			}

@@ -117,9 +117,10 @@ var choosingAttC = function (side, player) {
 		//making player's attacks an array
 		var playerAtt = Object.keys(goodGuys[player].attacks);
 		var att;
-		for (var i = 0; i < playerAtt.length; i++) {
-			att = playerAtt[i];	
-		};
+
+		var rand1 = Math.floor(Math.random() * playerAtt.length);
+		att = playerAtt[rand1];
+
 		alert(player+' has chosen ' + att + "!");
 		return att;
 
@@ -127,9 +128,10 @@ var choosingAttC = function (side, player) {
 		//making player's attacks an array
 		var playerAtt = Object.keys(badGuys[player].attacks);
 		var att;
-		for (var i = 0; i < playerAtt.length; i++) {
-			att = playerAtt[i];	
-		};
+
+		var rand1 = Math.floor(Math.random() * playerAtt.length);
+		att = playerAtt[rand1];
+
 		alert(player+' has chosen ' + att + "!");
 		return att;
 	};

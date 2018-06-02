@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Harry Potter Duelling Game</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/table.css">
+</head>
+<body>
+	<h1>Harry Potter Duelling Game</h1>
+	<h2>Intro</h2>
+		<p>Welcome to the wonderful wizarding world of Harry Potter! You can choose to be either on the light or dark side of this incredible and duel using your favourite heroes or villains in an all-out 3V3 duel! 
+
+		During each game, after the heroes and villains have been chosen, they will battle it out by taking turns to attack. The impact of the attack will decrease the Health Points(HP) of the character they are attacking. The impact is based on the attack power and the weakness of the character attacked to the attribute of the attack as well as the luckStat of the attacker.</p>
+
+		<p>Tips: Do take note that each character has different attributes and attacks. Tailor your attacks to the attributes of your enemy!</p>
+
+		<form action="game.html" target="_blank">
+	    	<input type="submit" value="Go to Game" />
+		</form>
+
+	<h2>Attributes and their rankings</h2>
+		<p>There are 7 attributes in total: </p>
+		<ol>
+			<li>Charms</li>
+			<li>DADA (Defence Against the Dark Arts)</li>
+			<li>DA (Dark Arts)</li>
+			<li>Flying</li>
+			<li>Herbology</li>
+			<li>Potions</li>
+			<li>Tranfiguration</li>
+		</ol>
+
+		<p>They are weak to each other in the manner shown here: Charms > DADA > DA > Flying > Herbology > Potions > Transfiguration > Charms</p>
+
+
+		<form action="game.html" target="_blank">
+	    	<input type="submit" value="Go to Game" />
+		</form>
+
+	<h2>Characters and their specs</h2>
+		<p>There are 9 heroes aligned with the light side and 8 villains with the dark side.</p>
+
+		<h3>The Light Side - Heroes</h3>
+		<table border="1" style="width: 80%; text-align: center;">
+			<tr>
+				<th>Hero</th>
+				<th>HP</th>
+				<th>luckStat</th>
+				<th>Attributes</th>
+				<th>Attacks: attribute, strength</th>
+			</tr>
+
+			<!-- HARRY POTTER -->
+			<tr>
+				<th rowspan="3">Harry Potter ('harry')</th>
+				<td rowspan="3">500</td>
+				<td rowspan="3">0.9</td>
+				<td>DADA</td>
+				<td>lightningBolt: DADA, 100</td>
+			</tr>
+			<tr>
+				<td rowspan="2">Flying</td>
+				<td>dragonFlyPast: flying, 150</td>
+			</tr>
+			<tr>
+				<td>roundSpecsGlare: DADA, 110</td>
+			</tr>
+
+			<!-- HERMOINE GRANGER -->
+			<tr>
+				<th rowspan="3">Hermoine ('her')</th>
+				<td rowspan="3">400</td>
+				<td rowspan="3">0.7</td>
+				<td rowspan="3">null (all-rounded)</td>
+				<td>hairFlip: null, 120</td>
+			</tr>
+			<tr>
+				<td>leviOsar: charms, 130</td>
+			</tr>
+			<tr>
+				<td>dracoPunch: DADA, 130</td>
+			</tr>
+
+			<!-- RONALD WEASLEY -->
+			<tr>
+				<th rowspan="3">Ronald Weasley ('ron')</th>
+				<td rowspan="3">600</td>
+				<td rowspan="3">0.7</td>
+				<td rowspan="3">flying</td>
+				<td>eatSlugs: flying, 140</td>
+			</tr>
+			<tr>
+				<td>goalDefence: flying, 150</td>
+			</tr>
+			<tr>
+				<td>chessMaster: null, 130</td>
+			</tr>
+
+			<!-- NEVILLE LONGBOTTOM -->
+			<tr>
+				<th rowspan="3">Neville Longbottom ('neville')</th>
+				<td rowspan="3">600</td>
+				<td rowspan="3">0.6</td>
+				<td>herbo</td>
+				<td>crucio: DA, 150</td>
+			</tr>
+			<tr>
+				<td rowspan="2">DADA</td>
+				<td>petrify: DADA, 140</td>
+			</tr>
+			<tr>
+				<td>screamingPlants: herbo, 160</td>
+			</tr>
+
+
+			<!-- DRACO MALFOY -->
+			<tr>
+				<th rowspan="3">Draco Malfoy ('draco')</th>
+				<td rowspan="3">400</td>
+				<td rowspan="3">0.7</td>
+				<td>flying</td>
+				<td>godlySneer: DA, 140</td>
+			</tr>
+			<tr>
+				<td rowspan="2">DA</td>
+				<td>snitchGrab: flying, 140</td>
+			</tr>
+			<tr>
+				<td>dadPetronus: null, 130</td>
+			</tr>
+
+			<!-- SEVERUS SNAPE -->
+			<tr>
+				<th rowspan="3">Severus Snape ('snape')</th>
+				<td rowspan="3">600</td>
+				<td rowspan="3">0.7</td>
+				<td>potions</td>
+				<td>sectumsempra: DA, 180</td>
+			</tr>
+			<tr>
+				<td rowspan="2">DA</td>
+				<td>Legilimens: DA, 160</td>
+			</tr>
+			<tr>
+				<td>felixFelicis: potions, 180</td>
+			</tr>
+
+			<!-- ALBUS DUMBLEDORE -->
+			<tr>
+				<th rowspan="3">Albus Dumbledore ('dumbledore')</th>
+				<td rowspan="3">700</td>
+				<td rowspan="3">0.8</td>
+				<td rowspan="3">null (all-rounded)</td>
+				<td>loveHarrylove: DADA, 180</td>
+			</tr>
+			<tr>
+				<td>flickWand: null, 190</td>
+			</tr>
+			<tr>
+				<td>invisibility: charms, 170</td>
+			</tr>
+
+			<!-- MINERVA MCGONAGALL -->
+			<tr>
+				<th rowspan="3">Minerva McGonagall('mcGonagall')</th>
+				<td rowspan="3">600</td>
+				<td rowspan="3">0.7</td>
+				<td>trans</td>
+				<td>catClaw: trans, 160</td>
+			</tr>
+			<tr>
+				<td rowspan="2">DADA</td>
+				<td>piertotumLocomotor: charms, 230</td>
+			</tr>
+			<tr>
+				<td>haveABiscuit: null, 170</td>
+			</tr>
+
+			<!-- RUBEUS HAGRID -->
+			<tr>
+				<th rowspan="3">Rubeus Hagrid ('hagrid')</th>
+				<td rowspan="3">800</td>
+				<td rowspan="3">0.6</td>
+				<td rowspan="3">DADA</td>
+				<td>dragonFlame: null, 160</td>
+			</tr>
+			<tr>
+				<td>spiderWeb: null, 170</td>
+			</tr>
+			<tr>
+				<td>umbrellaPigTail: trans, 160</td>
+			</tr>
+		</table>
+
+
+		<h3>The Dark Side - Villains</h3>
+			<table border="1" style="width: 80%; text-align: center;">
+			<tr>
+				<th>Hero</th>
+				<th>HP</th>
+				<th>luckStat</th>
+				<th>Attributes</th>
+				<th>Attacks: attribute, strength</th>
+			</tr>
+
+			<!-- TOM RIDDLE -->
+			<tr>
+				<th rowspan="3">Voldemort ('volemort')</th>
+				<td rowspan="3">1000</td>
+				<td rowspan="3">0.9</td>
+				<td rowspan="3">DA</td>
+				<td>deathSpell: DA, 140</td>
+			</tr>
+			<tr>
+				<td>naginiBite: null, 140</td>
+			</tr>
+			<tr>
+				<td>icyGlare: DA, 150</td>
+			</tr>
+
+			<!-- BELLATRIX LESTRANGE -->
+			<tr>
+				<th rowspan="3">Bellatrix Lestrange ('bellatrix')</th>
+				<td rowspan="3">800</td>
+				<td rowspan="3">0.9</td>
+				<td>flying</td>
+				<td>avadaKedavra: DA, 160</td>
+			</tr>
+			<tr>
+				<td rowspan="2">DA</td>
+				<td>crucio: DA, 180</td>
+			</tr>
+			<tr>
+				<td>legilimens: DA, 190</td>
+			</tr>
+
+			<!-- DOLORES UMBRIDGE -->
+			<tr>
+				<th rowspan="3">Dolores Umbridge ('umbridge')</th>
+				<td rowspan="3">700</td>
+				<td rowspan="3">0.8</td>
+				<td rowspan="3">charms</td>
+				<td>quillScratch: DA, 180</td>
+			</tr>
+			<tr>
+				<td>incarcerous: charms, 190</td>
+			</tr>
+			<tr>
+				<td>pinnkOverload: trans, 200</td>
+			</tr>
+
+
+			<!-- PETER PETTIGRES -->
+			<tr>
+				<th rowspan="3">Peter Pettigrew ('peter')</th>
+				<td rowspan="3">500</td>
+				<td rowspan="3">0.9</td>
+				<td rowspan="3">trans</td>
+				<td>mouseBite: trans, 120</td>
+			</tr>
+			<tr>
+				<td>treachery: DA, 110</td>
+			</tr>
+			<tr>
+				<td>flattery: null, 110</td>
+			</tr>
+
+			<!-- LUCIUS MALFOY -->
+			<tr>
+				<th rowspan="3">Lucius Malfoy ('lucius')</th>
+				<td rowspan="3">900</td>
+				<td rowspan="3">0.7</td>
+				<td rowspan="3">DA</td>
+				<td>bookHorcrux: DA, 150</td>
+			</tr>
+			<tr>
+				<td>hairWhip: null, 130</td>
+			</tr>
+			<tr>
+				<td>dobbyKick: flying, 130</td>
+			</tr>
+
+			<!-- FENRIR GREYBACK -->
+			<tr>
+				<th rowspan="3">Fenrir Greyback ('fenrir')</th>
+				<td rowspan="3">800</td>
+				<td rowspan="3">0.7</td>
+				<td>trans</td>
+				<td>howl: DA, 170</td>
+			</tr>
+			<tr>
+				<td rowspan="2">DA</td>
+				<td>wolfClaw: trans, 160</td>
+			</tr>
+			<tr>
+				<td>wolfBite: trans, 150</td>
+			</tr>
+
+			<!-- ALECTO CARROW -->
+			<tr>
+				<th rowspan="3">Alecto Carrow('alectoCarrow')</th>
+				<td rowspan="3">600</td>
+				<td rowspan="3">0.8</td>
+				<td>potions</td>
+				<td>twinPower: DA, 130</td>
+			</tr>
+			<tr>
+				<td rowspan="2">DA</td>
+				<td>summonTheLord: charms, 150</td>
+			</tr>
+			<tr>
+				<td>tortureStudents: potions, 130</td>
+			</tr>
+
+			<!-- RUBEUS HAGRID -->
+			<tr>
+				<th rowspan="3">Rubeus Hagrid ('hagrid')</th>
+				<td rowspan="3">800</td>
+				<td rowspan="3">0.6</td>
+				<td rowspan="3">DADA</td>
+				<td>dragonFlame: null, 160</td>
+			</tr>
+			<tr>
+				<td>spiderWeb: null, 170</td>
+			</tr>
+			<tr>
+				<td>umbrellaPigTail: trans, 160</td>
+			</tr>
+		</table>
+
+		<br>
+		<form action="game.html" target="_blank">
+	    	<input type="submit" value="Go to Game" />
+		</form>
+</body>
+</html>
