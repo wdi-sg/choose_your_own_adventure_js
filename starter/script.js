@@ -34,13 +34,13 @@ function pickDoor() {
   doorTest = doorVal;
   doorRoll = Math.floor(Math.random() * 20);
   //previous conditional was rigged that option 1 will always result in fail, changed conditional to check for door first then roll to see if door passes
-  if (doorVal > 1 && doorTest < 4) {
+  if (doorVal > 0 && doorTest < 4) {
     if (doorRoll >= 8 ) {
       attackRoll();
     }else{
       eject();
     }
-  } else if(!doorVal || doorTest > 3) {
+  } else if(doorVal || doorTest > 3) {
     alert("Pick a door!")
     invalidDoor();
   }
@@ -58,7 +58,7 @@ function invalidDoor() {
     }else{
       eject();
     }
-  } else if(!doorVal || doorTest > 3) {
+  } else if(doorVal || doorTest > 3) {
     alert("You failed to pick a door again. Die.")
     eject();
   }
