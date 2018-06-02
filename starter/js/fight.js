@@ -138,6 +138,15 @@ var choosingAttC = function (side, player) {
 
 };
 
+
+
+
+
+
+
+
+
+
 //calculate impact and deduct from hp 
 var computeImpact = function (sideOfAtt, attacker, defense, attack) {
 	var rand =  Math.floor(Math.random() * 10);
@@ -159,7 +168,6 @@ var computeImpact = function (sideOfAtt, attacker, defense, attack) {
 
 		console.log(prob);
 		console.log(rand);
-
 
 		//if luckStat returns true, then deduct from villain's hp
 		if (rand <= prob) {
@@ -183,11 +191,10 @@ var computeImpact = function (sideOfAtt, attacker, defense, attack) {
 			if(weakness >= specialities[attSpec][defSpec[i]]) {
 				weakness = specialities[attSpec][defSpec[i]];
 			}
-		}
+		};
 
 		console.log(prob);
 		console.log(rand);
-
 
 		//if luckStat returns true, then deduct from heroes' hp
 		if (rand <= prob) {
