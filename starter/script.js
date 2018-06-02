@@ -39,22 +39,22 @@ function escape(max, min) {
 }
 
 //Prompts name
-var name = prompt("Hey Trainer, what is your name??");
+var name = prompt("Welcome to the world of pokemon.\nHey Trainer, what is your name??");
 
 
 //Prompts to choose pokemon
-var pokemon = prompt("Hey, " + name + "!\nPlease choose your pokemon. \n(charmander, squirtle or bulbasaur??)");
+var pokemon = prompt("Professor Oak invites you to his house. \nHe offers you 3 pokemon to choose from. \nPlease choose your pokemon. \n(charmander, squirtle or bulbasaur??)");
 if (pokemon != "charmander" && pokemon != "squirtle" && pokemon != "bulbasaur") {
-	console.log("Please try again.");
+	alert("Please try again.");
 do {
 	var pokemon = prompt("Please choose your pokemon. (charmander, squirtle or bulbasaur??)");
 } while (pokemon != "charmander" && pokemon != "squirtle" && pokemon != "bulbasaur");
 }
 
 //Chooses enemy pokemon
-var enemy = prompt("Please choose your enemy. (ratata or magikarp??)");
+var enemy = prompt("You met Gary while walking out of Profressor Oak's house. \nGary offers to do a battle with you and you accepts his challenge. \nNow, please choose Gary's Pokemon that you want to battle with. \n(ratata or magikarp??)");
 if (enemy != "ratata" && enemy != "magikarp") {
-	console.log("Please try again.");
+	alert("Please try again.");
 do {
 	var enemy = prompt("Please choose your enemy. (ratata or magikarp??)");
 } while (enemy != "ratata" && enemy != "magikarp")
@@ -81,6 +81,10 @@ if (enemy == "ratata") {
 	var enemyAttack = characters[4].attack;
 }
 
+if (enemy == "ratata" || enemy == "magikarp") {
+	alert("The battle has started. " + pokemon + " VS " + enemy + "!");
+}
+
 // Decision to make during battle
 do {
 var decision = prompt("Do you want to attack " + enemy +"? \nOr do you want to run away? \n(attack / run)");
@@ -89,20 +93,20 @@ var decision = prompt("Do you want to attack " + enemy +"? \nOr do you want to r
 if (decision == "run") {
 	var pokemonEscape = escape(0,2)
 	if (pokemonEscape == 0) {
-		alert("Escapes successfully!!\nYour pokemon and you manage to flee!")
+		alert("Escapes successfully!!\nGary is mad at you for leaving the fight. Gary calls " + name + " a pussy.")
 		break;
 	} if (pokemonEscape == 1) {
-		alert("Fails to escape!!");
+		alert("Fails to escape!! \nWhy do you want to leave in a middle of a battle?");
 		var enemyHit = attack(0,5);
 		if (enemyHit <= 3) {
 			pokemonHealth = pokemonHealth - enemyAttack;
-			console.log(enemy + " used attack. Deals " + enemyAttack + " damage to " + pokemon + ".");
-			console.log(pokemon + "'s HP: " + pokemonHealth);
-			console.log(enemy + "'s HP: " + enemyHealth);
+			alert(enemy + " used attack. Deals " + enemyAttack + " damage to " + pokemon + ".");
+			alert(pokemon + "'s HP: " + pokemonHealth);
+			alert(enemy + "'s HP: " + enemyHealth);
 		} else {
-			console.log(enemy + " 's attack missed.");
-			console.log(pokemon + "'s HP: " + pokemonHealth);
-			console.log(enemy + "'s HP: " + enemyHealth);
+			alert(enemy + " 's attack missed.");
+			alert(pokemon + "'s HP: " + pokemonHealth);
+			alert(enemy + "'s HP: " + enemyHealth);
 		}
 }
 }
@@ -115,41 +119,63 @@ if (decision == "attack") {
 	var pokemonHit = attack(0,5);
 	if (pokemonHit <= 3) {
 		enemyHealth = enemyHealth - pokemonAttack;
-		console.log(pokemon + " used attack. Deals " + pokemonAttack + " damage to " + enemy + ".");
-		console.log(pokemon + "'s HP: " + pokemonHealth);
-		console.log(enemy + "'s HP: " + enemyHealth);
+		alert(pokemon + " used attack. Deals " + pokemonAttack + " damage to " + enemy + ".");
+		alert(pokemon + "'s HP: " + pokemonHealth);
+		alert(enemy + "'s HP: " + enemyHealth);
+		if (pokemonHealth == 0) {
+			alert(pokemon + " has fainted.");
+			break;
+}		else if (enemyHealth == 0) {
+			alert(enemy + " has fainted.");
+			break;
+}
+
 
 //enemy turn to hit
 		var enemyHit = attack(0,5);
 		if (enemyHit <= 3) {
 			pokemonHealth = pokemonHealth - enemyAttack;
-			console.log(enemy + " used attack. Deals " + enemyAttack + " damage to " + pokemon + ".");
-			console.log(pokemon + "'s HP: " + pokemonHealth);
-			console.log(enemy + "'s HP: " + enemyHealth);
+			alert(enemy + " used attack. Deals " + enemyAttack + " damage to " + pokemon + ".");
+			alert(pokemon + "'s HP: " + pokemonHealth);
+			alert(enemy + "'s HP: " + enemyHealth);
+				if (pokemonHealth == 0) {
+					alert(pokemon + " has fainted.");
+					break;
+}				else if (enemyHealth == 0) {
+					alert(enemy + " has fainted.");
+					break;
+}
 		} else {
-			console.log(enemy + " 's attack missed.");
-			console.log(pokemon + "'s HP: " + pokemonHealth);
-			console.log(enemy + "'s HP: " + enemyHealth);
+			alert(enemy + " 's attack missed.");
+			alert(pokemon + "'s HP: " + pokemonHealth);
+			alert(enemy + "'s HP: " + enemyHealth);
 		}
 
 
 //Pokemon attack and misses
 	} else {
-		console.log(pokemon + " 's attack missed.");
-		console.log(pokemon + "'s HP: " + pokemonHealth);
-		console.log(enemy + "'s HP: " + enemyHealth);
+		alert(pokemon + " 's attack missed.");
+		alert(pokemon + "'s HP: " + pokemonHealth);
+		alert(enemy + "'s HP: " + enemyHealth);
 
 //enemy turn to hit
 		var enemyHit = attack(0,5);
 		if (enemyHit <= 3) {
 			pokemonHealth = pokemonHealth - enemyAttack;
-			console.log(enemy + " used attack. Deals " + enemyAttack + " damage to " + pokemon + ".");
-			console.log(pokemon + "'s HP: " + pokemonHealth);
-			console.log(enemy + "'s HP: " + enemyHealth);
+			alert(enemy + " used attack. Deals " + enemyAttack + " damage to " + pokemon + ".");
+			alert(pokemon + "'s HP: " + pokemonHealth);
+			alert(enemy + "'s HP: " + enemyHealth);
+			if (pokemonHealth == 0) {
+				alert(pokemon + " has fainted.");
+				break;
+}			else if (enemyHealth == 0) {
+				alert(enemy + " has fainted.");
+				break;
+}
 		} else {
-			console.log(enemy + " 's attack missed.");
-			console.log(pokemon + "'s HP: " + pokemonHealth);
-			console.log(enemy + "'s HP: " + enemyHealth);
+			alert(enemy + " 's attack missed.");
+			alert(pokemon + "'s HP: " + pokemonHealth);
+			alert(enemy + "'s HP: " + enemyHealth);
 		}
 }
 }
@@ -157,9 +183,9 @@ if (decision == "attack") {
 } while (pokemonHealth != 0 && enemyHealth != 0)
 
 if (pokemonHealth == 0) {
-	alert(pokemon + " has fainted.")
+	alert(enemy + " has won. " + name + " has lost your first pokemon battle. \nRefresh the page if you want revenge.")
 } else if (enemyHealth == 0) {
-	alert(enemy + "has fainted.")
+	alert(pokemon + " has won. You successfully won your first pokemon battle. Congrats.")
 }
 
 
