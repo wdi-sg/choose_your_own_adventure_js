@@ -2,32 +2,39 @@
 
 //game stats
 var lootScore = 0;
-var userHp = 7;
-var userHpCheck = [];
-var monsterHp = Math.floor(Math.random() * 5);
-
+// tested both hp on 5 and 0, the flow is working
+var userHp = 5;
 //store username in global var, only asks for your name once
 var getUsername = prompt("What is your name?");
 
+//assigns default username if no username is present
+if(!getUsername){
+  getUsername = "Player 1"
+};
+
 var currentFloor = 1;
-//total score
+//always start at first floor and ++ if you pick the correct door
+
 //th stands for treasure hunt
+//th checks if the floor is 7 if not it will keep running the game
 function th() {
   if (currentFloor >= 7) {
     win();
-    } else {
+  } else {
     pickDoor();
   }
 }
 
-// select door, start of loop, if you didn't pick the correct door it will eject() (see eject function on line 48)
+// select door, start of loop, if you didn't pick the correct door it will eject() (see eject())
+// moved attackRoll() here, the order is Pick a door > Check Hp first > Check if a monster appears > Battle Monster > if win go to nextfloor / if lose minus hp and gotonextfloor
+// at every floor there is a chance for loot (see loot() function)
 function pickDoor() {
   console.log("you are on floor " + currentFloor)
-  var doorVal = prompt(getUsername + " is currently on floor " + currentFloor + "\n" + "Pick a door: 1 2 3");
+  var doorVal = prompt(getUsername + " is currently on floor " + currentFloor + "\n" + getUsername + " has " + userHp + "HP" + "\n" + "Pick a door: 1 2 3");
   doorTest = doorVal;
   doorVal = Math.floor(Math.random() * doorVal);
   if ((doorVal == 1 || doorVal == 2) && doorTest < 4) {
-    goToNextFloor();
+    attackRoll();
   } else if (doorTest > 3) {
     alert("INVALID DOOR, YOU DROWN.")
     eject();
@@ -35,16 +42,13 @@ function pickDoor() {
     eject();
   }
 }
-
+//
 function goToNextFloor() {
-  console.log("Proceed to the next floor");
   currentFloor = currentFloor + 1;
   loot();
-  console.log("lootscore: " + lootScore);
   th();
   //made a mistake here, instead of checking for currentFloor, used pickDoor so it just keeps going to 7 floors and beyond
 }
-// didn't make it to 7th currentFloor
 function eject() {
   var countTotal = lootScore + currentFloor;
   var answer = prompt("Lady luck does not shine on " + getUsername + ", your highest floor was: " + currentFloor + "\n" + "Your total score is: " + countTotal + "\n" + "Try again?");
@@ -78,32 +82,55 @@ function loot(){
   }
 }
 
-//battle logic
-var hp = 20;
-
-var monsterHp = Math.floor(Math.random() * 20);
-
-if(monsterHp > 1){
-  attackMon();
-  if (attackMon <= 0){
-    console.log("You killed the monster");
-  }else if (hp <= 0){
-    console.log("You died");
+//battle sequence
+// check for userHp first
+// moved goToNextFloor() here
+// everytime you kill a monster you get 2 points
+function attackRoll() {
+  var encChance = Math.floor(Math.random() * 20);
+  if (userHp >= 1) {
+    if (encChance >= 10) {
+      console.log("mob appear");
+      var playerChoice = prompt("A monster appears!" + "\n" + getUsername + " has " + userHp + "HP" + "\n" + "Attack? Yes/No");
+      if (playerChoice == "yes") {
+        var dmg = Math.floor(Math.random() * 20);
+        if (dmg >= 10) {
+          lootScore = lootScore + 2;
+          alert("You killed the monster!" + "\n" + getUsername + " has " + userHp + "HP")
+          goToNextFloor();
+        } else {
+          userHp = userHp - 1;
+          alert("The monster is too strong for you and it attacks you!" + "\n" + getUsername + " has " + userHp + "HP");
+          goToNextFloor();
+        }
+      } else {
+        userHp = userHp - 1;
+        alert("You escape but you lose 1HP while running away." + "\n" + getUsername + " has " + userHp + "HP");
+        goToNextFloor();
+      }
+    } else {
+      alert("No monsters appear, proceed!")
+      goToNextFloor();
+    }
+  } else {
+    var reply = prompt("You are dead reset game? Yes/No")
+    if(reply == "yes"){
+      resetGame();
+      th();
+    }else{
+      alert("Thanks for playing! " + getUsername );
+    }
   }
-}
-
-function battleStart(){
-  var attackNum = Math.floor(Math.random() * 20);
-  var battle = attackNum - Math.floor(Math.random() * 20);
-  return battle;
 }
 
 //restart game here
 function resetGame(){
   lootScore = 0;
   currentFloor = 1;
-  userHp = 7;
+  userHp = 5;
 }
 
 //run the function to start the game
 th();
+
+//what i learned: the order of functions is important, where you put the functions will behave differently, deciding the order of the functions from the start is important and drawing out the flow helps even more
