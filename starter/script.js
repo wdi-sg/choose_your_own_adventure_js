@@ -32,17 +32,38 @@ function pickDoor() {
   console.log("you are on floor " + currentFloor)
   var doorVal = prompt(getUsername + " is currently on floor " + currentFloor + "\n" + getUsername + " has " + userHp + "HP" + "\n" + "Pick a door: 1 2 3");
   doorTest = doorVal;
-  doorVal = Math.floor(Math.random() * doorVal);
-  if ((doorVal == 1 || doorVal == 2) && doorTest < 4) {
-    attackRoll();
-  } else if (doorTest > 3) {
-    alert("INVALID DOOR, YOU DROWN.")
-    eject();
-  } else {
+  doorRoll = Math.floor(Math.random() * 20);
+  //previous conditional was rigged that option 1 will always result in fail, changed conditional to check for door first then roll to see if door passes
+  if (doorVal > 1 && doorTest < 4) {
+    if (doorRoll >= 8 ) {
+      attackRoll();
+    }else{
+      eject();
+    }
+  } else if(!doorVal || doorTest > 3) {
+    alert("Pick a door!")
+    invalidDoor();
+  }
+}
+//added function if invalid value or door is picked which results in game reset, player will be alerted to pick a door
+function invalidDoor() {
+  console.log("you are on floor " + currentFloor)
+  var doorVal = prompt(getUsername + " is currently on floor " + currentFloor + "\n" + getUsername + " has " + userHp + "HP" + "\n" + "Pick a door: 1 2 3");
+  doorTest = doorVal;
+  doorRoll = Math.floor(Math.random() * 20);
+  //previous conditional was rigged that option 1 will always result in fail, changed conditional to check for door first then roll to see if door passes
+  if (doorVal > 1 && doorTest < 4) {
+    if (doorRoll >= 8 ) {
+      attackRoll();
+    }else{
+      eject();
+    }
+  } else if(!doorVal || doorTest > 3) {
+    alert("You failed to pick a door again. Die.")
     eject();
   }
 }
-//
+
 function goToNextFloor() {
   currentFloor = currentFloor + 1;
   loot();
@@ -91,7 +112,7 @@ function attackRoll() {
   if (userHp >= 1) {
     if (encChance >= 10) {
       console.log("mob appear");
-      var playerChoice = prompt("A monster appears!" + "\n" + getUsername + " has " + userHp + "HP" + "\n" + "Attack? Yes/No");
+      var playerChoice = prompt("A monster appears!" + "\n" + getUsername + " has " + userHp + "HP" + "\n" + "Attack? Yes/No").toLowerCase();
       if (playerChoice == "yes") {
         var dmg = Math.floor(Math.random() * 20);
         if (dmg >= 10) {
@@ -103,7 +124,7 @@ function attackRoll() {
           alert("The monster is too strong for you and it attacks you!" + "\n" + getUsername + " has " + userHp + "HP");
           goToNextFloor();
         }
-      } else {
+      } else if(playerChoice == "no") {
         userHp = userHp - 1;
         alert("You escape but you lose 1HP while running away." + "\n" + getUsername + " has " + userHp + "HP");
         goToNextFloor();
@@ -113,7 +134,7 @@ function attackRoll() {
       goToNextFloor();
     }
   } else {
-    var reply = prompt("You are dead reset game? Yes/No")
+    var reply = prompt("You are dead reset game? Yes/No").toLowerCase();
     if(reply == "yes"){
       resetGame();
       th();
