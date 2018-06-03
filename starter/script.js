@@ -116,37 +116,60 @@ var experience = prompt(" So... " + playerName + "! What would you like to do in
                 } else if (outlawActivity.toLowerCase() == "t") {
                     alert ("You make your way to the Tavern and push open the swinging doors menacingly. \nImmediately, several men playing cards at a table stand up.");
                     var inciteBrawl = prompt("Do you: \n(I)Insult them? or \n(S)Start shooting?");
-                    //Insult guys
-                    if (inciteBrawl.toLowerCase == "i") {
+                        if (inciteBrawl.toLowerCase() == "i") {
                         alert("You shout: "+"Yer yellow pickin slimeballs! I have saddle sores tougher than you!");
                         var reaction = prompt("The men all pull out their guns and point them at you. \n\nDo you: \n(L)Laugh it off? Or do you: \n(H)Hold your ground?");
-                        if (reaction.toLowerCase == "l") {
-                            alert("Reaction to laughter.");
-                        } else if (reaction.toLowerCase == "s") {
-                            alert("Reaction to Standing Ground.");
-                        }
-                    //Start Shooting    
-                    } else if (inciteBrawl.toLowerCase == "s") {
+                            if (reaction.toLowerCase() == "l") {
+                                alert("You laugh nervously and tell the men: "+"Whoa. I'm just kidding guys. How about I buy everyone here a round of drinks?");
+                                alert("They don't buy it and pump you full of bullets.");
+                                alert("Don't insult and laugh at people holding guns pointed at you.");
+                                gameOver();
+                                end();
+                            } else if (reaction.toLowerCase() == "h") {
+                                alert("You stand your ground and give them your most fearsome look.");
+                                alert("You have entered a standoff. \n\nRoll a 6 or more if you want to live");
+                                var standoffRoll = roll();
+                                alert("You've rolled a " + standoffRoll + "!");
+                                if (standoffRoll > 5 ) {
+                                    alert("After a tense minute, the men suddenly burst out laughing! \nYour expression has been the funniest they have ever seen. \nYou have diffused the tensed atmosphere in the tavern.");
+                                    alert("The men liked you so much that they decided to buy you a round of drinks. \nYou spend a pleasant afternoon drinking whiskey and playing poker with the notorious Black Bart and his gang who have been holding the tavern hostage.");
+                                    alert("Black Bart gave you a nickname but on the plus side, you win a small fortune from the owner of the tavern.")
+                                    playerName = "Shiteface"
+                                    rich();
+                                    disclaimer();
+                                    gameOver();
+                                    end();
+                                } else if (standoffRoll <= 5 ) {
+                                    alert("The men open fire and pump you full of bullets.");
+                                    alert("You can't stop bullets with your face.");
+                                    gameOver();
+                                    end();
+                                }
+                            }
+                        } else if (inciteBrawl.toLowerCase() == "s") {
                         alert("You pull out your trusty six-shooter and fire a shot into the air. \n\nThe men pull out their guns in response and aims them at you...");
-                        alert("You've entered a gunfight. \n\nRoll a 6 or more to win.");
-                        var gunfightRoll = roll();
-                        alert("You've rolled a " + gunfightRoll + "!");
-                        if (gunfightRoll > 5) {
-                            alert("You flip over a table and duck behind it for cover as it gets riddled with bullets. \n\nYou wait till the hail of bullets stop and you pump a bullet into each shooters with surprising accuracy while they are reloading.");
-                            alert("The entire tavern erupts in cheers and whistles! \n\nYou have just rescued them from the baddest gang in the county who had been holding the tavern ransome!");
-                            alert("The Mayor arrives and hands you your bounty for taking down the baddies: A big sack of gold!");
-                            rich()
-                            disclaimer();
-                            gameOver();
-                            end();
-                            } else if (gunfightRoll <=5) { 
-                            alert("You fumble with your gun and drops it, discharging a round right into your leg as it hits the floor.");
-                            alert("As you grab your wounded leg in pain, the gunmen laugh hysterically as they pump bullet after bullet into you.")
-                            gameOver();
-                            end(); 
-                            }                         
-                    }
+                            alert("You've entered a gunfight. \n\nRoll a 6 or more to win.");
+                            var tavernGunfightRoll = roll();
+                            alert("You've rolled a " + tavernGunfightRoll + "!");
+                            if (tavernGunfightRoll > 5) {
+                                alert("You flip over a table and duck behind it for cover as it gets riddled with bullets. \n\nYou wait till the hail of bullets stop and you pump a bullet into each shooters with surprising accuracy while they are reloading.");
+                                alert("The entire tavern erupts in cheers and whistles! \n\nYou have just rescued them from the baddest gang in the county who had been holding the tavern ransome!");
+                                alert("The Mayor arrives and hands you your bounty for taking down the baddies: A big sack of gold!");
+                                rich()
+                                disclaimer();
+                                gameOver();
+                                end();
+                            } else if (tavernGunfightRoll <=5) { 
+                                alert("You fumble with your gun and drops it, discharging a round right into your leg as it hits the floor.");
+                                alert("As you grab your wounded leg in pain, the gunmen laugh hysterically as they pump bullet after bullet into you.")
+                                gameOver();
+                                end(); 
+                            }
+                        }                         
+                    
                 }
+
+                
             
         
         
