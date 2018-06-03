@@ -21,6 +21,10 @@ var runScene = function (sceneId) {
     return userPoints;
 }
 
+var invalidEntry = function () {
+    alert("You don't know how to play a game, eh?");
+}
+
 var fightHemingway = function(useHelmet) {
     var hemingwayHP = 50;
     var userHP = 50;
@@ -73,10 +77,10 @@ var renaissance = function() {
             userPoints += 1;
             alert("His outstanding architectural work of the High Renaissance was the rebuilding of St. Peter's Basilica, super dope!");
         } else {
-            alert("You don't know how to play a game, eh?");
+            invalidEntry();
         }
     } else {
-        alert("You don't know how to play a game, eh?");
+        invalidEntry();
     }
 }
 
@@ -92,7 +96,7 @@ var belleEpoque = function() {
             userPoints += 10;
             alert("You must be playful to resonate with her style that incorporate much references to Surrealism!");
         } else {
-            alert("You don't know how to play a game, eh?");
+            invalidEntry();
         }
     } else if (fashionType === "B") {
         userPoints += 10;
@@ -104,10 +108,10 @@ var belleEpoque = function() {
             userPoints += 10;
             alert("Absolutely adore the idyllic Roman scenes! Do you know that he was one who inspired a generation of esthetic-minded 'Souls'");
         } else {
-            alert("You don't know how to play a game, eh?");
+            invalidEntry();
         }
     } else {
-        alert("You don't know how to play a game, eh?");
+        invalidEntry();
     }
 }
 
@@ -155,10 +159,10 @@ var twenties = function() {
             userPoints += 30;
             alert("He's totally not weird! Because he is Tom Hiddleston.... ahem, I meant Fitzgerald!");
         } else {
-            alert("You don't know how to play a game, eh?");
+            invalidEntry();
         }
     } else {
-        alert("You don't know how to play a game, eh?");
+        invalidEntry();
     }
 }
 
@@ -174,7 +178,7 @@ var future = function() {
             userPoints += 20;
             alert("Ok, all hail to the king / queen!");
         } else {
-            alert("You don't know how to play a game, eh?");
+            invalidEntry();
         }
     } else if (futureType === "B") {
         userPoints += 20;
@@ -186,9 +190,9 @@ var future = function() {
             userPoints -= 5;
             alert("You are ridiculous, look around you more often!");
         } else {
-            alert("You don't know how to play a game, eh?");
+            invalidEntry();
         }
     } else {
-        alert("You don't know how to play a game, eh?");
+        invalidEntry();
     }
 }
