@@ -265,6 +265,8 @@ var experience = prompt(" So... " + playerName + "! What would you like to do in
                     alert("Your shot misses too but that was your last bullet. As you struggle to reload your gun, the robber clears his head aims his weapon at you...");
                     alert("You see a flash of white... and then nothing as the robber's bullet enters your skull from between your eyes and out the back.");
                     gameOver();
+                    }
+                }
             }
         
         //Deal with Tavern Takeover
@@ -300,8 +302,7 @@ var experience = prompt(" So... " + playerName + "! What would you like to do in
             }
         }
     }
-}
-}
+
 
 
 
