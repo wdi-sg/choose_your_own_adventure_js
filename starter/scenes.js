@@ -28,6 +28,9 @@ var invalidEntry = function () {
 var fightHemingway = function(useHelmet) {
     var hemingwayHP = 50;
     var userHP = 50;
+
+    alert("Your HP: " + userHP + "\nHemingway's HP: " + hemingwayHP);
+
     var fightOutcome = "";
     var ratio = 1;
 
@@ -38,6 +41,7 @@ var fightHemingway = function(useHelmet) {
     do {
         hemingwayHP -= Math.floor(Math.random() * 15) + 1 ;
         userHP -= (Math.floor(Math.random() * 10) + 1) * ratio;
+        alert("Nice fight!\nYour HP: " + userHP + "\nHemingway's HP: " + hemingwayHP);
     } while (userHP > 0 && hemingwayHP > 0)
 
     if (userHP <= 0 && hemingwayHP <= 0) {
