@@ -14,7 +14,7 @@ var scene = {
 var name = prompt("Welcome, what is your name?");
 var score = 0;
 var gameContinue = true;
-var hitpoints = 200; 
+var hitpoints = 200;
 var enemies = [{
 	type: "soldier",
 	strength: 10,
@@ -34,6 +34,12 @@ var enemies = [{
 var encounterNumber = 3;
 var hitNumber = 3;
 var power = 50;
+var letters = "abcdefghijklmnopqrstuvwxyz1234567890";
+var passCode = ""
+for (var i = 0; i < 4; i++) {
+	passCode = passCode + letters[Math.floor(Math.random() * 36)];
+}
+var luckyRoom = Math.floor(Math.random() * 8);
 
 
 // Set all variables to undefined
@@ -111,6 +117,14 @@ function encounter() {
 			break;
 		default:
 			break;
+	}
+}
+
+// Show clue
+
+function showClue(x) {
+	if (x === luckyRoom) {
+		alert("Somehow you can't help but notice a string of 4 characters inscribed in the wall. It reads '" + passCode + "'.");
 	}
 }
 
@@ -209,24 +223,14 @@ while (gameContinue === true) {
 			case "G":
 				do {
 					scene.hostageRoom = prompt("It is locked. There is a number code you need to punch in. What do you enter: (Enter 'Q' to stop)");
-					switch (true) {
-						case (isNaN(scene.hostageRoom)):
-							alert("It is a number code.");
-							break;
-						case (scene.hostageRoom !== "2805"):
-							alert("Wrong code.");
-							break
-						default:
-							break;
-					}
 				}
-				while (scene.hostageRoom !== "Q" && scene.hostageRoom !== "q" && scene.hostageRoom !== "2805");
+				while (scene.hostageRoom !== "Q" && scene.hostageRoom !== "q" && scene.hostageRoom !== passCode);
 				switch (true) {
 					case (scene.hostageRoom === "Q" || scene.hostageRoom === "q"):
 						reset();
 						scene.buildingAtrium = "G";
 						break;
-					case (scene.hostageRoom === "2805"):
+					case (scene.hostageRoom === passCode):
 						scene.breakCode = true;
 						break;
 					default:
@@ -263,12 +267,14 @@ while (gameContinue === true) {
 				alert("It is stuck. You quickly use a knife to scrape it off. You notice there is a dose of adrenaline at your feet. You pick it up and shoot yourself with it. Time to head back.");
 				hitpoints = 200;
 				alert("Bonus: full hitpoints!");
+				showClue(0);
 				encounter();
 				reset();
 				scene.roomOnLeft = "T";
 				break;
 			case "F":
 				alert("You come to a dead end with a table and a cabinet. The cabinet is empty, however you notice there is a dog tag on the table. It reads '2LT JASON SMITH'. You pray for his safety as you turn back.");
+				showClue(1);
 				encounter();
 				reset();
 				scene.roomOnLeft = "T";
@@ -286,6 +292,7 @@ while (gameContinue === true) {
 		switch (scene.rightDoor) {
 			case "R":
 				alert("You slowly pull out your gun, take a deep breath, and slowly look behind. Nothing. There is nobody in the room ahead. You heave a sigh of relief and go back.");
+				showClue(2);
 				encounter();
 				reset();
 				scene.roomOnLeft = "G";
@@ -294,6 +301,7 @@ while (gameContinue === true) {
 				alert("Before the soldier can do anything, you have already knocked him out with a firm chop to the back of the neck. You peek into the room. It has a bed and study table and it looks pretty messy. You search the soldier's body. There is Jason's lucky charm. Finders, keepers so wear it around your neck.");
 				encounterNumber = 2;
 				alert("Bonus: No more enemy officer!");
+				showClue(3);
 				encounter();
 				reset();
 				scene.roomOnLeft = "G";
@@ -316,13 +324,19 @@ while (gameContinue === true) {
 
 		switch (scene.waiting) {
 			case "S":
-				alert("TV turned off. There is a note on top of the TV which reads '2805'. Alright, time to go.");
+				alert("TV turned off. There is a kevlar vest behind the TV console. Nice!");
+				for (var j = 0; j < enemies.length; j++) {
+					enemies[j].strength = 5 * (j + 1);
+				}
+				alert("Bonus: enemy damage halved!");
+				showClue(4);
 				encounter();
 				reset();
 				scene.rightPassage = "W";
 				break;
 			case "H":
 				alert("Bad luck. Some enemy(s) came to watch the TV and they seem like they are not about to leave anytime soon. Tired of watching the TV yourself, you emerge from behind the door...");
+				showClue(5);
 				encounter();
 				encounter();
 				encounter();
@@ -360,6 +374,7 @@ while (gameContinue === true) {
 				alert("You find a gun on the soldier and it is similar to yours! Now you have 2 guns!");
 				power = 100;
 				alert("Bonus: double damage!");
+				showClue(6);
 				encounter();
 				reset();
 				scene.rightPassage = "S";
@@ -368,6 +383,7 @@ while (gameContinue === true) {
 				alert("There is a sink at the corner rather well hidden from sight. Quickly, you turn on the tap and wash your face and take a few sips of water. Now you feel more energised!");
 				hitNumber = 2;
 				alert("Bonus: hit percentage = 100%!")
+				showClue(7);
 				encounter();
 				reset();
 				scene.rightPassage = "S";
@@ -385,4 +401,4 @@ while (gameContinue === true) {
 	}
 }
 
-alert(`${name}'s final score is ${score}`);
+alert(`LT ${name}'s final score is ${score}`);
