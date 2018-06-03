@@ -101,6 +101,7 @@ function combat(userHealth, enemyHealth, userAttack, enemyAttack, enemyName) {
 
   if (userHealth > 0) {
     alert("You successfully defeated the " + enemyName + ", and found the princess at the top of the castle, successfully saving her!");
+    userScore += 1;
   } else {
     alert("You have been defeated by the " + enemyName + "... Goodbye");
   };
@@ -278,6 +279,7 @@ function roomSix() {
   switch(userChoices) {
     case "0":
       alert("You rush down the hallway, entering the only door you see, where you found the princess awaiting you!");
+      userScore += 1;
       break;
     case "1":
       alert("He anticipates your move, and absolutely destroys you.... Goodbye...");
@@ -291,11 +293,12 @@ function roomSix() {
 function roomSeven() {
   alert("The giant is too quick and grabs you... do you...");
 
-  var userChoices = prompt("Do you choose to: Slip past him. Or: Attempt to finish him off. (0/1)");
+  var userChoices = prompt("Do you choose to: Try to wriggle out. Or: Attempt to finish him off. (0/1)");
 
   switch(userChoices) {
     case "0":
-      alert("You rush down the hallway, entering the only door you see, where you found the princess awaiting you!");
+      alert("You successfully wriggle out, rush down the hallway, and enter the only door you see, where you found the princess awaiting you!");
+      userScore += 1;
       break;
     case "1":
       alert("He anticipates your move, and absolutely destroys you.... Goodbye...");
@@ -368,9 +371,10 @@ function roomEleven() {
   switch(userChoices) {
     case "0":
       alert("He appreciates your honesty and directs you to the princess, where you successfully saved her!");
+      userScore += 1;
       break;
     case "1":
-      alert("He calls the guards on you. And your fate was sealed from that moment. Goodbye.");
+      alert("Annoyed, he calls the guards on you. And your fate was sealed from that moment. Goodbye.");
       break;
     default:
       alert("You have entered an invalid value");
@@ -388,8 +392,9 @@ function roomTwelve() {
 
     if (userChoices == oldManNumber) {
       alert("You successfully guessed his number! Honouring his promise, he directs you to the princess, where you successfully saved her!");
+      userScore += 1;
     } else {
-      alert("He calls the guards on you. And your fate was sealed from that moment. Goodbye.");
+      alert("You guessed wrongly... and he calls the guards on you. And your fate was sealed from that moment. Goodbye.");
     }
   } else {
     alert("You have entered an invalid value");
@@ -405,9 +410,10 @@ function roomThirteen() {
   switch(userChoices) {
     case "0":
       alert("He appreciates your honesty and directs you to the princess, where you successfully saved her!");
+      userScore += 1;
       break;
     case "1":
-      alert("He calls the guards on you. And your fate was sealed from that moment. Goodbye.");
+      alert("Pissed that you turn your back on him, he calls the guards on you. And your fate was sealed from that moment. Goodbye.");
       break;
     default:
       alert("You have entered an invalid value");
@@ -422,6 +428,7 @@ function roomThirteen() {
 // ===========================================================================================================================
 
 function beginGame(userInputName) {
+  alert("Number of Successful Runs: " + userScore);
 
   var userRoomOne = roomOne(userInputName);
 
@@ -510,6 +517,8 @@ function beginGame(userInputName) {
       beginGame(userInputName);
   };
 };
+
+var userScore = 0;
 
 $(document).ready(function() {
   beginGame(getUserName());
