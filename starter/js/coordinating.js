@@ -10,7 +10,7 @@ var coordinating = function () {
 
 		//minus off hLength or vLength everytime either heroes or villains die respectively
 		//the actual battle
-		while(hLength!=0 && vLength!=0) {
+		while(hLength>0 && vLength>0) {
 			var att = choosingAttU('light', chosenH);
 			computeImpact('light', chosenH, chosenV, att);
 			att = choosingAttC('dark', chosenV);
@@ -18,12 +18,16 @@ var coordinating = function () {
 
 			if (goodGuys[chosenH].hp <= 0 && hLength>0) {
 				alert(chosenH + " KO-ed! D:")
-				choosingHeroU();
 				hLength--;
+				if(hLength>0){
+					choosingHeroU();
+				};
 			} else if (badGuys[chosenV].hp <= 0 && vLength>0) {
 				alert(chosenV + " KO-ed! XD");
-				choosingVilC();
 				vLength--;
+				if(hLength>0){
+					choosingVilC();
+				};
 			};
 		};
 
@@ -50,12 +54,16 @@ var coordinating = function () {
 
 			if (badGuys[chosenV].hp <= 0 && vLength>0) {
 				alert(chosenV + " KO-ed! D:")
-				choosingVilU();
 				vLength --;
+				if(vLength>0){
+					choosingVilU();
+				};
 			} else if (goodGuys[chosenH].hp <= 0 && hLength>0) {
 				alert(chosenH + " KO-ed! XD");
-				choosingHeroC();
 				hLength --;
+				if(hLength>0){
+					choosingHeroC();
+				};
 			};
 		};
 
