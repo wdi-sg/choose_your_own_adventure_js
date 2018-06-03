@@ -1,7 +1,10 @@
 // part 2
-var name = prompt(askName); // add name in story later
-//part 3: Assign a score for each task in the game. Report the player's score at the end of the game.
-var score = 0; // to add codes to allow player to gain scores
+var name = prompt(askName); 
+if (name === "") {
+	name = "Player"
+}
+//part 3
+var score = 0; 
 //part 4: Have your player repeat a set of challenges or questions over again- if a player enters a situation or room, allow them to leave and come back if they want.
 //part 5: Create enemies for your player to face, create weapons that your player can use on the enemies ?!?!?!?!??!
 //part 6: randomize eveything ?!?!?!? .........
@@ -29,7 +32,7 @@ var letsPlay = function() {
 					result += resultKick; // kicked and died
 
 				} else {
-					alert("Not Valid");
+					alert("You have not unlock that move yet.");
 					force();
 				}
 				return result;
@@ -39,14 +42,14 @@ var letsPlay = function() {
 				
 				var pickLockChoice = prompt(searchOrForce)
 				
-				if (pickLockChoice.toLowerCase() === "search") { 				// earch
+				if (pickLockChoice.toLowerCase() === "search") {
 					result += resultSearch;
 
-				} else if (pickLockChoice.toLowerCase() === "force") { 		//force
+				} else if (pickLockChoice.toLowerCase() === "force") {
 					force(); // loops to parent choice
 				
 				} else {
-					alert("Not Valid");
+					alert("Eh, that's not an option.");
 					pickLock();
 				
 				}
@@ -63,14 +66,14 @@ var letsPlay = function() {
 				pickLock();
 				alert(result);
 			} else {
-				alert("Not valid");
-				letsPlayDoor(); // repeat letsPlayDoor prompt again
+				alert("You can't unlock the door with that. Try again.");
+				letsPlayDoor(); // repeat letsPlayDoor prompt again until valid answer
 			};
 			//choiceTwo ends
 
 			return doorChoice;
 		};
-		letsPlayDoor(); // initiate the function above
+		letsPlayDoor(); // initiate door option
 
 	} else if (choiceOne.toLowerCase() === "window") {
 		score += 100;
@@ -92,7 +95,7 @@ var letsPlay = function() {
 					result += resultShout;
 				
 				} else {
-					alert("Not Valid");
+					alert("I don't think you have time for that.");
 					breakWindow();
 				
 				}
@@ -111,7 +114,7 @@ var letsPlay = function() {
 					breakWindow(); // loops 2nd choice
 				
 				} else {
-					alert("Not Valid");
+					alert("Was that a typo? Try again.");
 					inspectWindow();
 				
 				}
@@ -129,15 +132,15 @@ var letsPlay = function() {
 				inspectWindow();
 				alert(result);
 			} else {
-				alert("Not valid");
-				letsPlayWindow(); // repeat letsPlayWindow prompt again
+				alert("Eh, that's not an option. Play seriously! Your life is at stake!");
+				letsPlayWindow(); // repeat letsPlayWindow prompt again until valid answer
 
 			};
 			//choiceTwo ends
 
 			return windowChoice;
 		};
-		letsPlayWindow(); // initiate the function above
+		letsPlayWindow(); // initiate the window option
 
 
 	} else if (choiceOne.toLowerCase() === "floor") {
@@ -153,22 +156,28 @@ var letsPlay = function() {
 				if (inspectFloorChoice.toLowerCase() === "open") {
 					score += 100;
 					result += resultOpen;
+				} else {
+					alert("Sorry, you only have one choice here. Heh.");
+					inspectFloor();
 				}
 				return result;
 			};
 
 			var jump = function() {
 				var jumpTimes = parseInt(prompt(askJumpTimes));
-				if (jumpTimes >= 5) {
-					score += 100;
-					result += resultJumpMore
-				} else if (jumpTimes < 0) {
-					alert("Let's be serious..");
+				if (jumpTimes < 0) {
+					alert("Really? You jump negative times lah, let me see.");
 					jump(); // repeat choice
-				} else {
+				} else if (jumpTimes < 5) {
 					score += 100;
 					alert(resultJumpLess);
 					inspectFloor(); // loops 2nd choice
+				} else if (jumpTimes >= 5) {
+					score += 100;
+					result += resultJumpMore
+				} else {
+					alert("You are suppose to choose a number.")
+					jump();
 				}
 				return result;
 			};
@@ -185,18 +194,18 @@ var letsPlay = function() {
 				jump();
 				alert(result);
 			} else {
-				alert("Not valid");
-				letsPlayFloor(); // repeat letsPlayFloor prompt again
+				alert("You can't do that now! Try again.");
+				letsPlayFloor(); // repeat letsPlayFloor prompt again until valid answer
 			};
 			//choiceTwo ends
 
 			return floorChoice;
 		};
-		letsPlayFloor(); // initiate the function above
+		letsPlayFloor(); // initiate floor option
 
 	} else {
-		alert("Not valid");
-		letsPlay(); // repeat the prompt again
+		alert("You don't see that in the room.. Try again.");
+		letsPlay(); // repeat the prompt again until valid answer
 	}
 
 	return choiceOne;
@@ -208,4 +217,4 @@ letsPlay();
 
 // allocated scores for individual choice but finalScore is always 0 because player dies regardless of choice
 finalScore = score - score
-alert(name + "\'s score is: " + finalScore)
+alert("Sorry " + name + ", it seems like you died. Your score is: " + finalScore)
