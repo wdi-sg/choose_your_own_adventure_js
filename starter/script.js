@@ -4,7 +4,7 @@ var aircraftB;
 var aircraftC;
 
 
-var userAircraft = [
+var userAircrafts = [
 {
 	name: "Aircraft 1",
 	healPointA: 50,
@@ -84,59 +84,60 @@ var userName = prompt("Enter Player Name: ");
 
 var aircraftChoices = prompt("Choose your Aircraft: 1/2/3");
 if ((parseInt(aircraftChoices) > 0) && (parseInt(aircraftChoices) <= 3)){
-	alert("You've selected " +userAircraft[parseInt(aircraftChoices)-1].name+ "-" +userAircraft[parseInt(aircraftChoices)-1].aircraftInfo());
+	alert("You've selected " +userAircrafts[parseInt(aircraftChoices)-1].name+ "-" +userAircrafts[parseInt(aircraftChoices)-1].aircraftInfo());
 }
 
 else {
 	aircraftChoices = prompt("Choose your Aircraft: A/B/C");
 }
 
-aircraftA = function(userAircraft, attkButtn){
+aircraft = function(userAircrafts, attkButtn){
 	if (parseInt(attkButtn) === 1 ){
-	alert("~"+userAircraft[parseInt(aircraftChoices)-1].skills(attkButtn)+"~! Enemy " +stageNum+ " down!");
+	alert("~"+userAircrafts[parseInt(aircraftChoices)-1].skills(attkButtn)+"~! Enemy " +stageNum+ " down!");
 	points++;
 	return points;
 }
 	else if (parseInt(attkButtn) === 2){
-	alert("~"+userAircraft[parseInt(aircraftChoices)-1].skills(attkButtn)+"~! Enemy " +stageNum+ " down!");
+	alert("~"+userAircrafts[parseInt(aircraftChoices)-1].skills(attkButtn)+"~! Enemy " +stageNum+ " down!");
 	points++;
 	return points;
 }
 };
 
 
-aircraftB = function(attkButtn){
-	if (parseInt(attkButtn) === 1 ){
-	alert("~"+userAircraft[parseInt(aircraftChoices)-1].skills(attkButtn)+"~! Enemy " +stageNum+ " down!");
-	points++;
-	return points;
-}
-	else if (parseInt(attkButtn) === 2){
-	alert("~"+userAircraft[parseInt(aircraftChoices)-1].skills(attkButtn)+"~! Enemy " +stageNum+" down!");
-	points++;
-	return points;
-}
-};
+// aircraftB = function(attkButtn){
+// 	if (parseInt(attkButtn) === 1 ){
+// 	alert("~"+userAircrafts[parseInt(aircraftChoices)-1].skills(attkButtn)+"~! Enemy " +stageNum+ " down!");
+// 	points++;
+// 	return points;
+// }
+// 	else if (parseInt(attkButtn) === 2){
+// 	alert("~"+userAircrafts[parseInt(aircraftChoices)-1].skills(attkButtn)+"~! Enemy " +stageNum+" down!");
+// 	points++;
+// 	return points;
+// }
+// };
 
-aircraftC = function(attkButtn){
-	if (parseInt(attkButtn) === 1){
-	alert("~"+userAircraft[parseInt(aircraftChoices)-1].skills(attkButtn)+"~! Enemy " +stageNum+ " down!");
-	points++;
-	return points;
-}
-	else if (parseInt(attkButtn) === 2){
-	alert("~"+userAircraft[parseInt(aircraftChoices)-1].skills(attkButtn)+"~! Enemy" +stageNum+ " down!");
-	points++;
-	return points;
-}
-};
+// aircraftC = function(attkButtn){
+// 	if (parseInt(attkButtn) === 1){
+// 	alert("~"+userAircrafts[parseInt(aircraftChoices)-1].skills(attkButtn)+"~! Enemy " +stageNum+ " down!");
+// 	points++;
+// 	return points;
+// }
+// 	else if (parseInt(attkButtn) === 2){
+// 	alert("~"+userAircrafts[parseInt(aircraftChoices)-1].skills(attkButtn)+"~! Enemy" +stageNum+ " down!");
+// 	points++;
+// 	return points;
+// }
+// };
 
-var stageAndAircraft = function(userAircraft, stage){
+var stageAndAircraft = function(userAircrafts, stage){
 	var points = 0;
 	var userInput = prompt("You've selected stage " +stage+ ". Advance? Y or N");
 		if ((userInput.toUpperCase()) === "Y"){ 
-		var attkButtn = prompt("YOU ENCOUNTER ENEMY " +stage+ " ! USE  " +userAircraft[parseInt(aircraftChoices)-1].firstWpn+ ", PRESS 1 OR " +userAircraft[parseInt(aircraftChoices-1)].secondWpn+ " PRESS 2");
-		aircraftA(userAircraft, attkButtn);
+		var attkButtn = prompt("YOU ENCOUNTER ENEMY " +stage+ " ! USE  " +userAircrafts[parseInt(aircraftChoices)-1].firstWpn+ ", PRESS 1 OR " +userAircrafts[parseInt(aircraftChoices-1)].secondWpn+ " PRESS 2");
+		aircraft(userAircrafts, attkButtn);
+		return userInput;
 		}
 	}
 // var stage1AircraftB = function(){
@@ -208,31 +209,35 @@ var stageAndAircraft = function(userAircraft, stage){
 
 var stageNum = prompt("Select stage: 1, 2, 3");
 
-if ((parseInt(stageNum) === 1) && (aircraftChoices === "1"))
-	stageAndAircraft(userAircraft, stageNum);
+if(((parseInt(stageNum) >= 1) && (parseInt(stageNum) <= 3)) && ((aircraftChoices >= "1") && (aircraftChoices <= "3")))
+stageAndAircraft(userAircrafts, stageNum);
 
-else if ((parseInt(stageNum) === 1) && (aircraftChoices === "2"))
-	stageAndAircraft(userAircraft, stageNum);
 
-else if ((parseInt(stageNum) === 1) && (aircraftChoices === "3"))
-	stageAndAircraft(userAircraft, stageNum);
+// if ((parseInt(stageNum) === 1) && (aircraftChoices === "1"))
+// 	stageAndAircraft(userAircrafts, stageNum);
 
-else if ((parseInt(stageNum) === 2) && (aircraftChoices === "1"))
-	stageAndAircraft(userAircraft, stageNum);
+// else if ((parseInt(stageNum) === 1) && (aircraftChoices === "2"))
+// 	stageAndAircraft(userAircrafts, stageNum);
 
-else if ((parseInt(stageNum) === 2) && (aircraftChoices === "2"))
-	stageAndAircraft(userAircraft, stageNum);
+// else if ((parseInt(stageNum) === 1) && (aircraftChoices === "3"))
+// 	stageAndAircraft(userAircrafts, stageNum);
 
-else if ((parseInt(stageNum) === 2) && (aircraftChoices === "3"))
-	stageAndAircraft(userAircraft, stageNum);
+// else if ((parseInt(stageNum) === 2) && (aircraftChoices === "1"))
+// 	stageAndAircraft(userAircrafts, stageNum);
 
-else if ((parseInt(stageNum) === 3) && (aircraftChoices === "1"))
-	stageAndAircraft(userAircraft, stageNum);
+// else if ((parseInt(stageNum) === 2) && (aircraftChoices === "2"))
+// 	stageAndAircraft(userAircrafts, stageNum);
 
-else if ((parseInt(stageNum) === 3) && (aircraftChoices === "2"))
-	stageAndAircraft(userAircraft, stageNum);
+// else if ((parseInt(stageNum) === 2) && (aircraftChoices === "3"))
+// 	stageAndAircraft(userAircrafts, stageNum);
 
-else if ((parseInt(stageNum) === 3) && (aircraftChoices === "3"))
-	stageAndAircraft(userAircraft, stageNum);
+// else if ((parseInt(stageNum) === 3) && (aircraftChoices === "1"))
+// 	stageAndAircraft(userAircrafts, stageNum);
+
+// else if ((parseInt(stageNum) === 3) && (aircraftChoices === "2"))
+// 	stageAndAircraft(userAircrafts, stageNum);
+
+// else if ((parseInt(stageNum) === 3) && (aircraftChoices === "3"))
+// 	stageAndAircraft(userAircrafts, stageNum);
  
 
