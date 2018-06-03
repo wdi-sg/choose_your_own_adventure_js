@@ -2,7 +2,7 @@
 var name = prompt(askName); 
 if (name === "") {
 	name = "Player"
-}
+};
 //part 3
 var score = 0; 
 //part 4: Have your player repeat a set of challenges or questions over again- if a player enters a situation or room, allow them to leave and come back if they want.
@@ -12,7 +12,11 @@ var score = 0;
 var letsPlay = function() {
 	var choiceOne = prompt(doorWindowFloor);
 
-	if (choiceOne.toLowerCase() === "door") {
+	if (choiceOne === null) {
+		alert(overrideCancel);
+		letsPlay();
+
+	} else if (choiceOne.toLowerCase() === "door") {
 		score += 100;
 		var letsPlayDoor = function() {
 			var doorChoice = prompt(forceOrPick);
@@ -23,7 +27,11 @@ var letsPlay = function() {
 				
 				var forceChoice = prompt(punchOrKick);
 
-				if (forceChoice.toLowerCase() === "punch") {
+				if (forceChoice === null) {
+					alert(overrideCancel);
+					force();
+
+				} else if (forceChoice.toLowerCase() === "punch") {
 					score += 100;
 					result += resultPunch; // punch and die
 
@@ -42,7 +50,11 @@ var letsPlay = function() {
 				
 				var pickLockChoice = prompt(searchOrForce)
 				
-				if (pickLockChoice.toLowerCase() === "search") {
+				if (pickLockChoice === null) {
+					alert(overrideCancel);
+					pickLock();
+					
+				} else if (pickLockChoice.toLowerCase() === "search") {
 					result += resultSearch;
 
 				} else if (pickLockChoice.toLowerCase() === "force") {
@@ -58,7 +70,10 @@ var letsPlay = function() {
 			//choiceThree ends
 
 			//choiceTwo: uses functions to run because have loops
-			if (doorChoice.toLowerCase() === "force") {
+			if (doorChoice === null) {
+				alert(overrideCancel);
+				letsPlayDoor();
+			} else if (doorChoice.toLowerCase() === "force") {
 				force();      // loops 2nd choice
 				alert(result);
 			} else if (doorChoice.toLowerCase() === "pick") {
@@ -86,7 +101,11 @@ var letsPlay = function() {
 
 				var breakWindowChoice = prompt(jumpOrShout)
 				
-				if (breakWindowChoice.toLowerCase() === "jump") {
+				if (breakWindowChoice === null) {
+					alert(overrideCancel);
+					breakWindow();
+
+				} else if (breakWindowChoice.toLowerCase() === "jump") {
 					score += 100;
 					result += resultJump;
 
@@ -106,7 +125,11 @@ var letsPlay = function() {
 
 				var inspectWindowChoice = prompt(inspectMoreOrBreak)
 				
-				if (inspectWindowChoice.toLowerCase() === "inspect") {	//inspectmore
+				if (inspectwindowChoice === null) {
+					alert(overrideCancel);
+					inspectWindow(); 
+
+				} else if (inspectWindowChoice.toLowerCase() === "inspect") {	//inspectmore
 					score += 100;
 					result += resultInspect;
 
@@ -114,7 +137,7 @@ var letsPlay = function() {
 					breakWindow(); // loops 2nd choice
 				
 				} else {
-					alert("Was that a typo? Try again.");
+					alert("Was that a typo? Try again");
 					inspectWindow();
 				
 				}
@@ -123,7 +146,10 @@ var letsPlay = function() {
 			//choiceThree ends
 
 			//choiceTwo: uses functions to run because have loops
-			if (windowChoice.toLowerCase() === "break") {
+			if (windowChoice === null) {
+				alert(overrideCancel);
+				letsPlayWindow();
+			} else if (windowChoice.toLowerCase() === "break") {
 				score += 100;
 				breakWindow();
 				alert(result);
@@ -153,7 +179,11 @@ var letsPlay = function() {
 			var inspectFloor = function() {
 
 				var inspectFloorChoice = prompt(openTD);
-				if (inspectFloorChoice.toLowerCase() === "open") {
+				if (inspectFloorChoice === null) {
+					alert(overrideCancel);
+					inspectFloor();
+
+				} else if (inspectFloorChoice.toLowerCase() === "open") {
 					score += 100;
 					result += resultOpen;
 				} else {
@@ -165,7 +195,10 @@ var letsPlay = function() {
 
 			var jump = function() {
 				var jumpTimes = parseInt(prompt(askJumpTimes));
-				if (jumpTimes < 0) {
+				if (jumpTimes === null) {
+					alert(overrideCancel);
+					jump();
+				} else if (jumpTimes < 0) {
 					alert("Really? You jump negative times lah, let me see.");
 					jump(); // repeat choice
 				} else if (jumpTimes < 5) {
@@ -185,7 +218,10 @@ var letsPlay = function() {
 
 
 			//choiceTwo: uses functions to run because have loops
-			if (floorChoice.toLowerCase() === "inspect") {
+			if (floorChoice === null) {
+				alert(overrideCancel);
+				letsPlayFloor();
+			} else if (floorChoice.toLowerCase() === "inspect") {
 				score += 100;
 				inspectFloor();
 				alert(result);
