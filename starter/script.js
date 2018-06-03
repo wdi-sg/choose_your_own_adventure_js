@@ -80,7 +80,7 @@ var experience = prompt(" So... " + playerName + "! What would you like to do in
         var outlawActivity = prompt("OOH! AN OUTLAW! Want to indulge your darker side Eh? \n\nWhat dastardly deed takes your fancy? \n(R)Robbing a Bank or \nStarting a (T)Tavern Brawl?");
                 //Rob a Bank
                 if (outlawActivity.toLowerCase() == "r") {
-                    alert("You bust into the bank, guns a blazin and you head straight for the Gold Bars.");   
+                    alert("The bank was poorly guarded. Just an old timer who has seen better years. You overpower him easily, bust into the bank, guns a blazin and you head straight for the Gold Bars.");   
                     var escapeParameters = prompt("You fill a sack with gold and make a dash for the door. \n\nOutside, you see the Town Sheriff running towards the bank. \n\nDo you: \n(R)Run for it, or do you \n(S)Steal a horse?")
                         //Escape on foot -> Gunfight
                         if (escapeParameters.toLowerCase() == "r") {
@@ -147,7 +147,7 @@ var experience = prompt(" So... " + playerName + "! What would you like to do in
                                     alert("After a tense minute, the men suddenly burst out laughing! \nYour expression has been the funniest they have ever seen. \nYou have diffused the tensed atmosphere in the tavern.");
                                     alert("The men liked you so much that they decided to buy you a round of drinks. \nYou spend a pleasant afternoon drinking whiskey and playing poker with the notorious Black Bart and his gang who have been holding the tavern hostage.");
                                     alert("Black Bart gave you an unpleasant nickname but on the plus side, you win a small fortune from one of his men.")
-                                    //Easter Egg - Name Change
+                                    //Easter Egg - Horrible Nickname
                                     playerName = "Shiteface"
                                     rich();
                                     disclaimer();
@@ -185,12 +185,89 @@ var experience = prompt(" So... " + playerName + "! What would you like to do in
 
    //Sheriff Sequence
     }   else if (experience.toLowerCase() == "s") {
-        var sheriffActivity = prompt("Prompt goes here.");
-        //Activity one
-        if (sheriffActivity.toLowerCase() == "") {
-            alert("");
-        //Activity Two
-        } else if (sheriffActivity.toLowerCase() == "") {
+        alert("Howdy Sheriff! Good thing rode into town! Some varmint is robbing the bank and ol Black Bart has taken the tavern hostage!");
+        var sheriffActivity = prompt("What will it be Sheriff? \n\nDeal with the (B)Bank Robbery, or \nConfront Black Bart in the (T)Tavern?");
+        
+        //Deal with Bank Robbery
+        if (sheriffActivity.toLowerCase() == "b") {
+            alert("You head over to the bank and see that the old guard has been overpowered and tied up outside.");
+            //Free the guard or be the hero?
+            var robberTrap = prompt("Do you (F)ree the guard, or do you (A)mbush the robber yourself?");
+            //Free the guard.
+            if (robberTrap.toLowerCase() == "f") {
+                alert("You untie the guard. He is old, and has seen better days. He doesn't seem to be much help to you.");
+                alert("Suddenly, you hear a gunshot and the robber comes running out of the bank. You pull out your gun and run towards him but he sees you and tries to steal a horse hitched outside the bank.");
+                //Shoot the robber or shoot the horse?
+                var shootingDecision = prompt("Do you shoot the (R)Robber, or do you shoot the (H)Horse?");
+                //Shoot the Robber
+                if (shootingDecision.toLowerCase() == "r"){
+                    alert("You stopped and aimed carefully at the robber, allowing him to use the time to mount the horse.  You pull the trigger... and missed... \n\nThe gunshot spooked the horse, making it run faster, and in return, making the robber's escape a lot faster.");
+                    alert("You should have shot the horse.");
+                    gameOver();
+                //Shoot the Horse
+                } else if (shootingDecision.toLowerCase() == "h") {
+                    alert("Without breaking pace, you point your gun in the general direction of the horse and pull the trigger. You missed... but the gunshot spooked the horse and it reared up, throwing the robber onto the ground.");
+                    alert("The robber quickly gets up and draws his weapon...");
+                    //Bank Robbery Gunfight Roll
+                    alert("You have entered a gunfight. \n\nRoll a 6 or more to win.");
+                    var robberyGunfightRoll = roll();
+                    alert("You've rolled a " + robberyGunfightRoll + "!");
+                    //Gunfight Win
+                    if (robberyGunfightRoll > 5) {
+                    alert("You both draw at the same moment. However, due to his recent fall from the horse, the robber is still seeing stars and misses the broad side of the barn behind you.");
+                    alert("Your shot however, gets him squarely between the eyes. \n\nIT WAS EPIC! \n\nThe townsfolk erupts into cheers and whistles!");
+                    alert("Besides gaining an awesome nickname, the Mayor arrives shortly and hands you your reward: A huge sack of gold!");
+                    //Easter Egg - Awesome nickname.
+                    playerName = "Super Duper Best Shot in the World";
+                    rich()
+                    disclaimer();
+                    gameOver();               
+                    //Gunfight Lose
+                    } else if (robberyGunfightRoll <=5) { 
+                    alert("You both draw at the same moment. However, due to his recent fall from the horse, the robber is still seeing stars and misses the broad side of the barn behind you.");
+                    alert("Your shot misses too but that was your last bullet. As you struggle to reload your gun, the robber clears his head aims his weapon at you...");
+                    alert("You shut your eyes as you hear a gunshot, bracing yourself for the red hot pellet of lead to rip through your body... \n\nbut it doesn't happen...");
+                    alert("You open your eyes to see the robber falling to the ground with a bullethole between his eyes. \nYou hear a noise behind you and turn to see the old bank guard holding a smoking pistol. \nThat old man still got it in him.");
+                    alert("The townsfolk erupt into cheers as they rush forward to lift the old guard upon their shoulders in celebration of their town hero! \nThe Mayor arrives shortly to present him with his reward: A huge sack of gold!");
+                    alert("That's his retirement settled. \n\nYou, on the other hand, gets forgotten, probably only remembered as a useless Sheriff.");
+                    gameOver();
+                }
+            //Ambush the robber by yourself.
+            } else if (robberTrap.toLowerCase() == "a") {
+                alert("You decide that the old timer has seen enough hardship for the day and you run to ambush the robber as he exits the bank. \nHowever, the robber sees you running towards him and tries to escape on a horse.");
+                //Shoot the Robber or Shoot the Horse?
+                var shootingDecisionTwo = prompt("Do you shoot the (R)Robber, or do you shoot the (H)Horse?");
+                //Shoot the Robber
+                if (shootingDecisionTwo.toLowerCase() == "r"){
+                    alert("You stopped and aimed carefully at the robber, allowing him to use the time to mount the horse.  You pull the trigger... and missed... \n\nThe gunshot spooked the horse, making it run faster, and in return, making the robber's escape a lot faster.");
+                    alert("You should have shot the horse.");
+                    gameOver();
+                //Shoot the Horse
+                } else if (shootingDecisionTwo.toLowerCase() == "h") {
+                    alert("Without breaking pace, you point your gun in the general direction of the horse and pull the trigger. You missed... but the gunshot spooked the horse and it reared up, throwing the robber onto the ground.");
+                    alert("The robber quickly gets up and draws his weapon...");
+                    //Bank Robbery Gunfight Roll
+                    alert("You have entered a gunfight. \n\nRoll a 6 or more to win.");
+                    var robberyGunfightRollTwo = roll();
+                    alert("You've rolled a " + robberyGunfightRollTwo + "!");
+                    //Gunfight Win
+                    if (robberyGunfightRollTwo > 5) {
+                    alert("You both draw at the same moment. However, due to his recent fall from the horse, the robber is still seeing stars and misses the broad side of the barn behind you.");
+                    alert("Your shot however, gets him squarely between the eyes. \n\nIT WAS EPIC! \n\nThe townsfolk erupts into cheers and whistles!");
+                    alert("The Mayor arrives shortly and hands you your reward: A huge sack of gold!");
+                    rich()
+                    disclaimer();
+                    gameOver();               
+                    //Gunfight Lose
+                    } else if (robberyGunfightRollTwo <=5) { 
+                    alert("You both draw at the same moment. However, due to his recent fall from the horse, the robber is still seeing stars and misses the broad side of the barn behind you.");
+                    alert("Your shot misses too but that was your last bullet. As you struggle to reload your gun, the robber clears his head aims his weapon at you...");
+                    alert("You see a flash of white... and then nothing as the robber's bullet enters your skull from between your eyes and out the back.");
+                    gameOver();
+            }
+        
+        //Deal with Tavern Takeover
+        } else if (sheriffActivity.toLowerCase() == "t") {
             alert("");
         }
     }
