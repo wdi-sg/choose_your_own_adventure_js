@@ -65,9 +65,11 @@ var pickYourPoison = function(poison) {
 				if (character.drunkedness >= 10) {
  				alert("Enjoy the hangover! You got " + character.drunkedness + "/10 drunk")}
  				else {
- 				var level3 = prompt('Everything is fuzzzxssyy now. Head home or not.', 'home/hv' )
+ 				var level3 = prompt('Everything is fuzzzxssyy now. Head home or not.', 'home/hv/stay' )
  				if (level3 == 'home'){
 				alert('You know when to quit! You got ' + character.drunkedness + "/10 drunk")
+				} else if (level3 == 'stay') {
+					alert("You don't know when to quit! You puked yourself and got " + character.drunkedness + "/10 drunk")
 				}
  				}
 		}
@@ -87,9 +89,11 @@ var pickYourPoison = function(poison) {
 				if (character.drunkedness >= 10) {
  				alert("Enjoy the hangover! You got " + character.drunkedness + "/10 drunk")}
  				else {
- 				var level3 = prompt('Everything is fuzzzxssyy now. Head home or not.', 'home/cq')
+ 				var level3 = prompt('Everything is fuzzzxssyy now. Head home or not.', 'home/cq/stay')
  				if (level3 == 'home'){
 				alert('You know when to quit! You got ' + character.drunkedness + "/10 drunk")
+				}else if (level3 == 'stay') {
+					alert("You don't know when to quit! You puked yourself and got " + character.drunkedness + "/10 drunk")
 				}
  				}
 		}
@@ -107,9 +111,11 @@ var pickYourPoison = function(poison) {
 				if (character.drunkedness >= 10) {
  				alert("Enjoy the hangover! You got " + character.drunkedness + "/10 drunk")}
  				else {
- 				var level3 = prompt('Everything is fuzzzxssyy now. Head home or not.', 'home/hv' )
+ 				var level3 = prompt('Everything is fuzzzxssyy now. Head home or not.', 'home/hv/stay' )
  				if (level3 == 'home'){
 				alert('You know when to quit! You got ' + character.drunkedness + "/10 drunk")
+				} else if (level3 == 'stay') {
+					alert("You don't know when to quit! You puked yourself and got " + character.drunkedness + "/10 drunk")
 				}
  				}
 		}		
