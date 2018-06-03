@@ -53,7 +53,7 @@ var letsPlay = function() {
 				if (pickLockChoice === null) {
 					alert(overrideCancel);
 					pickLock();
-					
+
 				} else if (pickLockChoice.toLowerCase() === "search") {
 					result += resultSearch;
 
@@ -253,4 +253,4 @@ letsPlay();
 
 // allocated scores for individual choice but finalScore is always 0 because player dies regardless of choice
 finalScore = score - score
-alert("Sorry " + name + ", it seems like you died. Your score is: " + finalScore)
+alert("Sorry " + name + ", you died. Your score is: " + finalScore)
