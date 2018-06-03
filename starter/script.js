@@ -185,7 +185,7 @@ var experience = prompt(" So... " + playerName + "! What would you like to do in
 
    //Sheriff Sequence
     }   else if (experience.toLowerCase() == "s") {
-        alert("Howdy Sheriff! Good thing rode into town! Some varmint is robbing the bank and ol Black Bart has taken the tavern hostage!");
+        alert("Howdy Sheriff! Good thing you rode into town! \n\nSome varmint is robbing the bank and the notorious Black Bart has taken the tavern hostage!");
         var sheriffActivity = prompt("What will it be Sheriff? \n\nDeal with the (B)Bank Robbery, or \nConfront Black Bart in the (T)Tavern?");
         
         //Deal with Bank Robbery
@@ -231,6 +231,7 @@ var experience = prompt(" So... " + playerName + "! What would you like to do in
                     alert("The townsfolk erupt into cheers as they rush forward to lift the old guard upon their shoulders in celebration of their town hero! \nThe Mayor arrives shortly to present him with his reward: A huge sack of gold!");
                     alert("That's his retirement settled. \n\nYou, on the other hand, gets forgotten, probably only remembered as a useless Sheriff.");
                     gameOver();
+                    }
                 }
             //Ambush the robber by yourself.
             } else if (robberTrap.toLowerCase() == "a") {
@@ -268,9 +269,40 @@ var experience = prompt(" So... " + playerName + "! What would you like to do in
         
         //Deal with Tavern Takeover
         } else if (sheriffActivity.toLowerCase() == "t") {
-            alert("");
+            alert("You arrive at the Tavern where a brawl is going on. From the looks of it, some outlaw wannabe had gone and started a standoff with Black Bart's gang.");
+            var tavernAttack = prompt("Do you (T)Take advantage of the chaos to pick them off? Or do you (W)Wait and see how the situation turns out?");
+            if (tavernAttack.toLowerCase() == "t") {
+                alert("You decide the best time to attack is while they are distracted. You creep towards a window and peek in...");
+                alert("You see a flash of white... and then nothing as a stray bullet enters your skull from between your eyes and out the back.");
+                alert("Perhaps sneaking around during a gunfight wasn't the best idea.")
+                gameOver();
+            } else if (tavernAttack.toLowerCase() == "w") {
+                alert("You decide that it might be better to let the bad guys kill each other and then deal with whoever emerges. It isn't long before the gunshots die down and Black Bart, the lone survivor stumbles out of the tavern, slightly injured.");
+                alert("You nonchalently make your presence known with a little cough and Black Bart whips round to face you and reaches for his pistol...");
+                //Black Bart Showdown Roll
+                alert("You have entered a gunfight. \n\nRoll a 6 or more to win.");
+                var bbShowdown = roll();
+                alert("You've rolled a " + bbShowdown + "!");
+                //Gunfight Win
+                if (bbShowdown > 5) {
+                alert("You both draw at the same moment. However, due to his recent gunfight in the tavern, Black Bart is still seeing stars and misses the broad side of the barn behind you.");
+                alert("Your shot however, gets him squarely between the eyes. \n\nIT WAS EPIC! \n\nThe townsfolk erupts into cheers and whistles!");
+                alert("The Mayor arrives shortly and hands you the Bounty on Black Bart: A huge sack of gold!");
+                rich()
+                disclaimer();
+                gameOver();               
+                //Gunfight Lose
+                } else if (bbShowdown <=5) { 
+                alert("You both draw at the same moment but Black Bart is one of the best gunslingers in the west and he was high on the adrenalin from his gunfight in the tavern.");
+                alert("You see a flash of white... and then nothing as a bullet enters your skull from between your eyes and out the back.");
+                gameOver();
+                }
+            }
         }
     }
+}
+}
+
 
 
                 
