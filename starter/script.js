@@ -4,46 +4,73 @@ var aircraftB;
 var aircraftC;
 
 
-var aircraftChoices = [
+var userAircraft = [
 {
-	a: "Aircraft A",
+	name: "Aircraft 1",
 	healPointA: 50,
-	mainCannonA: "Main Cannon", 
-	wingCannonA: "Wing Cannon",
+	firstWpn: "Main Cannon", 
+	secondWpn: "Wing Cannon",
 
-	aircraftaMainCannon: function(){
-		return "PEEEEW";
+	aircraftInfo: function(){
+		return "Weapons: " +this.firstWpn+ " & " +this.secondWpn
 	},
-	aircraftaWingCannon: function(){
-		return "PEW PEEEEW";
+
+	// aircraftaMainCannon: function(){
+	// 	return "PEEEEW";
+	// },
+	// aircraftaWingCannon: function(){
+	// 	return "PEW PEEEEW";
+	// }
+		skills: function(attkButtn){
+		if(attkButtn === "1"){
+			return "PEEEEW"
+		} else if (attkButtn === "2"){
+			return "PEW PeEeeWwW"
+		}
 	}
 },
 
 {
-	b: "Aircraft B",
+	name: "Aircraft 2",
 	healPointB: 70,
-	mainCannonB: "Main Cannon",
-	homingMissileB: "Homing Missile",
+	firstWpn: "Main Cannon",
+	secondWpn: "Homing Missile",
 
-	aircraftbMainCannon: function(){
-		return "PEEEEW"; 
+	aircraftInfo: function(){
+		return "Weapons: " +this.firstWpn+ " & " +this.secondWpn
 	},
-	aircraftbHomingMissile: function(){
-		return "POW POw POOOOOW";
+
+	skills: function(attkButtn){
+		if(attkButtn === "1"){
+			return "PEEEEW"
+		} else if (attkButtn === "2"){
+			return "POW POW POoOoWwW"
+		}
 	}
 },
 
 {
-	c: "Aircraft C",
+	name: "Aircraft 3",
 	healPointC: 100,
-	mainCannonC: "Main Cannon",
-	kamiKazeC: "Kamikaze",
+	firstWpn: "Main Cannon",
+	secondWpn: "Kamikaze",
 
-	aircraftcMainCannon: function(){
-		return "PEEEEW";
+	aircraftInfo: function(){
+		return "Weapons: " +this.firstWpn+ " & " +this.secondWpn
 	},
-	aircraftcKamiKaze: function(){
-		return "KaaAAPoOoOWwW";
+
+	// aircraftcMainCannon: function(){
+	// 	return "PEEEEW";
+	// },
+	// aircraftcKamiKaze: function(){
+	// 	return "KaaAAPoOoOWwW";
+	// }
+		skills: function(attkButtn){
+		if(attkButtn === "1"){
+			return "PEEEEW"
+		} else if (attkButtn === "2"){
+			return "KaaAAPoOoOWwW"
+		}
 	}
 }
 ];
@@ -55,31 +82,23 @@ getUserName(userName);
 var userName = prompt("Enter Player Name: ");
 
 
-var userAircraft = prompt("Choose your Aircraft: A/B/C");
-if (userAircraft.toUpperCase() === "A"){
-	alert("You've selected " +aircraftChoices[0].a+ ". Weapons: " +aircraftChoices[0].mainCannonA+ " & " +aircraftChoices[0].wingCannonA);
-}
-
-else if (userAircraft.toUpperCase() === "B") {
-	alert("You've selected " +aircraftChoices[1].b+ ". Weapons: " +aircraftChoices[1].mainCannonB+ " & " +aircraftChoices[1].homingMissileB);
-}
-
-else if (userAircraft.toUpperCase() === "C") {
-	alert("You've selected " +aircraftChoices[2].c+ ". Weapons: " +aircraftChoices[2].mainCannonC+ " & " +aircraftChoices[2].kamiKazeC);
+var aircraftChoices = prompt("Choose your Aircraft: 1/2/3");
+if ((parseInt(aircraftChoices) > 0) && (parseInt(aircraftChoices) <= 3)){
+	alert("You've selected " +userAircraft[parseInt(aircraftChoices)-1].name+ "-" +userAircraft[parseInt(aircraftChoices)-1].aircraftInfo());
 }
 
 else {
-	userAircraft = prompt("Choose your Aircraft: A/B/C");
+	aircraftChoices = prompt("Choose your Aircraft: A/B/C");
 }
 
-aircraftA = function(attkButtn){
+aircraftA = function(userAircraft, attkButtn){
 	if (parseInt(attkButtn) === 1 ){
-	alert("~"+aircraftChoices[0].aircraftaMainCannon()+"~! Enemy " +stageNum+ " down!");
+	alert("~"+userAircraft[parseInt(aircraftChoices)-1].skills(attkButtn)+"~! Enemy " +stageNum+ " down!");
 	points++;
 	return points;
 }
 	else if (parseInt(attkButtn) === 2){
-	alert("~"+aircraftChoices[0].aircraftaWingCannon()+"~! Enemy " +stageNum+ " down!");
+	alert("~"+userAircraft[parseInt(aircraftChoices)-1].skills(attkButtn)+"~! Enemy " +stageNum+ " down!");
 	points++;
 	return points;
 }
@@ -88,12 +107,12 @@ aircraftA = function(attkButtn){
 
 aircraftB = function(attkButtn){
 	if (parseInt(attkButtn) === 1 ){
-	alert("~"+aircraftChoices[1].aircraftbMainCannon()+"~! Enemy " +stageNum+ " down!");
+	alert("~"+userAircraft[parseInt(aircraftChoices)-1].skills(attkButtn)+"~! Enemy " +stageNum+ " down!");
 	points++;
 	return points;
 }
 	else if (parseInt(attkButtn) === 2){
-	alert("~"+aircraftChoices[1].aircraftbHomingMissile()+"~! Enemy " +stageNum+" down!");
+	alert("~"+userAircraft[parseInt(aircraftChoices)-1].skills(attkButtn)+"~! Enemy " +stageNum+" down!");
 	points++;
 	return points;
 }
@@ -101,23 +120,23 @@ aircraftB = function(attkButtn){
 
 aircraftC = function(attkButtn){
 	if (parseInt(attkButtn) === 1){
-	alert("~"+aircraftChoices[2].aircraftcMainCannon()+"~! Enemy " +stageNum+ " down!");
+	alert("~"+userAircraft[parseInt(aircraftChoices)-1].skills(attkButtn)+"~! Enemy " +stageNum+ " down!");
 	points++;
 	return points;
 }
 	else if (parseInt(attkButtn) === 2){
-	alert("~"+aircraftChoices[2].aircraftcKamiKaze()+"~! Enemy" +stageDifficulty+ " down!");
+	alert("~"+userAircraft[parseInt(aircraftChoices)-1].skills(attkButtn)+"~! Enemy" +stageNum+ " down!");
 	points++;
 	return points;
 }
 };
 
-var stageAndAircraft = function(stage){
+var stageAndAircraft = function(userAircraft, stage){
 	var points = 0;
-	var userInput = prompt("You've selected " +stage+ ". Advance? Y or N");
+	var userInput = prompt("You've selected stage " +stage+ ". Advance? Y or N");
 		if ((userInput.toUpperCase()) === "Y"){ 
-		var attkButtn = prompt("YOU ENCOUNTER ENEMY " +stage+ " ! USE MAIN CANNON,PRESS 1 OR WING CANNON, PRESS 2");
-		aircraftA(attkButtn);
+		var attkButtn = prompt("YOU ENCOUNTER ENEMY " +stage+ " ! USE  " +userAircraft[parseInt(aircraftChoices)-1].firstWpn+ ", PRESS 1 OR " +userAircraft[parseInt(aircraftChoices-1)].secondWpn+ " PRESS 2");
+		aircraftA(userAircraft, attkButtn);
 		}
 	}
 // var stage1AircraftB = function(){
@@ -189,31 +208,31 @@ var stageAndAircraft = function(stage){
 
 var stageNum = prompt("Select stage: 1, 2, 3");
 
-if ((parseInt(stageNum) === 1) && (userAircraft.toUpperCase() === "A"))
-	stageAndAircraft(stageNum);
+if ((parseInt(stageNum) === 1) && (aircraftChoices === "1"))
+	stageAndAircraft(userAircraft, stageNum);
 
-else if ((parseInt(stageNum) === 1) && (userAircraft.toUpperCase() === "B"))
-	stageAndAircraft(stageNum);
+else if ((parseInt(stageNum) === 1) && (aircraftChoices === "2"))
+	stageAndAircraft(userAircraft, stageNum);
 
-else if ((parseInt(stageNum) === 1) && (userAircraft.toUpperCase() === "C"))
-	stageAndAircraft(stageNum);
+else if ((parseInt(stageNum) === 1) && (aircraftChoices === "3"))
+	stageAndAircraft(userAircraft, stageNum);
 
-else if ((parseInt(stageNum) === 2) && (userAircraft.toUpperCase() === "A"))
-	stageAndAircraft(stageNum);
+else if ((parseInt(stageNum) === 2) && (aircraftChoices === "1"))
+	stageAndAircraft(userAircraft, stageNum);
 
-else if ((parseInt(stageNum) === 2) && (userAircraft.toUpperCase() === "B"))
-	stageAndAircraft(stageNum);
+else if ((parseInt(stageNum) === 2) && (aircraftChoices === "2"))
+	stageAndAircraft(userAircraft, stageNum);
 
-else if ((parseInt(stageNum) === 2) && (userAircraft.toUpperCase() === "C"))
-	stageAndAircraft(stageNum);
+else if ((parseInt(stageNum) === 2) && (aircraftChoices === "3"))
+	stageAndAircraft(userAircraft, stageNum);
 
-else if ((parseInt(stageNum) === 3) && (userAircraft.toUpperCase() === "A"))
-	stageAndAircraft(stageNum);
+else if ((parseInt(stageNum) === 3) && (aircraftChoices === "1"))
+	stageAndAircraft(userAircraft, stageNum);
 
-else if ((parseInt(stageNum) === 3) && (userAircraft.toUpperCase() === "B"))
-	stageAndAircraft(stageNum);
+else if ((parseInt(stageNum) === 3) && (aircraftChoices === "2"))
+	stageAndAircraft(userAircraft, stageNum);
 
-else if ((parseInt(stageNum) === 3) && (userAircraft.toUpperCase() === "C"))
-	stageAndAircraft(stageNum);
+else if ((parseInt(stageNum) === 3) && (aircraftChoices === "3"))
+	stageAndAircraft(userAircraft, stageNum);
  
 
