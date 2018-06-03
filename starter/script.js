@@ -36,72 +36,14 @@ function rich() {
 
 //Function to flash an end game disclaimer.
 function disclaimer() {
-    alert("Disclaimer: \nWasteWorld " + loot + " has no value as real currency and is only legal tender in the WasteWorld gift store. \n\nWasteWorld does not condone crime or violence outside this experience.");
+    alert("Disclaimer: \nWasteWorld gold has no value as real currency and is only legal tender in the WasteWorld gift store. \n\nWasteWorld does not condone crime or violence outside this experience.");
 }
 
 //Function - Tame Horse
 function tameHorse() {
-    alert("You decide to steal a horse hitched right outside the bank. \nAs you try to mount the horse, it suddenly rears up on its hind legs. \nClick to find out what happens to you.");
-    alert("Roll a 6 or more to successifully tame the horse.")
-    var tameHorseChance = roll();
-    alert("You rolled a " + tameHorseChance + "!");
-    if (tameHorseChance >5) {
-        alert("Good thing you had one foot in the stirrups. You hang on to the saddle and manage to hoist yourself on it and within seconds, you are riding into the sunset with your hard earned " + loot + ".")
-        rich();
-        disclaimer();
-        gameOver();
-        end();
-    } else if (tameHorseChance <= 5) {
-        alert("You get thrown off the horse and as you struggle to stand up, it aims a well aimed kick at your face. \nThe last thing you see is the Sheriff looming over you as he cocks his gun and points it at your head.");
-        gameOver();
-        end();
-    }
+
 } 
-
-//Function - Bank Robbery
-var loot;
-function bankRobbery() {
-    var robBank = prompt("You bust into the bank, guns a blazin and you head straight for the\n (G)old Bars \nStacks of (C)Cash");   
-        if (robBank.toLowerCase() == "g") {
-            loot = "gold";
-        } else if (robBank.toLowerCase() == "c") {
-            loot == "cash";
-        }
-        var escapeMethod = prompt("You grab the " + loot + " and fire a shot in the air. \n\nRunning outside, you see the Town Sheriff running towards the bank. \n\nDo you: \n(R)Run for it, or do you \n(S)Steal a horse?")
-        if (escapeMethod.toLowerCase() == "r" && loot == "cash") {
-            alert("You decide to high tail it out of here on foot. Thank goodness you grabbed something lightweight.");
-            rich();
-            disclaimer();
-            gameOver();
-            end();
-        }   else if (escapeMethod.toLowerCase() == "r" && loot == "gold") {
-            alert("Oh no! The gold you stole is slowing you down. \n\nThe Sheriff gets within shooting distance and draws his gun...");
-            gunfight();
-        }   else if (escapeMethod.toLowerCase() == "s") {
-            tameHorse();
-    }
-}
    
-
-
-//Function - Gun Fight
-function gunFight() {
-    alert("You've entered a gunfight. \n\nRoll a 6 or more to win.");
-    var gunfightRoll = roll();
-    alert("You've rolled a " + gunfightRoll + "!");
-    if (gunfightRoll > 5) {
-        alert("You hear a gunshot and feel the bullet whizz past your ear. \n\nYou keep running as fast as you can with the gold and manage to outrun the Sheriff who stopped to reload.");
-        rich()
-        disclaimer();
-        gameOver();
-        end();
-    } else if (gunfightRoll <=5) { 
-        alert("You hear a gunshot and feel a sharp pain in your right leg as you stumble and crash into the dirt. The last thing you see is the Sheriff looming above you as he cocks his gun and points it in your face.");
-        gameOver();
-        end(); 
-    }
-}
-
 //Tavern Brawl Function
 function tavernBrawl() {
     alert ("You make your way to the Tavern and push open the swinging doors menacingly. \nImmediately, several men playing cards at a table stand up.");
@@ -143,15 +85,52 @@ var experience = prompt(" So... " + playerName + "! What would you like to do in
     //Action Adventure
     }   else if (experience.toLowerCase() == "o") {
         var outlawActivity = prompt("OOH! AN OUTLAW! Want to indulge your darker side Eh? \n\nWhat dastardly deed takes your fancy? \n(R)Robbing a Bank or \nStarting a (T)Tavern Brawl?");
-            }   
-                //Rob a Bank -> Steal Gold or Cash.
+            }   //Rob a Bank -> Steal Gold or Cash.
                 if (outlawActivity.toLowerCase() == "r") {
-                    bankRobbery();
-                }
-                //Tavern Brawl
+                    alert("You bust into the bank, guns a blazin and you head straight for the Gold Bars.");   
+                    var escapeParameters = prompt("You fill a sack with gold and make a dash for the door. \n\nOutside, you see the Town Sheriff running towards the bank. \n\nDo you: \n(R)Run for it, or do you \n(S)Steal a horse?")
+                        if (escapeParameters.toLowerCase() == "r") {
+                        alert("Oh no! The gold you stole is slowing you down. \n\nThe Sheriff gets within shooting distance and draws his gun...");
+                            alert("You've entered a gunfight. \n\nRoll a 6 or more to win.");
+                            var gunfightRoll = roll();
+                            alert("You've rolled a " + gunfightRoll + "!");
+                            if (gunfightRoll > 5) {
+                            alert("You hear a gunshot and feel the bullet whizz past your ear. \n\nYou keep running as fast as you can with the gold and manage to outrun the Sheriff who stopped to reload.");
+                            rich()
+                            disclaimer();
+                            gameOver();
+                            end();
+                            } else if (gunfightRoll <=5) { 
+                            alert("You hear a gunshot and feel a sharp pain in your right leg as you stumble and crash into the dirt. The last thing you see is the Sheriff looming above you as he cocks his gun and points it in your face.");
+                            gameOver();
+                            end(); 
+                            }  
+                        }
+                        else if (escapeParameters.toLowerCase() == "s") {
+                            alert("You decide to steal a horse hitched right outside the bank. \nAs you try to mount the horse, it suddenly rears up on its hind legs. \nClick to find out what happens to you.");
+                            alert("Roll a 6 or more to successifully tame the horse.")
+                            var tameHorseChance = roll();
+                            alert("You rolled a " + tameHorseChance + "!");
+                            if (tameHorseChance >5) {
+                            alert("Good thing you had one foot in the stirrups. You hang on to the saddle and manage to hoist yourself on it and within seconds, you are riding into the sunset with your hard earned gold.")
+                            rich();
+                            disclaimer();
+                            gameOver();
+                            end();
+                            } else if (tameHorseChance <= 5) {
+                            alert("You get thrown off the horse and as you struggle to stand up, it aims a well aimed kick at your face. \nThe last thing you see is the Sheriff looming over you as he cocks his gun and points it at your head.");
+                            gameOver();
+                            end();
+
+                }//Tavern Brawl
                 else if (outlawActivity.toLowerCase() == "t") {
                     tavernBrawl();
                 }
+            }
+        }
+        
+        
+            
             
         
             
