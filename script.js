@@ -15,6 +15,17 @@ var daleOrMirkwood;
 // how many times player loses gandalf game
 var loseCounter = 0;
 
+// to restart the game
+	var playAgain = function() {
+
+	var restart = prompt("Would you like to play again? (Yes/No)").toLowerCase();
+	if (restart == "yes") {
+		characterType();
+	} else {
+		alert("Thank You for playing!");
+	}
+	};
+
 // spare gandalf function
 var town = function() {
 	alert("Let the Battle of Five Armies begin!");
@@ -27,6 +38,7 @@ var town = function() {
 			alert("You've managed sneak onboard a ship for the women and children with the pathetic Alfred.");
 			alert("The woman and children can't believe you and Alfred have deserted your fellow men.");
 			alert("They throw both of you overboard, the fate of you is uncertain.");
+			playAgain();
 			break;
 // spar stats
 		case "spar":
@@ -100,7 +112,8 @@ var hobbitDec = function() {
 	switch(fightOrHome) {
 		case "home":
 			alert("Bilbo makes the long journey back to The Shire. He lives out his days at Bag End where he can read as many books and eat as much salted pork as he desires!");
-			alert("But wait!!! He still possess the ring. The power of One Ring will soon be risen! TBC...")
+			alert("But wait!!! He still possess the ring. The power of One Ring will soon be risen! TBC...");
+			playAgain();
 			break;
 
 		case "fight":
@@ -124,6 +137,7 @@ var dwarfDec = function() {
 		case "treasure":
 			alert("Thorin refuses to part with a single coin as he watches his cousin Dain and his dwarf army get slained! This turns his 'Dragon Sickness' into a full blown one!");
 			alert("He suffers traumatic hallucinations and loses all sanity while he rots away in his hold, continously chanting 'The Arkenstone! The Arkenstone! The Arkenstone!...'");
+			playAgain();
 			break;
 
 		case "honor":
@@ -147,7 +161,8 @@ var elfDec = function() {
 		case "mirkwood":
 			alert("Legolas tells Tauriel that the elves must be protected and heads back to Mirkwood");
 			alert("A hundred years is a mere blink in the life of an elf. Legolas is patient and he can wait");
-			alert("With the power that has risen in the East...Who knows what lies ahead for Middle-earth.")
+			alert("With the power that has risen in the East...Who knows what lies ahead for Middle-earth.");
+			playAgain();
 			break;
 
 		case "dale":
@@ -313,13 +328,14 @@ function bolg() {
   	alert("Bolg picks Legolas' body up and smashes the elf's body onto the rock, ending his life.");
   	alert("He then walks over to Tauriel and stabs her in the back. That kinda sucks.");
   };
+  	playAgain();
 };
 
 function randomOrc() {
   var charHealth = 100;
   var randomOrcHealth = 50;
   var charAttack = 10;
-  var randomOrcAttack = 20;
+  var randomOrcAttack = 25;
   var bossName = "The random Orc"
 
   charHealth = bossBattle(charHealth, randomOrcHealth, charAttack, randomOrcAttack, bossName);
@@ -333,10 +349,11 @@ function randomOrc() {
   	alert("As your eyes darken, you begin to recall the amazing things in The Shire");
   	alert("The orchards in blosson, the birds will be nesting, the summer barley in the lower fields and eating the first of the strawberries with cream....");
   };
+  	playAgain();
 };
 
 function azog() {
-  var charHealth = 200;
+  var charHealth = 150;
   var azogHealth = 200;
   var charAttack = 10;
   var azogAttack = 50;
@@ -384,15 +401,8 @@ function azog() {
   	alert("He wants you his face to be the last thing you see before you die.");
   	alert("The surviving member of Thorin's company later kneel by his body as a mark of respect. One of the finest of Durin's folk!");
   };
+ 	playAgain();
 };
-
-// to restart the game
-	var restart = prompt("Would you like to play again? (Yes/No)").toLowerCase();
-	if (restart == "yes") {
-		characterType();
-	} else {
-		alert("Thank You for playing!");
-	};
 
 
 
