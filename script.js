@@ -299,7 +299,7 @@ function bolg() {
   var charHealth = 100;
   var blogHealth = 100;
   var charAttack = 10;
-  var blogAttack = 100;
+  var blogAttack = 25;
   var bossName = "Bolg"
 
   charHealth = bossBattle(charHealth, blogHealth, charAttack, blogAttack, bossName);
@@ -319,7 +319,7 @@ function randomOrc() {
   var charHealth = 100;
   var randomOrcHealth = 50;
   var charAttack = 10;
-  var randomOrcAttack = 100;
+  var randomOrcAttack = 20;
   var bossName = "The random Orc"
 
   charHealth = bossBattle(charHealth, randomOrcHealth, charAttack, randomOrcAttack, bossName);
@@ -336,10 +336,10 @@ function randomOrc() {
 };
 
 function azog() {
-  var charHealth = 150;
+  var charHealth = 200;
   var azogHealth = 200;
   var charAttack = 10;
-  var azogAttack = 200;
+  var azogAttack = 50;
   var bossName = "Azog the Defiler"
 
   alert("Steeled by battle, you head up the mountain Ravenhill to face the Orc Champion Azog The Defiler.");
