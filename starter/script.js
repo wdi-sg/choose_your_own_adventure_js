@@ -27,7 +27,7 @@ function gameOver() {
 
 //Function to give a Hint.
 function hint() {
-    alert("Hint: You don't come to WasteWorld to enjoy the scenery.");
+    alert("Hint: You don't come to WasteWorld to enjoy the scenery, "+playerName+".");
 }
 
 //Function to inform player of winnings
@@ -52,7 +52,7 @@ var experience = prompt(" So... " + playerName + "! What would you like to do in
 
     //Tourist Sequence -> All Dead Ends (Gag)
     if (experience.toLowerCase() == "t") {
-        var tour = prompt("Prefer the scenic route eh? \n\nWould you like to visit \nthe (E)Eastern Outbacks, \nthe (S)Southern Wastelands or \nthe (N)Northern Barrens?");
+        var tour = prompt("Prefer the scenic route eh "+playerName+"? \n\nWould you like to visit \nthe (E)Eastern Outbacks, \nthe (S)Southern Wastelands or \nthe (N)Northern Barrens?");
         //Tour of the East
             //Admire landscape of the East -> Dead End.
             if (tour.toLowerCase() == "e") {
@@ -77,7 +77,7 @@ var experience = prompt(" So... " + playerName + "! What would you like to do in
 
     //Outlaw Sequence
     }   else if (experience.toLowerCase() == "o") {
-        var outlawActivity = prompt("OOH! AN OUTLAW! Want to indulge your darker side Eh? \n\nWhat dastardly deed takes your fancy? \n(R)Robbing a Bank or \nStarting a (T)Tavern Brawl?");
+        var outlawActivity = prompt("A Outlaw eh " +playerName+"? Want to indulge your darker side Eh? \n\nWhat dastardly deed takes your fancy? \n(R)Robbing a Bank or \nStarting a (T)Tavern Brawl?");
                 //Rob a Bank
                 if (outlawActivity.toLowerCase() == "r") {
                     alert("The bank was poorly guarded. Just an old timer who has seen better years. You overpower him easily, bust into the bank, guns a blazin and you head straight for the Gold Bars.");   
@@ -185,7 +185,7 @@ var experience = prompt(" So... " + playerName + "! What would you like to do in
 
    //Sheriff Sequence
     }   else if (experience.toLowerCase() == "s") {
-        alert("Howdy Sheriff! Good thing you rode into town! \n\nSome varmint is robbing the bank and the notorious Black Bart has taken the tavern hostage!");
+        alert("Howdy Sheriff " +playerName+"! Good thing you rode into town! \n\nSome varmint is robbing the bank and the notorious Black Bart has taken the tavern hostage!");
         var sheriffActivity = prompt("What will it be Sheriff? \n\nDeal with the (B)Bank Robbery, or \nConfront Black Bart in the (T)Tavern?");
         
         //Deal with Bank Robbery
