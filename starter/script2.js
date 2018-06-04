@@ -2,10 +2,14 @@
 var name = prompt(askName); 
 if (name === "") {
 	name = "Player"
-};
+}
+
 //part 3
 var score = 0; 
+
 //part 4: Have your player repeat a set of challenges or questions over again- if a player enters a situation or room, allow them to leave and come back if they want.
+// created functions to repeat choices
+
 //part 5: Create enemies for your player to face, create weapons that your player can use on the enemies ?!?!?!?!??!
 //part 6: randomize eveything ?!?!?!? .........
 
@@ -194,8 +198,8 @@ var letsPlay = function() {
 			};
 
 			var jump = function() {
-				var jumpTimes = parseInt(prompt(askJumpTimes));
-				if (jumpTimes === null) {
+				var jumpTimes = parseInt(prompt(askJumpTimes), );
+				if (jumpTimes === null) { // ask!! why does not work
 					alert(overrideCancel);
 					jump();
 				} else if (jumpTimes < 0) {
@@ -208,8 +212,11 @@ var letsPlay = function() {
 				} else if (jumpTimes >= 5) {
 					score += 100;
 					result += resultJumpMore
+				} else if (jumpTimes === NaN) { // ask!! why does not work
+					alert("You are suppose to choose a number.") 
+					jump();
 				} else {
-					alert("You are suppose to choose a number.")
+					alert("You can't do that now.")
 					jump();
 				}
 				return result;
@@ -247,7 +254,6 @@ var letsPlay = function() {
 	return choiceOne;
 
 }; // end of letsPlay function
-
 letsPlay();
 
 
