@@ -118,6 +118,11 @@ function encounter() {
 		default:
 			break;
 	}
+	if (hitpoints <= 0) {
+		reset();
+		gameContinue = false;
+		alert("Sorry you are dead. Let's hope the nation pays tribute to you.");
+	}
 }
 
 // Show clue
@@ -129,6 +134,7 @@ function showClue(x) {
 }
 
 
+
 // Introduction
 
 alert(`Lieutenant ${name} has been appointed by the Captain to infiltrate a terrorist base in Kashmar in Iran.\n\nThe mission is to find ${name}'s platoonmate Jason who has been held captive for 2 days.\n\n${name} has been deployed to the outskirts of Kashmar.\n\nAfter 1 day of seeking, ${name} is now right outside of the building where Jason is being captured.`);
@@ -138,12 +144,11 @@ alert(`Lieutenant ${name} has been appointed by the Captain to infiltrate a terr
 
 while (gameContinue === true) {
 	
-	if (!(hitpoints <= 0)) {
-
 		// First Scene
 
 		switch (scene.firstScene) {
 			case true:
+				reset();
 				do {
 					scene.buildingAtrium = prompt("You have just entered the atrium of the building and there is a door to the left and a passageway to the right.\nDo you\n(O)pen the door on the left or \n(G)o right:");
 					scene.buildingAtrium = scene.buildingAtrium.toUpperCase();
@@ -157,6 +162,7 @@ while (gameContinue === true) {
 
 		switch (scene.buildingAtrium) {
 			case "O":
+				reset();
 				do {
 					scene.roomOnLeft = prompt("You enter a room with stairs going up and a door to your right. Do you\n(T)ake the stairs;\n(G)o through the door; or\n(R)eturn back to the building atrium:");
 					scene.roomOnLeft = scene.roomOnLeft.toUpperCase();
@@ -165,6 +171,7 @@ while (gameContinue === true) {
 				encounter();
 				break;
 			case "G":
+				reset();
 				do {
 					scene.rightPassage = prompt("At the end of the passageway, you find a room and a door to your right. You can see flashes of light coming out from the room. Do you\n(W)ait and check out the room;\n(G)o through the door on the right; \n(S)hoot at first sight; or\n(R)eturn back to atrium:")
 					scene.rightPassage = scene.rightPassage.toUpperCase();
@@ -186,6 +193,7 @@ while (gameContinue === true) {
 
 		switch (scene.roomOnLeft) {
 			case "T":
+				reset();
 				do {
 					scene.upstairs = prompt("There are some pictures on the wall. One of them is Jason's- tied up in a rope with a thick tape covering his mouth. Looks terrifying. Do you\n(T)ake the photo off the wall;\n(F)ocus on the mission and move on quick; or\n(G)o back downstairs:");
 					scene.upstairs = scene.upstairs.toUpperCase();
@@ -194,6 +202,7 @@ while (gameContinue === true) {
 				encounter();
 				break;
 			case "G":
+				reset();
 				do {
 					scene.rightDoor = prompt("Suddenly a door behind opens. Do you\n(R)un for the bend ahead;\n(C)reep behind the door; or\n(D)ash back to the room before:");
 					scene.rightDoor = scene.rightDoor.toUpperCase();
@@ -213,6 +222,7 @@ while (gameContinue === true) {
 
 		switch(scene.rightPassage) {
 			case "W":
+				reset();
 				do {
 					scene.waiting = prompt("Pulling out your gun, you slowly make your way in. There is a TV switched on. Do you\n(S)witch off the TV;\n(H)ide and wait to see if anyone else is coming; or\n(G)o back outside the room:");
 					scene.waiting = scene.waiting.toUpperCase();
@@ -221,6 +231,7 @@ while (gameContinue === true) {
 				encounter();
 				break;
 			case "G":
+				reset();
 				do {
 					scene.hostageRoom = prompt("It is locked. There is a number code you need to punch in. What do you enter: (Enter 'Q' to stop)");
 				}
@@ -239,6 +250,7 @@ while (gameContinue === true) {
 				encounter();
 				break;
 			case "S":
+				reset();
 				do {
 					scene.shootToKill = prompt("Just when you pull out your gun, a soldier appear and you shoot him in the head. Phew! Do you\n(S)earch his body;\n(R)un along; or\n(T)his is only your imagination and you have not shot anyone:");
 					scene.shootToKill = scene.shootToKill.toUpperCase();
@@ -395,10 +407,7 @@ while (gameContinue === true) {
 			default:
 				break;
 		} 
-	} else {
-		alert("Sorry you are dead. Let's hope the nation pays tribute to you.");
-		break;
-	}
+		
 }
 
 alert(`LT ${name}'s final score is ${score}`);
