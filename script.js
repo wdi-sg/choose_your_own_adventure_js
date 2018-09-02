@@ -35,8 +35,8 @@ var town = function() {
 
 	switch(gandalf){
 		case "run":
-			alert("You've managed sneak onboard a ship for the women and children with the pathetic Alfred.");
-			alert("The woman and children can't believe you and Alfred have deserted your fellow men.");
+			alert("You've managed sneak onboard a ship for the women and children with the pathetic Alfrid.");
+			alert("The woman and children can't believe you and Alfrid have deserted your fellow men.");
 			alert("They throw both of you overboard, the fate of you is uncertain.");
 			playAgain();
 			break;
@@ -68,9 +68,9 @@ var town = function() {
 			    } else {
 			        alert("Gandalf hits the ground with his staff but nothing happens.");
 			    }
-			}
+			};
 			// outcomes of gandalf battle
-			if (charDmg < gandalfDmg && loseCounter<= 3){
+			if (charDmg < gandalfDmg && loseCounter<= 5){
 			    alert ("Congratulations! You have proven yourself worthy!");
 			    if (start == "hobbit") {
 			    	alert("Impressed by your skill in battle, Gandalf bestows upon you the Elven blade 'Sting', and with it, you proceed to the battlefields of Dale.");
@@ -95,7 +95,7 @@ var town = function() {
 			    } else {
 			    town();
 				}
-			}
+			};
 			break;
 
 
@@ -120,7 +120,6 @@ var hobbitDec = function() {
 			alert("What a brave little Hobbit you are! Onward to Dale!");
 			alert("WITH HASTE!!!");
 			town();
-
 			break;
 
 		default:
@@ -136,7 +135,7 @@ var dwarfDec = function() {
 	switch(honorOrTreasure) {
 		case "treasure":
 			alert("Thorin refuses to part with a single coin as he watches his cousin Dain and his dwarf army get slained! This turns his 'Dragon Sickness' into a full blown one!");
-			alert("He suffers traumatic hallucinations and loses all sanity while he rots away in his hold, continously chanting 'The Arkenstone! The Arkenstone! The Arkenstone!...'");
+			alert("He suffers traumatic hallucinations and loses all sanity while he rots away in his hold, continously chanting 'The Arkenstone! The Arkenstone! The Arkenstone...'");
 			playAgain();
 			break;
 
@@ -182,8 +181,6 @@ var characterType = function() {
 	start = prompt("Please choose one your class: 'Hobbit', 'Dwarf', 'Elf'").toLowerCase();
 	theCharacter();
 };
-
-
 
 // confirm character, choose to fight or not
 var theCharacter = function() {
@@ -231,13 +228,11 @@ var theCharacter = function() {
 		default:
 			alert("Invaild option, please select again!");
 			characterType();
-
 	}
 };
 
 // start game
 characterType();
-
 
 // boss battle function
 
@@ -314,7 +309,7 @@ function bolg() {
   var charHealth = 100;
   var blogHealth = 100;
   var charAttack = 10;
-  var blogAttack = 25;
+  var blogAttack = 50;
   var bossName = "Bolg"
 
   charHealth = bossBattle(charHealth, blogHealth, charAttack, blogAttack, bossName);
@@ -335,7 +330,7 @@ function randomOrc() {
   var charHealth = 100;
   var randomOrcHealth = 50;
   var charAttack = 10;
-  var randomOrcAttack = 25;
+  var randomOrcAttack = 50;
   var bossName = "The random Orc"
 
   charHealth = bossBattle(charHealth, randomOrcHealth, charAttack, randomOrcAttack, bossName);
@@ -355,7 +350,7 @@ function randomOrc() {
 function azog() {
   var charHealth = 150;
   var azogHealth = 200;
-  var charAttack = 10;
+  var charAttack = 20;
   var azogAttack = 50;
   var bossName = "Azog the Defiler"
 
@@ -400,7 +395,7 @@ function azog() {
   	alert("Azog fatally wounds you and stares into your eyes at the light leaves your body");
   	alert("He wants you his face to be the last thing you see before you die.");
   	alert("The surviving member of Thorin's company later kneel by his body as a mark of respect. One of the finest of Durin's folk!");
-  };
+  }; 
  	playAgain();
 };
 
