@@ -104,7 +104,8 @@ Nice to meet you, `Sean`. What year would you like to go to? **(YYYY)**
 * Have your player repeat a set of challenges or questions over again- if a player enters a situation or room, allow them to leave and come back if they want. 
 #### Pseudo-coded Example
 * You are in a dark room. Would you like to enter the left door or the right door?
-   * You enter a drawing room with heavy curtains. A mage is sitting on the sofa. Would You like to talk to him? Y/Leave through the right door/Leave through the left door -----> **Left door leads to the dark room**
+   * (user chooses left door)
+   * You enter a drawing room with heavy curtains. A mage is sitting on the sofa. Would You like to talk to him? Yes, talk to him/Leave through the right door/Leave through the left door -----> **Left door leads to the dark room**
 
 ### Part 5: Further: Make Your Game More Complex
 
