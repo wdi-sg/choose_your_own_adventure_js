@@ -1,5 +1,8 @@
 # Choose Your Own Adventure!
 
+![https://media.giphy.com/media/3oEjHFzI1y4erDQ4kE/giphy.gif](https://media.giphy.com/media/3oEjHFzI1y4erDQ4kE/giphy.gif)
+
+
 Using what you know about data types, variables, operators, conditional blocks, and accepting user input, create a text-based game that allows the user to arrive at different "destinations" based on the inputs they type.
 
 ### Rules
@@ -8,6 +11,8 @@ Using what you know about data types, variables, operators, conditional blocks, 
 * For **at least one** of the questions asked, there must be **more than two possible user responses**.
 * Your code must contain **at least one loop**.
 * Your code must make use of **both string and number user inputs**.
+* The game should work without the dev tools console open- no `console.log`! 
+* You can only use `prompt`, `alert`, and `confirm`
 
 > **Hint:** For each small milestone you reach in your program, make a git commit
 
