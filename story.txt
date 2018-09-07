@@ -1,0 +1,8 @@
+(name) What is your name?
+
+Hi (name), welcome to GA Web Development Intensive\n
+Are you ready to go? (Y/N)
+	(Y)es - Git ready for the time of your life.
+	(N)o - Too bad, git gud or die.
+	Day 1 begins, have you done your pre-work? (Y/N/HALF)
+		(Y) - You
