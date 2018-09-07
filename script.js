@@ -1,9 +1,11 @@
 // Prompt the player for their name
 var nameOfPlayer = prompt("Hello, what is your name?")
 // Prompt the player on their choice of food
-var foodChoice = prompt("Nice to meet you, " + nameOfPlayer + ". Would you like to have noodles, rice, salad, or something else?")
+var foodChoice = prompt("Nice to meet you, " + nameOfPlayer + ". Would you like to have noodles, rice, salad, or you are lazy to think and wanna have a random choice?")
 // Introduced Calories as the points systems
 var caloriePoints = 0;
+// Create a random function to choose a random item from the food.items array.
+var randomChoice = food.items[Math.floor(Math.random() * food.items.length)]
 
 console.log(food)
 // Logic for food choices 
@@ -52,5 +54,7 @@ if (foodChoice.toLowerCase() === "noodles") {
     food.items.forEach(thingThatHappensForEachValue);
 
 } else {
-    console.log("Would you like something else?")
+    alert("You can go eat " + randomChoice.foodtype + " at " + randomChoice.shop + " located at " + randomChoice.location + ". You will gain " + randomChoice.calories + " calories after eating this.");
+    caloriePoints = caloriePoints + randomChoice.calories
 }
+confirm("Are you still hungry?")
