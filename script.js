@@ -40,8 +40,8 @@ if (foodChoice.toLowerCase() === "noodles") {
     var thingThatHappensForEachValue = function(food) {
         if (food.foodtype.toLowerCase().includes(riceChoice)) {
             caloriePoints = caloriePoints + parseInt(food.calories)
-            console.log("You can go eat " + food.foodtype + " at " + food.shop + " located at " + food.location + ". You will gain " + caloriePoints + " calories after eating this.")
-        }
+            console.log("You can go eat " + food.foodtype + " at " + food.shop + " located at " + food.location + ". You will gain " + caloriePoints + " calories after eating this.");
+        };
     };
     food.items.forEach(thingThatHappensForEachValue);
 } else if (foodChoice.toLowerCase() === "salad") {
@@ -60,8 +60,8 @@ if (foodChoice.toLowerCase() === "noodles") {
 // Added to check if the player is hungry and wants to eat more
 hungryOrNot = confirm("Do you want to eat more?")
 if (hungryOrNot === true) {
-	// Tempporarily added this to reload the page if the player chooses to eat more.
-	// I want to check if there is another weay to do this so that the points and user name persists in the memory.
+    // Tempporarily added this to reload the page if the player chooses to eat more.
+    // I want to check if there is another weay to do this so that the points and user name persists in the memory.
     alert("OK. You will have to make your choices again.");
     location.reload();
 } else {
