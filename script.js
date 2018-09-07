@@ -6,8 +6,9 @@ var foodChoice = prompt("Nice to meet you, " + nameOfPlayer + ". Would you like 
 var caloriePoints = 0;
 // Create a random function to choose a random item from the food.items array.
 var randomChoice = food.items[Math.floor(Math.random() * food.items.length)]
+// Create a variable to define the hunger level
+var hungryOrNot = true
 
-console.log(food)
 // Logic for food choices 
 if (foodChoice.toLowerCase() === "noodles") {
     var noodleChoice = prompt("Would you like soup or dry noodles?")
@@ -52,9 +53,17 @@ if (foodChoice.toLowerCase() === "noodles") {
         }
     };
     food.items.forEach(thingThatHappensForEachValue);
-
 } else {
     alert("You can go eat " + randomChoice.foodtype + " at " + randomChoice.shop + " located at " + randomChoice.location + ". You will gain " + randomChoice.calories + " calories after eating this.");
     caloriePoints = caloriePoints + randomChoice.calories
-}
-confirm("Are you still hungry?")
+};
+// Added to check if the player is hungry and wants to eat more
+hungryOrNot = confirm("Do you want to eat more?")
+if (hungryOrNot === true) {
+	// Tempporarily added this to reload the page if the player chooses to eat more.
+	// I want to check if there is another weay to do this so that the points and user name persists in the memory.
+    alert("OK. You will have to make your choices again.");
+    location.reload();
+} else {
+    alert("That's great! Moderation is the key to good health.");
+};
