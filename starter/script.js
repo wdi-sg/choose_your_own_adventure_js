@@ -1,6 +1,8 @@
 var player = {
-  name: 'unknown'
+  name: 'unknown',
+  score: 0
 };
+
 var choice;
 
 var start = function () {
@@ -42,12 +44,15 @@ var chooseOneRoad = function () {
   }
 
   if (choice === 'left') {
+    player.score += 1;
     alert('You choose the left path and keep going forward.');
     chooseLodgeOrContinue();
   } else if (choice === 'middle') {
+    player.score += 1;
     alert('You choose the middle path and keep going forward.');
     chooseCaveOrContinue();
   } else if (choice === 'right') {
+    player.score += 1;
     alert('You choose the right path and keep going forward.');
     chooseDungeonOrContinue();
   }
@@ -68,9 +73,11 @@ var chooseLodgeOrContinue = function () {
   }
 
   if (choice === '1') {
+    player.score += 2;
     alert('You go insside the lodge.');
     chooseTakeOrLeaveBottle();
   } else if (choice === '2') {
+    player.score += 1;
     alert('You continue on the road.');
     chooseLeaveOrStay();
   }
@@ -90,9 +97,11 @@ var chooseTakeOrLeaveBottle = function () {
   }
 
   if (choice === '1') {
+    player.score += 1;
     alert('You take the bottle and leave the lodge.');
     chooseDrinkOrLeaveAntidote();
   } else if (choice === '2') {
+    player.score += 1;
     alert('You leave the bottle on the table and continue searching the lodge.');
     goToEnding(0);
   }
@@ -113,9 +122,11 @@ var chooseDrinkOrLeaveAntidote = function () {
   }
 
   if (choice === '1') {
+    player.score += 2;
     alert('You drink the liquid.');
     goToEnding(3);
   } else if (choice === '2') {
+    player.score += 1;
     alert('You do not care and continue your journey.');
     goToEnding(4);
   }
@@ -136,9 +147,11 @@ var chooseCaveOrContinue = function () {
   }
 
   if (choice === '1') {
+    player.score += 4;
     alert('You go inside the cave.');
     chooseSecretPathOrContinue();
   } else if (choice === '2') {
+    player.score += 1;
     alert('You continue on the road.');
     chooseLeaveOrStay();
   }
@@ -158,9 +171,11 @@ var chooseSecretPathOrContinue = function () {
   }
 
   if (choice === '1') {
+    player.score += 5;
     alert('You go where the path may lead.');
     goToEnding(5);
   } else if (choice === '2') {
+    player.score += 2;
     alert('You ignore the secret path.');
     alert('You get out of the cave.');
     chooseLeaveOrStay();
@@ -182,8 +197,10 @@ var chooseDungeonOrContinue = function () {
   }
 
   if (choice === '1') {
+    player.score += 3;
     chooseStoneOrLeave();
   } else if (choice === '2') {
+    player.score += 1;
     chooseLeaveOrStay();
   }
 };
@@ -202,8 +219,10 @@ var chooseStoneOrLeave = function () {
   }
 
   if (choice === 'y') {
+    player.score += 5;
     goToEnding(6);
   } else if (choice === 'n') {
+    player.score += 1;
     alert('You ignore the stone and continue your way.');
     alert('You get out of the dungeon.');
     chooseLeaveOrStay();
@@ -225,8 +244,10 @@ var chooseLeaveOrStay = function () {
   }
 
   if (choice === '1') {
+    player.score += 2;
     goToEnding(1);
   } else if (choice === '2') {
+    player.score += 1;
     goToEnding(2);
   }
 };
@@ -263,5 +284,6 @@ var goToEnding = function (index) {
   ];
 
   alert(endings[index]);
+  alert('Your score: ' + player.score);
 }
 start();
