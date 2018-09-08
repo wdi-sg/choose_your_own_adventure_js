@@ -46,3 +46,13 @@ while(whereGloomhaven !== "towns" && whereGloomhaven !== "wilderness"){
     var whereGloomhaven = prompt("Where would you like to wander off first?",
     "towns or wilderness")
 }
+
+//Stage Two, welcome user to TOWNS
+if(whereGloomhaven.toLowerCase() === "towns"){
+    console.log("Hallo " + playerName + ", Welcome to the town!");
+}
+
+//Stage Two, welcome user to WILDERNESS
+else if (whereGloomhaven.toLowerCase() === "wilderness") {
+    console.log(playerName +"! "+ "Look out for dungeons and definitely go explore forgotten ruins!");
+}
