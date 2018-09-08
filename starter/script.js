@@ -29,3 +29,8 @@
 
 //Convert all the console.log msgs to alert msgs.
 */
+
+//Stage Zero, prompt user for name
+var playerNameInput = prompt("Enter your name: ");
+playerName = playerNameInput[0].toUpperCase() + playerNameInput.substring(1).toLowerCase();
+console.log("Welcome to Gloomhaven, " + playerName + "! Whatever your reason for coming to Gloomhaven, out here on the edge of the world, that simple fact is never going to change. Remember to take food, a mercenary can't fight on an empty stomach.");
