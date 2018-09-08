@@ -10,8 +10,12 @@ var start = function () {
     'You are to find the Magical Crystal. With it, you will ' +
     'fight the evil dragon and save the world from darkness.'
   );
+
   player.name = getPlayerName();
+
   alert('Hi, ' + player.name);
+  alert('You step into a dark forest.');
+
   chooseOneRoad();
 };
 
@@ -32,10 +36,11 @@ var getPlayerName = function () {
 var chooseOneRoad = function () {
   while (true) {
     choice = prompt(
-      'You step into a dark forest. There are 3 roads in front of you. ' +
+      'There are 3 roads in front of you. ' +
       'Which one would you like to choose, LEFT, MIDDLE or RIGHT?\n\n' +
       '(left/middle/right)'
     );
+
     choice = choice.toLowerCase();
 
     if (!choice || choice === 'left' || choice === 'middle' || choice === 'right') {
@@ -44,17 +49,36 @@ var chooseOneRoad = function () {
   }
 
   if (choice === 'left') {
-    player.score += 1;
     alert('You choose the left path and keep going forward.');
-    chooseLodgeOrContinue();
+    chooseContinueOrGoBack(chooseLodgeOrContinue);
   } else if (choice === 'middle') {
-    player.score += 1;
     alert('You choose the middle path and keep going forward.');
-    chooseCaveOrContinue();
+    chooseContinueOrGoBack(chooseCaveOrContinue);
   } else if (choice === 'right') {
-    player.score += 1;
     alert('You choose the right path and keep going forward.');
-    chooseDungeonOrContinue();
+    chooseContinueOrGoBack(chooseDungeonOrContinue);
+  }
+};
+
+var chooseContinueOrGoBack = function (road) {
+  while (true) {
+    choice = prompt(
+      'Would you like to continue or go back?\n\n' +
+      '[1] Continue\n' +
+      '[2] Go back'
+    );
+
+    if (!choice || choice === '1' || choice === '2') {
+      break;
+    }
+  }
+
+  if (choice === '1') {
+    alert('You continue walking.');
+    road();
+  } else if (choice === '2') {
+    alert('You go back to the entrance.');
+    chooseOneRoad();
   }
 };
 
@@ -147,7 +171,7 @@ var chooseCaveOrContinue = function () {
   }
 
   if (choice === '1') {
-    player.score += 4;
+    player.score += 5;
     alert('You go inside the cave.');
     chooseSecretPathOrContinue();
   } else if (choice === '2') {
@@ -197,7 +221,7 @@ var chooseDungeonOrContinue = function () {
   }
 
   if (choice === '1') {
-    player.score += 3;
+    player.score += 5;
     chooseStoneOrLeave();
   } else if (choice === '2') {
     player.score += 1;
@@ -284,6 +308,6 @@ var goToEnding = function (index) {
   ];
 
   alert(endings[index]);
-  alert('Your score: ' + player.score);
+  alert('Your score: ' + player.score + '/10');
 }
 start();
