@@ -73,10 +73,25 @@ if(whereGloomhaven.toLowerCase() === "towns"){
     if(whereTown.toLowerCase() === "sinking market"){
         //Display descriptive about the place
         console.log("As you shop for supplies at the Sinking Market, your hand instinctively goes for the wallet at your waist. It’s gone! You quickly scan the crowd and see a small Vermling darting away from you, heading towards a sewer grating.");
+
+        alert("All your money has been stolen!")
+        console.log();
+
+        // prompt user to pick a QUEST for Sinking Market
+        var whatMarketQuest = prompt("What do you do " +playerName+ " ?", "");
     }
     else if (whereTown.toLowerCase() === "gloomhaven square") {
         //Display descriptive about the place
         console.log(" You are at the town of Gloomhaven. There is a big commotion and you find yourself in a dilemma.");
+
+        alert("You know about Jekserah’s plan.");
+        console.log("Apart of you like the plan and it makes sense in some dark twisted way. You’ve seen the town guards slacking off their duties. They can barely fight back the Vermlings, and their taxation is strangling the town and your pocket.");
+        console.log("You know that with the help of Jekserah’s undead army, you will be able to kill off the Captain guard and all his men.");
+        console.log("You are also thinking that if this city was governed by an army of undead it would be madness. You can never give all the power to someone like Jekserah.");
+        console.log("You want to turn around and run as quickly as you can and report all that you know to the Captain guard.");
+
+        // prompt user to pick a QUEST for Gloomhaven Square
+        var whatSquareQuest = prompt("Are you ready to take on the fate of the cities into your own hands " + playerName + " ?", "Kill or Help Jekserah");
     }
 }
 
