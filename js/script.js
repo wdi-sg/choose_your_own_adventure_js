@@ -6,31 +6,65 @@
 
 var player = {
     name: 'John Doe',
-    exp: 0
+    exp: 0,
+    status: ['Refreshed', 'Normal', 'Sleepy', 'Tired', 'Zombie', 'GG']
 }
 
-var name
+var status = 1
 var gamePrompt, gameAlert
-var gameState = true
+var gameState = 0;
+var gameError = 'Hmm looks like your input broke something. Refresh to start over.'
 
 player.name = prompt('What is your name?', 'John Doe')
 
 //day 0
-gamePrompt = prompt(`Hi ${player.name}! Its the day before the start of GA's WDI 16.\nYou have...\n(C)ompleted all the prework - feeling confident!\n(A)ttempted the prework but needed more time :|\n(W)hat is prework?`, 'c, a, w')
+gamePrompt = prompt(`Hi ${player.name}! Its the day before the start of GA's WDI 16.\nYou have...\n(C)ompleted all the prework - feeling confident!\n(A)ttempted the prework but needed more time :|\n(W)hat is prework?`, 'C, A, W')
 
 switch (gamePrompt.toLowerCase()) {
     case 'c':
         player.exp += 40
-        gameAlert = alert(`${statsDisplay()}Well done ${player.name}. Your hardwork paid off, keep it up!\n +40 experience`)
+        gameAlert = alert(`${statsDisplay(status)}Well done ${player.name}. With everything completed, you go to sleep.\n (+40 exp)`)
+        player.status
+        gameState += 1
         break;
     case 'a':
         player.exp += 30
-        gameAlert = alert(`${statsDisplay()}Good effort ${player.name}. Don't be disheartened!\n +30 experience`)
+        gameAlert = alert(`${statsDisplay(status)}Good effort ${player.name}. Don't be disheartened!\n (+30 exp)`)
+        gameState += 1
         break;
     case 'w':
         player.exp += 0
-        gameAlert = alert(`${statsDisplay()}Uh oh ${player.name}. We'll see how this goes...\n +0 experience`)
+        gameAlert = alert(`${statsDisplay(status)}Uh oh ${player.name}. We'll see how this goes...\n (+0 exp)`)
+        gameState += 1
         break;
     default:
-        gameAlert = alert('Hmm looks like your input broke something. Refresh to start over.')
+        alert(gameError)
+}
+
+//day 0.5 or overnighter scenario
+if (player.exp <= 30 && gameState === 1) {
+    gamePrompt = prompt(`${statsDisplay(status)}Would you like to attempt the prework?\n(Y)es\n(N)o`, 'Y, N').toLowerCase();
+    if (gamePrompt === 'y') {
+        status++
+        player.exp += 5
+        gamePrompt = prompt(`${statsDisplay(status)}Nothing makes sense and you are hardly making any progress...\n (+5 Exp)\nCarry on through the night?\n(S)leep is for the weak\n(Z)zz`, 'S, Z').toLowerCase()
+        if (gamePrompt === 's') {
+            status++
+            player.exp += 5
+            alert(`${statsDisplay(status)}You managed to understand a few more things but sleep ultimately takes it's toll.\n(+5 Exp)`)
+        } else if (gamePrompt === 'z') {
+            status--;
+            alert(`${statsDisplay(status)}Sleep is more important, good call.`)
+        } else
+            alert(gameError)
+    } else if (gamePrompt === 'n') {
+        status--;
+        alert(`${statsDisplay(status)}You decide it was not worth it and go to bed`)
+    } else
+        alert(gameError)
+}
+
+//day 1
+if (gameState === 1) {
+    gamePrompt = prompt(`${statsDisplay(status)}`)
 }

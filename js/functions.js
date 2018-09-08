@@ -1,3 +1,3 @@
-function statsDisplay () {
-    return `${player.name} | Exp: ${player.exp}\n\n`
+function statsDisplay (status) {
+    return `${player.name} | Exp: ${player.exp} | Status: ${player.status[status]}\n\n`
 }
