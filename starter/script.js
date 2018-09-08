@@ -34,3 +34,15 @@
 var playerNameInput = prompt("Enter your name: ");
 playerName = playerNameInput[0].toUpperCase() + playerNameInput.substring(1).toLowerCase();
 console.log("Welcome to Gloomhaven, " + playerName + "! Whatever your reason for coming to Gloomhaven, out here on the edge of the world, that simple fact is never going to change. Remember to take food, a mercenary can't fight on an empty stomach.");
+
+//Stage One, prompt user for TOWNS / WILDERNESS
+var whereGloomhaven = prompt("Where would you like to wander off first?",
+"towns or wilderness")
+
+// if user gives invalid input: this will be shown
+while(whereGloomhaven !== "towns" && whereGloomhaven !== "wilderness"){
+    console.log("Are you lost? " + playerName + " the place you entered doesn't exists, "
+    + "please re-enter.");
+    var whereGloomhaven = prompt("Where would you like to wander off first?",
+    "towns or wilderness")
+}
