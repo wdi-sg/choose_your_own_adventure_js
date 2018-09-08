@@ -17,7 +17,7 @@ var gameState = 0;
 while (gameState >= 0) {
     //day 0
     resetPlayer()
-    player.name = prompt('What is your name?', 'John Doe')
+    player.name = prompt('What is your name?', player.name)
     gamePrompt = prompt(`Hi ${player.name}! Its the day before the start of GA's WDI 16.\nYou have...\n(C)ompleted all the prework - feeling confident!\n(A)ttempted the prework but needed more time :|\n(W)hat is prework?`, 'C, A, W').toLowerCase()
 
     switch (gamePrompt) {
@@ -25,17 +25,17 @@ while (gameState >= 0) {
             player.exp += 40
             gameAlert = alert(`${statsDisplay(status)}Well done ${player.name}. With everything completed, you go to sleep.\n (+40 exp)`)
             player.status
-            gameState += 1
+            gameState++
             break;
         case 'a':
             player.exp += 30
             gameAlert = alert(`${statsDisplay(status)}Good effort ${player.name}. Don't be disheartened!\n (+30 exp)`)
-            gameState += 1
+            gameState++
             break;
         case 'w':
             player.exp += 0
             gameAlert = alert(`${statsDisplay(status)}Uh oh ${player.name}. We'll see how this goes...\n (+0 exp)`)
-            gameState += 1
+            gameState++
             break;
         default:
             gameError()
@@ -66,6 +66,7 @@ while (gameState >= 0) {
 
     //day 1
     if (gameState === 1) {
+
         gamePrompt = prompt(`${statsDisplay(status)}`)
     }
 }
