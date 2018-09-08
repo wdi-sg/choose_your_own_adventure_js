@@ -1,7 +1,37 @@
 var player = {
   name: 'unknown',
-  score: 0
+  score: 0,
+  hp: 100,
+  attack: 10,
+  hit: 0.95
 };
+
+var enemies = [
+  {
+    name: 'Ice Bomb',
+    hp: 20,
+    attack: 15,
+    hit: 0.5
+  },
+  {
+    name: 'Imp',
+    hp: 15,
+    attack: 10,
+    hit: 0.5
+  },
+  {
+    name: 'Flan',
+    hp: 10,
+    attack: 5,
+    hit: 0.5
+  },
+  {
+    name: 'Tonberry',
+    hp: 25,
+    attack: 999,
+    hit: 0.2
+  },
+];
 
 var choice;
 
@@ -50,13 +80,25 @@ var chooseOneRoad = function () {
 
   if (choice === 'left') {
     alert('You choose the left path and keep going forward.');
-    chooseContinueOrGoBack(chooseLodgeOrContinue);
+    battleStart();
+
+    if (player.hp > 0) {
+      chooseContinueOrGoBack(chooseLodgeOrContinue);
+    }
   } else if (choice === 'middle') {
     alert('You choose the middle path and keep going forward.');
-    chooseContinueOrGoBack(chooseCaveOrContinue);
+    battleStart();
+
+    if (player.hp > 0) {
+      chooseContinueOrGoBack(chooseCaveOrContinue);
+    }
   } else if (choice === 'right') {
     alert('You choose the right path and keep going forward.');
-    chooseContinueOrGoBack(chooseDungeonOrContinue);
+    battleStart();
+
+    if (player.hp > 0) {
+      chooseContinueOrGoBack(chooseDungeonOrContinue);
+    }
   }
 };
 
@@ -304,10 +346,101 @@ var goToEnding = function (index) {
     // 6
     'You touch the stone. Your lost memories come back. ' +
     'You are the evil king and the dragon is your pet. ' +
-    'Your power comes back. You became the final boss in this game!'
+    'Your power comes back. You became the final boss in this game!',
+
+    // 7
+    'Game Over'
   ];
 
   alert(endings[index]);
   alert('Your score: ' + player.score + '/10');
 }
+
+// Battle
+var battleStart = function () {
+  var enemiesAppeared = getEnemies();
+  var enemyNames = [];
+  enemiesAppeared.forEach(function (enemy) {
+    enemyNames.push(enemy.name);
+  });
+
+  alert(
+    '#### BATTLE ####\n' +
+    'You encountered: ' + enemyNames.join(', ')
+  );
+  battleLoop(player, enemiesAppeared);
+
+  if (player.hp <= 0) {
+    goToEnding(7);
+  }
+};
+
+var getEnemies = function () {
+  var enemiesAppeared = [];
+  var randomAmount = Math.floor(Math.random() * enemies.length / 2) + 1;
+  var randomIndex;
+  var enemy;
+  var i;
+
+  for (i = 0; i < randomAmount; i++) {
+    randomIndex = Math.floor(Math.random() * enemies.length);
+    enemy = Object.assign({}, enemies[randomIndex]);
+    enemiesAppeared.push(enemy);
+  }
+
+  return enemiesAppeared;
+};
+
+var battleLoop = function (player, enemies) {
+  var battleInfo = [];
+  var turn = 0;
+
+  enemies.forEach(function (enemy) {
+    while (enemy.hp > 0 && player.hp > 0) {
+      var enemyAttack = getDamage(enemy.attack);
+      var playerAttack = getDamage(player.attack);
+
+      if (turn % 2 === 0) {
+        if (Math.random() <= enemy.hit) {
+          battleInfo.push(enemy.name + ' dealt ' + enemyAttack + ' damage to you');
+          player.hp -= enemyAttack;
+          player.hp = player.hp < 0 ? 0 : player.hp;
+        } else {
+          battleInfo.push(enemy.name + ' missed the attack');
+        }
+      } else {
+        if (Math.random() <= player.hit) {
+          battleInfo.push(player.name + ' dealt ' + playerAttack + ' damage to ' + enemy.name);
+          enemy.hp -= playerAttack;
+          enemy.hp = enemy.hp < 0 ? 0 : enemy.hp;
+        } else {
+          battleInfo.push(player.name + ' missed the attack');
+        }
+      }
+
+      battleInfo.push(
+        'Your health: ' + player.hp + ', ' +
+        enemy.name + '\'s health: ' + enemy.hp
+      );
+
+      turn++;
+    }
+  });
+
+  if (player.hp > 0) {
+    battleInfo.push('\nYou won!');
+  } else {
+    battleInfo.push('\nYou lost!');
+  }
+
+  alert(battleInfo.join("\n"));
+};
+
+var getDamage = function (attack) {
+  var deviation = 2 * Math.floor(attack / 3) + 1;
+  var randomDeviation = Math.floor(Math.random() * deviation);
+  var randomAttack = attack + deviation - randomDeviation;
+  return randomAttack;
+};
+
 start();
