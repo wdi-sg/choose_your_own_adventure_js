@@ -72,12 +72,11 @@ if(whereGloomhaven.toLowerCase() === "towns"){
     //Stage Three, welcome user to the SINKING MARKET / GLOOMHAVEN SQUARE
     if(whereTown.toLowerCase() === "sinking market"){
         //Display descriptive about the place
-        console.log("As you shop for supplies at the Sinking Market, your hand instinctively goes for the wallet at your waist. It’s gone! You quickly scan the crowd and see a small Vermling darting away from you, heading towards a sewer grating."
-        + "Vermlings are a scavenging, animalistic race. They feed off the flesh of the dead, and when they can’t find any of that, they are more than happy to do the killing themselves. ");
+        console.log("As you shop for supplies at the Sinking Market, your hand instinctively goes for the wallet at your waist. It’s gone! You quickly scan the crowd and see a small Vermling darting away from you, heading towards a sewer grating.");
     }
     else if (whereTown.toLowerCase() === "gloomhaven square") {
         //Display descriptive about the place
-        console.log(" You are at the center of Gloomhaven. There is a big commotion at the town square and you find yourself in a dilemma.");
+        console.log(" You are at the town of Gloomhaven. There is a big commotion and you find yourself in a dilemma.");
     }
 }
 
@@ -105,14 +104,14 @@ else if (whereGloomhaven.toLowerCase() === "wilderness") {
     //Stage Three, welcome user to the SINKING MARKET / GLOOMHAVEN SQUARE
     if(whereWilderness.toLowerCase() === "lingering swamps"){
         //Display descriptive about the place
-        console.log();
+        console.log("The swamp is a horrid place, full of bugs, muck and a general uneasiness. It would take lot of magical interventions to make the swamp hospitable.");
     }
     else if (whereWilderness.toLowerCase() === "serpent's kiss river") {
         //Display descriptive about the place
-        console.log();
+        console.log("It looks like any other river you have seen and the surroundings is peaceful. Not too far away in the distant, an old temple catches your attention.");
     }
     else if (whereWilderness.toLowerCase() === "dagger forest") {
         //Display descriptive about the place
-        console.log();
+        console.log("The Dagger Forest sits in the broad angle between the East Road and the Stone Road. It is known as a hideout for bandits seeking to prey upon traffic coming to and from the Capital along the East Road.");
     }
 }
