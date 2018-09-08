@@ -35,17 +35,21 @@ var playerNameInput = prompt("Enter your name: ");
 playerName = playerNameInput[0].toUpperCase() + playerNameInput.substring(1).toLowerCase();
 console.log("Welcome to Gloomhaven, " + playerName + "! Whatever your reason for coming to Gloomhaven, out here on the edge of the world, that simple fact is never going to change. Remember to take food, a mercenary can't fight on an empty stomach.");
 
+//========================================================================================
+
 //Stage One, prompt user for TOWNS / WILDERNESS
 var whereGloomhaven = prompt("Where would you like to wander off first?",
 "towns or wilderness")
 
 // if user gives invalid input: this will be shown
-while(whereGloomhaven !== "towns" && whereGloomhaven !== "wilderness"){
+while(whereGloomhaven.toLowerCase() !== "towns" && whereGloomhaven.toLowerCase() !== "wilderness"){
     console.log("Are you lost? " + playerName + " the place you entered doesn't exists, "
     + "please re-enter.");
     var whereGloomhaven = prompt("Where would you like to wander off first?",
     "towns or wilderness")
 }
+
+//========================================================================================
 
 //Stage Two, welcome user to TOWNS
 if(whereGloomhaven.toLowerCase() === "towns"){
@@ -55,7 +59,16 @@ if(whereGloomhaven.toLowerCase() === "towns"){
     var whereTown = prompt("Walk to the Sinking Market or Gloomhaven Square",
     "Sinking Market or Gloomhaven Square");
 
+    //if user gives invalid input: this will be shown
+    while(whereTown.toLowerCase() !== "sinking market" && whereTown.toLowerCase() !== "gloomhaven square"){
+        console.log("Good Day " + playerName + ", You look lost! Do you need directions? "
+        + "Re enter the name of place."); //**Can consider giving recommendations here
+        var whereTown = prompt("Walk to the Sinking Market or Gloomhaven Square",
+        "Sinking Market or Gloomhaven Square");
+    }
 }
+
+//---------------------------------------------------------------------------------------
 
 //Stage Two, welcome user to WILDERNESS
 else if (whereGloomhaven.toLowerCase() === "wilderness") {
@@ -65,4 +78,13 @@ else if (whereGloomhaven.toLowerCase() === "wilderness") {
     var whereWilderness = prompt("Departing to?",
     "Lingering Swamps, Serpent's Kiss River or Dagger Forest");
 
+    // if user gives invalid input: this will be shown
+    while(whereWilderness.toLowerCase() !== "lingering swamps"
+    && whereWilderness.toLowerCase() !== "serpent's kiss river"
+    && whereWilderness.toLowerCase() !== "dagger forest"){
+        console.log("Good Day " + playerName + ", You look lost! Do you need directions? "
+        + "Re enter the name of place.");
+        var whereWilderness = prompt("Departing to?",
+        "Lingering Swamps, Serpent's Kiss River or Dagger Forest");
+    }
 }
