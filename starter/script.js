@@ -7,8 +7,9 @@
   2)Prompt => the user to find out which destination he would wanna check out first!
     3)Selection(THE SINKING MARKET)
     3)Prompt => the user to select a quest to complete
-      4)Quest()
-      4)Quest()
+      4)Action()
+      4)Action()
+      4)Action()
     3)Selection(GLOOMHAVEN SQUARE)
     3)Prompt => the user to select a quest to complete
       4)Quest()
@@ -26,6 +27,18 @@
     3)Prompt => the user to select a quest to complete
       4)Quest()
       4)Quest()
+
+      Complete an action or quest will reward gold, a score or items
+
+//Must contain one loop
+//User inputs to be string and number
+//May need `parseInt()` and `toString()
+//putting certain parts inside functions.
+//use random number
+
+//**assign a score for each task and report the score at the end of the game
+//**Make Your Game Repeat as many times as the player wants
+//**Part 5 & 6
 
 //Convert all the console.log msgs to alert msgs.
 */
@@ -75,11 +88,15 @@ if(whereGloomhaven.toLowerCase() === "towns"){
         console.log("As you shop for supplies at the Sinking Market, your hand instinctively goes for the wallet at your waist. It’s gone! You quickly scan the crowd and see a small Vermling darting away from you, heading towards a sewer grating.");
 
         alert("All your money has been stolen!")
-        console.log("Option A: Give chase! No one steals from you and gets away with it.");
-        console.log("Option B: Take a clear shot at him with a bow before he disappears into the grating.");
-
+        console.log("Option 1: Give chase! No one steals from you and gets away with it.");
+        console.log("Option 2: Take a clear shot at him with a bow before he disappears into the grating.");
+        console.log("Option 3: Ignore what had happen; and get more information on Vermlings before deciding what you want to do.");
         // prompt user to pick a QUEST for Sinking Market
-        var whatMarketQuest = prompt("What do you do " +playerName+ " ?", "A or B");
+        var whatMarketQuest = prompt("What do you do " +playerName+ " ?", "1, 2 or 3");
+
+        //while()
+
+        //Stage Four,
     }
     else if (whereTown.toLowerCase() === "gloomhaven square") {
         //Display descriptive about the place
@@ -91,8 +108,12 @@ if(whereGloomhaven.toLowerCase() === "towns"){
         console.log("Option Kill: You are also thinking that if this city was governed by an army of undead it would be madness. You can never give all the power to someone like Jekserah.");
         console.log("Option Kill: You want to turn around and run as quickly as you can and report all that you know to the Captain guard.");
 
-        // prompt user to pick a QUEST for Gloomhaven Square
+        //Stage Four, prompt user to pick a QUEST for Gloomhaven Square
         var whatSquareQuest = prompt("Are you ready to take on the fate of the cities into your own hands " + playerName + " ?", "Kill or Help Jekserah");
+
+        //while()
+
+        //Stage Four,
     }
 }
 
@@ -103,26 +124,19 @@ else if (whereGloomhaven.toLowerCase() === "wilderness") {
     console.log(playerName +"! "+ "Look out for dungeons and definitely go explore forgotten ruins!");
 
     // and prompt user to select which areas at the WILDERNESS to explore
-    var whereWilderness = prompt("Departing to?",
-    "Lingering Swamps, Serpent's Kiss River or Dagger Forest");
+    var whereWilderness = prompt("Departing to?", "Serpent's Kiss River or Dagger Forest");
 
     // if user gives invalid input: this will be shown
-    while(whereWilderness.toLowerCase() !== "lingering swamps"
-    && whereWilderness.toLowerCase() !== "serpent's kiss river"
-    && whereWilderness.toLowerCase() !== "dagger forest"){
+    while(whereWilderness.toLowerCase() !== "serpent's kiss river"
+          && whereWilderness.toLowerCase() !== "dagger forest"){
         console.log("Good Day " + playerName + ", You look lost! Do you need directions? "
         + "Re enter the name of place.");
-        var whereWilderness = prompt("Departing to?",
-        "Lingering Swamps, Serpent's Kiss River or Dagger Forest");
+        var whereWilderness = prompt("Departing to?", "Serpent's Kiss River or Dagger Forest");
     }
 //========================================================================================
 
-    //Stage Three, welcome user to the SINKING MARKET / GLOOMHAVEN SQUARE
-    if(whereWilderness.toLowerCase() === "lingering swamps"){
-        //Display descriptive about the place
-        console.log("The swamp is a horrid place, full of bugs, muck and a general uneasiness. It would take lot of magical interventions to make the swamp hospitable.");
-    }
-    else if (whereWilderness.toLowerCase() === "serpent's kiss river") {
+    //Stage Three, welcome user to the SERPENT'S KISS RIVER / DAGGER FOREST
+    if(whereWilderness.toLowerCase() === "serpent's kiss river") {
         //Display descriptive about the place
         console.log("It looks like any other river you have seen and the surroundings is peaceful. Not too far away in the distant, an old temple catches your attention.");
     }
