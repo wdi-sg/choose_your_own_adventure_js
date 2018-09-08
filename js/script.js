@@ -13,7 +13,6 @@ var player = {
 var status = 1
 var gamePrompt, gameAlert
 var gameState = 0;
-var gameError = 'Hmm looks like your input broke something. Refresh to start over.'
 
 player.name = prompt('What is your name?', 'John Doe')
 
@@ -38,7 +37,7 @@ switch (gamePrompt.toLowerCase()) {
         gameState += 1
         break;
     default:
-        alert(gameError)
+        gameError()
 }
 
 //day 0.5 or overnighter scenario
@@ -56,12 +55,12 @@ if (player.exp <= 30 && gameState === 1) {
             status--;
             alert(`${statsDisplay(status)}Sleep is more important, good call.`)
         } else
-            alert(gameError)
+            gameError()
     } else if (gamePrompt === 'n') {
         status--;
         alert(`${statsDisplay(status)}You decide it was not worth it and go to bed`)
     } else
-        alert(gameError)
+        gameError()
 }
 
 //day 1
