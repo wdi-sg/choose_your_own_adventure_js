@@ -50,9 +50,19 @@ while(whereGloomhaven !== "towns" && whereGloomhaven !== "wilderness"){
 //Stage Two, welcome user to TOWNS
 if(whereGloomhaven.toLowerCase() === "towns"){
     console.log("Hallo " + playerName + ", Welcome to the town!");
+
+    // and prompt user to select which areas at the TOWNS to explore
+    var whereTown = prompt("Walk to the Sinking Market or Gloomhaven Square",
+    "Sinking Market or Gloomhaven Square");
+
 }
 
 //Stage Two, welcome user to WILDERNESS
 else if (whereGloomhaven.toLowerCase() === "wilderness") {
     console.log(playerName +"! "+ "Look out for dungeons and definitely go explore forgotten ruins!");
+
+    // and prompt user to select which areas at the WILDERNESS to explore
+    var whereWilderness = prompt("Departing to?",
+    "Lingering Swamps, Serpent's Kiss River or Dagger Forest");
+
 }
