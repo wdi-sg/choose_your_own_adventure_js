@@ -66,6 +66,19 @@ if(whereGloomhaven.toLowerCase() === "towns"){
         var whereTown = prompt("Walk to the Sinking Market or Gloomhaven Square",
         "Sinking Market or Gloomhaven Square");
     }
+
+//========================================================================================
+
+    //Stage Three, welcome user to the SINKING MARKET / GLOOMHAVEN SQUARE
+    if(whereTown.toLowerCase() === "sinking market"){
+        //Display descriptive about the place
+        console.log("As you shop for supplies at the Sinking Market, your hand instinctively goes for the wallet at your waist. It’s gone! You quickly scan the crowd and see a small Vermling darting away from you, heading towards a sewer grating."
+        + "Vermlings are a scavenging, animalistic race. They feed off the flesh of the dead, and when they can’t find any of that, they are more than happy to do the killing themselves. ");
+    }
+    else if (whereTown.toLowerCase() === "gloomhaven square") {
+        //Display descriptive about the place
+        console.log(" You are at the center of Gloomhaven. There is a big commotion at the town square and you find yourself in a dilemma.");
+    }
 }
 
 //---------------------------------------------------------------------------------------
@@ -86,5 +99,20 @@ else if (whereGloomhaven.toLowerCase() === "wilderness") {
         + "Re enter the name of place.");
         var whereWilderness = prompt("Departing to?",
         "Lingering Swamps, Serpent's Kiss River or Dagger Forest");
+    }
+//========================================================================================
+
+    //Stage Three, welcome user to the SINKING MARKET / GLOOMHAVEN SQUARE
+    if(whereWilderness.toLowerCase() === "lingering swamps"){
+        //Display descriptive about the place
+        console.log();
+    }
+    else if (whereWilderness.toLowerCase() === "serpent's kiss river") {
+        //Display descriptive about the place
+        console.log();
+    }
+    else if (whereWilderness.toLowerCase() === "dagger forest") {
+        //Display descriptive about the place
+        console.log();
     }
 }
