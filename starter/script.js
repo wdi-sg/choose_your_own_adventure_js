@@ -1,3 +1,6 @@
+var player = {
+  name: 'unknown'
+};
 var choice;
 
 var start = function () {
@@ -5,7 +8,23 @@ var start = function () {
     'You are to find the Magical Crystal. With it, you will ' +
     'fight the evil dragon and save the world from darkness.'
   );
+  player.name = getPlayerName();
+  alert('Hi, ' + player.name);
   chooseOneRoad();
+};
+
+var getPlayerName = function () {
+  var name;
+
+  while (true) {
+    name = prompt('You lost your memory. Give yourself a name:');
+
+    if (name) {
+      break;
+    }
+  }
+
+  return name;
 };
 
 var chooseOneRoad = function () {
