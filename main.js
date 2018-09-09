@@ -6,7 +6,7 @@ var instructions = "This is a role playing game.\nPlayer will be presented with 
 console.log(instructions);
 
 
-// User can choose where to start a new game or not
+// User can choose where to start a new game or not. If its a new game, lead to create account function
 
 function logInScreen(){
 
@@ -15,11 +15,11 @@ var displayLogInOption = prompt("New Game\nContinue\nExit");
     if (displayLogInOption === "New Game" || displayLogInOption === "new game"){
         createAccount();
 
-        if (playerData.gender === "male"){
-            console.log("Welcome Mr " + playerName + "!\nYou will now begin your adventure of a lifetime!");
+        if (currentPlayerStat.gender === "male"){
+            console.log("Welcome Mr " + currentPlayerName + "!\nYou will now begin your adventure of a lifetime!");
         }
-        else if (playerData.gender === "female"){
-            console.log("Welcome Ms " + playerName + "\nYou will now begin your adventure of a lifetime!");
+        else if (currentPlayerStat.gender === "female"){
+            console.log("Welcome Ms " + currentPlayerName + "\nYou will now begin your adventure of a lifetime!");
         }
     }
 
@@ -43,26 +43,28 @@ var displayLogInOption = prompt("New Game\nContinue\nExit");
 
 //This array stores player data by user, in the future link to some backend database.
 
-var currentPlayerData;
+var currentPlayerData = [];
 
-var currentPlayerName = " ";
 var currentPlayerStat = {
                         name: "Dsen",
                         gender: "m",
                         age: 27,
+                        job: "knight",
                         stat:{
-                                Hp: 100 ,
-                                Strength: 10 ,
+                                Hp: 100,
+                                Strength: 10,
                                 Intelligence: 5}
+
                         };
 
-
+var currentPlayerName = currentPlayerStat.name;
 
 function createAccount (){
         var playerData = {
-                name: askName() ,
-                gender: askGender() ,
-                age: askAge() ,
+                name: askName(),
+                gender: askGender(),
+                age: askAge(),
+                job: askJob(),
                 stat: {
                         Hp: 0 ,
                         Strength: 0 ,
@@ -72,7 +74,7 @@ function createAccount (){
         currentPlayerData.push(playerData);
         currentPlayerStat = playerData;
         currentPlayerName = playerData.name;
-        console.log(currentPlayerData);
+        console.log(playerData.name + " has been created and has chosen the job of a " + playerData.job.name);
 };
 
 
@@ -86,6 +88,7 @@ function askName(){
             var confirmName = prompt("Is " + playerName + " your name?\nyes/no")
                 if (confirmName === "yes"){
                     console.log("You will be now called " + playerName)
+                    return playerName;
                 }
                 else if (confirmName === "no"){
                     console.log("Please re-enter your name")
@@ -132,27 +135,58 @@ function askAge(){
 };
 
 
-//This section will enable let the player choose their in game characters classes.
+
+
+//This section will enable let the player choose their in game characters job.
 var strength;
 var intelligence;
 var dmg = strength + intelligence;
 
 var knight = {
+        name: "knight",
+        description: "The chivalrous knight uses its sword to defend the realm!",
         Hp: 100,
         Strength: 10,
         Intelligence: 5
 };
 
 var wizard = {
+        name: "wizard",
+        description: "The wizard uses the mystical forces of nature!",
         Hp: 50,
         Strength: 5,
         Intelligence: 10
 };
 
 var archer = {
+        name: "archer",
+        description: "The archer uses the bow to shoot targets a mile away!",
         Hp: 60,
         Strength: 7,
         Intelligence: 7
+};
+
+function askJob(){
+    var job = prompt("Please choose your job.\nknight: " + knight.description + "\n"+ "wizard: " + wizard.description + "\n" + "archer: " + archer.description);
+
+
+    if (job === "knight"){
+        console.log("You have chosen the knight and taken up the responsibility of defending the realm!")
+        return knight;
+    }
+    else if (job === "wizard"){
+        console.log("You have chosen the wizard and taken up the responsibility of defending the realm!")
+        return wizard;
+    }
+    else if (job === "archer"){
+        console.log("You have chosen the archer and taken up the responsibility of defending the realm!")
+        return archer;
+    }
+
+    else {
+        console.log("Please choose your job!")
+        askClass();
+    };
 };
 
 
@@ -196,26 +230,48 @@ var battle = function(player, monster){
         var statOfPlayerInBattle = player.stat;
         var statOfMonsterInBattle = monster.stat;
 
+
+        while (statOfMonsterInBattle.Hp > 0){
+            //this will call the function playerAction defined below
+            playerAction();
+
+        };
+
         function turn(){
             var attackOrRun = prompt("What would you like to do?\nattack or run")
             return attackOrRun
-        }
-
-        if (turn() === "attack"){
-            var playerAttack = (statOfPlayerInBattle.Strength + statOfPlayerInBattle.Intelligence)
-
-
-            //This will updated the variable statOfMonsterInBattle
-            statOfMonsterInBattle.Hp = statOfMonsterInBattle.Hp - playerAttack
-
-        }
-
-        else if (turn() === "run"){
-            console.log("You fled from battle")
         };
-}
 
-battle(currentPlayerStat, slime);
+
+        function playerAction(){
+
+                if (turn() === "attack"){
+                    var playerAttackDamage = (statOfPlayerInBattle.Strength + statOfPlayerInBattle.Intelligence)
+                    var monstersAttackDamage = monster.stat.dmg;
+
+                    console.log(currentPlayerName + " attacked " + monster.name + " and dealt " + playerAttackDamage + " dmg! ");
+
+                    //This will update the variable statOfMonsterInBattle based on player dealt damage
+                    statOfMonsterInBattle.Hp = statOfMonsterInBattle.Hp - playerAttackDamage
+                    console.log(monster.name + " has hp: " + statOfMonsterInBattle.Hp + "\n" + currentPlayerName + " has hp: " + statOfPlayerInBattle.Hp)
+
+                    //This will update the variable statOfPlayerInBattle based on monster dealt damage
+                    statOfPlayerInBattle.Hp = statOfPlayerInBattle.Hp - monstersAttackDamage
+
+                    console.log(monster.name + " attacked " + currentPlayerName + " and dealt " + monstersAttackDamage + " dmg! ");
+                    console.log(monster.name + " has hp: " + statOfMonsterInBattle.Hp + "\n" + currentPlayerName + " has hp: " + statOfPlayerInBattle.Hp)
+
+                }
+
+                else if (turn() === "run"){
+                    console.log("You fled from battle")
+                };
+
+        }
+
+};
+
+
 
 
 
