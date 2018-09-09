@@ -8,6 +8,11 @@ var caloriePoints = 0;
 var randomChoice = food.items[Math.floor(Math.random() * food.items.length)]
 // Create a variable to define the hunger level
 var hungryOrNot = true
+// Initialize a starting value for the number game.
+var moneyToPay = 5
+// Create a array to pick a random value from for the Rock Paper Scissors Game
+var rockPaperScissorsArray = ["rock", "paper", "scissors"]
+var ownerChoice = rockPaperScissorsArray[Math.floor(Math.random() * 2)]
 
 // Logic for food choices 
 if (foodChoice.toLowerCase() === "noodles") {
@@ -19,7 +24,7 @@ if (foodChoice.toLowerCase() === "noodles") {
         var thingThatHappensForEachValue = function(food) {
             if (food.foodtype.toLowerCase().includes(soupNoodleChoice)) {
                 caloriePoints = caloriePoints + parseInt(food.calories)
-                console.log("You can go eat " + food.foodtype + " at " + food.shop + " located at " + food.location + ". You will gain " + caloriePoints + " calories after eating this.")
+                alert("You can go eat " + food.foodtype + " at " + food.shop + " located at " + food.location + ". You will gain " + caloriePoints + " calories after eating this.")
                 // Logic if choose dry noodles
             }
         };
@@ -30,7 +35,7 @@ if (foodChoice.toLowerCase() === "noodles") {
         var thingThatHappensForEachValue = function(food) {
             if (food.foodtype.toLowerCase().includes(dryNoodleChoice)) {
                 caloriePoints = caloriePoints + parseInt(food.calories)
-                console.log("You can go eat " + food.foodtype + " at " + food.shop + " located at " + food.location + ". You will gain " + caloriePoints + " calories after eating this.")
+                alert("You can go eat " + food.foodtype + " at " + food.shop + " located at " + food.location + ". You will gain " + caloriePoints + " calories after eating this.")
             }
         };
         food.items.forEach(thingThatHappensForEachValue);
@@ -40,7 +45,16 @@ if (foodChoice.toLowerCase() === "noodles") {
     var thingThatHappensForEachValue = function(food) {
         if (food.foodtype.toLowerCase().includes(riceChoice)) {
             caloriePoints = caloriePoints + parseInt(food.calories)
-            console.log("You can go eat " + food.foodtype + " at " + food.shop + " located at " + food.location + ". You will gain " + caloriePoints + " calories after eating this.");
+            alert("You can go eat " + food.foodtype + " at " + food.shop + " located at " + food.location + ". You will gain " + caloriePoints + " calories after eating this.");
+            alert("Surprise! The Uncle decides to play a game with you. He takes out a Black Jar with 10 Ping Pong Balls with different values on it. You will both dip your hands into the Jar one at a time, and the person with the bigger number will win. You will both start at $5 and each time you win, you pay $1 less. If you lose the round, you pay $1 more. The game will go on until you either pay $10 or nothing.")
+            numberGame();
+            if (moneyToPay === 0) {
+                alert("You won! Your meal is free!");
+            } else if (moneyToPay === 10) {
+                alert("You lost! You have to pay $10 for your meal!");
+            } else {
+                return;
+            };
         };
     };
     food.items.forEach(thingThatHappensForEachValue);
@@ -49,10 +63,14 @@ if (foodChoice.toLowerCase() === "noodles") {
     var thingThatHappensForEachValue = function(food) {
         if (food.foodtype.toLowerCase().includes(saladChoice)) {
             caloriePoints = caloriePoints + parseInt(food.calories)
-            console.log("You can go eat " + food.foodtype + " at " + food.shop + " located at " + food.location + ". You will gain " + caloriePoints + " calories after eating this.")
-        }
+            alert("You can go eat " + food.foodtype + " at " + food.shop + " located at " + food.location + ". You will gain " + caloriePoints + " calories after eating this.")
+        };
     };
     food.items.forEach(thingThatHappensForEachValue);
+    alert("The owner of the place is a Rock Paper Scissors Olympic Champion. He challenges you to a game of Rock Paper Scissors. On the line is not Olympic Glory, but a cup of drink. If you lose, you have to buy him a drink. Otherwise, if you win, he will give you a free drink!")
+    var playerChoice = prompt("What is your Choice? scissors, rock or paper?")
+    // Call the rock paper scissors game function
+    rockPaperScissors();
 } else {
     alert("You can go eat " + randomChoice.foodtype + " at " + randomChoice.shop + " located at " + randomChoice.location + ". You will gain " + randomChoice.calories + " calories after eating this.");
     caloriePoints = caloriePoints + randomChoice.calories
