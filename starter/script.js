@@ -1,38 +1,66 @@
-var player = {
-  name: 'unknown',
-  score: 0,
-  hp: 100,
-  attack: 10,
-  hit: 0.95
-};
+var party = [
+  {
+    name: 'unknown',
+    score: 0,
+    hp: 100,
+    weapon: null
+  }
+];
+
+var weapons = [
+  {
+    name: 'Bow',
+    attack: 5,
+    hit: 0.95
+  },
+  {
+    name: 'Spear',
+    attack: 10,
+    hit: 0.9
+  },
+  {
+    name: 'Blade',
+    attack: 15,
+    hit: 0.85
+  }
+];
 
 var enemies = [
   {
     name: 'Ice Bomb',
     hp: 20,
-    attack: 15,
-    hit: 0.5
+    weapon: {
+      attack: 15,
+      hit: 0.5
+    }
   },
   {
     name: 'Imp',
     hp: 15,
-    attack: 10,
-    hit: 0.5
+    weapon: {
+      attack: 10,
+      hit: 0.5
+    }
   },
   {
     name: 'Flan',
     hp: 10,
-    attack: 5,
-    hit: 0.5
+    weapon: {
+      attack: 5,
+      hit: 0.5
+    }
   },
   {
     name: 'Tonberry',
     hp: 25,
-    attack: 999,
-    hit: 0.2
-  },
+    weapon: {
+      attack: 999,
+      hit: 0.2
+    }
+  }
 ];
 
+var player = party[0];
 var choice;
 
 var start = function () {
@@ -42,11 +70,26 @@ var start = function () {
   );
 
   player.name = getPlayerName();
-
   alert('Hi, ' + player.name);
-  alert('You step into a dark forest.');
+  chooseWeapon();
 
-  chooseOneRoad();
+  if (choice) {
+    alert('You step into a dark forest.');
+    chooseOneRoad();
+  }
+};
+
+var getWeapons = function (weapons) {
+  var message = [];
+
+  weapons.forEach(function (weapon, index) {
+    message.push(
+      '[' + (index + 1) + '] ' + weapon.name +
+      ', attack: ' + weapon.attack +
+      ', hit: ' + weapon.hit);
+  });
+
+  return message.join('\n');
 };
 
 var getPlayerName = function () {
@@ -63,6 +106,33 @@ var getPlayerName = function () {
   return name;
 };
 
+var chooseWeapon = function () {
+  var weaponIndex;
+  var validInputs = [];
+  var i;
+  var weaponNumber;
+
+  for (i = 0; i < weapons.length; i++) {
+    weaponNumber = i + 1;
+    validInputs.push(weaponNumber.toString());
+  }
+
+  while (true) {
+    choice = prompt('Please choose a weapon:\n' + getWeapons(weapons));
+
+    if (!choice || validInputs.indexOf(choice) !== -1) {
+      break;
+    }
+  }
+
+  if (choice) {
+    weaponIndex = parseInt(choice) - 1;
+    player.weapon = weapons[weaponIndex];
+    alert('You choose ' + weapons[weaponIndex].name + '.');
+  }
+
+}
+
 var chooseOneRoad = function () {
   while (true) {
     choice = prompt(
@@ -71,11 +141,13 @@ var chooseOneRoad = function () {
       '(left/middle/right)'
     );
 
-    choice = choice.toLowerCase();
-
     if (!choice || choice === 'left' || choice === 'middle' || choice === 'right') {
       break;
     }
+  }
+
+  if (choice) {
+    choice = choice.toLowerCase();
   }
 
   if (choice === 'left') {
@@ -277,11 +349,14 @@ var chooseStoneOrLeave = function () {
       'You go into the dungeon. After a long walk, you find a mystery stone.\n\n' +
       'Do you want to touch it? (y/n)'
     );
-    choice = choice.toLowerCase();
 
     if (!choice || choice === 'y' || choice === 'n') {
       break;
     }
+  }
+
+  if (choice) {
+    choice = choice.toLowerCase();
   }
 
   if (choice === 'y') {
@@ -368,7 +443,7 @@ var battleStart = function () {
     '#### BATTLE ####\n' +
     'You encountered: ' + enemyNames.join(', ')
   );
-  battleLoop(player, enemiesAppeared);
+  battleLoop(party, enemiesAppeared);
 
   if (player.hp <= 0) {
     goToEnding(7);
@@ -391,41 +466,24 @@ var getEnemies = function () {
   return enemiesAppeared;
 };
 
-var battleLoop = function (player, enemies) {
+var battleLoop = function (party, enemies) {
   var battleInfo = [];
   var turn = 0;
 
-  enemies.forEach(function (enemy) {
-    while (enemy.hp > 0 && player.hp > 0) {
-      var enemyAttack = getDamage(enemy.attack);
-      var playerAttack = getDamage(player.attack);
-
-      if (turn % 2 === 0) {
-        if (Math.random() <= enemy.hit) {
-          battleInfo.push(enemy.name + ' dealt ' + enemyAttack + ' damage to you');
-          player.hp -= enemyAttack;
-          player.hp = player.hp < 0 ? 0 : player.hp;
-        } else {
-          battleInfo.push(enemy.name + ' missed the attack');
-        }
-      } else {
-        if (Math.random() <= player.hit) {
-          battleInfo.push(player.name + ' dealt ' + playerAttack + ' damage to ' + enemy.name);
-          enemy.hp -= playerAttack;
-          enemy.hp = enemy.hp < 0 ? 0 : enemy.hp;
-        } else {
-          battleInfo.push(player.name + ' missed the attack');
-        }
-      }
-
-      battleInfo.push(
-        'Your health: ' + player.hp + ', ' +
-        enemy.name + '\'s health: ' + enemy.hp
-      );
-
-      turn++;
+  while (isAlive(enemies) && isAlive(party)) {
+    if (turn % 2 === 0) {
+      battleInfo.push(dealDamage(enemies, party));
+    } else {
+      battleInfo.push(dealDamage(party, enemies));
     }
-  });
+
+    battleInfo.push(
+      'Your health: ' + player.hp + ', ' +
+      displayHealth(enemies)
+    );
+
+    turn++;
+  }
 
   if (player.hp > 0) {
     battleInfo.push('\nYou won!');
@@ -441,6 +499,52 @@ var getDamage = function (attack) {
   var randomDeviation = Math.floor(Math.random() * deviation);
   var randomAttack = attack + deviation - randomDeviation;
   return randomAttack;
+};
+
+var dealDamage = function (attackers, defenders) {
+  var battleInfo = [];
+
+  attackers.forEach(function (attacker) {
+    var damage = getDamage(attacker.weapon.attack);
+
+    if (Math.random() <= attacker.weapon.hit) {
+      defenders.forEach(function (defender) {
+        defender.hp -= damage;
+        defender.hp = defender.hp < 0 ? 0 : defender.hp;
+        battleInfo.push(attacker.name + ' dealt ' + damage + ' damage to ' + defender.name);
+      });
+    } else {
+      battleInfo.push(attacker.name + ' missed the attack');
+    }
+  });
+
+  return battleInfo.join('\n');
+};
+
+var isAlive = function (members) {
+  var i;
+
+  /**
+   * In this case, a forEach() loop with return gives wrong result.
+   * There's no way to stop or break a forEach() loop other than throwing an exception.
+   */
+  for (i = 0; i < members.length; i++) {
+    if (members[i].hp > 0) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+var displayHealth = function (members) {
+  var message = [];
+
+  members.forEach(function (member) {
+    message.push(member.name + '\'s health: ' + member.hp);
+  });
+
+  return message.join(', ');
 };
 
 start();
