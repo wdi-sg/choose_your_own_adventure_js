@@ -9,67 +9,67 @@ var player = {
     exp: 0,
     tardy: 0,
     status: 1,
-    special: ['Luck']
+    day: 0,
+    special: ['Grit', 'Give Up']
 }
 
 var specials = ['Slack', 'Google','Pseudo-code']
 var sleepiness = ["Refreshed", "Normal", "Sleepy", "Tired", "Zombie", "GG"]
 var gamePrompt, gameAlert
-var day = 0;
 
-while (day >= 0) {
-    //day 0
+while (player.day >= 0) {
+    //player.day 0
     resetPlayer()
-    player.name = prompt('What is your name?', player.name)
-    gamePrompt = prompt(`Hi ${player.name}! Its the day before the start of GA's WDI 16.\nYou have...\n(C)ompleted all the prework - feeling confident!\n(A)ttempted the prework but needed more time :|\n(W)hat is prework?`, 'C, A, W').toLowerCase()
+    player.name = prompt('WDI SIMULATOR 16\nWhat is your name?', player.name)
+    gamePrompt = prompt(`Hi ${player.name}! It's the day before the start of GA's WDI 16.\nYou have...\n1. Completed all the prework - feeling confident!\n2. Attempted the prework but needed more time :|\n3. What is prework?`, '1, 2, 3')
 
-    switch (gamePrompt) {
-        case 'c':
+    switch (parseInt(gamePrompt)) {
+        case 1:
             player.exp += 50
             gameAlert = alert(`${statsDisplay(player.status)}Well done ${player.name}. With everything completed, you go to sleep.\n (+40 exp)`)
             player.status--
-            day++
+            player.day++
             break;
-        case 'a':
+        case 2:
             player.exp += 30
             gameAlert = alert(`${statsDisplay(player.status)}Good effort ${player.name}. Don't be disheartened!\n (+30 exp)`)
-            day++
+            player.day++
             break;
-        case 'w':
+        case 3:
             player.exp += 0
             gameAlert = alert(`${statsDisplay(player.status)}Uh oh ${player.name}. We'll see how this goes...\n (+0 exp)`)
-            day++
+            player.day++
             break;
         default:
             gameError()
     }
-    //day 0.5 or overnighter scenario
-    if (player.exp <= 30 && day === 1) {
-        gamePrompt = prompt(`${statsDisplay(player.status)}Would you like to attempt the prework?\n(Y)es\n(N)o`, 'Y, N').toLowerCase();
-        if (gamePrompt === 'y') {
+    //player.day 0.5 or overnighter scenario
+    if (player.exp <= 30 && player.day === 1) {
+        gamePrompt = parseInt(prompt(`${statsDisplay(player.status)}Would you like to attempt the prework?\n1. Yes\n2. No`, '1, 2'));
+        if (gamePrompt === 1) {
             player.status++
             player.exp += 5
-            gamePrompt = prompt(`${statsDisplay(player.status)}Nothing makes sense and you are hardly making any progress...\n (+5 Exp)\nCarry on through the night?\n(S)leep is for the weak\n(Z)zz`, 'S, Z').toLowerCase()
-            if (gamePrompt === 's') {
+            gamePrompt = parseInt(prompt(`${statsDisplay(player.status)}Nothing makes sense and you are hardly making any progress...\n (+5 Exp)\nCarry on through the night?\n1. Sleep is for the weak\n2. Zzz`, '1, 2'))
+            if (gamePrompt === 1) {
                 player.status++
                 player.exp += 5
                 alert(`${statsDisplay(player.status)}You managed to understand a few more things but sleep ultimately takes it's toll.\n(+5 Exp)`)
-            } else if (gamePrompt === 'z') {
+            } else if (gamePrompt === 2) {
                 player.status--
                 alert(`${statsDisplay(player.status)}Sleep is more important, good call.`)
             } else
                 gameError()
-        } else if (gamePrompt === 'n') {
+        } else if (gamePrompt === 2) {
             player.status--;
-            alert(`${statsDisplay(player.status)}You decide it was not worth it and head to bed`)
+            alert(`${statsDisplay(player.status)}You decide it was not worth it and head to bed.`)
         } else
             gameError()
     }
 
-    //day 1
-    if (day === 1) {
+    //player.day 1
+    if (player.day === 1) {
         lateCheck(player, specials)
-        gamePrompt = prompt(`${statsDisplay(player.status)}`)
+        gamePrompt = prompt(`${statsDisplay(player.status)}After a rather awkward ice-breaking session, the real work begins. It's installfest! There's alot of terminal work to be done. \nYou..\n${displaySpecial(player)}`)
     }
 
     //ends game loop

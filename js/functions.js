@@ -1,31 +1,42 @@
 function statsDisplay(playerStatus) {
-    return `Day: ${day} | ${player.name} | Exp: ${player.exp} | Status: ${sleepiness[playerStatus]}\n\n`
+    return `Day: ${player.day} | ${player.name} | Exp: ${player.exp} | Status: ${sleepiness[playerStatus]}\n\n`
+}
+
+function displaySpecial(player) {
+    var options = ''
+    var index = 1
+    for (i in player.special) {
+        options += `${index}. Use ${player.special[i]}\n`
+        index++
+    }
+    return options
 }
 
 function resetPlayer() {
     player.exp = 0
     player.tardy = 0
-    player.special = ['Luck']
+    player.special = ['Grit', 'Give Up']
     player.status = 1
 }
 
 function gameError() {
     alert('Hmm looks like your input broke something. Starting over.')
-    day = 0
+    player.day = 0
     resetPlayer()
 }
 
 function gameEnd() {
-    day = -1
+    player.day = -1
 }
 
 function earlyBonus (player, specials) {
     for (i in player.special) {
         var modifier = Math.floor((Math.random() * specials.length) + 0);
         if (player.special[i] !== specials[modifier]) {
+            player.special.pop()
             player.special.push(specials[modifier])
-            i++ //to fix wierd addition bug
-            return alert(`Arrived Early! You spend your extra time studying and gain a new special: ${player.special[i]}`)
+            player.special.push('Give Up')
+            return alert(`It's day ${player.day}. Arrived Early! You spend your extra time studying and gain a new special: ${specials[modifier]}`)
         }
     }
 }
@@ -60,10 +71,10 @@ function lateCheck(player, specials) {
         earlyBonus(player, specials)
     }
     else if (lateChance >= 50) {
-        return alert('You arrive at class on time.')
+        return alert(`It's day ${player.day}. You arrive to class on time.`)
     }
     else {
         player.tardy++
-        return alert('Oh no you overslept and arrived late.')
+        return alert(`It's day ${player.day}. Oh no you overslept and arrived late.`)
     }
 }
