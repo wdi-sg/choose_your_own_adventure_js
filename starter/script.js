@@ -534,13 +534,16 @@ var dealDamage = function (attackers, defenders) {
   var battleInfo = [];
 
   attackers.forEach(function (attacker) {
-    var damage = getDamage(attacker.weapon.attack);
-
     if (Math.random() <= attacker.weapon.hit) {
       defenders.forEach(function (defender) {
+        var damage = getDamage(attacker.weapon.attack);
+
+        if (defender.hp > 0) {
+          battleInfo.push(attacker.name + ' dealt ' + damage + ' damage to ' + defender.name);
+        }
+
         defender.hp -= damage;
         defender.hp = defender.hp < 0 ? 0 : defender.hp;
-        battleInfo.push(attacker.name + ' dealt ' + damage + ' damage to ' + defender.name);
       });
     } else {
       battleInfo.push(attacker.name + ' missed the attack');
