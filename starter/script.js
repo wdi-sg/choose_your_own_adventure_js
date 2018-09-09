@@ -40,15 +40,20 @@
 */
 
 //Player details or items
-var playerItems = [];
-var playerGold;
-var playerScore;
+var playerItems = [
+  {bow: 1},
+  {arrow: 20},
+  {dagger: 4}
+];
+var playerGold = 20;
+var playerScore = 0;
 
 
 //Stage Zero, prompt user for name
 var playerNameInput = prompt("Enter your name: ");
 playerName = playerNameInput[0].toUpperCase() + playerNameInput.substring(1).toLowerCase();
 console.log("Welcome to Gloomhaven, " + playerName + "! Whatever your reason for coming to Gloomhaven, out here on the edge of the world, that simple fact is never going to change. Remember to take food, a mercenary can't fight on an empty stomach.");
+alert("Gold: " + playerGold + " Score: " + playerScore); // add "Your items: " +playerItems+ "
 
 //========================================================================================
 
@@ -84,12 +89,13 @@ if(whereGloomhaven.toLowerCase() === "towns"){
 
 //========================================================================================
 
-    //Stage Three, welcome user to the SINKING MARKET / GLOOMHAVEN SQUARE
+    //Stage Three, welcome user to the SINKING MARKET
     if(whereTown.toLowerCase() === "sinking market"){
         //Display descriptive about the place
         console.log("As you shop for supplies at the Sinking Market, your hand instinctively goes for the wallet at your waist. It’s gone! You quickly scan the crowd and see a small Vermling darting away from you, heading towards a sewer grating.");
 
-        alert("All your money has been stolen!")
+        playerGold = 0;
+        alert("All your money has been stolen!" + " Gold: " + playerGold);
         console.log("Option 1: Give chase! No one steals from you and gets away with it.");
         console.log("Option 2: Take a clear shot at him with a bow before he disappears into the grating.");
         console.log("Option 3: Ignore what had happen; and get more information on Vermlings before deciding what you want to do.");
@@ -102,10 +108,34 @@ if(whereGloomhaven.toLowerCase() === "towns"){
             var whatMarketQuest = prompt("What do you do " +playerName+ " ?", "1, 2 or 3");
         }
 
+        var marketQuest = parseInt(whatMarketQuest);
+
 //========================================================================================
 
         //Stage Four, describe the options for SINKING MARKET and the rewards...
+        if(marketQuest === 1){
+            console.log("The Vermling disappears into the sewers, and you try to give chase. But after a few minutes you are hopelessly lost and are forced to give up.");
+            playerGold -= 5;
+            console.log("Gold: " + playerGold + " Score: " + playerScore);
+        }
+        else if(marketQuest === 2){
+            console.log("You raise your bow and take aim at the thief. A woman screams, but you try not to let it faze you. As the Vermling pauses to open the grate, you fire the arrow and see the furry figure drop. You smile and go to retrieve your gold from the corpse. You get a lot of dirty looks, though. Apparently firing a bow on a crowded street is frowned upon.");
+            playerScore -= 10;
+            //playerItems.arrow -1;
+            console.log("Gold: " + playerGold + " Score: " + playerScore);
+        }
+        else if(marketQuest === 3){
+            console.log("You left the market feeling a disappointment. Walking down the streets, dragging your feet and unaware of your surroundings. You kicked onto a big object on the ground and almost tripped over.");
+            console.log("You looked down and picked up a book with a small print 'Learn enough Vermlings to be dangerous'. You opened the book and started reading. 'Vermlings are a scavenging, animalistic race...hunt with crude knives and bows...They are small and weak-willed, so can be controlled by...the right combination of food and fear.'");
+            playerScore += 10;
+            playerItems.push("Book about Vermlings");
+            console.log("Gold: " + playerGold + " Score: " + playerScore); // add "Your items: " +playerItems+ "
+        }
     }
+
+//---------------------------------------------------------------------------------------
+
+    //Stage Three, welcome user to the GLOOMHAVEN SQUARE
     else if (whereTown.toLowerCase() === "gloomhaven square") {
         //Display descriptive about the place
         console.log("You are at the town of Gloomhaven. There is a big commotion and you find yourself in a dilemma.");
@@ -124,12 +154,11 @@ if(whereGloomhaven.toLowerCase() === "towns"){
             alert("Invalid. Please select an option: Help or Kill");
             var whatSquareQuest = prompt("Are you ready to take on the fate of the cities into your own hands " + playerName + " ?", "Help or Kill");
         }
-
-
     }
 
+//========================================================================================
 
-        //Stage Four,
+        //Stage Four, describe the options for GLOOMHAVEN SQUARE and the rewards...
 
 }
 
