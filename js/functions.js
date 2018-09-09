@@ -5,8 +5,8 @@ function statsDisplay(playerStatus) {
 function displaySpecial(player) {
     var options = ''
     var index = 1
-    for (i in player.special) {
-        options += ` ${index}. Use ${player.special[i]}\n`
+    for (i in player.skills) {
+        options += ` ${index}. Use ${player.skills[i]}\n`
         index++
     }
     return options
@@ -19,7 +19,7 @@ function randomNumber(max, min) {
 function resetPlayer() {
     player.exp = 0
     player.tardy = 0
-    player.special = ['Grit', 'Give Up']
+    player.skills = ['Grit', 'Give Up']
     player.status = 1
 }
 
@@ -29,18 +29,18 @@ function gameError() {
 }
 
 function gameEnd() {
-    player.special.pop()
-    alert(`GAME OVER\n You survived to day ${player.day}.\n Skills: ${player.special}\n Learnt: ${player.skills}`)
+    player.skills.pop()
+    alert(`GAME OVER\n You survived to day ${player.day}.\n Skills: ${player.skills}\n Learnt: ${player.knowledge}`)
     player.day = -1
 }
 
 function earlyBonus(player, specials) {
-    for (i in player.special) {
+    for (i in player.skills) {
         var modifier = randomNumber(specials.length, i);
-        if (player.special[i] !== specials[modifier]) {
-            player.special.pop()
-            player.special.push(specials[modifier])
-            player.special.push('Give Up')
+        if (player.skills[i] !== specials[modifier]) {
+            player.skills.pop()
+            player.skills.push(specials[modifier])
+            player.skills.push('Give Up')
             return alert(`It's day ${player.day}. Arrived Early! You spend your extra time studying and gain a new special: ${specials[modifier]}`)
         }
     }
@@ -89,7 +89,7 @@ function lateCheck(player, specials) {
 function battleStart(assignment, prompt, player) {
     var sucessChance = 0
     var difficulty = 45
-    switch (player.special[prompt - 1]) {
+    switch (player.skills[prompt - 1]) {
         case 'Grit':
             sucessChance += (randomNumber(40, 1) + player.exp)
             break;
@@ -128,11 +128,11 @@ function battleStart(assignment, prompt, player) {
 
     if (sucessChance >= difficulty) {
         player.exp += 5
-        player.skills.push(assignment)
-        alert(`You used ${player.special[prompt - 1]}! Your efforts were not wasted. You have now mastered ${assignment}.`)
+        player.knowledge.push(assignment)
+        alert(`You used ${player.skills[prompt - 1]}! Your efforts were not wasted. You have now mastered ${assignment}.`)
     } else {
         player.exp += 2.5
-        alert(`You used ${player.special[prompt - 1]}! It was no good, you were left dazed by the ${assignment} assignment.`)
+        alert(`You used ${player.skills[prompt - 1]}! It was no good, you were left dazed by the ${assignment} assignment.`)
     }
 }
 
@@ -161,7 +161,7 @@ function attemptAssignment(assignment, player) {
         } else {
             player.status--
             player.exp += 5
-            player.skills.push(assignment)
+            player.knowledge.push(assignment)
             alert(`${statsDisplay(player.status)}You breezed through the assignment. Mastered ${assignment}!`)
         }
     } else if (gamePrompt === '2') {

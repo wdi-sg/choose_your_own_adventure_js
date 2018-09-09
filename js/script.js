@@ -10,8 +10,8 @@ var player = {
     tardy: 0,
     status: 1,
     day: 0,
-    special: ['Grit', 'Give Up'],
-    skills: []
+    skills: ['Grit', 'Give Up'],
+    knowledge: []
 }
 
 var specials = ['Slack', 'Google']
@@ -28,6 +28,7 @@ while (player.day >= 0) {
         case '1':
             player.exp += 40
             gameAlert = alert(`${statsDisplay(player.status)}Well done ${player.name}. With everything completed, you go to sleep.\n (+40 exp)`)
+            player.knowledge.push('Prework')
             player.status--
             player.day++
             break;
@@ -45,27 +46,8 @@ while (player.day >= 0) {
             gameError()
     }
     //player.day 0.5 or overnighter scenario
-    if (player.exp <= 30 && player.day === 1) {
-        gamePrompt = prompt(`${statsDisplay(player.status)}Would you like to attempt the prework?\n 1. Yes\n 2. No`, '1, 2');
-        if (gamePrompt === '1') {
-            player.status++
-            player.exp += 5
-            gamePrompt = prompt(`${statsDisplay(player.status)}Nothing makes sense and you are hardly making any progress...\n (+5 Exp)\nCarry on through the night?\n 1. Sleep is for the weak\n 2. Zzz`, '1, 2')
-            if (gamePrompt === '1') {
-                player.status++
-                player.exp += 5
-                alert(`${statsDisplay(player.status)}You managed to understand a few more things but sleep ultimately takes it's toll.\n(+5 Exp)`)
-            } else if (gamePrompt === '2') {
-                player.status--
-                alert(`${statsDisplay(player.status)}Sleep is more important, good call.`)
-            } else
-                gameError()
-        } else if (gamePrompt === '2') {
-            player.status--;
-            alert(`${statsDisplay(player.status)}You decide it was not worth it and head to bed.`)
-        } else
-            gameError()
-    }
+    if (player.exp <= 30)
+        attemptAssignment('Prework', player)
 
     //player.day 1
     if (player.day === 1) {
@@ -73,7 +55,7 @@ while (player.day >= 0) {
         gamePrompt = prompt(`${statsDisplay(player.status)}After a rather awkward ice-breaking session, the real work begins. It's installfest! A wild terminal assignment appears! \nYou..\n${displaySpecial(player)}`)
         battleStart('Terminal', gamePrompt, player)
         player.status++
-        gamePrompt = prompt(`${statsDisplay(player.status)}Woah that was tough. It is now time for javascript. The first assignment begins with conditionals.`)
+        alert(`${statsDisplay(player.status)}Woah that was tough. It is now time for javascript. The first assignment begins with conditionals.`)
         attemptAssignment('Conditionals', player)
 
     }
