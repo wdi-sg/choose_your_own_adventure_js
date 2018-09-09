@@ -60,10 +60,17 @@ var enemies = [
   }
 ];
 
+var randomBranches;
 var player = party[0];
 var choice;
 
 var start = function () {
+  randomBranches = getRandomBranches([
+    chooseLodgeOrContinue,
+    chooseCaveOrContinue,
+    chooseDungeonOrContinue
+  ]);
+
   alert(
     'You are to find the Magical Crystal. With it, you will ' +
     'fight the evil dragon and save the world from darkness.'
@@ -155,23 +162,36 @@ var chooseOneRoad = function () {
     battleStart();
 
     if (player.hp > 0) {
-      chooseContinueOrGoBack(chooseLodgeOrContinue);
+      chooseContinueOrGoBack(randomBranches[0]);
     }
   } else if (choice === 'middle') {
     alert('You choose the middle path and keep going forward.');
     battleStart();
 
     if (player.hp > 0) {
-      chooseContinueOrGoBack(chooseCaveOrContinue);
+      chooseContinueOrGoBack(randomBranches[1]);
     }
   } else if (choice === 'right') {
     alert('You choose the right path and keep going forward.');
     battleStart();
 
     if (player.hp > 0) {
-      chooseContinueOrGoBack(chooseDungeonOrContinue);
+      chooseContinueOrGoBack(randomBranches[2]);
     }
   }
+};
+
+var getRandomBranches = function (branches) {
+  var branches = branches.slice();
+  var randomBranches = [];
+
+  while (branches.length) {
+    var random = Math.floor(Math.random() * branches.length);
+    randomBranches.push(branches[random]);
+    branches.splice(random, 1);
+  }
+
+  return randomBranches;
 };
 
 var chooseContinueOrGoBack = function (road) {
