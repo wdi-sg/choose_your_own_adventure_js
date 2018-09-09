@@ -460,7 +460,7 @@ var battleStart = function () {
   });
 
   alert(
-    '#### BATTLE ####\n' +
+    '#### BATTLE ####\n\n' +
     'You encountered: ' + enemyNames.join(', ')
   );
   battleLoop(party, enemiesAppeared);
@@ -505,14 +505,23 @@ var battleLoop = function (party, enemies) {
     turn++;
   }
 
-  if (player.hp > 0) {
-    battleInfo.push('\nYou won!');
-  } else {
-    battleInfo.push('\nYou lost!');
-  }
-
   alert(battleInfo.join("\n"));
+  showBattleResult();
 };
+
+var showBattleResult = function () {
+  if (player.hp > 0) {
+    alert(
+      '#### BATTLE RESULT ####\n\n' +
+      'You won!'
+    );
+  } else {
+    alert(
+      '#### BATTLE RESULT ####\n\n' +
+      'You lost!'
+    );
+  }
+}
 
 var getDamage = function (attack) {
   var deviation = 2 * Math.floor(attack / 3) + 1;
