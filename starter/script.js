@@ -192,15 +192,42 @@ else if (whereGloomhaven.toLowerCase() === "wilderness") {
         + "Re enter the name of place.");
         var whereWilderness = prompt("Departing to?", "Serpent's Kiss River or Dagger Forest");
     }
+
 //========================================================================================
 
-    //Stage Three, welcome user to the SERPENT'S KISS RIVER / DAGGER FOREST
+    //Stage Three, welcome user to the SERPENT'S KISS RIVER
     if(whereWilderness.toLowerCase() === "serpent's kiss river") {
         //Display descriptive about the place
         console.log("It looks like any other river you have seen and the surroundings is peaceful. Not too far away in the distant, an old temple catches your attention.");
+        alert("Then you hear a voice speaking to you in your head. 'You should serve me " +playerName+ ". There is an artefact of great power located in a forgotten temple along this river. You can retrieve it for me, or you can die here and now.'");
+
+        // prompt user to pick a QUEST for SERPENT'S KISS RIVER
+        var whatRiverQuest = prompt("Do you serve him?", "Yes or No");
+
+        //The player must select a quest; the quest cannot be null
+        while(whatRiverQuest.toLowerCase() !== "yes" && whatRiverQuest.toLowerCase() !== "no"){
+            alert("Invalid. Please select an option: Yes or No");
+            var whatRiverQuest = prompt("Do you serve him?", "Yes or No");
+        }
     }
-    else if (whereWilderness.toLowerCase() === "dagger forest") {
+
+//========================================================================================
+
+        //Stage Four, describe the options for SERPENT'S KISS RIVER and the rewards...
+
+//---------------------------------------------------------------------------------------
+
+    //Stage Three, welcome user to the DAGGER FOREST
+    else if(whereWilderness.toLowerCase() === "dagger forest") {
         //Display descriptive about the place
         console.log("The Dagger Forest sits in the broad angle between the East Road and the Stone Road. It is known as a hideout for bandits seeking to prey upon traffic coming to and from the Capital along the East Road.");
     }
+
+    // prompt user to pick a QUEST for DAGGER FOREST
+    //var whatForestQuest = prompt("", "");
+
+    //The player must select a quest; the quest cannot be null
+
+
+
 }
