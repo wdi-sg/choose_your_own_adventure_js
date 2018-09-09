@@ -214,6 +214,38 @@ else if (whereGloomhaven.toLowerCase() === "wilderness") {
 //========================================================================================
 
         //Stage Four, describe the options for SERPENT'S KISS RIVER and the rewards...
+        if(whatRiverQuest.toLowerCase() === "yes"){
+            alert("You have decided to listen to the voice in your head and it led you to the temple of the elements in search of an ancient artefact.");
+            console.log("You enter the decaying stone structure to see for yourself what all the fuss is about. As you step inside, you eye catches signs of recent visitors — a broken twig, footprints in the dust. You approach the main chamber and ready your weapons as a group of of hooded figures emerge from the shadows.");
+
+            alert("'You are too late, " +playerName+ "'. 'We control this temple now, and all its power serves us. The artefact is ours and it has made our minions more powerful than ever. The cultist raise their hands and a barrier surrounds the artefact.'");
+
+            //Include a task here to see if the player manage to destroy all four altars.
+
+            alert("Success! With the altars smashed, the demons vanish and the protective barrier around the artefact finally dissipates.")
+            console.log("You approach the center of the temple and reach out for the vessel but stop short. You feel a powerful darkness emanating from the thing and behind that a deep sadness.");
+            console.log("This artefact has been corrupted and you know that it could be used for great evil but would you fight for that evil or against it? After some pondering, you use a thick cloth to get the vessel into your bag. Perhaps it would be better to bring it to an enchanter than mess with it yourself.");
+
+            playerScore += 60;
+            playerItems.push("Mystery artefact")
+            console.log("Gold: " + playerGold + " Score: " + playerScore); // add "Your items: " +playerItems+ "
+        }
+        else if(whatRiverQuest.toLowerCase() === "no"){
+            alert("Black smoke surrounds you and you find yourself in a dark misty room.");
+            console.log("You try to reach for your weapons but the demon sense your intent.");
+            console.log("' "+playerName+ ", you are a fool!' His voice tears at your skull and you reel in pain.");
+            console.log("'You dare go against me in my own seat of power? You have make a grave mistake this day!' In a burst of flame, his massive form vanishes into the darkness. 'To me, my servants! Grind this mortal into the stone and use it to decorate my palace.'");
+
+            //Include a task here, the player has to defeat the prime demon (the boss) or all his servants
+
+            alert("You send one final blow to the demon boss.");
+            console.log("As the wave hits the prime demon, his aura dissipates and a scream pierces your mind. HIs legs buckle underneath him and he collapses on the floor, crashing into shards of stone. As this happens the screaming stops and the palace grows oddly quiet.");
+            alert("Next, the only sensible thing left to does loot the place and make your way back.");
+
+            playerGold += 50;
+            playerScore += 60;
+            console.log("Gold: " + playerGold + " Score: " + playerScore);
+        }
 
 //---------------------------------------------------------------------------------------
 
