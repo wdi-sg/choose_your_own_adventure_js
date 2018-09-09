@@ -12,7 +12,7 @@ var cellbreak = prompt(myname() + ", You got kidnapped and you found yourself\ni
 if (cellbreak === ("L" && "l")){//saw kidnapper
     var cellbreakkidnapper = prompt("You saw the kidnapper running towards you!\nWhat would you do? Press F to fight him?\n Press R to run away.");
     } else if (cellbreak === ("C" && "c")){//saw 2 doors
-        var cellbreakpromptdoor = prompt("You see 2 doors in front of you");
+        var cellbreakpromptdoor = prompt("You see 2 doors in front of you. One is black and the other is green. Which door would you choose? Press key (B/G)");
     } else if (cellbreak === ("R" && "r")) {//saw someone unknown
         var cellbreakpromptmate = prompt("You saw someone running towards you");
     } else {
@@ -26,15 +26,24 @@ if (cellbreak === ("L" && "l")){//saw kidnapper
 if (cellbreakkidnapper === ("F" && "f")){
     var searchkidnapper = prompt("You caught the kidnapper unprepared, you knock him down, you found a bag. You search the bag you found 2 small boxes.\nChoose boxes Press A for box 1 and Press B for box 2");
     } else {cellbreakkidnapper === ("R" && "r");
-    var runaway = prompt("The kidnapper saw you running away, he took out the gun and shoot you. You are died. Press S to restart or Press Q to quit.");
+    var runaway = prompt("The kidnapper saw you running away, he took out the gun and shoot you. You are died. Restart (Y) or Quit (Q)");
         };
+//you runaway you die and quit game
+if (runaway === ("Y" && "y")){
+location.reload();
+    }
+//you runaway you die and quit game
+else if (runaway === ("Q" && "q")) {
+alert("Thank you for playing.");
+}
 
-// if (runaway === ("s" && "S")){
-//    alert("WTF");
-// }
-// else {runaway === "q" && "Q"){
-// alert("You have quit the game.");
-// }
+//saw 2 doors
+if (cellbreakpromptdoor === ("b" && "B")){
+    alert("This is a black door");
+} else if(cellbreakpromptdoor === ("g" && "G")){
+alert("This is a green door");
+} else
+
 
 // var age = parseInt(prompt("How old are you?"));
 
