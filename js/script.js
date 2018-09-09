@@ -56,9 +56,11 @@ while (player.day >= 0) {
         gamePrompt = prompt(`${statsDisplay(player.status)}After a rather awkward ice-breaking session, the real work begins. It's installfest! A wild terminal assignment appears! \nYou..\n${displaySpecial(player)}`)
         battleStart('Terminal', gamePrompt, player)
         player.status++
-        alert(`${statsDisplay(player.status)}Woah that was tough. It is now time for javascript. The first assignment begins with conditionals.`)
-        attemptAssignment('Conditionals', player)
-        player.day++
+        if (player.day === 1) { //interim bug fix for selecting give up
+            alert(`${statsDisplay(player.status)}Woah that was tough. It is now time for javascript. The first assignment begins with conditionals.`)
+            attemptAssignment('Conditionals', player)
+            player.day++
+        }
     }
 
     if (player.day == 2) {
@@ -66,5 +68,6 @@ while (player.day >= 0) {
     }
 
     //ends game loop
-    gameEnd()
+    if (player.day > 0)
+        gameEnd()
 }

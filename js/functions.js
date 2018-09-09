@@ -109,6 +109,10 @@ function battleStart(assignment, prompt, player) {
         case 'Slack':
             sucessChance += (randomNumber(40, 10) + player.exp)
             break;
+        case 'Give Up':
+            alert('Dude cmon.')
+            return gameEnd()
+            break;
         default:
             gameError()
     }
