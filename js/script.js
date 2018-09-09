@@ -7,7 +7,8 @@
 var player = {
     name: 'John Doe',
     exp: 0,
-    status: ['Refreshed', 'Normal', 'Sleepy', 'Tired', 'Zombie', 'GG']
+    status: ['Refreshed', 'Normal', 'Sleepy', 'Tired', 'Zombie', 'GG'],
+    tardy: 0
 }
 
 var status = 1
@@ -24,7 +25,7 @@ while (gameState >= 0) {
         case 'c':
             player.exp += 40
             gameAlert = alert(`${statsDisplay(status)}Well done ${player.name}. With everything completed, you go to sleep.\n (+40 exp)`)
-            player.status
+            status--
             gameState++
             break;
         case 'a':
@@ -66,7 +67,10 @@ while (gameState >= 0) {
 
     //day 1
     if (gameState === 1) {
-
+        lateCheck(status)
         gamePrompt = prompt(`${statsDisplay(status)}`)
     }
+
+    //ends game loop
+    gameEnd()
 }

@@ -4,7 +4,8 @@ function statsDisplay(status) {
 
 function resetPlayer() {
     player.exp = 0
-    status = 0
+    player.tardy = 0
+    status = 1
 }
 
 function gameError() {
@@ -13,33 +14,49 @@ function gameError() {
     resetPlayer()
 }
 
+function gameEnd() {
+    gameState = -1
+}
+
 function lateCheck(status) {
-    var modifier = Math.floor((Math.random() * 50) + 10);
+    var modifier = Math.floor((Math.random() * 40) + 10);
     var lateChance
     switch (status) {
-        case 'Refreshed':
+        case '0':
             lateChance = 51
+            console.log(lateChance);
             break;
-        case 'Normal':
+        case '1':
             lateChance = 37
+            console.log(lateChance);
             break;
-        case 'Sleepy':
+        case '2':
             lateChance = 32
+            console.log(lateChance);
             break;
-        case 'Tired':
+        case '3':
             lateChance = 29
+            console.log(lateChance);
             break;
-        case 'Zombie':
+        case '4':
             lateChance = 20
+            console.log(lateChance);
             break;
         default:
             lateChance = 0
+            console.log(lateChance)
     }
 
-    latechance += modifier
+    lateChance += modifier
 
-    if (lateChance >= = 50)
+    if (lateChance >= 70) {
+        return alert('You arrive early')
+    }
+    else if (lateChance >= 50) {
         return alert('You arrive at class on time.')
-    else
+    }
+    else {
+        player.tardy++
         return alert('Oh no you overslept and arrived late.')
+    }
 }
