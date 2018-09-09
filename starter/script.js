@@ -1,3 +1,9 @@
+/**
+ * This program creates a text-based game that allows the user to arrive at
+ * different destinations based on the inputs they type.
+ * @author Liang Xin, Chloe
+ */
+
 var party = [
   {
     name: 'unknown',
@@ -64,6 +70,10 @@ var randomBranches;
 var player = party[0];
 var choice;
 
+/**
+ * Generates random branches every time the game starts.
+ * Gets player name, weapon and goes to three branches.
+ */
 var start = function () {
   randomBranches = getRandomBranches([
     chooseLodgeOrContinue,
@@ -86,6 +96,11 @@ var start = function () {
   }
 };
 
+/**
+ * Returns a string that lists all the weapons.
+ * @param {Object[]} weapons An array of all the weapons.
+ * @return {string} A string that lists the status of each weapon.
+ */
 var getWeapons = function (weapons) {
   var message = [];
 
@@ -99,6 +114,10 @@ var getWeapons = function (weapons) {
   return message.join('\n');
 };
 
+/**
+ * Returns the player's name.
+ * @return {string} The player's name.
+ */
 var getPlayerName = function () {
   var name;
 
@@ -113,6 +132,7 @@ var getPlayerName = function () {
   return name;
 };
 
+// Gets a weapon number from user and sets player's weapon.
 var chooseWeapon = function () {
   var weaponIndex;
   var validInputs = [];
@@ -140,6 +160,10 @@ var chooseWeapon = function () {
 
 }
 
+/**
+ * Choose one of the three branches.
+ * Left, middle and right goes to a random branch every time the game starts.
+ */
 var chooseOneRoad = function () {
   while (true) {
     choice = prompt(
@@ -181,6 +205,11 @@ var chooseOneRoad = function () {
   }
 };
 
+/**
+ * Returns an array that contains three random starting point functions.
+ * @param {function[]} branches Three functions that are the starting point of each branch.
+ * @return {function[]} An array that contains three starting points in random order.
+ */
 var getRandomBranches = function (branches) {
   var branches = branches.slice();
   var randomBranches = [];
@@ -194,6 +223,10 @@ var getRandomBranches = function (branches) {
   return randomBranches;
 };
 
+/**
+ * Continues the road or goes back to where you need to choose among three roads.
+ * @param {function} road The starting point of one of the three branches.
+ */
 var chooseContinueOrGoBack = function (road) {
   while (true) {
     choice = prompt(
@@ -216,7 +249,11 @@ var chooseContinueOrGoBack = function (road) {
   }
 };
 
-// Branch 1: lodge
+/**
+ * Branch 1: Lodge
+ * This branch goes to ending 0, 1, 2, 3, and 4.
+ */
+
 var chooseLodgeOrContinue = function () {
   while (true) {
     choice = prompt(
@@ -290,7 +327,11 @@ var chooseDrinkOrLeaveAntidote = function () {
   }
 };
 
-// Branch 2: cave
+/**
+ * Branch 2: Cave
+ * This branch goes to ending 1, 2, and 5.
+ */
+
 var chooseCaveOrContinue = function () {
   while (true) {
     choice = prompt(
@@ -340,7 +381,11 @@ var chooseSecretPathOrContinue = function () {
   }
 };
 
-// Branch 3: dungeon
+/**
+ * Branch 3: Dungeon
+ * This branch goes to ending 1, 2, and 6.
+ */
+
 var chooseDungeonOrContinue = function () {
   while (true) {
     choice = prompt(
@@ -390,7 +435,10 @@ var chooseStoneOrLeave = function () {
   }
 };
 
-// Reusable branch
+/**
+ * Some choices lead to this sub-branch.
+ * This goes to ending 1 and 2.
+ */
 var chooseLeaveOrStay = function () {
   while (true) {
     choice = prompt(
@@ -413,6 +461,10 @@ var chooseLeaveOrStay = function () {
   }
 };
 
+/**
+ * Displays the ending and player's score.
+ * @param {number} index The index number of an ending.
+ */
 var goToEnding = function (index) {
   var endings = [
     // 0
@@ -451,10 +503,15 @@ var goToEnding = function (index) {
   alert('Your score: ' + player.score + '/10');
 }
 
-// Battle
+/**
+ * Starts a turn-based battle.
+ * Displays battle information and battle result.
+ * If the player's hp is 0, displays Game Over.
+ */
 var battleStart = function () {
   var enemiesAppeared = getEnemies();
   var enemyNames = [];
+
   enemiesAppeared.forEach(function (enemy) {
     enemyNames.push(enemy.name);
   });
@@ -464,12 +521,17 @@ var battleStart = function () {
     'You encountered: ' + enemyNames.join(', ')
   );
   battleLoop(party, enemiesAppeared);
+  showBattleResult();
 
   if (player.hp <= 0) {
     goToEnding(7);
   }
 };
 
+/**
+ * Returns an array of a maximum number of 2 enemies.
+ * @return {Object[]} An array of enemies that appears in a battle.
+ */
 var getEnemies = function () {
   var enemiesAppeared = [];
   var randomAmount = Math.floor(Math.random() * enemies.length / 2) + 1;
@@ -486,6 +548,11 @@ var getEnemies = function () {
   return enemiesAppeared;
 };
 
+/**
+ * Displays a turn-based battle loop.
+ * @param {Object[]} party An array of players.
+ * @param {Object[]} enemies An array of enemies.
+ */
 var battleLoop = function (party, enemies) {
   var battleInfo = [];
   var turn = 0;
@@ -506,9 +573,9 @@ var battleLoop = function (party, enemies) {
   }
 
   alert(battleInfo.join("\n"));
-  showBattleResult();
 };
 
+// Shows battle result based on player's hp.
 var showBattleResult = function () {
   if (player.hp > 0) {
     alert(
@@ -523,6 +590,11 @@ var showBattleResult = function () {
   }
 }
 
+/**
+ * Returns a random damage based on the attacker's attack property.
+ * @param {number} attack The attack property of the attacker.
+ * @return {number} A random generated damage value.
+ */
 var getDamage = function (attack) {
   var deviation = 2 * Math.floor(attack / 3) + 1;
   var randomDeviation = Math.floor(Math.random() * deviation);
@@ -530,6 +602,13 @@ var getDamage = function (attack) {
   return randomAttack;
 };
 
+/**
+ * Returns a string that shows each attacker's action.
+ * @param {Object[]} attackers An array of attackers.
+ * @param {Object[]} defenders An array of defenders.
+ * @return {string} If attack succeeded, returns 'xx dealt xx damage to xx'.
+ *                  Otherwise, returns 'xx missed the attack'.
+ */
 var dealDamage = function (attackers, defenders) {
   var battleInfo = [];
 
@@ -553,6 +632,12 @@ var dealDamage = function (attackers, defenders) {
   return battleInfo.join('\n');
 };
 
+/**
+ * Returns whether at least one member (enemy or player) is alive.
+ * @param {Object[]} members An array of enemies or party members
+ * @return {boolean} If true, the battle will continue until no one survives on either side.
+ *                   If false, the battle will end.
+ */
 var isAlive = function (members) {
   var i;
 
@@ -569,6 +654,11 @@ var isAlive = function (members) {
   return false;
 };
 
+/**
+ * Returns the name and health of each member.
+ * @param {Object[]} members An array of enemies or players.
+ * @return {string} A string indicates the name and health separated by comma.
+ */
 var displayHealth = function (members) {
   var message = [];
 
