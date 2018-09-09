@@ -53,7 +53,7 @@ var playerScore = 0;
 var playerNameInput = prompt("Enter your name: ");
 playerName = playerNameInput[0].toUpperCase() + playerNameInput.substring(1).toLowerCase();
 console.log("Welcome to Gloomhaven, " + playerName + "! Whatever your reason for coming to Gloomhaven, out here on the edge of the world, that simple fact is never going to change. Remember to take food, a mercenary can't fight on an empty stomach.");
-alert("Gold: " + playerGold + " Score: " + playerScore); // add "Your items: " +playerItems+ "
+alert(playerName+ ", you have " +playerGold+ " gold. And your Score: " + playerScore); // add "Your items: " +playerItems+ "
 
 //========================================================================================
 
@@ -159,7 +159,21 @@ if(whereGloomhaven.toLowerCase() === "towns"){
 //========================================================================================
 
         //Stage Four, describe the options for GLOOMHAVEN SQUARE and the rewards...
-
+        if(whatSquareQuest.toLowerCase() === "help"){
+            alert("You led the monsters to Ghost Fortress and massacred everyone who was alive and breathing. The task was accomplished and everything went well as planned.");
+            alert("Jekserah took over the city and thank you with a bag of gifts. She said that she will bring in more merchants to govern the city into the age of prosperity and keep it safe from the forces outside the walls.");
+            playerGold += 150;
+            playerScore -= 15;
+            playerItems.push("Skullbane axe")
+            console.log("Gold: " + playerGold + " Score: " + playerScore); // add "Your items: " +playerItems+ "
+        }
+        else if(whatSquareQuest.toLowerCase() === "kill"){
+            alert("You race through Gloomhaven Square to the Ghost Fortress. Guards stop you at the gate and you hurriedly explain the threat looming behind you. Frantically, you push past them, looking for the Captain of the Guard. You quickly explain Jekserah’s plan to him but before he could say a word; the doors burst open and the decaying shapes of the living dead stream into the room.");
+            alert("All City Guards and City Archers are your allies. “To arms! Fight them back!”, you shouted. As the city guards and archers took out the monsters, you went straight for the head of Jekserah. Both Jekserah and you battled for a long time and you have weakened her. You reach for your daggers and threw them at the critical areas. Jekserah collapses, and she whispers to you…"+ playerName + " they will come after you.");
+            playerGold += 30;
+            playerScore += 30;
+            console.log("Gold: " + playerGold + " Score: " + playerScore);
+        }
 }
 
 //---------------------------------------------------------------------------------------
