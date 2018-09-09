@@ -47,9 +47,10 @@ var playerItems = [
 ];
 var playerGold = 20;
 var playerScore = 0;
+var playerLife = 100; //-5 for every tries to defeat a monster
 
 
-//Stage Zero, prompt user for name
+//Stage Zero, prompt player for name
 var playerNameInput = prompt("Enter your name: ");
 playerName = playerNameInput[0].toUpperCase() + playerNameInput.substring(1).toLowerCase();
 console.log("Welcome to Gloomhaven, " + playerName + "! Whatever your reason for coming to Gloomhaven, out here on the edge of the world, that simple fact is never going to change. Remember to take food, a mercenary can't fight on an empty stomach.");
@@ -57,11 +58,11 @@ alert(playerName+ ", you have " +playerGold+ " gold. And your Score: " + playerS
 
 //========================================================================================
 
-//Stage One, prompt user for TOWNS / WILDERNESS
+//Stage One, prompt player for TOWNS / WILDERNESS
 var whereGloomhaven = prompt("Where would you like to wander off first?",
 "towns or wilderness")
 
-// if user gives invalid input: this will be shown
+// if player gives invalid input: this will be shown
 while(whereGloomhaven.toLowerCase() !== "towns" && whereGloomhaven.toLowerCase() !== "wilderness"){
     console.log("Are you lost? " + playerName + " the place you entered doesn't exists, "
     + "please re-enter.");
@@ -71,15 +72,15 @@ while(whereGloomhaven.toLowerCase() !== "towns" && whereGloomhaven.toLowerCase()
 
 //========================================================================================
 
-//Stage Two, welcome user to TOWNS
+//Stage Two, welcome player to TOWNS
 if(whereGloomhaven.toLowerCase() === "towns"){
     console.log("Hallo " + playerName + ", Welcome to the town!");
 
-    // and prompt user to select which areas at the TOWNS to explore
+    // and prompt player to select which areas at the TOWNS to explore
     var whereTown = prompt("Walk to the Sinking Market or Gloomhaven Square",
     "Sinking Market or Gloomhaven Square");
 
-    //if user gives invalid input: this will be shown
+    //if player gives invalid input: this will be shown
     while(whereTown.toLowerCase() !== "sinking market" && whereTown.toLowerCase() !== "gloomhaven square"){
         console.log("Good Day " + playerName + ", You look lost! Do you need directions? "
         + "Re enter the name of place."); //**Can consider giving recommendations here
@@ -89,7 +90,7 @@ if(whereGloomhaven.toLowerCase() === "towns"){
 
 //========================================================================================
 
-    //Stage Three, welcome user to the SINKING MARKET
+    //Stage Three, welcome player to the SINKING MARKET
     if(whereTown.toLowerCase() === "sinking market"){
         //Display descriptive about the place
         console.log("As you shop for supplies at the Sinking Market, your hand instinctively goes for the wallet at your waist. It’s gone! You quickly scan the crowd and see a small Vermling darting away from you, heading towards a sewer grating.");
@@ -99,10 +100,10 @@ if(whereGloomhaven.toLowerCase() === "towns"){
         console.log("Option 1: Give chase! No one steals from you and gets away with it.");
         console.log("Option 2: Take a clear shot at him with a bow before he disappears into the grating.");
         console.log("Option 3: Ignore what had happen; and get more information on Vermlings before deciding what you want to do.");
-        // prompt user to pick a QUEST for Sinking Market
+        // prompt player to pick a QUEST for Sinking Market
         var whatMarketQuest = prompt("What do you do " +playerName+ " ?", "1, 2 or 3");
 
-        //The player must select a quest no.; the quest cannot be null
+        //if player gives invalid input: this will be shown
         while(whatMarketQuest !== "1" && whatMarketQuest !== "2" && whatMarketQuest !== "3"){
             alert("Invalid. Please select an option: 1, 2 or 3");
             var whatMarketQuest = prompt("What do you do " +playerName+ " ?", "1, 2 or 3");
@@ -135,7 +136,7 @@ if(whereGloomhaven.toLowerCase() === "towns"){
 
 //---------------------------------------------------------------------------------------
 
-    //Stage Three, welcome user to the GLOOMHAVEN SQUARE
+    //Stage Three, welcome player to the GLOOMHAVEN SQUARE
     else if (whereTown.toLowerCase() === "gloomhaven square") {
         //Display descriptive about the place
         console.log("You are at the town of Gloomhaven. There is a big commotion and you find yourself in a dilemma.");
@@ -146,10 +147,10 @@ if(whereGloomhaven.toLowerCase() === "towns"){
         console.log("Option Kill: You are also thinking that if this city was governed by an army of undead it would be madness. You can never give all the power to someone like Jekserah.");
         console.log("You want to turn around and run as quickly as you can and report all that you know to the Captain guard.");
 
-        // prompt user to pick a QUEST for Gloomhaven Square
+        // prompt player to pick a QUEST for Gloomhaven Square
         var whatSquareQuest = prompt("Are you ready to take on the fate of the cities into your own hands " + playerName + " ?", "Help or Kill");
 
-        //The player must select a quest; the quest cannot be null
+        //if player gives invalid input: this will be shown
         while(whatSquareQuest.toLowerCase() !== "help" && whatSquareQuest.toLowerCase() !== "kill"){
             alert("Invalid. Please select an option: Help or Kill");
             var whatSquareQuest = prompt("Are you ready to take on the fate of the cities into your own hands " + playerName + " ?", "Help or Kill");
@@ -178,14 +179,14 @@ if(whereGloomhaven.toLowerCase() === "towns"){
 
 //---------------------------------------------------------------------------------------
 
-//Stage Two, welcome user to WILDERNESS
+//Stage Two, welcome player to WILDERNESS
 else if (whereGloomhaven.toLowerCase() === "wilderness") {
     console.log(playerName +"! "+ "Look out for dungeons and definitely go explore forgotten ruins!");
 
-    // and prompt user to select which areas at the WILDERNESS to explore
+    // and prompt player to select which areas at the WILDERNESS to explore
     var whereWilderness = prompt("Departing to?", "Serpent's Kiss River or Dagger Forest");
 
-    // if user gives invalid input: this will be shown
+    // if player gives invalid input: this will be shown
     while(whereWilderness.toLowerCase() !== "serpent's kiss river"
           && whereWilderness.toLowerCase() !== "dagger forest"){
         console.log("Good Day " + playerName + ", You look lost! Do you need directions? "
@@ -195,21 +196,20 @@ else if (whereGloomhaven.toLowerCase() === "wilderness") {
 
 //========================================================================================
 
-    //Stage Three, welcome user to the SERPENT'S KISS RIVER
+    //Stage Three, welcome player to the SERPENT'S KISS RIVER
     if(whereWilderness.toLowerCase() === "serpent's kiss river") {
         //Display descriptive about the place
         console.log("It looks like any other river you have seen and the surroundings is peaceful. Not too far away in the distant, an old temple catches your attention.");
         alert("Then you hear a voice speaking to you in your head. 'You should serve me " +playerName+ ". There is an artefact of great power located in a forgotten temple along this river. You can retrieve it for me, or you can die here and now.'");
 
-        // prompt user to pick a QUEST for SERPENT'S KISS RIVER
+        // prompt player to pick a QUEST for SERPENT'S KISS RIVER
         var whatRiverQuest = prompt("Do you serve him?", "Yes or No");
 
-        //The player must select a quest; the quest cannot be null
+        //if player gives invalid input: this will be shown
         while(whatRiverQuest.toLowerCase() !== "yes" && whatRiverQuest.toLowerCase() !== "no"){
             alert("Invalid. Please select an option: Yes or No");
             var whatRiverQuest = prompt("Do you serve him?", "Yes or No");
         }
-    }
 
 //========================================================================================
 
@@ -246,20 +246,73 @@ else if (whereGloomhaven.toLowerCase() === "wilderness") {
             playerScore += 60;
             console.log("Gold: " + playerGold + " Score: " + playerScore);
         }
-
+}
 //---------------------------------------------------------------------------------------
 
-    //Stage Three, welcome user to the DAGGER FOREST
+    //Stage Three, welcome player to the DAGGER FOREST
     else if(whereWilderness.toLowerCase() === "dagger forest") {
         //Display descriptive about the place
         console.log("The Dagger Forest sits in the broad angle between the East Road and the Stone Road. It is known as a hideout for bandits seeking to prey upon traffic coming to and from the Capital along the East Road.");
+
+        // prompt player to pick a number from 0-9 which would randomly give him a QUEST from DAGGER FOREST
+        var randomNum = prompt("Pick a number from 0 - 9");
+
+        //if player gives invalid input: this will be shown
+        while(randomNum > 9){
+            alert("Invalid. Please pick a number from 0 - 9");
+            var randomNum = prompt("Pick a number from 0 - 9");
+        }
+
+            var whatForestQuest = Math.floor(Math.random() * randomNum);
+            if(whatForestQuest%2 === 0){
+                console.log("You are walking through the forest and you spotted a shade of purple piece of fabric torn by a tree branch. It wasn’t much, but it was everything to you.");
+                console.log("You pick that trail and followed it until you were enveloped in a thick, lingering fog. You lost the trail, but you are determined to find it and take revenge on the bandits who destroyed your village.");
+                console.log("The fog seems to be sapping your strength as you stumble through it, one painful step at a time.");
+                playerLife -= 10;
+                console.log("Just when you think you can’t make it any farther, however, you find a hidden cache of supplies marked with the purple emblem of your quarry. You quickly open the cache and find a detailed map of the area with precise instructions on navigating your way to the camp. You snatch it up and flee off into the trees, away from the fog. With this map, you feel your quest is finally nearing its end.");
+                playerItems.push("Map of Bandit Camp");
+            }
+            else{
+                console.log("It has been an uneventful set of days in Gloomhaven, but you are always looking for ways to help those in need. You hear from a source that a very valuable shipment of Orchid goods heading for the Capital is looking for guards, so you go to the Boiler District to offer your services.");
+                console.log("'We’ve been getting numerous reports from merchants coming in that the East Road is swimming with bandits,' the caravan leader says when you inquire about the job.");
+                console.log("'We will happily accept your help, no matter the cost you require.'");
+            }
+
+                var requireCost = prompt("How much do you want to be paid?", "Enter an value");
+                if(parseInt(requireCost) > 500 ){
+                    console.log("'Sorry I dont have that much money on me, I will give you all I have.'");
+                    playerGold += 500;
+                }
+                else if(requireCost === null){
+                    console.log("You humbly decline to be paid, and the man’s eyes go wide. All you want to do is prove your prowess and destroy the evil-doers of the world.");
+                }
+                else{
+                  playerGold += parseInt(requireCost);
+                }
+
+                console.log("You accepted your payment and prepare for the journey. Working together with 9 others, you helped to get the caravan clear of the Dagger Forest and then head out of the West Gate.");
+                console.log("The first day is uneventful.");
+                console.log("On the morning of the following day, you awake to yelling. 'Bandits are attacking! Defensive positions!'");
+
+                //insert task to see if the player defeats the bandits
+                //7 bandits, use
+
+                alert("You reach for your bow and arrows. With confidence that your group clearly outnumbers the bandits; you started to take out every bandit");
+                console.log("The caravan was intact and nothing was stolen. The remaining merchants were happy that you kill all 7 bandits and the goods are safe.");
+                console.log("Following that, you loot and steal from the bandits");
+
+                playerGold += 210;
+
+                if(parseInt(requireCost) > 500){
+                    playerScore += 20;
+                }
+                else if(requireCost === null){
+                    playerScore += 80;
+                }
+                else{
+                    playerScore += 40;
+                }
+                console.log("Gold: " + playerGold + " Score: " + playerScore);
+
     }
-
-    // prompt user to pick a QUEST for DAGGER FOREST
-    //var whatForestQuest = prompt("", "");
-
-    //The player must select a quest; the quest cannot be null
-
-
-
 }
