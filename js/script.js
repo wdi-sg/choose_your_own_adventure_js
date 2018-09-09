@@ -7,10 +7,12 @@
 var player = {
     name: 'John Doe',
     exp: 0,
+    tardy: 0,
     status: ['Refreshed', 'Normal', 'Sleepy', 'Tired', 'Zombie', 'GG'],
-    tardy: 0
+    special: []
 }
 
+var specials = ['Slack', 'Google','Pseudo-code']
 var status = 1
 var gamePrompt, gameAlert
 var gameState = 0;
@@ -67,7 +69,7 @@ while (gameState >= 0) {
 
     //day 1
     if (gameState === 1) {
-        lateCheck(status)
+        lateCheck(status, player, specials)
         gamePrompt = prompt(`${statsDisplay(status)}`)
     }
 

@@ -18,39 +18,43 @@ function gameEnd() {
     gameState = -1
 }
 
-function lateCheck(status) {
+function earlyBonus (player, specials) {
+    for (i in specials) {
+        if (player.special[i] !== specials[i]) {
+            player.special.push(specials[i])
+            return alert(`Arrived Early! You spend your extra time studying and gain a new special: ${player.special[i]}`)
+        }
+    }
+}
+
+function lateCheck(status, player, specials) {
     var modifier = Math.floor((Math.random() * 40) + 10);
     var lateChance
     switch (status) {
         case '0':
             lateChance = 51
-            console.log(lateChance);
             break;
         case '1':
             lateChance = 37
-            console.log(lateChance);
             break;
         case '2':
             lateChance = 32
-            console.log(lateChance);
             break;
         case '3':
             lateChance = 29
-            console.log(lateChance);
             break;
         case '4':
             lateChance = 20
-            console.log(lateChance);
             break;
         default:
             lateChance = 0
-            console.log(lateChance)
     }
 
     lateChance += modifier
 
     if (lateChance >= 70) {
-        return alert('You arrive early')
+        //return alert('You arrive early')
+        earlyBonus(player, specials)
     }
     else if (lateChance >= 50) {
         return alert('You arrive at class on time.')
