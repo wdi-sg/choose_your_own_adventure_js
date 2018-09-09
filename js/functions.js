@@ -30,7 +30,7 @@ function gameError() {
 
 function gameEnd() {
     player.special.pop()
-    alert(`GAME OVER\n You survived to day ${player.day}.\n Specials Found: ${player.special}\n Skills Gained: ${player.skills}`)
+    alert(`GAME OVER\n You survived to day ${player.day}.\n Skills: ${player.special}\n Learnt: ${player.skills}`)
     player.day = -1
 }
 
@@ -78,6 +78,10 @@ function lateCheck(player, specials) {
         return alert(`It's day ${player.day}. You arrive to class on time.`)
     } else {
         player.tardy++
+        if (player.tardy > 2) {
+            alert('You were late one too many times...')
+            gameEnd()
+        }
         return alert(`It's day ${player.day}. Oh no you overslept and arrived late.`)
     }
 }
@@ -130,7 +134,39 @@ function battleStart(assignment, prompt, player) {
         player.exp += 2.5
         alert(`You used ${player.special[prompt - 1]}! It was no good, you were left dazed by the ${assignment} assignment.`)
     }
+}
 
+function attemptAssignment(assignment, player) {
+    var skillLevel
+    if (player.exp > 50)
+        skillLevel = randomNumber(100, 45)
+    else
+        skillLevel = randomNumber(100, 20)
 
-
+    gamePrompt = prompt(`${statsDisplay(player.status)}Would you like to attempt the ${assignment} assignment?\n 1. Yes\n 2. No`, '1, 2');
+    if (gamePrompt === '1') {
+        player.status++
+        player.exp += 5
+        if (skillLevel <= 50) {
+            gamePrompt = prompt(`${statsDisplay(player.status)}Nothing makes sense and you are hardly making any progress...\n (+5 Exp)\nCarry on through the night?\n 1. Sleep is for the weak\n 2. Zzz`, '1, 2')
+            if (gamePrompt === '1') {
+                player.status++
+                player.exp += 5
+                alert(`${statsDisplay(player.status)}You managed to understand a few more things but sleep ultimately takes it's toll.\n(+5 Exp)`)
+            } else if (gamePrompt === '2') {
+                player.status--
+                alert(`${statsDisplay(player.status)}Sleep is more important, good call.`)
+            } else
+                gameError()
+        } else {
+            player.status--
+            player.exp += 5
+            player.skills.push(assignment)
+            alert(`${statsDisplay(player.status)}You breezed through the assignment. Mastered ${assignment}!`)
+        }
+    } else if (gamePrompt === '2') {
+        player.status--;
+        alert(`${statsDisplay(player.status)}You decide it was not worth it and head to bed.`)
+    } else
+        gameError()
 }

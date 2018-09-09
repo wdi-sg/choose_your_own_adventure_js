@@ -73,7 +73,9 @@ while (player.day >= 0) {
         gamePrompt = prompt(`${statsDisplay(player.status)}After a rather awkward ice-breaking session, the real work begins. It's installfest! A wild terminal assignment appears! \nYou..\n${displaySpecial(player)}`)
         battleStart('Terminal', gamePrompt, player)
         player.status++
-        gamePrompt = prompt(`${statsDisplay(player.status)}`)
+        gamePrompt = prompt(`${statsDisplay(player.status)}Woah that was tough. It is now time for javascript. The first assignment begins with conditionals.`)
+        attemptAssignment('Conditionals', player)
+
     }
 
     //ends game loop
