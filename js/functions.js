@@ -17,3 +17,7 @@ function checkBackpack (inv) {
         return alert (`Your backpack is empty.`)
     }
 };
+
+function dead () {
+    return alert ("You have died.")
+};

@@ -22,11 +22,11 @@ while (true) {
 };
 
     while (choice0 === 1) { // Went left
-        var choice1 = parseInt(prompt("As you amble down the path, you spy something shiny on the ground ahead of you. Upon closer inspection, the shiny object appears in fact to be a pile of gold pieces, sitting conspicuously in front of a small tree. Looking further ahead, you can see that your current path forks again, into a left and right junction.\n\nWhat will you do?\n\n[1] Pick up the gold pieces.\n[2] Ignore the gold and take the left fork.\n[3] Ignore the gold and take the right fork.\n[4] Look inside your backpack.\n[5]Look inside your coin pouch"));
+        var choice1 = parseInt(prompt("As you amble down the path, you spy something shiny on the ground ahead of you. Upon closer inspection, the shiny object appears in fact to be a pile of gold pieces, sitting conspicuously in front of a small tree. Looking further ahead, you can see that your current path forks again, into a left and right junction.\n\nWhat will you do?\n\n[1] Pick up the gold pieces.\n[2] Ignore the gold and continue along the left junction.\n[3] Ignore the gold and continue along the right junction.\n[4] Look inside your backpack.\n[5]Look inside your coin pouch"));
 
         if (choice1 === 1) { // Reach for gold
-            var choice1_1 = confirm(`As you reach for the gold, a small Leprechaun hops out from behind the tree and accosts you:\n\n"Halt, ${playerName}! Yes, I know your name, and I know you want my gold! I will only give it to you if you can answer my riddle correctly. Fail, and I claim your head! Will you attempt the riddle?"`);
-            if (choice1_1 === true) { // Chose to hear riddle
+            var choice1_a = confirm(`As you reach for the gold, a small Leprechaun hops out from behind the tree and accosts you:\n\n"Halt, ${playerName}! Yes, I know your name, and I know you want my gold! I will only give it to you if you can answer my riddle correctly. Fail, and I claim your head! Will you attempt the riddle?"`);
+            if (choice1_a === true) { // Chose to hear riddle
                 var choice1_lep = prompt(`The leprechaun hops from side to side with glee, and reads out his riddle:\n
 "To all things and men I appertain,
 and yet by some am shunned and distained.
@@ -45,14 +45,12 @@ What am I?"`).toString().toLowerCase()
                     var choice1_cont = parseInt(prompt("Which way will you go next?\n\n[1] Head down the left junction.\n[2] Head down the right junction."));
                 } else {
                     alert ("With a maniacal cackle, the leprechaun brandishes a blade and leaps for your throat.")
-                    alert ("You have died.");
+                    dead();
                 } break;
             } else alert("The leprechaun laughs racously as you shake your head and slowly back away.");
-        } else if (choice1 === 2) {
-            // Went left
+        } else if (choice1 === 2) { // went left
             break;
-        } else if (choice1 === 3) {
-            // Went right
+        } else if (choice1 === 3) { // went right
             break;
         } else if (choice1 === 4) {
             checkBackpack (inventory);
@@ -61,11 +59,21 @@ What am I?"`).toString().toLowerCase()
         }
     };
 
+    if (choice1 === 2 || choice1_cont === 1) { // went left again
+        var choice1_1 = confirm("You come up to a menacing cave entrance. There is a foul odor emanating from deep within the cave. The mouth of the cave seems to narrow into a tunnel entrance, beyond which is pitch black darkness. You do not think it is a good idea to explore further without a source of light.\n\nWill you proceed deeper into the cave?");
+        if (choice1_1 === true) {
+            alert("As you stumble along the rocky corridor in the darkness, you feel the earth suddenly begin to crumble beneath your feet. You try to jump backwards, but it is too late, as the ground gives way underfoot and you find yourself falling through the air.");
+            dead();
+        } else alert("You decide to be prudent, and retrace your steps back to where the path split, choosing the alternate path this time.");
+    };
 
+    if (choice1 === 3 || choice1_cont === 2 || choice1_1 !== true) { // went left, then right
+        alert("Went left, then right.");
+    };
 
-    if (choice0 === 2) {
+    if (choice0 === 2) { // went right
         alert("yyy");
-    }
+    };
 
 // Awaken with no memory, choose path 1 or 2, or check coin pouch, or check backpack
 //
