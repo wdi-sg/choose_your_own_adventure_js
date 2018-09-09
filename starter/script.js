@@ -2,6 +2,7 @@
 var playerName = prompt("Welcome to the money heist game. What's your name?");
 var dice = Math.floor(Math.random() * 7);
 var counter = 100;
+var win = false;
 
 
 var restartGame = function(){
@@ -15,26 +16,32 @@ var restartGame = function(){
 }
 
 var fight = function(){
-    var weapons = [ "machine gun","hand gun","shot gun "];
-    var enemy = weapons[(Math.floor(Math.random() * 4))];
-    var player =weapons[(Math.floor(Math.random() * 4))];
+    var i = Math.floor(Math.random() * 3);
+    var weapons = ["machine gun","hand gun","shot gun"];
+    var enemy = weapons[i];
+    var i = Math.floor(Math.random() * 3);
+    var player =weapons[i];
+    console.log(enemy + player);
     alert("You fire your " +player+ " at them.");
 
-    if (player==="machine gun" && enemy==="hand gun"){
+    if ((player==="machine gun" && enemy==="hand gun") || (player==="machine gun" && enemy==="shot gun") ){
         counter -= 30;
         alert("You dodge some bullets and get shot in your arm. But you successfully gun them down.");
+        win = true;
     }
-    else if (player === "hand gun" && enemy==="shot gun"){
+    else if ((player === "hand gun" && enemy==="shot gun") || (player === "hand gun" && enemy==="machine gun") ){
         counter -=30;
         alert("Shooting behind a pillar, you successfully come out of the crossfire unscathed.");
+        win = true;
     }
-    else if (player === "shot gun" && enemy==="machine gun"){
+    else if ((player === "shot gun" && enemy==="machine gun") || (player === "shot gun" && enemy==="hand gun")){
         counter -=20;
         alert("Your comrade is shot and you rush to their aid. Unfortunately, you suffer four shots to the chest and abdomen.");
     }
     else if (player === enemy){
         counter-=10;
         alert("You engage in the crossfire. Your aggressive shooting and remarkable aim leaves you and your team victorious.");
+        win = true;
     }
 
 }
@@ -85,7 +92,12 @@ if (characterChoiceOne.includes("R")){
     else if (characterChoiceTwo.includes("L")){
         counter-=30;
         fight();
-        alert("Game over, your score is: "+counter);
+        if (win===true){
+        alert("Congratulations " +playerName+ ", you've successfully robbed the bank. Your score is: " +counter);
+        }
+        else{
+        alert("Unfortunately, you were fatally shot. Your score is: " +counter);
+        }
     }
 
     // Robber - escape 3 - complete
@@ -221,7 +233,12 @@ else if (characterChoiceOne.includes("P")){
             if (characterChoiceThree === "1"){
                 alert("The team chose the wrong door! you end up face to face with the robbers. A crossfire ensues.");
                 fight();
-                alert("Your score is: " +counter);
+                if (win===true){
+                alert("Congratulations " +playerName+ ", you've successfully took down the robbers. Your score is: " +counter);
+                }
+                else{
+                alert("Unfortunately, your team was inadequate in stopping the robbers. Your score is: " +counter);
+                }
                 restartGame();
             }
             else if (characterChoiceThree==="2"){
