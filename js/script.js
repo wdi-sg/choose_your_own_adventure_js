@@ -64,7 +64,7 @@ while (player.day >= 0) {
     }
 
     if (player.day == 2) {
-        lateCheck()
+        lateCheck(player, specials)
         alert('Day 2 to be continued?')
     }
 
