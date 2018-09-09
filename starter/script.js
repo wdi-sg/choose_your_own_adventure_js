@@ -69,8 +69,14 @@ var  welcomePlayer = function(name){
 ////////////////////////////////////////////////////////
 var returnHome = function(name){
     var playerName = cappedPlayerName(name);
-    alert(playerName + ", you have returned to Gloomhaven!")
-    whereToGoGloomhaven(playerName);
+    alert(playerName + ", you have returned to Gloomhaven!");
+    esc = prompt(playerName + ", do you want to play on or quit the game?", "play or quit");
+    if(esc === "play"){
+      whereToGoGloomhaven(playerName);
+    }
+    else{
+      alert("End of game!! Gold: " + playerGold + " Score: " + playerScore);
+    }
 }
 
 var daggerForestQuestOutcomes = function(whatForestQuest){
