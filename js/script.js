@@ -22,7 +22,7 @@ while (player.day >= 0) {
     //player.day 0
     resetPlayer()
     player.name = prompt('WDI SIMULATOR 16\nWhat is your name?', player.name)
-    gamePrompt = prompt(`Hi ${player.name}! It's the day before the start of GA's WDI 16.\nYou have...\n1. Completed all the prework - feeling confident!\n2. Attempted the prework but needed more time :|\n3. What is prework?`, '1, 2, 3')
+    gamePrompt = prompt(`Hi ${player.name}! It's the day before the start of GA's WDI 16.\nYou have...\n 1. Completed all the prework - feeling confident!\n 2. Attempted the prework but needed more time :|\n 3. What is prework?`, '1, 2, 3')
 
     switch (gamePrompt) {
         case '1':
@@ -46,11 +46,11 @@ while (player.day >= 0) {
     }
     //player.day 0.5 or overnighter scenario
     if (player.exp <= 30 && player.day === 1) {
-        gamePrompt = prompt(`${statsDisplay(player.status)}Would you like to attempt the prework?\n1. Yes\n2. No`, '1, 2');
+        gamePrompt = prompt(`${statsDisplay(player.status)}Would you like to attempt the prework?\n 1. Yes\n 2. No`, '1, 2');
         if (gamePrompt === '1') {
             player.status++
             player.exp += 5
-            gamePrompt = prompt(`${statsDisplay(player.status)}Nothing makes sense and you are hardly making any progress...\n (+5 Exp)\nCarry on through the night?\n1. Sleep is for the weak\n2. Zzz`, '1, 2')
+            gamePrompt = prompt(`${statsDisplay(player.status)}Nothing makes sense and you are hardly making any progress...\n (+5 Exp)\nCarry on through the night?\n 1. Sleep is for the weak\n 2. Zzz`, '1, 2')
             if (gamePrompt === '1') {
                 player.status++
                 player.exp += 5
@@ -70,8 +70,10 @@ while (player.day >= 0) {
     //player.day 1
     if (player.day === 1) {
         lateCheck(player, specials)
-        gamePrompt = prompt(`${statsDisplay(player.status)}After a rather awkward ice-breaking session, the real work begins. It's installfest! There's alot of terminal work to be done. \nYou..\n${displaySpecial(player)}`)
+        gamePrompt = prompt(`${statsDisplay(player.status)}After a rather awkward ice-breaking session, the real work begins. It's installfest! A wild terminal assignment appears! \nYou..\n${displaySpecial(player)}`)
         battleStart('Terminal', gamePrompt, player)
+        player.status++
+        gamePrompt = prompt(`${statsDisplay(player.status)}`)
     }
 
     //ends game loop

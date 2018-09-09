@@ -6,7 +6,7 @@ function displaySpecial(player) {
     var options = ''
     var index = 1
     for (i in player.special) {
-        options += `${index}. Use ${player.special[i]}\n`
+        options += ` ${index}. Use ${player.special[i]}\n`
         index++
     }
     return options
@@ -29,6 +29,8 @@ function gameError() {
 }
 
 function gameEnd() {
+    player.special.pop()
+    alert(`GAME OVER\n You survived to day ${player.day}.\n Specials Found: ${player.special}\n Skills Gained: ${player.skills}`)
     player.day = -1
 }
 
@@ -123,10 +125,12 @@ function battleStart(assignment, prompt, player) {
     if (sucessChance >= difficulty) {
         player.exp += 5
         player.skills.push(assignment)
-        alert(`You used ${player.special[prompt - 1]}! You have now mastered ${assignment}`)
+        alert(`You used ${player.special[prompt - 1]}! Your efforts were not wasted. You have now mastered ${assignment}.`)
     } else {
         player.exp += 2.5
-        alert(`You used ${player.special[prompt - 1]}! It was no good, you were left dazed by the ${assignment} assignment`)
+        alert(`You used ${player.special[prompt - 1]}! It was no good, you were left dazed by the ${assignment} assignment.`)
     }
+
+
 
 }
