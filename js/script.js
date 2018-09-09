@@ -65,6 +65,7 @@ while (player.day >= 0) {
 
     if (player.day == 2) {
         lateCheck()
+        alert('Day 2 to be continued?')
     }
 
     //ends game loop
