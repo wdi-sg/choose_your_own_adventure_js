@@ -1,11 +1,12 @@
-function statsDisplay(status) {
-    return `${player.name} | Exp: ${player.exp} | Status: ${player.status[status]}\n\n`
+function statsDisplay(playerStatus) {
+    return `Day: ${gameState} | ${player.name} | Exp: ${player.exp} | Status: ${sleepiness[playerStatus]}\n\n`
 }
 
 function resetPlayer() {
     player.exp = 0
     player.tardy = 0
-    status = 1
+    player.special = []
+    player.status = 1
 }
 
 function gameError() {
@@ -27,23 +28,23 @@ function earlyBonus (player, specials) {
     }
 }
 
-function lateCheck(status, player, specials) {
+function lateCheck(player, specials) {
     var modifier = Math.floor((Math.random() * 40) + 10);
     var lateChance
-    switch (status) {
-        case '0':
+    switch (player.status) {
+        case 0:
             lateChance = 51
             break;
-        case '1':
+        case 1:
             lateChance = 37
             break;
-        case '2':
+        case 2:
             lateChance = 32
             break;
-        case '3':
+        case 3:
             lateChance = 29
             break;
-        case '4':
+        case 4:
             lateChance = 20
             break;
         default:
