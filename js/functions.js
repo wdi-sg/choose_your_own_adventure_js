@@ -21,8 +21,7 @@ function resetPlayer() {
 
 function gameError() {
     alert('Hmm looks like your input broke something. Starting over.')
-    player.day = 0
-    resetPlayer()
+    player.day--
 }
 
 function gameEnd() {
