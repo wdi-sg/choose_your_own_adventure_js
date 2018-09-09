@@ -10,10 +10,11 @@ var player = {
     tardy: 0,
     status: 1,
     day: 0,
-    special: ['Grit', 'Give Up']
+    special: ['Grit', 'Give Up'],
+    skills: []
 }
 
-var specials = ['Slack', 'Google', 'Pseudo-code']
+var specials = ['Slack', 'Google']
 var sleepiness = ['Refreshed', 'Normal', 'Sleepy', 'Tired', 'Zombie', 'GG']
 var gamePrompt, gameAlert
 
@@ -25,7 +26,7 @@ while (player.day >= 0) {
 
     switch (gamePrompt) {
         case '1':
-            player.exp += 50
+            player.exp += 40
             gameAlert = alert(`${statsDisplay(player.status)}Well done ${player.name}. With everything completed, you go to sleep.\n (+40 exp)`)
             player.status--
             player.day++
@@ -70,7 +71,7 @@ while (player.day >= 0) {
     if (player.day === 1) {
         lateCheck(player, specials)
         gamePrompt = prompt(`${statsDisplay(player.status)}After a rather awkward ice-breaking session, the real work begins. It's installfest! There's alot of terminal work to be done. \nYou..\n${displaySpecial(player)}`)
-
+        battleStart('Terminal', gamePrompt, player)
     }
 
     //ends game loop

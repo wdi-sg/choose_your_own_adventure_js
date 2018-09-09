@@ -12,6 +12,10 @@ function displaySpecial(player) {
     return options
 }
 
+function randomNumber(max, min) {
+    return Math.floor((Math.random() * max) + min);
+}
+
 function resetPlayer() {
     player.exp = 0
     player.tardy = 0
@@ -21,16 +25,16 @@ function resetPlayer() {
 
 function gameError() {
     alert('Hmm looks like your input broke something. Starting over.')
-    player.day--
+    player.day = 0
 }
 
 function gameEnd() {
     player.day = -1
 }
 
-function earlyBonus (player, specials) {
+function earlyBonus(player, specials) {
     for (i in player.special) {
-        var modifier = Math.floor((Math.random() * specials.length) + 0);
+        var modifier = randomNumber(specials.length, i);
         if (player.special[i] !== specials[modifier]) {
             player.special.pop()
             player.special.push(specials[modifier])
@@ -65,15 +69,64 @@ function lateCheck(player, specials) {
 
     lateChance += modifier
 
-    if (lateChance >= 70) {
+    if (lateChance >= 75) {
         //return alert('You arrive early')
         earlyBonus(player, specials)
-    }
-    else if (lateChance >= 50) {
+    } else if (lateChance >= 50) {
         return alert(`It's day ${player.day}. You arrive to class on time.`)
-    }
-    else {
+    } else {
         player.tardy++
         return alert(`It's day ${player.day}. Oh no you overslept and arrived late.`)
     }
+}
+
+function battleStart(assignment, prompt, player) {
+    var sucessChance = 0
+    var difficulty = 45
+    switch (player.special[prompt - 1]) {
+        case 'Grit':
+            sucessChance += (randomNumber(40, 1) + player.exp)
+            break;
+        case 'Google':
+            sucessChance += (randomNumber(30, 15) + player.exp)
+            break;
+        case 'Slack':
+            sucessChance += (randomNumber(40, 10) + player.exp)
+            break;
+        default:
+            gameError()
+    }
+
+    switch (player.status) {
+        case 0:
+            difficulty -= 10
+            break;
+        case 1:
+            difficulty -= 5
+            break;
+        case 2:
+            difficulty += 5
+            break;
+        case 3:
+            difficulty += 10
+            break;
+        case 4:
+            difficulty += 15
+            break;
+        case 5:
+            difficulty += 20
+            break;
+        default:
+            gameError()
+    }
+
+    if (sucessChance >= difficulty) {
+        player.exp += 5
+        player.skills.push(assignment)
+        alert(`You used ${player.special[prompt - 1]}! You have now mastered ${assignment}`)
+    } else {
+        player.exp += 2.5
+        alert(`You used ${player.special[prompt - 1]}! It was no good, you were left dazed by the ${assignment} assignment`)
+    }
+
 }
