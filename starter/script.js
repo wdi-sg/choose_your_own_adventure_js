@@ -15,10 +15,6 @@
       4)Quest()
       4)Quest()
   2)Selection(WILDERNESS)
-    3)Selection(LINGERING SWAMPS)
-    3)Prompt => the user to select a quest to complete
-      4)Quest()
-      4)Quest()
     3)Selection(SERPENT'S KISS RIVER)
     3)Prompt => the user to select a quest to complete
       4)Quest()
@@ -42,6 +38,12 @@
 
 //Convert all the console.log msgs to alert msgs.
 */
+
+//Player details or items
+var playerItems = [];
+var playerGold;
+var playerScore;
+
 
 //Stage Zero, prompt user for name
 var playerNameInput = prompt("Enter your name: ");
@@ -94,27 +96,41 @@ if(whereGloomhaven.toLowerCase() === "towns"){
         // prompt user to pick a QUEST for Sinking Market
         var whatMarketQuest = prompt("What do you do " +playerName+ " ?", "1, 2 or 3");
 
-        //while()
+        //The player must select a quest no.; the quest cannot be null
+        while(whatMarketQuest !== "1" && whatMarketQuest !== "2" && whatMarketQuest !== "3"){
+            alert("Invalid. Please select an option: 1, 2 or 3");
+            var whatMarketQuest = prompt("What do you do " +playerName+ " ?", "1, 2 or 3");
+        }
 
-        //Stage Four,
+//========================================================================================
+
+        //Stage Four, describe the options for SINKING MARKET and the rewards...
     }
     else if (whereTown.toLowerCase() === "gloomhaven square") {
         //Display descriptive about the place
         console.log("You are at the town of Gloomhaven. There is a big commotion and you find yourself in a dilemma.");
 
         alert("You know about Jekserah’s plan.");
-        console.log("Option Help: Apart of you like the plan and it makes sense in some dark twisted way. You’ve seen the town guards slacking off their duties. They can barely fight back the Vermlings, and their taxation is strangling the town and your pocket.");
-        console.log("Option Help: You know that with the help of Jekserah’s undead army, you will be able to kill off the Captain guard and all his men.");
+        console.log("Option Help: Apart of you like Jekserah’s plan and it makes sense in some dark twisted way. You’ve seen the town guards slacking off their duties. They can barely fight back the Vermlings, and their taxation is strangling the town and your pocket.");
+        console.log("You know that with the help of Jekserah’s undead army, you will be able to kill off the Captain guard and all his men.");
         console.log("Option Kill: You are also thinking that if this city was governed by an army of undead it would be madness. You can never give all the power to someone like Jekserah.");
-        console.log("Option Kill: You want to turn around and run as quickly as you can and report all that you know to the Captain guard.");
+        console.log("You want to turn around and run as quickly as you can and report all that you know to the Captain guard.");
 
-        //Stage Four, prompt user to pick a QUEST for Gloomhaven Square
-        var whatSquareQuest = prompt("Are you ready to take on the fate of the cities into your own hands " + playerName + " ?", "Kill or Help Jekserah");
+        // prompt user to pick a QUEST for Gloomhaven Square
+        var whatSquareQuest = prompt("Are you ready to take on the fate of the cities into your own hands " + playerName + " ?", "Help or Kill");
 
-        //while()
+        //The player must select a quest; the quest cannot be null
+        while(whatSquareQuest.toLowerCase() !== "help" && whatSquareQuest.toLowerCase() !== "kill"){
+            alert("Invalid. Please select an option: Help or Kill");
+            var whatSquareQuest = prompt("Are you ready to take on the fate of the cities into your own hands " + playerName + " ?", "Help or Kill");
+        }
+
+
+    }
+
 
         //Stage Four,
-    }
+
 }
 
 //---------------------------------------------------------------------------------------
