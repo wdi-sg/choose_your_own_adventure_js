@@ -1,7 +1,9 @@
+//HEADS UP DISPLAY
 function statsDisplay(playerStatus) {
     return `Day: ${player.day} | ${player.name} | Exp: ${player.exp} | Status: ${sleepiness[playerStatus]}\n\n`
 }
 
+//Generate options menu for assignment battles.
 function displaySpecial(player) {
     var options = ''
     var index = 1
@@ -12,10 +14,12 @@ function displaySpecial(player) {
     return options
 }
 
+//Convienient random number generator function
 function randomNumber(max, min) {
     return Math.floor((Math.random() * max) + min);
 }
 
+//Reset player stats to default
 function resetPlayer() {
     player.exp = 0
     player.tardy = 0
@@ -23,17 +27,20 @@ function resetPlayer() {
     player.status = 1
 }
 
+//Generic game error message
 function gameError() {
     alert('Hmm looks like your input broke something. Starting over.')
     player.day = 0
 }
 
+//Ends game and display final stats summary
 function gameEnd() {
     player.skills.pop()
     alert(`GAME OVER\n You survived to day ${player.day}.\n Skills: ${player.skills}\n Learnt: ${player.knowledge}`)
     player.day = -1
 }
 
+//Assigns a random special skill if player is early.
 function earlyBonus(player, specials) {
     for (i in player.skills) {
         var modifier = randomNumber(specials.length, i);
@@ -46,6 +53,7 @@ function earlyBonus(player, specials) {
     }
 }
 
+//Checks if player is late for class dependent on sleepiness level
 function lateCheck(player, specials) {
     var modifier = Math.floor((Math.random() * 40) + 10);
     var lateChance
@@ -78,6 +86,7 @@ function lateCheck(player, specials) {
         return alert(`It's day ${player.day}. You arrive to class on time.`)
     } else {
         player.tardy++
+        //game ends if player is late > 2 times
         if (player.tardy > 2) {
             alert('You were late one too many times...')
             gameEnd()
@@ -86,6 +95,7 @@ function lateCheck(player, specials) {
     }
 }
 
+//function for handling day assignments, skill check based on option selected + player experience points
 function battleStart(assignment, prompt, player) {
     var sucessChance = 0
     var difficulty = 45
@@ -136,6 +146,7 @@ function battleStart(assignment, prompt, player) {
     }
 }
 
+//function for night assignments; determines players sleepiness stat for next day
 function attemptAssignment(assignment, player) {
     var skillLevel
     if (player.exp > 50)

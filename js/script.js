@@ -6,18 +6,19 @@
 
 var player = {
     name: 'John Doe',
-    exp: 0,
-    tardy: 0,
-    status: 1,
-    day: 0,
-    skills: ['Grit', 'Give Up'],
-    knowledge: []
+    exp: 0, //score, stat use to determine success in events
+    tardy: 0, //tracking for lateness, >3 = gameover
+    status: 1, //tracking for sleepiness
+    day: 0, //tracking for game progress
+    skills: ['Grit', 'Give Up'], //skills that can be used when tackling day assignments
+    knowledge: [] //achievements when completing day or night assignments
 }
 
 var specials = ['Slack', 'Google']
 var sleepiness = ['Refreshed', 'Normal', 'Sleepy', 'Tired', 'Zombie', 'GG']
 var gamePrompt, gameAlert
 
+//game loops as long gameEnd() has not been triggered
 while (player.day >= 0) {
     //player.day 0
     resetPlayer()
@@ -57,7 +58,11 @@ while (player.day >= 0) {
         player.status++
         alert(`${statsDisplay(player.status)}Woah that was tough. It is now time for javascript. The first assignment begins with conditionals.`)
         attemptAssignment('Conditionals', player)
+        player.day++
+    }
 
+    if (player.day == 2) {
+        lateCheck()
     }
 
     //ends game loop
