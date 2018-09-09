@@ -9,7 +9,7 @@ var player = {
     exp: 0,
     tardy: 0,
     status: 1,
-    special: []
+    special: ['Luck']
 }
 
 var specials = ['Slack', 'Google','Pseudo-code']

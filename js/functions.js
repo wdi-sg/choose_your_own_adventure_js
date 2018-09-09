@@ -5,7 +5,7 @@ function statsDisplay(playerStatus) {
 function resetPlayer() {
     player.exp = 0
     player.tardy = 0
-    player.special = []
+    player.special = ['Luck']
     player.status = 1
 }
 
@@ -20,9 +20,11 @@ function gameEnd() {
 }
 
 function earlyBonus (player, specials) {
-    for (i in specials) {
-        if (player.special[i] !== specials[i]) {
-            player.special.push(specials[i])
+    for (i in player.special) {
+        var modifier = Math.floor((Math.random() * specials.length) + 0);
+        if (player.special[i] !== specials[modifier]) {
+            player.special.push(specials[modifier])
+            i++ //to fix wierd addition bug
             return alert(`Arrived Early! You spend your extra time studying and gain a new special: ${player.special[i]}`)
         }
     }
