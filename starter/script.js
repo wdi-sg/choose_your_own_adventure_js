@@ -36,8 +36,9 @@
 //**Make Your Game Repeat as many times as the player wants
 //**Part 5 & 6
 
-//Convert all the console.log msgs to alert msgs.
+//Now need to put things into function and loop player back to gloomhaven central
 */
+
 
 //Player details or items
 var playerItems = [
@@ -49,18 +50,32 @@ var playerGold = 20;
 var playerScore = 0;
 var playerLife = 100; //-5 for every tries to defeat a monster
 
+//FUNCTIONS
+var getPlayerName = function(){
+  var nameInput = prompt("Enter your name: ");
+  return nameInput;
+}
+
+var  welcomePlayer = function(name){
+  var playerNameInput = name[0].toUpperCase() + name.substring(1).toLowerCase();
+  alert("Welcome to Gloomhaven, " + playerNameInput + "! Whatever your reason for coming to Gloomhaven, out here on the edge of the world, that simple fact is never going to change. Remember to take food, a mercenary can't fight on an empty stomach.");
+  alert(playerNameInput+ ", you have " +playerGold+ " gold. And your Score: " + playerScore); // add "Your items: " +playerItems+ "
+}
+
+var whereToGoGloomhaven = function(){
+  var whereGloomhaven = prompt("Where would you like to wander off first?",
+  "towns or wilderness");
+  return whereGloomhaven;
+}
 
 //Stage Zero, prompt player for name
-var playerNameInput = prompt("Enter your name: ");
-playerName = playerNameInput[0].toUpperCase() + playerNameInput.substring(1).toLowerCase();
-alert("Welcome to Gloomhaven, " + playerName + "! Whatever your reason for coming to Gloomhaven, out here on the edge of the world, that simple fact is never going to change. Remember to take food, a mercenary can't fight on an empty stomach.");
-alert(playerName+ ", you have " +playerGold+ " gold. And your Score: " + playerScore); // add "Your items: " +playerItems+ "
+var playerName = getPlayerName();
+welcomePlayer(playerName);
 
 //========================================================================================
 
 //Stage One, prompt player for TOWNS / WILDERNESS
-var whereGloomhaven = prompt("Where would you like to wander off first?",
-"towns or wilderness")
+var whereGloomhaven = whereToGoGloomhaven();
 
 // if player gives invalid input: this will be shown
 while(whereGloomhaven.toLowerCase() !== "towns" && whereGloomhaven.toLowerCase() !== "wilderness"){
