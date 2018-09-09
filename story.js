@@ -73,8 +73,6 @@ if (first === "n") {
 
         }
 
-        northRouteEnding();
-
     } else if (second1 === "n") {
 
         var enemy1 = enemies[randomEncounter()];
@@ -118,9 +116,9 @@ if (first === "n") {
 
         }
 
-        northRouteEnding();
-
     }
+
+    northRouteEnding();
 
 } else if (first === "e") {
 
@@ -134,10 +132,62 @@ if (first === "n") {
 
     if (second2 === 1) {
 
-        var bushDamage = randomizer();
-        player.hp -= bushDamage;
-        var third21 = alert("The path seems to be littered thorned bushes poking on your flesh as you walk through it. You lost " + bushDamage + "hp. But luckily for you, thats all you had to go through because...\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
-        win();
+        var enemy2 = enemies[randomEncounter()] ;
+        var third21 = messages("This path seems to lead to a cave. As you enter the cave and venture deeper in, you reached a dead end. You turn around to go back but a " + enemy2.name + " jumped in front of you and block your exit. You have no choice but to fight. Do you want to use your fists or pocket knife?(F/P)\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
+
+        while (third21 !== "f" && third21 !== "p") {
+
+            third21 = messages("This path seems to lead to a cave. As you enter the cave and venture deeper in, you reached a dead end. You turn around to go back but a " + enemy2.name + " jumped in front of you and block your exit. You have no choice but to fight. Do you want to use your fists or pocket knife?(F/P)\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
+
+        }
+
+        if (third21 === "f") {
+
+            battle(player.damageFist, enemy2);
+
+        } else if (third21 === "p") {
+
+            battle(player.itemInBag.weapon[0].damage, enemy2);
+
+        }
+
+        if (player.hp <= 0) {
+
+            gameover();
+
+        } else {
+
+            var fourth21 = messages("Phew, you managed to return back to the crossroad alive... Now which path do you want to take next.(2/3)\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
+
+            while (fourth21 !== 2 && fourth21 !== 3) {
+
+                fourth21 = messages("Phew, you managed to return back to the crossroad alive... Now which path do you want to take next.(2/3)\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
+            }
+
+            if (fourth21 === 2) {
+
+                var fith21 = messages("As you continue down this path, you found a large stick that looks like it cound be a better weapon than the pocket knife in your bag. Do you want to pick it up?(Y/N)\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
+
+                while (fith21 !== "y" && fith21 !== "n") {
+
+                    fith21 = messages("As you continue down this path, you found a large stick that looks like it cound be a better weapon than the pocket knife in your bag. Do you want to pick it up?(Y/N)\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
+
+                }
+
+                if (fith21 === "y") {
+
+                    player.itemInBag.weapon.push({ name: "stick", damage: 20});
+                    var sixth21 = alert("You picked up the stick and continue walking down the path. Soon, the path became vary foggy and the next thing you know you ended up back at the crossroad. Since path 1 and 2 doesn't lead you anywhere, lets go through path 3 then.\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
+
+                } else if (fith21 === "n") {
+
+                    var sixth21 = alert("You ignore the stick and continue walking down the path. Soon, the path became vary foggy and the next thing you know you ended up back at the crossroad. Since path 1 and 2 doesn't lead you anywhere, lets go through path 3 then.\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
+                }
+
+            }
+
+            eastRouteEnding();
+        }
 
     } else if (second2 === 2) {
 
@@ -151,31 +201,117 @@ if (first === "n") {
 
         if (third22 === "y") {
 
-            //pick up stick
+            player.itemInBag.weapon.push({ name: "stick", damage: 20});
+            var third23 = messages("You picked up the stick and continue walking down the path. Soon, the path became vary foggy and the next thing you know you ended up back at the crossroad. So I guess you just have to go a different path then. Which path do you want to take?(1/3)\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
+
+            while(third23 !== 1 && third23 !== 3) {
+
+                third23 = messages("Which path do you want to take?(1/3)\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
+            }
+
+            if (third23 === 1) {
+
+                var enemy2 = enemies[randomEncounter()] ;
+                var third21 = messages("This path seems to lead to a cave. As you enter the cave and venture deeper in, you reached a dead end. You turn around to go back but a " + enemy2.name + " jumped in front of you and block your exit. You have no choice but to fight. Do you want to use your fists, pocket knife or stick?(F/P/S)\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
+
+                while (third21 !== "f" && third21 !== "p" && third21 !== "s") {
+
+                third21 = messages("This path seems to lead to a cave. As you enter the cave and venture deeper in, you reached a dead end. You turn around to go back but a " + enemy2.name + " jumped in front of you and block your exit. You have no choice but to fight. Do you want to use your fists, pocket knife or stick?(F/P/S)\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
+
+                }
+
+                if (third21 === "f") {
+
+                    battle(player.damageFist, enemy2);
+
+                } else if (third21 === "p") {
+
+                    battle(player.itemInBag.weapon[0].damage, enemy2);
+
+                } else if (third21 === "s") {
+
+                    battle(player.itemInBag.weapon[1].damage, enemy2);
+                }
+
+                if (player.hp <= 0) {
+
+                    gameover();
+
+                } else {
+
+                    var fourth21 = alert("Phew, you managed to return back to the crossroad alive... I guess the only path left is path 3.\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
+                    eastRouteEnding();
+
+                }
+            } else {
+
+                eastRouteEnding();
+
+            }
+
+
 
         } else if (third22 === "n") {
 
-            //dont pick up stick
-        }
+            var third23 = messages("You ignore the stick and continue walking down the path. Soon, the path became vary foggy and the next thing you know you ended up back at the crossroad. So I guess you just have to go a different path then. Which path do you want to take?(1/3)\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
 
-        //path is foggy end up at back at the crossroad
+            while(third23 !== 1 && third23 !== 3) {
+
+                third23 = messages("Which path do you want to take?(1/3)\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
+            }
+
+            if (third23 === 1) {
+
+                var enemy2 = enemies[randomEncounter()] ;
+                var third21 = messages("This path seems to lead to a cave. As you enter the cave and venture deeper in, you reached a dead end. You turn around to go back but a " + enemy2.name + " jumped in front of you and block your exit. You have no choice but to fight. Do you want to use your fists or pocket knife?(F/P)\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
+
+                while (third21 !== "f" && third21 !== "p") {
+
+                third21 = messages("This path seems to lead to a cave. As you enter the cave and venture deeper in, you reached a dead end. You turn around to go back but a " + enemy2.name + " jumped in front of you and block your exit. You have no choice but to fight. Do you want to use your fists or pocket knife?(F/P)\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
+
+                }
+
+                if (third21 === "f") {
+
+                    battle(player.damageFist, enemy2);
+
+                } else if (third21 === "p") {
+
+                    battle(player.itemInBag.weapon[0].damage, enemy2);
+
+                }
+
+                if (player.hp <= 0) {
+
+                    gameover();
+
+                } else {
+
+                    var fourth21 = alert("Phew, you managed to return back to the crossroad alive... I guess the only path left is path 3.\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
+                    eastRouteEnding();
+
+                }
+            } else {
+                eastRouteEnding();
+            }
+
+        }
 
     } else if (second2 === 3) {
 
-
-        //enter a cave with a random enemy after defeating enemy find out that cave is a dead end and have to go back
-
+        eastRouteEnding();
 
     }
 
 
+
 } else if (first === "w") {
 
-    var second3 = messages("As you make your way deeper into the woods, u met amysterious old man.\nMysterious Old Man: Hi stranger, can you spare me some gold coins? If you help me I will reward you with something that can help you in your journey. As you make your way deeper into the woods, you will soon encountr a dragon and the only way out of the woods is to get past that dragon.\nDo you wis to donate gold coins to the old man?(Y/N)\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
+    var second3 = messages("As you make your way deeper into the woods, u meet a mysterious old man.\n\nMysterious Old Man: Hi stranger, can you spare me some gold coins? If you help me I will reward you with something that can help you in your journey. As you make your way deeper into the woods, you will soon encountr a dragon and the only way out of the woods is to get past that dragon.\n\nDo you wish to donate gold coins to the old man?(Y/N)\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
 
     while (second3 !== "y" && second3 !== "n") {
 
-        second3 = messages("As you make your way deeper into the woods, u met amysterious old man.\nMysterious Old Man: Hi stranger, can you spare me some gold coins? If you help me I will reward you with something that can help you in your journey. As you make your way deeper into the woods, you will soon encountr a dragon and the only way out of the woods is to get past that dragon.\nDo you wis to donate gold coins to the old man?(Y/N)\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
+        second3 = messages("As you make your way deeper into the woods, u meet a mysterious old man.\n\nMysterious Old Man: Hi stranger, can you spare me some gold coins? If you help me I will reward you with something that can help you in your journey. As you make your way deeper into the woods, you will soon encountr a dragon and the only way out of the woods is to get past that dragon.\n\nDo you wish to donate gold coins to the old man?(Y/N)\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
 
     }
 
@@ -190,14 +326,16 @@ if (first === "n") {
 
         if (donation <= 10 && donation > 0) {
 
-            player.itemInBag.weapon.push({name: sword, damage: 33});
-            alert("Mysterious Old Man: Thank you so much young adventurer. Here is my reward: a sword.\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
+            player.itemInBag.gold -= donation;
+            player.itemInBag.weapon.push({name: "sword", damage: 30});
+            alert("Mysterious Old Man: Thank you so much young adventurer. Here is your reward: a sword.\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
 
         } else {
 
-            player.itemInBag.weapon.push({name: sword, damage: 33});
+            player.itemInBag.weapon.push({name: "sword", damage: 35});
             player.hp += 100;
-            alert("Mysterious Old Man: Wow, you're very generous young adventurer. Here is my reward: a sword, 100HP.\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
+            player.itemInBag.gold -= donation;
+            alert("Mysterious Old Man: Wow, you're very generous young adventurer. Here is your reward: a sword, 100HP.\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
         }
 
         var third31 = messages("After the encounter with the mysterious old man, you countinue walking deeper into the woods and soon enough encountered the dragon. You can see the exit is just behind it, you have to fight it so that you can leave. Do you want to use ur fists, pocket knife or sword to fight the dragon?(F/P/S)\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
@@ -252,6 +390,8 @@ if (first === "n") {
 
         alert("Not bad, " + player.name + ".You manage to defeat the dragon!\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
         win();
+
+    }
 
 }
 

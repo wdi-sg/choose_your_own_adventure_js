@@ -6,7 +6,7 @@ var enemies = [
     {
         name: "dire wolf",
         hp: 40,
-        damage: 10
+        damage: 15
 
     },
 
@@ -26,7 +26,7 @@ var enemies = [
     {
         name: "snake",
         hp:20,
-        damage: 5
+        damage: 10
     }
 
 ];
@@ -107,7 +107,7 @@ var enemyAttack = function(en) {
 
     var enemyRandom = randomizer();
 
-    if (enemyRandom % 2 === 0 || enemyRandom > 34) {
+    if (enemyRandom % 2 === 0 || enemyRandom > 30) {
 
         player.hp -= en.damage;
         alert("The " + en.name + " dealt " + en.damage + " to you. \n Your HP: " + player.hp);
@@ -124,7 +124,7 @@ var playerAttack = function(damage, en) {
 
     var playerRandom = randomizer();
 
-    if ( playerRandom % 2 === 0 || playerRandom > 30) {
+    if ( playerRandom % 2 === 0 || playerRandom > 24) {
 
         en.hp -= damage;
         alert("You dealt " + damage + ". \n enemy's HP: " + en.hp);
@@ -153,10 +153,17 @@ var battle = function(damage, en) {
 
 };
 
+var solveMath = function(a, b, c) {
+
+    return  a + b * c;
+
+};
+
 
 var calculateScore = function(hp, gold) {
 
     return hp + gold;
+
 };
 
 var gameover = function() {
@@ -173,6 +180,7 @@ var gameover = function() {
 var win = function() {
 
     alert("Congratulations " + player.name + " you have succesfully made your way out of the forest alive and reached the next village.\n\nYour score is: " + calculateScore(player.hp, player.itemInBag.gold));
+    console.log("Score: " + calculateScore(player.hp, player.itemInBag.gold));
 
 };
 
@@ -228,7 +236,34 @@ var northRouteEnding = function() {
 
 };
 
+var eastRouteEnding = function() {
 
-//\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems()
+    var bushDamage = randomizer();
+    player.hp -= bushDamage;
+    var a = randomizer();
+    var b = randomizer();
+    var c = randomizer();
 
+    if (player.hp <= 0) {
+
+        alert("The path seems to be littered thorned bushes poking on your flesh as you walk through it. You lost " + bushDamage + "hp.");
+        gameover();
+
+    } else {
+
+        alert("The path seems to be littered with thorned bushes and its poking on your flesh as you walk through it. You lost " + bushDamage + "hp. But luckily for you, thats all you had to go through because...\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
+        var mathQuestion = messages("The path leads you to a huge cave. You entered the cave and continue walking deeper and deeper into the cave until you reached a door at the end of the cave. The writing on the door says that one has to go through this door to get to the East village. However, the door will only open if you can answer the following math question right and if you get it wrong......\n\n" + a + " + " + b + " * " + c + "\n\nHP: " + player.hp + "\nItems in Bag: " + displayItems());
+        if (mathQuestion === solveMath(a, b, c)) {
+
+            win();
+
+        } else {
+
+            alert("The answer you entered is incorrect. The floor beneath you start to crumble causing you to fall to your demise.");
+            gameover();
+
+        }
+    }
+
+};
 
