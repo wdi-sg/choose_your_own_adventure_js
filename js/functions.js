@@ -1,5 +1,5 @@
 function statsDisplay(playerStatus) {
-    return `Day: ${gameState} | ${player.name} | Exp: ${player.exp} | Status: ${sleepiness[playerStatus]}\n\n`
+    return `Day: ${day} | ${player.name} | Exp: ${player.exp} | Status: ${sleepiness[playerStatus]}\n\n`
 }
 
 function resetPlayer() {
@@ -11,12 +11,12 @@ function resetPlayer() {
 
 function gameError() {
     alert('Hmm looks like your input broke something. Starting over.')
-    gameState = 0
+    day = 0
     resetPlayer()
 }
 
 function gameEnd() {
-    gameState = -1
+    day = -1
 }
 
 function earlyBonus (player, specials) {

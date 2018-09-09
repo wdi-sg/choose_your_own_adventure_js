@@ -15,9 +15,9 @@ var player = {
 var specials = ['Slack', 'Google','Pseudo-code']
 var sleepiness = ["Refreshed", "Normal", "Sleepy", "Tired", "Zombie", "GG"]
 var gamePrompt, gameAlert
-var gameState = 0;
+var day = 0;
 
-while (gameState >= 0) {
+while (day >= 0) {
     //day 0
     resetPlayer()
     player.name = prompt('What is your name?', player.name)
@@ -28,23 +28,23 @@ while (gameState >= 0) {
             player.exp += 50
             gameAlert = alert(`${statsDisplay(player.status)}Well done ${player.name}. With everything completed, you go to sleep.\n (+40 exp)`)
             player.status--
-            gameState++
+            day++
             break;
         case 'a':
             player.exp += 30
             gameAlert = alert(`${statsDisplay(player.status)}Good effort ${player.name}. Don't be disheartened!\n (+30 exp)`)
-            gameState++
+            day++
             break;
         case 'w':
             player.exp += 0
             gameAlert = alert(`${statsDisplay(player.status)}Uh oh ${player.name}. We'll see how this goes...\n (+0 exp)`)
-            gameState++
+            day++
             break;
         default:
             gameError()
     }
     //day 0.5 or overnighter scenario
-    if (player.exp <= 30 && gameState === 1) {
+    if (player.exp <= 30 && day === 1) {
         gamePrompt = prompt(`${statsDisplay(player.status)}Would you like to attempt the prework?\n(Y)es\n(N)o`, 'Y, N').toLowerCase();
         if (gamePrompt === 'y') {
             player.status++
@@ -67,7 +67,7 @@ while (gameState >= 0) {
     }
 
     //day 1
-    if (gameState === 1) {
+    if (day === 1) {
         lateCheck(player, specials)
         gamePrompt = prompt(`${statsDisplay(player.status)}`)
     }
