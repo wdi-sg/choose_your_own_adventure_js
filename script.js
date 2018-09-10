@@ -30,13 +30,13 @@ var inputName = prompt(`Enter you Name`)
 var nameUser = capFirst(inputName)
 
 alert(`${nameUser} had just finished visiting the Brixton town. ${capFirst(sex)} is on holiday in London Town.But it was time to go return to the hotel near Waterloo Station `)
-alert(`As , you took a step out of the train at Waterloo Station ,all of a sudden a hooded person came over and snatched your bag that has 20k pounds in it`)
+alert(`As,you took a step out of the train at Waterloo Station ,all of a sudden a hooded person came over and snatched your bag that has 20k pounds in it`)
 alert(` Chief ${nameUser} , What do you do?`)
 
 var firstChoice = prompt(`give [c]hase or [g]ive up`)
 
 if(firstChoice === `c`){
-    alert(`${nameUser} , good job ,  you start giving chase , you are panting.Hes running up the stairs up to level 1`)
+    alert(`${nameUser},good job,you start giving chase , you are panting.Hes running up the stairs up to level 1`)
 }
 else {
     youNoGuts()
@@ -79,13 +79,14 @@ if (secondChoice === 'h'){
 }
 else{
     alert(`Right on ${nameUser}`)
-    alert(`The bleeding man got up as soon as your vehicle pass him.Luckily, you didnt fall for their tricks.It was a trap!You find yourself now behind the thieves`)
+    alert(`The bleeding man got up as soon as your vehicle pass him.Luckily, you didnt fall for their tricks/It was a trap! Well done.You find yourself now behind the thieves`)
 }
 
 
 //Dodge scene
-alert(`He takes out a gun`)
-alert(`Shots Fired`)
+alert(`The pillion rider takes out a gun`)
+alert(`He fires a shot`)
+alert(`What do you do?`)
 
 var inputDodge =prompt(`[d]odge or [s]tay`)
 
@@ -122,7 +123,7 @@ else{
     alert(`You stop alongside the moped`)
     alert(`You take their gun`)
     alert(`Hasta la vista boys`)
-    alert('You got your money back and gained street cred')
+    alert('The thieves are dead,you got your money back and gained street cred')
     alert(`VICTORIOUS`)
     reloadPage()
 }

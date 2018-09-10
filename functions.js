@@ -21,7 +21,7 @@ return userScore
 
 //function when user freaks out
 var youNoGuts = function(restart){
-    alert(`${nameUser}, you a pussy`)
+    alert(`${nameUser}, you a scaredy cat`)
     reloadPage()
     return youNoGuts
 }
@@ -33,9 +33,9 @@ var youDie = function(){
     return youDie
 }
 
-//function invalid entry
-var nothing = function(){
-    alert(`Don't be sly or slow , type the correct thing`)
-    alert(`Alright enough, we'll start again`)
-    return nothing
-}
+// //function invalid entry
+// var nothing = function(){
+//     alert(`Don't be sly or slow , type the correct thing`)
+//     alert(`Alright enough, we'll start again`)
+//     return nothing
+// }
