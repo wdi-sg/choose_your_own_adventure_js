@@ -137,3 +137,21 @@ Nice to meet you, `Sean`. What year would you like to go to? **(YYYY)**
 * How would you make your game completely dynamic?
 * Create a game that when started up, the user is presented with a different set of choices than before.
 * Those can be a set of possible choices, or they can each be completely different for every game start. (For example, if the player goes from room to room, randomize which room is next to which room every time.)
+
+### Further: ascii art:
+Use [graphical characters](http://www.pictoriano.com/) to try and create small illustrations for your game.
+
+Remember that you have to account for newlines in your strings, so that a drawing like this:
+```
+...▀▀▀▀▀▀▀▀...
+...▀▀▀▀▀▀▀▀...
+...▀▀▀▀▀▀▀▀...
+...▀▀▀▀▀▀▀▀...
+...▀▀▀▀▀▀▀▀...
+...▀▀▀▀▀▀▀▀...
+```
+
+Will need to be formatted like this in your javascript:
+```
+var ttt = "...▀▀▀▀▀▀▀▀...\n...▀▀▀▀▀▀▀▀...\n...▀▀▀▀▀▀▀▀...\n...▀▀▀▀▀▀▀▀...\n...▀▀▀▀▀▀▀▀...\n...▀▀▀▀▀▀▀▀...\n";
+```
