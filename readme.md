@@ -5,6 +5,12 @@
 
 Using what you know about data types, variables, operators, conditional blocks, and accepting user input, create a text-based game that allows the user to arrive at different "destinations" based on the inputs they type.
 
+The game can be as simple or as complicated as you would like to make it.
+
+Below are some basic rules to get you started. 
+
+If you feel comfortable implementing them, you can start to make your game more complex and dynamic.
+
 ### Rules
 * Any path the user goes down must ask them at least **three** questions.
 * There must be a minimum of **seven** total destinations the user could arrive at based on their responses.
@@ -99,20 +105,20 @@ Nice to meet you, `Sean`. What year would you like to go to? **(YYYY)**
                     * Smart choice. Unfortunately the Doc was deeply in love with Clara, and when he gets back to 1985 he becomes very depressed.
 
 
-### Part 2: Further: Name
+### Further: Name
 * Ask the player for their name at the beggining of the game and use it in the game.
 
-### Part 3: Further: Keep Score
+### Further: Keep Score
 * Assign a score for each task in the game. Report the player's score at the end of the game.
 
-### Part 4: Further: Make Your Game Repeat as many times as the player wants 
+### Further: Make Your Game Repeat as many times as the player wants 
 * Have your player repeat a set of challenges or questions over again- if a player enters a situation or room, allow them to leave and come back if they want. 
 #### Pseudo-coded Example
 * You are in a dark room. Would you like to enter the left door or the right door?
    * (user chooses left door)
    * You enter a drawing room with heavy curtains. A mage is sitting on the sofa. Would You like to talk to him? Yes, talk to him/Leave through the right door/Leave through the left door -----> **Left door leads to the dark room**
 
-### Part 5: Further: Make Your Game More Complex
+### Further: Make Your Game More Complex
 
 * Create enemies for your player to face. (Or a series of enemies - perhaps an array of objects)
   * Each enemy can attack your player. (Or your player can recieve powerups or points from other characters)
@@ -126,7 +132,8 @@ Nice to meet you, `Sean`. What year would you like to go to? **(YYYY)**
 * create weapons that your player can use on the enemies.
   * make those weapons work on many enemies at once.
 
-### Part 6: Further: Dynamic Game
+
+### Further: Dynamic Game
 * How would you make your game completely dynamic?
 * Create a game that when started up, the user is presented with a different set of choices than before.
 * Those can be a set of possible choices, or they can each be completely different for every game start. (For example, if the player goes from room to room, randomize which room is next to which room every time.)
