@@ -54,8 +54,22 @@ function hitSuccess (quantity) {
     }
 }
 
+function attackChoice(choice) {
+    var userStrike;
+    if (choice=="p") {
+        userStrike = (randGen(stats.intelligence));
+    } else if (choice=="k") {
+        userStrike = 2*(randGen(stats.intelligence));
+    } else if (choice=="b") {
+        userStrike = 3*(randGen(stats.intelligence));
+    } else {
+        userStrike = (randGen(stats.intelligence));
+    }
+    return userStrike;
+}
+
 function userCalculator(userSuccess) {
-    var userDamage = randGen(stats.intelligence);
+    // var userDamage = randGen(stats.intelligence);
     var userResult;
     if (userSuccess.includes("success")) {
         userResult = userDamage;
@@ -75,8 +89,6 @@ function opponentCalculator(opponentSuccess) {
     }   return userResult
 }
 
-            // var userOutcome = stats.health -= opponentDamage;
-            // var opponentOutcome = opponentHealth -= userDamage;
 
 //functions dealing with strings
 
