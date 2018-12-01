@@ -48,3 +48,20 @@ while (run===1) {
 
 //scenario 3: getting the name and dob
 
+userInput = prompt("Very much alive, and arriving into this brave new world, you deserve a name. What shall it be?");
+
+stats.userName = capitalise(userInput) + restOfString(userInput);
+
+alert("Your parents give you the extraordinarily boring name of: " + stats.userName +".");
+
+stats.dob = getDate();
+
+var resultStats = logStats(stats);
+var currentStats = showStats(resultStats)
+
+alert("Congratulations, " + stats.userName + ", you have entered the world with the following stats:\n\n" + currentStats);
+
+//scenario 4: going to school
+
+
+
