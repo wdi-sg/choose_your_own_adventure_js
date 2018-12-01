@@ -101,7 +101,7 @@ while (run===1) {
     }
 }
 
-scenario 5: specific and repeatable challenges with enemies
+//scenario 5: specific and repeatable challenges with enemies
 
 var background = prompt("You are now fourteen.\n\n Impetuousness is the hallmark of your youth. The hallways of school carry whispers of an underground fight club. Eager to prove yourself, you head to an alloted time and place.\n However, just when you are about to head inside, the club manager asks you if you do any extra-curricular activities. \n\n You may pick from: \n (W)eightlifting: increases 100 health.\n (V)ideo-gaming: increases 100 intelligence.\n (G)ardening: increases 50 health and 50 intelligence.").toLowerCase();
 
