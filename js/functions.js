@@ -16,6 +16,68 @@ function randGen (quantity) {
     return quantity;
 }
 
+function addFifty (quantity) {
+    quantity += 50;
+    return quantity;
+}
+
+function addHundred (quantity) {
+    quantity += 100;
+    return quantity;
+}
+
+//function dealing with fighting
+
+function hitChoice (choice) {
+    if (choice=="p") {
+        var toHit = 25;
+        var success = hitSuccess(toHit);
+    } else if (choice=="k") {
+        var toHit = 50;
+        var success = hitSuccess(toHit);
+    } else if (choice=="b") {
+        var toHit = 75;
+        var success = hitSuccess(toHit);
+    } else {
+        var toHit = 25;
+        var success = hitSuccess(toHit);
+    } return success;
+}
+
+function hitSuccess (quantity) {
+    var combatSuccess = "attack was successful.";
+    var combatFailure = "attack missed";
+    if (Math.round(Math.random()*100) >= quantity) {
+        return combatSuccess;
+    }   else {
+        return combatFailure;
+    }
+}
+
+function userCalculator(userSuccess) {
+    var userDamage = randGen(stats.intelligence);
+    var userResult;
+    if (userSuccess.includes("success")) {
+        userResult = userDamage;
+    } else {
+        userResult = 0*userDamage;
+    }   return userResult
+}
+
+
+function opponentCalculator(opponentSuccess) {
+    var opponentDamage = randGen(opponentIntelligence);
+    var opponentResult;
+    if (opponentSuccess.includes("success")) {
+        opponentResult = opponentDamage;
+    } else {
+        opponentResult = 0*opponentDamage;
+    }   return userResult
+}
+
+            // var userOutcome = stats.health -= opponentDamage;
+            // var opponentOutcome = opponentHealth -= userDamage;
+
 //functions dealing with strings
 
 function capitalise (string) {
