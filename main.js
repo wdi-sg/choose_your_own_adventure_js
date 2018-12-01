@@ -7,6 +7,22 @@
 // You can only use prompt, alert, and confirm
 
 //scenario 1
+
+var startPage = alert(
+    "  _____   _   _   ____ \n"+
+    " |_   _  | | | | | |  __|\n"+
+    "    |  |    | |_| | | |__ \n"+
+    "    |  |    |  _  | |  __|\n"+
+    "    |  |    | | | | | |__ \n"+
+    "    |_ |    |_| |_| |____|\n\n\n"+
+
+    "  _______   ______   __       __   ____ \n"+
+    " |  _____| |  __  | |  \     /  | |  __|\n"+
+    " | |  ___  | |__| | |   \   /   | | |__ \n"+
+    " | | |_  | |  __  | | |\ \ / /| | |  __|\n"+
+    " | |__ _| | | |  | | | | \   / | | | |__ \n"+
+    " |_______| |_|  |_| |_|  \_/  |_| |____|\n");
+
 var wake = prompt("As you open your eyes, you blink. The fuzziness clears. Do you move your arms[A] or your head?[H]").toLowerCase();
 
 switch (wake) {
@@ -68,7 +84,7 @@ while (run===1) {
     if (studyEffort <= 100) {
         stats.intelligence = stats.intelligence += (2*randGen(studyEffort));
         stats.mentalWellBeing = stats.mentalWellBeing -= randGen(studyEffort);
-        stats.physicalWellBeing =  stats.physicalWellBeing -= randGen(studyEffort);
+        stats.physicalWellBeing = stats.physicalWellBeing -= randGen(studyEffort);
         // console.log(Math.random()*studyEffort);
         alert("The efforts you placed into studying have changed you.\n Your intelligence increases to "+ stats.intelligence +".\n Your mental wellbeing decreases to: "+ stats.mentalWellBeing + ".\n Your physical wellbeing decreases to: " + stats.physicalWellBeing + ".");
         run-=1;
@@ -85,11 +101,12 @@ while (run===1) {
     }
 }
 
+
+
 // Further: Make Your Game Repeat as many times as the player wants (specific challenges)
 
 // Further: Make Your Game More Complex (having enemies)
 
 // Further: Dynamic Game (randomised rooms)
 
-// Further: ascii art:
 
