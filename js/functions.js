@@ -11,6 +11,11 @@ function minusTen (quantity) {
     return quantity;
 }
 
+function randGen (quantity) {
+    quantity = Math.round(Math.random()*quantity);
+    return quantity;
+}
+
 //functions dealing with strings
 
 function capitalise (string) {
@@ -63,12 +68,15 @@ function logStats (stats) {
     } return resultStats;
 };
 
-// function showStats (Stats) {
-//     var stringStats = resultStats[0] + "\n" + resultStats[1] + "\n" + resultStats[2] + "\n" + resultStats[3] + "\n" + resultStats[4] + "\n"+ resultStats[5];
-//     return stringStats;
-// }
-
 function showStats (Stats) {
     var stringStats = resultStats.join("\n");
     return stringStats;
 }
+
+//miscellaneous functions
+
+function FatalError(){
+    Error.apply(this, arguments);
+    this.name = "FatalError";
+}
+FatalError.prototype = Object.create(Error.prototype);

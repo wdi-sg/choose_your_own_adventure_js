@@ -6,10 +6,6 @@
 // The game should work without the dev tools console open- no console.log!
 // You can only use prompt, alert, and confirm
 
-//establishing baseline stats
-var name, dob;
-var run = 0;
-
 //scenario 1
 var wake = prompt("As you open your eyes, you blink. The fuzziness clears. Do you move your arms[A] or your head?[H]").toLowerCase();
 
@@ -28,8 +24,10 @@ switch (wake) {
 
 //scenario 2: with loop
 
+
 var slap = prompt("Just as you recognise that you are being carried by a person much bigger than you, a hand slaps you on you back. Do you start crying[C] or stare at the person who slapped you[S]?").toLowerCase();
 
+var run = 0;
 run++;
 
 while (run===1) {
@@ -48,9 +46,9 @@ while (run===1) {
 
 //scenario 3: getting the name and dob
 
-userInput = prompt("Very much alive, and arriving into this brave new world, you deserve a name. What shall it be?");
+var newName = prompt("Very much alive, and arriving into this brave new world, you deserve a name. What shall it be?");
 
-stats.userName = capitalise(userInput) + restOfString(userInput);
+stats.userName = capitalise(newName) + restOfString(newName);
 
 alert("Your parents give you the extraordinarily boring name of: " + stats.userName +".");
 
@@ -63,5 +61,35 @@ alert("Congratulations, " + stats.userName + ", you have entered the world with 
 
 //scenario 4: going to school
 
+var studyEffort = parseInt(prompt("You are now twelve. \n\n As with other twelve-year-olds (some eleven, some thirteen), you are preparing to take your PSLE. You are not sure why, but your loving parents tell you that this is very important and will affect you for the rest of your life. \n\n How much effort will you give (from 1-100)? (Remember: no matter what people tell you, it is physically impossible to go above 100%."));
 
+run++
+while (run===1) {
+    if (studyEffort <= 100) {
+        stats.intelligence = stats.intelligence += (2*randGen(studyEffort));
+        stats.mentalWellBeing = stats.mentalWellBeing -= randGen(studyEffort);
+        stats.physicalWellBeing =  stats.physicalWellBeing -= randGen(studyEffort);
+        // console.log(Math.random()*studyEffort);
+        alert("The efforts you placed into studying have changed you.\n Your intelligence increases to "+ stats.intelligence +".\n Your mental wellbeing decreases to: "+ stats.mentalWellBeing + ".\n Your physical wellbeing decreases to: " + stats.physicalWellBeing + ".");
+        run-=1;
+    } else if (studyEffort > 100) {
+        var extraMile = confirm("Are you sure you want to do this? In case we were not clear enough, going more than 100% can result in DEATH.");
+            if (extraMile == true ){
+                alert("You tried your best. But you tried too hard. Your body could not take it.");
+                throw new FatalError("End of story.");
+            } else {
+                studyEffort = parseInt(prompt("How much effort will you give (from 1-100)?"));
+        }
+    } else {
+        studyEffort = parseInt(prompt("Please give a number. How much effort will you give (from 1-100)?"));
+    }
+}
+
+// Further: Make Your Game Repeat as many times as the player wants (specific challenges)
+
+// Further: Make Your Game More Complex (having enemies)
+
+// Further: Dynamic Game (randomised rooms)
+
+// Further: ascii art:
 
