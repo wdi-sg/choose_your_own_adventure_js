@@ -16,9 +16,11 @@
 
 var equipmentBox = ["Sword", "Spear", "Dagger", "Axe", "Rapier", "PickAxe", "Bat"];
 var randomNum = Math.floor(Math.random() * 7);
-var randomEquipString = equipmentBox[randomNum];
+var randomEquip = equipmentBox[randomNum];
+var randomEquipString = randomEquip.toString();
 
 var userNameOutput = [];
+var point = 0;
 
 // Function executed from newMap 1 second if statement
 var train = function(){
@@ -57,6 +59,80 @@ var explore = function(){
     }
 }
 
+var dungeonMain = function(){
+    var dungChoice = prompt(userNameOutput[0] + " input the dungeon room number from 1 - 6 in order to enter.\nSurprises lies ahead!");
+    var dungNewChoice = parseInt(dungChoice);
+    dungeonRm(dungNewChoice);
+}
+
+var dungeonRm1Nex = function(){
+    var dungNewEx = prompt("A mysterious door appeared. Do you want to enter the mysterious door or exit room?");
+    var dungNewExDoor = dungNewEx.toLowerCase();
+    if(dungNewExDoor.includes("enter") === true){
+        mystDoor();
+    }
+    else if(dungNewExDoor.includes("exit") === true){
+        dungeonMain();
+    }
+    else{
+        alert("Not a valid choice, please choose again.");
+        dungeonRm1Nex();
+    }
+}
+
+var dungeonRm1 = function(){
+    alert("Boss appeared!!!!!");
+    var dungNewChoice1 = prompt("Engage the enemy or flee?");
+    if(dungNewChoice1.includes("engage") === true){
+        alert(userNameOutput[0] + " attacked Boss using " + randomEquipString);
+        point += 10;
+        alert("Boss defeated! 10 points added!");
+        dungeonRm1Nex();
+    }
+    else if(dungNewChoice1.includes("flee") === true){
+        alert(userNameOutput[0] + " has exit the room.");
+        dungeonMain();
+    }
+    else{
+        alert("Not a valid choice, please choose again.");
+        dungeonRm1();
+    }
+}
+
+var mystDoor = function(){
+
+}
+
+var dungeonRm = function(dungNewChoice){
+    if(dungNewChoice === 1){
+        dungeonRm1();
+    }
+    else if(dungNewChoice === 2){
+        dungeonRm2();
+    }
+    else if(dungNewChoice === 3){
+        dungeonRm3();
+    }
+    else if(dungNewChoice === 4){
+        dungeonRm4();
+    }
+    else if(dungNewChoice === 5){
+        dungeonRm5();
+    }
+    else if(dungNewChoice === 6){
+        dungeonRm6();
+    }
+    else{
+        alert("Not a valid choice, please choose again.");
+        dungeonRm();
+    }
+}
+
+var dungeonFloor = function(){
+    alert(userNameOutput[0] + " you will start earning points while doing various action while you are in the dungeon. The points earned will rank up your adventurer level. You will be able to see your total points once you exit the dungeon. Good Luck!");
+    dungeonMain();
+}
+
 var dungeon = function(){
     alert(userNameOutput[0] + " has reached the dungeon entrance. A sign board and a huge box lying beneath it.\n\nThe sign board reads 'Welcome to the dungeon brave soul in order to aid you on your tough trial that lies ahead of you, I have left a box below this sign and I want you to open it. A random equipment will appear in the box and you are free to bring it along with you on your adventure into the dungeon. I wish you luck!'-Annoymous");
     alert("These are the equipments that can appear from the equipment box 'Sword, Spear, Dagger, Axe, Rapier, Crowbar, Bat'.");
@@ -64,7 +140,16 @@ var dungeon = function(){
     var dungeonEntranceInput = dungeonEntrance.toLowerCase();
 
         if(dungeonEntranceInput.includes("y") === true){
-            alert(userNameOutput[0] + " has received a " + randomEquipString + "." + "\nVenture on adventurer!");
+            alert(userNameOutput[0] + " has received a " + randomEquip + "." + "\nVenture on adventurer!");
+            dungeonFloor();
+        }
+        else if(dungeonEntranceInput.includes("n") === true){
+            alert(userNameOutput[0] + " leaves the dungeon and headed back to the previous location.");
+            newMap3();
+        }
+        else{
+            alert("Not a valid choice, please choose again.");
+            dungeon();
         }
 }
 
