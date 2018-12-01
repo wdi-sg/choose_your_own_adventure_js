@@ -1,20 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="styles.css" />
 </head>
+
 <body>
-    <div class="query-box">
-         Hard mode?: <input type="checkbox" id="gameMode"><br>
-         What's your name: <input type="text" id="playerName"><br>
-        <input type="submit" value="Start" id="startGame" onclick="startGame();">
-    
-    
-      </div>
+  <div id="player-container">
+    <div id="game-menu">
+      Hard mode?: <input type="checkbox" id="gameMode"><br>
+      What's your name: <input type="text" id="playerName"><br>
+      <input type="submit" value="Start" id="startGame" onclick="startGame()">
+    </div>
+    <div id="player-toolbar" style="display:none">
+      <div id="player-status"></div>
+      <div id="player-weapons"></div>
+    </div>
+  </div>
 
+  <div id="play-area">
+    <div id="grid-container"></div>
+    <div id="event-container"></div>
     <div id="fight-container"></div>
-
+  </div>
   <script src="script.js"></script>
 </body>
+
 </html>

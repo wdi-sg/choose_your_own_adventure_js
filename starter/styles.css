@@ -1,0 +1,60 @@
+body {
+    padding:0;
+    margin: 0 0 0 0;
+    width: 100%;
+    height: 100%;
+    display:block;
+}
+
+#player-container {
+    position: relative;
+    width: 90vw;
+    height:20vh;
+    border: 3px solid black;
+}
+
+input[type=text] {
+    
+}
+
+#play-area {
+    width: 90vw;
+    height:75vh;
+    border: 3px solid black;
+}
+
+#grid-container {
+    position: absolute;
+    width: 90vw;
+    height: 75vh;
+    display:grid;
+    z-index: 0;
+}
+
+#event-container {
+    display:none;
+position: absolute;
+    z-index: 1;
+    width: 90vw;
+    height: 75vh;
+    background: orange;
+    border: 2px solid green;
+
+}
+
+.map-grid {
+
+   border: 1px solid red;
+}
+
+#player {
+    animation:playerCurrentPosition 1.5s infinite; 
+}
+
+@keyframes playerCurrentPosition {
+    0%{     color: #000;    }
+    25%{    color: transparent; }
+    50%{    color: transparent; }
+    80%{    color:transparent;  }
+    100%{   color: #000;    }
+}
