@@ -45,10 +45,22 @@ var dungeonClear1 = function(){
 }
 
 var mystDoor = function(){
-    alert("Health fully recovered");
+    alert("Health fully recovered\nIncrease your points by 5 as well.");
     userStats.Health = 100;
+    point += 5;
+    Object.assign(userStats, {Points: point});
     alert("Status update take a look at your current stats:-\n\n" + "Name: "+ userStats.Name + "\n" + "Current Points: " + userStats.Points + "\n" + "Current Health: " + userStats.Health + "\n" + "Current Weapon: " + userStats.Weapon);
     dungeonClear1();
+}
+
+var mystDoor2 = function(){
+    alert("Health fully recovered\nIncrease your points by 5 as well.");
+    userStats.Health = 100;
+    point += 5;
+    Object.assign(userStats, {Points: point});
+    alert("Status update take a look at your current stats:-\n\n" + "Name: "+ userStats.Name + "\n" + "Current Points: " + userStats.Points + "\n" + "Current Health: " + userStats.Health + "\n" + "Current Weapon: " + userStats.Weapon);
+    alert("Dungeon Cleared wait for new updates!");
+    dungeonEscape();
 }
 
 var dungeonRm1Nex = function(){
@@ -77,6 +89,10 @@ var endGame = function(){
     }
     else if(userContAns.includes("n") === true){
         stopGame();
+    }
+    else{
+        alert("Not a valid choice, please choose again.");
+        endGame();
     }
 }
 
@@ -107,11 +123,12 @@ var fightRm1 = function(){
 }
 
 var fightRm2 = function(){
-    alert("Take a look at your current stats:-\n\n" + "Name: "+ userStats.Name + "\n" + "Current Points: " + userStats.Points + "\n" + "Current Health: " + userStats.Health + "\n" + "Current Weapon: " + userStats.Weapon);
     alert("You attacked the weird looking creature with your glowing " + userStats.Weapon + " killing it instantly.")
+    alert("Weird looking creature defeated! 5 points added!");
     point += 5;
     Object.assign(userStats, {Points: point});
-    dungeonEscape();
+    alert("A mysterious door appeared and suck you in.");
+    mystDoor2();
 }
 
 var dungeonRm2En = function(){
@@ -123,7 +140,7 @@ var dungeonRm2En = function(){
         fightRm2();
     }
     else if(dungRm2BoxAns.includes("flee") === true){
-        dungeonEscape();
+        dungeonClear1();
     }
     else{
         alert("Not a valid choice, please choose again.");
@@ -167,7 +184,7 @@ var dungeonRm2 = function(){
 }
 
 var dungeonRm3 = function(){
-    alert("Under maintenance");
+    alert("Under maintenance. Due to incompetence of game maker you will need to fight the boss again if you entered this room after you defeated the boss.");
     dungeonMain();
 }
 
