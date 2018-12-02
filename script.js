@@ -13,7 +13,7 @@
 // 4. create questions with more than 1 option
 // 5. ceate for loop in a room to get random weapon in chest
 
-
+// Equipment array that stores equipment. When user answer yes to prompt in dungeon function they given a random weapon
 var equipmentBox = ["Sword", "Spear", "Dagger", "Axe", "Rapier", "PickAxe", "Bat"];
 var randomNum = Math.floor(Math.random() * 7);
 var randomEquip = equipmentBox[randomNum];
@@ -21,6 +21,14 @@ var randomEquipString = randomEquip.toString();
 
 var userNameOutput = [];
 var point = 0;
+
+// Object for user stats to show before entering dungeon
+var userStats = {
+    Name: userNameOutput,
+    Points: point,
+    Health: 100,
+    Weapon: randomEquipString
+}
 
 // Function executed from newMap 1 second if statement
 var train = function(){
@@ -57,80 +65,6 @@ var explore = function(){
         alert("Not a valid choice, please choose again.");
         explore();
     }
-}
-
-var dungeonMain = function(){
-    var dungChoice = prompt(userNameOutput[0] + " input the dungeon room number from 1 - 6 in order to enter.\nSurprises lies ahead!");
-    var dungNewChoice = parseInt(dungChoice);
-    dungeonRm(dungNewChoice);
-}
-
-var dungeonRm1Nex = function(){
-    var dungNewEx = prompt("A mysterious door appeared. Do you want to enter the mysterious door or exit room?");
-    var dungNewExDoor = dungNewEx.toLowerCase();
-    if(dungNewExDoor.includes("enter") === true){
-        mystDoor();
-    }
-    else if(dungNewExDoor.includes("exit") === true){
-        dungeonMain();
-    }
-    else{
-        alert("Not a valid choice, please choose again.");
-        dungeonRm1Nex();
-    }
-}
-
-var dungeonRm1 = function(){
-    alert("Boss appeared!!!!!");
-    var dungNewChoice1 = prompt("Engage the enemy or flee?");
-    if(dungNewChoice1.includes("engage") === true){
-        alert(userNameOutput[0] + " attacked Boss using " + randomEquipString);
-        point += 10;
-        alert("Boss defeated! 10 points added!");
-        dungeonRm1Nex();
-    }
-    else if(dungNewChoice1.includes("flee") === true){
-        alert(userNameOutput[0] + " has exit the room.");
-        dungeonMain();
-    }
-    else{
-        alert("Not a valid choice, please choose again.");
-        dungeonRm1();
-    }
-}
-
-var mystDoor = function(){
-
-}
-
-var dungeonRm = function(dungNewChoice){
-    if(dungNewChoice === 1){
-        dungeonRm1();
-    }
-    else if(dungNewChoice === 2){
-        dungeonRm2();
-    }
-    else if(dungNewChoice === 3){
-        dungeonRm3();
-    }
-    else if(dungNewChoice === 4){
-        dungeonRm4();
-    }
-    else if(dungNewChoice === 5){
-        dungeonRm5();
-    }
-    else if(dungNewChoice === 6){
-        dungeonRm6();
-    }
-    else{
-        alert("Not a valid choice, please choose again.");
-        dungeonRm();
-    }
-}
-
-var dungeonFloor = function(){
-    alert(userNameOutput[0] + " you will start earning points while doing various action while you are in the dungeon. The points earned will rank up your adventurer level. You will be able to see your total points once you exit the dungeon. Good Luck!");
-    dungeonMain();
 }
 
 var dungeon = function(){
@@ -189,7 +123,7 @@ var newMap2 = function(){
 }
 
 var newMap3 = function(){
-    var welcome3 = prompt("Upon your arrival you saw a dungeon, a spring and a cave in front of you.\nWhich will you choose to explore?\n\n" + "The Dungeon\n" + "The spring\n" + "The cave");
+    var welcome3 = prompt("Upon your arrival you saw a dungeon, a spring and a cave in front of you.\nWhich will you choose to explore?\n\n" + "The Dungeon\n" + "The Spring\n" + "The Cave");
     var welcomeInput3 = welcome3.toLowerCase();
 
     if(welcomeInput3.includes("dung") === true){
@@ -232,7 +166,8 @@ var enterNewMap = function(storeInput){
         return;
     }
     else{
-        alert("Warp into Outer space!"); // If user type in random integers in start function this will cease the game
+        alert(userNameOutput[0] + " entered incorrect number. Returning to the start!"); // If user type in random integers in start function this will cease the game
+        start();
     }
 }
 
