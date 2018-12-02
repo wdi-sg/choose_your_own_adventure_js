@@ -325,6 +325,11 @@ var userAccuNormal = function() {
 }
 
 var enemyAccu = function() {
+    if (enemyHP < 1) {
+        alert("You have defeated \"Mountain of Paperwork\"!\n\nThank you for playing \"Technically A Dog's Life\" demo version.\nIf you like the game, please stay tuned for the official full version in my developer\'s profile below!\n\nhttps://github.com/kingcashthefifth/choose_your_own_adventure_js\n\nOnce again, thank you for playing!");
+        oneMoreTime();
+        return;
+    };
     alert("Enemy \"Mountain of Paperwork\" used \"Demoralizing\"!\n");
         var randomAccu = Math.floor(Math.random() * 20);
     if (randomAccu <= 10) {
@@ -335,7 +340,7 @@ var enemyAccu = function() {
         alert("It\'s a miss!")
         paperworkFight();
     };
-}
+};
 
 var consumeCandy = function () {
     alert(userName + " consumed a candy!\n\n" + userName + "\'s HP increased by 5!")
@@ -348,10 +353,8 @@ var paperworkFight = function() {
     if (userHP < 1) {
         alert("You have no more morale, you decided to quit the job and more into the forest for a living...\n\nGame Over.")
         oneMoreTime();
-    } else if (enemyHP < 1) {
-        alert("You have defeated \"Mountain of Paperwork\"!\n\nThank you for playing \"Technically A Dog's Life\" demo version.\nIf you like the game, please stay tuned for the official full version in my developer\'s profile below!\n\nhttps://github.com/kingcashthefifth/choose_your_own_adventure_js\n\nOnce again, thank you for playing!");
-        oneMoreTime();
-    }
+        return;
+    };
         do {
             do {
                 fightAction = prompt("Name: " + userName + "\nMorale: " + userHP + "\n\nEnemy Name: Mountain of Paperwork" + "\nEnemy HP: " + enemyHP + "\n\nA wild \"Mountain of Paperwork\" appeared!\n\nActions:\n- Write\n- Consume Candy: " + candyBar + " left", "\'write\' or \'consume\'")
@@ -389,3 +392,4 @@ var oneMoreTime = function() {
 }
 
 mainPageRun();
+
