@@ -154,3 +154,84 @@ function FatalError(){
     this.name = "FatalError";
 }
 FatalError.prototype = Object.create(Error.prototype);
+
+function book(choice) {
+    var bookTitle;
+    var quantity = Math.floor(Math.random() * 10) + 1;
+    switch (quantity) {
+        case 1:
+            bookTitle = "Harry Potter";
+            break;
+        case 2:
+            bookTitle = "Lord of the Rings";
+            break;
+        case 3:
+            bookTitle = "Spiderman";
+            break;
+        case 4:
+            bookTitle = "Chemistry for Students";
+            break;
+        case 5:
+            bookTitle = "Geography for Dummies";
+            break;
+        case 6:
+            bookTitle = "Web Design Made Easy";
+            break;
+        case 7:
+            bookTitle = "I am smart. So are you.";
+            break;
+        case 8:
+            bookTitle = "Grandma's Recipes";
+            break;
+        case 9:
+            bookTitle = "Religion in the Modern World";
+            break;
+        case 10:
+            bookTitle = "Self-Defense for Everyone";
+            break;
+    } return bookTitle;
+}
+
+function encounter(choice) {
+    var schoolOn = 0;
+    schoolOn++;
+    while (schoolOn === 1) {
+        var schoolChoice = prompt("You can go to: \n (L)ibrary \n (C)lassroom \n (CA)nteen");
+        if (schoolChoice == "l" ||schoolChoice == "c" || schoolChoice == "ca" || schoolChoice == "y") {
+        var explore =    0;
+        explore++;
+            while (explore == 1) {
+                if (schoolChoice = "l") {
+                    var library = prompt("You are at the library. Would you like to read a book? (y/n)").toLowerCase();
+                    var readBook;
+                    if (library = "y") {
+                        var reading = 0;
+                        reading ++;
+                        while (reading == 1) {
+                            book();
+                            readBook = book();
+                            alert ("You read: " + readBook + ".");
+                            var readOn = prompt("Would you like to read another book? (y/n)").toLowerCase();
+                            if (readOn == "n") {
+                                reading -=1;
+                            }
+                        }
+                    }
+                explore -= 1;
+                } else if (schoolChoice = "c") {
+                    var classroom = prompt("You are at the classroom.").toLowerCase();
+                    explore -= 1;
+                } else if (schoolChoice = "ca") {
+                    var canteen = prompt("You are at the canteen.").toLowerCase();
+                    explore -= 1;
+                }
+            }
+        } else {
+            school = prompt("Would you like to leave the school? (Y) leave \n (N) Go back to school").toLowerCase();
+            if (school == "y") {
+                alert ("You went home.");
+                schoolOn -=1;
+            }
+        }
+    }
+}
