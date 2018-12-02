@@ -326,7 +326,7 @@ var userAccuNormal = function() {
 
 var enemyAccu = function() {
     if (enemyHP < 1) {
-        alert("You have defeated \"Mountain of Paperwork\"!\n\nThank you for playing \"Technically A Dog's Life\" demo version.\nIf you like the game, please stay tuned for the official full version in my developer\'s profile below!\n\nhttps://github.com/kingcashthefifth/choose_your_own_adventure_js\n\nOnce again, thank you for playing!");
+        alert("### CONGRATULATIONS!!! ###\n\nYou have defeated \"Mountain of Paperwork\"!\n\nThank you for playing \"Technically A Dog's Life\" demo version.\nIf you like the game, please stay tuned for the official full version in my developer\'s profile below!\n\nhttps://github.com/kingcashthefifth/choose_your_own_adventure_js\n\nOnce again, thank you for playing!");
         oneMoreTime();
         return;
     };
