@@ -68,7 +68,7 @@ function attackChoice(choice) {
     return userStrike;
 }
 
-function userCalculator(userSuccess) {
+function userCalculator(userSuccess, userDamage) {
     // var userDamage = randGen(stats.intelligence);
     var userResult;
     if (userSuccess.includes("success")) {
@@ -86,7 +86,52 @@ function opponentCalculator(opponentSuccess) {
         opponentResult = opponentDamage;
     } else {
         opponentResult = 0*opponentDamage;
-    }   return userResult
+    }   return opponentResult
+}
+
+function opponentAppear(chance) {
+    var chance = 0;
+    var fate = Math.round(Math.random()*100);
+    if (fate>=50) {
+        chance+=1;
+    } return chance
+}
+
+function fightingOpponent() {
+    var run = 0;
+    run++;
+    while (run==1) {
+        userHealth = stats.health;
+        opponentHealth = 100;
+        opponentIntelligence = 50;
+        var fightStart = alert("Your opponent steps into the middle of the classroom. You do the same. Adrenaline pumps through your veins as you move in.");
+        var fight = 0;
+        fight ++
+        while (fight == 1){
+            var reaction = prompt("Do you:\n (P)unch - high accuracy, low damage \n (K)ick - medium accuracy, medium damage \n (B)odyslam - low accuracy, high damage").toLowerCase();
+            var userSuccess = hitChoice(reaction);
+            var userDamage = attackChoice(reaction);
+            var userHit = userCalculator(userSuccess, userDamage);
+            var opponentSuccess = hitChoice("k");
+            var opponentHit =  opponentCalculator(opponentSuccess);
+            userHealth = userHealth -= opponentHit;
+            opponentHealth = opponentHealth -= userHit;
+            alert ("Your " + userSuccess + "\n Your opponent's " + opponentSuccess + "\n You caused "+ userHit + " damage.\n Your opponent caused " + opponentHit + " damage.\n Your health: " + userHealth + "\n Opponent's health: " + opponentHealth);
+            if (userHealth < 1) {
+                stats.health = minusTen(stats.health);
+                alert ("You lose! Your general health decreases to: " + stats.health +".");
+                fight -=1;
+            } else if (opponentHealth < 1) {
+                stats.health = addTen(stats.health);
+                alert ("You win! Your general health increases to: " + stats.health +".");
+                fight -=1;
+            }
+        }
+        var cont = prompt("Continue?(Y/N)").toLowerCase();
+        if (cont == "n") {
+        run -=1;
+        }
+    }
 }
 
 
@@ -195,13 +240,18 @@ function book(choice) {
 function encounter(choice) {
     var schoolOn = 0;
     schoolOn++;
+    var explore =    0;
+    explore++;
     while (schoolOn === 1) {
-        var schoolChoice = prompt("You can go to: \n (L)ibrary \n (C)lassroom \n (CA)nteen");
-        if (schoolChoice == "l" ||schoolChoice == "c" || schoolChoice == "ca" || schoolChoice == "y") {
+        var schoolChoice = prompt("You can go to: \n (L)ibrary \n (C)lassroom \n (CA)nteen \n (G)o home").toLowerCase();
+        if (schoolChoice == "g") {
+            alert ("You went home.");
+            schoolOn -=1;
+        } else if (schoolChoice == "l" ||schoolChoice == "c" || schoolChoice == "ca") {
         var explore =    0;
         explore++;
             while (explore == 1) {
-                if (schoolChoice = "l") {
+                if (schoolChoice == "l") {
                     var library = prompt("You are at the library. Would you like to read a book? (y/n)").toLowerCase();
                     var readBook;
                     if (library = "y") {
@@ -216,21 +266,33 @@ function encounter(choice) {
                                 reading -=1;
                             }
                         }
+                    } explore -= 1;
+                } else if (schoolChoice =="c") {
+                    var classroom = alert("You are at the classroom.");
+                    opponentAppear();
+                    var classroomScenario = opponentAppear();
+                    if (classroomScenario == 1) {
+                        var attack = prompt("The guy you are looking for is here. Do you fight him? (y/n)").toLowerCase();
+                        if (attack == "y") {
+                            fightingOpponent();
+                        }
+                    } else {
+                        alert ("There is no one else. You walk back to the school entrance");
                     }
-                explore -= 1;
-                } else if (schoolChoice = "c") {
-                    var classroom = prompt("You are at the classroom.").toLowerCase();
                     explore -= 1;
-                } else if (schoolChoice = "ca") {
-                    var canteen = prompt("You are at the canteen.").toLowerCase();
-                    explore -= 1;
+                } else if (schoolChoice == "ca") {
+                    var canteen = prompt("You are at the canteen. Would you like to eat? (y/n)").toLowerCase();
+                    if (canteen == "y") {
+                        stats.health = addTen(stats.health);
+                        alert("You ate food and have gained health.\n Your health is now: "+ stats.health + ".");
+                            }
+                        } explore -= 1;
                 }
-            }
-        } else {
-            school = prompt("Would you like to leave the school? (Y) leave \n (N) Go back to school").toLowerCase();
-            if (school == "y") {
-                alert ("You went home.");
-                schoolOn -=1;
+            } else {
+                schoolLeave = prompt("Would you like to leave the school? (Y) leave \n (N) Go back to school").toLowerCase();
+                if (schoolLeave == "y") {
+                    alert ("You went home.");
+                    schoolOn -=1;
             }
         }
     }
