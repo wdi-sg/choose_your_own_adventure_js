@@ -27,7 +27,7 @@ var occupations = [
     },
     {
         "jobTitle": "Firefighter",
-        "jobDescription": "Read your safety equipment, fellow firefighter! Fight blazing fires, drive a red firetruck, save the town, and become a hero... or have ready for some fun.",
+        "jobDescription": "Ready your safety equipment, fellow firefighter! Fight blazing fires, drive a red firetruck, save the town, and become a hero... or have ready for some fun.",
         "tasks": [
             {"taskDescription": "1. Put out a forest fire.",
             "result": "Mother nature thank you for your hard work.",
@@ -62,9 +62,9 @@ var fatigueReducers = [
     "fatigue": -25,
     },
     {
-    "name": "The Dark Lord",
-    "money": -50,
-    "fatigue": -40,
+    "name": "R.N. Jesus (You won't get what you see. Do you want to bet with the odds? xD)",
+    "money": (Math.floor(Math.random() * Math.floor(50))) * (-1),
+    "fatigue": (Math.floor(Math.random() * Math.floor(50))) * (-1),
     }
 ]
 
@@ -101,10 +101,11 @@ var fatigueCatalogue = function(){
     var catalogueList = "";
 
     for (var c=0; c<fatigueReducers.length; c++){
-        catalogueList += c + ". " + fatigueReducers[c].name + "\nFatigue: " +  fatigueReducers[c].fatigue + "\nCost: " + fatigueReducers[c].money + "\n\n";
+        catalogueList += (c+1) + ". " + fatigueReducers[c].name + "\nFatigue: " +  fatigueReducers[c].fatigue + "\nCost: " + fatigueReducers[c].money + "\n\n";
     }
 
-    console.log(catalogueList);
+    alert(catalogueList);
+    return catalogueList;
 }
 
 
@@ -115,4 +116,26 @@ var calculations = function(choiceOption){
 
     userChar.userFatigue += choiceOption.fatigue;
     parseInt(userChar.userFatigue);
+
+    alert("Your current fatigue level: " + userChar.userFatigue + "\n\nYour current coins: " + userChar.money);
+}
+
+
+var reset = function(){
+    alert("Your final fatigue level: " + userChar.userFatigue + "\n\nYour final coins: " + userChar.money);
+    var resetQns = prompt("Do you want to play again? (yes/no)");
+    resetQns = resetQns.toLowerCase();
+
+    if (resetQns==="yes"){
+        userChar.money = 0;
+        userChar.userFatigue = 0;
+        var currentGame = occupations;
+        var stageCount = 0;
+        var stageContinue = true;
+
+        alert("Oh so you're ready for another round, " + userChar.name + "? Let's go!");
+    } else if (resetQns === "no"){
+        var stageContinue = false;
+        alert("Hope you had fun! Goodbye!");
+    }
 }
