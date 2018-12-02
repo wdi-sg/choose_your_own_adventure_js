@@ -1,5 +1,3 @@
-// player, enemies , weapons, events
-// events = [encounter[enemies], shops, goodevent, badevent]
 let player = {};
 let weaponList = {
     melee: [],
@@ -15,6 +13,7 @@ const weaponNameList = {
 
 const enemyNameList = ['Algebra', 'Hunger', 'Tulips', 'Fear', 'Doubt', 'Loathing', 'Dog', 'Hubris', 'Q', 'M']
 const fightContainer = document.getElementById("fight-container");
+const playerToolbarWeapons = document.getElementById("player-weapons");
 
 class _character {
     constructor(name, health, experience, gold, display) {
@@ -29,12 +28,13 @@ class _character {
     }
 }
 class _player extends _character {
-    constructor(name, health, experience, gold, melee, range, display, x, y) {
+    constructor(name, health, experience, level, gold, melee, range, display, x, y) {
         super(name, health, experience, gold, display);
         this.weapons = {
             melee: [melee],
             range: [range]
         };
+        this.level = level;
         this.x = x;
         this.y = y;
     }
@@ -44,19 +44,23 @@ class _player extends _character {
         this.display.appendChild(displayPlayerNode);
         let grid = document.getElementById(`x${this.x}y${this.y}`);
         grid.appendChild(this.display);
-        grid.style.backgroundColor = "blue";
-        let playerStatus = document.createTextNode(`Health: ${this.health} Exp: ${this.experience} Gold: ${this.gold}`);
         let playerToolbarStatus = document.getElementById("player-status");
-        playerToolbarStatus.appendChild(playerStatus);
-
+        playerToolbarStatus.innerHTML = `${this.name}'s level: ${this.level} Health: ${this.health} Exp: ${this.experience} Gold: ${this.gold}`;
     }
-    movePlayer() {
+    updatePlayer() {
+        if (this.experience >= 100) {
+            this.experience = 0;
+            this.level++
+        };
+        let playerToolbarStatus = document.getElementById("player-status");
+        playerToolbarStatus.innerHTML = `${this.name}'s level: ${this.level} Health: ${this.health} Exp: ${this.experience} Gold: ${this.gold}`;
+        console.log('moving char');
+        this.updatePlayerVision();
+    }
+    updatePlayerVision() {
         let grid = document.getElementById(`x${this.x}y${this.y}`);
         grid.appendChild(this.display);
-        grid.style.backgroundColor = "aqua";
-        console.log('moving char');
     }
-
 }
 class _enemy extends _character {
     constructor(name, health, experience, gold, damage, display) {
@@ -76,6 +80,9 @@ class _enemy extends _character {
             this.display.innerHTML = `${this.name} Health:${this.health}`;
         }
     }
+    removeEnemy(){
+        this.display.innerHTML = '';
+    }
 }
 
 class _weapon {
@@ -87,13 +94,21 @@ class _weapon {
         this.display = display;
     }
     displayWeapon() {
+        this.display.className = "inventory-weapons";
+        let displayWeaponNode = document.createTextNode(`${this.name}`);
+        this.display.appendChild(displayWeaponNode);
+        playerToolbarWeapons.appendChild(this.display);
+
+    }
+    displayWeaponBattle() {
         this.display.type = "button";
         this.display.value = `${this.name}`;
-        let playerToolbarWeapons = document.getElementById("player-weapons");
-        playerToolbarWeapons.appendChild(this.display);
-        this.display.addEventListener("click", () => this.dealDamage());
+        fightContainer.appendChild(this.display);
+        this.display.addEventListener("click", () => {
+            this.dealDamage();
+            battleLoop()
+        });
 
-        //      console.log(this.display);
     }
     dealDamage() {
         if (enemyList) {
@@ -123,10 +138,10 @@ class _weapon {
 const populateWeaponList = () => {
     for (let i = 1; i - 1 < weaponNameList.material.length; i++) {
         for (let j = 2; j - 2 < weaponNameList.melee.length; j++) {
-            weaponList.melee.push(new _weapon(`${weaponNameList.material[i-1]} ${weaponNameList.melee[j-2]}`, 80 * i * j, 100 * i * j, false, document.createElement('input')));
+            weaponList.melee.push(new _weapon(`${weaponNameList.material[i-1]} ${weaponNameList.melee[j-2]}`, 80 * i * j, 100 * i * j, false, document.createElement('div')));
         }
         for (let j = 2; j - 2 < weaponNameList.range.length; j++) {
-            weaponList.range.push(new _weapon(`${weaponNameList.material[i-1]} ${weaponNameList.range[j-2]}`, 120 * i * j, 200 * i * j, true, document.createElement('input')));
+            weaponList.range.push(new _weapon(`${weaponNameList.material[i-1]} ${weaponNameList.range[j-2]}`, 120 * i * j, 200 * i * j, true, document.createElement('div')));
         };
     };
 }
@@ -136,13 +151,22 @@ const displayPlayer = (playerWeapons, player) => {
     for (weapon in playerWeapons.melee) {
         if (playerWeapons.melee[weapon]) {
             playerWeapons.melee[weapon].displayWeapon();
+
         }
     }
     for (weapon in playerWeapons.range) {
         if (playerWeapons.range[weapon]) {
             playerWeapons.range[weapon].displayWeapon();
+
         }
     }
+    for (weapon in playerWeapons.melee) {
+        playerWeapons.melee[weapon].displayWeaponBattle();
+    }
+    for (weapon in playerWeapons.range) {
+        playerWeapons.range[weapon].displayWeaponBattle();
+    }
+
     player.displayPlayer();
 }
 
@@ -152,64 +176,36 @@ const playerToolbar = document.getElementById('player-toolbar');
 const startGame = () => {
     populateWeaponList();
     let playerName = document.getElementById('playerName').value;
-    player = new _player(`${playerName}`, 100, 0, 0, weaponList.melee[0], weaponList.range[8], document.createElement("div"), ranN(10), ranN(10));
-    player.weapons.melee.push(weaponList.melee[6]);
-    player.weapons.melee.push(weaponList.melee[6]);
+    player = new _player(`${playerName}`, 100, 0, 3, 0, weaponList.melee[0], weaponList.range[8], document.createElement("div"), ranN(10), ranN(10));
     player.weapons.melee.push(weaponList.melee[6]);
     player.weapons.range.push(weaponList.range[4]);
     generateMap(10, 10);
     displayPlayer(player.weapons, player);
+
     gameMenu.style.display = "none";
     playerToolbar.style.display = "block";
 }
 
-//battle and enemy encounter
 const ranN = (num) => Math.floor(Math.random() * num) + 1;
 
-
-
-
-const eventSpawnEnemies = () => {
-    for (x = 0; x < 5; x++) {
-        enemyList.push(new _enemy(enemyNameList[ranN(9) - 1], 1000, 100, 100, 100, document.createElement("div")));
-
-    };
-    console.log('spawned enemy');
-}
-
-const eventShop = () => {
-    console.log('shop event');
-}
-
-const eventGood = () => {
-    console.log('good event');
-}
-
-const eventBad = () => {
-    console.log('bad event');
-}
-
-const eventNeut = () => {
-    console.log('neut event');
-}
-
-const triggerEvent = (x,y) =>{
+const enterCell = (x, y) => {
     eventContainer.style.display = "block";
-    gridArray[x-1][y-1].event();
-    console.log(gridArray[x-1][y-1].eventId);
+    gridArray[x - 1][y - 1].environment();
+    gridArray[x - 1][y - 1].askEvent();
+    console.log(gridArray[x - 1][y - 1].seed);
 }
 
 const eventContainer = document.getElementById("event-container");
-
 
 //grid map for play area
 const gridContainer = document.getElementById("grid-container");
 
 class _grid {
-    constructor(x, y, eventId) {
+    constructor(x, y, seed, eventCounter = 100) {
         this.x = x;
         this.y = y;
-        this.eventId =eventId;
+        this.seed = seed;
+        this.eventCounter = 100;
     }
     showGrid() {
         let grid = document.createElement("div");
@@ -218,16 +214,60 @@ class _grid {
         grid.style.gridColumnEnd = this.x + 2;
         grid.style.gridRowStart = this.y + 1;
         grid.style.gridRowEnd = this.y + 2;
+        this.seed <= 25 ? grid.style.backgroundColor = "forestgreen" :
+            this.seed <= 55 ? grid.style.backgroundColor = "lawngreen" :
+            this.seed <= 72 ? grid.style.backgroundColor = "dodgerblue" :
+            this.seed <= 82 ? grid.style.backgroundColor = "saddlebrown" :
+            this.seed <= 92 ? grid.style.backgroundColor = "dimgray" :
+            this.seed <= 97 ? grid.style.backgroundColor = "orange" :
+            grid.style.backgroundColor = "black";
+
         grid.style.border = '1px solid red';
-        grid.innerHTML = `x=${this.x}, y=${this.y}`;
         gridContainer.appendChild(grid);
     }
-    event()  {
-        this.eventId <= 20 ? eventGood() :
-        this.eventId  <= 40 ? eventBad() :
-        this.eventId  <= 60 ? eventNeut() :
-        this.eventId  <= 80 ? eventSpawnEnemies() :
-            eventShop();
+    environment() {
+        this.seed <= 25 ? trees(this.seed) :
+            this.seed <= 55 ? grass(this.seed) :
+            this.seed <= 72 ? lake(this.seed) :
+            this.seed <= 82 ? hill(this.seed) :
+            this.seed <= 92 ? mountain(this.seed) :
+            this.seed <= 97 ? abandonedBuilding(this.seed) :
+            town(this.seed);
+    }
+    askEvent() {
+        (() => {
+            if (this.eventCounter > 0) {
+                eventContainer.innerHTML += ' Would you like to ';
+                eventContainer.innerHTML += '<input type="submit" value="explore" id="askEventButton">?';
+                let askEventButton = document.getElementById('askEventButton');
+                askEventButton.addEventListener("click", function () {
+                    runEvent();
+                });
+                let runEvent = () => {
+                    this.seed <= 25 ? treesEvent() :
+                        this.seed <= 55 ? grassEvent() :
+                        this.seed <= 72 ? lakeEvent() :
+                        this.seed <= 82 ? hillEvent() :
+                        this.seed <= 92 ? mountainEvent() :
+                        this.seed <= 97 ? abandonedBuildingEvent() :
+                        townEvent();
+                    this.eventCounter -= 50;
+                };
+            } else if (this.eventCounter <= 0 && this.seed > 97) {
+                eventContainer.innerHTML += ' Would you like to ';
+                eventContainer.innerHTML += '<input type="submit" value="enter" id="askEventButton"> the town?';
+                let askEventButton = document.getElementById('askEventButton');
+                askEventButton.addEventListener("click", function () {
+                    townEvent();
+                });
+
+            } else if (this.eventCounter <= 0) {
+                eventContainer.innerHTML += ' There is nothing worth exploring here.';
+            }
+
+
+
+        })();
     }
 }
 
@@ -237,7 +277,6 @@ const generateMap = (x, y) => {
     for (i = 1; i <= x; i++) {
         gridArray[i - 1] = [];
         for (j = 1; j <= y; j++) {
-            //           gridArray[i][j]=[];
             gridArray[i - 1].push(new _grid(i, j, ranN(100)));
             gridArray[i - 1][j - 1].showGrid();
         }
@@ -246,40 +285,32 @@ const generateMap = (x, y) => {
 
 document.addEventListener('keydown', event => {
     const keyName = event;
- //   console.log(`${keyName.key} `);
-  //  if (event.key === 'ArrowUp'||'ArrowRight'||'ArrowDown'||'ArrowLeft'){
     switch (event.key) {
         case 'ArrowUp':
- //           console.log('up');
             if (player.y > 1) {
                 player.y--;
-                triggerEvent(player.x,player.y);
+                enterCell(player.x, player.y);
             };
             break;
         case 'ArrowLeft':
-  //          console.log('left');
             if (player.x > 1) {
                 player.x--;
-                triggerEvent(player.x,player.y);
+                enterCell(player.x, player.y);
             };
             break;
         case 'ArrowRight':
-   //         console.log('right');
             if (player.x < 10) {
                 player.x++;
-                triggerEvent(player.x,player.y);
+                enterCell(player.x, player.y);
             };
             break;
         case 'ArrowDown':
-  //          console.log('down');
             if (player.y < 10) {
                 player.y++;
-                triggerEvent(player.x,player.y);
+                enterCell(player.x, player.y);
             };
             break;
     };
-    player.movePlayer();
- //   console.log(`keydown event key: ${keyName.key} and keycode ${keyName.which}`)
-
-
+    player.updatePlayer();
+    //   console.log(`keydown event key: ${keyName.key} and keycode ${keyName.which}`)
 })
