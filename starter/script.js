@@ -35,21 +35,84 @@ var createChar = function() {
         alert("Congrats on creating your character! Get ready for the adventures ahead!");
         alert(`Welcome ${userChar.Name}! Your adventure will start of in the World of Null.\n\nIn every map, you will be fighting a monster, winning will give you battle points and potential loots, while losing will reduce your battle points.\n\nAfter every battle, you can choose to stay and fight monsters in the same map or explore the rest of the world.`);
         alert("You are now in the World of Null. Go win your first battle!");
-        currentMap = regionObj.null.map1;
+        currentRegion = regionObj.null;
+        currentMap = regionObj.null[0];
+        setTimeout(endGame, 180000);
         battle();
     } else {
         createChar();
     }
 }
 
-var explore = function() {
-
-}
-
 var battle = function() {
     var battleMonster = currentMap.monsters()[Math.floor(Math.random()*99)];
-    var playerBP = userChar["BattlePoints"] * userChar["Weapon"].classmultiplier() * elementAdvantageCalc(userChar["Weapon"], battleMonster);
-    debugger
+    var playerBP = userChar["BattlePoints"] * userChar["Weapon"].classmultiplier(userChar["Class"].name) * elementAdvantageCalc(userChar["Weapon"], battleMonster);
+
+    if (confirm(`You encountered ${battleMonster.name}!\nDo you want to fight ${battleMonster.name}? Or run away?`)) {
+        if (playerBP > battleMonster.BattlePoints) {
+            var battleLoot = Object.values(battleMonster.loot()[Math.floor(Math.random()*99)])[Math.floor(Math.random()*5)];
+            userChar["BattlePoints"] += (battleMonster.BattlePoints / 3);
+            if (confirm(`${battleMonster.name} dropped ${battleLoot.name}!\nDo you want to equip this?`)) {
+                userChar["Weapon"] = battleLoot;
+            }
+            explore();
+        } else {
+            userChar["BattlePoints"] -= (battleMonster.BattlePoints / 2);
+            explore();
+        }
+    } else {
+        explore();
+    }
+}
+
+var explore = function() {
+    var userExplore = prompt(`You are currently at ${currentMap.name}.\nYou can choose to continue exploring the current map, move deeper into the current World, or go to another World.\n\n Enter: Another World (A) / Stay (S) / Deeper (D)`)
+
+    switch (userExplore) {
+        case "A":
+            var userWorldChoice = prompt("Which world do you want to go to?\n\nNothing (N) / Seas (S) / Flames (F) / Woods (W)");
+            switch (userWorldChoice) {
+                case "N":
+                    currentRegion = regionObj.null;
+                    currentMap = currentRegion[0];
+                    battle();
+                    break;
+
+                case "S":
+                    currentRegion = regionObj.water;
+                    currentMap = currentRegion[0];
+                    battle();
+                    break;
+
+                case "F":
+                    currentRegion = regionObj.fire;
+                    currentMap = currentRegion[0];
+                    battle();
+                    break;
+
+                case "W":
+                    currentRegion = regionObj.nature;
+                    currentMap = currentRegion[0];
+                    battle();
+                    break;
+                default:
+                    explore();
+                    break;
+            }
+            break;
+
+        case "S":
+            battle();
+            break;
+
+        case "D":
+            currentMap = currentRegion[1];
+            battle();
+            break;
+        default:
+            explore();
+            break;
+    }
 }
 
 var elementAdvantageCalc = function(currentWeapon, battleMonster) {
@@ -60,6 +123,7 @@ var elementAdvantageCalc = function(currentWeapon, battleMonster) {
             }  else {
                 return 0.8;
             }
+
         case "fire":
             if (battleMonster.element == "nature") {
                 return 2;
@@ -89,8 +153,19 @@ var elementAdvantageCalc = function(currentWeapon, battleMonster) {
     }
 }
 
+var endGame = function() {
+    highScore.push(userChar);
+    if (confirm(`Your game has ended! Your ${userChar["Weapon"].name} wielding ${userChar["Class"].name} character, ${userChar["Name"]}, achieved ${userChar["BattlePoints"]} Battle Points! He is one of the strongest hero that WoW have seen.\n\nWould you like to start a new game?`)) {
+        createChar();
+    } else {
+        throw alert("See you again in WoW");
+    }
+}
+
+
 
 
 var userChar = {};
 var currentMap = {};
+var highScore = [];
 createChar();

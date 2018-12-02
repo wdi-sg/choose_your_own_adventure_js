@@ -1,31 +1,118 @@
 var regionObj = {
-    "null": {
-        "map1": {
-            monsters: function() {
-                var monsterArr = [];
-                for (var i = 0; i < 70; i++) {
-                    monsterArr.push(monsters.null1);
+    "null": [{
+                "name": "World of Nothings - Entrance",
+                monsters: function() {
+                    var monsterArr = [];
+                    for (var i = 0; i < 70; i++) {
+                        monsterArr.push(monsters.null1);
+                    }
+                    for (var i = 0; i < 30; i++) {
+                        monsterArr.push(monsters.null2);
+                    }
+                    return monsterArr;
                 }
-                for (var i = 0; i < 30; i++) {
-                    monsterArr.push(monsters.null2);
+            },
+            {
+                "name": "World of Nothings",
+                monsters: function() {
+                    var monsterArr = [];
+                    for (var i = 0; i < 40; i++) {
+                        monsterArr.push(monsters.null1);
+                    }
+                    for (var i = 0; i < 35; i++) {
+                        monsterArr.push(monsters.null2);
+                    }
+                    for (var i = 0; i < 25; i++) {
+                        monsterArr.push(monsters.null3);
+                    }
+                    return monsterArr;
                 }
-                return monsterArr;
-            }
-        },
-        "map2": {
-            monsters: function() {
-                var monsterArr = [];
-                for (var i = 0; i < 40; i++) {
-                    monsterArr.push(monsters.null1);
+            }],
+    "fire": [{
+                "name": "World of Nothings - Entrance",
+                monsters: function() {
+                    var monsterArr = [];
+                    for (var i = 0; i < 70; i++) {
+                        monsterArr.push(monsters.null1);
+                    }
+                    for (var i = 0; i < 30; i++) {
+                        monsterArr.push(monsters.null2);
+                    }
+                    return monsterArr;
                 }
-                for (var i = 0; i < 35; i++) {
-                    monsterArr.push(monsters.null2);
+            },
+            {
+                "name": "World of Nothings",
+                monsters: function() {
+                    var monsterArr = [];
+                    for (var i = 0; i < 40; i++) {
+                        monsterArr.push(monsters.null1);
+                    }
+                    for (var i = 0; i < 35; i++) {
+                        monsterArr.push(monsters.null2);
+                    }
+                    for (var i = 0; i < 25; i++) {
+                        monsterArr.push(monsters.null3);
+                    }
+                    return monsterArr;
                 }
-                for (var i = 0; i < 25; i++) {
-                    monsterArr.push(monsters.null3);
+            }],
+    "nature": [{
+                "name": "World of Nothings - Entrance",
+                monsters: function() {
+                    var monsterArr = [];
+                    for (var i = 0; i < 70; i++) {
+                        monsterArr.push(monsters.null1);
+                    }
+                    for (var i = 0; i < 30; i++) {
+                        monsterArr.push(monsters.null2);
+                    }
+                    return monsterArr;
                 }
-                return monsterArr;
-            }
-        }
-    }
+            },
+            {
+                "name": "World of Nothings",
+                monsters: function() {
+                    var monsterArr = [];
+                    for (var i = 0; i < 40; i++) {
+                        monsterArr.push(monsters.null1);
+                    }
+                    for (var i = 0; i < 35; i++) {
+                        monsterArr.push(monsters.null2);
+                    }
+                    for (var i = 0; i < 25; i++) {
+                        monsterArr.push(monsters.null3);
+                    }
+                    return monsterArr;
+                }
+            }],
+    "water": [{
+                "name": "World of Nothings - Entrance",
+                monsters: function() {
+                    var monsterArr = [];
+                    for (var i = 0; i < 70; i++) {
+                        monsterArr.push(monsters.null1);
+                    }
+                    for (var i = 0; i < 30; i++) {
+                        monsterArr.push(monsters.null2);
+                    }
+                    return monsterArr;
+                }
+            },
+            {
+                "name": "World of Nothings",
+                monsters: function() {
+                    var monsterArr = [];
+                    for (var i = 0; i < 40; i++) {
+                        monsterArr.push(monsters.null1);
+                    }
+                    for (var i = 0; i < 35; i++) {
+                        monsterArr.push(monsters.null2);
+                    }
+                    for (var i = 0; i < 25; i++) {
+                        monsterArr.push(monsters.null3);
+                    }
+                    return monsterArr;
+                }
+            }]
 }
