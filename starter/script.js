@@ -13,41 +13,47 @@ alert("Clue 1: Suspect last seen at Market St 41. \nWhat would you like to do ne
 
 var question1 = prompt("[a] Go to Market Street 41.\n[b] Go home \n[c] Lepak and drink kopi");
 
-    if (question1 === "a") {
-        alert("Great! Let's go to Market Street 41 to look out for more clues.");
-    } else if (question1 === "b" || "c") {
-        alert("Ohh no! What a terrible choice you have made! You missed the chance to capture suspect due to your lepak attitude");
-        youLose();
-    } else {
+if (question1 === "a") {
+    alert("Great! Let's go to Market Street 41 to look out for more clues.");
+} else {
+    alert("Ohh no! What a terrible choice you have made! You missed the chance to capture suspect due to your lepak attitude");
+    youLose();
+}
 
-    }
+
 //Quest (Level 2)
 var question2 = prompt("There are thee alternatives to go to Market St 42. Choose the best and fastest route. \n[a] Route A crowded and there is road congestion.\n[b] Route B less crowded and road path is clear. \n[c] Route C a very bad road accident had just happened.") ;
 
     if(question2 === "b") {
         alert("Wise choice indeed! Route B is clear and you will arrive at Market St 42 at the fastest time! Good Job!")
-    } else
-    {
+    } else{
         alert("Hmmm..bad choice. Suspect had escaped while you arrived at location 1 hour later. :(");
         youLose();
     }
+
+
 //Quest (Level 3)
-// alert("Clue 2: We have received a tip-off from an informant, suspect was last seen at Mangrove Hotel. \n*Hint: He has short brown hair, 6 feet tall and has an x scar on his left cheek.");
+alert("Clue 2: We have received a tip-off from an informant, suspect was last seen at Mangrove Hotel. \n*Hint: He has short brown hair, 6 feet tall and has an x scar on his left cheek.");
 
-// alert ("You arrived at Mangrove hotel. You spot 2 suspicious men, both with short brown hair and are 6 feet tall. They entered the same lift and went to level 5. To get to level 5, you need to enter a hotel guest access code in the lift.");
+alert ("You arrived at Mangrove hotel. You spot 2 suspicious men, both with short brown hair and are 6 feet tall.");
 
-// alert ("Solve these 3 riddles to get code to gain acess to level 5");
+alert(" They entered the same lift and went to level 5. To get to level 5, you need to enter a hotel guest access code in the lift.");
 
-// var riddle1 = prompt ("1 = 5 \n2 = 25 \n3 = 325 \n4 = 4325 \nThen 5 = ? \nKey in the correct answer below" );
-// var ansRiddle1 = Number(riddle1);
+alert ("Solve these 3 riddles to get code to gain acess to level 5");
 
 
-// for(maxTry = 0; maxTry != 3; maxTry ++){
 
-//     if( ansRiddle1 === 1 ) {
-//         alert("Correct! The first access code number is 1! One down, two more to go!"   );
-//     }
-//};
+for(maxTry = 3; maxTry > 0; maxTry --){
+var riddle1 = prompt ("1 = 5 \n2 = 25 \n3 = 325 \n4 = 4325 \nThen 5 = ? \nKey in the correct answer below");
+var ansRiddle1 = Number(riddle1);
+
+    if( ansRiddle1 === 1 ) {
+        alert("Correct! The first access code number is 1! One down, two more to go!");
+        break;
+    }else {
+        alert("Try again!" + maxTry) ;
+    }
+};
 
 
 
@@ -81,11 +87,11 @@ var question2 = prompt("There are thee alternatives to go to Market St 42. Choos
 
 
 
-if (startGame === "y")  {
-    stage1();
-} else
-     quit();
-
+// if (startGame === "y")  {
+//     stage1();
+// } else
+//   quit();
+//
 
 //
 // function stage1(question, choices)   {

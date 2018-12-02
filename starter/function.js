@@ -1,15 +1,18 @@
-function youLose()  {
-    var lose = prompt("Bad Decision! Bad choice! Please try again. \n Key in [y]es to play again or [n]o to quit.");
+var reload = function(restart) {
 
-    if(lose === "y")    {
-        alert("That's the spirit! Do not give up easily!")
-        location.reload();
-    } else
-    {
-        alert("Thank you for playing! :)");
+    location.reload(restart)
+    return reloadPage
+}
 
-    }
 
+var youLose = function()  {
+        alert("bad choice, you lose!")
+        reload()
+        return youLose
+}
+
+function maxOutTry() {
+    alert("You have maxed out your chance. Game Over! Suspect has escape!");
 }
 
 
