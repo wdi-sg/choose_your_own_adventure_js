@@ -21,13 +21,17 @@ var randomEquipString = randomEquip.toString();
 
 var userNameOutput = [];
 var point = 0;
-
 // Object for user stats to show before entering dungeon
 var userStats = {
     Name: userNameOutput,
     Points: point,
     Health: 100,
     Weapon: randomEquipString
+}
+
+// Function to break out of game
+var stopGame = function(){
+    break;
 }
 
 // Function executed from newMap 1 second if statement
@@ -93,6 +97,7 @@ var newMap1 = function(){
     var welcomeInput1 = welcome1.toLowerCase();
     if(welcomeInput1.includes("y") === true){
         alert(userNameOutput[0] + " walks towards the stadium.");
+        alert(userNameOutput[0] + " there is nothing to see here therefore you will be teleported back to the start.")
         start();
     }
     else if(welcomeInput1.includes("n") === true){
@@ -132,6 +137,8 @@ var newMap3 = function(){
     }
     else if(welcomeInput3.includes("spr") === true){
         alert(userNameOutput[0] + " walks towards the spring.");
+        alert("Spring closed please leave. " + userNameOutput[0] + " have no choice but to walk back to the previous location.");
+        newMap3();
     }
     else if(welcomeInput3.includes("cave") === true) {
         alert(userNameOutput[0] + " walks towards the cave.");
@@ -163,7 +170,7 @@ var enterNewMap = function(storeInput){
     }
     else if(storeInput === 4){
         alert("GoodBye! Have a nice day!");
-        return;
+        stopGame();
     }
     else{
         alert(userNameOutput[0] + " entered incorrect number. Returning to the start!"); // If user type in random integers in start function this will cease the game
@@ -179,7 +186,7 @@ var inputName = function(){
 
 // Function ask which area does the user want to start
 var start = function() {
-    var userInput = prompt("Hi there adventurer please pick a starting destination\n\n" + "1) Oratoria\n" + "2) Taranor\n" + "3) Solayu Forest\n" + "4) Exit Game");
+    var userInput = prompt("Hi there adventurer please pick a starting destination\n\n" + "1) Oratoria\n" + "2) Taranor\n" + "3) Solayu Forest\n" + "4) Exit Game\n\n" + "Just a heads up from the game maker please choose Solayu Forest then dungeon for maximum experience :D");
     var storeInput = parseInt(userInput);
 
         while(isNaN(storeInput) === true){
