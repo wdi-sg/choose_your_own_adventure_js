@@ -337,6 +337,12 @@ var enemyAccu = function() {
     };
 }
 
+var consumeCandy = function () {
+    alert(userName + " consumed a candy!\n\n" + userName + "\'s HP increased by 5!")
+    userHP += 5;
+    enemyAccu();
+}
+
 var paperworkFight = function() {
     var fightAction;
     if (userHP < 1) {
@@ -348,7 +354,7 @@ var paperworkFight = function() {
     }
         do {
             do {
-                fightAction = prompt("Name: " + userName + "\nMorale: " + userHP + "\n\nEnemy Name: Mountain of Paperwork" + "\nEnemy HP: " + enemyHP + "\n\nA wild \"Mountain of Paperwork\" appeared!\n\nActions:\n- Write\n- Consume Candy: " + candyBar + " left", "\'write\' or \'eat\'")
+                fightAction = prompt("Name: " + userName + "\nMorale: " + userHP + "\n\nEnemy Name: Mountain of Paperwork" + "\nEnemy HP: " + enemyHP + "\n\nA wild \"Mountain of Paperwork\" appeared!\n\nActions:\n- Write\n- Consume Candy: " + candyBar + " left", "\'write\' or \'consume\'")
             }
             while (fightAction == null || fightAction == "");
         }
@@ -360,7 +366,9 @@ var paperworkFight = function() {
         } else if (fightAction.charAt(0) == 'w') {
             alert(userName + " used \"Write\"!");
             userAccuNormal();
-        }; else if (fightAction.charAt(0) == '')
+        } else if (fightAction.charAt(0) == 'c') {
+            consumeCandy();
+        }
 };
 
 var oneMoreTime = function() {
