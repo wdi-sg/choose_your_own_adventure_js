@@ -1,44 +1,37 @@
-var helperObject = createHelper()
-var playerName = getPlayerName()
-var player = createNewPlayer(playerName)
-var map = createMap()
+var player = newPlayer()
+createRoomsAndItems()
 
-while(true){
-    var descriptionString = getLocationString()
-    var userInput = prompt(descriptionString)
-    var currentRoom = map[player.xPosition][player.yPosition]
+alert("You find yourself waking up with a throbbing pain in your head, and no recollection of who you are and what you were last doing. There are bruises on your arms and small cuts over your face. It was as though you had gotten into a fight and passed out...")
 
-    if (userInput === "exit"){
-        break;
-    }
-    if(playerWantsToMove(userInput)) {
-        movePlayer(userInput)
-    }
-    if(playerWantsToInteract(userInput) && currentRoom.interactableItems.length !==0){
-        currentRoom.interactableItems[0].interact(currentRoom)
-    }
-    if(currentRoom.door && playerWantsToOpenDoor(userInput)){
-        currentRoom.door.isOpen = true
-        var doorDirection = currentRoom.door.doorDirection
-        enableTheExit(currentRoom, doorDirection)
-        alert("You opened the door")
+while (true){
+    var playerInput = prompt(getDescriptionString(player))
+
+    if (playerInput === "exit"){
+        break
+    } else {
+        actOnInput(player, playerInput)
     }
 }
 
-function playerWantsToMove(userInput){
-    if (userInput === "n" || userInput === "north" || userInput === "s" || userInput === "south" || userInput === "e" || userInput === "east" || userInput === "w" || userInput === "west"){
+// ---------------------------------------------------------------------------------------------
+
+function actOnInput(player, playerInput){
+    if(playerWantsToMove(playerInput)) {
+        movePlayer(player, playerInput)
+    }
+    if(playerWantsToInteract(playerInput)){
+        interactWithItems(player)
+    }
+}
+
+function playerWantsToMove(playerInput){
+    if (playerInput === "n" || playerInput === "north"|| playerInput === "s" || playerInput === "south" || playerInput === "e" || playerInput === "east" || playerInput === "w" || playerInput === "west"){
         return true
     }
 }
 
-function playerWantsToInteract(userInput){
-    if (userInput === "i" || userInput === "I"){
-        return true
-    }
-}
-
-function playerWantsToOpenDoor(userInput){
-    if (userInput === "o" || userInput === "O"){
+function playerWantsToInteract(){
+    if (playerInput === "I" || playerInput === "i") {
         return true
     }
 }
