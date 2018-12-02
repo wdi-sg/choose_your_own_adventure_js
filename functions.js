@@ -37,17 +37,99 @@ var occupations = [
             {"taskDescription": "2. Save a kitten stuck in a sewer pipe",
             "result": "After half a day of work, you saved the little kitty! Its owner awards you handsomely!",
             "fatigue": 25,
-            "money": 30,
+            "money": 35,
             },
             {"taskDescription": "3. Disappears mid-shift to water the fire station garden with your firetruck's hose.",
             "result": "The flowers are blooming, but not your supervisor's face.",
             "fatigue": 10,
             "money": 0,
-
             }
         ]
     },
-
+    {
+        "jobTitle": "Surgeon",
+        "jobDescription":"You are in the chief surgeon in general  surgical team from the most prestigious hospital in the area. Ready your white robe to save some lives... or not",
+        "tasks": [
+            {"taskDescription": "1. Perform a heart transplant on a 6 year old.",
+            "result": "Although, there were many complications in the midst of the 16 hours operation, your team and you managed to give the child a new heart.",
+            "fatigue": 30,
+            "money": 30,
+            },
+            {"taskDescription": "2. Conduct a hospital tour for the external board of directors.",
+            "result": "Not everyone was satisfied with your tour. Your boss is slightly unhappy but gave you a pat on your back for your efforts.",
+            "fatigue": 15,
+            "money": 20,
+            },
+            {"taskDescription": "3. A day without a nap is like a cupcake without frosting! Sneak into the on-call room and get a snooze.",
+            "result": "No work is done. Your patients conducted a hospital-wide search in their hospital PJs and IV stands for you. Your supervisor gave you a double shift because of this havoc.",
+            "fatigue": 25,
+            "money": 5,
+            }
+        ]
+    },
+    {
+        "jobTitle": "Astronaut",
+        "jobDescription": "Astronaut, the space traveler! Pilot the newest NASA spaceship into the cosmic graveyard, exploring the unknowns.. or not.",
+        "tasks": [
+            {"taskDescription": "1. Collect data on the sun.",
+            "result": "You fell asleep because you thought it was too mundane.",
+            "fatigue": 5,
+            "money": 10,
+            },
+            {"taskDescription": "2. Fire a missile at an unavoidable nebula.",
+            "result": "Your machine calculations were inaccurate, causing the fragments of the nebula to destroy a nearby satellite.",
+            "fatigue": 20,
+            "money": 5,
+            },
+            {"taskDescription": "3. Travel into the black hole out of curiosity.",
+            "result": "After centuries of traveling and almost nearing death, you have arrived in an alternate universe.",
+            "fatigue": 35,
+            "money": 50,
+            }
+        ]
+    },
+    {
+        "jobTitle": "Burglar",
+        "jobDescription": "Find the safe, crack and empty it, and escape! Burglar or modern-day Robin Hood, your pick.",
+        "tasks": [
+            {"taskDescription": "1. Rob a bakery!",
+            "result": "You managed to steal a truck of bread, which you later left at the nearby charitable organisation.",
+            "fatigue":15,
+            "money": 20,
+            },
+            {"taskDescription": "2. Rob a bank!",
+            "result": "Security's tight, you didn't even manage to get into the vicinity of the protected area. Though mission failed, you managed to pickpocket a bank's client.",
+            "fatigue": 20,
+            "money": 10,
+            },
+            {"taskDescription": "3. Rob a billionaire's house.",
+            "result": "You were caught in the midst of burglary. The billionaire recognised your moves and skills and offered you a position to be his personal spy.",
+            "fatigue": 20,
+            "money": 50,
+            }
+        ]
+    },
+    {
+        "jobTitle": "Baby-sitter",
+        "jobDescription": "If there's anything that puts your time management skills to the test, it's managing an entire household. A nanny. Are you up for the job?",
+        "tasks": [
+            {"taskDescription": "1. Complete the household chores.",
+            "result": "Almost done until toddler Jack thought that the walls needed a touch of abstract art.",
+            "fatigue": 30,
+            "money": 35,
+            },
+            {"taskDescription": "2. Take care of baby Timmy",
+            "result": "Baby Timmy was unexpectedly a really quiet baby. All his needs were easily taken care of.",
+            "fatigue": 10,
+            "money": 25,
+            },
+            {"taskDescription": "3. Teaching Jane her algebra homework.",
+            "result": "Apparently the methods have changed over the years, leaving you wrecking your brain for the entire afternoon.",
+            "fatigue":25,
+            "money": 20,
+            }
+        ]
+    }
 ]
 
 var fatigueReducers = [
