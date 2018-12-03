@@ -12,7 +12,7 @@
 
 
 var createChar = function() {
-    var userName = prompt("Welcome to the World of Worlds! In this game, you have 3mins to adventure the Worlds and try to become the strongest character ever!\n\nFirstly, please tell me your name: ");
+    var userName = prompt("Welcome to the World of Worlds! In this game, you have 20 battles worth of time to adventure the Worlds and try to become the strongest character ever!\n\nFirstly, please tell me your name: ");
 
     var userClassChoice = prompt("Secondly, choose your favorite class: \n\n(Available classes are: Swordman, Archer, Magician, Assassin.)");
 
