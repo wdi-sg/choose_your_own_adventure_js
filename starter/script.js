@@ -51,6 +51,7 @@ var battle = function() {
     if (confirm(`You encountered ${battleMonster.name}!\nDo you want to fight ${battleMonster.name}? Or run away?`)) {
         if (playerBP > battleMonster.BattlePoints) {
             var battleLoot = Object.values(battleMonster.loot()[Math.floor(Math.random()*99)])[Math.floor(Math.random()*5)];
+            alert("Congrats, you won the battle!");
             userChar["BattlePoints"] += (battleMonster.BattlePoints / 3);
             if (confirm(`${battleMonster.name} dropped ${battleLoot.name}!\nDo you want to equip this?`)) {
                 userChar["Weapon"] = battleLoot;
@@ -58,6 +59,7 @@ var battle = function() {
             explore();
         } else {
             userChar["BattlePoints"] -= (battleMonster.BattlePoints / 2);
+            alert(`You lost the battle... and loses ${battleMonster.BattlePoints / 2} Battle Points :(`)
             explore();
         }
     } else {

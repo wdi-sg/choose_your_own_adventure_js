@@ -2,11 +2,14 @@ var monsters = {
     "null1": {
         "name": "Goblin",
         "element": "null",
-        "BattlePoints": 60,
+        "BattlePoints": 90,
         loot: function() {
             var lootArr = [];
-            for (i = 0; i < 99; i++) {
+            for (i = 0; i < 95; i++) {
                 lootArr.push(weaponObj.tier1);
+            }
+            for (i = 0; i < 5; i++) {
+                lootArr.push(weaponObj.tier2);
             }
 
             return lootArr;
@@ -16,11 +19,17 @@ var monsters = {
     "null2": {
         "name": "Goblin Archer",
         "element": "null",
-        "BattlePoints": 55,
+        "BattlePoints": 120,
         loot: function() {
             var lootArr = [];
-            for (i = 0; i < 99; i++) {
+            for (i = 0; i < 85; i++) {
                 lootArr.push(weaponObj.tier1);
+            }
+            for (i = 0; i < 10; i++) {
+                lootArr.push(weaponObj.tier2);
+            }
+            for (i = 0; i < 5; i++) {
+                lootArr.push(weaponObj.tier3);
             }
 
             return lootArr;
@@ -28,13 +37,19 @@ var monsters = {
     },
 
     "null3": {
-        "name": "Goblin Archer",
+        "name": "Mutated Kobold",
         "element": "null",
-        "BattlePoints": 55,
+        "BattlePoints": 260,
         loot: function() {
             var lootArr = [];
-            for (i = 0; i < 99; i++) {
+            for (i = 0; i < 70; i++) {
                 lootArr.push(weaponObj.tier1);
+            }
+            for (i = 0; i < 20; i++) {
+                lootArr.push(weaponObj.tier2);
+            }
+            for (i = 0; i < 10; i++) {
+                lootArr.push(weaponObj.tier3);
             }
 
             return lootArr;
@@ -42,13 +57,16 @@ var monsters = {
     },
 
     "fire1": {
-        "name": "Wyvern",
+        "name": "Salamander",
         "element": "fire",
-        "BattlePoints": 70,
+        "BattlePoints": 150,
         loot: function() {
             var lootArr = [];
-            for (i = 0; i < 75; i++) {
+            for (i = 0; i < 95; i++) {
                 lootArr.push(weaponObj.tier1);
+            }
+            for (i = 0; i < 5; i++) {
+                lootArr.push(weaponObj.tier2);
             }
 
             return lootArr;
@@ -56,13 +74,19 @@ var monsters = {
     },
 
     "fire2": {
-        "name": "Wyvern",
+        "name": "Flamehound",
         "element": "fire",
-        "BattlePoints": 70,
+        "BattlePoints": 280,
         loot: function() {
             var lootArr = [];
-            for (i = 0; i < 75; i++) {
+            for (i = 0; i < 85; i++) {
                 lootArr.push(weaponObj.tier1);
+            }
+            for (i = 0; i < 10; i++) {
+                lootArr.push(weaponObj.tier2);
+            }
+            for (i = 0; i < 5; i++) {
+                lootArr.push(weaponObj.tier3);
             }
 
             return lootArr;
@@ -70,13 +94,19 @@ var monsters = {
     },
 
     "fire3": {
-        "name": "Goblin Archer",
-        "element": "null",
-        "BattlePoints": 55,
+        "name": "Red Wyvern",
+        "element": "fire",
+        "BattlePoints": 500,
         loot: function() {
             var lootArr = [];
-            for (i = 0; i < 99; i++) {
+            for (i = 0; i < 70; i++) {
                 lootArr.push(weaponObj.tier1);
+            }
+            for (i = 0; i < 20; i++) {
+                lootArr.push(weaponObj.tier2);
+            }
+            for (i = 0; i < 10; i++) {
+                lootArr.push(weaponObj.tier3);
             }
 
             return lootArr;
@@ -84,13 +114,16 @@ var monsters = {
     },
 
     "water1": {
-        "name": "Wyvern",
-        "element": "fire",
-        "BattlePoints": 70,
+        "name": "Slime",
+        "element": "water",
+        "BattlePoints": 130,
         loot: function() {
             var lootArr = [];
-            for (i = 0; i < 75; i++) {
+            for (i = 0; i < 95; i++) {
                 lootArr.push(weaponObj.tier1);
+            }
+            for (i = 0; i < 5; i++) {
+                lootArr.push(weaponObj.tier2);
             }
 
             return lootArr;
@@ -98,13 +131,19 @@ var monsters = {
     },
 
     "water2": {
-        "name": "Wyvern",
-        "element": "fire",
-        "BattlePoints": 70,
+        "name": "Morphling",
+        "element": "water",
+        "BattlePoints": 250,
         loot: function() {
             var lootArr = [];
-            for (i = 0; i < 75; i++) {
+            for (i = 0; i < 85; i++) {
                 lootArr.push(weaponObj.tier1);
+            }
+            for (i = 0; i < 10; i++) {
+                lootArr.push(weaponObj.tier2);
+            }
+            for (i = 0; i < 5; i++) {
+                lootArr.push(weaponObj.tier3);
             }
 
             return lootArr;
@@ -112,13 +151,19 @@ var monsters = {
     },
 
     "water3": {
-        "name": "Goblin Archer",
-        "element": "null",
-        "BattlePoints": 55,
+        "name": "Medusa",
+        "element": "water",
+        "BattlePoints": 550,
         loot: function() {
             var lootArr = [];
-            for (i = 0; i < 99; i++) {
+            for (i = 0; i < 70; i++) {
                 lootArr.push(weaponObj.tier1);
+            }
+            for (i = 0; i < 20; i++) {
+                lootArr.push(weaponObj.tier2);
+            }
+            for (i = 0; i < 10; i++) {
+                lootArr.push(weaponObj.tier3);
             }
 
             return lootArr;
@@ -126,13 +171,16 @@ var monsters = {
     },
 
     "nature1": {
-        "name": "Wyvern",
-        "element": "fire",
-        "BattlePoints": 70,
+        "name": "Treant",
+        "element": "nature",
+        "BattlePoints": 140,
         loot: function() {
             var lootArr = [];
-            for (i = 0; i < 75; i++) {
+            for (i = 0; i < 95; i++) {
                 lootArr.push(weaponObj.tier1);
+            }
+            for (i = 0; i < 5; i++) {
+                lootArr.push(weaponObj.tier2);
             }
 
             return lootArr;
@@ -140,13 +188,19 @@ var monsters = {
     },
 
     "nature2": {
-        "name": "Wyvern",
-        "element": "fire",
-        "BattlePoints": 70,
+        "name": "Druid",
+        "element": "nature",
+        "BattlePoints": 300,
         loot: function() {
             var lootArr = [];
-            for (i = 0; i < 75; i++) {
+            for (i = 0; i < 85; i++) {
                 lootArr.push(weaponObj.tier1);
+            }
+            for (i = 0; i < 10; i++) {
+                lootArr.push(weaponObj.tier2);
+            }
+            for (i = 0; i < 5; i++) {
+                lootArr.push(weaponObj.tier3);
             }
 
             return lootArr;
@@ -154,13 +208,19 @@ var monsters = {
     },
 
     "nature3": {
-        "name": "Goblin Archer",
-        "element": "null",
-        "BattlePoints": 55,
+        "name": "Yggdrasil",
+        "element": "nature",
+        "BattlePoints": 600,
         loot: function() {
             var lootArr = [];
-            for (i = 0; i < 99; i++) {
+            for (i = 0; i < 70; i++) {
                 lootArr.push(weaponObj.tier1);
+            }
+            for (i = 0; i < 20; i++) {
+                lootArr.push(weaponObj.tier2);
+            }
+            for (i = 0; i < 10; i++) {
+                lootArr.push(weaponObj.tier3);
             }
 
             return lootArr;
