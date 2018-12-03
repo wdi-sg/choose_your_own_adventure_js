@@ -26,7 +26,9 @@ var createChar = function() {
     while (!weaponObj.tier1.hasOwnProperty(userWeaponChoice.toLowerCase())) {
         userWeaponChoice = prompt("Lastly, pick your trusty weapon: \n(Available weapons are: Sword, Spear, Bow, Staff, Dagger, Shuriken.");
     }
-
+    debugger
+    var newUser = {}
+    userChar = newUser;
     userChar["Name"] = userName;
     userChar["Class"] = classesObj[userClassChoice.toLowerCase()];
     userChar["Weapon"] = weaponObj.tier1[userWeaponChoice.toLowerCase()];
@@ -38,6 +40,7 @@ var createChar = function() {
         alert("You are now in the World of Null. Go win your first battle!");
         currentRegion = regionObj.null;
         currentMap = regionObj.null[0];
+        console.log(userChar);
         battle();
     } else {
         createChar();
@@ -54,7 +57,7 @@ var battle = function() {
             var battleLoot = Object.values(battleMonster.loot()[Math.floor(Math.random()*99)])[Math.floor(Math.random()*5)];
             alert("Congrats, you won the battle!");
             userChar["BattlePoints"] += (battleMonster.BattlePoints / 3);
-            if (battleCounter == 20) {
+            if (battleCounter == 5) {
                 return endGame();
             }
             if (confirm(`${battleMonster.name} dropped ${battleLoot.name}!\nDo you want to equip this?`)) {
@@ -64,7 +67,7 @@ var battle = function() {
         } else {
             userChar["BattlePoints"] -= (battleMonster.BattlePoints / 2);
             alert(`You lost the battle... and loses ${battleMonster.BattlePoints / 2} Battle Points :(`)
-            if (battleCounter == 20) {
+            if (battleCounter == 5) {
                 return endGame();
             }
             explore();
@@ -164,20 +167,29 @@ var elementAdvantageCalc = function(currentWeapon, battleMonster) {
 
 var endGame = function() {
     hallOfFame.push(userChar);
-    var topChar = [];
-    var bpscoreArr = [];
-    for (var i in hallOfFame) {
-        bpscoreArr.push(hallOfFame[i]["BattlePoints"]);
-    }
-    var highScore = bpscoreArr.sort(function(a, b){return b - a})[0];
-    for (var i in hallOfFame) {
-        var charArr = Object.values(hallOfFame[i]);
-        if (charArr.indexOf(highScore) >= 0) {
-            topChar = charArr;
+    // var topChar = [];
+    // var bpscoreArr = [];
+
+    // for (var i in hallOfFame) {
+    //     bpscoreArr.push(hallOfFame[i]["BattlePoints"]);
+    // }
+    // var highScore = bpscoreArr.sort(function(a, b){return b - a})[0];
+    // for (var i in hallOfFame) {
+    //     var charArr = Object.values(hallOfFame[i]);
+    //     if (charArr.indexOf(highScore) >= 0) {
+    //         topChar = charArr;
+    //     }
+    // }
+    var compare = function(a, b) {
+        if (b["BattlePoints"] > a) {
+            return b;
+        } else {
+            return a;
         }
     }
+    var topChar = hallOfFame.reduce(compare , 0);
 
-    if (confirm(`Your game has ended! Your ${userChar["Weapon"].name} wielding ${userChar["Class"].name} character, ${userChar["Name"]}, achieved ${userChar["BattlePoints"]} Battle Points!\n\nThe strongest hero that WoW have seen is:\nName: ${topChar[0]}\nClass: ${topChar[1].name}\nWeapon: ${topChar[2].name}\nBattle Points: ${topChar[3]}\n\nWould you like to start a new game?\n\n`)) {
+    if (confirm(`Your game has ended! Your ${userChar["Weapon"].name} wielding ${userChar["Class"].name} character, ${userChar["Name"]}, achieved ${userChar["BattlePoints"]} Battle Points!\n\nThe strongest hero that WoW have seen is:\nName: ${topChar["Name"]}\nClass: ${topChar["Class".name]}\nWeapon: ${topChar["Weapon"].name}\nBattle Points: ${topChar["BattlePoints"]}\n\nWould you like to start a new game?\n\n`)) {
         createChar();
     } else {
         alert("See you again in WoW");
