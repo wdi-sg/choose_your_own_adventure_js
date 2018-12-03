@@ -55,7 +55,7 @@ var battle = function() {
             alert("Congrats, you won the battle!");
             userChar["BattlePoints"] += (battleMonster.BattlePoints / 3);
             if (battleCounter == 20) {
-                endGame();
+                return endGame();
             }
             if (confirm(`${battleMonster.name} dropped ${battleLoot.name}!\nDo you want to equip this?`)) {
                 userChar["Weapon"] = battleLoot;
@@ -65,7 +65,7 @@ var battle = function() {
             userChar["BattlePoints"] -= (battleMonster.BattlePoints / 2);
             alert(`You lost the battle... and loses ${battleMonster.BattlePoints / 2} Battle Points :(`)
             if (battleCounter == 20) {
-                endGame();
+                return endGame();
             }
             explore();
         }
@@ -180,7 +180,7 @@ var endGame = function() {
     if (confirm(`Your game has ended! Your ${userChar["Weapon"].name} wielding ${userChar["Class"].name} character, ${userChar["Name"]}, achieved ${userChar["BattlePoints"]} Battle Points!\n\nThe strongest hero that WoW have seen is:\nName: ${topChar[0]}\nClass: ${topChar[1].name}\nWeapon: ${topChar[2].name}\nBattle Points: ${topChar[3]}\n\nWould you like to start a new game?\n\n`)) {
         createChar();
     } else {
-        throw alert("See you again in WoW");
+        alert("See you again in WoW");
     }
 }
 

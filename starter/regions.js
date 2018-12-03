@@ -19,10 +19,10 @@ var regionObj = {
                     for (var i = 0; i < 40; i++) {
                         monsterArr.push(monsters.null1);
                     }
-                    for (var i = 0; i < 35; i++) {
+                    for (var i = 0; i < 40; i++) {
                         monsterArr.push(monsters.null2);
                     }
-                    for (var i = 0; i < 25; i++) {
+                    for (var i = 0; i < 20; i++) {
                         monsterArr.push(monsters.null3);
                     }
                     return monsterArr;
@@ -48,10 +48,10 @@ var regionObj = {
                     for (var i = 0; i < 40; i++) {
                         monsterArr.push(monsters.fire1);
                     }
-                    for (var i = 0; i < 35; i++) {
+                    for (var i = 0; i < 40; i++) {
                         monsterArr.push(monsters.fire2);
                     }
-                    for (var i = 0; i < 25; i++) {
+                    for (var i = 0; i < 20; i++) {
                         monsterArr.push(monsters.fire3);
                     }
                     return monsterArr;
@@ -77,10 +77,10 @@ var regionObj = {
                     for (var i = 0; i < 40; i++) {
                         monsterArr.push(monsters.nature1);
                     }
-                    for (var i = 0; i < 35; i++) {
+                    for (var i = 0; i < 40; i++) {
                         monsterArr.push(monsters.nature2);
                     }
-                    for (var i = 0; i < 25; i++) {
+                    for (var i = 0; i < 20; i++) {
                         monsterArr.push(monsters.nature3);
                     }
                     return monsterArr;
@@ -106,10 +106,10 @@ var regionObj = {
                     for (var i = 0; i < 40; i++) {
                         monsterArr.push(monsters.water1);
                     }
-                    for (var i = 0; i < 35; i++) {
+                    for (var i = 0; i < 40; i++) {
                         monsterArr.push(monsters.water2);
                     }
-                    for (var i = 0; i < 25; i++) {
+                    for (var i = 0; i < 20; i++) {
                         monsterArr.push(monsters.water3);
                     }
                     return monsterArr;
