@@ -1,6 +1,6 @@
 // put code here!
 
-// Create encompassing counter. 20Battles to train the strongest character, highest battle points. Or defeat Elite 4.
+// Create counter. 20Battles to train the strongest character, highest battle points
 // Create Character. Character have Name, Class, Level, weapons
 // weapon have range effectiveness factor, element, class multiplier
 // Class have weapon multiplier.
@@ -12,6 +12,7 @@
 
 
 var createChar = function() {
+    battleCounter = 0;
     var userName = prompt("Welcome to the World of Worlds! In this game, you have 20 battles worth of time to adventure the Worlds and try to become the strongest character ever!\n\nFirstly, please tell me your name: ");
 
     var userClassChoice = prompt("Secondly, choose your favorite class: \n\n(Available classes are: Swordman, Archer, Magician, Assassin.)");
@@ -49,7 +50,7 @@ var battle = function() {
 
     if (confirm(`You encountered ${battleMonster.name}!\nDo you want to fight ${battleMonster.name}? Or run away?`)) {
         battleCounter++;
-        if (playerBP > battleMonster.BattlePoints) {
+        if (playerBP > battleMonster.BattlePoints && Math.floor(Math.random()*100) > 5) {
             var battleLoot = Object.values(battleMonster.loot()[Math.floor(Math.random()*99)])[Math.floor(Math.random()*5)];
             alert("Congrats, you won the battle!");
             userChar["BattlePoints"] += (battleMonster.BattlePoints / 3);
@@ -163,13 +164,20 @@ var elementAdvantageCalc = function(currentWeapon, battleMonster) {
 
 var endGame = function() {
     hallOfFame.push(userChar);
-    debugger
-    // var topHallOfFame = function() {
-    //     var topBP = Object.values(hallOfFame).sort(function(a, b){return b - a});
-    // }
+    var topChar = [];
+    var bpscoreArr = [];
+    for (var i in hallOfFame) {
+        bpscoreArr.push(hallOfFame[i]["BattlePoints"]);
+    }
+    var highScore = bpscoreArr.sort(function(a, b){return b - a})[0];
+    for (var i in hallOfFame) {
+        var charArr = Object.values(hallOfFame[i]);
+        if (charArr.indexOf(highScore) >= 0) {
+            topChar = charArr;
+        }
+    }
 
-
-    if (confirm(`Your game has ended! Your ${userChar["Weapon"].name} wielding ${userChar["Class"].name} character, ${userChar["Name"]}, achieved ${userChar["BattlePoints"]} Battle Points! He is one of the strongest hero that WoW have seen.\n\nWould you like to start a new game?\n\n`)) {
+    if (confirm(`Your game has ended! Your ${userChar["Weapon"].name} wielding ${userChar["Class"].name} character, ${userChar["Name"]}, achieved ${userChar["BattlePoints"]} Battle Points!\n\nThe strongest hero that WoW have seen is:\nName: ${topChar[0]}\nClass: ${topChar[1].name}\nWeapon: ${topChar[2].name}\nBattle Points: ${topChar[3]}\n\nWould you like to start a new game?\n\n`)) {
         createChar();
     } else {
         throw alert("See you again in WoW");
