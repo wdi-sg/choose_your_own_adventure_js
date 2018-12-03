@@ -1,13 +1,13 @@
 // put code here!
 
-// Create encompassing counter. 5mins to train the strongest character, highest battle points. Or defeat Elite 4.
+// Create encompassing counter. 20Battles to train the strongest character, highest battle points. Or defeat Elite 4.
 // Create Character. Character have Name, Class, Level, weapons
 // weapon have range effectiveness factor, element, class multiplier
 // Class have weapon multiplier.
 // Map have Regions, more range/melee monsters. with loots for certain class.
 // Regions have monsters. Monsters have rng to drop loots
 // Monsters have Name, range, element, battle points.
-//// Winning gives battle points
+// Winning gives battle points
 // Losing reduce reduce battle points
 
 
@@ -37,7 +37,6 @@ var createChar = function() {
         alert("You are now in the World of Null. Go win your first battle!");
         currentRegion = regionObj.null;
         currentMap = regionObj.null[0];
-        setTimeout(endGame, 180000);
         battle();
     } else {
         createChar();
@@ -49,10 +48,14 @@ var battle = function() {
     var playerBP = userChar["BattlePoints"] * userChar["Weapon"].classmultiplier(userChar["Class"].name) * elementAdvantageCalc(userChar["Weapon"], battleMonster);
 
     if (confirm(`You encountered ${battleMonster.name}!\nDo you want to fight ${battleMonster.name}? Or run away?`)) {
+        battleCounter++;
         if (playerBP > battleMonster.BattlePoints) {
             var battleLoot = Object.values(battleMonster.loot()[Math.floor(Math.random()*99)])[Math.floor(Math.random()*5)];
             alert("Congrats, you won the battle!");
             userChar["BattlePoints"] += (battleMonster.BattlePoints / 3);
+            if (battleCounter == 20) {
+                endGame();
+            }
             if (confirm(`${battleMonster.name} dropped ${battleLoot.name}!\nDo you want to equip this?`)) {
                 userChar["Weapon"] = battleLoot;
             }
@@ -60,6 +63,9 @@ var battle = function() {
         } else {
             userChar["BattlePoints"] -= (battleMonster.BattlePoints / 2);
             alert(`You lost the battle... and loses ${battleMonster.BattlePoints / 2} Battle Points :(`)
+            if (battleCounter == 20) {
+                endGame();
+            }
             explore();
         }
     } else {
@@ -156,8 +162,14 @@ var elementAdvantageCalc = function(currentWeapon, battleMonster) {
 }
 
 var endGame = function() {
-    highScore.push(userChar);
-    if (confirm(`Your game has ended! Your ${userChar["Weapon"].name} wielding ${userChar["Class"].name} character, ${userChar["Name"]}, achieved ${userChar["BattlePoints"]} Battle Points! He is one of the strongest hero that WoW have seen.\n\nWould you like to start a new game?`)) {
+    hallOfFame.push(userChar);
+    debugger
+    // var topHallOfFame = function() {
+    //     var topBP = Object.values(hallOfFame).sort(function(a, b){return b - a});
+    // }
+
+
+    if (confirm(`Your game has ended! Your ${userChar["Weapon"].name} wielding ${userChar["Class"].name} character, ${userChar["Name"]}, achieved ${userChar["BattlePoints"]} Battle Points! He is one of the strongest hero that WoW have seen.\n\nWould you like to start a new game?\n\n`)) {
         createChar();
     } else {
         throw alert("See you again in WoW");
@@ -169,5 +181,6 @@ var endGame = function() {
 
 var userChar = {};
 var currentMap = {};
-var highScore = [];
+var hallOfFame = [];
+var battleCounter = 0;
 createChar();
