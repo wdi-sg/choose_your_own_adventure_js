@@ -52,6 +52,9 @@ class _player extends _character {
             this.experience = 0;
             this.level++
         };
+        if (this.health <= 0) {
+            endGame();
+        }
         let playerToolbarStatus = document.getElementById("player-status");
         playerToolbarStatus.innerHTML = `${this.name}'s level: ${this.level} Health: ${this.health} Exp: ${this.experience} Gold: ${this.gold}`;
         console.log('moving char');
@@ -314,3 +317,7 @@ document.addEventListener('keydown', event => {
     player.updatePlayer();
     //   console.log(`keydown event key: ${keyName.key} and keycode ${keyName.which}`)
 })
+
+const endGame = () => {
+    alert("You died");
+}
