@@ -26,7 +26,6 @@ var createChar = function() {
     while (!weaponObj.tier1.hasOwnProperty(userWeaponChoice.toLowerCase())) {
         userWeaponChoice = prompt("Lastly, pick your trusty weapon: \n(Available weapons are: Sword, Spear, Bow, Staff, Dagger, Shuriken.");
     }
-    debugger
     var newUser = {}
     userChar = newUser;
     userChar["Name"] = userName;
@@ -36,8 +35,8 @@ var createChar = function() {
 
     if (confirm(`Name: ${userChar.Name}\nClass: ${userChar.Class.name}\nWeapon: ${userChar.Weapon.name}\n\nAre you sure of your Character?`)){
         alert("Congrats on creating your character! Get ready for the adventures ahead!");
-        alert(`Welcome ${userChar.Name}! Your adventure will start of in the World of Null.\n\nIn every map, you will be fighting a monster, winning will give you battle points and potential loots, while losing will reduce your battle points.\n\nAfter every battle, you can choose to stay and fight monsters in the same map or explore the rest of the world.`);
-        alert("You are now in the World of Null. Go win your first battle!");
+        alert(`Welcome ${userChar.Name}! Your adventure will start of in the World of Nothings.\n\nIn every map, you will be fighting a monster, winning will give you battle points and potential loots, while losing will reduce your battle points.\n\nAfter every battle, you can choose to stay and fight monsters in the same map or explore the rest of the world.`);
+        alert("You are now in the World of Nothings. Go win your first battle!");
         currentRegion = regionObj.null;
         currentMap = regionObj.null[0];
         console.log(userChar);
@@ -57,7 +56,7 @@ var battle = function() {
             var battleLoot = Object.values(battleMonster.loot()[Math.floor(Math.random()*99)])[Math.floor(Math.random()*5)];
             alert("Congrats, you won the battle!");
             userChar["BattlePoints"] += (battleMonster.BattlePoints / 3);
-            if (battleCounter == 5) {
+            if (battleCounter == 20) {
                 return endGame();
             }
             if (confirm(`${battleMonster.name} dropped ${battleLoot.name}!\nDo you want to equip this?`)) {
@@ -67,7 +66,7 @@ var battle = function() {
         } else {
             userChar["BattlePoints"] -= (battleMonster.BattlePoints / 2);
             alert(`You lost the battle... and loses ${battleMonster.BattlePoints / 2} Battle Points :(`)
-            if (battleCounter == 5) {
+            if (battleCounter == 20) {
                 return endGame();
             }
             explore();
@@ -82,7 +81,7 @@ var explore = function() {
 
     switch (userExplore) {
         case "A":
-            var userWorldChoice = prompt("Which world do you want to go to?\n\nNothing (N) / Seas (S) / Flames (F) / Woods (W)");
+            var userWorldChoice = prompt("Which world do you want to go to?\n\nNothings (N) / Seas (S) / Flames (F) / Woods (W)");
             switch (userWorldChoice) {
                 case "N":
                     currentRegion = regionObj.null;
@@ -131,14 +130,14 @@ var elementAdvantageCalc = function(currentWeapon, battleMonster) {
     switch (currentWeapon.element) {
         case "null":
             if (battleMonster.element == "null") {
-                return 1.1;
+                return 1.2;
             }  else {
                 return 0.8;
             }
 
         case "fire":
             if (battleMonster.element == "nature") {
-                return 2;
+                return 1.5;
             } else if (battleMonster.element == "fire" || battleMonster.element == "null") {
                 return 0.8;
             } else {
@@ -147,7 +146,7 @@ var elementAdvantageCalc = function(currentWeapon, battleMonster) {
 
         case "nature":
             if (battleMonster.element == "water") {
-                return 2;
+                return 1.5;
             } else if (battleMonster.element == "nature" || battleMonster.element == "null") {
                 return 0.8;
             } else {
@@ -156,7 +155,7 @@ var elementAdvantageCalc = function(currentWeapon, battleMonster) {
 
         case "water":
             if (battleMonster.element == "fire") {
-                return 2;
+                return 1.5;
             } else if (battleMonster.element == "water" || battleMonster.element == "null") {
                 return 0.8;
             } else {
@@ -189,8 +188,9 @@ var endGame = function() {
     }
     var topChar = hallOfFame.reduce(compare , 0);
 
-    if (confirm(`Your game has ended! Your ${userChar["Weapon"].name} wielding ${userChar["Class"].name} character, ${userChar["Name"]}, achieved ${userChar["BattlePoints"]} Battle Points!\n\nThe strongest hero that WoW have seen is:\nName: ${topChar["Name"]}\nClass: ${topChar["Class".name]}\nWeapon: ${topChar["Weapon"].name}\nBattle Points: ${topChar["BattlePoints"]}\n\nWould you like to start a new game?\n\n`)) {
+    if (confirm(`Your game has ended! Your ${userChar["Weapon"].name} wielding ${userChar["Class"].name} character, ${userChar["Name"]}, achieved ${Math.floor(userChar["BattlePoints"])} Battle Points!\n\nThe strongest hero that WoW have seen is:\nName: ${topChar["Name"]}\nClass: ${topChar["Class"].name}\nWeapon: ${topChar["Weapon"].name}\nBattle Points: ${Math.floor(topChar["BattlePoints"])}\n\nWould you like to start a new game?\n\n`)) {
         createChar();
+
     } else {
         alert("See you again in WoW");
     }
