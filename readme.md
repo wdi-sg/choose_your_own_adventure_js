@@ -15,7 +15,6 @@ If you feel comfortable implementing them, you can start to make your game more 
 * Any path the user goes down must ask them at least **three** questions.
 * There must be a minimum of **seven** total destinations the user could arrive at based on their responses.
 * For **at least one** of the questions asked, there must be **more than two possible user responses**.
-* Your code must contain **at least one loop**.
 * Your code must make use of **both string and number user inputs**.
 * The game should work without the dev tools console open- no `console.log`! 
 * You can only use `prompt`, `alert`, and `confirm`
