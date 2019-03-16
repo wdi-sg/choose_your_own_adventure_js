@@ -1,5 +1,5 @@
 
-var smallGroup = function(firstQuestion) {
+var game = function(firstQuestion) {
     if (firstQuestion < 5) {
      var whichOne = prompt("Which food do you think the judges prefer? \"Sushi\" or \"Ramen\"?");
       if (whichOne === "Sushi") {
@@ -17,12 +17,7 @@ var smallGroup = function(firstQuestion) {
             alert("Is this jelly or noodle? You boiled too much! Yikes!");
         }
        }
- }
-}
-
-
-var mediumGroup = function(firstQuestion) {
-    if (firstQuestion >= 5 && firstQuestion < 10) {
+ } else if (firstQuestion >= 5 && firstQuestion < 10) {
     var howIsMeat = prompt("You have to make the perfect steak. How many minutes would you cook? Type a number:");
     if (howIsMeat < 5) {
         alert("Too rare! It Tastes too blood....");
@@ -31,13 +26,7 @@ var mediumGroup = function(firstQuestion) {
     } else if (howIsMeat > 8) {
         alert("Uggg, over cooked. The meat lost all its flavor.");
     }
- }
-}
-
-
-
-var largeGroup = function(firstQuestion) {
-    if (firstQuestion >= 10) {
+ } else if (firstQuestion >= 10) {
     var bigGroup = prompt("You've got a big group of judge. Which kind of cuisine would you cook? \"Italian\", \"French\" or \"Spanish\"?");
     if (bigGroup === "Italian") {
         alert("Bad luck! The judges are not really fan of Italian cuisine....");
@@ -55,16 +44,23 @@ var largeGroup = function(firstQuestion) {
  }
 }
 
-// var askUserName = function() {
-//     var userName = prompt("Welcome to Master Chef in Singapore! What's your name? Type your name:");
-//     alert("Hello " + userName.toString() + "!");
-// }
+
+
+
+/*var askUserName = function() {
+     var userName = prompt("Hello! What's your name? Type your name:");
+     if (userName === true) {
+        alert("Welcome to Master Chef in Singapore, " + userName.toString() + "!");
+        smallGroup(startQuestion);
+     } else {
+        alert("Please type your name.");
+     }
+}
+*/
 
 
 
 var startQuestion = prompt("How many judges are there? Type a number:");
 
 //askUserName();
-smallGroup(startQuestion);
-mediumGroup(startQuestion);
-largeGroup(startQuestion);
+game(startQuestion);
