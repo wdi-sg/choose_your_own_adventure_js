@@ -2,16 +2,12 @@ var numError = function() {
     return "Please enter a whole number!"
 }
 
-//  function for numbers prompt
-var askNumber = function(order, type) {
-    var promptNum = Number(prompt(`Enter your ${order} ${type}: `));
-    return promptNum;
-}
-
-var test = function(array, type) {
+// prompt element and store in array
+var promptNStore = function(type) {
     var array = []
-    for (var i = 1; i <= 3; i++) {
-        var numName;
+    var numName;
+    var i = 1;
+    while (i <=3) {
         if (i === 1) {
             numName = "first";
         } else if (i === 2 ) {
@@ -19,16 +15,20 @@ var test = function(array, type) {
         } else if (i === 3) {
             numName = "third"
         }
-        var promptNum = Number(prompt(`Enter ${numName} ${type}: `));
-        // if input is not interger
+
+        var promptNum = Number(prompt(`Enter ${type} ${i}`));
+
         if (Number.isInteger(promptNum) === false) {
             alert(numError());
+            continue
         } else {
             array.push(promptNum)
         }
+        i++;
     }
     return array;
 }
+
 
 //  shuffle the array
 var shuffle = function(array) {
