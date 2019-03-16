@@ -2,7 +2,7 @@ var numError = function() {
     return "Please enter a whole number!"
 }
 
-// prompt element and store in array
+// prompt number and store in array
 var promptNStore = function(type) {
     var array = []
     var numName;
@@ -16,7 +16,7 @@ var promptNStore = function(type) {
             numName = "third"
         }
 
-        var promptNum = Number(prompt(`Enter ${type} ${i}`));
+        var promptNum = Number(prompt(`Enter ${numName} ${type}: `));
 
         if (Number.isInteger(promptNum) === false) {
             alert(numError());
@@ -28,7 +28,6 @@ var promptNStore = function(type) {
     }
     return array;
 }
-
 
 //  shuffle the array
 var shuffle = function(array) {
@@ -71,3 +70,38 @@ var checkMatch = function(arrayOne, arrayTwo) {
     }
     return score;
 }
+////////////////////// LETTER GAME FUNCTION ////////////////////////
+var letterError = function() {
+    return "Please enter a letter!"
+}
+
+// prompt letter and store in array
+var promptLStore = function(type) {
+    var array = []
+    var numName;
+    var i = 1;
+    while (i <=3) {
+        if (i === 1) {
+            numName = "first";
+        } else if (i === 2 ) {
+            numName = "second";
+        } else if (i === 3) {
+            numName = "third";
+        } // end of if statement
+
+        var letter = prompt(`Enter ${numName} ${type}`);
+
+ // If input cannot be converted to a number, parseInt() returns NaN
+ // means if NaN is returned, it is a string
+ // isNaN is to check if value is NaN
+        if (letter.length === 1 && isNaN(parseInt(letter)) === true) {
+            array.push(letter);
+
+        } else {
+            alert(letterError());
+            continue;
+        }
+        i++;
+    } // end of while loop
+    return array;
+} // end of the function
