@@ -16,13 +16,14 @@ var promptNStore = function(type) {
             numName = "third"
         }
 
-        var promptNum = Number(prompt(`Enter ${numName} ${type}: `));
+        var promptNum = parseInt(prompt(`Enter ${numName} ${type}: `));
 
-        if (Number.isInteger(promptNum) === false) {
+        if (Number.isInteger(promptNum) === true || isNaN(promptNum) === false) {
+            array.push(promptNum)
+
+        } else {
             alert(numError());
             continue
-        } else {
-            array.push(promptNum)
         }
         i++;
     }
