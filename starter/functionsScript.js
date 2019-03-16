@@ -8,6 +8,28 @@ var askNumber = function(order, type) {
     return promptNum;
 }
 
+var test = function(array, type) {
+    var array = []
+    for (var i = 1; i <= 3; i++) {
+        var numName;
+        if (i === 1) {
+            numName = "first";
+        } else if (i === 2 ) {
+            numName = "second";
+        } else if (i === 3) {
+            numName = "third"
+        }
+        var promptNum = Number(prompt(`Enter ${numName} ${type}: `));
+        // if input is not interger
+        if (Number.isInteger(promptNum) === false) {
+            alert(numError());
+        } else {
+            array.push(promptNum)
+        }
+    }
+    return array;
+}
+
 //  shuffle the array
 var shuffle = function(array) {
     var currentIndex = array.length, tempValue, randIndex;
@@ -34,4 +56,18 @@ var eleToArray = function(array, ele1, ele2, ele3){
     array.push(ele3);
 
     return array;
+}
+
+//  check if both array match and give points
+var checkMatch = function(arrayOne, arrayTwo) {
+    var score = 0;
+
+    for (var i = 0; i < arrayOne.length; i++) {
+        if (arrayOne[i] === arrayTwo[i]) {
+            score += 1;
+        } else {
+            score += 0;
+        }
+    }
+    return score;
 }

@@ -3,11 +3,14 @@ var gameChoice = prompt(`Hello, ${name}! Do you want to guess the order of numbe
 
 var numArray = [];
 var ansNumArray = [];
+var score;
 
 if (gameChoice === "n") {
-    var firstNumber = askNumber("first", "number");
+    var test = test(numArray, "number");
+    console.log(test);
+    //var firstNumber = askNumber("first", "number");
 
-    if (Number.isInteger(firstNumber) === true) {
+   /* if (Number.isInteger(firstNumber) === true) {
         var secondNumber = askNumber("second", "number");
 
         if (Number.isInteger(secondNumber) === true) {
@@ -35,6 +38,17 @@ if (gameChoice === "n") {
 
                             console.log(ansNumArray);
 
+                            score = checkMatch(numArray, ansNumArray);
+                            if (score === 0) {
+                                alert(`TOO BAD! \nSCORE: ${score}`);
+                            } else {
+                               alert(`CONGRATS! \nSCORE: ${score}`);
+                            }
+
+
+
+
+
                         } else {  // error for third order
                             alert(numError());
                         }
@@ -53,5 +67,5 @@ if (gameChoice === "n") {
         }
     } else {  // error for first number
         alert(numError());
-    }
+    }*/
 } // end of game choice
