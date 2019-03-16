@@ -1,0 +1,11 @@
+body {
+	background-color: black;
+}
+
+.bottomText {
+	background-color: blue;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	height: 90px;
+}
