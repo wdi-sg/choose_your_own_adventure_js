@@ -114,7 +114,37 @@ if (year >= 2015) {
 //year chosen
 } else if (year < 1955) {
     alert("I see you're a fan of Back to the Future 3.\nYou've run out of gas and can't get back to your own time!\nHow do you power the Time Machine?")
-    prompt("Horses (H),\nMoonshine (M),\nor Train (T)?")
+    var powerTimeMachine = uppercaseIt(prompt("Horses (H),\nMoonshine (M),\nor Train (T)?"))
+
+
+  //user chooses horse
+      if (powerTimeMachine === "H") {
+        alert("Good idea, but no. The time machine needs to get to 88mph.\n12 horsepower ain't gonna cut it.")
+        theEnd();
+  //user chooses moonshine
+      } else if (powerTimeMachine === "M") {
+        alert("You'd be better off drinking the moonshine. Do not pass Go, do not collect $200. Stuck in 1855.")
+        theEnd();
+  //user chooses train
+      } else if (powerTimeMachine === "T") {
+        alert("Good call! This plan seems to be working. But wait!\nClara wants to go Back to the Future with you at the last moment.\nWhat do you do?")
+        var takeOrLeave = prompt("Take her (T) or Leave her (L)?")
+
+    //user chooses Take
+        if (takeOrLeave === "T") {
+          confirm("Interesting choice. Unfortunately the Doc can't grab Clara and get back to the car in time.\nHe ends up staying in 1855 with her.")
+          theEnd();
+    //user chooses Leave
+        } else if (takeOrLeave === "L") {
+          confirm("Smart choice. Unfortunately the Doc was deeply in love with Clara, and when he gets back to 1985 he becomes very depressed.")
+          theEnd();
+        } else {
+          notRecognized();
+        }
+
+      } else {
+        notRecognized();
+      }
 
 //year chosen
 } else {
