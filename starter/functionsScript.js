@@ -106,3 +106,23 @@ var promptLStore = function(type) {
     } // end of while loop
     return array;
 } // end of the function
+
+///////////////////////  DECIPHER GAME FUNCTION /////////////////////////
+
+var encode = function(code) {
+    var plain = "abcdefghijklmnopqrstuvwxyz";
+    var cipher = "zyxwvutsrqponmlkjihgfedcba";
+
+    encodedCode = []//
+    for (var i = 0; i < code.length; i++) {
+        var position = plain.indexOf(code[i]);
+        for (var j = 0; j < cipher.length; j++) {
+            if (position === j) {
+                encodedCode.push(cipher[j]);
+                //console.log(cipher[j]);
+            }
+        }
+    }
+    var joinedWord = encodedCode.join("")  // to print it as a word
+    return joinedWord
+}
