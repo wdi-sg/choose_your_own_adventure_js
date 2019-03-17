@@ -1,5 +1,6 @@
 
-var game = function(firstQuestion) {
+var game = function() {
+    var firstQuestion = prompt("How many judges are there? Type a number:");
     if (firstQuestion < 5) {
      var whichOne = prompt("Which food do you think the judges prefer? \"Sushi\" or \"Ramen\"?");
       if (whichOne === "Sushi") {
@@ -7,7 +8,7 @@ var game = function(firstQuestion) {
           if (salmonOrTuna === "Salmon") {
             alert("Great choice! The head of judge liked a lot!");
         } else if (salmonOrTuna === "Tuna") {
-            alert("\"Hmmmm.....Not my favorite.\" The head of judge doesn't like Tuna.");
+            alert("\"Hmmmm.....Not my favorite.\" The head of judge doesn't like tuna.");
         }
        } else if (whichOne === "Ramen") {
         var howManyMins = prompt("How many minutes do you boil the noodle? Type a number:");
@@ -42,25 +43,20 @@ var game = function(firstQuestion) {
         }
     }
  }
+var playAgain = confirm("Do you want to play again?");
+if (playAgain === true) {
+    game();
+} else {
+    alert("Thanks for playing!")
+}
 }
 
 
-
-
-/*var askUserName = function() {
-     var userName = prompt("Hello! What's your name? Type your name:");
-     if (userName === true) {
-        alert("Welcome to Master Chef in Singapore, " + userName.toString() + "!");
-        smallGroup(startQuestion);
-     } else {
-        alert("Please type your name.");
-     }
+var playGame = function() {
+    var userName = prompt("Hello! What's your name? Type your name:");
+    alert("Welcome to Master Chef in Singapore, " + userName.toString() + "!");
+    game();
 }
-*/
 
 
-
-var startQuestion = prompt("How many judges are there? Type a number:");
-
-//askUserName();
-game(startQuestion);
+playGame();
