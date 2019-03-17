@@ -1,7 +1,7 @@
 // Game is about fixed gear bicycles and putting togethether a customised bicycle before testing one's skills on a crit lap.
 // Start by getting the player's name. 
 
-var userName = prompt("Welcome to Wacky Wheels. A game that revolves around riding bicycles. Please enter your name to start playing!");
+var userName = prompt("Welcome to Bespoke Bicycle Build. A game that revolves around building your own virtual bicycle. Please enter your name to start playing!");
 // console.log(userName);
 
 // "Thanks for entering your name. Please confirm it is " + userName + ".");
@@ -15,9 +15,9 @@ var userName = prompt("Welcome to Wacky Wheels. A game that revolves around ridi
 // }
 
 if (confirm("Thanks for entering your name. Please confirm it is " + userName + ".") == true) {
-	userName = "Great, time to move on!";
+	var userNameResponse = "Great, time to move on!";
 } else {
-	userName = prompt("Please enter your name again");
+	var userNameRedo = prompt("Please enter your name again");
 }
 
 // Now let the user choose what type of riding they want to do. They can choose between Road, Track and Fixie riding.
@@ -100,23 +100,87 @@ var cycling = [{
 	"frameColor": [],
 	"groupsetChoice": ["Shimano 105", "Shimano Ultegra", "Shimano Dura Ace", "SRAM Rival 22", "Sram Red"],
 },
-{	"kind": "track",
-	"frameBrand": ["Cannondale", "Cinelli", "Specialzied", "Look"],
+{	"kind": "cyclocross",
+	"frameBrand": ["Cannondale", "Cinelli", "Specialized", "Look"],
 	"frameMaterial": ["alumnium", "carbon", "steel"],
 	"frameColor": [],
 	"groupsetChoice": ["Shimano Dura Ace", "SRAM Force 1", "Sram Rival 1"],
 },
-{	"kind": "fixed",
-	"frameBrand": ["8 bar", "Cinelli", "Specialzied", "Look"],
+{	"kind": "track",
+	"frameBrand": ["8 bar", "Cinelli", "Specialized", "Look"],
 	"frameMaterial": ["alumnium", "steel", "titanium"],
 	"frameColor":[],
 	"groupsetChoice": ["Aventon Push", "Campagnolo Pista"],
 }]
 
 //console.log(cycling); // Check array works!!
-// Now that array of objects is made. Can move onto figuring out how to code this and make the game interative and dynamic.
-// var userChoice = function (style,brand, material, color, groupset) {
 
+// Now that array of objects is made. Can move onto figuring out how to code this and make the game interative and dynamic.
+
+var userFinalBike = [];
+
+var userKind = prompt(userName + ", choose your style of riding from road, cyclocross or track.");
+if (userKind === "road") {
+var userRoadBrand = prompt("Choose a frame brand from Cannondale, Canyon, Specialized or Trek.");
+} else if (userKind === "cyclocross") {
+var userXBrand = prompt("Choose a frame brand from Cannondale, Cinelli, Specialized or Look.");
+} else if (userKind === "track") {
+var userTrackBrand = prompt("Choose a frame brand from 8 bar, Cinelli, Specialized or Look.");
+} else {
+var defaultKind = prompt("Please choose a style of riding from road, cyclocross or track.");
+}
+
+console.log(userKind);
+
+var userBrand = console.log(userKind);
+if (userBrand === userRoadBrand) {
+var userRoadMaterial = prompt("Choose a frame material from alumnium, carbon, steel or titanium.");
+} else if (userBrand === userXBrand) {
+var userXMaterial = prompt("Choose a frame material from alumnium, carbon or steel.");
+} else if (userBrand === userTrackBrand) {
+var userTrackMaterial = prompt("Choose a frame material from alumnium, steel or titanium.")
+} else {
+var defaultMaterial = prompt("Please choose a frame material.")
+}
+		// if (userKind === cycling[userRoadMaterial]["material"]) {
+		// var userRoadColor = prompt("Choose any color(s).");
+		// } else if (userKind === cycling[userXMaterial]["material"]) {
+		// var userXColor = prompt("Choose any color(s).");
+		// } else if (userKind === cycling[userTrackMaterial]["material"]) {
+		// var userTrackColor = prompt("Choose any color(s).");
+		// } else {
+		// var defaultColor = prompt("Choose any color(s).");
+		// }
+		// 	if (userRoadColor === cycling["frameColor"]) {
+		// 	var userRoadGroupset = prompt("Choose from Shimano 105, Shimano Ultegra, Shimano Dura Ace, SRAM Rival 22 or SRAM Red.");
+		// 		if (userRoadGroupset === cycling["groupsetChoice"]) {
+		// 			userFinalBike.push(userKind, userRoadBrand, userRoadMaterial, userRoadColor, userRoadGroupset);
+		// 			}
+		// 		}
+// 			}
+		
+	
+
+// 	alert(userFinalBike);
+// }
+
+
+
+// var userChoice = function (style, brand, material, color, groupset) {
+
+// 	for (var i=0; i < cycling.length; i++) {
+// 		if (userKind === "road") {
+// 			prompt(userName + ", choose the brand for your bike frame from Cannondale, Canyon, Specialzied or Trek."); 
+// 		} else 
+			
+// 	// 	if (userChoice["brand"] === "Cannondale" || userChoice["brand"] === "Canyon" || userChoice["brand"] === "Specialzied" || userChoice["brand"] === "Trek") {
+// 	// 	 userFinalBike
+
+
+// 	 // userFinalBike.push(cycling["kind"]);
+// 		}
+// 	} 
+// 	return userFinalBike;
 // }
 
 
