@@ -2,6 +2,7 @@ var userInput = "";
 var nameOfNpcInRoom = "";
 var npcInRoom;
 var itemsInRoom;
+var reload = false;
 var playerModel = {
     position: [1, 1],
     inventory: []
@@ -13,11 +14,13 @@ function kimJongIll() {
 }
 function eatSashimi() {
     alert("As you ingest slice after slice, you disregard the fact that there's a slight smell to the fish. Your stomach starts to ache, twist and turn. Your head starts to throb terribly. As your vision fades to black, you remember how mother used to say something about sashimi being dangerous and some guy having his brains being eaten by worms...");
-    playerModel.position = [1, 1];
+    reload = true;
+    location.reload(true);
 }
 function submitSoul() {
     alert("Deep down inside you always wished to be just like Anastasia Steele, plus you like cats. An eternity of feline bdsm awaits you.");
-    playerModel.position = [1, 1];
+    reload = true;
+    location.reload(true);
 }
 var itemsArray = main.data.items;
 //function to use to move user by 1 room in the north/east/south/west direction relative to where user currently is
@@ -119,11 +122,11 @@ function enterRoom() {
         }
     }
     itemsInRoomDescription =
-        itemsInRoomDescription + "\nType the name of the item to pick it up.";
+        itemsInRoomDescription + "\nType the name of the item to pick it up.\n\n";
     //setup movement conditionals to ensure user does not move out of grid
     var roomsKeys = Object.keys(main.data.rooms);
     var roomsKeysX = Object.keys(main.data.rooms[x]);
-    var movementMessage = "Type \"n\" to move north, \"s\" to move south, \"e\" to move east and \"w\" to move west.";
+    var movementMessage = 'Type "n" to move north, "s" to move south, "e" to move east and "w" to move west.';
     if (x === 1) {
         //don't allow movement in the West
         movementMessage = movementMessage + "\nThere is no door to the West";
@@ -140,13 +143,26 @@ function enterRoom() {
         //don't allow movement in the North
         movementMessage = movementMessage + "\nThere is no door to the North";
     }
-    //order of userPrompt; 1. description of npc in room, 2. action description to interact with npc in room 3a. items in room 3b. description of items in room that follow with each item 4. Default options: movement options (user cannot move out of map. if at [1,y], no option to move west)
+    var inventoryMessage = "Your inventory contains: ";
+    if (playerModel.inventory.length === 0) {
+        inventoryMessage = inventoryMessage + "\nNothing\n\n";
+    }
+    else {
+        for (var i = 0; i < playerModel.inventory.length; i++) {
+            var item = playerModel.inventory[i];
+            inventoryMessage = inventoryMessage + "\n" + item;
+        }
+        inventoryMessage =
+            inventoryMessage + "\nType the item name to use it in this room.\n\n";
+    }
+    //order of userPrompt; 1. description of npc in room, 2. action description to interact with npc in room 3a. items in room 3b. description of items in room that follow with each item 4. Default options: movement options (user cannot move out of map. if at [1,y], no option to move west) 5. List items player has in inventory
     var userPrompt = nameOfNpcInRoom +
         ", " +
         npcDescription +
         "\n" +
         npcActionDescription +
         itemsInRoomDescription +
+        inventoryMessage +
         movementMessage;
     userInput = prompt(userPrompt);
     console.log("You entered " + userInput);
@@ -165,8 +181,10 @@ function gameLoop() {
     //0,1,2,3,4... which denotes interaction with npc
     //an item name, which denotes the user picking up the item
     //"use " + "item_name" which denotes using the item in the room.
-    while (!(playerModel.inventory.includes("exit") || userInput === "quit")) {
+    while (!((playerModel.inventory.includes("exit")) || (userInput === "quit") ||
+        (reload === true))) {
         enterRoom();
+        var room = getRoom();
         switch (userInput) {
             case "0":
                 console.log("user typed 0");
@@ -222,7 +240,20 @@ function gameLoop() {
                         //item has been removed from inventory
                     }
                 }
+                //remove npc from room
+                room.npc.name = "Empty room";
+                var rewardItemDescription = void 0;
+                for (var j = 0; j < itemsArray.length; j++) {
+                    var itemNameInArray = itemsArray[j].name;
+                    var itemDescriptionInArray = itemsArray[j].description;
+                    if (itemNameInArray === rewardItem) {
+                        rewardItemDescription =
+                            "\n" + itemNameInArray + ": " + itemDescriptionInArray;
+                    }
+                }
+                //give player the reward item
                 playerModel.inventory.push(rewardItem);
+                alert("You received " + rewardItemDescription);
             }
             else {
                 alert("You cannot use that item here.");
@@ -243,3 +274,4 @@ function gameLoop() {
     }
     alert("Congratulations, you escaped, now you're stuck back in real life.");
 }
+gameLoop();
