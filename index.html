@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>A Long Night in the Woods</title>
+    <title>Choose Your Own Adventure</title>
+    <style type="text/css" href="style.css"></style>
 </head>
 <body>
-    <h1>A Long Night in the Woods</h1>
+    <h1>Choose Your Own Adventure</h1>
 
     <p>Click the button to start the game</p>
 
     <button onclick="startWarning()">Run Game</button>
 
-    <div id="textBox">
-        <h2>Player's Log:</h2>
+    <div id="Instructions">
+        <h2>Instructions</h2>
+        <p>This game will require you to make decisions that will affect the fate of your character. When you reach these checkpoints, type in choice of action in the format provided in the brackets ().
+        <p>
+            (YYYY) - Key in a four-digit year eg. 1984</br>
+            (A/X) - Key in either A or X.
+        </p>
     </div>
 
-<script type="text/javascript" src="game-engine.js"></script>
+<script type="text/javascript" src="script.js"></script>
 </body>
 </html>
