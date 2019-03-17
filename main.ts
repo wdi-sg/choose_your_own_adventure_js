@@ -25,6 +25,8 @@ interface npcObject {
 }
 let userInput: string = "";
 let nameOfNpcInRoom: string = "";
+let npcInRoom: npcObject;
+let itemsInRoom: string[];
 
 let playerModel = {
   position: [1, 1],
@@ -92,7 +94,7 @@ function getRoom() {
 }
 
 function enterRoom() {
-    //gets current position of player
+  //gets current position of player
   let x: number = playerModel.position[0];
   let y: number = playerModel.position[1];
   let room: roomObject = main.data.rooms[x][y];
@@ -104,7 +106,7 @@ function enterRoom() {
   //iterate through array of npc objects to match name and select npc
   let npcArray: npcObject[] = main.data.npcs;
   //initialise npcInRoom as an emptyRoom
-  let npcInRoom: npcObject = npcArray[0];
+  npcInRoom = npcArray[0];
   for (let i = 0; i < npcArray.length; i++) {
     const npcName: string = npcArray[i].name;
     if (npcName === nameOfNpcInRoom) {
@@ -115,7 +117,7 @@ function enterRoom() {
   let npcDescription: string = npcInRoom.description;
   let npcActionDescription: string = npcInRoom.actionDescription;
 
-  let itemsInRoom: string[] = room.items;
+  itemsInRoom = room.items;
   let itemsInRoomDescription: string =
     "Items in the room that can be picked up:";
   //iterate through items in room and create text block of item name followed by item description.
@@ -178,18 +180,18 @@ function npcFunctions() {
   //get npc in the room
 }
 
+//MAIN function running the game
 function gameLoop() {
   //use userInput to execute a function
   //userInput can be nsew which denotes movement,
   //0,1,2,3,4... which denotes interaction with npc
   //an item name, which denotes the user picking up the item
   //"use " + "item_name" which denotes using the item in the room.
-  while (!playerModel.inventory.includes("exit")) {
+  while (!(playerModel.inventory.includes("exit") || userInput === "quit")) {
     enterRoom();
     switch (userInput) {
       case "0":
         console.log("user typed 0");
-
         break;
       case "1":
         //look through NPC object, get NPC object's function name, run that function
@@ -235,6 +237,35 @@ function gameLoop() {
 
         break;
     }
-    //create code that only triggers if user has item in inventory. item is used by command "use item_name". Item is only successfully used if npc also has the same item.name in their object.
+    //create code that only triggers if user has item in inventory.
+    if (playerModel.inventory.includes(userInput)) {
+      //since item is in inventory, next, check to see if item can be used on this npc.
+      if (npcInRoom.item.name === userInput) {
+        alert(npcInRoom.item.response);
+        //use for loop to find position of this item used in player inventory and slice it away
+        for (let i = 0; i < playerModel.inventory.length; i++) {
+          const item = playerModel.inventory[i];
+          if (item === userInput) {
+            playerModel.inventory.splice(i, 1);
+            //item has been removed from inventory
+          }
+        }
+      } else {
+        alert("You cannot use that item here.");
+      }
+    }
+    //create code that picks up the item if it is in the room
+    for (let i = 0; i < itemsInRoom.length; i++) {
+      const item = itemsInRoom[i];
+      if (userInput === item) {
+        //since item is in the room and userInput matches the item, pick it up and put it in the player inventory
+        playerModel.inventory.push(item);
+        //next, remove the item from the room
+        itemsInRoom.splice(i, 1);
+        //item has been removed from inventory
+      }
+    }
+    //end of while loop
   }
+  alert("Congratulations, you escaped, now you're stuck back in real life.");
 }
