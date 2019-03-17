@@ -3,7 +3,7 @@ var score = 0;
 var name = prompt("Enter your name!").toUpperCase();
 
 while (true) {
-    var choice = Number(prompt("Enter 1 to earn points! \nEnter 2 to Fight the Ghosts using the points you have earned! \nEnter 0 to exit game "));
+    var choice = Number(prompt("Enter 1 to Earn Points! \nEnter 2 to Fight the Ghosts using the points you have earned! \nEnter 0 to Exit Game"));
     if (choice === 1) {
         alert(`You see three doors with "WELCOME ${name}!" printed on it with blood... Choose the door you want to escape from!`);
 
@@ -12,6 +12,7 @@ while (true) {
         if (doorChoice === "red") {
             score = 0;
             alert(`"AAAHHHHHHH!" \nYou entered a room full of ghosts and were killed! GAME OVER \nScore: ${score}`);
+            break;
 
         } else if (doorChoice === "blue") {
             score += 1;   // because you entered the correct room, points + 1
@@ -36,6 +37,7 @@ while (true) {
             var blueScore = checkMatch(numArray, ansNumArray);   // how many points user earned from guessing
             if (blueScore === 0) {
                 alert(`YOU FAILED! GAME OVER \nSCORE: ${blueScore}`);
+                break
             } else {
                 score += blueScore;
              alert(`CONGRATS! \nYou earned ${blueScore} point from guessing the sequence correctly. \nCurrent Score: ${score}`);
@@ -59,6 +61,7 @@ while (true) {
                 var blueScore = checkMatch(letterArray, ansLetterArray);
                 if (blueScore === 0) {
                     alert(`YOU FAILED! GAME OVER \nSCORE: ${blueScore}`);
+                    break;
                 } else {
                  alert(`CONGRATS! \nYou earned ${blueScore} point from guessing the sequence correctly. \nCurrent Score: ${score}`);
                 } // end of letter game
@@ -69,9 +72,8 @@ while (true) {
             alert(`WHAT?!! The door is locked! \nHurry ${name}! Try to decode to unlock the door! \n\n\nHint: The letter A has a position of 1 in the human world but a position of 26 in your nightmare.`)
 
             //  encode the correct word first
-            var encode = encode(randomWord);
-            // console.log(encode);
-            var decodeGuess = prompt(`Try to decode this word: ${encode}`).toLowerCase();
+            var encodeWord = encode(randomWord);   // why it goes through the first time but not the second time?!
+            var decodeGuess = prompt(`Try to decode this word: ${encodeWord}`).toLowerCase();
 
             if (decodeGuess === randomWord) {
                 var decodeScore = 3;
@@ -79,7 +81,7 @@ while (true) {
                 alert(`WOW! The door opened! \nYou earned ${decodeScore} points. \nCurrent Score: ${score}`);
 
             } else {
-                var secondDecodeGuess = prompt(`It's incorrect! Enter word to try again --- \nTry to decode this word: ${encode} \n`).toLowerCase();
+                var secondDecodeGuess = prompt(`It's incorrect! Enter word to try again --- \nTry to decode this word: ${encodeWord} \n`).toLowerCase();
 
                 if (secondDecodeGuess === randomWord) {
                     var decodeScore = 2;
@@ -87,7 +89,7 @@ while (true) {
                     alert(`Yey, finally! The door opened! \nYou earned ${decodeScore} points. \nCurrent Score: ${score}`);
 
                 } else {
-                    var thirdDecodeGuess = prompt(`OH NO! LAST CHANCE! Enter word to try again --- \nTry to decode this word: ${encode} \n`).toLowerCase();
+                    var thirdDecodeGuess = prompt(`OH NO! LAST CHANCE! Enter word to try again --- \nTry to decode this word: ${encodeWord} \n`).toLowerCase();
 
                     if (thirdDecodeGuess === randomWord) {
                         var decodeScore = 1;
@@ -97,6 +99,7 @@ while (true) {
                     } else {
                         score += 0;
                         alert(`GOODBYE ${name}! You took too long to unlock the door! You were killed by the ghosts --- GAME OVER \nSCORE: ${score}`);
+                        break;
                     }  // end of third guess
                 }  // end of second guess
 
@@ -111,8 +114,9 @@ while (true) {
             break;
         } else if (ghostPoints < score) {
             alert(`CONGRATS!!!! YOU WIN!!! \nYou managed to kill all the ghosts and wake up from your sleep with a beautiful dream instead of a nightmare!`);
+            break;
         } else if (ghostPoints === score) {
-            alert(`Huh?! You're as stong as the ghosts. Try again`);
+            alert(`WAIT! You're as strong as the ghosts. Try again`);
         }
 
     } else if (choice === 0) {

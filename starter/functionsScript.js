@@ -78,7 +78,7 @@ var letterError = function() {
 
 // prompt letter and store in array
 var promptLStore = function(type) {
-    var array = []
+    var array = [];
     var numName;
     var i = 1;
     while (i <=3) {
@@ -113,7 +113,7 @@ var encode = function(code) {
     var plain = "abcdefghijklmnopqrstuvwxyz";
     var cipher = "zyxwvutsrqponmlkjihgfedcba";
 
-    encodedCode = []//
+    var encodedCode = [];//
     for (var i = 0; i < code.length; i++) {
         var position = plain.indexOf(code[i]);
         for (var j = 0; j < cipher.length; j++) {
@@ -123,6 +123,6 @@ var encode = function(code) {
             }
         }
     }
-    var joinedWord = encodedCode.join("")  // to print it as a word
-    return joinedWord
+    var joinedWord = encodedCode.join("");  // to print it as a word
+    return joinedWord;
 }
