@@ -1,126 +1,89 @@
+var userName;
+var action;
 
 
-var sanityPoints;
-var substancePoints;
-var intellectualPoints;
-var modifier;
-var currentScene;
-var cast;
-// var sceneTwo = gameObject.storyLine
-// var sceneThree =
+var start = function() {
 
-var charDetails = function() {
+var y = confirm("Let us begin....");
 
-    sanityPoints = gameObject.storyLine.cast_one.details.startStats[0];
-    substancePoints = gameObject.storyLine.cast_one.details.startStats[1];
-    intellectualPoints = gameObject.storyLine.cast_one.details.startStats[2];
-
-}
-
-var optionSelector = function(input/*input 1,2,3 */) {//player chooses what to do (0 = fight, 1= run, 2= discourse)
-    var x = input
-    var option = gameObject.storyLine.cast_one.plotAction.scene_four[input]; /// need to choose scene function
-    // var action = alert(option[]);
-    var action = alert(option[0]);
-    var outcome = alert(option[1]);
-    modifier = option[2];
-
-    cbangeMod(x);
+    if(y== true) {
+    userName = prompt(gameObject.start[0]);
+    alert(userName + gameObject.start[1] );
+    confirm(gameObject.start[2]);
+    action = prompt(gameObject.start[3]);
+    partOne();
+    } else {
+        console.log("Not started");
+        alert("Thank you for your time");
+    }
 
 }
 
 
+start();
 
-/*var changeMod = function(input/*needs to have option number) {
+function partOne() {
+if(action == "talk" || action == "t" ) {
+    action = prompt(gameObject.opening.talk[0]);
+    storyProgOne(action); // to next part of story?
 
+} else if (action == "beat" || action == "b") {
+    action = prompt(gameObject.opening.beat[0]);
 
-    sanityPoints = sanityPoints - gameObject.storyLine.cast_one.plotAction.scene_four[2][2][0]
-    substancePoints = substancePoints - gameObject.storyLine.
-    // intellectualPoints =
-}
-*/
+    if (action == "stop" || action == "s") {
+        alert(gameObject.opening.beat[1][0]); //end. need to refresh
+        restart();
 
-var charToPlay = function(select){
-    if(select == 0) {
-        console.log(gameObject.storyLine.cast_one);
-        cast = gameObject.storyLine.cast_one;
-    } else if (select == 3) {
-        console.log("do Nothing");
+    } else if(action == "continue" || action == "c") {
+        action = prompt(gameObject.opening.beat[1][1][0]);
+
+        if(action == "listen" || action == "l") {
+            alert(gameObject.opening.beat[1][1][1][1]);
+            action = prompt(gameObject.opening.talk[0]);
+            storyProgOne(action); // to next part of story?
+
+        } else if (action == "continue" || action == "c") {
+            alert(gameObject.opening.beat[1][1][1][0]); //end. need to refresh
+            restart();
+
+        }
+    }
+
+} else if (action == "walk") {
+    action = prompt(gameObject.opening.walk[0]);
+    if(action == "brush him aside" || action == "b") {
+        alert(gameObject.opening.walk[1][0])
+        restart();
+         // end need to refresh.
+    } else if (action == "stay" || action == "s") {
+        action = prompt(gameObject.opening.talk[0]);
+        storyProgOne(action);
     }
 }
 
-
-// var whichscene = function() {
-
-//     currentScene
-
-// }
+}
 
 
+function storyProgOne(input) {
+if(input == "accept") {
+    action = prompt(gameObject.opening.talk[1][1]);
+} else if (input == "decline") {
+    alert(gameObject.opening.talk[1][0]); // end. need to refresh.
+};
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function restart() {
+    var y = confirm("Do you wish to restart?")
+    if ( y == true) {
+        start();
+    } else {
+        console.log("Not started");
+        alert("Thank you for you time");
+    }
+}
 
 
 /*
-console.log(gameObject);
-
-var questionSelector = function(input) {
-
-    if(input == 1) {
-        return alert(gameObject.firstScene.first_three);
-    } else if (input == 2) {
-        return alert(gameObject.secondScene.second_one);
-    }
-
-}
-
-var promptSelector = function(input) {
-
-    if(input == 1) {
-        return alert(gameObject.firstScene.first_three)
-    } else if (input == 2) {
-        return alert(gameObject.secondScene.second_one);
-    }
-}
-
-var gameLogic = function(input) {
-    if(input == 1) {
-    questionSelector(promptSelector(input));
-    ;
-}
-}
-// var counter = 0;
-var gameStart = function(input) {
-    for(var i = 0; i < 5; i++) {
-    // if (counter < 5) {
-        gameLogic(input);
-        console.log(i);
-
-    }
-}
-// stepSelector(userInput);
-// promptSelector(userInput);
+You start as a man who does not wear a much, other than pieces of rags around your body. No one really likes you nor do you have friends in this village. There is a village ritual happening. You proceed to check it out.
+//You see a short and strangely clothed man. You approach him  He appears puzzled yet intrigued by your appearance. He starts talking to you in english, which you understand. What do you do? (Talk? Beat him up for looking like you? Walk away to disassociate yourself?)
 */
