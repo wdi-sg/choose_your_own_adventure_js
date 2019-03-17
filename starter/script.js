@@ -1,4 +1,5 @@
 // put code here!
+// to understand and flow of paths, please refer to path-framework.jpg file.
 
 var character = {
     name: "person",
