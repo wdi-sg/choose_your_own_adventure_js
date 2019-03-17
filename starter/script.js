@@ -115,25 +115,54 @@ if (chooseFighter == 1){
     console.log(geckoFloorOrCeiling);
     //return (geckoFloorOrCeiling);
   }
+}else if (chooseFighter == 3){
+  var pointyHomeRoom = prompt('The room is dark. You have this knife in your in your hands. The same knife that you tell your pet doggo not to ever touch. You look closer... It is the exact same knife that you use for poking things around in the toilet! Could this be your (h)ome and that you åre now in the body of your pet doggo??? No it can\'t be right. This is just a bad dream and you have never seen this (r)oom before');
+  if (pointyHomeRoom == 'h'){
+    alert('This IS your HOME! No wonder it has the familiar timber-oak smell. You reckon it is attic. You bark and hear footsteps up the attic...');
+    console.log(pointyHomeRoom);
+  }else if (pointyHomeRoom == 'r'){
+    alert('No, you have never been to this dark room ever...');
+    console.log(pointyHomeRoom);
+}else {
+  alert('please choose something');
+  console.log(pointyHomeRoom);
+  }
+}else if (chooseFighter == 4){
+  alert('Just as you open your eyes, and as bubbles form in your mouth.\nA bright light from the top emerges and something reachs out and trys to grab you!');
+  var stabOrNot = prompt('Do you pick up the knife and try to (s)tab it? Or do you (l)eave the knife behind?');
+}else if (chooseFighter ==5){
+  alert('Opps. Have not created paths for this character yet');
+}else if (chooseFighter == 6){
+  alert('Opps. Have not created paths for this character yet');
+}else if (chooseFighter ==7){
+  alert('Opps. Have not created paths for this character yet');
 }else if (chooseFighter == 8){
-  var siegeSurvey = prompt('A miserable tortoise you are... What are the chances you can make it out alive? Do you want to start (o)ver? Or continue to (s)urvey this dark room?');
-  if (siegeSurvey == 's'){
+  var siegeSurveyHibernate = prompt('A miserable tortoise you are... What are the chances you can make it out alive? Do you want to start (o)ver? Or continue to (s)urvey this dark room? Or just (h)ibernate?');
+  if (siegeSurveyHibernate == 's'){
     alert('You inch your way around, albeit REALLY slowly; plus the fork is heavy...');
-    console.log(siegeSurvey);
-  }else if (siegeSurvey == 'o'){
-    console.log(siegeSurvey);
+    console.log(siegeSurveyHibernate);
+  }else if (siegeSurveyHibernate == 'o'){
+    console.log(siegeSurveyHibernate);
     checkFighterChosen();
+  }else if (siegeSurveyHibernate == 'h'){
+    alert('It is that time of the year. You can\'t help it. You are tough as h*ll, and your metabolism is low, you can afford to idle. And so.. zzzZ.');
+    console.log(siegeSurveyHibernate);
   }else{
     alert('please choose something');
-    console.log(siegeSurvey);
+    console.log(siegeSurveyHibernate);
   }
+}else if (chooseFighter == 9){
+  alert('Opps. Have not created paths for this character yet');
+}else if (chooseFighter == 10){
+  alert('A cat! PUURRRfect! You have night vision! Though this room is dark, you can actually see... wait a minute. You don\'t just have night vision... You have x-ray vision! You can see... just make out a shape of a woman undressing two rooms ahead of where you are sitted. She lets her blouse drop of to the ... (insert NSFW content here). Phew, that was steamy! Now we know why cats love to stare off blankly into the distance! I wish I were a cat too!');
+  var catDoorSmell = prompt('Anyway, there is a (d)oor with a wooden handle. But wait, you (s)mell something.');
 }else {
   alert("Let's come back to this later");
   console.log('Last else statement printed')
 }
 }
 
-openYourEyes();
+//openYourEyes();
 
 console.log('choose fighter conditional statement has finished running');
 //console.log(geckoFloorOrCeiling);
