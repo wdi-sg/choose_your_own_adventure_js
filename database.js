@@ -10,7 +10,7 @@ var main = {
             name: "emptyRoom",
             completed: false
           },
-          item: ["medicine"]
+          items: ["medicine"]
         },
         2: {
           desciption: "This is room 1,2",
@@ -18,34 +18,91 @@ var main = {
           positionY: 2,
           userPrompt: "",
           npc: {
-            name: "none",
+            name: "Empty room",
             completed: false
           },
-          item: []
+          items: []
+        },
+        3: {
+          desciption: "This is room 1,2",
+          positionX: 1,
+          positionY: 2,
+          userPrompt: "",
+          npc: {
+            name: "Empty room",
+            completed: false
+          },
+          items: []
+        }
+      },
+      2: {
+        1: {
+          desciption: "This is room 2,1",
+          positionX: 2,
+          positionY: 1,
+          userPrompt: "",
+          npc: {
+            name: "sashimi",
+            completed: false
+          },
+          items: []
         },
         2: {
-          1: {
-            desciption: "This is room 2,1",
-            positionX: 2,
-            positionY: 1,
-            userPrompt: "",
-            npc: {
-              name: "sashimi",
-              completed: false
-            },
-            item: []
+          desciption: "This is room 2,2",
+          positionX: 2,
+          positionY: 2,
+          userPrompt: "",
+          npc: {
+            name: "Kim Jong Ill",
+            completed: false
           },
-          2: {
-            desciption: "This is room 2,2",
-            positionX: 2,
-            positionY: 2,
-            userPrompt: "",
-            npc: {
-              name: "Kim Jong Ill",
-              completed: false
-            },
-            item: []
-          }
+          items: []
+        },
+        3: {
+          desciption: "This is room 2,3",
+          positionX: 1,
+          positionY: 2,
+          userPrompt: "",
+          npc: {
+            name: "Empty room",
+            completed: false
+          },
+          items: []
+        }
+      },
+      3: {
+        1: {
+          desciption: "This is room 2,1",
+          positionX: 2,
+          positionY: 1,
+          userPrompt: "",
+          npc: {
+            name: "sashimi",
+            completed: false
+          },
+          items: []
+        },
+        2: {
+          desciption: "This is room 2,2",
+          positionX: 2,
+          positionY: 2,
+          userPrompt: "",
+          npc: {
+            name: "Kim Jong Ill",
+            completed: false
+          },
+          items: []
+        },
+        3: {
+          desciption: "This is room 2,3",
+          positionX: 1,
+          positionY: 2,
+          userPrompt: "",
+          npc: {
+            name: "Empty room",
+            completed: false
+          },
+          items: []
         }
       }
     },
@@ -55,16 +112,28 @@ var main = {
         load: 0,
         items: {}
       },
-      position:[0,0]
+      position: [0, 0]
     },
     npcs: [
       {
+        name: "emptyRoom",
+        description: "You find yourself in an empty room",
+        actionCommand: [""],
+        actionDescription: "",
+        function: [""],
+        item: {
+          name: "",
+          response: "",
+          rewardItem: ""
+        }
+      },
+      {
         name: "Kim Jong Ill",
         description:
-          "An ill dictator sits upon a chest, he gestures to you to speak",
+          "an ill dictator sits upon a chest, he gestures to you to speak",
         actionCommand: ["speak"],
         actionDescription:
-          'Type "speak" to speak with him, "nothing" to do nothing.',
+          'Type "1" to speak with him.',
         function: ["kimJongIll"],
         item: {
           name: "medicine",
@@ -78,7 +147,7 @@ var main = {
         description: "A delicious bowl of sashimi sits alone in a room",
         actionCommand: ["eat", "nothing"],
         actionDescription:
-          "Type \"eat\" to fill your empty stomach, \"nothing\" to do nothing.",
+          "Type \"1\" to eat the sashimi to fill your empty stomach",
         function: ["eatSashimi", "nothingSashimi"],
         item: {
           name: "",
@@ -87,21 +156,28 @@ var main = {
         }
       },
       {
-          name: "emptyRoom",
-          description: "You find yourself in an empty room",
-          actionCommand: [""],
-          actionDescription: "",
-          function: [""],
-          item: {
-              name: "",
-              response: "",
-              rewardItem: ""
-          }
+        name: "Lord Meow Meow",
+        description: "A great fluffy house cat the size of a house stands between you and the EXIT, it demands that you provide it with an offering or submit your soul to be its eternal scratchboard.",
+        actionCommand: [],
+        actionDescription:
+          "Type \"1\" to submit your soul",
+        function: ["eatSashimi", "nothingSashimi"],
+        item: {
+          name: "Yellowtail",
+          response: "Lord Meow Meow is satisfied with your offering, you may pass.",
+          rewardItem: "exit"
       }
-    ],
-    items: {
-      name: "medicine",
-      description: "Perhaps someone sick needs this"
     }
+    ],
+    items: [
+      {
+        name: "medicine",
+        description: "Perhaps someone sick needs this"
+      },
+      {
+        name: "Yellowtail",
+        description: "A large tasty fish that will never grow stale thanks to the power of existing only in code"
+      }
+    ]
   }
 };
