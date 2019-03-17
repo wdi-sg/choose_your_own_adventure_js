@@ -193,7 +193,7 @@ function pathB() {
        };
     } else if (userInput === 'f') {
         alert('The troll snorts and lifts its club. You are in for a tough fight ahead!')
-        attack(3,character.str,14)
+        attack(3,character.str,10)
         pathC();
         // no if else for fight, as you would just keep fighting until either party dies.
     } else if (userInput == 'p') {
