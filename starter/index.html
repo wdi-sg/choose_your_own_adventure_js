@@ -3,8 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
+  <script src="functions.js"> </script>
 </head>
-<body>
-  <script src="script.js"></script>
+<body style="background-image: url('https://i.imgur.com/jNL4Zpv.jpg'); width: 100vw; height: 100vh;">
+  <button id="start" style= "position: fixed; left:50%; top:50%; width:200px; height: 120px; background-color: blue; color: white; font-size:40px;  border: 2px solid green" >Start game</button> 
+  <script type="text/javascript" >
+    var startGame = document.getElementById('start');
+    startGame.onclick = function() {
+      var script = document.createElement("script");
+      script.src = "script.js"; 
+      document.getElementsByTagName("head")[0].appendChild(script);
+      return false;
+    }
+  </script>
 </body>
 </html>
