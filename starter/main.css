@@ -1,0 +1,18 @@
+
+body {
+  background-color: grey;
+}
+
+.choose_your_fighter{
+  max-width: 100%;
+  height: auto;
+  width: auto\9;
+}
+
+li {
+  float: left;
+  display: block;
+  width: 20%;
+  margin: 0;
+  padding: 0;
+}/*source: https://stackoverflow.com/questions/7758866/making-an-unordered-list-span-100-the-width-of-a-div */
