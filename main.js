@@ -9,7 +9,7 @@ var playerModel = {
 //npc functions
 function kimJongIll() {
     var userIn = prompt("Say something");
-    alert(userIn);
+    alert("Kim Jong Ill: " + userIn);
 }
 function eatSashimi() {
     alert("As you ingest slice after slice, you disregard the fact that there's a slight smell to the fish. Your stomach starts to ache, twist and turn. Your head starts to throb terribly. As your vision fades to black, you remember how mother used to say something about sashimi being dangerous and some guy having his brains being eaten by worms...");
@@ -24,26 +24,50 @@ var itemsArray = main.data.items;
 function moveUser(moveCommand) {
     var incrementX = 0;
     var incrementY = 0;
+    var positionX = playerModel.position[0];
+    var positionY = playerModel.position[1];
+    var roomsKeys = Object.keys(main.data.rooms);
+    var roomsKeysX = Object.keys(main.data.rooms[positionX]);
     switch (moveCommand) {
         case "n":
-            incrementY = 1;
+            if (positionY === roomsKeysX.length) {
+                alert("invalid movement, there is no door");
+            }
+            else {
+                incrementY = 1;
+            }
             break;
         case "e":
-            incrementX = 1;
+            if (positionX === roomsKeys.length) {
+                alert("invalid movement, there is no door");
+            }
+            else {
+                incrementX = 1;
+            }
             break;
         case "s":
-            incrementY = -1;
+            if (positionY === 1) {
+                alert("invalid movement, there is no door");
+            }
+            else {
+                incrementY = -1;
+            }
             break;
         case "w":
-            incrementX = -1;
+            if (positionX === 1) {
+                alert("invalid movement, there is no door");
+            }
+            else {
+                incrementX = -1;
+            }
             break;
         default:
             break;
     }
     //update player model's position in the x-axis
-    playerModel.position[0] = playerModel.position[0] + incrementX;
+    playerModel.position[0] = positionX + incrementX;
     //update player model's position in the y-axis
-    playerModel.position[1] = playerModel.position[1] + incrementY;
+    playerModel.position[1] = positionY + incrementY;
     console.log(playerModel);
 }
 //run enterRoom after user has moved or if user wants to recall status of current room
@@ -77,7 +101,7 @@ function enterRoom() {
     var npcDescription = npcInRoom.description;
     var npcActionDescription = npcInRoom.actionDescription;
     itemsInRoom = room.items;
-    var itemsInRoomDescription = "Items in the room that can be picked up:";
+    var itemsInRoomDescription = "\nItems in the room that can be picked up:";
     //iterate through items in room and create text block of item name followed by item description.
     for (var i = 0; i < itemsInRoom.length; i++) {
         var itemInRoom = itemsInRoom[i];
@@ -99,7 +123,7 @@ function enterRoom() {
     //setup movement conditionals to ensure user does not move out of grid
     var roomsKeys = Object.keys(main.data.rooms);
     var roomsKeysX = Object.keys(main.data.rooms[x]);
-    var movementMessage = "";
+    var movementMessage = "Type \"n\" to move north, \"s\" to move south, \"e\" to move east and \"w\" to move west.";
     if (x === 1) {
         //don't allow movement in the West
         movementMessage = movementMessage + "\nThere is no door to the West";
@@ -189,6 +213,7 @@ function gameLoop() {
             //since item is in inventory, next, check to see if item can be used on this npc.
             if (npcInRoom.item.name === userInput) {
                 alert(npcInRoom.item.response);
+                var rewardItem = npcInRoom.item.rewardItem;
                 //use for loop to find position of this item used in player inventory and slice it away
                 for (var i = 0; i < playerModel.inventory.length; i++) {
                     var item = playerModel.inventory[i];
@@ -197,6 +222,7 @@ function gameLoop() {
                         //item has been removed from inventory
                     }
                 }
+                playerModel.inventory.push(rewardItem);
             }
             else {
                 alert("You cannot use that item here.");

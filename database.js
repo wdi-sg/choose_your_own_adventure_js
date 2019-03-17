@@ -7,7 +7,7 @@ var main = {
           positionX: 1,
           positionY: 1,
           npc: {
-            name: "emptyRoom",
+            name: "Empty Room",
             completed: false
           },
           items: ["medicine"]
@@ -116,7 +116,7 @@ var main = {
     },
     npcs: [
       {
-        name: "emptyRoom",
+        name: "Empty Room",
         description: "You find yourself in an empty room",
         actionCommand: [""],
         actionDescription: "",
@@ -133,7 +133,7 @@ var main = {
           "an ill dictator sits upon a chest, he gestures to you to speak",
         actionCommand: ["speak"],
         actionDescription:
-          'Type "1" to speak with him.',
+          'Type "1" to speak with him.\n',
         function: ["kimJongIll"],
         item: {
           name: "medicine",
@@ -147,7 +147,7 @@ var main = {
         description: "A delicious bowl of sashimi sits alone in a room",
         actionCommand: ["eat", "nothing"],
         actionDescription:
-          "Type \"1\" to eat the sashimi to fill your empty stomach",
+          "Type \"1\" to eat the sashimi to fill your empty stomach\n",
         function: ["eatSashimi", "nothingSashimi"],
         item: {
           name: "",

@@ -36,7 +36,7 @@ let playerModel = {
 //npc functions
 function kimJongIll() {
   let userIn: string = prompt("Say something");
-  alert(userIn);
+  alert("Kim Jong Ill: " + userIn);
 }
 function eatSashimi() {
   alert(
@@ -56,31 +56,50 @@ let itemsArray: itemObject[] = main.data.items;
 function moveUser(moveCommand: string) {
   let incrementX = 0;
   let incrementY = 0;
-
+  let positionX = playerModel.position[0];
+  let positionY = playerModel.position[1];
+  let roomsKeys = Object.keys(main.data.rooms);
+  let roomsKeysX = Object.keys(main.data.rooms[positionX]);
   switch (moveCommand) {
     case "n":
-      incrementY = 1;
+      if (positionY === roomsKeysX.length) {
+        alert("invalid movement, there is no door");
+      } else {
+        incrementY = 1;
+      }
       break;
 
     case "e":
-      incrementX = 1;
+      if (positionX === roomsKeys.length) {
+        alert("invalid movement, there is no door");
+      } else {
+        incrementX = 1;
+      }
       break;
 
     case "s":
-      incrementY = -1;
+      if (positionY === 1) {
+        alert("invalid movement, there is no door");
+      } else {
+        incrementY = -1;
+      }
       break;
 
     case "w":
-      incrementX = -1;
+      if (positionX === 1) {
+        alert("invalid movement, there is no door");
+      } else {
+        incrementX = -1;
+      }
       break;
 
     default:
       break;
   }
   //update player model's position in the x-axis
-  playerModel.position[0] = playerModel.position[0] + incrementX;
+  playerModel.position[0] = positionX + incrementX;
   //update player model's position in the y-axis
-  playerModel.position[1] = playerModel.position[1] + incrementY;
+  playerModel.position[1] = positionY + incrementY;
   console.log(playerModel);
 }
 //run enterRoom after user has moved or if user wants to recall status of current room
@@ -119,7 +138,7 @@ function enterRoom() {
 
   itemsInRoom = room.items;
   let itemsInRoomDescription: string =
-    "Items in the room that can be picked up:";
+    "\nItems in the room that can be picked up:";
   //iterate through items in room and create text block of item name followed by item description.
   for (let i = 0; i < itemsInRoom.length; i++) {
     const itemInRoom = itemsInRoom[i];
@@ -143,7 +162,7 @@ function enterRoom() {
   //setup movement conditionals to ensure user does not move out of grid
   let roomsKeys = Object.keys(main.data.rooms);
   let roomsKeysX = Object.keys(main.data.rooms[x]);
-  let movementMessage: string = "";
+  let movementMessage: string = "Type \"n\" to move north, \"s\" to move south, \"e\" to move east and \"w\" to move west.";
   if (x === 1) {
     //don't allow movement in the West
     movementMessage = movementMessage + "\nThere is no door to the West";
@@ -242,6 +261,7 @@ function gameLoop() {
       //since item is in inventory, next, check to see if item can be used on this npc.
       if (npcInRoom.item.name === userInput) {
         alert(npcInRoom.item.response);
+        let rewardItem: string = npcInRoom.item.rewardItem;
         //use for loop to find position of this item used in player inventory and slice it away
         for (let i = 0; i < playerModel.inventory.length; i++) {
           const item = playerModel.inventory[i];
@@ -250,6 +270,7 @@ function gameLoop() {
             //item has been removed from inventory
           }
         }
+        playerModel.inventory.push(rewardItem);
       } else {
         alert("You cannot use that item here.");
       }
