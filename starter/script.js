@@ -290,7 +290,7 @@ if (check > 0) {
         if (playerHorse === "1" && treat[playerTreat] === horseAndTreats["Pinky Pie"]) {
             alert("🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆\n \nWoohoo! Great job! " +horse[playerHorse]+ " came in first place. She really enjoyed her " +treat[playerTreat].toLowerCase()+ "! \n \n 🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆");
         } else if (playerHorse === "2" && treat[playerTreat] === horseAndTreats["Robohorse"]) {
-            alert("🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖 \n \n Meep morp! Great Job!" +horse[playerHorse]+ " came in FIRST place! The " +treat[playerTreat].toLowerCase()+ " you fed him really helped. \n \n 🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖");
+            alert("🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖 \n \n Meep morp! Great job! " +horse[playerHorse]+ " came in FIRST place! The " +treat[playerTreat].toLowerCase()+ " you fed him really helped. \n \n 🤖🤖🤖🤖🤖🤖🤖🤖🤖🤖");
         } else {
             alert("🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆 \n \n Woohoo! Great job! " +horse[playerHorse]+ " came in first place. \n \n 🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆 ")
         }
