@@ -76,9 +76,50 @@ switch(chooseFighter){
     alert(`You must wake up as SOMETHING???`);
     checkFighterChosen();
 }
-console.log("end of switch function");
+console.log("end of choose fighter switch function");
+//end of choosing fighter.
+
+if (chooseFighter == 1){
+  var geckoFloorOrCeiling = prompt('You look around. There is a crack on the floor, and you can just about make out something shiny... On the other hand, there seems to be a glimmer of light coming from the ceiling above. Lucky for you, you have sticky feet and can eh... stick to surfaces.\nDo you check out the crack on the (f)loor or check out the (c)eiling?').toLowerCase();
+  if (geckoFloorOrCeiling == 'f'){
+    alert('You check out the shiny object in the crack of the floor...');
+    console.log(geckoFloorOrCeiling);
+    //return (geckoFloorOrCeiling);
+  }else if (geckoFloorOrCeiling == 'c'){
+    alert('You attempt to crawl your way up the wall and towards the gleamer of light coming from that ceiling. The pin is a lil\' heavy though...');
+    console.log(geckoFloorOrCeiling);
+    //return (geckoFloorOrCeiling);
+  }else{
+    alert('please choose something');
+    console.log(geckoFloorOrCeiling);
+    //return (geckoFloorOrCeiling);
+  }
+}else if (chooseFighter == 2){
+  var blackCeilingOrSurvey = prompt('The room is really dark... From where you are, you can only see a glimmer of light from the ceiling. But it is much too small to fit through.\nDo you check the (c)eiling out anyway? Or do you contiune flapping around and (s)urvey the area?');
+  if (blackCeilingOrSurvey == 'c'){
+    alert('You attempt to fly towards the ceiling with knife still in your beak...');
+    console.log(blackCeilingOrSurvey);
+    //return(blackCeilingOrSurvey);
+  }else if (blackCeilingOrSurvey == 's'){
+    alert('You flap around and survey for a while...');
+    console.log(blackCeilingOrSurvey);
+    //return(blackCeilingOrSurvey);
+  }else{
+    alert('please choose something');
+    console.log(geckoFloorOrCeiling);
+    //return (geckoFloorOrCeiling);
+  }
+}else {
+  alert("Let's come back to this later");
+  console.log('Last else statement printed')
+}
+
+console.log('choose fighter conditional statement has finished running');
+console.log(geckoFloorOrCeiling);
+console.log(blackCeilingOrSurvey);
 
 
+//create boss character called 'Big Chungus', will auto lose to siege since the tortoise runs faster than the hare...
 
 // if (chooseFighter === 1 ){
 //   alert("You have woken up as a gecko pecko! 'Pick PICK!''");
