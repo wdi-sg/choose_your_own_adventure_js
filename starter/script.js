@@ -35,12 +35,15 @@ console.log(typeof(chooseFighter));
 
 var checkFighterChosen = function(){
   chooseFighter = parseInt(prompt('WhAt hAvE yOu beCoMe??!\n 1. gecko pecko\n 2. black menace\n 3. pointy boi\n 4. stabo the crabo\n 5. monky bizness\n 6. rhino threat\n 7. cock with a glock\n 8. siege\n 9. hopper with a chopper\n 10. cat with a gat'));
+  switch1();
+  openYourEyes();
 }
 checkFighterChosen();
 
 console.log(chooseFighter);
 console.log(typeof(chooseFighter));
 
+function switch1(){
 switch(chooseFighter){
   case 1:
     alert(`You have woken up as ${userName} the gecko pecko! 'Pick PICK!''`);
@@ -75,10 +78,13 @@ switch(chooseFighter){
   default:
     alert(`You must wake up as SOMETHING???`);
     checkFighterChosen();
+  }
 }
+switch1();
+
 console.log("end of choose fighter switch function");
 //end of choosing fighter.
-
+function openYourEyes(){
 if (chooseFighter == 1){
   var geckoFloorOrCeiling = prompt('You look around. There is a crack on the floor, and you can just about make out something shiny... On the other hand, there seems to be a glimmer of light coming from the ceiling above. Lucky for you, you have sticky feet and can eh... stick to surfaces.\nDo you check out the crack on the (f)loor or check out the (c)eiling?').toLowerCase();
   if (geckoFloorOrCeiling == 'f'){
@@ -109,14 +115,29 @@ if (chooseFighter == 1){
     console.log(geckoFloorOrCeiling);
     //return (geckoFloorOrCeiling);
   }
+}else if (chooseFighter == 8){
+  var siegeSurvey = prompt('A miserable tortoise you are... What are the chances you can make it out alive? Do you want to start (o)ver? Or continue to (s)urvey this dark room?');
+  if (siegeSurvey == 's'){
+    alert('You inch your way around, albeit REALLY slowly; plus the fork is heavy...');
+    console.log(siegeSurvey);
+  }else if (siegeSurvey == 'o'){
+    console.log(siegeSurvey);
+    checkFighterChosen();
+  }else{
+    alert('please choose something');
+    console.log(siegeSurvey);
+  }
 }else {
   alert("Let's come back to this later");
   console.log('Last else statement printed')
 }
+}
+
+openYourEyes();
 
 console.log('choose fighter conditional statement has finished running');
-console.log(geckoFloorOrCeiling);
-console.log(blackCeilingOrSurvey);
+//console.log(geckoFloorOrCeiling);
+//console.log(blackCeilingOrSurvey);
 
 
 //create boss character called 'Big Chungus', will auto lose to siege since the tortoise runs faster than the hare...
