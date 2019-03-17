@@ -90,28 +90,30 @@ var fightEnemy = function (player, enemy) {
             alert("[Player Action] You skip a turn for taking a wrong action.");
         }
 
-        // enemy turn
-        // enemy accuracy check
-        if ( ((Math.floor(Math.random() * 100) + 1)  <= selectedEnemy["accuracy"]) ) {
-            // enemy critical hit check
-            if ( ((Math.floor(Math.random() * 100) + 1)  <= selectedEnemy["critical"]) ) {
-                player["hp"] = player["hp"] - selectedEnemy["attack"] * 2;
-                alert("[Enemy Action] The enemy scores a critical hit! You take " + selectedEnemy["attack"] * 2 + " damage!");
+        // enemy turn if it still has hp left
+        if (selectedEnemy["hp"] > 0) {
+            // enemy accuracy check
+            if ( ((Math.floor(Math.random() * 100) + 1)  <= selectedEnemy["accuracy"]) ) {
+                // enemy critical hit check
+                if ( ((Math.floor(Math.random() * 100) + 1)  <= selectedEnemy["critical"]) ) {
+                    player["hp"] = player["hp"] - selectedEnemy["attack"] * 2;
+                    alert("[Enemy Action] The enemy scores a critical hit! You take " + selectedEnemy["attack"] * 2 + " damage!");
+                } else {
+                    player["hp"] = player["hp"] - selectedEnemy["attack"];
+                    alert("[Enemy Action] The enemy charge at you and attack you! You take " + selectedEnemy["attack"] + " damage!");
+                }
             } else {
-                player["hp"] = player["hp"] - selectedEnemy["attack"];
-                alert("[Enemy Action] The enemy charge at you and attack you! You take " + selectedEnemy["attack"] + " damage!");
+                alert("[Enemy Action] The enemy missed its attack!");
             }
-        } else {
-            alert("[Enemy Action] The enemy missed its attack!");
         }
     }
 
     // check the outcome of the battle
-    if (player["hp"] > 0 && selectedEnemy["hp"] === 0) {
+    if (player["hp"] > 0 && selectedEnemy["hp"] <= 0) {
         alert("[Battle Outcome] You won the battle!");
         win = true;
 
-    } else if (selectedEnemy["hp"] > 0 && player["hp"] === 0) {
+    } else if (selectedEnemy["hp"] > 0 && player["hp"] <= 0) {
         alert("[Battle Outcome] You got killed in the battle!");
         win = false;
 
@@ -124,10 +126,15 @@ var fightEnemy = function (player, enemy) {
 
 var playerName = prompt("What is your name?");
 
+if (playerName.trim() === "") {
+    alert("Your name sound weird. You shall not proceed! Game over!");
+    continuePlaying = false;
+}
+
 while (continuePlaying === true) {
     var yearToGo = prompt("Nice to meet you, " + playerName + ". What year would you like to go to? (YYYY)");
 
-    if (Number(yearToGo) === 0 || Number(yearToGo) === NaN){
+    if (Number(yearToGo) === 0 || isNaN(yearToGo)) {
         alert("You try to be a fool and key in a invalid year. Now, the computer have gone haywire and you went into a limbo. Game over!");
 
     } else if (Number(yearToGo) >= 2015) {
@@ -210,6 +217,9 @@ while (continuePlaying === true) {
     playerContinue = prompt("Do you want to continue playing?", "(Y)es or (N)o");
 
     if (playerContinue.toLowerCase() === "y") {
+        if (playerStats["hp"] <= 0) {
+            playerStats["hp"] = 1;
+        }
         continuePlaying = true;
     } else {
         continuePlaying = false;
