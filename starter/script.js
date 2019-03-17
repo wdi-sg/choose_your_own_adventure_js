@@ -15,7 +15,7 @@ var userName = prompt("Welcome to Bespoke Bicycle Build. A game that revolves ar
 // }
 
 if (confirm("Thanks for entering your name. Please confirm it is " + userName + ".") == true) {
-	var userNameResponse = "Great, time to move on!";
+	var userNameResponse = alert("Great, time to move on!");
 } else {
 	var userNameRedo = prompt("Please enter your name again");
 }
@@ -104,7 +104,7 @@ var cycling = [{
 	"frameBrand": ["Cannondale", "Cinelli", "Specialized", "Look"],
 	"frameMaterial": ["alumnium", "carbon", "steel"],
 	"frameColor": [],
-	"groupsetChoice": ["Shimano Dura Ace", "SRAM Force 1", "Sram Rival 1"],
+	"groupsetChoice": ["Shimano Dura Ace", "SRAM Force 1", "SRAM Rival 1"],
 },
 {	"kind": "track",
 	"frameBrand": ["8 bar", "Cinelli", "Specialized", "Look"],
@@ -117,53 +117,85 @@ var cycling = [{
 
 // Now that array of objects is made. Can move onto figuring out how to code this and make the game interative and dynamic.
 
-var userFinalBike = [];
+// var userFinalBike = [];
 
 var userKind = prompt(userName + ", choose your style of riding from road, cyclocross or track.");
 if (userKind === "road") {
-var userRoadBrand = prompt("Choose a frame brand from Cannondale, Canyon, Specialized or Trek.");
+userKind = alert("Choose a frame brand from Cannondale, Canyon, Specialized or Trek.");
 } else if (userKind === "cyclocross") {
-var userXBrand = prompt("Choose a frame brand from Cannondale, Cinelli, Specialized or Look.");
+userKind = alert("Choose a frame brand from Cannondale, Cinelli, Specialized or Look.");
 } else if (userKind === "track") {
-var userTrackBrand = prompt("Choose a frame brand from 8 bar, Cinelli, Specialized or Look.");
+userKind = alert("Choose a frame brand from 8 bar, Cinelli, Specialized or Look.");
 } else {
 var defaultKind = prompt("Please choose a style of riding from road, cyclocross or track.");
 }
 
-console.log(userKind);
-
-var userBrand = console.log(userKind);
-if (userBrand === userRoadBrand) {
-var userRoadMaterial = prompt("Choose a frame material from alumnium, carbon, steel or titanium.");
-} else if (userBrand === userXBrand) {
-var userXMaterial = prompt("Choose a frame material from alumnium, carbon or steel.");
-} else if (userBrand === userTrackBrand) {
-var userTrackMaterial = prompt("Choose a frame material from alumnium, steel or titanium.")
-} else {
-var defaultMaterial = prompt("Please choose a frame material.")
-}
-		// if (userKind === cycling[userRoadMaterial]["material"]) {
-		// var userRoadColor = prompt("Choose any color(s).");
-		// } else if (userKind === cycling[userXMaterial]["material"]) {
-		// var userXColor = prompt("Choose any color(s).");
-		// } else if (userKind === cycling[userTrackMaterial]["material"]) {
-		// var userTrackColor = prompt("Choose any color(s).");
-		// } else {
-		// var defaultColor = prompt("Choose any color(s).");
-		// }
-		// 	if (userRoadColor === cycling["frameColor"]) {
-		// 	var userRoadGroupset = prompt("Choose from Shimano 105, Shimano Ultegra, Shimano Dura Ace, SRAM Rival 22 or SRAM Red.");
-		// 		if (userRoadGroupset === cycling["groupsetChoice"]) {
-		// 			userFinalBike.push(userKind, userRoadBrand, userRoadMaterial, userRoadColor, userRoadGroupset);
-		// 			}
-		// 		}
-// 			}
-		
-	
-
-// 	alert(userFinalBike);
+// // if (confirm("You have chosen to ride a " + userKind + " bike.") == true) {
+// 	userKind = alert("Fantastic, time to get your bike kitted out.");
+// } else {
+// 	userKind = prompt("Please choose between road, cyclocross and track riding.");
 // }
 
+var userBrandPrompt = function getUserBrand (cycling) {
+	userBrandPrompt = prompt("Choose a brand.")
+	var userBrand = [];
+	for (c=0; c <cycling.length; c++) {
+		if (cycling.frameBrand[0] === "Cannondale" || cycling.frameBrand[0] === "Canyon" || cycling.frameBrand[0] === "Specialized" || cycling.frameBrand[0] === "Trek") {
+			results.push(cycling.frameBrand[0]);
+		} else if (cycling.frameBrand[1] === "Cannondale" || cycling.frameBrand[1] === "Cinelli" || cycling.frameBrand[1] === "Specialized" || cycling.frameBrand[1] === "Look") {
+		userBrand.push(cycling.frameBrand[1]);
+		} else if (cycling.frameBrand[2] === "8 bar" || cycling.frameBrand[2] === "Cinelli" || cycling.frameBrand[2] === "Specialized" || cycling.frameBrand[2] === "Look") {
+		userBrand.push(cycling.frameBrand[2]);
+		} else {
+			var userDefault = prompt("Please choose a listed brand.")
+		}
+	}
+	return userBrand;
+}
+
+
+// if (userBrand === cycling.frameMaterial[0]) {
+// userBrand = prompt("Choose a frame material from alumnium, carbon, steel or titanium.");
+// } else if (userBrand === cycling.frameMaterial[1]) {
+// userBrand = prompt("Choose a frame material from alumnium, carbon or steel.");
+// } else if (userBrand === cycling.frameMaterial[2]) {
+// userBrand = prompt("Choose a frame material from alumnium, steel or titanium.")
+// } else {
+// var defaultMaterial = prompt("Please choose a frame material.")
+// }
+
+// console.log(userBrand);
+// if (confirm("You have chosen a " + userBrand + " frame.") == true) {
+// 	userKind = alert("Woohoo! Great choice!");
+// } else {
+// 	userKind = prompt("Please choose a frame brand.");
+// }
+
+var userMaterial = alert("Monochrome or multicolored?");
+if (userMaterial === userRoadMaterial) {
+var userRoadColor = prompt("Choose any color(s).");
+} else if (userMaterial === userXMaterial) {
+var userXColor = prompt("Choose any color(s).");
+} else if (userMaterial === userTrackMaterial) {
+var userTrackColor = prompt("Choose any color(s).");
+} else {
+var defaultColor = prompt("Choose any color(s).");
+}
+
+// console.log(userMaterial);
+
+var userColor = alert("Now lastly and most technically...");
+if (userColor === userRoadColor) {
+var userRoadGroupset = prompt("Choose from Shimano 105, Shimano Ultegra, Shimano Dura Ace, SRAM Rival 22 or SRAM Red.");
+} else if (userColor === userXColor) {
+var userXGroupset = prompt("Choose from Shimano Dura Ace, SRAM Force 1, SRAM Rival 1.");
+} else if (userColor === userTrackColor) {
+var userTrackGroupset = prompt("Choose from Aventon Push, Campagnolo Pista.")
+}
+
+console.log(userGroupset);
+
+alert("Your final virtual customised bike is for " + userKind + " cycling, from the brand " + userBrand + " with a frame made of " + userMaterial + ", and that is " + userColor + ", and consists of a " + userGroupset + " groupset.");
 
 
 // var userChoice = function (style, brand, material, color, groupset) {
