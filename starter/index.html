@@ -1,10 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-  <script src="script.js"></script>
+    <header>
+        <h1>Morality Alignment Test</h1>
+    </header>
+    <section>
+        <p>A creature's general moral and personal attitudes are represented by its alignment: lawful good, neutral good, chaotic good, lawful neutral, neutral, chaotic neutral, lawful evil, neutral evil, or chaotic evil.
+
+Alignment is a tool for developing your character's identity. It is not a straitjacket for restricting your character. Each alignment represents a broad range of personality types or personal philosophies, so two characters of the same alignment can still be quite different from each other. In addition, few people are completely consistent.</p>
+
+        <ul>
+            <li><a href="#" onclick="startTest()">Take the test</a></li>
+        </ul>
+
+        <h3><span id="qn-progression"></div></h3>
+        <h2><div id="qn-asked"></div></h2>
+        <form id="answers" class="hide">
+            <input id="opt1" type="radio" name="answer" value="answer1"><span id="answer1">Answer 1</span>
+            <br>
+            <input id="opt2" type="radio" name="answer" value="answer2"><span id="answer2">Answer 2</span>
+            <br>
+            <input id="opt3" type="radio" name="answer" value="answer3"><span id="answer3">Answer 3</span>
+            <br>
+            <input id="opt4"  type="radio" name="answer" value="answer4"><span id="answer4">Answer 4</span>
+            <br><br>
+            <input type="button" value="Next" onclick="nextQn(); clearAnswer();">
+        </form>
+        <h2><span id="result"> </span></h2>
+    </section>
+
+    <script src="script.js"></script>
 </body>
 </html>
