@@ -1,0 +1,26 @@
+html {
+	background-color: #ffcc00;
+}
+h1 {
+	font-size: 36px;
+	font-weight: normal;
+	text-align: center;
+	font-family: 'Margarine', cursive;
+
+}
+
+.footer {
+	color: red;
+	bottom: 0
+	font-size: 12px;
+	text-align: center;
+	margin-bottom: 0px
+	padding: 20px 0;
+}
+
+.flex-wrapper {
+	display: flex;
+	height: 100vh;
+	flex-direction: column;
+	justify-content: space-between;
+}
