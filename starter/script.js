@@ -64,13 +64,13 @@ while (playerHorse == null) {
 // If player picks anything other than the 4 choices, they'll be kicked out of the game for cheating
     switch (playerHorse) {
         case "1":
-        response = alert("Super! Pinky Pie (or Ponka Po) is a hyperactive, excitable, quirky, and outgoing Earth pony with a brilliant raspberry rose with pale, light grayish gold mane. She has a sugar rush when if she eats too much candy. She loves baking with her pet crocodile, Gummy. \n \nPinky says: “A little birdy told me that a certain magician is very bad at riding horses");
+        response = alert("Super! Pinky Pie (or Ponka Po) is a hyperactive, excitable, quirky, and outgoing Earth pony with a brilliant raspberry rose with pale, light grayish gold mane. She has a sugar rush when if she eats too much candy. She loves baking with her pet crocodile, Gummy. \n \nPinky says: 'A little birdy told me that a certain magician is very bad at riding horses.\"");
         break;
         case "2":
-        response = alert("Awesome pick! Robohorse is a 20-year-old Irish student. Robo has two sisters and a pet fish, Lily. His favourite TV show is Futurama, and Bender is his “spirit animal”. Like Bender, he is conniving and enjoys telling lies for the hell of it. He also likes cooking for his girlfriend, Lisa. \n \nRobohorse says: “Bytes are delightful.");
+        response = alert("Awesome pick! Robohorse is a 20-year-old Irish student. Robo has two sisters and a pet fish, Lily. His favourite TV show is Futurama, and Bender is his “spirit animal”. Like Bender, he is conniving and enjoys telling lies for the hell of it. He also likes cooking for his girlfriend, Lisa. \n \nRobohorse says: “Bytes are delightful.\"");
         break;
         case "3":
-        response = alert("A humanoid horse, BoJack Horseman, is a self-loathing alcoholic horse currently in his 50s. \n \nBoJack: “Ow, crap. I hate this. Running is terrible. Everything is the worst. I hear that the Valkyrie is very good at this thing. You’d better pick her.");
+        response = alert("A humanoid horse, BoJack Horseman, is a self-loathing alcoholic horse currently in his 50s. \n \nBoJack: “Ow, crap. I hate this. Running is terrible. Everything is the worst. I hear that the Valkyrie is very good at this thing. You’d better pick her.\"");
         break;
         case "4":
         response = alert("(Set in a meadow during a sunny day as Charlie the Unicorn is asleep on the ground. Pink and Blue unicorns approach him) \n \nBLUE UNICORN \nHey, Charlie. Hey Charlie, wake up! \n \nPINK UNICORN \nYeah Charlie. You silly sleepy-head, wake up. \n \n(Charlie wakes up and looks at the two) \nCHARLIE THE UNICORN {Groans} \nOh God, you guys. This'd better be pretty freaking important. Is the meadow on fire? \n \n BLUE UNICORN \n No Charlie. We found a map, to Candy Mountain. Candy Mountain, Charlie.")
