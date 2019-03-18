@@ -1,0 +1,42 @@
+{
+    "data":{
+        "rooms":[
+            {
+                "desciption":"This is room 1,1",
+                "positionX":1,
+                "positionY":1,
+                "npc":"Kim Jong Ill"
+            },
+            {
+                "desciption":"This is room 2,1",
+                "positionX":2,
+                "positionY":1
+            }
+        ],
+        "player":{
+            "inventory":{
+                "space":3,
+                "load":0,
+                "items":{}
+            }
+        },
+        "npcs":[
+            {
+                "name":"Kim Jong Ill",
+                "description":"An ill dictator sits upon a chest, he gestures to you to speak",
+                "actionCommand":"speak",
+                "actionDescription":"Type \"speak\" to speak with him",
+                "function":"kimJongIll",
+                "item":{
+                    "name":"medicine",
+                    "response":"You've cured Kim of his ill dictation, he gets off the chest. The boy who no longer has a dictator sitting on his chest thanks you and hands you an item.",
+                    "rewardItem":"brick"
+                }
+            }
+        ],
+        "items":{
+            "name":"medicine",
+            "description":"Perhaps someone sick needs this"
+        }
+    }
+}
