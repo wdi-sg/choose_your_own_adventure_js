@@ -1,0 +1,45 @@
+header{
+  text-align: center;
+}
+#gamecontainer{
+    width: 700px;
+    height: 800px;
+    background-color: rgba(0,255,0,0.5);
+    margin: auto;
+}
+#storycontainer{
+  width:500px;
+  margin: 50px auto;
+}
+#nameinput{
+  width:500px;
+  margin: auto;
+  text-align: center;
+}
+#actionpanel{
+  text-align: center;
+  width: 500px;
+  margin: 50px auto;
+}
+button{
+  margin: 0 30px;
+}
+#statbox{
+  background-color: rgba(255,0,0,0.5);
+  height: 200px;
+  width: 200px;
+  margin: auto;
+  padding: 2%;
+}
+#optionbox{
+  background-color: rgba(255,0,255,0.5);
+  height: 300px;
+  width: 100%;
+  text-align: center;
+}
+#storytext{
+  text-align: center;
+}
+.options{
+  position:relative;
+}
