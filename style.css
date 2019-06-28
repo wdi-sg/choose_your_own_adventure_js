@@ -1,0 +1,39 @@
+.starter{
+  font-size:30px;
+  padding:10px;
+  border:3px solid blue;
+}
+
+#output{
+  background-color:orange;
+}
+
+*{
+  font-family: Helvetica, Arial, Verdana, sans-serif;
+  letter-spacing: -1px;
+  padding: 5px;
+}
+
+p{
+	font-size: 20px;
+}
+
+body{
+  background: hsla(80,29%,89%,1);
+  color: #222;
+  width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#tableman{
+	  font-size:30px;
+  	padding:10px;
+  	letter-spacing: 5px;
+}
+
+#answer{
+	  font-size:30px;
+  	padding:10px;
+  	letter-spacing: 10px;
+}

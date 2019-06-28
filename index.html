@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div>
+        <h1>Hangman Game</h1>
+        <h3>Instructions</h3>
+        <p>Guess letters one at a time to solve the word puzzle. Enter one letter at a time with your keyboard. <br>Every time you get a letter wrong, the table flipper gets more impatient with you... 😨 </p>
+        <p>Get help by typing 'hint'</p>
+        <input class="starter" id="input" placeholder="type a letter"/>
+        <h2>The Table Flipper</h2>
+        <p id = "tableman"></p>
+        <p class="starter" id="output"></p>
+        <h2>Answer</h2>
+        <p id = "answer"></p>
+        <script>
+            document.querySelector('#input').addEventListener('change', function(event){
+                var currentInput = event.target.value;
+                inputHappened(currentInput)
+            });
+            var display = function( data ){
+                var output = document.querySelector('#output');
+                output.innerText = data;
+            }
+            var display2 = function( data2 ){
+                let tableman = document.querySelector('#tableman');
+                tableman.innerText = data2;
+            }
+            var display3 = function( data3 ){
+                let answer = document.querySelector('#answer');
+                answer.innerText = data3;
+            }
+        </script>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
