@@ -15,50 +15,27 @@ If you feel comfortable implementing them, you can start to make your game more 
 * Any path the user goes down must ask them at least **three** questions.
 * There must be a minimum of **seven** total destinations the user could arrive at based on their responses.
 * For **at least one** of the questions asked, there must be **more than two possible user responses**.
-* Your code must make use of **both string and number user inputs**.
-* The game should work without the dev tools console open- no `console.log`! 
-* You can only use `prompt`, `alert`, and `confirm`
 
 > **Hint:** For each small milestone you reach in your program, make a git commit
 
 > **Hint:** You may need `parseInt()` and `toString()`
 
-> **Hint:** if you finish your code, clean it up by putting certain parts inside functions. If needed they can be used again later as well.
-
 > **Hint:** Need a [random number? ](https://www.freecodecamp.org/challenges/generate-random-whole-numbers-with-javascript)
 ```
 var randomNumberBetween0and19 = Math.floor(Math.random() * 20);
 ```
+### Getting Started
 
-## How to Get User Input
+Use the unit 1 template here: [https://github.com/wdi-sg/unit1-template/](https://github.com/wdi-sg/unit1-template/) Copy the files into your repo. 
 
-At any point in our JS code, if we write prompt(), a pop up box will open in our browser for a user to enter in text.
-
-```js
-// prompts user and stores value in the variable
-var valueOfPrompt = prompt()
-// logs value stored
-console.log(valueOfPrompt)
-```
-
-You can also pass in a string as an argument to have the pop up box contain that string as a ... prompt.
-
-```js
-var age = prompt("How old are you?")
-alert("You are " + age + " years old.")
-```
-
-Whatever we type into the textbox in the window that prompt() brings up, is returned by prompt to the variable age.
-
-
-### Need Some Inspiration?
+#### Need Some Inspiration?
 
 How about...
 * A Lord of the Rings style adventure where the player is Frodo, and he must choose how to get to Mordor. Possible obstacles involve Orcs, Goblins and getting drunk on mead.
 * A "Top Chef" style cooking adventure where the player is the chef, trying to make dinner for an elite group of judges. Possible obstacles include overcooking the meal, running out of time or mean judges.
 * A Harry Potter themed adventure where the user is Harry and he must find all the horcruxes. Possible obstacles include He-who-must-not-be-named, Professor Snape or Ron being completely useless.
 
-### Pseudo-coded Example
+#### Pseudo-coded Example
 
 What is your name?
 * `Sean`
@@ -116,6 +93,11 @@ Nice to meet you, `Sean`. What year would you like to go to? **(YYYY)**
 * You are in a dark room. Would you like to enter the left door or the right door?
    * (user chooses left door)
    * You enter a drawing room with heavy curtains. A mage is sitting on the sofa. Would You like to talk to him? Yes, talk to him/Leave through the right door/Leave through the left door -----> **Left door leads to the dark room**
+
+### Further
+**newline**: if you want to output formatted paragraphs of text, you can try `\n` which creates a new line in yoour text.
+
+Refactor your code to create a function or series of functions that formats your output in a nice way.
 
 ### Further: Make Your Game More Complex
 
