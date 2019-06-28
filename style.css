@@ -1,0 +1,21 @@
+body{
+	
+	background: pink;
+
+}
+.welcome , .transport {
+	width: 80%;
+	border: 2px solid gray;
+	margin: 0 auto;
+	padding: 20px;
+}
+.transport {
+	visibility: hidden;
+}
+.first {
+	width: 20%;
+	border: 2px solid gray;
+	margin: 20px;
+	padding: 20px;
+	display: inline-block;
+}
