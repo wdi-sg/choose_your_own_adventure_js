@@ -8,12 +8,13 @@
 </head>
 <body>
 	<div class ="welcome">
-		<h1 id = 'welcome'> Welcome! Please tell me your name!</h1>
+		<h1 id = 'welcome'> Welcome to Robocar Poli! Please tell me your name!</h1>
 		<input type="text" id = "name" autofocus autocomplete="off"  placeholder="Your name">
 	</div>
 
 	<div class = "container" id = "containerOne">
-		<h3 class = "prompt"> Hello, user. Glad to see you! Which activity do you want to play today?</h3>
+		<h4 class = "prompt"> Hello, <span id ="userName"> </span>. Poli is waiting for you at one of these games. You have 30 minutes to find him. Where do you think he is?  Wrong choice delays you 10 minutes or 5 minutes. Good luck! </h4>
+
 		<input type="text" class ="input" id = "name" autofocus autocomplete="off"  placeholder="Type your choice here" oninput="chooseAdventure(event)">
 
 		<div class = "small">
@@ -33,9 +34,8 @@
 	</div>
 
 
-	<div class = "container" id = "containerTwo">
-		<h3 class = "prompt"> The pigs had stolen all the eggs and hid them in Piggy's Island. Help the angry birds find the way to Piggy's Island and retrieve their eggs. You may choose to bring one bird with you. Which bird do you want?</h3>
-		<input type="text" id = "name" autofocus autocomplete="off"  placeholder="Type the bird's name here">
+	<div class = "container" id = "containerTwo"> <span id ="timeLeft"></span> minutes. Poli is on Piggy's Island looking for the stolen eggs. Bring along one of the birds to help him.</h3>
+		<input type="text" id = ""  autofocus  autocomplete="off"  placeholder="Type the bird's name here" oninput="chooseAdventure(event)">
 		<div class = "small">
 			<div class = "first" id = "oneOne">
 				<h4>Red </h4> 
@@ -57,85 +57,97 @@
 
 
 	<div class = "container" id = "containerThree">
-		<h3 class = "prompt"> Hello user! Please choose your mode of transport</h3>
+		<h3 class = "prompt"> You're sidetracked. You have <span id ="timeLeft_1"></span> minutes. Ask one of Tom's pets to help you find the way.</h3>
+
+		<input type="text" id = "" autofocus autocomplete="off"  placeholder="Type the bird's name here" oninput="chooseAdventure(event)">
+
 		<div class = "first" id = "twoOne">
-			<h5>Two one</h5>
+			<h5>Sugar</h5>
 			<img src="#" alt="">
 		</div>
 		<div class = "first" id = "twoTwo">
-			<h5>Two two</h5>
+			<h5>Dot</h5>
 			<img src="#" alt="">
 		</div>
 		<div class = "first" id = "twoThree">
-			<h5>Two three</h5>
+			<h5>Squeak</h5>
 			<img src="#" alt="">
 		</div>	
 	</div>
 
 
 	<div class = "container" id = "containerFour">
-		<h3 class = "prompt"> Hello user! Please choose your mode of transport</h3>
+		<h3 class = "prompt"> Oops! You're lost. You have <span id="timeLeft_2"></span> minutes to get back on track. Maybe one of these toys can help.</h3>
+
+		<input type="text" id = "" autofocus autocomplete="off"  placeholder="Type the bird's name here" oninput="chooseAdventure(event)">
 		<div class = "first" id = "threeOne">
-			<h5>Three one</h5>
+			<h5>Gabby</h5>
 			<img src="#" alt="">
 		</div>
 		<div class = "first" id = "threeTwo">
-			<h5>Three two</h5>
+			<h5>Forky</h5>
 			<img src="#" alt="">
 		</div>
 		<div class = "first" id = "threeThree">
-			<h5>Three three</h5>
+			<h5>Woody</h5>
 			<img src="#" alt="">
 		</div>	
 	</div>
 
 
 	<div class = "container" id = "containerFive">
-		<h3 class = "prompt"> Hello user! Are you sure?</h3>
+		<h3 class = "prompt"> You're so close now. You still have <span id="timeLeft_2"></span> minutes. Poli is calling for backup. Join the rescue member.</h3>
+
+		<input type="text" id = "" autofocus autocomplete="off"  placeholder="Type the rescue member's name here" oninput="chooseAdventure(event)">
+
 		<div class = "first" id = "oneOneOne">
-			<h5>Umm. They are quite tricky</h5>
+			<h5>Roy</h5>
 			<img src="#" alt="">
 		</div>
 		<div class = "first" id = "oneOneTwo">
-			<h5>They are explosive</h5>
+			<h5>Heli</h5>
 			<img src="#" alt="">
 		</div>
 		<div class = "first" id = "oneOneThree">
-			<h5>Like to listen to a song?</h5>
+			<h5>Amber</h5>
 			<img src="#" alt="">
 		</div>	
 	</div>
 
 
 	<div class = "container" id = "containerSix">
-		<h3 class = "prompt"> Hello user! Please choose your mode of transport</h3>
+		<h3 class = "prompt"> You're making progress. Chuck is playful but he's fast. You still have <span id="timeLeft_2"></span> minutes. How do want to go to Piggy's island?</h3>
+		<input type="text" id = "" autofocus autocomplete="off"  placeholder="Type your choice here" oninput="chooseAdventure(event)">
 		<div class = "first" id = "oneTwoOne">
-			<h5>oneTwoOne</h5>
+			<h5>By air</h5>
 			<img src="#" alt="">
 		</div>
 		<div class = "first" id = "oneTwoTwo">
-			<h5>oneTwoTwo</h5>
+			<h5>On water</h5>
 			<img src="#" alt="">
 		</div>
 		<div class = "first" id = "oneTwoThree">
-			<h5>oneTwoThree</h5>
+			<h5>On land</h5>
 			<img src="#" alt="">
 		</div>	
 	</div>
 
 
 	<div class = "container" id = "containerSeven">
-		<h3 class = "prompt"> Hello user! Please choose your mode of transport</h3>
+
+		<h3 class = "prompt"> Umm,Bomb is very angry at the moment and not willing to help. You should choose another bird. You still have <span id="timeLeft_2"></span> minutes.</h3>
+
+		<input type="text" id = "name" autofocus autocomplete="off"  placeholder="Type the bird's name here" oninput="chooseAdventure(event)">
 		<div class = "first" id = "oneThreeOne">
-			<h5>oneThreeOne</h5>
+			<h5>The Blues</h5>
 			<img src="#" alt="">
 		</div>
 		<div class = "first" id = "oneThreeTwo">
-			<h5>oneThreeTwo</h5>
+			<h5>Malthida</h5>
 			<img src="#" alt="">
 		</div>
 		<div class = "first" id = "oneThreeThree">
-			<h5>oneThreeThree</h5>
+			<h5>Stella</h5>
 			<img src="#" alt="">
 		</div>	
 	</div>
@@ -143,6 +155,8 @@
 
 	<div class = "container" id = "containerEight">
 		<h3 class = "prompt"> Hello user! Please choose your mode of transport</h3>
+		<input type="text" id = "" autofocus autocomplete="off"  placeholder="Type the bird's name here" oninput="chooseAdventure(event)">
+
 		<div class = "first" id = "TwoOneOne">
 			<h5>TwoOneOne</h5>
 			<img src="#" alt="">
@@ -159,7 +173,11 @@
 
 
 	<div class = "container" id = "containerNine">
+
 		<h3 class = "prompt"> Hello user! Please choose your mode of transport</h3>
+
+		<input type="text" id = "" autofocus autocomplete="off"  placeholder="Type the bird's name here" oninput="chooseAdventure(event)">
+
 		<div class = "first" id = "twoTwoOne">
 			<h5>twoTwoOne</h5>
 			<img src="#" alt="">
@@ -177,6 +195,9 @@
 
 	<div class = "container" id = "containerTen">
 		<h3 class = "prompt"> Hello user! Please choose your mode of transport</h3>
+
+		<input type="text" id = "" autofocus autocomplete="off"  placeholder="Type the bird's name here" oninput="chooseAdventure(event)">
+
 		<div class = "first" id = "twoThreeOne">
 			<h5>twoThreeOne</h5>
 			<img src="#" alt="">
@@ -192,7 +213,11 @@
 	</div>
 
 	<div class = "container" id = "containerEleven">
-		<h3 class = "prompt"> Hello user! Please choose your mode of transport</h3>
+
+		<h3 class = "prompt"> Hello ! Please choose your mode of transport</h3>
+
+		<input type="text" id = "" autofocus autocomplete="off"  placeholder="Type the bird's name here" oninput="chooseAdventure(event)">
+
 		<div class = "first" id = "threeOneOne">
 			<h5>ThreeOneOne</h5>
 			<img src="#" alt="">
@@ -210,6 +235,9 @@
 
 	<div class = "container" id = "containerTwele">
 		<h3 class = "prompt"> Hello user! Please choose your mode of transport</h3>
+
+		<input type="text" id = "" autofocus autocomplete="off"  placeholder="Type the bird's name here" oninput="chooseAdventure(event)">
+
 		<div class = "first" id = "threeTwoOne">
 			<h5>threeTwoOne</h5>
 			<img src="#" alt="">
@@ -226,6 +254,9 @@
 
 	<div class = "container" id = "containerThirteen">
 		<h3 class = "prompt"> Hello user! Please choose your mode of transport</h3>
+
+		<input type="text" id = "name" autofocus autocomplete="off"  placeholder="Type the bird's name here" oninput="chooseAdventure(event)">
+
 		<div class = "first" id = "threeThreeOne">
 			<h5>threeThreeOne</h5>
 			<img src="#" alt="">

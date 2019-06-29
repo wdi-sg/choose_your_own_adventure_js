@@ -1,59 +1,106 @@
 console.log('hello');
-document.addEventListener("keyup", function(event) {
+document.querySelector("#name").addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
   	document.querySelector(".welcome").style.display = "none";
 		document.querySelector("#containerOne").style.display = "block";
+
+		var userName = event.target.value;
+		document.querySelector("#userName").innerHTML = userName;
 	}	
 })
-var containerOne = document.querySelector("#containerOne").style.display;
-var containerTwo = document.querySelector("#containerTwo").style.display;
-var containerThree = document.querySelector("#containerThree").style.display;
-var containerFour = document.querySelector("#containerFour").style.display;
-var containerFive;
-console.log (containerOne);
+var containerOne = document.querySelector("#containerOne");
+var containerTwo = document.querySelector("#containerTwo");
+var containerThree = document.querySelector("#containerThree");
+var containerFour = document.querySelector("#containerFour");
+var containerFive = document.querySelector("#containerFive");
+var containerSix = document.querySelector("#containerSix");
+var containerSeven = document.querySelector("#containerSeven");
+var containerEight = document.querySelector("#containerEight");
+var containerNine = document.querySelector("#containerNine");
+var containerTen = document.querySelector("#containerTen");
+var containerEleven = document.querySelector("#containerEleven");
+var containerTwele = document.querySelector("#containerTwele");
+var containerThirteen = document.querySelector("#containerThirteen");
+var timeLeft = 30;
+document.querySelector("#timeLeft").innerHTML = timeLeft;
 
 function chooseAdventure(event){
-	 let currentInput = event.target.value;
+	let currentInput = event.target.value;
 	let inputData = currentInput.toLowerCase();
 	if(inputData.includes ("angry bird")){
 
-		
+		containerOne.style.display = "none";
+		containerTwo.style.display = "block";
 
-		document.querySelector("#containerOne").style.display = "none";
-		document.querySelector("#containerTwo").style.display = "block";
 
-		
 	} else if (inputData.includes ("tom")){
 
-		document.querySelector("#containerOne").style.display = "none";
-		document.querySelector("#containerThree").style.display = "block";
+		containerOne.style.display = "none";
+		containerThree.style.display = "block";
+		timeLeft -= 5;
+		document.querySelector("#timeLeft_1").innerHTML = timeLeft;
 
 	} else if (inputData.includes("story")) {
 
-		document.querySelector("#containerOne").style.display = "none";
-		document.querySelector("#containerFour").style.display = "block";
+		containerOne.style.display = "none";
+		containerFour.style.display = "block";
+		timeLeft -=10;
+		document.querySelector("#timeLeft_2").innerHTML = timeLeft;
+
+	
+
+
+	} else if (inputData.includes("red")) {
+
+		containerTwo.style.display = "none";
+		containerFive.style.display = "block";
+
+	} else if (inputData.includes("chuck")) {
+
+		containerTwo.style.display = "none";
+		containerSix.style.display = "block";
+
+	} else if (inputData.includes("bomb")) {
+
+		containerTwo.style.display = "none";
+		containerSeven.style.display = "block";
+
+	} else if (inputData.includes("sugar")) {
+
+		containerThree.style.display = "none";
+		containerEight.style.display = "block";
+
+	} else if (inputData.includes("dot")) {
+
+		containerThree.style.display = "none";
+		containerNine.style.display = "block";
+
+	} else if (inputData.includes("squeak")) {
+
+		containerThree.style.display = "none";
+		containerTen.style.display = "block";
+
+	} else if (inputData.includes("Forky")) {
+
+		containerFour.style.display = "none";
+		containerEleven.style.display = "block";
+
+	} else if (inputData.includes("Woody")) {
+
+		containerFour.style.display = "none";
+		containerTwele.style.display = "block";
+
+	} else if (inputData.includes("jessie")) {
+
+		containerFour.style.display = "none";
+		containerThirteen.style.display = "block";
+		
 	}
+
 }
 
 
 
-// document.querySelector("#one").addEventListener("click", function() {
-// 	document.querySelector("#containerOne").style.display = "none";
-// 		document.querySelector("#containerTwo").style.display = "block";
-		
-// })
-
-// document.querySelector("#two").addEventListener("click", function() {
-// 	document.querySelector("#containerOne").style.display = "none";
-// 		document.querySelector("#containerThree").style.display = "block";
-		
-// })
-
-// document.querySelector("#three").addEventListener("click", function() {
-// 	document.querySelector("#containerOne").style.display = "none";
-// 		document.querySelector("#containerFour").style.display = "block";
-		
-// })
 
 
 // document.querySelector("#oneOne").addEventListener("click", function() {
