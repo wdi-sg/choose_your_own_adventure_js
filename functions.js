@@ -1,6 +1,6 @@
 //------------------TIME FUNCTIONS------------------
 
-var time = 10; //we will add to this
+var time = 0; //we will add to this
 var properTime = 0; //proper time eg. 00:00 will be pushed here
 
 //clockify the time
@@ -30,6 +30,11 @@ var updateTime = function(passedTime){
     displayTime(properTime);
 }
 //call = updateTime(time to add); eg updateTime(5);
+
+var resetTime = function(){
+    time = 0;
+}
+//call: resetTime();
 
 
 
@@ -65,4 +70,16 @@ var updateDay = function(daysPassed){
     addDay(daysPassed);
     properDay(dayNumber);
     displayDay(day);
+}
+
+
+//----------NAME FUNCTION-----------------
+//                NOTE: CHANGE THIS FROM INPUT TO PROMPT!
+
+var playerName = null;
+
+//function to set playerName
+//no need to call, inserts on input
+var inputHappened = function(currentInput){
+  playerName = currentInput;
 }

@@ -9,7 +9,16 @@
   </header>
   <body>
 
-    <p class="starter" id="output"></p>
+    <p class="starter" id="mainDisplay"></p>
+    <p class="starter" id="secDisplay"></p>
+ <!--    <p class="starter" id="output"></p> -->
+
+
+
+
+
+
+
 
 
 
@@ -20,13 +29,17 @@
         inputHappened(currentInput)
       });
 
-      var display = function( data ){
-        var output = document.querySelector('#output');
-        output.innerText = data;
-      }
+    // var display = function( data ){
+    //     var output = document.querySelector('#output');
+    //     output.innerText = data;
+    //   }
     </script>
+
     <div class="buttonContainer">
-        /<p>HELLO</p>
+        <button class="btn" id="btn1" onclick=""></button>
+        <button class="btn" id="btn2"></button>
+        <button class="btn" id="btn3"></button>
+
     </div>
 
     <script src="functions.js"></script>

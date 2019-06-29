@@ -15,9 +15,13 @@
 }
 
 .buttonContainer{
-	position: absolute;
-	bottom: 0;
-	left: 0;
+	text-align: center;
 	background-color: red;
-	margin: 50px;
+	margin: 50px auto;
+}
+
+.btn{
+	position: relative;
+	padding: 10px;
+	margin: 10px;
 }
