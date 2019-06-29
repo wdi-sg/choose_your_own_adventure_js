@@ -38,7 +38,7 @@ var player = {
   health:100,
   weapon: fists,
   target: null,
-  score: null,
+  score: 0,
   settarget: function(enemy){
     this.target = enemy;
   },
@@ -57,7 +57,7 @@ var player = {
 //initialize enemies for game
 var enemyGoon = {
   name: "Enemy Goon",
-  health:10,
+  health:100,
   fight: function(){
     var damage = Math.floor(Math.random()*11);
     console.log(`enemy did ${damage} damage!`);
@@ -68,7 +68,7 @@ var enemyGoon = {
 
 var enemyBoss = {
   name: "Goon boss",
-  health:12,
+  health:120,
   fight: function(){
     var damage = Math.floor(Math.random()*21);
     console.log(`enemy boss did ${damage} damage!`);
@@ -107,7 +107,7 @@ var enemyArray = [enemyGoon, enemyBoss];
 //   }
 // }
 
-//initialize scenario objects and array
+//initialize scenario objects and array and clone copy to be used in game
 var scenario = [
   {
     story: "You find yourself in a room with a painting of a butterfly on the wall. There are two doors to your left and right. What do you do?",
@@ -210,6 +210,41 @@ var scenario = [
     ]
   }
 ];
+//clone object
+var scenarioClone = null;
+
+//restart game with basic settings
+function restartGame(){
+  weaponType = null;
+  currentScenario = null;
+  backPedal = [];
+  storySelect = null;
+  battleStatus = 0;
+  weaponTaken = 0;
+  healthInfo = null;
+  weaponInfo = null;
+  enemyHealthInfo = null;
+  endState = 0;
+  player.health = 100;
+  player.weapon = fists;
+  enemyGoon.health = 100;
+  enemyBoss.health = 120;
+  enemyArray = [enemyGoon, enemyBoss];
+  while (storyNode.firstChild) {
+    storyNode.removeChild(storyNode.firstChild);
+  };
+  while (optionNode.firstChild) {
+    optionNode.removeChild(optionNode.firstChild);
+  };
+  while (statNode.firstChild) {
+    statNode.removeChild(statNode.firstChild);
+  };
+  var storytext = document.createElement("p");
+  storytext.setAttribute("id", "storytext");
+  document.getElementById("storycontainer").appendChild(storytext);
+  document.getElementById("startadventure").style.visibility = "visible";
+  document.getElementById("storytext").innerHTML = "You wake up in a daze, memories of what happened last night slowly begin to fill your mind. You were walking home by yourself when you happened across some people who looked a bit too shady for your liking. As you continue walking, you felt a knock on your head and everything went black. You get up to explore your surroundings and try to get out of this creepy house...";
+}
 
 var endMap = {
   story: "A stream of light pours through the edge of the door as you open it. You take a deep breathe of fresh air and pluck a flower by the side of the gravel road. As you walk on, you leave behind you, the memories of a place that never seems to end.",
@@ -237,12 +272,13 @@ document.getElementById("startadventure").style.visibility = "hidden";
 function setName(){
   var input = document.getElementById("setname").value;
   document.getElementById("nameinput").style.visibility = "hidden";
-  document.getElementById("storytext").innerHTML = `${input}!!! This adventure is fraught with perils. Press start to commence your adventure of a life time!`;
+  document.getElementById("storytext").innerHTML = `${input}!!! This adventure is fraught with perils. Press start to commence your escape of a life time!`;
   document.getElementById("startadventure").style.visibility = "visible";
 }
 
 //starts the game. Loads player and story settings.
 function startAdventure(){
+  scenarioClone = JSON.parse(JSON.stringify(scenario));
   loadPlayer();
   loadStory();
   document.getElementById("startadventure").style.visibility = "hidden";
@@ -262,20 +298,20 @@ function loadPlayer(){
 
 //function to load random player story and option choices
 function loadStory(){
-  storySelect = Math.floor(Math.random()*scenario.length);
-  //once scenario length drops to two, the end game scenario loads into the scenario array
-  if (scenario.length === 2 && endState === 0){
-    scenario.push(endMap);
+  storySelect = Math.floor(Math.random()*scenarioClone.length);
+  //once scenarioClone length drops to two, the end game scenario loads into the scenarioClone array
+  if (scenarioClone.length === 2 && endState === 0){
+    scenarioClone.push(endMap);
     endState = 1;
   }
-  console.log(scenario.length);
-  document.getElementById("storycontainer").textContent = scenario[storySelect]["story"];
-  currentScenario = scenario[storySelect];
+  console.log(scenarioClone.length);
+  document.getElementById("storycontainer").textContent = scenarioClone[storySelect]["story"];
+  currentScenario = scenarioClone[storySelect];
   //creating interact, fight and traverse options
-  for (var i = 0; i < scenario[storySelect]["option"].length; i++){
+  for (var i = 0; i < scenarioClone[storySelect]["option"].length; i++){
     var btn = document.createElement("button");
     var para = document.createElement("p");
-    if (hasOwnProperty.call(scenario[storySelect]["option"][i], "fight") && battleStatus === 0){
+    if (hasOwnProperty.call(scenarioClone[storySelect]["option"][i], "fight") && battleStatus === 0){
       btn.setAttribute("onClick","fight()");
       btn.setAttribute("display", "block");
       btn.setAttribute("class", "options");
@@ -284,31 +320,31 @@ function loadStory(){
       document.getElementById("optionbox").appendChild(btn);
       battleStatus = 1;
       break;
-    }else if (hasOwnProperty.call(scenario[storySelect]["option"][i], "interact")){
-        btn.setAttribute("onClick",scenario[storySelect]["option"][i]["response"]);
+    }else if (hasOwnProperty.call(scenarioClone[storySelect]["option"][i], "interact")){
+        btn.setAttribute("onClick",scenarioClone[storySelect]["option"][i]["response"]);
         btn.setAttribute("display", "block");
         btn.setAttribute("class", "options");
         btn.textContent = "Interact!";
         para.setAttribute("class", "options");
-        para.textContent = scenario[storySelect]["option"][i]["interact"];
+        para.textContent = scenarioClone[storySelect]["option"][i]["interact"];
         document.getElementById("optionbox").appendChild(btn);
         document.getElementById("optionbox").appendChild(para);
-    } else if (hasOwnProperty.call(scenario[storySelect]["option"][i], "traverse")){
-        btn.setAttribute("onClick", scenario[storySelect]["option"][i]["response"]);
+    } else if (hasOwnProperty.call(scenarioClone[storySelect]["option"][i], "traverse")){
+        btn.setAttribute("onClick", scenarioClone[storySelect]["option"][i]["response"]);
         btn.setAttribute("display", "block");
         btn.setAttribute("class", "options");
         btn.textContent = "Travel!";
         para.setAttribute("class", "options");
-        para.textContent = scenario[storySelect]["option"][i]["traverse"];
+        para.textContent = scenarioClone[storySelect]["option"][i]["traverse"];
         document.getElementById("optionbox").appendChild(btn);
         document.getElementById("optionbox").appendChild(para);
-    } else if (hasOwnProperty.call(scenario[storySelect]["option"][i], "weapon") && weaponTaken === 0){
-        btn.setAttribute("onClick", scenario[storySelect]["option"][i]["response"]);
+    } else if (hasOwnProperty.call(scenarioClone[storySelect]["option"][i], "weapon") && weaponTaken === 0){
+        btn.setAttribute("onClick", scenarioClone[storySelect]["option"][i]["response"]);
         btn.setAttribute("display", "block");
         btn.setAttribute("id", "weapon");
         btn.textContent = "Weapon!";
         para.setAttribute("class", "options");
-        para.textContent = scenario[storySelect]["option"][i]["weapon"];
+        para.textContent = scenarioClone[storySelect]["option"][i]["weapon"];
         document.getElementById("optionbox").appendChild(btn);
         document.getElementById("optionbox").appendChild(para);
     }
@@ -347,11 +383,11 @@ function battle(){
     enemy.fight();
   }
   updateHealthInfo();
-  if (player.health < 0){
+  if (player.health <= 0){
     console.log("enemy wins!")
     alert("You lost this fight!")
-    gameOver();
-  }else if (enemy.health < 0){
+    gameOverLose();
+  }else if (enemy.health <= 0){
     battleStatus = 1;
     player.score += 1;
     enemyArray.shift();
@@ -464,7 +500,7 @@ function gameOverLose(){
   btn.setAttribute("display", "block");
   btn.setAttribute("class", "options");
   btn.textContent = "Click to restart game!";
-  document.getElementById("storytext").appendChild(para);
+  document.getElementById("storycontainer").appendChild(para);
   document.getElementById("statbox").appendChild(stats);
   document.getElementById("optionbox").appendChild(btn);
 }
@@ -566,13 +602,8 @@ function travel(){
   while (storyNode.firstChild) {
     storyNode.removeChild(storyNode.firstChild);
   };
-  backPedal = scenario.splice([storySelect], 1);
+  backPedal = scenarioClone.splice([storySelect], 1);
   loadStory();
-}
-
-//function to restart game upon complete or end
-function restartGame(){
-
 }
 
 // function loadMain(){
