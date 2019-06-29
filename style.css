@@ -1,0 +1,17 @@
+.starter{
+  font-size:30px;
+  padding:10px;
+  display:block;
+  border:3px solid blue;
+  margin: 40px auto;
+}
+
+#output{
+  background-color:pink;
+  margin: 0 auto;
+  padding: 25px;
+}
+
+#wrapper{
+	text-align:center;
+}
