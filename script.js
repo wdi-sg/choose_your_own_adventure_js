@@ -23,19 +23,24 @@ var msg;
 
 var inputHappened = function(currentInput){
     tempInput = currentInput.toUpperCase();
-    console.log(tempInput);
+    timeTravel(tempInput);
+    // CLEAR INPUT BOX
+    document.querySelector('#input').value="";
+};
 
+var timeTravel = function (currentInput) {
     for (var i = 0; i < yearChoiceArray.length; i++ ) {
         // PLAYER CHOOSE YEAR //////////////////
         if (tempInput == yearChoiceArray[i]) {
             console.log("Year Chosen");
             // DISPLAY CHOSEN YEAR MSG
             display(yearMsgArray[i]);
+            break;
         }
-        // CLEAR INPUT BOX
-        document.querySelector('#input').value="";
     }
 };
+
+
 /*
             switch (yearChoice) {
                 case '2015':
