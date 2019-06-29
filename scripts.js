@@ -5,24 +5,31 @@ document.addEventListener("keyup", function(event) {
 		document.querySelector("#containerOne").style.display = "block";
 	}	
 })
-document.querySelector('.input').addEventListener('change', function(event){
-        var currentInput = event.target.value;
-        
-      });
+var containerOne = document.querySelector("#containerOne").style.display;
+var containerTwo = document.querySelector("#containerTwo").style.display;
+var containerThree = document.querySelector("#containerThree").style.display;
+var containerFour = document.querySelector("#containerFour").style.display;
+var containerFive;
+console.log (containerOne);
 
 function chooseAdventure(event){
 	 let currentInput = event.target.value;
 	let inputData = currentInput.toLowerCase();
 	if(inputData.includes ("angry bird")){
 
-		document.querySelector("#containerOne").style.display = "none";
 		
+
+		document.querySelector("#containerOne").style.display = "none";
 		document.querySelector("#containerTwo").style.display = "block";
+
 		
 	} else if (inputData.includes ("tom")){
+
 		document.querySelector("#containerOne").style.display = "none";
 		document.querySelector("#containerThree").style.display = "block";
+
 	} else if (inputData.includes("story")) {
+
 		document.querySelector("#containerOne").style.display = "none";
 		document.querySelector("#containerFour").style.display = "block";
 	}
