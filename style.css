@@ -3,14 +3,14 @@ body{
 	background: pink;
 
 }
-.welcome , .transport {
+.welcome , .container {
 	width: 80%;
 	border: 2px solid gray;
 	margin: 0 auto;
 	padding: 20px;
 }
-.transport {
-	visibility: hidden;
+.container {
+	display: none;
 }
 .first {
 	width: 20%;
