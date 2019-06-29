@@ -2,9 +2,18 @@
   <head>
     <link rel="stylesheet" href="style.css">
   </head>
+  <header>
+        <p id="dayBox"></p>
+        <p id="timeBox"></p>
+
+  </header>
   <body>
-    <input class="starter" id="input" placeholder="input"/>
+
     <p class="starter" id="output"></p>
+
+
+
+     <input class="starter" id="input" placeholder="input"/>
     <script>
       document.querySelector('#input').addEventListener('change', function(event){
         var currentInput = event.target.value;
@@ -16,6 +25,11 @@
         output.innerText = data;
       }
     </script>
+    <div class="buttonContainer">
+        /<p>HELLO</p>
+    </div>
+
+
     <script src="script.js"></script>
   </body>
 </html>
