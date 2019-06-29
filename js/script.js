@@ -3,33 +3,51 @@ console.log('Game is running!');
 let currentLayer = 0;   //               ==> now at ?
 let scenario = 0;            //1, 2, 3, 4, 5....    ==> now at ?
 
+let userName = '';
+let userBar = 0;
+let extraCounter = '';
 // -------------------------  AWAITING USER INPUT --------
 let inputHappened = (anInput) => {        // ==> input is b
     let input = anInput.toUpperCase();
+    let message = '';
 
-    if (input === 'S') {
+    if (extraCounter === 'username') {
+        userName = anInput;
+        extraCounter = '';
         startGame();
-    }
-    if (input === 'R') {
+    } else if (input === 'S') {
+        startGame();
+    } else if (input === 'R') {
         resetGame();
-    }
-    if (input === 'A' || 'B' || 'C' ){
+    } else if (input === 'A' || 'B' || 'C' ){
         checkLayers(input);
     }
     console.log('currentLayer:' + currentLayer)
     console.log('scenario:' + scenario)
+    display2(userBar);
+    display3(userBar);
     event.target.value = '';
 }
 
 // -------------------------  START & RESET GAME -----
+let getUsername = () => {
+    display('What is your name?');
+    extraCounter = 'username';
+}
 let startGame = () => {
-    if (currentLayer === 0) {
+    if (currentLayer === 0 && userName) {
         stories.storyLayer0();
+    } else if (currentLayer === 0){
+        getUsername();
     }
+}
+let goBack = () => {
+    currentLayer -= 2;
 }
 let resetGame = () => {
     currentLayer = 0;
     scenario = 0;
+    userName = '';
     display("Game reset. \n Type 's' to play again.");
 }
 // ----------------  CHECK WHAT LAYER & SCENARIO USER IS IN --
@@ -62,6 +80,9 @@ let checkLayers = (input) => {
                 stories.storyLayer2A1();
             } else if (input === 'B') {
                 stories.storyLayer2B1();
+            } else if (input === 'C') {
+                goBack();
+                stories.storyLayer0();
             }
         } else if (scenario === 2) {
             if (input === 'A') {
@@ -85,12 +106,12 @@ let checkLayers = (input) => {
 let stories = {
 //  ------------------------------ LAYER 0
     storyLayer0 () {
-        display('Choose one: \n 🍣 sushi \n 🍕 pizza');
+        display(`Hi ${userName}! It's dinner time! \n What should we eat for dinner? \n A. 🍣 \n B. 🍕 \n C. 🍜 \n D. 🍚`);
         nextLayer(1);
     },
 // -------------------------- LAYER 1
     storyLayer1A1 () {
-        display('Sushi express or santouka?');
+        display(`Great choice! Where should we eat our sushi?\n \n A. Sushi express \n B. Genki sushi \n C. Go back`);
         nextLayer(1);
     },
     storyLayer1B1 () {

@@ -10,13 +10,13 @@
             <p>Type 's' to Start Game</p>
             <input class="starter" id="input" placeholder="type here"/>
         </div>
-        <div class ="playerStatus">
+        <div class ="userBar">
             <h2>Life Bar</h2>
-            <p class = "starter" id = "counter"></p>
+            <p class = "starter" id = "lifebar"></p>
         </div>
-        <div class ="playerStatus">
+        <div class ="userBar">
             <h2>Items</h2>
-            <p class = "starter" id = "answer"></p>
+            <p class = "starter" id = "items"></p>
         </div>
         <h2>Choices</h2>
         <p class="starter" id="choices"></p>
@@ -33,12 +33,12 @@
                 output.innerText = data;
             }
             var display2 = function( data2 ){
-                let tableman = document.querySelector('#counter');
-                tableman.innerText = data2;
+                let lifebar = document.querySelector('#lifebar');
+                lifebar.innerText = data2;
             }
             var display3 = function( data3 ){
-                let answer = document.querySelector('#answer');
-                answer.innerText = data3;
+                let items = document.querySelector('#items');
+                items.innerText = data3;
             }
         </script>
     </div>
