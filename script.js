@@ -4,13 +4,26 @@ console.log("hello script js");
 var goToVormir = false;
 var goToMorag = false;
 var goToAsgard = false;
+var goToNY = false;
+
 var soulStone = {found:false,name:"Soul Stone"};
 var powerStone = {found:false,name:"Power Stone"};
 var realityStone = {found:false,name:"Reality Stone"};
-var infinityStones = [soulStone,powerStone,realityStone]
+var timeStone = {found:false,name:"Time Stone"};
+var mindStone = {found:false,name:"Mind Stone"};
+var spaceStone = {found:false,name:"Reality Stone"};
+var infinityStones = [soulStone,powerStone,realityStone,timeStone,mindStone,spaceStone];
+
+
 var moragChoiceCount = 0;
 var asgardThor = false;
 var asgardOdin = false;
+var choiceNYStonePick = false;
+var NYTimeStone = false;
+var NYMindStone = false;
+var NYMindB = false;
+var NYMindC = false;
+
 var life = true;
 
 //just a function to return destinations choices
@@ -54,8 +67,19 @@ var inputHappened = function(currentInput){
                 choicesAsgardThor(currentInput);
             else
                 choicesAsgard(currentInput);
+        }else if(choiceNYStonePick){
+            if(NYTimeStone)
+                choicesNYTime(currentInput);
+            else if(NYMindStone){
+                if(NYMindB)
+                    choicesNYMindB(currentInput);
+                else if (NYMindC)
+                    choicesNYMindC(currentInput);
+                else
+                    choicesNYMind(currentInput);
+            }else
+                choicesNYStone(currentInput);
         }
-
         else{
             chooseDestinations(currentInput);
         }
@@ -72,7 +96,8 @@ var chooseDestinations = function(currentInput){
     display(choicesDestinationsDisplay());
     switch (currentInput){
         case "A":
-            console.log("Test");
+            choiceNYStonePick = true;
+            display("Which stone do you want to go for?\n\n"+choicesNYStoneDisplay());
             break;
         case "B":
             if(soulStone.found){
@@ -250,6 +275,140 @@ var choicesAsgardOdin = function(currentInput){
     }
 }
 
+var choicesNYStone = function(currentInput){
+    switch(currentInput){
+        case "A":
+            if(timeStone.found){
+                choiceNYStonePick = false;
+                display(`${stoneFoundMessage(timeStone)}\n\n${choicesDestinationsDisplay()}`);
+                break;
+            }else{
+                NYTimeStone = true;
+                display("You arrived at New York 2012 and you went with Hulk to meet the Ancient One for the Time Stone\n\nThe hulk asked for the time stone from the Ancient One but she denied. \n\nWhat would you do?\n"+choicesNYTimeDisplay());
+                break;
+            }
+        case "B":
+            if(mindStone.found){
+                choiceNYStonePick = false;
+                display(`${stoneFoundMessage(mindStone)}\n\n${choicesDestinationsDisplay()}`);
+                break;
+            }else{
+                NYMindStone = true;
+                display("You arrived at New York 2012 and went with Captain America to look for the Mind Stone, which should still attached on Loki's Scepter.\n\nUpon going into the Stark's tower you guys saw the scepter is already in the SHIELD's possession. \n\nWhat should you do?\n"+choicesNYMindDisplay());
+                break;
+            }
+
+        default:
+            display(`${invalidInputMessage()}\n\n${choicesNYStoneDisplay()}`);
+            break;
+    }
+}
+
+var choicesNYTime = function(currentInput){
+    switch(currentInput){
+        case "A":
+            life = false;
+            choiceNYStonePick = false;
+            NYTimeStone = false;
+            display("You and Hulk souls were being pushed out and were left hanging.\n\nYou both have no way of going back\n\n"+gameOverMessage());
+            break;
+        case "B":
+            life = false;
+            choiceNYStonePick = false;
+            NYTimeStone = false;
+            display("The Ancient One think that you are a liar and went off. You did not managed to get the stone from her\n\n"+gameOverMessage());
+            break;
+        case "C":
+            choiceNYStonePick = false;
+            NYTimeStone = false;
+            timeStone.found = true;
+            display("The Ancient One actually pitied you and give you the Time Stone. What a luck eh?\n\nYou and Hulk head back to present time. \n\nChoose your next destination:\n"+choicesDestinationsDisplay());
+            break;
+        default:
+            display(`${invalidInputMessage()}\n\n${choicesNYTimeDisplay()}`);
+            break;
+    }
+}
+
+var choicesNYMind = function(currentInput){
+    switch(currentInput){
+        case "A":
+            NYMindStone = false;
+            choiceNYStonePick = false;
+            life = false;
+            display("You made too big of an attention and also revealed their through identity, they caused a havoc and escaped.\n\n Good work genius!\n\n"+gameOverMessage());
+            break;
+        case "B":
+            NYMindB = true;
+            display("You managed to steal from them, but the whole SHIELD units are chasing both of you. Eventually you are surrounded by them.\n\nWhat do you do next!?\n"+choicesNYMindBDisplay());
+            break;
+        case "C":
+            NYMindC = true;
+            display("You and Captain America went into the lift with them. The SHIELD members find that both of you looked suspicious.\n\nWhat should you do?\n"+choicesNYMindCDisplay());
+            break;
+        default:
+            display(`${invalidInputMessage()}\n\n${choicesNYMindDisplay()}`);
+            break;
+    }
+}
+
+var choicesNYMindB = function(currentInput){
+    switch(currentInput){
+        case "A":
+            NYMineB = false;
+            NYMindStone = false;
+            choiceNYStonePick = false;
+            mindStone.found = true;
+            display("They really thought you are one of them, and they even protect you and escort you out from the commotion.\n\nLucky!!\n\nYou and Captain America quickly found an opportunity to return to the present time.\n\nPlease choose your next destination:\n"+choicesDestinationsDisplay());
+            break;
+        case "B":
+            NYMineB = false;
+            NYMindStone = false;
+            choiceNYStonePick = false;
+            mindStone.found = true;
+            display("You used the scepter to control few of them to attack each other. The commotion is big enough for both of you to make your escape.\n\nGreat Work!\n\nYou and Captain America go back to the present time.\n\nChoose your next destination\n"+choicesDestinationsDisplay());
+            break;
+        case "C":
+            NYMineB = false;
+            NYMindStone = false;
+            choiceNYStonePick = false;
+            life = false;
+            display("They ignore what you said and just pin you down. Both of you are caught and unable to go back to the present time.\n\n"+gameOverMessage());
+            break;
+        default:
+            display(`${invalidInputMessage()}\n\n${choicesNYMindBDisplay()}`);
+            break;
+    }
+}
+
+var choicesNYMindC = function(currentInput){
+    switch(currentInput){
+        case "A":
+            NYMineC = false;
+            NYMindStone = false;
+            choiceNYStonePick = false;
+            mindStone.found = true;
+            display("They thought that you are really Hydra and pass you the scepter. Both you and Captain America walked out with a Smirk\n\nGreat Work!\n\nBoth of you then go back to the present time.\n\nChoose your next destination:\n"+choicesDestinationsDisplay());
+            break;
+        case "B":
+            NYMineC = false;
+            NYMindStone = false;
+            choiceNYStonePick = false;
+            life = false;
+            display("Your distraction helped Captain America to escape with the scepter but you ended up being caught and unable to go back to the present.\n\nThanks for you help hero, but too bad you can't see the end of it.\n\n"+gameOverMessage());
+            break;
+        case "C":
+            NYMineC = false;
+            NYMindStone = false;
+            choiceNYStonePick = false;
+            mindStone.found = true;
+            display("The SHIELD unit quickly pin you down to help Captain America. Captain America then suggests he will bring you into custody with a false report. He also take the scepter with him. You guys quickly fled when given a chance.\n\nGreat Work!\n\nBoth of you go back to the present.\n\nChoose your next destination:\n"+choicesDestinationsDisplay());
+            break;
+        default:
+            display(`${invalidInputMessage()}\n\n${choicesNYMindCDisplay()}`);
+            break;
+    }
+}
 
 
 //display message if stone found
@@ -297,11 +456,31 @@ var choicesAsgardOdinDisplay = function(){
     return "A : \"FIGHT ME!\"\nB : \"Just passing by sir\"\nC : \"I am here to warn you of a tragedy that is to come!\"";
 }
 
+var choicesNYStoneDisplay = function(){
+    return "A : Time Stone\nB : Mind Stone\nC : Space Stone";
+}
+
+var choicesNYTimeDisplay = function(){
+    return "A : Tell the Hulk to smash her\nB : Tell her it was Doctor Strange's idea\nC : Cry in front of her";
+}
+
+var choicesNYMindDisplay = function(){
+    return "A : Scream \"HAIL HYDRA!!\"\nB : Try to steal it away from them\nC : Pretend to be calm and get close to them"
+}
+
+var choicesNYMindBDisplay = function(){
+    return "A : Nows the time to scream \"HAIL HYDRA\"\nB : Use the scepter!\nC : Tell them you are from the future!"
+}
+
+var choicesNYMindCDisplay = function(){
+    return "A : Tell them softly \"Hail Hydra\"\nB : Distract them by going hysterical\nC : Reveals that Captain America is actually Hydra";
+}
+
 //return invalid input message
 var invalidInputMessage = function(){
     return "Please enter something that makes sense!"
 }
 
 var gameOverMessage = function(){
-    return "Game Over\n\nRefresh to restart the game"
+    return "Game Over\n\nRefresh to restart the game";
 }
