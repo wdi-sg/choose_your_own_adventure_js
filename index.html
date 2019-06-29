@@ -4,27 +4,36 @@
   </head>
   <body>
     <div>
-        <h1>Hangman Game</h1>
-        <h3>Instructions</h3>
-        <p>Guess letters one at a time to solve the word puzzle. Enter one letter at a time with your keyboard. <br>Every time you get a letter wrong, the table flipper gets more impatient with you... 😨 </p>
-        <p>Get help by typing 'hint'</p>
-        <input class="starter" id="input" placeholder="type a letter"/>
-        <h2>The Table Flipper</h2>
-        <p id = "tableman"></p>
-        <p class="starter" id="output"></p>
-        <h2>Answer</h2>
-        <p id = "answer"></p>
+        <div>
+            <h1>Adventure Game</h1>
+            <p>Are you ready to play? 😨 </p>
+            <p>Type 's' to Start Game</p>
+            <input class="starter" id="input" placeholder="type here"/>
+        </div>
+        <div class ="playerStatus">
+            <h2>Life Bar</h2>
+            <p class = "starter" id = "counter"></p>
+        </div>
+        <div class ="playerStatus">
+            <h2>Items</h2>
+            <p class = "starter" id = "answer"></p>
+        </div>
+        <h2>Choices</h2>
+        <p class="starter" id="choices"></p>
+
+        <p id="extra">To reset game, enter ' r ' in the text box above</p>
+
         <script>
             document.querySelector('#input').addEventListener('change', function(event){
                 var currentInput = event.target.value;
-                inputHappened(currentInput)
+                inputHappened(currentInput);
             });
             var display = function( data ){
-                var output = document.querySelector('#output');
+                var output = document.querySelector('#choices');
                 output.innerText = data;
             }
             var display2 = function( data2 ){
-                let tableman = document.querySelector('#tableman');
+                let tableman = document.querySelector('#counter');
                 tableman.innerText = data2;
             }
             var display3 = function( data3 ){
@@ -33,6 +42,6 @@
             }
         </script>
     </div>
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>

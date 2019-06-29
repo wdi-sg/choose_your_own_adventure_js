@@ -1,11 +1,35 @@
 .starter{
   font-size:30px;
   padding:10px;
-  border:3px solid blue;
+  border:3px solid black;
 }
 
-#output{
+.playerStatus{
+	width: 30%;
+	margin: 0 auto;
+	display: inline-block;
+}
+
+#counter{
+  	letter-spacing: 5px;
+}
+
+#answer{
+	letter-spacing: 5px;
+}
+
+#choices{
   background-color:orange;
+  width: 75%;
+  margin: 0 auto;
+}
+
+#input{
+	text-align: center;
+}
+
+#extra{
+	color: grey;
 }
 
 *{
@@ -24,16 +48,4 @@ body{
   width: 900px;
   margin: 0 auto;
   text-align: center;
-}
-
-#tableman{
-	  font-size:30px;
-  	padding:10px;
-  	letter-spacing: 5px;
-}
-
-#answer{
-	  font-size:30px;
-  	padding:10px;
-  	letter-spacing: 10px;
 }

@@ -24,9 +24,9 @@ boss object
         - special attack 50%
 
 // -----------_RULES--------------------
-1. ask at least 3 questions
+1. ask at least 3 questions [done]
 2. Minimum 7 endings
-3. For at least 1 question, have at least 3 user responses
+3. For at least 1 question, have at least 3 user responses [done]
 
 4. get username
 5. get player score
