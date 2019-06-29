@@ -37,18 +37,21 @@ var response = {
 // ask for username and display hello message. if user name has been entered then run check for year. note: add 1 counter to var question
 var inputHappened = function(currentInput){
     if(questionAnswered.length === 0 ) {
-    userName.push(currentInput);
-     console.log( currentInput );
-    display( `Nice to meet you ${userName}, which year do you want to go?` );
-    questionAnswered.push("1");
+        userName.push(currentInput);
+        console.log( currentInput );
+        display( `Nice to meet you ${userName}, which year do you want to go?` );
+        questionAnswered.push("1");
     //run check for year if user name length is 1
     } else  {
         if (questionAnswered.length === 1) {
             console.log(currentInput);
             checkForYear (currentInput);
             questionAnswered.push("2");
-        }else if (questionAnswered.length === 2 ) {
+        }else if (questionAnswered.length === 2 &&(yearAnswered == "2015")) {
             biffOrGriff (currentInput);
+            questionAnswered.push("3");
+        }else if (questionAnswered.length === 2 &&(yearAnswered >=1985 || yearAnswered <= 2014)) {
+            name1985to2014(currentInput);
             questionAnswered.push("3");
             //edit this check counter and character name
         }else if (questionAnswered.length === 3 && (character == "B")) {
@@ -65,12 +68,12 @@ var checkForYear = function (currentInput) {
     //if year is 2015
     if (year === 2015) {
         display(response.year2015.reply1);
-        yearAnswered.push(currentInput);
+        yearAnswered.push(parseInt(currentInput));
         console.log(yearAnswered);
     //if year is between 1985 to 2014
     } else if (year<=2014 && year >=1985) {
         display(response.year1985to2014.reply1);
-        yearAnswered.push(currentInput);
+        yearAnswered.push(parseInt(currentInput));
         console.log(yearAnswered);
     }
 }
@@ -94,7 +97,7 @@ var standRun = function (currentInput) {
         display (response.year2015.stand);
     }else if (currentInput == "R") {
         console.log(currentInput);
-        display(reponse.year2015.run);
+        display(response.year2015.run);
     }
 }
 // to check if I or O under 2015 giff qns 2
@@ -107,10 +110,9 @@ var InOut = function (currentInput) {
         display (response.year2015.out);
     }
 }
-/*
-//create function for griff
-var name1985To2014 = function (currentInput) {
-    var name = currentInput;
-    display ("Welcome to the future" + name);
+
+//create function to welcome to future
+var name1985to2014 = function (currentInput) {
+    var newName = currentInput;
+    display ("Welcome to the future " + newName);
 }
-*/
