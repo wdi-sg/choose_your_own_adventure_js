@@ -3,10 +3,14 @@ console.log("hello script js");
 
 var goToVormir = false;
 var goToMorag = false;
+var goToAsgard = false;
 var soulStone = {found:false,name:"Soul Stone"};
 var powerStone = {found:false,name:"Power Stone"};
-var infinityStones = [soulStone,powerStone]
+var realityStone = {found:false,name:"Reality Stone"};
+var infinityStones = [soulStone,powerStone,realityStone]
 var moragChoiceCount = 0;
+var asgardThor = false;
+var asgardOdin = false;
 var life = true;
 
 //just a function to return destinations choices
@@ -14,13 +18,13 @@ var choicesDestinationsDisplay = function(){
     return "A : New York City (Time/Mind/Space stones)\nB : Vormir (Soul Stone)\nC : Morag (Power Stone)\nD : Asgard (Reality Stone)\n\n"+checkStones();
 }
 
+//check number of stones obtained
 var checkStones = function(){
     var str = "";
     for(var i = 0; i<infinityStones.length;i++){
         if(infinityStones[i].found)
             str += infinityStones[i].name + "\n"
     }
-
     if (str ==="")
         return "Infinity Stones found so far:\nNone"
     else
@@ -43,7 +47,16 @@ var inputHappened = function(currentInput){
                 choicesMorag(currentInput);
             else if (moragChoiceCount === 1)
                 choicesMorag2(currentInput);
-        }else{
+        }else if(goToAsgard && !realityStone.found){
+            if(asgardOdin)
+                choicesAsgardOdin(currentInput);
+            else if (asgardThor)
+                choicesAsgardThor(currentInput);
+            else
+                choicesAsgard(currentInput);
+        }
+
+        else{
             chooseDestinations(currentInput);
         }
     }else{
@@ -79,15 +92,19 @@ var chooseDestinations = function(currentInput){
                 display(choicesMoragDescription()+"\n\nWhat would you do?\n"+choicesMoragDisplay());
                 break;
             }
-
         case "D":
-            console.log("Test");
-            break;
+            if(realityStone.found){
+                display(`${stoneFoundMessage(realityStone)}\n\n${choicesDestinationsDisplay()}`);
+                break;
+            }else{
+                goToAsgard = true;
+                display(choicesAsgardDescription()+"\n"+choicesAsgardDisplay());
+                break;
+            }
 
         default:
             display(`${invalidInputMessage()}\n\n${choicesDestinationsDisplay()}`);
             break;
-
     }
 }
 
@@ -115,6 +132,7 @@ var choicesVormir = function(currentInput){
     }
 }
 
+//take input for choices at Morag
 var choicesMorag = function(currentInput){
     switch(currentInput){
         case "A":
@@ -135,6 +153,7 @@ var choicesMorag = function(currentInput){
     }
 }
 
+//take input for 2nd set of choices at Morag
 var choicesMorag2 = function(currentInput){
     switch(currentInput){
         case "A":
@@ -157,8 +176,79 @@ var choicesMorag2 = function(currentInput){
     }
 }
 
+var choicesAsgard = function(currentInput){
+    switch(currentInput){
+        case "A":
+            asgardThor = true;
+            display("You tried to stop Thor but he has gone uncontrollable and decided to fight you. What would you do?\n"+choicesAsgardThorDisplay());
+            break;
+        case "B":
+            life = false;
+            goToAsgard = false;
+            display("You following Rocket actually did not help at all due to your size, and you guys were discovered by the guards!\n\nTouch Luck bro!\n\n"+gameOverMessage());
+            break;
+        case "C":
+            asgardOdin = true;
+            display("You don't even know why do you look for Odin..\n\n Odin sees you and ask who you are. What do you answer?\n"+choicesAsgardOdinDisplay());
+            break;
+        default:
+            display(`${invalidInputMessage()}\n\n${choicesAsgardDisplay()}`);
+            break;
+    }
+}
 
+var choicesAsgardThor = function(currentInput){
+    switch(currentInput){
+        case "A":
+            goToAsgard = false;
+            asgardThor = false;
+            realityStone.found = true;
+            display("Due to Thor having not fighting for 5 years, you managed to win him and knock him out!\n\nRocket has came back with the reality stone and your team head back to the present time.\n\nChoose your next destination\n\n"+choicesDestinationsDisplay());
+            break;
+        case "B":
+            goToAsgard = false;
+            asgardThor = false;
+            realityStone.found = true;
+            display("This calmed Thor down and both of you looked for his mum, Frigga. Frigga consoled Thor and thanked you for helping him. \n\nRocket has came back with the reality stone and your team head back to the present time.\n\nChoose your next destination\n\n"+choicesDestinationsDisplay());
+            break;
+        case "C":
+            goToAsgard = false;
+            asgardThor = false;
+            life = false;
+            display("Thor rushed to look for Loki, but Loki used him to escape and caused both of you to get cause. Too bad..\n\n"+gameOverMessage());
+            break;
+        default:
+            display(`${invalidInputMessage()}\n\n${choicesAsgardThorDisplay()}`);
+            break;
 
+    }
+}
+
+var choicesAsgardOdin = function(currentInput){
+    switch(currentInput){
+        case "A":
+            life = false;
+            goToAsgard = false;
+            asgardOdin = false;
+            display("Odin crushed you within seconds. What do you even think you are doing? @@\n\n"+gameOverMessage());
+            break;
+        case "B" :
+            life = false;
+            goToAsgard = false;
+            asgardOdin = false;
+            display("Odin ordered his man to catch you. You were unable to join the group back to present time. Game over for you sonny\n\n"+gameOverMessage());
+            break;
+        case "C" :
+            goToAsgard = false;
+            asgardOdin = false;
+            realityStone.found = true;
+            display("Odin actually listened to your story and let you go in the end.\nRocket finally gotten the reality stone and you guys went back to the present time.\n\nChoose your next destination:\n"+choicesDestinationsDisplay());
+            break;
+        default:
+            display(`${invalidInputMessage()}\n\n${choicesAsgardOdinDisplay()}`);
+            break;
+    }
+}
 
 
 
@@ -189,6 +279,22 @@ var choicesMoragDescription2 = function(){
 
 var choicesMoragDisplay2 = function(){
     return "A : Let Nebula take the stone with her hand\nB : Take the stone with your hand\n C : Suggest WarMachine to control his suit to take the stone without his hand in it"
+}
+
+var choicesAsgardDescription = function(){
+    return "You went to Asgard with Thor and Rocket\n\nThor suddenly went hysterical and run off. Rocket ignores him and went to look for Jane\n\nWhat should you do?";
+}
+
+var choicesAsgardDisplay = function(){
+    return "A : Run after Thor\nB : Follow rocket\nC : Look for Odin!";
+}
+
+var choicesAsgardThorDisplay = function(){
+    return "A : \"FIGHT ME!\"\nB : Tell him about his mum\nC : Tell him about Loki";
+}
+
+var choicesAsgardOdinDisplay = function(){
+    return "A : \"FIGHT ME!\"\nB : \"Just passing by sir\"\nC : \"I am here to warn you of a tragedy that is to come!\"";
 }
 
 //return invalid input message
