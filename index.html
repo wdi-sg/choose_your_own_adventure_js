@@ -8,21 +8,23 @@ import seperate pokemon objects module for battle mechanics -->
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <p class="starter" id="output"></p>
-    <script>
-        //creates display(data); function, anything passed in as data parameter will be displayed in output box
-        var display = function( data ){
-        var output = document.querySelector('#output');
-        output.innerText = data;
-        }
-
-        //inputHappened(currentInput) -> whatever user types in input box will go through inputHappened function. so how to reset for each choice?
-        <input class="starter" id="input" placeholder="input"/>
-        document.querySelector('#input').addEventListener('change', function(event){
-        var currentInput = event.target.value;
-        inputHappened(currentInput)
-      });
-    </script>
+    <div class = 'header'>
+        <img src="images/header-2.jpeg" id="header-frame" height="250px">
+        <br>
+        <img src="images/walking.png" height="80px">
+    </div>
+    <div class="divider">-----------</div>
+    <div class="output" id="output-container">
+    This is the output container. Quis magna dolor amet duis tempor ea ut in exercitation aliquip.Sint in ea enim occaecat est quis exercitation elit consectetur anim deserunt non est velit elit quis et laborum ut quis incididunt labore anim dolor sint cupidatat tempor.
+    </div>
+    <div class="divider">-----------</div>
+    <div class="input">
+        <h2>Type your input below</h2>
+        <input type="text" id="userinput">
+        <br>
+        <input type="button" id ="enter-button"  value ="GO!">
+ <!--        add event listener to button for onClick function -->
+    <div>
     <script src="script.js"></script>
   </body>
 </html>
