@@ -1,30 +1,22 @@
 // updateDay(0); (day to show)
 // updateTime(9); (time to show)
 
-
-
-
-
-
-
 // to put choice1 and function test(time) in button 1
 // // pushBtn1(choice1 , test, time);
 
-// resetPage();
+//template:
+    // resetPage();
+    // updateTime();
+    // mainText =
+    // secText =
+
+    // choice1 =
+    // pushMain();
+    // pushSec();
+    // pushBtn1();
 
 
 
-//-----------------------------------------------LUNCH EVENT-------------------------
-
-var lunchStudy = function(){
-    console.log('lunchstudy');
-}
-var lunchBoxing = function(){
-    console.log('lunchboxing');
-}
-var lunchMeet = function(){
-    console.log('lunchMeet');
-}
 
 
 //------------------------------------CREATE TOWN-------------------------

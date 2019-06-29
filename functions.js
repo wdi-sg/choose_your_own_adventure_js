@@ -182,7 +182,7 @@ var pushSec = function(){
 //------------------------------------------------------------------------PAIR WORK EVENT----------------
 var student = null;
 //length = 32
-var studentsArray = ["Hafiz", "Alicia", "Yi Xin", "Aqilah", "Axel", "Benny", "Caspian", "Daniel", "Donna", "Elise", "Frederick", "Hilmi", "Keith", "Kenny", "Lien Huong", "Thean Yew", "Hui Yu", "Wei De", "C.K", "Malcolm", "Marcus", "Asshikin", "Nicholas", "Samuel", "Sarah", "Shirley", "Sowyuen", "Boon Hock", "Thea", "Vivien", "Wen Lei", "Wilfriend"];
+var studentsArray = ["Hafiz", "Alicia", "Yi Xin", "Aqilah", "Axel", "Benny", "Caspian", "Daniel", "Donna", "Elise", "Frederick", "Hilmi", "Keith", "Kenny", "Lien Huong", "Thean Yew", "Hui Yu", "Wei De", "C.K", "Malcolm", "Marcus", "Asshikin", "Nicholas", "Samuel", "Sarah", "Shirley", "Sowyuen", "Boon Hock", "Thea", "Vivien", "Wen Lei", "Wilfried"];
 //chooses random student from array
 var getStudent = function(){
     var randomIndex = Math.floor((Math.random() * 32) + 1);
@@ -220,13 +220,50 @@ var pairWorkResults = function(){
     }
     getStudent();
     choice1 = "Study in the lounge."
-    choice2 = "Rush to a boxing class."
+    choice2 = "Devour a chicken."
     choice3 = `Meet with ${student} for lunch.`
     pushMain();
     pushSec();
     pushBtn1(choice1, lunchStudy);
-    pushBtn2(choice2, lunchBoxing);
+    pushBtn2(choice2, lunchChicken);
     pushBtn3(choice3, lunchMeet);
 }
 
 //--------------------------------------------END PAIR WORK EVENT-----------------------
+//-----------------------------------------------LUNCH EVENT-------------------------
+
+var lunchStudy = function(){
+    resetPage();
+    updateTime(1);
+    mainText = "You study till you get a headache, and then study some more. It's gonna be a long road ahead.";
+    secText = "Intelligence + 1!";
+    player.intelligence += 1;
+    choice1 = "Where do I place this function parameter again...";
+    pushMain();
+    pushSec();
+    pushBtn1(choice1, createTown);
+}
+var lunchChicken = function(){
+    resetPage();
+    updateTime(1);
+    getStudent();
+    mainText = `You wolf down your lunch without a care in the world. Out of the corner of your eye, you see ${student} point and whisper something to a friend. It doesn't faze you.`
+    secText = "Guts + 1!"
+    player.guts += 1;
+    choice1 = "Om nom nom."
+    pushMain();
+    pushSec();
+    pushBtn1(choice1, createTown);
+}
+
+var lunchMeet = function(){
+    resetPage();
+    updateTime(1);
+    mainText = `${student} turned out to be great company. Let's do this again.`;
+    secText = "Charm + 1!"
+    player.charm += 1;
+    choice1 = "\"You HAVE to try Persona 5.\"";
+    pushMain();
+    pushSec();
+    pushBtn1(choice1, createTown);
+}
