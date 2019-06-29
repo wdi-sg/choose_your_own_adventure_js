@@ -1,8 +1,5 @@
-updateDay(0);
-updateTime(9);
-
-// test
-// document.getElementById('mainDisplay').innerHTML = "HELLO"
+updateDay(0); // (day to show)
+updateTime(9); // (time to show)
 
 // function to push to mainDisplay
 var pushMain = function(input){
@@ -19,8 +16,6 @@ var choice3 = null;
 var test = function(time){
     console.log(time);
 }
-
-
 
 // to put choice1 and function test(time) in button 1
 // // pushBtn1(choice1 , test, time);

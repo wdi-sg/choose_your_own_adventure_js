@@ -8,9 +8,12 @@ var getProperTime = function(time){
     properTime = time + ":00";
 }
 
-//show clock on screen
+//create and show clock on screen
 var displayTime = function(properTime){
-    document.getElementById('timeBox').innerHTML = properTime;
+    var createTime = document.createElement('p');
+    createTime.setAttribute("id", "timeBox");
+    createTime.innerHTML = properTime;
+    document.getElementById('day-and-time').appendChild(createTime);
 }
 
 //changes the time
@@ -55,9 +58,12 @@ var properDay = function(dayNumber){
 }
 
 
-//function to set the day, where dayNumber corresponds to day, eg. days[0]; gives Monday
+//function to create and push the day
 var displayDay = function(day){
-    document.getElementById('dayBox').innerHTML = day;
+    var createDay = document.createElement('p');
+    createDay.setAttribute("id", "dayBox");
+    createDay.innerHTML = day;
+    document.getElementById('day-and-time').appendChild(createDay);
 }
 
 //functions to add, set and push over the day
@@ -65,7 +71,7 @@ var displayDay = function(day){
 // properDay(dayNumber);
 // displayDay(day);
 
-// all-in-one function to update and display day, where daysPassed = day you wanna add. dayPassed = 0 to show Monday
+// all-in-one function to update and push the day, where daysPassed = day you wanna add. dayPassed = 0 to show Monday
 var updateDay = function(daysPassed){
     addDay(daysPassed);
     properDay(dayNumber);
