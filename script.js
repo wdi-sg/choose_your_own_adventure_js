@@ -11,9 +11,9 @@ var choice;
 var msg;
 
 var inputHappened = function(currentInput){
-    choice = currentInput;
-    console.log( currentInput );
-    //return msg;
+    var tempInput = currentInput;
+    choice = tempInput.toUpperCase();
+    console.log( choice );
 
     switch (choice) {
       case '2015':
@@ -43,4 +43,6 @@ var inputHappened = function(currentInput){
     }
 
     display( msg );
+    // CLEAR INPUT BOX
+    document.querySelector('#input').value="";
 };
