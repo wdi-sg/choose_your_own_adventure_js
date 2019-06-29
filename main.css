@@ -43,3 +43,9 @@ button{
 .options{
   position:relative;
 }
+#backoption{
+  height: 300px;
+  width: 100%;
+  text-align: center;
+  background-color: rgba(0,0,255,0.5);
+}

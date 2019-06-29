@@ -1,16 +1,32 @@
 //initialize weapon objects
 var fists = {
-  damage: 10,
+  damage: 11,
 }
 var hammer = {
   damage: 21,
 }
 var blade = {
-  damage: 41,
+  damage: 31,
 }
 var gun = {
-  damage: 81,
+  damage: 41,
 }
+var weaponArray = [
+  hammer = {
+    damage: 21,
+  },
+  blade = {
+    damage: 31,
+  },
+  gun = {
+    damage: 41,
+  }
+]
+
+function weaponPicked(){
+  return weaponArray[Math.floor(Math.random()*weaponArray.length)];
+}
+
 //initialize player info and set default weapon to fists
 var player = {
   health:100,
@@ -54,7 +70,7 @@ var enemyBoss = {
 var enemyArray = [enemyGoon, enemyBoss];
 
 //initialize battle proceedings
-function fightBattle (){
+function battleOutcome (){
   //assign enemy to fight
   var enemy = null;
   var i = 0
@@ -83,119 +99,113 @@ function fightBattle (){
 
 //initialize scenario objects and array
 var scenario = [
-  {
-    story: "You find yourself in a room with a painting of a butterfly on the wall. There are two doors to your left and right. What do you do?",
-    option: [
-      {option: "Spit at the painting because you hate butterflies.",
-      response: "alert(`You are a terrible person!`)"},
-      {option: "Take the left door.",
-      response: "response()"},
-      {option: "Take the right door.",
-      response: "response()"},
-      {option: "Go back.",
-      response: "goBack()"},
-    ]
-
-  },
   // {
-  //   story: "You feel hot as you enter the room. The room is rapidly heating up. What do you do?",
-  //   option:[
-  //     {option: "Do a sexy dance in the hope that a genie will appear.",
-  //     response: "response()"},
-  //     {option: "Take a swig of water left suspiciously in the middle of the room.",
-  //     response: "response()"},
-  //     {option: "Go back.",
-  //     response: "goBack()"},
-  //   ]
-  // },
-  // {
-  //   story: "Bam! You feel your head getting smacked by something.",
-  //   option:[
-  //     {option: "Fight the enemy!",
-  //     response: "response()"},
-  //     {option: "Use the door on your left.",
-  //     response: "response()"},
-  //     {option: "Go back.",
-  //     response: "goBack()"},
-  //   ]
-  // },
-  // {
-  //   story: "There's a weapon on the shelf that is in the middle of two doors! I'd suggest you take it first!",
+  //   story: "You find yourself in a room with a painting of a butterfly on the wall. There are two doors to your left and right. What do you do?",
   //   option: [
-  //     {option: "Take weapon.",
+  //     {interact: "Spit at the painting because you hate butterflies.",
+  //     response: "alert(`You are a terrible person!`)"},
+  //     {traverse: "Take the left door.",
   //     response: "response()"},
-  //     {option: "Take the left door.",
+  //     {traverse: "Take the right door.",
   //     response: "response()"},
-  //     {option: "Take the right door.",
-  //     response: "response()"},
-  //     {option: "Go back.",
-  //     response: "goBack()"},
   //   ]
+  //
   // },
-  // {
-  //   story: "You see fairy dust floating around as you enter the room. In the middle of a room lies a glowing orb with a sign that says Do Not Touch. What do you do?",
-  //   option:[
-  //     {option: "Touch the orb.",
-  //     response: "response()"},
-  //     {option: "Try to catch some fairy dust.",
-  //     response: "response()"},
-  //     {option: "Go through a door that suddenly appeared on the other side of the room. The door behind you has disappeared.",
-  //     response: "response()"},
-  //   ]
-  // },
-  // {
-  //   story: "You come to a room filled with books. The place looks dusty and it looks like someone left their burrito lying in the corner of the room.",
-  //   option:[
-  //     {option: "Taste the burrito.",
-  //     response: "response()"},
-  //     {option: "Eat the burrito.",
-  //     response: "response()"},
-  //     {option: "Read one of the books.",
-  //     response: "response()"},
-  //     {option: "Go back.",
-  //     response: "goBack()"},
-  //   ]
-  // },
-  // {
-  //   story: "There are several flies hovering around the body that you see lying in the middle of the room.",
-  //   option:[
-  //     {option: "Search the body.",
-  //     response: "response()"},
-  //     {option: "Smell the body.",
-  //     response: "response()"},
-  //     {option: "Take the door across the room.",
-  //     response: "response()"},
-  //     {option: "Go back.",
-  //     response: "goBack()"},
-  //   ]
-  // },
-  // {
-  //   story: "You find yourself falling down as someone... or something tried to get at you.",
-  //   option:[
-  //     {option: "Fight the enemy.",
-  //     response: "response()"},
-  //     {option: "Use the door across the room.",
-  //     response: "response()"},
-  //     {option: "Go back.",
-  //     response: "goBack()"},
-  //   ]
-  // },
-  // {
-  //   story: "This room is strange. You must wonder what is a well doing in the middle of the room.",
-  //   option:[
-  //     {option: "Throw a coin down the well.",
-  //     response: "response()"},
-  //     {option: "Draw some water from the well and drink it.",
-  //     response: "response()"},
-  //     {option: "Relieve yourself into the well.",
-  //     response: "response()"},
-  //     {option: "Go back.",
-  //     response: "goBack()"},
-  //   ]
-  // }
+  {
+    story: "You feel hot in the room. The room is rapidly heating up. What do you do?",
+    option:[
+      {interact: "Do a sexy dance in the hope that a genie will appear.",
+      response: "response()"},
+      {interact: "Take a swig of water left suspiciously in the middle of the room.",
+      response: "response()"},
+      {traverse: "Exit a door that is on the left of the room",
+      response: "response()"},
+    ]
+  },
+  {
+    story: "Bam! You feel your head getting smacked by something.",
+    option:[
+      {fight: "Fight the enemy!",
+      response: "response()"},
+      {traverse: "Use the door on your left.",
+      response: "response()"},
+    ]
+  },
+  {
+    story: "There's a weapon on the shelf that is in the middle of two doors! I'd suggest you take it first!",
+    option: [
+      {interact: "Take weapon.",
+      response: "player.pickUpWeapon(weaponPicked())"},
+      {traverse: "Take the left door.",
+      response: "response()"},
+      {traverse: "Take the right door.",
+      response: "response()"},
+    ]
+  },
+  {
+    story: "You see fairy dust floating around as you enter the room. In the middle of a room lies a glowing orb with a sign that says Do Not Touch. What do you do?",
+    option:[
+      {interact: "Touch the orb.",
+      response: "response()"},
+      {interact: "Try to catch some fairy dust.",
+      response: "response()"},
+      {traverse: "Go through a door on the other side of the room.",
+      response: "response()"},
+    ]
+  },
+  {
+    story: "You are in a room filled with books. The place looks dusty and it looks like someone left their burrito lying in the corner of the room.",
+    option:[
+      {interact: "Taste the burrito.",
+      response: "response()"},
+      {interact: "Eat the burrito.",
+      response: "response()"},
+      {interact: "Read one of the books.",
+      response: "response()"},
+      {traverse: "Step over the stale burrito and into a small door",
+      response: "response()"},
+    ]
+  },
+  {
+    story: "There are several flies hovering around the body that you see lying in the middle of the room.",
+    option:[
+      {interact: "Search the body.",
+      response: "response()"},
+      {interact: "Smell the body.",
+      response: "response()"},
+      {traverse: "Take the door across the room.",
+      response: "response()"},
+    ]
+  },
+  {
+    story: "You find yourself in danger as someone... or something tries to get at you.",
+    option:[
+      {fight: "Fight the enemy.",
+      response: "response()"},
+      {traverse: "Use the door across the room.",
+      response: "response()"},
+    ]
+  },
+  {
+    story: "This room is strange. You must wonder what is a well doing in the middle of the room.",
+    option:[
+      {interact: "Throw a coin down the well.",
+      response: "response()"},
+      {interact: "Draw some water from the well and drink it.",
+      response: "response()"},
+      {interact: "Relieve yourself into the well.",
+      response: "response()"},
+      {traverse: "Use the trap door located conveniently next to the sign that says trap door",
+      response: "response()"},
+    ]
+  }
 ];
 
 var backPedal = [];
+var storySelect = null;
+var battleStatus = 0;
+var optionNode = document.getElementById("optionbox");
+var storyNode = document.getElementById("storycontainer");
 document.getElementById("startadventure").style.visibility = "hidden";
 //initialize game
 function setName(){
@@ -226,37 +236,173 @@ function loadPlayer(){
   // // document.getElementById("statbox").appendChild(weapon);
 }
 
+//function to load random player story and option choices
 function loadStory(){
-  var storySelect = Math.floor(Math.random()*scenario.length);
-  document.getElementById("storytext").textContent = scenario[storySelect]["story"];
+  storySelect = Math.floor(Math.random()*scenario.length);
+  document.getElementById("storycontainer").textContent = scenario[storySelect]["story"];
+  //creating interact, fight and traverse options
   for (var i = 0; i < scenario[storySelect]["option"].length; i++){
     var btn = document.createElement("button");
-    btn.setAttribute("onClick",scenario[storySelect]["option"][i]["response"]);
-    btn.setAttribute("height", "100px");
-    btn.setAttribute("width", "100px");
-    btn.setAttribute("display", "block");
-    btn.setAttribute("class", "options");
-    btn.textContent = "Choose Me!";
     var para = document.createElement("p");
-    para.setAttribute("class", "options");
-    para.textContent = scenario[storySelect]["option"][i]["option"];
-    document.getElementById("optionbox").appendChild(para);
-    document.getElementById("optionbox").appendChild(btn);
-  };
-  backPedal.push(scenario[storySelect]);
+
+    if (hasOwnProperty.call(scenario[storySelect]["option"][i], "fight")){
+      btn.setAttribute("onClick","fight()");
+      btn.setAttribute("display", "block");
+      btn.setAttribute("class", "options");
+      btn.setAttribute("id", "fightbtn");
+      btn.textContent = "Fight!";
+      document.getElementById("optionbox").appendChild(btn);
+      battleStatus = 1;
+      break;
+    }else if (hasOwnProperty.call(scenario[storySelect]["option"][i], "interact")){
+      btn.setAttribute("onClick",scenario[storySelect]["option"][i]["response"]);
+      btn.setAttribute("display", "block");
+      btn.setAttribute("class", "options");
+      btn.textContent = "Interact!";
+      para.setAttribute("class", "options");
+      para.textContent = scenario[storySelect]["option"][i]["interact"];
+      document.getElementById("optionbox").appendChild(btn);
+      document.getElementById("optionbox").appendChild(para);
+    } else if (hasOwnProperty.call(scenario[storySelect]["option"][i], "traverse")){
+      btn.setAttribute("onClick", "travel()");
+      btn.setAttribute("display", "block");
+      btn.setAttribute("class", "options");
+      btn.textContent = "Travel!";
+      para.setAttribute("class", "options");
+      para.textContent = scenario[storySelect]["option"][i]["traverse"];
+      document.getElementById("optionbox").appendChild(btn);
+      document.getElementById("optionbox").appendChild(para);
+    }
+  }
+  if (backPedal[backPedal.length-1] != undefined && battleStatus === 0){
+    var backbtn = document.createElement("button");
+    backbtn.setAttribute("onClick","goBack()");
+    backbtn.setAttribute("display", "block");
+    backbtn.setAttribute("class", "options");
+    backbtn.textContent = "Go back!";
+    document.getElementById("optionbox").appendChild(backbtn);
+  }
   console.log(backPedal);
-  console.log(scenario[storySelect])
+}
+//fight function whenever user encounters a battle, go back button is disabled to prevent escape
+function fight(){
+  while (optionNode.firstChild) {
+    optionNode.removeChild(optionNode.firstChild);
+  };
+  var fightbtn = document.createElement("button");
+  fightbtn.textContent = "Attack!";
+  fightbtn.setAttribute("onClick", "battle()");
+  document.getElementById("optionbox").appendChild(fightbtn);
 }
 
-function goBack(){
-  if (backPedal[0] != undefined){
-    
+function battle(){
+  enemy = enemyArray[0];
+  player.settarget(enemy);
+  if (player.health > 0){
+    player.fight();
+    updateEnemyHealth();
+  }
+  if (enemy.health > 0){
+    enemy.fight();
+    updatePlayerHealth();
+  }
+  if (player.health < 0){
+    console.log("enemy wins!")
+  }else if (enemy.health < 0){
+    enemyArray.shift();
+    enemy.health = 100;
+    console.log("player wins!")
   }
 }
 
+
+
+//function to allow user to go back to previous room
+function goBack(){
+  console.log("goBack function called")
+  while (optionNode.firstChild) {
+    optionNode.removeChild(optionNode.firstChild);
+  };
+  while (storyNode.firstChild) {
+    storyNode.removeChild(storyNode.firstChild);
+  };
+  document.getElementById("storycontainer").textContent = backPedal[backPedal.length-1]["story"];
+  if (backPedal[backPedal.length-1] != undefined){
+    for (var i = 0; i < backPedal[backPedal.length-1]["option"].length; i++){
+      var btn = document.createElement("button");
+      var para = document.createElement("p");
+
+      if (hasOwnProperty.call(backPedal[backPedal.length-1]["option"][i], "fight")){
+        btn.setAttribute("onClick","fight()");
+        btn.setAttribute("display", "block");
+        btn.setAttribute("class", "options");
+        btn.textContent = "Fight!";
+        document.getElementById("optionbox").appendChild(btn);
+        break;
+      }else if (hasOwnProperty.call(backPedal[backPedal.length-1]["option"][i], "interact")){
+        btn.setAttribute("onClick",backPedal[backPedal.length-1]["option"][i]["response"]);
+        btn.setAttribute("display", "block");
+        btn.setAttribute("class", "options");
+        btn.textContent = "Interact!";
+        para.setAttribute("class", "options");
+        para.textContent = backPedal[backPedal.length-1]["option"][i]["interact"];
+        document.getElementById("optionbox").appendChild(btn);
+        document.getElementById("optionbox").appendChild(para);
+      } else if (hasOwnProperty.call(backPedal[backPedal.length-1]["option"][i], "traverse")){
+        btn.setAttribute("onClick", "travel()");
+        btn.setAttribute("display", "block");
+        btn.setAttribute("class", "options");
+        btn.textContent = "Travel!";
+        para.setAttribute("class", "options");
+        para.textContent = backPedal[backPedal.length-1]["option"][i]["traverse"];
+        document.getElementById("optionbox").appendChild(btn);
+        document.getElementById("optionbox").appendChild(para);
+      }
+    }
+  }
+  backPedal.pop();
+}
+
+function travel(){
+  while (optionNode.firstChild) {
+    optionNode.removeChild(optionNode.firstChild);
+  };
+  while (storyNode.firstChild) {
+    storyNode.removeChild(storyNode.firstChild);
+  };
+  backPedal = scenario.splice([storySelect], 1);
+  loadStory();
+}
+
+
+// function loadMain(){
+//     if (hasOwnProperty.call(scenario[storySelect]["option"][i], "interact")){
+//       btn.setAttribute("onClick",scenario[storySelect]["option"][i]["response"]);
+//       btn.setAttribute("display", "block");
+//       btn.setAttribute("class", "options");
+//       btn.textContent = "Interact!";
+//       para.setAttribute("class", "options");
+//       para.textContent = scenario[storySelect]["option"][i]["interact"];
+//       document.getElementById("optionbox").appendChild(btn);
+//       document.getElementById("optionbox").appendChild(para);
+//     } else if (hasOwnProperty.call(scenario[storySelect]["option"][i], "traverse")){
+//       btn.setAttribute("onClick","travel()");
+//       btn.setAttribute("display", "block");
+//       btn.setAttribute("class", "options");
+//       btn.textContent = "Travel!";
+//       para.setAttribute("class", "options");
+//       para.textContent = scenario[storySelect]["option"][i]["traverse"];
+//       document.getElementById("optionbox").appendChild(btn);
+//       document.getElementById("optionbox").appendChild(para);
+//     }
+// }
+
+
+
+
+
+
+
 function response (){
   console.log("response function called")
-}
-function goBack (){
-  console.log("goBack function called")
 }
