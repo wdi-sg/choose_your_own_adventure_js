@@ -1,21 +1,9 @@
-// Gameplay
-
-// type start to begin - pick your difficulty
-// easy m hard ------- are you excited?
-// yes or hell yeah    - story starts;
-// 1. take the red door    2. take the blue door   3. dont take any door - randomly assigns either door
-// 1. you are at x         2. you are at y
-// 1. decision a/b        2. decision a,b,c
-// 1. decision a1,a2,a3 / b1,b2    2. a1,a2 ,c1,c2
-
 // DECLARE VARIABLES
 console.log('Game is running!');
-let currentLayer = 0;   //               ==> now at 3
-let scenario = 0;            //1, 2, 3, 4, 5....    ==> now at 3
+let currentLayer = 0;   //               ==> now at ?
+let scenario = 0;            //1, 2, 3, 4, 5....    ==> now at ?
 
-console.log('currentLayer:' + currentLayer)
-console.log('scenario:' + scenario)
-
+// -------------------------  AWAITING USER INPUT --------
 let inputHappened = (anInput) => {        // ==> input is b
     let input = anInput.toUpperCase();
 
@@ -23,30 +11,30 @@ let inputHappened = (anInput) => {        // ==> input is b
         startGame();
     }
     if (input === 'R') {
-        console.log('input RESET?')
         resetGame();
     }
     if (input === 'A' || 'B' || 'C' ){
         checkLayers(input);
     }
+    console.log('currentLayer:' + currentLayer)
+    console.log('scenario:' + scenario)
     event.target.value = '';
 }
 
+// -------------------------  START & RESET GAME -----
 let startGame = () => {
     if (currentLayer === 0) {
         stories.storyLayer0();
     }
 }
-
 let resetGame = () => {
     currentLayer = 0;
     scenario = 0;
     display("Game reset. \n Type 's' to play again.");
 }
-
+// ----------------  CHECK WHAT LAYER & SCENARIO USER IS IN --
 let checkLayers = (input) => {
     if (currentLayer === 3) {
-        console.log('im in currentLayer 3')
         if (scenario === 1) {
             if (input === 'A') {
                 stories.storyLayer3A1();
@@ -69,7 +57,6 @@ let checkLayers = (input) => {
         }
     }
     if (currentLayer === 2) {
-        console.log('im in currentLayer 2')
         if (scenario === 1) {
             if (input === 'A') {
                 stories.storyLayer2A1();
@@ -87,7 +74,6 @@ let checkLayers = (input) => {
         }
     }
     if (currentLayer === 1) {
-        console.log('im in currentLayer 1')
         if (input === 'A') {
             stories.storyLayer1A1();
         } else if (input === 'B') {
@@ -95,14 +81,14 @@ let checkLayers = (input) => {
         }
     }
 }
-
+// ---------------------  ACTIVATE STORY BASED ON LAYER & SCENARIO --
 let stories = {
 //  ------------------------------ LAYER 0
     storyLayer0 () {
         display('Choose one: \n 🍣 sushi \n 🍕 pizza');
         nextLayer(1);
     },
-// ------------------------------ LAYER 1
+// -------------------------- LAYER 1
     storyLayer1A1 () {
         display('Sushi express or santouka?');
         nextLayer(1);
@@ -111,7 +97,7 @@ let stories = {
         display('pepperoni, hawaiian, or screw pizza!');
         nextLayer(2);
     },
-// ------------------------------ LAYER 2
+// ------------------------- LAYER 2
     storyLayer2A1 () {
         display('10 plates or 20 plates?');
         nextLayer(1);
@@ -132,7 +118,7 @@ let stories = {
         display('you have decided to have dessert instead. bubble tea or waffles?');
         nextLayer(5);
     },
-// ------------------------------ LAYER 3
+// ------------------------- LAYER 3
     storyLayer3A1 () {
         display('total for 10 plates is $91,000. Thanks for eating!');
         nextLayer(1);
@@ -157,10 +143,9 @@ let stories = {
         display('waffles are cheap! only $1.70!');
         nextLayer(3);
     }
-//  ------------------------------ END LAYER
+//  ------------------------- END LAYER
 }
-
-
+// --------------------- ACTIVATE NEXT LAYER & SELECT SCENE --
 let nextLayer = (number) => {
     if (number === 1) {
         scenario = 1;
@@ -175,17 +160,3 @@ let nextLayer = (number) => {
     }
     currentLayer += 1;
 }
-
-
-
-
-// ADDITIONAL FEATURES TO INCLUDE
-
-// go back one line
-// put input a b c
-// show your path of you got there
-// good ending or bad ending or normal ending (the last line will tell me which ending i got eg: there are 5 endings you got the 3rd one)
-
-// can maybe make all layerCounts be in an array. for every question,
-// if i = layerCount, run that number function..
-// story object with all the stories (place in a js file);
