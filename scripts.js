@@ -59,16 +59,24 @@ function chooseAdventure(event){
 
 		containerTwo.style.display = "none";
 		containerSix.style.display = "block";
+		timeLeft -=5;
+		document.querySelector("#timeLeft_3").innerHTML = timeLeft;
+
 
 	} else if (inputData.includes("bomb")) {
 
 		containerTwo.style.display = "none";
 		containerSeven.style.display = "block";
+		timeLeft -=10;
+		document.querySelector("#timeLeft_4").innerHTML = timeLeft;
 
 	} else if (inputData.includes("sugar")) {
 
 		containerThree.style.display = "none";
 		containerEight.style.display = "block";
+		timeLeft -= 10;
+		document.querySelector("#timeLeft_5").innerHTML = timeLeft;
+
 
 	} else if (inputData.includes("dot")) {
 
@@ -79,13 +87,19 @@ function chooseAdventure(event){
 
 		containerThree.style.display = "none";
 		containerTen.style.display = "block";
+		timeLeft -= 5;
+		document.querySelector("#timeLeft_6").innerHTML = timeLeft;
 
-	} else if (inputData.includes("Forky")) {
+
+	} else if (inputData.includes("forky")) {
 
 		containerFour.style.display = "none";
 		containerEleven.style.display = "block";
+		timeLeft -=10
+		document.querySelector("#timeLeft_7").innerHTML = timeLeft;
 
-	} else if (inputData.includes("Woody")) {
+
+	} else if (inputData.includes("woody")) {
 
 		containerFour.style.display = "none";
 		containerTwele.style.display = "block";
@@ -94,6 +108,9 @@ function chooseAdventure(event){
 
 		containerFour.style.display = "none";
 		containerThirteen.style.display = "block";
+		timeLeft -= 5;
+		document.querySelector("#timeLeft_8").innerHTML = timeLeft;
+
 		
 	}
 
