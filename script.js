@@ -3,14 +3,28 @@ console.log("hello script js");
 
 var goToVormir = false;
 var goToMorag = false;
-var timeStone = {found:false,name:"Time Stone"};
+var soulStone = {found:false,name:"Soul Stone"};
 var powerStone = {found:false,name:"Power Stone"};
+var infinityStones = [soulStone,powerStone]
 var moragChoiceCount = 0;
 var life = true;
 
 //just a function to return destinations choices
 var choicesDestinationsDisplay = function(){
-    return "A : New York City (Time/Mind/Space stones)\nB : Vormir (Soul Stone)\nC : Morag (Power Stone)\nD : Asgard (Reality Stone)"
+    return "A : New York City (Time/Mind/Space stones)\nB : Vormir (Soul Stone)\nC : Morag (Power Stone)\nD : Asgard (Reality Stone)\n\n"+checkStones();
+}
+
+var checkStones = function(){
+    var str = "";
+    for(var i = 0; i<infinityStones.length;i++){
+        if(infinityStones[i].found)
+            str += infinityStones[i].name + "\n"
+    }
+
+    if (str ==="")
+        return "Infinity Stones found so far:\nNone"
+    else
+        return `Infinity Stones found so far:\n${str}`;
 }
 
 //display the choices at the begining of the game
@@ -21,7 +35,7 @@ display(`Welcome to Avengers:End Game!\n\nYou will be joining the Avengers as a 
 var inputHappened = function(currentInput){
 
     if(life){
-        if (goToVormir && !timeStone.found){
+        if (goToVormir && !soulStone.found){
             choicesVormir(currentInput);
 
         }else if(goToMorag && !powerStone.found){
@@ -48,8 +62,8 @@ var chooseDestinations = function(currentInput){
             console.log("Test");
             break;
         case "B":
-            if(timeStone.found){
-                display(`${stoneFoundMessage(timeStone)}\n\n${choicesDestinationsDisplay()}`);
+            if(soulStone.found){
+                display(`${stoneFoundMessage(soulStone)}\n\n${choicesDestinationsDisplay()}`);
                 break;
             }else{
                 goToVormir = true;
@@ -92,7 +106,7 @@ var choicesVormir = function(currentInput){
             break;
         case "C":
             goToVormir = false;
-            timeStone.found = true
+            soulStone.found = true
             display("The Three of you pushed Red Skull down the cliff and gotten the Soul Stone. \n\nYes!!\n\n Your team head back to the present time.\n\nChoose your next destination\n\n"+choicesDestinationsDisplay());
             break;
         default:
