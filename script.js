@@ -1,29 +1,49 @@
 console.log("hello script js");
 
 //declare 5 choices user has to choose from
-var year = [2015, 2020, 2025, 1995, 3005];
-var yearChose = [];
-
+var starterPokemon = ["bulbasaur", "squirtle", "charmander", "pikachu", "random1", "random2", "random3"];
+var question = 0;
+var questionComplete = [];
+var playerName = null;
 
 display("What is your name");
 
 var inputHappened = function(currentInput){
+    question = questionComplete.length + 1;
+    console.log("question now is " +question);
     //when user enters name, give 5 choices of year to go to
-    display(`Welcome ${currentInput}! \nWhich year would you like to travel to? \n1. 2015 \n2.2020`);
-    document.getElementById('input').value='';
-    // var question2 = true;
-    // //loop through year array to check user input
-    // if (question2 = true) {
-        if (currentInput === 2015) {
-            display(`You are in the year ${currentInput}`);
-        } else if (currentInput < 2014 || currentInput >= 1985) {
-            display(`moving back to ${currentInput}`)
+    if (question === 1) {
+        display(`Welcome ${currentInput}! \nChoose your starting pokemon \n1. Bulbasaur \n2. Squirtle\n3. Charmander\n4. Pikachu\n5. Choose a random pokemon for me!`);
+        playerName = (currentInput);
+        console.log(playerName);
+        questionComplete.push(1);
+        console.log(questionComplete + "question complete");
+        document.getElementById('input').value='';
+    }
+
+    // //return messages for diff year choices
+    if (question === 2) {
+        console.log("question now is " +question);
+        if (currentInput === 'bulbasaur') {
+            display(`You chose ${currentInput} \n\n1. Go Left \n2. Go Right`);
+            questionComplete.push(1);
+            console.log(questionComplete + "question complete");
+            document.getElementById('input').value='';
+        } else if (currentInput === 'squirtle') {
+            display(`WHAT?! ${currentInput}`)
         } else {
             return;
         }
-    // }
+    }
 
-
+    if (question === 3) {
+        console.log("Q3");
+        if (currentInput.toLowerCase() === "left") {
+                display('what!');
+        } else if (currentInput === "right") {
+                display('You chose right');
+        }
+    }
 
 
 
