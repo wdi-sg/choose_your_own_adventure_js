@@ -4,8 +4,10 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <input class="starter" id="input" placeholder="input"/>
-    <p class="starter" id="output"></p>
+    <div class ="changeinput">
+    <input class="starter" id="input" placeholder="Please type a response"/>
+    <p class="starter" id="output"> What is your name?</p>
+</div>
     <script>
       document.querySelector('#input').addEventListener('change', function(event){
         var currentInput = event.target.value;
@@ -17,6 +19,7 @@
         output.innerText = data;
       }
     </script>
-    <script src="script.js"></script>
+
+    <script src="script2.js"></script>
   </body>
 </html>

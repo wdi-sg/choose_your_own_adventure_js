@@ -9,3 +9,25 @@
 #output{
   background-color:pink;
 }
+body {
+	border: 2px solid black;
+	width: 800px;
+	margin: auto;
+}
+.changeinput {
+ width: 400px;
+ margin:auto;
+
+}
+.starter {
+	position: relative;
+	margin-left: 50px;
+	border: 2px solid black;
+	display: block;
+	padding: 10px;
+}
+
+
+p {
+	text-align: center;
+}
