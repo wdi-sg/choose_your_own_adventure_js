@@ -1,0 +1,28 @@
+<!--
+.toLowerCase any input (should be under inputHappened() function.) or maybe just using == is good enough
+import message array module
+import seperate pokemon objects module for battle mechanics -->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <p class="starter" id="output"></p>
+    <script>
+        //creates display(data); function, anything passed in as data parameter will be displayed in output box
+        var display = function( data ){
+        var output = document.querySelector('#output');
+        output.innerText = data;
+        }
+
+        //inputHappened(currentInput) -> whatever user types in input box will go through inputHappened function. so how to reset for each choice?
+        <input class="starter" id="input" placeholder="input"/>
+        document.querySelector('#input').addEventListener('change', function(event){
+        var currentInput = event.target.value;
+        inputHappened(currentInput)
+      });
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>
