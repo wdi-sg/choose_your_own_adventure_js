@@ -83,3 +83,56 @@ var playerName = null;
 var inputHappened = function(currentInput){
   playerName = currentInput;
 }
+
+//----------------------RESET PAGE FUNCTION-----------------
+var resetPage = function(){
+
+    storyText = null;
+    var choice1 = null;
+    var choice2 = null;
+    var choice3 = null;
+    document.getElementById('btnContainer').innerHTML = null;
+    document.getElementById('mainDisplay').innerHTML = null;
+}
+
+//----------------------------CREATE BUTTONS---------------
+
+//function to create buttons, set id/class, insert text, insert function and  push to buttonContainer
+
+// to put choice1 and function test(time) in button 1
+//call: pushBtn1(choice1 , test, time);
+
+//NOTE: ASK WHY onclick needs to contain the function within another function. Why doesn't setAttribute or addEventListener achieve the same thing?
+var pushBtn1 = function(choice1, func, param){
+     var createBtn = document.createElement('button');
+    createBtn.setAttribute("class", "btn");
+    createBtn.setAttribute("id", "btn1");
+    createBtn.innerHTML = choice1;
+    createBtn.onclick = function(){
+        func(param);
+    }
+    document.getElementById('btnContainer').appendChild(createBtn);
+}
+
+var pushBtn2 = function(choice2, func, param){
+    var createBtn = document.createElement('button');
+    createBtn.setAttribute("class", "btn");
+    createBtn.setAttribute("id", "btn2");
+    createBtn.innerHTML = choice2;
+    createBtn.onclick = function(){
+        func(param);
+    }
+    document.getElementById('btnContainer').appendChild(createBtn);
+}
+
+var pushBtn3 = function(choice3, func, param){
+    var createBtn = document.createElement('button');
+    createBtn.setAttribute("class", "btn");
+    createBtn.setAttribute("id", "btn3");
+    createBtn.innerHTML = choice3;
+    createBtn.onclick = function(){
+        func(param);
+    }
+    document.getElementById('btnContainer').appendChild(createBtn);
+
+}
