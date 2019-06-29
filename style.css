@@ -1,21 +1,58 @@
 body{
 	
 	background: pink;
-
+	max-width: 1600px
 }
+
 .welcome , .container {
-	width: 80%;
+	width: 90%;
 	border: 2px solid gray;
 	margin: 0 auto;
-	padding: 20px;
+	padding: 30px;
 }
 .container {
 	display: none;
+	/*margin: 10px 40px;*/
 }
+
+input {
+	display: block;
+	margin: 0 auto;
+	height: 20px;
+	width:30%;
+}
+.small {
+	margin: 0 auto;
+	width: 90%;
+	height: 60%;
+}
+ h1, h3, h4 ,p {
+	text-align: center;
+	padding: 15px;
+	margin:0;
+	
+}
+
+
+
+
 .first {
-	width: 20%;
+	position:relative;
+	width: 22%;
+	height: 200px;
 	border: 2px solid gray;
-	margin: 20px;
-	padding: 20px;
+	margin: 30px 15px ;
+	padding: 10px;
 	display: inline-block;
+}
+/*.first h4 {
+	padding:0;
+}*/
+img {
+	position:relative;
+	width: 100%;
+	height: 50%;
+	margin:0 auto;
+	float: bottom;
+
 }
