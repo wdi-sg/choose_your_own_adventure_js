@@ -1,0 +1,35 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/style.css">
+    <script src=#></script>
+</head>
+
+<body>
+    <div class="main_container">
+      <div class="transparent_container">
+        <div class="display_container">
+            <p class="starter" id="output"></p>
+        </div>
+        <div class="input_container">
+            <input type=text class="starter" id="input" placeholder="" autofocus/>
+        </div>
+      </div>
+
+        <script>
+            document.querySelector('#input').addEventListener('change', function(event) {
+                var currentInput = event.target.value;
+                inputHappened(currentInput)
+            });
+
+            var display = function(data) {
+                var output = document.querySelector('#output');
+                output.innerText = data;
+            }
+        </script>
+        <script src="js/script.js"></script>
+    </div>
+</body>
+
+</html>

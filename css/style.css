@@ -1,0 +1,103 @@
+@@font-face {
+	font-family: "Classic Console";
+	src: url('fonts/clacon.ttf');
+}
+
+body {
+	background-color: rgb(10, 15, 10);
+	height: 100vh;
+	margin: 0;
+	overflow: hidden;
+}
+
+.main_container {
+	display: flex;
+	flex-direction: column;
+	background-color: black;
+	background-image: radial-gradient(rgba(0, 130, 0, 0.5), black 120%);
+	height: 100vh;
+	width: 100%;
+	margin: 0;
+	overflow: hidden;
+	color: white;
+	font: 1.5rem "Classic Console";
+	text-shadow: 0 0 3px #C8C8C8;
+
+
+
+}
+.transparent_container{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: repeating-linear-gradient(to top,
+			rgba(0,0,0, 0.4),
+			rgba(0,0,0, 0.3) 3px,
+			transparent 3px,
+			transparent 4px);
+	border: none;
+}
+::selection {
+	background: #0080FF;
+	text-shadow: none;
+}
+
+#output {
+	background-color: transparent;
+	border: none;
+	width: 100%;
+	height: 96%;
+	margin: 0;
+	padding: 12px 30px;
+	font-size: 1.5em;
+	text-shadow: 0 0 3px #C8C8C8;
+}
+
+#id {
+	background: rgba(255, 255, 255, 0.4);
+	border: none;
+	position: relative;
+	display: block;
+	outline: none;
+	width: 400px;
+	height: 30p;
+	top: 250px;
+	margin: 0 auto;
+	padding: 10px;
+	color: #333;
+	-webkit-box-shadow: 0 2px 10px 1px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 2px 10px 1px rgba(0, 0, 0, 0.5);
+	border: 25px solid green;
+}
+
+.display_container {
+	border: none;
+	width: 100%;
+	height: 90%;
+}
+
+.input_container {
+	margin: 0;
+	width: 100%;
+	height: 10%;
+}
+
+input[type=text] {
+	width: 100%;
+	padding: 12px 30px;
+	display: inline-block;
+	border: none;
+	background-color: rgba(60, 179, 113, 0.1);
+	box-sizing: border-box;
+	font: 1.5em "Classic Console";
+	color: white;
+	text-shadow: 0 0 3px #C8C8C8;
+	outline: none;
+	caret-color: white;
+}
+
+input[type=text]:focus {
+	border: 0px outline: none;
+}
