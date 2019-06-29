@@ -21,14 +21,29 @@ var asgardOdin = false;
 var choiceNYStonePick = false;
 var NYTimeStone = false;
 var NYMindStone = false;
+var NYSpaceStone = false;
 var NYMindB = false;
 var NYMindC = false;
 
 var life = true;
 
+
 //just a function to return destinations choices
 var choicesDestinationsDisplay = function(){
-    return "A : New York City (Time/Mind/Space stones)\nB : Vormir (Soul Stone)\nC : Morag (Power Stone)\nD : Asgard (Reality Stone)\n\n"+checkStones();
+    if(countStones()===6)
+        return "A : New York City (Time/Mind/Space stones)\nB : Vormir (Soul Stone)\nC : Morag (Power Stone)\nD : Asgard (Reality Stone)\nE : Save the World\n\n"+checkStones();
+    else
+        return "A : New York City (Time/Mind/Space stones)\nB : Vormir (Soul Stone)\nC : Morag (Power Stone)\nD : Asgard (Reality Stone)\n\n"+checkStones();
+
+}
+
+var countStones = function(){
+    var count = 0;
+    for(var i = 0; i<infinityStones.length;i++){
+        if(infinityStones[i].found)
+            count += 1
+    }
+    return count;
 }
 
 //check number of stones obtained
@@ -52,7 +67,9 @@ display(`Welcome to Avengers:End Game!\n\nYou will be joining the Avengers as a 
 var inputHappened = function(currentInput){
 
     if(life){
-        if (goToVormir && !soulStone.found){
+        if(currentInput === "whosyourdaddy")
+            cheatcode(currentInput);
+        else if (goToVormir && !soulStone.found){
             choicesVormir(currentInput);
 
         }else if(goToMorag && !powerStone.found){
@@ -77,7 +94,9 @@ var inputHappened = function(currentInput){
                     choicesNYMindC(currentInput);
                 else
                     choicesNYMind(currentInput);
-            }else
+            }else if(NYSpaceStone)
+                choicesNYSpace(currentInput);
+            else
                 choicesNYStone(currentInput);
         }
         else{
@@ -126,6 +145,10 @@ var chooseDestinations = function(currentInput){
                 display(choicesAsgardDescription()+"\n"+choicesAsgardDisplay());
                 break;
             }
+        case "E":
+            life = 0;
+            display("You finally saved the world! Congratulations");
+            break;
 
         default:
             display(`${invalidInputMessage()}\n\n${choicesDestinationsDisplay()}`);
@@ -297,6 +320,16 @@ var choicesNYStone = function(currentInput){
                 display("You arrived at New York 2012 and went with Captain America to look for the Mind Stone, which should still attached on Loki's Scepter.\n\nUpon going into the Stark's tower you guys saw the scepter is already in the SHIELD's possession. \n\nWhat should you do?\n"+choicesNYMindDisplay());
                 break;
             }
+        case "C":
+            if(spaceStone.found){
+                choiceNYStonePick = false;
+                display(`${stoneFoundMessage(spaceStone)}\n\n${choicesDestinationsDisplay()}`);
+                break;
+            }else{
+                NYSpaceStone = true;
+                display("You arrived at New York 2012 and went with Iron Man and Ant Man to look for the Space Stone. The Space Stone is at the past Tony's Possession after the Avengers beat Loki.\n\nWhat can you do?\n"+choicesNYSpaceDisplay());
+                break;
+            }
 
         default:
             display(`${invalidInputMessage()}\n\n${choicesNYStoneDisplay()}`);
@@ -410,6 +443,40 @@ var choicesNYMindC = function(currentInput){
     }
 }
 
+var choicesNYSpace = function(currentInput){
+    switch(currentInput){
+        case "A":
+            NYSpaceStone = false;
+            choiceNYStonePick = false;
+            life = false;
+            display("The commotion was successful and Iron Man managed to stole the spacs stone, but Hulk suddenly appeared and threw Iron man off, causing the stone to be take by Loki and he escaped with it.\n\nYou knew this will happen right?\n\n"+gameOverMessage());
+            break;
+        case "B":
+            NYSpaceStone = false;
+            choiceNYStonePick = false;
+            life = false;
+            display("They thought you are a mad man and had SHIELD to arrest you. Did you really think this would work?\n\n"+gameOverMessage());
+            break;
+        case "C":
+            NYSpaceStone = false;
+            choiceNYStonePick = false;
+            spaceStone.found = true;
+            display("Iron Man and Ant Man helped you to distract the past Avengers members and you managed to steal away the Space stone. You all successfully found an opportunity to escape back to the present as well.\n\nGood Work!\n\nChoose your next destination:\n"+choicesDestinationsDisplay());
+            break;
+        default:
+            display(`${invalidInputMessage()}\n\n${choicesNYSpaceDisplay()}`);
+            break;
+    }
+}
+
+var cheatcode = function(currentInput){
+    for(var i = 0; i<infinityStones.length;i++){
+        infinityStones[i].found = true
+    }
+    display("Activated cheat code.\n\nPlease choose your next destination:\n"+choicesDestinationsDisplay());
+
+}
+
 
 //display message if stone found
 var stoneFoundMessage = function(stoneObject){
@@ -474,6 +541,10 @@ var choicesNYMindBDisplay = function(){
 
 var choicesNYMindCDisplay = function(){
     return "A : Tell them softly \"Hail Hydra\"\nB : Distract them by going hysterical\nC : Reveals that Captain America is actually Hydra";
+}
+
+var choicesNYSpaceDisplay = function(){
+    return "A : Make a commotion by having Ant Man to cause Tony a cardiac arrest\nB : Tell them you are from the future\nC : Try to steal it from Tony";
 }
 
 //return invalid input message
