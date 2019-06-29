@@ -9,36 +9,42 @@ console.log("hello script js");
 
 var tempInput;
 
-var yearChoice;
-var yearChoiceArray = ['2015', '1985', '1955'];
-var yearMsgArray = ["I see you're a fan of Back to the Future 2. Would you rather deal with Biff, or Griff? (B or G)", "Doc has already destroyed the Time Machine at this point. I guess you'll have to wait around until 2015. What name would you like to go by until then?", "I see you're a fan of Back to the Future 1. Your future Mom has just asked you to the Enchantment Under the Sea dance. What do you do?"];
+var yearChoice = ['2015', '1985', '1955'];
+var yearMsg = ["I see you're a fan of Back to the Future 2. Would you rather deal with Biff, or Griff? (B or G)", "Doc has already destroyed the Time Machine at this point. I guess you'll have to wait around until 2015. What name would you like to go by until then?", "I see you're a fan of Back to the Future 1. Your future Mom has just asked you to the Enchantment Under the Sea dance. What do you do?"];
 
-var levelOneChoiceArray = ['B', 'G'];
+var charChoice = ['B', 'G'];
+var charMsg = ["Hmm, interesting. Biff is angry and has a cane. Do you stand and fight, or run away like a coward?", "Griff is asking you if you are in, or out. What do you say?"];
 
-
-var levelOneChoice;
-var levelTwoChoice;
-
-var msg;
 
 var inputHappened = function(currentInput){
     tempInput = currentInput.toUpperCase();
     timeTravel(tempInput);
-    // CLEAR INPUT BOX
-    document.querySelector('#input').value="";
+
 };
 
 var timeTravel = function (currentInput) {
-    for (var i = 0; i < yearChoiceArray.length; i++ ) {
-        // PLAYER CHOOSE YEAR //////////////////
-        if (tempInput == yearChoiceArray[i]) {
-            console.log("Year Chosen");
+    for (var i = 0; i < yearChoice.length; i++ ) {
+        // PLAYER CHOOSE YEAR
+        if (tempInput == yearChoice[i]) {
             // DISPLAY CHOSEN YEAR MSG
-            display(yearMsgArray[i]);
-            break;
+            display(yearMsg[i]);
+        }
+        // CLEAR INPUT BOX
+    document.querySelector('#input').value="";
+    chooseChar(currentInput);
+    }
+};
+
+var chooseChar = function (currentInput) {
+    for (var i = 0; i < charChoice.length; i++ ) {
+        // PLAYER CHOOSE CHARACTER
+        if (tempInput == charChoice[i]) {
+            // DISPLAY CHOSEN YEAR MSG
+            display(charMsg[i]);
         }
     }
 };
+
 
 
 /*
