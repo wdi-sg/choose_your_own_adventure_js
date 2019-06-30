@@ -33,11 +33,11 @@ var inputHappened = function(currentInput){
 
   //q1-choice 1/2:points - choice 1/3:rainbow staircase
         if ((inputRecord[2].toLowerCase())==="a" ){
-            display(`At the top of the rainbow marshmellow staircase, there is a room. To open its door, you must engage in a number-guessing game with the Stress Monster.\n\n Guess a number - from 2 or 11. If Stress Monster's number is divisible by your number, you win. If not, you lose to your Stress Monster.`);
+            display(`At the top of the rainbow marshmellow staircase, there is a room. To open its door, you must engage in a number-guessing game with the Stress Monster.\n\n Guess a number - from 2 or 11.\n If Stress Monster's number is divisible by your number, you win.\nIf not, you lose to your Stress Monster.`);
 
   //q1-choice 1/2:points - choice 1/3:rainbow staircase - Outcome 1/2
             if (divideRNumber%(parseInt(inputRecord[3]))===0){
-                display(`You won!\n Stress Monster's number is: ${divideRNumber}, you have successfully divided your Stress Monster and the fluffiest puppies attack you with tummy rubs and kisses!`);
+                display(`YOU WON!\n\n Stress Monster's number is: ${divideRNumber}, you have successfully divided your Stress Monster!\nThe fluffiest puppies attack you with tummy rubs and kisses!`);
             }
   //q1-choice 1/2:points - choice 1/3:rainbow staircase - Outcome 2/2 - Game Over
             else if (divideRNumber%(parseInt(inputRecord[3]))>0){
