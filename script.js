@@ -2,15 +2,44 @@ console.log("hello script js");
 
 //declare global variables
 var playerName = null;
+var currentPokemon = null;
 var starterPokemon = ["bulbasaur", "squirtle", "charmander", "pikachu", "charizard", "blastoise", "venasaur"];
-var pokemonChose = [];
-var pokemonList = ["caterpie", "rattata","butterfree"];
+var wildPokemonList = ["caterpie", "rattata","butterfree"];
+var pokemonList = [
+    {   "pokemon": "bulbasaur",
+        "moveList": ["growl", "tackle"]
+    },
+    {
+        "pokemon": "squirtle",
+        "moveList": ["tackle", "tail whip"]
+    },
+    {
+        "pokemon": "charmander",
+        "moveList":["scratch", "growl"]
+    },
+    {
+        "pokemon": "pikachu",
+        "moveList": ["thunder shock", "growl"]
+    },
+    {
+        "pokemon": "blastoise",
+        "moveList": ["hydro pump", "skull bash", "headbutt", "bubble beam"]
+    },
+    {
+        "pokemon": "charizard",
+        "moveList": ["fire spin", "flamethrower", "slash", "wing attack"]
+    },
+    {
+        "pokemon": "venasaur",
+        "moveList": ["petal dance", "solar beam", "razor leaf"]
+    },
+];
 var opponentPokemon = [];
 
 //battle variables
 var bag = ["pokeball","antidote"];
 var pokemonBelt = [];
-var moveList = ["Quick Attack", "Vine Whip"]
+
 
 //variables for stage and questions
 var stage = 0;
@@ -24,23 +53,33 @@ function completeQuestion(currentInput) {
 }
 
 function beginAdventure(currentInput) {
-    pokemonChose.push(currentInput.charAt(0).toUpperCase()+currentInput.slice(1))
-    console.log(`Player chose ${pokemonChose}`);
-    display(`Great choice, ${playerName}!\nCongrats on choosing your first pokemon ${pokemonChose[0].charAt(0).toUpperCase()+pokemonChose[0].slice(1)}.\n\nNow where would you like to begin your adventure? \n\n1. Pallet Town (pallet)\n2. Lavender Town (lavender)\n3. Saffron City (saffron)\n4. Pewter City (pewter)\n5. Safari Zone (safari)`);
+    pokemonBelt.push(currentInput);
+    currentPokemon = pokemonBelt[0];
+    console.log(currentPokemon);
+    console.log(`Player chose ${currentPokemon}`);
+    display(`Great choice, ${playerName.charAt(0).toUpperCase()+playerName.slice(1)}!\nCongrats on choosing your first pokemon ${currentPokemon.charAt(0).toUpperCase()+ currentPokemon.slice(1)}.\n\nNow where would you like to begin your adventure? \n\n1. Pallet Town (pallet)\n2. Lavender Town (lavender)\n3. Saffron City (saffron)\n4. Pewter City (pewter)\n5. Safari Zone (safari)`);
 }
 
 //battle function
-function battleFunctions(pokemonChose) {
-    display(`What will ${pokemonChose} do?\n1. Fight\n2. Pokemon\n3. Bag\n4. Escape`);
+function battleFunctions(currentPokemon) {
+    display(`What will ${currentPokemon} do?\n1. Fight\n2. Pokemon\n3. Bag\n4. Escape`);
 }
 
 //display move list
-function showMoveList(pokemon) {
-    display(`1. ${moveList[0]}\n2.${moveList[1]}`)
+function showMoveList(pokemonChose) {
+    for (i=0;i<pokemonList.length;i++) {
+        if (currentPokemon === pokemonList[i].pokemon) {
+        display(`1. ${pokemonList[i].moveList[0]}\n2. ${pokemonList[i].moveList[1]}\n3. ${pokemonList[i].moveList[2]}\n4. ${pokemonList[i].moveList[3]}`);
+        }
+    }
 }
 //show pokemon belt
 function showPokemonBelt(pokemon) {
-    display(`1. ${pokemonBelt[0]}\n2.${pokemonBelt[1]}`)
+    if (pokemonBelt=null) {
+        display(`You do not have any other pokemon!`)
+    } else {
+    display(`1. ${pokemonBelt[0]}\n2.${pokemonBelt[1]}`);
+}
 }
 //open bag
 function showBag() {
@@ -54,12 +93,18 @@ console.log(`stage 0 => choose username`)
 
 var inputHappened = function(currentInput){
     stage = questionComplete.length;
+    // if (currentInput === "back") {
+    //     stage = stage - 1;
+    //     questionComplete.pop();
+    //     console.log(questionComplete);
+    //     console.log(stage);
+    // }
 
 //STAGE 1 => Choose Pokemon
     if (stage === 1) {
         console.log(`stage 1 - choose pokemon`);
-        display(`Welcome to the world of pokemon, ${currentInput.charAt(0).toUpperCase()+currentInput.slice(1)}! \n\nChoose your starting pokemon: \n1. Bulbasaur \n2. Squirtle\n3. Charmander\n4. Pikachu\n5. Choose a random pokemon for me (random)`);
-        playerName = (currentInput.charAt(0).toUpperCase()+currentInput.slice(1));
+        playerName = currentInput;
+        display(`Welcome to the world of pokemon, ${playerName.charAt(0).toUpperCase()+playerName.slice(1)}! \n\nChoose your starting pokemon: \n1. Bulbasaur \n2. Squirtle\n3. Charmander\n4. Pikachu\n5. Choose a random pokemon for me (random)`);
         console.log(playerName);
         questionComplete.push(playerName);
         console.log(questionComplete);
@@ -73,8 +118,8 @@ var inputHappened = function(currentInput){
             beginAdventure(currentInput);
             completeQuestion(currentInput);
         } else if (currentInput === 'random') {
-            pokemonChose.push(starterPokemon[Math.floor(Math.random()*7)]);
-            display(`Ahh, taking chances I see, ${playerName}!\nCongrats on acquiring your first pokemon ${pokemonChose[0].charAt(0).toUpperCase()+pokemonChose[0].slice(1)}!\n\nNow where would you like to begin your adventure? \n\n1. Pallet Town (pallet)\n2. Lavender Town (lavender)\n3. Cinabar Island (cinabar)\n4. Pewter City (pewter)\n5. Safari Zone (safari)`);
+            pokemonBelt.push(starterPokemon[Math.floor(Math.random()*7)]);
+            display(`Ahh, taking chances I see, ${playerName.charAt(0).toUpperCase()+playerName.slice(1)}!\nCongrats on acquiring your first pokemon ${pokemonBelt[0].charAt(0).toUpperCase()+pokemonBelt[0].slice(1)}!\n\nNow where would you like to begin your adventure? \n\n1. Pallet Town (pallet)\n2. Lavender Town (lavender)\n3. Cinabar Island (cinabar)\n4. Pewter City (pewter)\n5. Safari Zone (safari)`);
             completeQuestion(currentInput);
         } else {
             return;
@@ -88,7 +133,7 @@ var inputHappened = function(currentInput){
                 display(`What better way to start our adventure than from our hometown.\nShould we:\n\n1. Visit cousin Gary\n2. Head up north`);
                 completeQuestion();
         } else if (currentInput.toLowerCase() === "lavender") {
-                opponentPokemon.push(pokemonList[Math.floor(Math.random()*3)]);
+                opponentPokemon.push(wildPokemonList[Math.floor(Math.random()*3)]);
                 console.log(`first pokemon to fight ${opponentPokemon}`);
                 display(`You head up north to Lavender Town.\n\nUpon entering a grass patch, you encounter your first pokemon.\n\nWild ${opponentPokemon[0].charAt(0).toUpperCase()+opponentPokemon[0].slice(1)} appeared!\n\n 1. Fight\n2. Run`);
                 completeQuestion(currentInput);
@@ -120,7 +165,7 @@ var inputHappened = function(currentInput){
     if (stage === 4 && questionComplete[3]==="lavender") {
         console.log("Stage 4 lavender town");
         if (currentInput.toLowerCase() === "fight") {
-                display(`You sent out ${pokemonChose}!\n\nWhat will ${pokemonChose} do?\n1. Fight\n2. Pokemon\n3. Bag\n4. Escape`);
+                display(`You sent out ${pokemonBelt}!\n\nWhat will ${pokemonBelt} do?\n1. Fight\n2. Pokemon\n3. Bag\n4. Escape`);
                 completeQuestion(currentInput);
         } else if (currentInput.toLowerCase() === "run") {
                 display('You ran away');
@@ -158,11 +203,11 @@ var inputHappened = function(currentInput){
     if (stage === 5 && questionComplete[4]==="fight") {
         console.log("Stage 5");
         if (currentInput === "fight") {
-            showMoveList();
-            stage = 5.1;
-            if (stage===5.1 && currentInput==="fight") {
-                display(`test`);
-            }
+            showMoveList(pokemonBelt);
+            // stage = 5.1;
+            // if (stage===5.1 && currentInput==="fight") {
+
+            // }
         } else if (currentInput === "pokemon"){
             showPokemonBelt();
             stage = 5.2;
