@@ -157,6 +157,7 @@ var inOrOut = function (currentInput) {
     document.querySelector('#input').value="";
 };
 
+// UNDER THE SEA DOES NOT WORK WITH SWTICH CASE AS WE CAME TO THIS STAGE FROM YEAR STAGE WHICH MEAN nextStage is updated to 2. BUT underTheSea is only called when case 5. THIS METHOD OF CASSCADING CHOICES DOES NOT WORK IF THE STORY IS IN A DIFFERENT BRAND OF PATH.
 var underTheSea = function (currentInput) {
     for (var i = 0; i < underTheSeaChoice.length; i++ ) {
         if (currentInput == underTheSeaChoice[i]) {
