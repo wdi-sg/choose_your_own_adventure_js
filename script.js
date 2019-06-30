@@ -41,6 +41,8 @@ var inputHappened = function(currentInput){
 
 
 var timeTravel = function (currentInput) {
+    currentStage = 1;
+
     for (var i = 0; i < yearChoice.length; i++ ) {
         // PLAYER CHOOSE YEAR
         if (currentInput == yearChoice[i]) {
@@ -50,10 +52,11 @@ var timeTravel = function (currentInput) {
     }
     // CLEAR INPUT BOX
     document.querySelector('#input').value="";
-    currentStage = currentStage + 1;
 };
 
 var chooseChar = function (currentInput) {
+    currentStage = 2;
+
     for (var i = 0; i < charChoice.length; i++ ) {
         // PLAYER CHOOSE CHARACTER
         if (currentInput == charChoice[i]) {
@@ -63,11 +66,12 @@ var chooseChar = function (currentInput) {
     }
     // CLEAR INPUT BOX
     document.querySelector('#input').value="";
-    currentStage = currentStage + 1;
 };
 
 
 var stayRun = function (currentInput) {
+    currentStage = 3;
+
     for (var i = 0; i < fightFlightChoice.length; i++ ) {
         // PLAYER CHOOSE CHARACTER
         if (currentInput == fightFlightChoice[i]) {
