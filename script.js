@@ -6,138 +6,141 @@ var starterPokemon = ["bulbasaur", "squirtle", "charmander", "pikachu", "chariza
 var pokemonChose = [];
 var opponentPokemonList = ["caterpie", "rattata","butterfree"];
 var opponentPokemon = [];
-var questionComplete = [];
-var stage = 0;
 
+//battle variables
+var bag = ["pokeball","antidote"];
+var pokemonBelt = [];
+var moveList = ["Quick Attack", "Vine Whip"]
+
+//variables for stage and questions
+var stage = 0;
+var questionComplete = ["0"];
 
 //storyline functions
+function completeQuestion(currentInput) {
+    questionComplete.push(currentInput);
+    console.log(questionComplete);
+    document.getElementById('input').value='';
+}
+
 function beginAdventure(currentInput) {
     pokemonChose.push(currentInput.charAt(0).toUpperCase()+currentInput.slice(1))
     console.log(`Player chose ${pokemonChose}`);
     display(`Great choice, ${playerName}!\nCongrats on choosing your first pokemon ${pokemonChose[0].charAt(0).toUpperCase()+pokemonChose[0].slice(1)}.\n\nNow where would you like to begin your adventure? \n\n1. Pallet Town (pallet)\n2. Lavender Town (lavender)\n3. Saffron City (saffron)\n4. Pewter City (pewter)\n5. Safari Zone (safari)`);
-    questionComplete.push(2);
-    console.log(`stage ${stage} complete`)
-    document.getElementById('input').value='';
 }
 
+//battle function
 function pokemonBattle(currentInput) {
 
 }
 
+//open bag
+function showBag(bag) {
+    display(`1. ${bag[0]}\n2.${bag[1]}`);
+}
+//display move list
+function showMoveList(pokemon) {
+    display(`1. ${moveList[0]}\n2.${moveList[1]}`)
+}
+//show pokemon belt
+function showPokemonBelt(pokemon) {
+    display(`1. ${pokemonBelt[0]}\n2.${pokemonBelt[1]}`)
+}
+
 //start of game
 display("What is your name, young trainer?");
+console.log(`stage 0 => choose username`)
 
 var inputHappened = function(currentInput){
-    stage = questionComplete.length + 1;
-    console.log("question now is " +questionComplete);
-    //when user enters name, give choices of pokemon to choose from
+    stage = questionComplete.length;
+
 //STAGE 1 => Choose Pokemon
     if (stage === 1) {
-        display(`Welcome ${currentInput.charAt(0).toUpperCase()+currentInput.slice(1)}! \n\nChoose your starting pokemon: \n1. Bulbasaur \n2. Squirtle\n3. Charmander\n4. Pikachu\n5. Choose a random pokemon for me (random)`);
+        console.log(`stage 1 - choose pokemon`);
+        display(`Welcome to the world of pokemon, ${currentInput.charAt(0).toUpperCase()+currentInput.slice(1)}! \n\nChoose your starting pokemon: \n1. Bulbasaur \n2. Squirtle\n3. Charmander\n4. Pikachu\n5. Choose a random pokemon for me (random)`);
         playerName = (currentInput.charAt(0).toUpperCase()+currentInput.slice(1));
         console.log(playerName);
-        questionComplete.push(1);
+        questionComplete.push(playerName);
+        console.log(questionComplete);
         document.getElementById('input').value='';
-        console.log(stage + " stage complete");
     }
 
 //STAGE 2 => Begin adventure and choose town
-    // //run beginAdventure function after player chooses start pokemon
-    if (stage === 2 && questionComplete[0]===1) {
-        console.log("question now is " +questionComplete);
-        if (currentInput === 'bulbasaur') {
+    if (stage === 2 && questionComplete[1]===playerName) {
+        console.log(`stage 2 choose start town`);
+        if (currentInput === 'bulbasaur'||currentInput === 'squirtle'||currentInput === 'charmander'||currentInput === 'pikachu') {
             beginAdventure(currentInput);
-        } else if (currentInput === 'squirtle') {
-            beginAdventure(currentInput);
-        } else if (currentInput === 'charmander') {
-            beginAdventure(currentInput);
-        } else if (currentInput === 'pikachu') {
-            beginAdventure(currentInput);
+            completeQuestion(currentInput);
         } else if (currentInput === 'random') {
             pokemonChose.push(starterPokemon[Math.floor(Math.random()*7)]);
             display(`Ahh, taking chances I see, ${playerName}!\nCongrats on acquiring your first pokemon ${pokemonChose[0].charAt(0).toUpperCase()+pokemonChose[0].slice(1)}!\n\nNow where would you like to begin your adventure? \n\n1. Pallet Town (pallet)\n2. Lavender Town (lavender)\n3. Saffron City (saffron)\n4. Pewter City (pewter)\n5. Safari Zone (safari)`);
-            questionComplete.push(2);
-            console.log(`stage ${stage} complete`);
-            document.getElementById('input').value='';
+            completeQuestion(currentInput);
         } else {
             return;
         }
     }
 
-//STAGE 3
-    if (stage === 3 && questionComplete[1]===2) {
-        console.log("Q3");
+//STAGE 3 =>
+    if (stage === 3 && (questionComplete[2]==="bulbasaur"||questionComplete[2]==="squirtle"||questionComplete[2]==="charmander"||questionComplete[2]==="pikachu"||questionComplete[2]==="random")) {
+        console.log("Stage 3");
         if (currentInput.toLowerCase() === "pallet") {
                 display(`What better way to start our adventure than from our hometown.\nShould we:\n\n1. Visit cousin Gary\n2. Head up north`);
-                questionComplete.push(3);
-                console.log(stage + " stage complete");
-                document.getElementById('input').value='';
+                completeQuestion();
         } else if (currentInput.toLowerCase() === "lavender") {
                 opponentPokemon.push(opponentPokemonList[Math.floor(Math.random()*3)]);
                 console.log(`first pokemon to fight ${opponentPokemon}`);
-                display(`You head up north to Lavender Town.\n\nUpon entering a grass patch, you encounter your first pokemon, ${opponentPokemon[0].charAt(0).toUpperCase()+opponentPokemon[0].slice(1)}!\n\n 1. Fight\n2. Run`);
-                questionComplete.push(4);
-                console.log(stage + "stage complete");
-                document.getElementById('input').value='';
+                display(`You head up north to Lavender Town.\n\nUpon entering a grass patch, you encounter your first pokemon.\n\nWild ${opponentPokemon[0].charAt(0).toUpperCase()+opponentPokemon[0].slice(1)} appeared!\n\n 1. Fight\n2. Run`);
+                completeQuestion(currentInput);
+        } else if (currentInput.toLowerCase() === "saffron") {
+            display(`You want to go to ${currentInput}`);
+        } else if (currentInput.toLowerCase() === "pewter") {
+            display(`You want to go to ${currentInput}`);
+        } else if (currentInput.toLowerCase() === "safari") {
+            display(`You want to go to ${currentInput}`);
         }
     }
 
 
 //STAGE 4
-    if (stage === 4 && questionComplete[2]===3) {
-        console.log("Stage 3 Gary Path");
+    if (stage === 4 && questionComplete[3]==="pallet") {
+        console.log("Stage 4 pallet town");
         if (currentInput.toLowerCase() === "gary") {
                 display(`It's been a long time since you have seen Gary.\n\nGary challenges you to your first pokemon battle.\n\n1. Accept the challenge (accept)\n2. Tell Gary he's wasting your time and head north (north)`);
-                questionComplete.push(4);
-                console.log(stage + "stage complete");
-                document.getElementById('input').value='';
+                completeQuestion(currentInput);
         } else if (currentInput.toLowerCase() === "north") {
                 display('You chose north');
-                questionComplete.push(5);
-                console.log(questionComplete + "question complete");
-                document.getElementById('input').value='';
+                completeQuestion(currentInput);
         }
     }
 
-    if (stage === 4 && questionComplete[2]===3) {
-        console.log("Stage 3 Gary Path");
-        if (currentInput.toLowerCase() === "gary") {
-                display(`It's been a long time since you have seen Gary.\n\nGary challenges you to your first pokemon battle.\n\n1. Accept the challenge (accept)\n2. Tell Gary he's wasting your time and head north (north)`);
-                questionComplete.push(4);
-                console.log(stage + "stage complete");
-                document.getElementById('input').value='';
-        } else if (currentInput.toLowerCase() === "north") {
-                display('You chose north');
-                questionComplete.push(5);
-                console.log(questionComplete + "question complete");
-                document.getElementById('input').value='';
+    if (stage === 4 && questionComplete[3]==="lavender") {
+        console.log("Stage 4 lavender town");
+        if (currentInput.toLowerCase() === "fight") {
+                display(`You sent out ${pokemonChose}!\n\nWhat will ${pokemonChose} do?\n1. Fight\n2. Pokemon\n3. Bag\n4. Escape`);
+                completeQuestion(currentInput);
+        } else if (currentInput.toLowerCase() === "run") {
+                display('You ran away');
+                completeQuestion(currentInput);
         }
     }
 
 //STAGE 5
-    if (stage === 5 && questionComplete[3]===4) {
-        console.log("Q5");
-        if (currentInput.toLowerCase() === "fight") {
-                display(`Fight`);
-                questionComplete.push(5);
-                console.log(questionComplete + "question complete");
-                document.getElementById('input').value='';
-        } else if (currentInput.toLowerCase() === "run") {
-                display('You want to run');
+    if (stage === 5 && questionComplete[4]==="fight") {
+        console.log("Stage 5");
+        if (currentInput === "fight") {
+            showMoveList();
+        } else if (currentInput === "pokemon"){
+            showPokemonBelt();
+        } else if (currentInput === "bag") {
+            showBag(currentInput);
+        } else {
+            display(`You ran away safely!`);
         }
+        completeQuestion(currentInput);
+
     }
 
-    if (stage === 5 && questionComplete[3]===5) {
-        console.log("Q5");
-        if (currentInput.toLowerCase() === "fight") {
-                display(`Fight`);
-                questionComplete.push(5);
-                console.log(questionComplete + "question complete");
-                document.getElementById('input').value='';
-        } else if (currentInput.toLowerCase() === "run") {
-                display('You want to run');
-        }
-    }
+
 
 
 
@@ -154,7 +157,6 @@ var inputHappened = function(currentInput){
     // return;
     // }
 
-    //if user chooses 1, give two choices of characters to deal wth
 
 
 
