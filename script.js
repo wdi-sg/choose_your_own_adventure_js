@@ -229,9 +229,26 @@ var underTheSea = function (currentInput) {
         if (currentInput == underTheSeaChoice[i]) {
             msg = underTheSeaMsg[i];
 
-            nextStage = nextStage + 1;
+            // DIRECT USER TO CORRECT PATH BASED ON INPUT
+            if (underTheSeaChoice[i] === 'Y') {
+                console.log('Creepy...');
+                console.log('END OF GAME');
+            } else if (underTheSeaChoice[i] === 'N') {
+                console.log('Honorable!');
+                score = score + 1;
+                console.log("score: " + score);
+                console.log('END OF GAME');
+            } else if (underTheSeaChoice[i] === 'S') {
+                // STAY IN STAY OR RUN STAGE
+                console.log('Interesting!');
+            } else {
+                console.log('Stay underTheSea');
+                nextStage = 5;
+            }// END OF DIRECT USER TO CORRECT PATH BASED ON INPUT
+
             // CLEAR INPUT BOX
             document.querySelector('#input').value="";
+            updateScore(score);
             return msg;
         } else {
             // CLEAR INPUT BOX
