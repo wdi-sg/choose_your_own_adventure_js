@@ -11,7 +11,7 @@ var powerStone = {found:false,name:"Power Stone"};
 var realityStone = {found:false,name:"Reality Stone"};
 var timeStone = {found:false,name:"Time Stone"};
 var mindStone = {found:false,name:"Mind Stone"};
-var spaceStone = {found:false,name:"Reality Stone"};
+var spaceStone = {found:false,name:"Space Stone"};
 var infinityStones = [soulStone,powerStone,realityStone,timeStone,mindStone,spaceStone];
 
 
@@ -219,7 +219,7 @@ display("Hi, please enter your name.");
 var welcomingMessage = function(currentInput){
     gameStart = true;
     userName = currentInput;
-    display(`Hi ${userName}, Welcome to Avengers:End Game!\n\n${asciiArt()}\n\nYou will be joining the Avengers as a new recruit to help them find the Infinity Stones by travelling back in time.\n\n Lets choose a destination:\n\n${choicesDestinationsDisplay()}`);
+    display(`Hi ${userName}, Welcome to Avengers: End Game!\n\n${asciiArt()}\n\nYou will be joining the Avengers as a new recruit to help them find the Infinity Stones by travelling back in time.\n\n Lets choose a destination:\n\n${choicesDestinationsDisplay()}`);
 }
 
 //display the choices at the begining of the game
@@ -475,7 +475,7 @@ var choicesPostThorBattle = function(){
     player.hp = tempHp;
     playerLevelUp(2);
 
-    display(`${scoreAddDisplay(500)}\n\nYou leveled up!\n${userName} LVL${player.lvl}\nHP : ${player.hp}\nAtk : ${player.atk}\nAcc : ${player.acc}\n\nDue to Thor having not fighting for 5 years, you managed to win him and knock him out!\n\nRocket has came back with the reality stone and your team head back to the present time.\n\nChoose your next destination\n\n${choicesDestinationsDisplay()}`);
+    display(`${scoreAddDisplay(500)}\n\nYou leveled up!\n${userName} LVL${player.lvl}\nHP : ${player.hp}\nAtk : ${player.atk}\nAcc : ${Math.round(player.acc)}\n\nDue to Thor having not fighting for 5 years, you managed to win him and knock him out!\n\nRocket has came back with the reality stone and your team head back to the present time.\n\nChoose your next destination\n\n${choicesDestinationsDisplay()}`);
 
 }
 
@@ -634,7 +634,7 @@ var choicesPostShieldBattle = function(currentInput){
     player.hp = tempHp;
     playerLevelUp(5);
 
-    display(`${scoreAddDisplay(1000)}\n\nYou leveled up!\n${userName} LVL${player.lvl}\nHP : ${player.hp}\nAtk : ${player.atk}\nAcc : ${player.acc}\n\nYou managed to beat some of them and create an opening and ran off!\n\nGreat Work ${userName}\n\nYou guys went back to the present time.\n\nChoose your next destination\n\n${choicesDestinationsDisplay()}`);
+    display(`${scoreAddDisplay(1000)}\n\nYou leveled up!\n${userName} LVL${player.lvl}\nHP : ${player.hp}\nAtk : ${player.atk}\nAcc : ${Math.round(player.acc)}\n\nYou managed to beat some of them and create an opening and ran off!\n\nGreat Work ${userName}\n\nYou guys went back to the present time.\n\nChoose your next destination\n\n${choicesDestinationsDisplay()}`);
 }
 
 var choicesNYMindC = function(currentInput){
