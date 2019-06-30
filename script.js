@@ -17,7 +17,7 @@ var inputHappened = function(currentInput){
 var stories = [
         {
           id: 0,
-          text: "I see you're a fan of Back to the Future 2. You confronted with the dilemma",
+          text: "I see you're a fan of Back to the Future 2. You confronted with your nemesis",
           paths: [
             {target: 1, text: "Would you rather deal with Biff"},
             {target: 2, text: "Would you rather deal with Griff?"}
@@ -35,11 +35,21 @@ var stories = [
 
         {
           id: 2,
-          text: "Griff is asking you to join him for a secret party. What do you say?",
+          text: "Griff is asking you to join him for a secret rendezvous. What do you say?",
           paths: [
-            {target: 3, text: "Are you in?"},
-            {target: 4, text: "Or are your out"}
+            {target: 5, text: "Are you in?"},
+            {target: 6, text: "Or are your out"}
           ]
+        },
+
+        {
+          id: 5,
+          text: "Bad call. Griff and his cronies rob the Hill Valley bank and frame you for it. No more time travel for you. THE END.",
+        },
+
+        {
+          id: 6,
+          text: "Good call. You deck Griff in the jaw and run away. He gives chase on his hoverboard and ends up in a pile of manure.THE END.",
         },
 
 
