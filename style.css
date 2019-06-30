@@ -3,6 +3,13 @@ body {
 	background-color: #f3c446;
 }
 
+.main-wrapper {
+	margin: 40px auto 0 auto;
+	border: 1px solid black;
+	max-width: 720px;
+	padding: 40px;
+}
+
 .starter{
   font-size:1em;
   padding:10px;
