@@ -26,6 +26,8 @@ var NYMindB = false;
 var NYMindC = false;
 
 var life = true;
+var gameStart = false;
+var userName = "";
 
 
 //just a function to return destinations choices
@@ -59,51 +61,64 @@ var checkStones = function(){
         return `Infinity Stones found so far:\n${str}`;
 }
 
+
+display("Hi, please enter your name.")
+
+var welcomingMessage = function(currentInput){
+    gameStart = true;
+    userName = currentInput;
+    display(`Hi ${userName}, Welcome to Avengers:End Game!\n\nYou will be joining the Avengers as a new recruit to help them find the Infinity Stones by travelling back in time.\n\n Lets choose a destination:\n\n${choicesDestinationsDisplay()}`);
+}
+
 //display the choices at the begining of the game
-display(`Welcome to Avengers:End Game!\n\nYou will be joining the Avengers as a new recruit to help them find the Infinity Stones by travelling back in time.\n\n Lets choose a destination:\n\n${choicesDestinationsDisplay()}`);
+
 
 
 //MAIN FUNCTION TO TAKE USER INPUT
 var inputHappened = function(currentInput){
 
-    if(life){
-        if(currentInput === "whosyourdaddy")
-            cheatcode(currentInput);
-        else if (goToVormir && !soulStone.found){
-            choicesVormir(currentInput);
+    if(!gameStart)
+        welcomingMessage(currentInput);
+    else{
+        if(life){
+            if(currentInput === "whosyourdaddy")
+                cheatcode(currentInput);
+            else if (goToVormir && !soulStone.found){
+                choicesVormir(currentInput);
 
-        }else if(goToMorag && !powerStone.found){
-            if(moragChoiceCount === 0)
-                choicesMorag(currentInput);
-            else if (moragChoiceCount === 1)
-                choicesMorag2(currentInput);
-        }else if(goToAsgard && !realityStone.found){
-            if(asgardOdin)
-                choicesAsgardOdin(currentInput);
-            else if (asgardThor)
-                choicesAsgardThor(currentInput);
-            else
-                choicesAsgard(currentInput);
-        }else if(choiceNYStonePick){
-            if(NYTimeStone)
-                choicesNYTime(currentInput);
-            else if(NYMindStone){
-                if(NYMindB)
-                    choicesNYMindB(currentInput);
-                else if (NYMindC)
-                    choicesNYMindC(currentInput);
+            }else if(goToMorag && !powerStone.found){
+                if(moragChoiceCount === 0)
+                    choicesMorag(currentInput);
+                else if (moragChoiceCount === 1)
+                    choicesMorag2(currentInput);
+            }else if(goToAsgard && !realityStone.found){
+                if(asgardOdin)
+                    choicesAsgardOdin(currentInput);
+                else if (asgardThor)
+                    choicesAsgardThor(currentInput);
                 else
-                    choicesNYMind(currentInput);
-            }else if(NYSpaceStone)
-                choicesNYSpace(currentInput);
-            else
-                choicesNYStone(currentInput);
+                    choicesAsgard(currentInput);
+            }else if(choiceNYStonePick){
+                if(NYTimeStone)
+                    choicesNYTime(currentInput);
+                else if(NYMindStone){
+                    if(NYMindB)
+                        choicesNYMindB(currentInput);
+                    else if (NYMindC)
+                        choicesNYMindC(currentInput);
+                    else
+                        choicesNYMind(currentInput);
+                }else if(NYSpaceStone)
+                    choicesNYSpace(currentInput);
+                else
+                    choicesNYStone(currentInput);
+            }
+            else{
+                chooseDestinations(currentInput);
+            }
+        }else{
+            display(gameOverMessage());
         }
-        else{
-            chooseDestinations(currentInput);
-        }
-    }else{
-        display(gameOverMessage());
     }
 
 }
@@ -147,7 +162,7 @@ var chooseDestinations = function(currentInput){
             }
         case "E":
             life = 0;
-            display("You finally saved the world! Congratulations");
+            display(`You finally saved the world! Congratulations ${userName}!`);
             break;
 
         default:
@@ -162,7 +177,7 @@ var choicesVormir = function(currentInput){
         case "A":
             goToVormir = false;
             life = false;
-            display("You jumped off the cliff suddenly without discussing with the others.. thats heroic and all but, you died and never get to see the ending.\n\n"+gameOverMessage());
+            display("You jumped off the cliff suddenly without discussing with the others.. thats heroic and all "+userName+" but, you died and never get to see the ending.\n\n"+gameOverMessage());
             break;
         case "B":
             goToVormir = false;
@@ -172,7 +187,7 @@ var choicesVormir = function(currentInput){
         case "C":
             goToVormir = false;
             soulStone.found = true
-            display("The Three of you pushed Red Skull down the cliff and gotten the Soul Stone. \n\nYes!!\n\n Your team head back to the present time.\n\nChoose your next destination\n\n"+choicesDestinationsDisplay());
+            display("The Three of you pushed Red Skull down the cliff and gotten the Soul Stone. \n\nNice Job "+userName+"!\n\n Your team head back to the present time.\n\nChoose your next destination\n\n"+choicesDestinationsDisplay());
             break;
         default:
             display(`${invalidInputMessage()}\n\n${choicesVormirDisplay()}`);
@@ -185,11 +200,11 @@ var choicesMorag = function(currentInput){
     switch(currentInput){
         case "A":
             moragChoiceCount += 1;
-            display("Your distraction helped WarMachine to knock out StarLord. Great Job!\n\n"+choicesMoragDescription2()+"\n"+choicesMoragDisplay2());
+            display("Your distraction helped WarMachine to knock out StarLord. Great Job "+userName+"!\n\n"+choicesMoragDescription2()+"\n"+choicesMoragDisplay2());
             break;
         case "B":
             moragChoiceCount += 1;
-            display("You win StarLord in the dance battle and he give you the key to the Ancient Temple voluntarily.\n\nGreat Job!\n\n"+choicesMoragDescription2()+"\n"+choicesMoragDisplay2());
+            display("You win StarLord in the dance battle and he give you the key to the Ancient Temple voluntarily.\n\nGreat Job "+userName+"!\n\n"+choicesMoragDescription2()+"\n"+choicesMoragDisplay2());
             break;
         case "C":
             life = false;
@@ -212,7 +227,7 @@ var choicesMorag2 = function(currentInput){
         case "B":
             goToMorag = false;
             powerStone.found = true;
-            display("You managed to take the stone but it cost your hand. The team thank you for your effort but they think they had better ideas than this. Well too bad..\n\nYour team head back to the present time.\n\nChoose your next destination\n\n"+choicesDestinationsDisplay());
+            display("You managed to take the stone but it cost your hand. The team thank you for your effort but they think they had better ideas than this. Well too bad "+userName+"..\n\nYour team head back to the present time.\n\nChoose your next destination\n\n"+choicesDestinationsDisplay());
             break;
         case "C":
             goToMorag = false;
@@ -228,7 +243,7 @@ var choicesAsgard = function(currentInput){
     switch(currentInput){
         case "A":
             asgardThor = true;
-            display("You tried to stop Thor but he has gone uncontrollable and decided to fight you. What would you do?\n"+choicesAsgardThorDisplay());
+            display("You tried to stop Thor but he has gone uncontrollable and decided to fight you. What would you do "+userName+"?\n"+choicesAsgardThorDisplay());
             break;
         case "B":
             life = false;
@@ -263,7 +278,7 @@ var choicesAsgardThor = function(currentInput){
             goToAsgard = false;
             asgardThor = false;
             life = false;
-            display("Thor rushed to look for Loki, but Loki used him to escape and caused both of you to get cause. Too bad..\n\n"+gameOverMessage());
+            display("Thor rushed to look for Loki, but Loki used him to escape and caused both of you to get cause. Too bad "+userName+"..\n\n"+gameOverMessage());
             break;
         default:
             display(`${invalidInputMessage()}\n\n${choicesAsgardThorDisplay()}`);
@@ -278,7 +293,7 @@ var choicesAsgardOdin = function(currentInput){
             life = false;
             goToAsgard = false;
             asgardOdin = false;
-            display("Odin crushed you within seconds. What do you even think you are doing? @@\n\n"+gameOverMessage());
+            display("Odin crushed you within seconds. What do you even think you are doing "+userName+"? @@\n\n"+gameOverMessage());
             break;
         case "B" :
             life = false;
@@ -355,7 +370,7 @@ var choicesNYTime = function(currentInput){
             choiceNYStonePick = false;
             NYTimeStone = false;
             timeStone.found = true;
-            display("The Ancient One actually pitied you and give you the Time Stone. What a luck eh?\n\nYou and Hulk head back to present time. \n\nChoose your next destination:\n"+choicesDestinationsDisplay());
+            display("The Ancient One actually pitied you and give you the Time Stone. What a luck eh "+userName+"?\n\nYou and Hulk head back to present time. \n\nChoose your next destination:\n"+choicesDestinationsDisplay());
             break;
         default:
             display(`${invalidInputMessage()}\n\n${choicesNYTimeDisplay()}`);
@@ -399,7 +414,7 @@ var choicesNYMindB = function(currentInput){
             NYMindStone = false;
             choiceNYStonePick = false;
             mindStone.found = true;
-            display("You used the scepter to control few of them to attack each other. The commotion is big enough for both of you to make your escape.\n\nGreat Work!\n\nYou and Captain America go back to the present time.\n\nChoose your next destination\n"+choicesDestinationsDisplay());
+            display("You used the scepter to control few of them to attack each other. The commotion is big enough for both of you to make your escape.\n\nGreat Work "+userName+"!\n\nYou and Captain America go back to the present time.\n\nChoose your next destination\n"+choicesDestinationsDisplay());
             break;
         case "C":
             NYMineB = false;
@@ -421,21 +436,21 @@ var choicesNYMindC = function(currentInput){
             NYMindStone = false;
             choiceNYStonePick = false;
             mindStone.found = true;
-            display("They thought that you are really Hydra and pass you the scepter. Both you and Captain America walked out with a Smirk\n\nGreat Work!\n\nBoth of you then go back to the present time.\n\nChoose your next destination:\n"+choicesDestinationsDisplay());
+            display("They thought that you are really Hydra and pass you the scepter. Both you and Captain America walked out with a Smirk\n\nGreat Work "+userName+"!\n\nBoth of you then go back to the present time.\n\nChoose your next destination:\n"+choicesDestinationsDisplay());
             break;
         case "B":
             NYMineC = false;
             NYMindStone = false;
             choiceNYStonePick = false;
             life = false;
-            display("Your distraction helped Captain America to escape with the scepter but you ended up being caught and unable to go back to the present.\n\nThanks for you help hero, but too bad you can't see the end of it.\n\n"+gameOverMessage());
+            display("Your distraction helped Captain America to escape with the scepter but you ended up being caught and unable to go back to the present.\n\nThanks for you help "+userName+", but too bad you can't see the end of it.\n\n"+gameOverMessage());
             break;
         case "C":
             NYMineC = false;
             NYMindStone = false;
             choiceNYStonePick = false;
             mindStone.found = true;
-            display("The SHIELD unit quickly pin you down to help Captain America. Captain America then suggests he will bring you into custody with a false report. He also take the scepter with him. You guys quickly fled when given a chance.\n\nGreat Work!\n\nBoth of you go back to the present.\n\nChoose your next destination:\n"+choicesDestinationsDisplay());
+            display("The SHIELD unit quickly pin you down to help Captain America. Captain America then suggests he will bring you into custody with a false report. He also take the scepter with him. You guys quickly fled when given a chance.\n\nGreat Work "+userName+"!\n\nBoth of you go back to the present.\n\nChoose your next destination:\n"+choicesDestinationsDisplay());
             break;
         default:
             display(`${invalidInputMessage()}\n\n${choicesNYMindCDisplay()}`);
@@ -455,13 +470,13 @@ var choicesNYSpace = function(currentInput){
             NYSpaceStone = false;
             choiceNYStonePick = false;
             life = false;
-            display("They thought you are a mad man and had SHIELD to arrest you. Did you really think this would work?\n\n"+gameOverMessage());
+            display("They thought you are a mad man and had SHIELD to arrest you. Did you really think this would work "+userName+"?\n\n"+gameOverMessage());
             break;
         case "C":
             NYSpaceStone = false;
             choiceNYStonePick = false;
             spaceStone.found = true;
-            display("Iron Man and Ant Man helped you to distract the past Avengers members and you managed to steal away the Space stone. You all successfully found an opportunity to escape back to the present as well.\n\nGood Work!\n\nChoose your next destination:\n"+choicesDestinationsDisplay());
+            display("Iron Man and Ant Man helped you to distract the past Avengers members and you managed to steal away the Space stone. You all successfully found an opportunity to escape back to the present as well.\n\nGood Work "+userName+"!\n\nChoose your next destination:\n"+choicesDestinationsDisplay());
             break;
         default:
             display(`${invalidInputMessage()}\n\n${choicesNYSpaceDisplay()}`);
