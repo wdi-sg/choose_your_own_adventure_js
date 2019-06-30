@@ -81,7 +81,6 @@ var stayRun = function (currentInput) {
     }
     // CLEAR INPUT BOX
     document.querySelector('#input').value="";
-    currentStage = currentStage + 1;
 };
 
 
