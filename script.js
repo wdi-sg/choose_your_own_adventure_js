@@ -7,8 +7,7 @@
 
 console.log("hello script js");
 
-var tempInput;
-var currentStage = 1;
+var currentStage = 0;
 
 var yearChoice = ['2015', '1985', '1955'];
 var yearMsg = ["I see you're a fan of Back to the Future 2. Would you rather deal with Biff, or Griff? **(B/G)**", "Doc has already destroyed the Time Machine at this point. I guess you'll have to wait around until 2015. What name would you like to go by until then?", "I see you're a fan of Back to the Future 1. Your future Mom has just asked you to the Enchantment Under the Sea dance. What do you do?**(Y/N/S)**"];
@@ -21,47 +20,64 @@ var fightFlightMsg = ["Good choice. Biff is old and feeble at this point. You pu
 
 
 var inputHappened = function(currentInput){
-    tempInput = currentInput.toUpperCase();
-    timeTravel(tempInput);
+    var tempInput = currentInput.toUpperCase();
+    // CHECK STAGE PLAYER IS IN
+    // RUN TIMETRAVEL STAGE ONLY IF CURRENT STAGE IS 0
+    switch(currentStage){
+        case 0:
+            timeTravel(tempInput);
+            console.log(currentStage);
+            break;
+        case 1:
+            chooseChar(tempInput);
+            console.log(currentStage);
+            break;
+        case 2:
+            stayRun(tempInput);
+            console.log(currentStage);
+            break;
+    }
 };
+
 
 var timeTravel = function (currentInput) {
     for (var i = 0; i < yearChoice.length; i++ ) {
-            // PLAYER CHOOSE YEAR
-            if (tempInput == yearChoice[i]) {
-                // DISPLAY CHOSEN YEAR MSG
-                display(yearMsg[i]);
-            }
-        // CLEAR INPUT BOX
-        document.querySelector('#input').value="";
-        chooseChar(currentInput);
+        // PLAYER CHOOSE YEAR
+        if (currentInput == yearChoice[i]) {
+            // DISPLAY CHOSEN YEAR MSG
+            display(yearMsg[i]);
+        }
     }
+    // CLEAR INPUT BOX
+    document.querySelector('#input').value="";
+    currentStage = currentStage + 1;
 };
 
 var chooseChar = function (currentInput) {
-        for (var i = 0; i < charChoice.length; i++ ) {
-            // PLAYER CHOOSE CHARACTER
-            if (tempInput == charChoice[i]) {
-                // DISPLAY CHOSEN YEAR MSG
-                display(charMsg[i]);
-            }
-        // CLEAR INPUT BOX
-        document.querySelector('#input').value="";
-        stayRun(currentInput);
+    for (var i = 0; i < charChoice.length; i++ ) {
+        // PLAYER CHOOSE CHARACTER
+        if (currentInput == charChoice[i]) {
+            // DISPLAY CHOSEN YEAR MSG
+            display(charMsg[i]);
+        }
     }
+    // CLEAR INPUT BOX
+    document.querySelector('#input').value="";
+    currentStage = currentStage + 1;
 };
 
 
 var stayRun = function (currentInput) {
-        for (var i = 0; i < fightFlightChoice.length; i++ ) {
-            // PLAYER CHOOSE CHARACTER
-            if (tempInput == fightFlightChoice[i]) {
-                // DISPLAY CHOSEN YEAR MSG
-                display(fightFlightMsg[i]);
-            }
-        // CLEAR INPUT BOX
-        document.querySelector('#input').value="";
+    for (var i = 0; i < fightFlightChoice.length; i++ ) {
+        // PLAYER CHOOSE CHARACTER
+        if (currentInput == fightFlightChoice[i]) {
+            // DISPLAY CHOSEN YEAR MSG
+            display(fightFlightMsg[i]);
+        }
     }
+    // CLEAR INPUT BOX
+    document.querySelector('#input').value="";
+    currentStage = currentStage + 1;
 };
 
 
