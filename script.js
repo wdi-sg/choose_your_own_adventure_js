@@ -29,13 +29,15 @@ var life = true;
 var gameStart = false;
 var userName = "";
 var score = 0;
+var tempHp = 0;
 
 //Battle System Variables
 
-var player = { hp : 1000, atk : 100, accuracy : 0.8};
-var enemyThor = { hp : 500, atk : 70, accuracy  :0.5};
+var player = { hp : 1000, atk : 100, acc : 0.7, lvl:1};
+var enemyThor = { hp : 500, atk : 70, acc  :0.5, name:"Thor",conclude:false,};
 var battle = false;
 var battleThorWin = false;
+var battleThorLose = false;
 
 var playerLevelUp = function(num){
     player.hp += (100*num);
@@ -44,43 +46,68 @@ var playerLevelUp = function(num){
 }
 
 var battleOnDisplay = function(playerData,enemyData){
-    return(`${userName}\nHP : ${playerData.hp}\n\nEnemy Thor\nHP : ${enemyData.hp}\n\nChoose your moves:\nA : Punch\nB :  Machine Gun Swipe`);
+    return(`${userName} LVL ${player.lvl}\nHP : ${playerData.hp}\n\nEnemy Thor\nHP : ${enemyData.hp}\n\nChoose your moves:\nA : Punch\nB :  Machine Gun Swipe`);
 }
 
 var battleOn = function(currentInput,playerData,enemyData){
     var atkDmg = null;
+    var enemyDmg = null;
+    var randomPlayer = Math.random();
+    var randomEnemy = Math.random();
+    tempHp = playerData.hp;
     switch (currentInput){
         case "A":
-            atkDmg = Math.round(playerData.atk);
-            enemyData.hp -=playerData.atk;
+            if(randomPlayer>playerData.acc)
+                atkDmg = 0;
+            else
+                atkDmg = Math.round(playerData.atk);
+
+            if(randomEnemy>enemyData.acc)
+                enemyDmg = 0;
+            else
+                enemyDmg = Math.round(enemyData.atk);
+
+            enemyData.hp -=atkDmg;
+            playerData.hp -=enemyDmg;
+
             break;
         case "B":
-            atkDmg = Math.round(playerData.atk*0.7);
+            if(randomPlayer>playerData.acc)
+                atkDmg = 0;
+            else
+                atkDmg = Math.round(playerData.atk*0.7);
+
+            if(randomEnemy>enemyData.acc)
+                enemyDmg = 0;
+            else
+                enemyDmg = Math.round(enemyData.atk);
+
             enemyData.hp -=atkDmg;
+            playerData.hp -=enemyDmg;
+
             break;
+
         default:
             display(`${invalidInputMessage()}\n\n${battleOnDisplay(playerData,enemyData)}`);
             return false
             break;
     }
-    if(enemyData.hp>0){
-        display(`You caused ${atkDmg} damage to enemy.\n\n${battleOnDisplay(playerData,enemyData)}`)
-    }else{
-        battleThorWin = true;
+
+
+    if(enemyData.hp>0 && playerData.hp >0){
+        display(`You caused ${atkDmg} damage to ${enemyData.name}. \n${enemyData.name} caused ${enemyDmg} dmg to you.\n\n${battleOnDisplay(playerData,enemyData)}`);
+    }else if(enemyData.hp>0 && playerData.hp <=0){
+        life = false;
+        display("You lost the battle..\n\n"+gameOverMessage());
+    }
+    else if(enemyData.hp <=0 && playerData.hp>0){
+        enemyData.conclude = true;
+        playerData.hp = tempHp;
         display("You Won the battle!\n\nPress any key to continue..")
     }
 
 }
 
-var choicesPostThorBattle = function(){
-    score += 500;
-    goToAsgard = false;
-    asgardThor = false;
-    battle = false;
-    battleThorWin = false;
-    realityStone.found = true;
-    display(scoreAddDisplay(500)+"\n\nDue to Thor having not fighting for 5 years, you managed to win him and knock him out!\n\nRocket has came back with the reality stone and your team head back to the present time.\n\nChoose your next destination\n\n"+choicesDestinationsDisplay());
-}
 
 
 //just a function to return destinations choices
@@ -149,8 +176,7 @@ var inputHappened = function(currentInput){
                     choicesAsgardOdin(currentInput);
                 else if (asgardThor){
                     if(battle){
-                        if(battleThorWin){
-
+                        if(enemyThor.conclude){
                             choicesPostThorBattle();
                         }else{
                             battleOn(currentInput,player,enemyThor);
@@ -331,6 +357,8 @@ var choicesAsgard = function(currentInput){
     }
 }
 
+
+
 var choicesAsgardThor = function(currentInput){
     switch(currentInput){
         case "A":
@@ -355,6 +383,19 @@ var choicesAsgardThor = function(currentInput){
             break;
 
     }
+}
+
+var choicesPostThorBattle = function(){
+    score += 500;
+    goToAsgard = false;
+    asgardThor = false;
+    battle = false;
+    realityStone.found = true;
+    player.lvl +=2;
+    playerLevelUp(2);
+
+    display(`${scoreAddDisplay(500)}\n\nYou leveled up!\n${userName} LVL${player.lvl}\nHP : ${player.hp}\nAtk : ${player.atk}\nAcc : ${player.acc}\n\nDue to Thor having not fighting for 5 years, you managed to win him and knock him out!\n\nRocket has came back with the reality stone and your team head back to the present time.\n\nChoose your next destination\n\n${choicesDestinationsDisplay()}`);
+
 }
 
 var choicesAsgardOdin = function(currentInput){
