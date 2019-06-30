@@ -1,9 +1,16 @@
 //SOME GLOBAL VARS
 var mainText = null;
 var secText = null;
+var choice0 = null;
 var choice1 = null;
 var choice2 = null;
 var choice3 = null;
+
+
+var lunchStudyDone = false;
+var lunchChickenDone = false;
+var lunchMeetDone = false;
+
 
 //-------------------------------------------------------------------NAME FUNCTION-----------------
 //                NOTE: CHANGE THIS FROM INPUT TO PROMPT!
@@ -108,6 +115,7 @@ var updateDay = function(daysPassed){
 
 //----------------------------------------------------------------------RESET PAGE FUNCTION-----------------
 var resetPage = function(){
+    var choice0 = null;
     var choice1 = null;
     var choice2 = null;
     var choice3 = null;
@@ -132,8 +140,19 @@ var resetPage = function(){
 
 //NOTE: ASK WHY onclick needs to contain the function within another function. Why doesn't setAttribute or addEventListener achieve the same thing?
 //you can insert param if you need
+var pushBtn0 = function(choice0, func){
+    var createBtn = document.createElement('button');
+    createBtn.setAttribute("class", "btn");
+    createBtn.setAttribute("id", "btn0");
+    createBtn.innerHTML = choice0;
+    createBtn.onclick = function(){
+        func();
+    }
+    document.getElementById('btnContainer').appendChild(createBtn);
+}
+
 var pushBtn1 = function(choice1, func){
-     var createBtn = document.createElement('button');
+    var createBtn = document.createElement('button');
     createBtn.setAttribute("class", "btn");
     createBtn.setAttribute("id", "btn1");
     createBtn.innerHTML = choice1;
@@ -179,7 +198,59 @@ var pushSec = function(){
 }
 
 
-//------------------------------------------------------------------------PAIR WORK EVENT----------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//----------------------------------BEFORE SCHOOL EVENT----------------------
+//----------------------------------INITIAL EVENT-----------------
+var beforeSchool1 = function(){
+    resetPage();
+    resetTime();
+    updateDay(0); //initial value
+    updateTime(9); //initial value
+    mainText = `You stand in front of 79 Anson Road with a decision to make.`;
+    choice0 = "Next";
+    pushMain();
+    pushBtn0(choice0, beforeSchool2);
+}
+
+var beforeSchool2 = function(){
+    resetPage();
+    updateTime(0);
+    mainText = `You've had a rough night and ${properTime} is way too early for anything. You haven't had breakfast. You're terrible at coding and you know it.`;
+    choice0 = "Next";
+    pushMain();
+    pushBtn0(choice0, beforeSchool3);
+}
+
+var beforeSchool3 = function(){
+    resetPage();
+    updateTime(0);
+    mainText = `After a minute of indecision, you...`;
+    pushMain();
+    choice0 = "Go to class.";
+    choice1 = "Skip over to town"
+    pushBtn0(choice0, pairWork1);
+    pushBtn1(choice1, createTown);
+
+}
+//-------------------------------------END SCHOOL EVENT-------------
+
+//------------------------------------------PAIR WORK EVENT----------------
 var student = null;
 //length = 32
 var studentsArray = ["Hafiz", "Alicia", "Yi Xin", "Aqilah", "Axel", "Benny", "Caspian", "Daniel", "Donna", "Elise", "Frederick", "Hilmi", "Keith", "Kenny", "Lien Huong", "Thean Yew", "Hui Yu", "Wei De", "C.K", "Malcolm", "Marcus", "Asshikin", "Nicholas", "Samuel", "Sarah", "Shirley", "Sowyuen", "Boon Hock", "Thea", "Vivien", "Wen Lei", "Wilfried"];
@@ -192,14 +263,30 @@ var getStudent = function(){
 
 
 
-var pairWork = function(){
+var pairWork1 = function(){
     resetPage();
     updateTime(2);
     getStudent();
-    mainText = `Pair work has begun. You squint at the groupings Akira has put up on the screen. Your partner is someone you haven't talked to before. You scan the room without much hope, resigned to having to hold your fingers up to show your group number. Before you can stand up, you hear someone call, \"${player.name}!\" You turn to find someone walking over to your desk. \"You're ${player.name}, right? I\'m ${student}. Let\s get along!\"`
-    choice1 = "Do pair work";
+    mainText = `Pair work has begun. You squint at the groupings Akira has put up on the screen. Your partner is someone you haven't talked to before.`;
+    choice0 = "Next";
     pushMain();
-    pushBtn1(choice1, pairWorkResults);
+    pushBtn0(choice0, pairWork2);
+}
+var pairWork2 = function(){
+    resetPage();
+    updateTime(0);
+    mainText = `You scan the room without much hope, resigned to having to hold your fingers up to show your group number. Before you can stand up, you hear someone call, \"${player.name}!\"`;
+    choice0 = "Next";
+    pushMain();
+    pushBtn0(choice0, pairWork3);
+}
+var pairWork3 = function(){
+    resetPage();
+    updateTime(0);
+    mainText = `You turn to find someone walking over to your desk. \"You're ${player.name}, right? I\'m ${student}. Let\s get along!\"`;
+    choice0 = "Do pair work";
+    pushMain();
+    pushBtn0(choice0, pairWorkResults);
 }
 
 var pairWorkResults = function(){
@@ -218,19 +305,82 @@ var pairWorkResults = function(){
         mainText = `Completion rate: ${successRate}. <br /> It was an absolute nightmare.`
         secText = "Intelligence did not increase."
     }
-    getStudent();
-    choice1 = "Study in the lounge."
-    choice2 = "Devour a chicken."
-    choice3 = `Meet with ${student} for lunch.`
+    choice0 = "Next";
     pushMain();
     pushSec();
-    pushBtn1(choice1, lunchStudy);
-    pushBtn2(choice2, lunchChicken);
-    pushBtn3(choice3, lunchMeet);
+    getStudent();
+    pushBtn0(choice0, lunchEvent1)
+
 }
 
 //--------------------------------------------END PAIR WORK EVENT-----------------------
 //-----------------------------------------------LUNCH EVENT-------------------------
+
+
+// //for the end of day!!
+// var lunchEventReset = function(){
+//     lunchStudyDone === false;
+//     lunchChickenDone === false;
+//     lunchMeetDone === false;
+//
+
+var lunchEvent1 = function(){
+    resetPage();
+    updateTime(0);
+    mainText = `Akira lets the class out for lunch break. You glance at your watch - you have about two hours to yourself.`;
+    choice0 = "Next";
+    pushMain();
+    pushBtn0(choice0, lunchEvent2)
+}
+
+var lunchEvent2 = function(){
+    resetPage();
+    updateTime(0);
+    mainText = `Mulling over you options, you decide to....`;
+    pushMain();
+    getStudent();
+
+    if (lunchStudyDone === true){
+        choice1 = "Devour a chicken.";
+        pushBtn1(choice1, lunchChicken);
+        choice2 = `Meet with ${student} for lunch.`;
+        pushBtn2(choice2, lunchMeet);
+    } else if (lunchChickenDone === true){
+        choice2 = `Meet with ${student} for lunch.`;
+        pushBtn2(choice2, lunchMeet);
+        choice2 = `Meet with ${student} for lunch.`;
+        pushBtn2(choice2, lunchMeet);
+    } else if (lunchMeetDone === true){
+        choice0 = "Study in the lounge.";
+        pushBtn0(choice0, lunchStudy);
+        choice2 = `Meet with ${student} for lunch.`;
+        pushBtn2(choice2, lunchMeet);
+    } else {
+        choice0 = "Study in the lounge.";
+        pushBtn0(choice0, lunchStudy);
+        choice1 = "Devour a chicken.";
+        pushBtn1(choice1, lunchChicken);
+        choice2 = `Meet with ${student} for lunch.`;
+        pushBtn2(choice2, lunchMeet);
+    }
+}
+
+
+    // if (lunchStudyDone === false){
+    //     choice0 = "Study in the lounge.";
+    //     pushBtn0(choice0, lunchStudy);
+    // }
+    // if (lunchChickenDone === false){
+    //     choice1 = "Devour a chicken.";
+    //     pushBtn1(choice1, lunchChicken);
+    // }
+    // if (lunchMeetDone === false){
+    //     choice2 = `Meet with ${student} for lunch.`;
+    //     pushBtn2(choice2, lunchMeet);
+    // }
+
+
+//THIS ISNT WORKINGGGGGG TRIED TOP AS WELL
 
 var lunchStudy = function(){
     resetPage();
@@ -238,10 +388,16 @@ var lunchStudy = function(){
     mainText = "You study till you get a headache, and then study some more. It's gonna be a long road ahead.";
     secText = "Intelligence + 1!";
     player.intelligence += 1;
-    choice1 = "Where do I place this function parameter again...";
+    choice0 = "Finish up.";
+    lunchStudyDone === true;
     pushMain();
     pushSec();
-    pushBtn1(choice1, createTown);
+    pushBtn0(choice0, afterLunch);
+    if (time <= 13){
+        choice1 = "Go back to the classroom while there's still time."
+        pushBtn1(choice1, lunchEvent2);
+        console.log("Is Lunch Study done? :" + lunchStudyDone);
+    }
 }
 var lunchChicken = function(){
     resetPage();
@@ -250,10 +406,15 @@ var lunchChicken = function(){
     mainText = `You wolf down your lunch without a care in the world. Out of the corner of your eye, you see ${student} point and whisper something to a friend. It doesn't faze you.`
     secText = "Guts + 1!"
     player.guts += 1;
-    choice1 = "Om nom nom."
+    choice0 = "Om nom nom.";
+    lunchChickenDone === true;
     pushMain();
     pushSec();
-    pushBtn1(choice1, createTown);
+    pushBtn0(choice0, afterLunch);
+    if (time <= 13){
+        choice1 = "Go back to the classroom while there's still time."
+        pushBtn1(choice1, lunchEvent2);
+    }
 }
 
 var lunchMeet = function(){
@@ -262,8 +423,23 @@ var lunchMeet = function(){
     mainText = `${student} turned out to be great company. Let's do this again.`;
     secText = "Charm + 1!"
     player.charm += 1;
-    choice1 = "\"You HAVE to try Persona 5!\"";
+    choice0 = "\"You HAVE to try Persona 5!\"";
+    lunchMeetDone === true;
     pushMain();
     pushSec();
-    pushBtn1(choice1, createTown);
+    pushBtn0(choice0, afterLunch);
+    if (time <= 13){
+        choice1 = "Go back to the classroom while there's still time."
+        pushBtn1(choice1, lunchEvent2);
+    }
+}
+
+var afterLunch = function(){
+    resetPage();
+    updateTime(3);
+    mainText = "Class resumes. As the clock ticks closer to five, you find yourself struggling to stay awake...";
+    choice0 = "School's out!"
+    pushMain();
+    pushSec();
+    pushBtn0(choice0, createTown);
 }
