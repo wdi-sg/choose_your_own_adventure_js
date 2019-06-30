@@ -8,7 +8,7 @@
 console.log("hello script js");
 
 var nextStage = 0;
-var msg = 0;
+var msg = "hello";
 
 var yearChoice = ['2015', '1985', '1955'];
 var yearMsg = ["I see you're a fan of Back to the Future 2. Would you rather deal with Biff, or Griff? **(B/G)**", "Doc has already destroyed the Time Machine at this point. I guess you'll have to wait around until 2015. What name would you like to go by until then?", "I see you're a fan of Back to the Future 1. Your future Mom has just asked you to the Enchantment Under the Sea dance. What do you do?**(Y/N/S)**"];
@@ -25,30 +25,32 @@ var inOutMsg = ["Bad call. Griff and his cronies rob the Hill Valley bank and fr
 
 var inputHappened = function(currentInput){
     var tempInput = currentInput.toUpperCase();
+
     // CHECK STAGE PLAYER IS IN
     // RUN TIMETRAVEL STAGE ONLY IF CURRENT STAGE IS 0
     switch(nextStage){
         case 0:
-            display("Please choose year: 2015, 1985, or 1955");
+            displayStory(msg);
+            nextStage = nextStage + 1;
             break;
         case 1:
             year(tempInput);
-            display(msg);
+            displayStory(msg);
             break;
         case 2:
             biffOrGriff(tempInput);
-            display(msg);
+            displayStory(msg);
             break;
         case 3:
             stayRun(tempInput);
-            display(msg);
+            displayStory(msg);
             break;
         case 4:
             inOrOut(tempInput);
-            display(msg);
+            displayStory(msg);
             break;
         default:
-            display("please enter choice");
+            displayStory("please enter choice");
     }
 };
 
@@ -82,6 +84,7 @@ var stayRun = function (currentInput) {
     for (var i = 0; i < fightFlightChoice.length; i++ ) {
         if (currentInput == fightFlightChoice[i]) {
             var msg = fightFlightMsg[i];
+            nextStage = 3;
             return msg;
         }
     }
@@ -93,6 +96,7 @@ var inOrOut = function (currentInput) {
     for (var i = 0; i < inOutChoice.length; i++ ) {
         if (currentInput == inOutChoice[i]) {
             var msg = inOutMsg[i];
+            nextStage = 4;
             return msg;
         }
     }
