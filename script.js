@@ -7,18 +7,11 @@
  */
 console.log("Welcome to Back to the Future");
 
-
-var inputHappened = function(currentInput){
-    var parsedInput = parseInt(currentInput)
-    playStory(stories, parsedInput);
-};
-
-
 // START OF STORIES ARRAY//////////////////////
 var stories = [
         // PART 1 (2015) - STORIES & PATHS
         {
-          id: 2015,
+          id: '2015',
           text: "I see you're a fan of Back to the Future 2. You confronted with your nemesis",
           paths: [
             {target: 'b', text: "Would you rather deal with Biff"},
@@ -56,20 +49,31 @@ var stories = [
 
 ]// END OF STORIESS ARRAY//////////////////////
 
-// START OF DISPLAYING STORIES
- for (var i = 0; i < stories.length; i++) {
-    if (stories[i].id == 2015) {
-        //console.log (stories[i].paths); // text of path
-    }
- }
+var currentInput;
+var currentText;
 
- var playStory = function (stories, id) {
-    var currentStory = [];
+var inputHappened = function(currentInput){
+    playStory(stories, currentInput);
+    display(currentText);
+};
+
+
+
+// START OF DISPLAYING STORIES
+ // for (var i = 0; i < stories.length; i++) {
+ //    if (stories[i].id == '2015') {
+ //        console.log (stories[i].text); // text of path
+ //    }
+ // }
+
+ var playStory = function (stories, currentInput) {
     for (var i = 0; i < stories.length; i++) {
-        if (stories[i].id == 2015) {
-            currentStory.push(stories[i].text);
-            console.log(stories[i].text);
+        if (stories[i].id === currentInput) {
+            currentText = stories[i].text;
+            return currentText;
+        } else {
+            currentText = "Please enter choice";
+            return currentText;
         }
-     }
-    display(currentStory); // text of path
+    }
  };
