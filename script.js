@@ -42,7 +42,7 @@ var inputHappened = function(currentInput){
             console.log("case 1!");
             year(tempInput);
             displayStory(msg);
-            nextStage = nextStage + 1;
+            // nextStage = nextStage + 1;
             break;
         case 2:
             console.log("case 2!");
@@ -71,10 +71,14 @@ var inputHappened = function(currentInput){
 var year = function (currentInput) {
     console.log("year stage");
     for (var i = 0; i < yearChoice.length; i++ ) {
-        if (currentInput == yearChoice[i]) {
+        if ((currentInput === yearChoice[i]) && (nextStage === 1)) {
             msg = yearMsg[i];
             // nextStage = 1;
+            // CLEAR INPUT BOX IF MATCH FOUND
+            document.querySelector('#input').value="";
             return msg;
+        } else {
+            document.querySelector('#input').value="";
         }
     }
     // CLEAR INPUT BOX
@@ -83,7 +87,7 @@ var year = function (currentInput) {
 
 var biffOrGriff = function (currentInput) {
     for (var i = 0; i < charChoice.length; i++ ) {
-        if (currentInput == charChoice[i]) {
+        if (currentInput === charChoice[i]) {
             var msg = charMsg[i];
             // nextStage = 2;
             return msg;
