@@ -1,8 +1,11 @@
+
+// ---------------------  ACTIVATE STORY BASED ON LAYER & SCENARIO --
+
 let stories = {
     zeroL: { /////////------------ LAYER 0 --------------///////////
         oneS: { // -------SCENARIO----------
             A () { // ------INPUT -----
-                display(`Hi ${userName}! It's dinner time! \n What should we eat for dinner? \n A. 🍣 \n B. 🍕`);
+                display(`Hi ${userName}! Let's begin the game...It's dinner time! \n What should we eat for dinner? \n A. 🍣 \n B. 🍕`);
                 nextLayer(1);
             }
         }
@@ -53,8 +56,8 @@ let stories = {
     threeL: { /////////------------ LAYER 3 --------------///////////
         oneS: {
             A () {
-                display('total for 10 plates is $91,000. Thanks for eating!');
-                nextLayer();
+                display('total for 10 plates is $91,000. Cash or credit card?');
+                nextLayer(1);
             },
             B () {
                 display ("It's your lucky day! Sushi's on the house!");
@@ -79,6 +82,26 @@ let stories = {
             B () {
                 display('waffles are cheap! only $1.70!');
                 nextLayer();
+            }
+        }
+    },
+    fourL: { /////////------------ LAYER 4 --------------///////////
+        oneS: {
+            A () {
+                display('Thanks for your purchase!');
+                nextLayer();
+            },
+            B () {
+                display('Machine is not working. Please pay by cash! \n A. Go back');
+                nextLayer();
+            }
+        }
+    },
+    fiveL: { /////////------------ LAYER 5 --------------///////////
+        oneS: {
+            A () {
+                goBack();
+                stories.threeL.oneS.A();
             }
         }
     }
