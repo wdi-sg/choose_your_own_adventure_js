@@ -109,6 +109,7 @@ var biffOrGriff = function (currentInput) {
             // nextStage = nextStage + 1;
 
             // ADDED CONDITIONS CHECKING WHICH STAGE TO MOVE ON TO BASED ON INPUT
+            // HMM... THIS CONDITIONS BELOW DOES NOT ALLOW USER TO PROGRESS TO STAY OR RUN IF THEY CHOOSE 'B'
             if (currentInput === 'G') {
                 nextStage = 4;
             } else {
