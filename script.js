@@ -8,9 +8,10 @@
 console.log("Welcome to Back to the Future");
 
 
-// var inputHappened = function(currentInput){
-
-// };
+var inputHappened = function(currentInput){
+    var parsedInput = parseInt(currentInput)
+    playStory(stories, parsedInput);
+};
 
 
 // START OF STORIES ARRAY//////////////////////
@@ -58,6 +59,17 @@ var stories = [
 // START OF DISPLAYING STORIES
  for (var i = 0; i < stories.length; i++) {
     if (stories[i].id == 2015) {
-        console.log (stories[i].paths); // text of path
+        //console.log (stories[i].paths); // text of path
     }
  }
+
+ var playStory = function (stories, id) {
+    var currentStory = [];
+    for (var i = 0; i < stories.length; i++) {
+        if (stories[i].id == 2015) {
+            currentStory.push(stories[i].text);
+            console.log(stories[i].text);
+        }
+     }
+    display(currentStory); // text of path
+ };
