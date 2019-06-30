@@ -30,13 +30,65 @@ var gameStart = false;
 var userName = "";
 var score = 0;
 
+//Battle System Variables
+
+var player = { hp : 1000, atk : 100, accuracy : 0.8};
+var enemyThor = { hp : 500, atk : 70, accuracy  :0.5};
+var battle = false;
+var battleThorWin = false;
+
+var playerLevelUp = function(num){
+    player.hp += (100*num);
+    player.atk += (10*num);
+    player.accuracy += (0.01*num);
+}
+
+var battleOnDisplay = function(playerData,enemyData){
+    return(`${userName}\nHP : ${playerData.hp}\n\nEnemy Thor\nHP : ${enemyData.hp}\n\nChoose your moves:\nA : Punch\nB :  Machine Gun Swipe`);
+}
+
+var battleOn = function(currentInput,playerData,enemyData){
+    var atkDmg = null;
+    switch (currentInput){
+        case "A":
+            atkDmg = Math.round(playerData.atk);
+            enemyData.hp -=playerData.atk;
+            break;
+        case "B":
+            atkDmg = Math.round(playerData.atk*0.7);
+            enemyData.hp -=atkDmg;
+            break;
+        default:
+            display(`${invalidInputMessage()}\n\n${battleOnDisplay(playerData,enemyData)}`);
+            return false
+            break;
+    }
+    if(enemyData.hp>0){
+        display(`You caused ${atkDmg} damage to enemy.\n\n${battleOnDisplay(playerData,enemyData)}`)
+    }else{
+        battleThorWin = true;
+        display("You Won the battle!\n\nPress any key to continue..")
+    }
+
+}
+
+var choicesPostThorBattle = function(){
+    score += 500;
+    goToAsgard = false;
+    asgardThor = false;
+    battle = false;
+    battleThorWin = false;
+    realityStone.found = true;
+    display(scoreAddDisplay(500)+"\n\nDue to Thor having not fighting for 5 years, you managed to win him and knock him out!\n\nRocket has came back with the reality stone and your team head back to the present time.\n\nChoose your next destination\n\n"+choicesDestinationsDisplay());
+}
+
 
 //just a function to return destinations choices
 var choicesDestinationsDisplay = function(){
     if(countStones()===6)
         return "A : New York City (Time/Mind/Space stones)\nB : Vormir (Soul Stone)\nC : Morag (Power Stone)\nD : Asgard (Reality Stone)\nE : Save the World\n\n"+checkStones()+"\n\n"+reportScore();
     else
-        return "A : New York City (Time/Mind/Space stones)\nB : Vormir (Soul Stone)\nC : Morag (Power Stone)\nD : Asgard (Reality Stone)\n\n"+checkStones()+"\n\n"+reportScore();
+        return "A : New York City (Time/Mind/Space stones)\nB : Vormir (Soul Stone)\nC : Morag (Power Stone)\nD : Asgard (Reality Stone)\n\n"+checkStones()+"\n"+reportScore();
 
 }
 
@@ -95,8 +147,18 @@ var inputHappened = function(currentInput){
             }else if(goToAsgard && !realityStone.found){
                 if(asgardOdin)
                     choicesAsgardOdin(currentInput);
-                else if (asgardThor)
-                    choicesAsgardThor(currentInput);
+                else if (asgardThor){
+                    if(battle){
+                        if(battleThorWin){
+
+                            choicesPostThorBattle();
+                        }else{
+                            battleOn(currentInput,player,enemyThor);
+                        }
+                    }
+                    else
+                        choicesAsgardThor(currentInput);
+                }
                 else
                     choicesAsgard(currentInput);
             }else if(choiceNYStonePick){
@@ -245,6 +307,7 @@ var choicesMorag2 = function(currentInput){
     }
 }
 
+
 var choicesAsgard = function(currentInput){
     switch(currentInput){
         case "A":
@@ -271,11 +334,8 @@ var choicesAsgard = function(currentInput){
 var choicesAsgardThor = function(currentInput){
     switch(currentInput){
         case "A":
-            score += 500;
-            goToAsgard = false;
-            asgardThor = false;
-            realityStone.found = true;
-            display(scoreAddDisplay(500)+"\n\nDue to Thor having not fighting for 5 years, you managed to win him and knock him out!\n\nRocket has came back with the reality stone and your team head back to the present time.\n\nChoose your next destination\n\n"+choicesDestinationsDisplay());
+            battle = true;
+            display("Battle Start!!\n\n"+battleOnDisplay(player,enemyThor));
             break;
         case "B":
             goToAsgard = false;
@@ -500,6 +560,8 @@ var choicesNYSpace = function(currentInput){
             break;
     }
 }
+
+
 
 var cheatcode = function(currentInput){
     for(var i = 0; i<infinityStones.length;i++){
