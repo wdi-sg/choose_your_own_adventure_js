@@ -262,7 +262,7 @@ var lunchMeet = function(){
     mainText = `${student} turned out to be great company. Let's do this again.`;
     secText = "Charm + 1!"
     player.charm += 1;
-    choice1 = "\"You HAVE to try Persona 5.\"";
+    choice1 = "\"You HAVE to try Persona 5!\"";
     pushMain();
     pushSec();
     pushBtn1(choice1, createTown);
