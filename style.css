@@ -1,11 +1,41 @@
+body {
+	background-color: black;
+	color: rgba(255,204,47,1);
+}
+
+header {
+	text-align: center;
+}
+
+
 .starter{
   font-size:30px;
   padding:10px;
   display:block;
-  margin:40px;
+  margin:40px auto 0;
   border:3px solid blue;
+  text-align: center;
+  font-family: 'Signika', sans-serif;
 }
 
+#instructions {
+	font-size: 15px;
+	padding: 5px;
+	margin:0 auto;
+	text-align: center;
+}
+
+#input{
+	background-color: rgba(255,204,47,1);
+  border: 5px solid rgba(30,50,102,0.9);
+  color: rgba(30,50,102,0.9);
+}
+
+
 #output{
-  background-color:pink;
+  background-color: rgba(255,204,47,1);
+  border: 5px solid rgba(30,50,102,0.9);
+  text-align: center;
+  color: rgba(30,50,102,0.9);
+
 }

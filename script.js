@@ -55,15 +55,15 @@ var pokemonList = [
     },
     {   "pokemon": "caterpie",
         "moveList": ["growl", "tackle"],
-        "hitPoints": 200
+        "hitPoints": 150
     },
     {   "pokemon": "butterfree",
         "moveList": ["growl", "tackle"],
-        "hitPoints": 200
+        "hitPoints": 180
     },
     {   "pokemon": "rattata",
         "moveList": ["growl", "tackle"],
-        "hitPoints": 200
+        "hitPoints": 160
     },
 ];
 
@@ -77,35 +77,6 @@ var abilityDamage = [
       "move": "scratch",
       "damage": 200
     }]
-
-
-// console.log(abilityDamage[0].move);
-// console.log(pokemonList[0].moveList[1]);
-// if (pokemonList[0].moveList[1] === abilityDamage[0].move) {
-//     console.log(`the damage of ${abilityDamage[0].move} is ${abilityDamage[0].damage}`);
-// }
-
-//      TO UPDATE ATTACK FUNCTION    //
-// function attack(move) {
-//     for (i=0; i < abilityDamage.length; i++) {
-//         if (abilityDamage[i].move === pokemonList[0].moveList[1]) {
-//             console.log(`the damage of ${abilityDamage[i].move} is ${abilityDamage[i].damage}`);
-//             opponentPokemon
-//         }
-//     }
-// }
-// console.log(abilityDamage[0].move);
-// console.log(pokemonList[0].moveList[1]);
-// if (pokemonList[0].moveList[1] === abilityDamage[0].move) {
-//     console.log(`the damage of ${abilityDamage[0].move} is ${abilityDamage[0].damage}`);
-// }
-
-
-
-
-// //variables for stage and questions
-// var stage = 0;
-// var questionComplete = ["0"];
 
 
 ////    Storyline Functions    ////
@@ -138,6 +109,23 @@ function showPokemonBelt(pokemon) {
 function showBag() {
     display(`1. ${bag[0]}\n2. ${bag[1]}`);
 }
+
+
+//      TO UPDATE ATTACK FUNCTION    //
+// function attack(move) {
+//     for (i=0; i < abilityDamage.length; i++) {
+//         if (abilityDamage[i].move === pokemonList[0].moveList[1]) {
+//             console.log(`the damage of ${abilityDamage[i].move} is ${abilityDamage[i].damage}`);
+//             opponentPokemon
+//         }
+//     }
+// }
+// console.log(abilityDamage[0].move);
+// console.log(pokemonList[0].moveList[1]);
+// if (pokemonList[0].moveList[1] === abilityDamage[0].move) {
+//     console.log(`the damage of ${abilityDamage[0].move} is ${abilityDamage[0].damage}`);
+// }
+
 
 //           TO UPDATE.    ////
 // //battle function
@@ -172,7 +160,7 @@ var inputHappened = function(currentInput){
     //     console.log(stage);
     // }
 
-//STAGE 1 => Choose Pokemon
+///////    STAGE 1 Choose Pokemon   ///////
     if (stage === 1) {
         console.log(`stage 1 - choose pokemon`);
         playerName = currentInput;
@@ -183,7 +171,7 @@ var inputHappened = function(currentInput){
         document.getElementById('input').value='';
     }
 
-//STAGE 2 => Begin adventure and choose town
+///////  STAGE 2 Choose Start Point  ///////
     if (stage === 2 && questionComplete[1]===playerName) {
         console.log(`stage 2 choose start town`);
         if (currentInput === 'bulbasaur'||currentInput === 'squirtle'||currentInput === 'charmander'||currentInput === 'pikachu') {
@@ -202,12 +190,12 @@ var inputHappened = function(currentInput){
         }
     }
 
-//STAGE 3 =>
+//////            STAGE 3           ///////
     if (stage === 3 && (questionComplete[2]==="bulbasaur"||questionComplete[2]==="squirtle"||questionComplete[2]==="charmander"||questionComplete[2]==="pikachu"||questionComplete[2]==="random")) {
         console.log("Stage 3");
         if (currentInput.toLowerCase() === "pallet") {
-                display(`What better way to start our adventure than from our hometown.\nShould we:\n\n1. Visit cousin Gary\n2. Head up north`);
-                completeQuestion();
+                display(`What better way to start our adventure than from our hometown.\n\nShould we:\n1. Visit cousin Gary (gary)\n2. Head up north (north)`);
+                completeQuestion(currentInput);
         } else if (currentInput.toLowerCase() === "lavender") {
                 var opponentPokemon = [];
                 opponentPokemon.push(wildPokemonList[Math.floor(Math.random()*3)]);
@@ -215,7 +203,7 @@ var inputHappened = function(currentInput){
                 display(`You head up north to Lavender Town.\n\nUpon entering a grass patch, you encounter your first pokemon.\n\nWild ${opponentPokemon[0].charAt(0).toUpperCase()+opponentPokemon[0].slice(1)} appeared!\n\n 1. Fight\n2. Run`);
                 completeQuestion(currentInput);
         } else if (currentInput.toLowerCase() === "cinabar") {
-            display(`You arrive in Cinabar Island.\nThere is not a soul in sight.\n\nWhat would you do?\n1. Have a drink by the coast (drink)\n2. Surf back to Pallet Town (surf)`);
+            display(`You arrive on Cinabar Island.\nThere is not a soul in sight.\n\nWhat would you do?\n1. Have a drink by the coast (drink)\n2. Surf back to Pallet Town (surf)`);
             completeQuestion(currentInput);
         } else if (currentInput.toLowerCase() === "pewter") {
             display(`You take a lift from Professor Oak and arrive in Pewter City.\nA huge rock gym stands in front of you.\n\n1. Enter the gym (gym)\n2. Head east towards the cave (cave)`);
@@ -227,7 +215,7 @@ var inputHappened = function(currentInput){
     }
 
 
-//STAGE 4
+//////            STAGE 4           ///////
 //pallet storyline -> visit gary or head north
     if (stage === 4 && questionComplete[3]==="pallet") {
         console.log("Stage 4 pallet town");
@@ -277,9 +265,7 @@ var inputHappened = function(currentInput){
 
 
 
-
-
-//STAGE 5
+//////            STAGE 5           ///////
 //Lavender Town storyline -> fight mode
     if (stage === 5 && questionComplete[4]==="fight") {
         console.log("Stage 5 lavender");

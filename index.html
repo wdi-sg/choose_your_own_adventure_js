@@ -2,11 +2,24 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Signika&display=swap" rel="stylesheet">
   </head>
   <body>
-    <input class="starter" id="input" placeholder="input"/>
-    <p id="instructions">Choose options by entering the text in parentheses<p>
-    <p class="starter" id="output"></p>
+    <header>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg">
+        <h1>Welcome to Pokemon Text Adventures!</h1>
+    </header>
+    <main>
+        <p class="starter" id="output"></p>
+
+        <input class="starter" id="input" placeholder="Enter Option"/>
+        <p id="instructions">Choose options by entering the text in parentheses<p>
+
+    </main>
+
+
+
+
     <script>
       document.querySelector('#input').addEventListener('change', function(event){
         var currentInput = event.target.value;
@@ -19,5 +32,7 @@
       }
     </script>
     <script src="script.js"></script>
+
+
   </body>
 </html>
