@@ -1,10 +1,10 @@
-// I CANT DO FREAKING MODULES
-console.log(charmander.hp);
 var name = prompt("Hello, trainer! What's your name?").toUpperCase();
 var rival = prompt("And it appears you have a rival. What's their name again?").toUpperCase()
 var gameDialog = [];
 var stage = 1;
 var number = 1;
+// var starter = null;
+// var rivalStarter = null;
 
 var output = document.getElementById("output-container");
 var input = document.getElementById("user-input");
@@ -13,8 +13,8 @@ var restart = document.getElementById("restart");
 
 var gameOn = function() {
     answer = input.value.toLowerCase();
-    getDialog();
     checkStage();
+    getDialog();
     output.innerHTML = gameDialog[number];
     input.value = null;
 }
