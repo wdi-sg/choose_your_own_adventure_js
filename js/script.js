@@ -1,15 +1,15 @@
-// DECLARE VARIABLES
 console.log('Game is running!');
-let currentLayer = 0;   //               ==> now at ?
-let scenario = 0;            //1, 2, 3, 4, 5....    ==> now at ?
+// ---------------------------- GLOBAL VARIABLES
+let currentLayer = 0;
+let scenario = 0;
 
 let userName = '';
 let userBar = 0;
+let userItems = '-';
 let extraCounter = '';
 // -------------------------  AWAITING USER INPUT --------
-let inputHappened = (anInput) => {        // ==> input is b
+let inputHappened = (anInput) => {
     let input = anInput.toUpperCase();
-    let message = '';
 
     if (extraCounter === 'username') {
         userName = anInput;
@@ -25,7 +25,7 @@ let inputHappened = (anInput) => {        // ==> input is b
     console.log('currentLayer:' + currentLayer)
     console.log('scenario:' + scenario)
     display2(userBar);
-    display3(userBar);
+    display3(userItems);
     event.target.value = '';
 }
 
@@ -51,6 +51,20 @@ let resetGame = () => {
     display("Game reset. \n Type 's' to play again.");
 }
 // ----------------  CHECK WHAT LAYER & SCENARIO USER IS IN --
+let layerArray = [0,1,2,3,4,5,6,7];
+let scenarioLayers = [0,1,2,3,4,5,6,7,8,9,10];
+let inputLayers = [0,1,2,3];
+
+// let newFunc = () => {
+//     for (let i = 0; i<layerArray.length; i++) {
+//         if (currentLayer === layerArray[i]){
+//             if (scenario === 1){
+
+//             }
+//         }
+//     }
+// }
+
 let checkLayers = (input) => {
     if (currentLayer === 3) {
         if (scenario === 1) {
@@ -61,16 +75,16 @@ let checkLayers = (input) => {
             }
         } else if (scenario === 3) {
             if (input === 'A') {
-                stories.storyLayer3A2();
+                stories.storyLayer3A3();
             } else if (input === 'B') {
-                stories.storyLayer3B2();
+                stories.storyLayer3B3();
             }
         }
         else if (scenario === 5) {
             if (input === 'A') {
-                stories.storyLayer3A3();
+                stories.storyLayer3A5();
             } else if (input === 'B') {
-                stories.storyLayer3B3();
+                stories.storyLayer3B5();
             }
         }
     }
@@ -106,12 +120,13 @@ let checkLayers = (input) => {
 let stories = {
 //  ------------------------------ LAYER 0
     storyLayer0 () {
-        display(`Hi ${userName}! It's dinner time! \n What should we eat for dinner? \n A. 🍣 \n B. 🍕 \n C. 🍜 \n D. 🍚`);
+        display(`Hi ${userName}! It's dinner time! \n What should we eat for dinner? \n A. 🍣 \n B. 🍕`);
         nextLayer(1);
     },
 // -------------------------- LAYER 1
     storyLayer1A1 () {
         display(`Great choice! Where should we eat our sushi?\n \n A. Sushi express \n B. Genki sushi \n C. Go back`);
+        userBar += 1;
         nextLayer(1);
     },
     storyLayer1B1 () {
@@ -142,42 +157,38 @@ let stories = {
 // ------------------------- LAYER 3
     storyLayer3A1 () {
         display('total for 10 plates is $91,000. Thanks for eating!');
-        nextLayer(1);
+        nextLayer();
     },
     storyLayer3B1 () {
         display ("It's your lucky day! Sushi's on the house!")
-        nextLayer(1)
-    },
-    storyLayer3A2 () {
-        display('pepperoni with mushroom. yum!');
-        nextLayer(2);
-    },
-    storyLayer3B2 () {
-        display('pepperoni without mushroom... no vege is bad!!');
-        nextLayer(2);
+        nextLayer()
     },
     storyLayer3A3 () {
-        display('all the bubble tea shops are closed!');
-        nextLayer(3);
+        display('pepperoni with mushroom. yum!');
+        nextLayer();
     },
     storyLayer3B3 () {
+        display('pepperoni without mushroom... no vege is bad!!');
+        nextLayer();
+    },
+    storyLayer3A5 () {
+        display('all the bubble tea shops are closed!');
+        nextLayer();
+    },
+    storyLayer3B5 () {
         display('waffles are cheap! only $1.70!');
-        nextLayer(3);
+        nextLayer();
     }
 //  ------------------------- END LAYER
 }
 // --------------------- ACTIVATE NEXT LAYER & SELECT SCENE --
+
 let nextLayer = (number) => {
-    if (number === 1) {
-        scenario = 1;
-    } else if (number === 2) {
-        scenario = 2;
-    } else if (number === 3) {
-        scenario = 3;
-    } else if (number === 4) {
-        scenario = 4;
-    } else if (number === 5) {
-        scenario = 5;
+    for (let i = 0; i < scenarioLayers.length; i++) {
+        if (number === scenarioLayers[i]) {
+            scenario = i;
+            console.log('value of:' + i );
+        }
     }
     currentLayer += 1;
 }

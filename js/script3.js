@@ -4,7 +4,7 @@
     3. For at least 1 question, have at least 3 user responses [done]
 
     4. get username [done]
-    5. get player score
+    5. get player score [done]
     6. go back to the previous scenario, or restart game [done]
 
     7. create enemies to fight (array of objects)
@@ -23,12 +23,21 @@
     3. hell yeah, yes, guess so
     4. difficulty level
 
+    1. fill up story - the avengers mini game
+    2. you are ironman (later can choose other characters)
+    3. fight enemies in the game or choose to run. last boss cannot run
+        - enemies can attack randomly, 40% hit rate for normal attack (1 counter), boss 20% attack (4 counters), normal attack 40% (2 counters);
+    4. you have 3 potions, secret place to get full life and potions
+    5. gain experience and lose/gain life depending on the choices
+    6. randomize some moments
+    7. start at level 1 - basic attack, lvl 2 basic attack and cannon lvl 3 missle, depletes energy
+
     can maybe make all layerCounts be in an array. for every question,
     if i = layerCount, run that number function..
     story object with all the stories (place in a js file);
 
 // VARIABLES
-let player = {
+let ironman = {
     name: '';
     energy: '';
     hp: '';
