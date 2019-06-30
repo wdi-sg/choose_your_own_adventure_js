@@ -8,19 +8,24 @@ body {
   padding:10px;
   display:block;
   margin:40px;
-  border:3px solid #2766a4;
+}
+
+#input {
+	width: 400px;
+	font-size: 1.2em;
 }
 
 #output {
+	color: #221e23;
 	font-family: sans-serif;
 	font-size: 2em;
-  background-color:pink;
 }
 
 #score {
+	color: white;
 	font-family: sans-serif;
 	font-size: 1.5em;
-	font-weight: bold;
-  background-color: #00FF00;
+	/*font-weight: bold;*/
+  background-color: #656a78;
   max-width: 200px;
 }
