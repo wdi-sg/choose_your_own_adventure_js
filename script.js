@@ -10,7 +10,7 @@ console.log("hello script js");
 var nextStage = 1;
 var msg = "Hello, which year would you like to time travel to? 2015, 1985 or 1955";
 
-var yearChoice = ['2015', '1985', '1955', '1988'];
+var yearChoice = ['2015', '1985', '1955'];
 var yearMsg = ["I see you're a fan of Back to the Future 2. Would you rather deal with Biff, or Griff? **(B/G)**", "Doc has already destroyed the Time Machine at this point. I guess you'll have to wait around until 2015. What name would you like to go by until then?", "I see you're a fan of Back to the Future 1. Your future Mom has just asked you to the Enchantment Under the Sea dance. What do you do?**(Y/N/S)**"];
 
 var charChoice = ['B', 'G'];
@@ -67,6 +67,11 @@ var inputHappened = function(currentInput){
             underTheSea(tempInput);
             displayStory(msg);
             break;
+        case 6:
+            console.log("case 6!");
+            timeMachineDestroyed(tempInput);
+            displayStory(msg);
+            break;
         default:
             displayStory("please enter choice");
     }
@@ -82,7 +87,16 @@ var year = function (currentInput) {
             // CLEAR INPUT BOX IF MATCH FOUND
             console.log("nextStage value in year function: ", nextStage);
             // nextStage = nextStage + 1;
-            nextStage = 2;
+
+            if (yearChoice[i] === '2015') {
+                nextStage = 2;
+            } else if (yearChoice[i] === '1985') {
+                nextStage = 6;
+            } else if (yearChoice[i] === '1955') {
+                nextStage = 5;
+            } else {
+                document.querySelector('#input').value="";
+            }
             // console.log("nextStage value in year function after update: ", nextStage);
             document.querySelector('#input').value="";
             return msg;
