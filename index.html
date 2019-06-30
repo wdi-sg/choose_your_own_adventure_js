@@ -1,62 +1,87 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title></title>
-    <link type="text/css" rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header>
-        <h1>Simple Role-Playing Adventure</h1>
-    </header>
-    <main>
-        <div class="input-form">
-            <span> Warrior Name: </span>
-            <input class="text-input" id ="warrior-name" type="text"><br><br>
-            <span> Choose your weapon: </span   >
-            <select>
-                <option value = "sword">Sword (2x Damage against Ground Enemies</option>
-                <option value = "bow">Bow (2x Damage against Flying Enemies</option>
-            </select><br><br>
-            <button id="start-button">Start Game!</button>
-        </div>
+    <head>
+        <title>Simple Role-Playing</title>
+        <link type="text/css" rel="stylesheet" href="style.css">
+    </head>
 
-        <p id = "main-quest-display"></p>
+    <body>
+        <header>
+            <h1>Simple Role-Playing Adventure</h1>
+        </header>
 
-        <p id = "side-quest-display"></p>
+        <main>
+            <div class="input-form">
+                <h2> Enter the following details and press the button to start the game!</h2>
+                <span> Warrior Name: </span>
+                <input class="text-input" id ="warrior-name" type="text"><br><br>
+                <span> Choose your weapon: </span>
+                <select id = "weapon-input">
+                    <option>Please Select a Weapon</option>
+                    <option value = "sword">Sword (Attack:20)</option>
+                    <option value = "bow">Bow (Attack:16 with chance of x2 critical strike)</option>
+                </select><br><br>
+                <button id="start-button" onclick="gameStart()">Start Game!</button>
+            </div>
 
-        <p id = "current-location"></p>
+            <div class = "game-display">
+                <div class = "game-info">
+                    <span id = "main-quest-display"></span><br>
+                    <span id = "side-quest-display"></span><br>
+                    <span id = "current-location"></span><br>
+                </div>
 
-        <div class="location">
-            <button class="location-buttons" id ='warrior-village' value = 'Warrior Village' onclick ='locationTravel(value)'>Warrior Village</button>
-            <button class="location-buttons" id ='warrior-home' value = 'Warrior Home' onclick ='locationTravel(value)'>Warrior Home</button>
-            <button class="location-buttons" id ='village-chief-house' value = 'Village Chief House' onclick ='locationTravel(value)'>Village Chief House</button>
-            <button class="location-buttons" id ='flower-field' value = 'Flower Field' onclick ='locationTravel(value)'>Flower Field</button>
-            <button class="location-buttons" id ='flower-field-left' value = 'Flower Field Left' onclick ='locationTravel(value)'>Flower Field Left</button>
-            <button class="location-buttons" id ='flower-field-right' value = 'Flower Field Right' onclick ='locationTravel(value)'>Flower Field Right</button>
-            <button class="location-buttons" id ='ice-cave' value = 'Ice Cave' onclick ='locationTravel(value)'>Ice Cave</button>
-            <button class="location-buttons" id ='inner-ice-cave' value = 'Ice Cave (Inner)' onclick ='locationTravel(value)'>Ice Cave (Inner)</button>
-            <button class="location-buttons" id ='sun-highway' value = 'Sun Highway' onclick ='locationTravel(value)'>Sun Highway</button>
-            <button class="location-buttons" id ='middle-town' value = 'Middle Town' onclick ='locationTravel(value)'>Middle Town</button>
-            <button class="location-buttons" id ='high-tower' value = 'High Tower' onclick ='locationTravel(value)'>High Tower</button>
-            <button class="location-buttons" id ='high-tower-top' value = 'High Tower (Top)' onclick ='locationTravel(value)'>High Tower Top</button>
-            <button class="location-buttons" id ='middle-town-blacksmith' value = 'Middle Town Blacksmith' onclick ='locationTravel(value)'>Middle Town Blacksmith</button>
-            <button class="location-buttons" id ='middle-town-mayor-house' value = 'Middle Town Mayor House' onclick ='locationTravel(value)'>Middle Town Mayor House</button>
-            <button class="location-buttons" id ='ancient-ruins' value = 'Ancient Ruins' onclick ='locationTravel(value)'>Ancient Ruins</button>
-            <button class="location-buttons" id ='majestic-castle' value = 'Majestic Castle' onclick ='locationTravel(value)'>Majestic Castle</button>
-        </div>
+                <div class = "user-details">
+                    <span id = "name">Warrior name:</span><br>
+                    <span id = "weapon">Weapon:</span><br>
+                    <span id = "attack">Attack:</span><br>
+                    <span id = "health">Current Health:</span><br>
+                    <span id = "gold">Gold: </span><br>
+                </div>
 
-        <div class="action">
-            <button class="action-button" id="main-quest" onclick = 'mainQuest()'>Select Main Quest</button>
-            <button class="action-button" id="side-quest" onclick = "sideQuest1()">Select Side Quest 1</button>
-            <button class="action-button" id="side-quest" onclick = "sideQuest2()">Select Side Quest 2</button>
-            <button class="action-button" id="attack" onclick = "attack()">Attack</button>
-            <button class="action-button" id="pick-up" onclick = "pickUp()">Investigate surrounding</button>
-        </div>
-    </main>
+                <div class="location">
+                    <h3> Locations Buttons </h3>
+                    <button class="location-buttons" id ='warrior-village' value = '0' onclick ='locationTravel(value)'>Warrior Village</button>
+                    <button class="location-buttons" id ='warrior-home' value = '1' onclick ='locationTravel(value)'>Warrior Home</button>
+                    <button class="location-buttons" id ='village-chief-house' value = '2' onclick ='locationTravel(value)'>Village Chief House</button>
+                    <button class="location-buttons" id ='flower-field' value = '3' onclick ='locationTravel(value)'>Flower Field</button>
+                    <button class="location-buttons" id ='flower-field-left' value = '4' onclick ='locationTravel(value)'>Flower Field Left</button>
+                    <button class="location-buttons" id ='flower-field-right' value = '5' onclick ='locationTravel(value)'>Flower Field Right</button>
+                    <button class="location-buttons" id ='ice-cave' value = '6' onclick ='locationTravel(value)'>Ice Cave</button>
+                    <button class="location-buttons" id ='inner-ice-cave' value = '7' onclick ='locationTravel(value)'>Ice Cave (Inner)</button>
+                    <button class="location-buttons" id ='sun-highway' value = '8' onclick ='locationTravel(value)'>Sun Highway</button>
+                    <button class="location-buttons" id ='middle-town' value = '9' onclick ='locationTravel(value)'>Middle Town</button>
+                    <button class="location-buttons" id ='high-tower' value = '10' onclick ='locationTravel(value)'>High Tower</button>
+                    <button class="location-buttons" id ='high-tower-top' value = '11' onclick ='locationTravel(value)'>High Tower Top</button>
+                    <button class="location-buttons" id ='middle-town-blacksmith' value = '12' onclick ='locationTravel(value)'>Middle Town Blacksmith</button>
+                    <button class="location-buttons" id ='middle-town-mayor-house' value = '13' onclick ='locationTravel(value)'>Middle Town Mayor House</button>
+                    <button class="location-buttons" id ='ancient-ruins' value = '14' onclick ='locationTravel(value)'>Ancient Ruins</button>
+                    <button class="location-buttons" id ='majestic-castle' value = '15' onclick ='locationTravel(value)'>Majestic Castle</button>
+                </div>
 
-    <script src="display.js"></script>
-    <script src="places.js"></script>
-    <script src="script.js"></script>
+                <div class="action">
+                    <h3> Action Buttons </h3>
+                    <button class="action-button" id="main-quest" onclick = 'mainQuest()'>Select Main Quest</button>
+                    <button class="action-button" id="side-quest1" onclick = "sideQuest1()">Select Side Quest 1</button>
+                    <button class="action-button" id="side-quest2" onclick = "sideQuest2()">Select Side Quest 2</button>
+                    <button class="action-button" id="attackB" onclick = "attack()">Attack</button>
+                    <button class="action-button" id="upgrade" onclick = "upgradeWeapon()">Upgrade Weapon</button>
+                    <button class="action-button" id="rest" onclick = "restUser()">Rest</button>
+                </div>
 
-</body>
+                <div class="logs">
+                    <h3 class="log-header">Game Log</h3>
+                    <ol id = "game-logs"></ol>
+                </div>
+            </div>
+
+            <script src="display.js"></script>
+            <script src="user.js"></script>
+            <script src="places.js"></script>
+            <script src="script.js"></script>
+        </main>
+        <footer>
+            <h4>This is an original code from Frederick. Last Updated: 1st Jul 2019</h4>
+        </footer>
+    </body>
 </html>

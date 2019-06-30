@@ -11,6 +11,9 @@ var places = [
         name: 'Warrior Home',
         visitCount:0,
         adjacentSite: ['warrior-village'],
+        rest() {
+            user.currentHealth = user.maxHealth;
+        }
     },
 
     {
@@ -28,12 +31,12 @@ var places = [
         },
         sideQuest: {
             questOne: {
-                quest: "Help protect our village fields: Defeat enemies at Flower Field Left and Flower Field Right.",
+                quest: "Help protect our village fields: Defeat enemies somewhere in Flower Field.",
                 questAccept: false,
                 questComplete: false
             },
             questTwo: {
-                quest: "Explore Ice Cave (Inner): Get a block of ice for the weekend party!",
+                quest: "Explore Ice Cave (Inner): Defeat the troll and get a block of ice for the weekend party!",
                 questAccept: false,
                 questComplete: false
             }
@@ -52,12 +55,13 @@ var places = [
         name: 'Flower Field Left',
         visitCount:0,
         adjacentSite: ['flower-field'],
+        enemyLocated: true,
         enemy: {
             name: 'Rabid Wolf',
             type: 'Ground',
-            health:1,
-            attack:1,
-            defeat: false
+            health:100,
+            attack:7,
+            reward: 100,
         }
     },
 
@@ -66,13 +70,6 @@ var places = [
         name: 'Flower Field Right',
         visitCount:0,
         adjacentSite: ['flower-field'],
-        enemy: {
-            name: 'Ferocious Harpy',
-            type: 'Flying',
-            health:1,
-            attack:1,
-            defeat: false
-        }
     },
 
     {
@@ -87,12 +84,13 @@ var places = [
         name: 'Ice Cave (Inner)',
         visitCount:0,
         adjacentSite: ['ice-cave'],
+        enemyLocated: true,
         enemy: {
             name: 'Ice Troll',
             type: 'Ground',
-            health:1,
-            attack:1,
-            defeat: false
+            health:200,
+            attack:9,
+            reward: 150,
         }
     },
 
@@ -101,12 +99,13 @@ var places = [
         name: 'Sun Highway',
         visitCount:0,
         adjacentSite: ['warrior-village','middle-town'],
+        enemyLocated: true,
         enemy: {
             name: 'Helicoopter',
             type: 'Flying',
-            health:1,
-            attack:1,
-            defeat: false
+            health:250,
+            attack:9,
+            reward: 150,
         }
     },
 
@@ -129,12 +128,13 @@ var places = [
         name: 'High Tower (Top)',
         visitCount:0,
         adjacentSite: ['high-tower'],
+        enemyLocated: true,
         enemy: {
             name: 'Mystical Wizard',
             type: 'Ground',
-            health:1,
-            attack:1,
-            defeat: false
+            health: 400,
+            attack: 13,
+            reward: 200,
         }
     },
 
@@ -142,7 +142,15 @@ var places = [
         id: 12,
         name: 'Middle Town Blacksmith',
         visitCount:0,
-        adjacentSite: ['middle-town']
+        adjacentSite: ['middle-town'],
+        upgrade() {
+            if (user.gold <50) {
+                return;
+            }
+            user.maxHealth+=50;
+            user.attack+=3;
+            user.gold-=50;
+        }
     },
 
     {
@@ -160,12 +168,12 @@ var places = [
         },
         sideQuest: {
             questOne: {
-                quest: "Help protect our village fields: Defeat enemies at Flower Field Left and Flower Field Right.",
+                quest: "Help put the Undead to rest: Defeat the Undead Flying Skeleton at the Ancient Ruins.",
                 questAccept: false,
                 questComplete: false
             },
             questTwo: {
-                quest: "Explore Ice Cave (Inner): Get a block of ice for the weekend party!",
+                quest: "Stop the Charm: Defeat the Mystical Wizard at the High Tower.",
                 questAccept: false,
                 questComplete: false
             }
@@ -176,13 +184,28 @@ var places = [
         id: 14,
         name: 'Ancient Ruins',
         visitCount:0,
-        adjacentSite: ['middle-town']
+        adjacentSite: ['middle-town'],
+        enemyLocated: true,
+        enemy: {
+            name: 'Undead Flying Skeleton',
+            type: 'Flying',
+            health: 350,
+            attack: 15,
+            reward: 200
+        }
     },
 
     {
         id: 15,
-        name: 'MajesticCastle',
+        name: 'Majestic Castle',
         visitCount:0,
-        adjacentSite: ['majestic-castle']
+        adjacentSite: ['majestic-castle'],
+        enemyLocated: true,
+        enemy: {
+            name: 'Hypnotic Robot',
+            type: 'Neutral',
+            health: 800,
+            attack: 30
+        }
     }
 ]
