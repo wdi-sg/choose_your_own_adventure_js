@@ -6,7 +6,6 @@ var playerName = "";
 var initMsg = "What is your name?";
 
 var score = 0;
-
 var msg;
 
 var yearChoice = ['2015', '1985', '1955'];
@@ -26,6 +25,7 @@ var underTheSeaMsg = ["Creepy. I hope you have some backup plan in place to get 
 
 
 displayStory(initMsg);
+displayScore(score);
 
 var inputHappened = function(currentInput){
     console.log("Input happened!", currentInput);
@@ -82,6 +82,10 @@ var promptName = function(currentInput) {
     document.querySelector('#input').value="";
     nextStage = 1;
     return playerName;
+}
+
+var updateScore = function(score) {
+    displayScore(score);
 }
 
 // STAGES OF THE GAME
@@ -173,6 +177,7 @@ var stayRun = function (currentInput) {
 
             // CLEAR INPUT BOX
             document.querySelector('#input').value="";
+            updateScore(score);
             return msg;
         } else {
             // CLEAR INPUT BOX
@@ -207,6 +212,7 @@ var inOrOut = function (currentInput) {
 
             // CLEAR INPUT BOX
             document.querySelector('#input').value="";
+            updateScore(score);
             return msg;
         } else {
             // CLEAR INPUT BOX
