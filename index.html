@@ -7,10 +7,7 @@
     <h1>Welcome to Back to the Future I, II, III </h1>
 
     <!-- Display story / questions -->
-    <p class="starter" id="story-container"></p>
-
-    <!-- Display paths -->
-    <p class="starter" id="path-container"></p>
+    <p class="starter" id="output"></p>
 
     <!-- User Input box -->
     <input class="starter" id="input" placeholder="input"/>
@@ -22,12 +19,7 @@
       });
 
       var displayStory = function( data ){
-        var output = document.querySelector('#story-container');
-        output.innerText = data;
-      }
-
-      var displayPath = function( data ){
-        var output = document.querySelector('#path-container');
+        var output = document.querySelector('#output');
         output.innerText = data;
       }
 
