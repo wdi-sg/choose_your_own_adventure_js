@@ -22,6 +22,9 @@ console.log ("Game path is " + gamePath);
 var immunity = false;
 console.log ("Player has immunity " + immunity);
 
+//var to track player's main alliance
+var friend = "Gina";
+
 //welcome message to start game rolling
 display("Hi " + name + "! You have just arrived on the beach with your new tribe. What would you do first?" + "\n" + "1. Make shelter" + "\n" + "2. Make alliances" + "\n" + "3. Search for an idol" + "\n" + "4. Chill" + "\n" + "(type: shelter/alliances/idol/chill to select option)");
 
@@ -34,23 +37,20 @@ var shelter = {
 
 var alliances = {
     actionTitle: "make alliances",
-    displayMsg1: "You have chosen to start building alliances. Who would you like to speak with:" + "\n" + "1. The quiet girl whom you haven't spoken to since the game started" + "\n" + "2. The outgoing chap who said hi earlier" + "\n" + "3. The older male who's sharing his ideas on how to get fire going",
+    displayMsg1: "You have chosen to start building alliances. Who would you like to speak with:" + "\n" + "1. Sarah - The quiet and nerdy girl whom you haven't spoken to since the game started" + "\n" + "2. Mark - The well-built, outgoing chap who said hi earlier" + "\n" + "3. Dennis - The older male who's sharing his ideas on how to get the fire going" + "\n" + "(type: Sarah/Mark/Dennis to select option)",
     adjustTally: + +1,
-    options: ['alliance1', 'alliance2']
 };
 
 var idol = {
     actionTitle: "search for idol",
     displayMsg1: "You have decided to launch a search for the hidden immunity idol. Would you like to search:" + "\n" + "1. Near the watering hole" + "\n" + "2. Amongst the trees and brush" + "\n" + "(type: water/trees to select option)",
     adjustTally: + +1,
-    options: ['idol1', 'idol2']
 };
 
 var chill = {
     actionTitle: "chilling",
     displayMsg1: "You probably signed up for the wrong game... Your tribe mates are getting frustrated with you slacking off. It's still early in the game and not too late to get back into the game if you want." + "\n" + "1. Time to get into the game!" + "\n" + "Nah. This is it for me." + "\n" + "(type: game/quit to select option)",
     adjustTally: - +5,
-    options: ['start over', 'quit the game']
 };
 
 var wood = {
@@ -134,6 +134,13 @@ var inputHappened = function(currentInput) {
         display(water.displayMsg1);
         clearInput("");
 
+    }else if ((currentInput === "Sarah" || currentInput === 'Mark' || currentInput === "Dennis") && gamePath === "alliancesPath") {
+        friend = currentInput;
+        display("You spoke with " + friend + " and you hit it off right away! You make a pact to stick together till the end." + "\n" + "For now, you both decide to help out with the shelter. Some of the other tribe members are working on the shelter. What would you like to do next:" + "\n" + "1. Start building" + "\n" + "2. Help gather more wood" + "\n" + "(type: build/wood to select option)");
+        clearInput("");
+        survivorTally = survivorTally + +2;
+        gamePath = "shelterPath";
+
     //to restart function if player wants to start again
     }else if (currentInput === "game" && gamePath === "chillPath") {
         display("What would you do?" + "\n" + "1. Make shelter" + "\n" + "2. Make alliances" + "\n" + "3. Search for an idol" + "\n" + "4. Chill" + "\n" + "(type: shelter/alliances/idol/chill to select option)");
@@ -154,7 +161,7 @@ var inputHappened = function(currentInput) {
         gamePath = "immunityPath";
 
     }else if (currentInput === "n" && gamePath === "shelterPath") {
-        display(hardwork.displayMsg1);
+        display(hardwork.displayMsg1+ "For now, let's get to a challenge!" + "\n" + "(type: go)");
         clearInput("");
         survivorTally = survivorTally + hardwork.adjustTally;
         gamePath = "mainPath";
@@ -185,7 +192,21 @@ var inputHappened = function(currentInput) {
 
     // to access FOURTH level actions
     }else if (currentInput === "dash" && gamePath === "immunityPath") {
-        display("You have found a HIDDEN IMMUNITY IDOL!" + "For now, let's get to a challenge!" + "\n" + "(type: go)");
+        display("You have found a HIDDEN IMMUNITY IDOL!" + "\n" +
+"       |@@@@|     |####|" + "\n" +
+"       \@@@@|     |####/" + "\n" +
+"        \@@@|     |###/" + "\n" +
+"         `@@|_____|##'" + "\n" +
+"              (O)" + "\n" +
+"           .-'''''-." + "\n" +
+"         .'  * * *  `." + "\n" +
+"        :  *       *  :" + "\n" +
+"       : ~ IMMUNITY ~  :"  + "\n" +
+"       : ~ I D O L ! ~ :" + "\n" +
+"        :  *       *  :" + "\n" +
+"         `.  * * *  .'"  + "\n" +
+"           `-.....-'"  + "\n" +
+        "For now, let's get to a challenge!" + "\n" + "(type: go)");
         clearInput("");
         survivorTally = survivorTally + +5;
         gamePath = "mainPath";
@@ -197,9 +218,59 @@ var inputHappened = function(currentInput) {
         survivorTally = survivorTally + -1;
         gamePath = "mainPath";
 
+//to access MAIN path (fifth level onwards)
+    }else if (currentInput === "go" && gamePath === "mainPath") {
+        display("!!IMMUNITY CHALLENGE!!" + "\n" + "The challenge is a physical task which involves height elements and swimming. You are pretty strong at both but are worried that showcasing your physical prowess could put a target on your back. You know that the other tribe is physically very strong and your tribe stands little chance at a win. Do you:" + "\n" + "1.Put in all your effort to help your tribe try for the win" + "\n" + "2. Run the race but hold back and just help the weaker ones along to complete" + "\n" + "(type: effort/hold to select option)");
+        clearInput("");
+        gamePath = "challenge";
+
+    }else if (currentInput === "effort" && gamePath === "challenge") {
+        display("Good effort " + name + "! Despite your efforts, the other tribe pulled out an easy win and your tribe will be heading to tribal council tonight. Your tribe mates see you as a physical asset to the tribe." + "\n" + "(type: tribal)");
+        clearInput("");
+        survivorTally = survivorTally + +2;
+        gamePath = "tribal";
+
+    }else if (currentInput === "hold" && gamePath === "challenge") {
+        display("The challenge was a blow out! The other tribe pulled out an easy win and your tribe will be heading to tribal council tonight. Some of your tribe mates secretly blame you for the loss." + "\n" + "(type: tribal)");
+        clearInput("");
+        survivorTally = survivorTally + -1;
+        gamePath = "tribal";
+
+    }else if (currentInput === "tribal" && gamePath === "tribal") {
+        display("The tribe now has to vote a player out. You are in an alliance with " + friend + " who wishes to vote out Jeri, who seems to be rather cunning. However, you have spoken to Jeri and believe that she could help further your game in time to come." + "\n" + "\n" + "On the other hand, Jeri has approached you to form an alliance as well. She suggests voting out " + friend + " who she thinks will hinder your game. You have considered this and realise that a big part of it might be true. Do you want to:" +"\n" + "1. Vote with " + friend + " and maintain original alliance" + "\n" + "2. Vote with Jeri and swap alliances" + "\n" + "(type: original/swap to select option)");
+        clearInput("");
+
+    }else if (currentInput === "original" && gamePath === "tribal") {
+        display("You have chosen to stick out your alliance with " + friend + ". Whether this pays off for you remains to be seen! Let's fast forward to the end and see if your strategy has paid off! " + "\n" + "(type: final tribal)");
+        clearInput("");
+        survivorTally = survivorTally + Math.floor((Math.random() * 8) + 1);
+        gamePath = "finalTribal";
+
+    }else if (currentInput === "swap" && gamePath === "tribal") {
+        friend = "Jeri";
+        display("You have shifted alliances and are now aligned with " + friend + ". Whether this pays off for you remains to be seen! Let's fast forward to the end and see if your strategy has paid off! " + "\n" + "(type: final tribal)");
+        clearInput("");
+        survivorTally = survivorTally + Math.floor((Math.random() * 8) + 1);
+        gamePath = "finalTribal";
+
+//FINAL TRIBAL COUNCIL
+    }else if (currentInput === "final tribal" && gamePath === "finalTribal") {
+        display("Well done " + name + "! You have done everything in your power to get to the final 3. It is now up to the jury to vote for who they think is the most deserving survivor who has Outwit, Outplayed, and Outlasted the rest. It's time for the big reveal!" + "\n" + "(type: OMG)");
+        clearInput("");
+
+    }else if (currentInput === "OMG" && gamePath === "finalTribal") {
+        if (survivorTally > 23) {
+            display ("CONGRATULATIONS " + name.toUpperCase() + "!!!" + "\n" + "The jury's votes are in and you have been crowned the sole survivor of Survivor SEI-19!" + "\n" + "(type: bye)");
+            gamePath = "gameOver";
+        }else if (survivorTally <= 23){
+            display ("Sorry " + name + "... You did not win the title of sole survivor but fantastic job on getting here! Unfortunately, no prizes for second place..... :(" + "\n" + "(type: bye)");
+            gamePath = "gameOver";
+        }
+        clearInput("");
+
     //GAME OVER PATH
     }else if (currentInput === "bye" && gamePath === "gameOver") {
-        display("GAME OVER!!!");
+        display("GAME OVER!!! Thanks for playing!");
         clearInput("");
     }
 
