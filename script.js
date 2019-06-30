@@ -48,7 +48,7 @@ var inputHappened = function(currentInput){
             console.log("case 2!");
             biffOrGriff(tempInput);
             displayStory(msg);
-            nextStage = nextStage + 1;
+            // nextStage = nextStage + 1;
             break;
         case 3:
             console.log("case 3!");
@@ -75,20 +75,27 @@ var year = function (currentInput) {
             msg = yearMsg[i];
             // nextStage = 1;
             // CLEAR INPUT BOX IF MATCH FOUND
+            console.log("nextstage value in year function: ", nextStage);
+            nextStage = nextStage + 1;
+            console.log("nextstage value in year function after update: ", nextStage);
             document.querySelector('#input').value="";
             return msg;
         } else {
+            // FUNCTION ONLY RUN TIS PART IF NO MATCH FOUND
             document.querySelector('#input').value="";
+            console.log("nextstage value in year function after else: ", nextStage);
         }
     }
     // CLEAR INPUT BOX
+    // FUNCTION ONLY RUN TIS PART IF NO MATCH FOUND
+    console.log("nextstage value in year function after for loop: ", nextStage);
     document.querySelector('#input').value="";
 };
 
 var biffOrGriff = function (currentInput) {
     for (var i = 0; i < charChoice.length; i++ ) {
         if (currentInput === charChoice[i]) {
-            var msg = charMsg[i];
+            msg = charMsg[i];
             // nextStage = 2;
             return msg;
         }
