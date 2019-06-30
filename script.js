@@ -39,7 +39,7 @@ var inputHappened = function(currentInput){
             displayStory("Welcome " + tempInput);
             displayStory("Hello " + tempInput + ", which year would you like to time travel to? 2015, 1985 or 1955");
             console.log("going to case: ", nextStage);
-            console.log("hello: ", playerName)
+            console.log("hello: ", playerName);
             break;
         case 1:
             console.log("case 1!");
@@ -124,16 +124,16 @@ var biffOrGriff = function (currentInput) {
 
             // DIRECT USER TO CORRECT PATH BASED ON INPUT
             if (charChoice[i] === 'G') {
-                console.log('G selected!!!')
+                console.log('G selected!!!');
                 nextStage = 4;
-                console.log('Going to stage:', nextStage)
+                console.log('Going to stage:', nextStage);
             } else if (charChoice[i] === 'B') {
-                console.log('B selected!!!')
+                console.log('B selected!!!');
                 nextStage = 3;
-                console.log('Going to stage:', nextStage)
+                console.log('Going to stage:', nextStage);
             } else {
                 // STAY IN BIFF & GRIIF STAGE
-                console.log('STAY IN B&G**')
+                console.log('STAY IN B&G**');
                 nextStage = 2;
             }
 
@@ -155,7 +155,22 @@ var stayRun = function (currentInput) {
     for (var i = 0; i < fightFlightChoice.length; i++ ) {
         if (currentInput == fightFlightChoice[i]) {
             msg = fightFlightMsg[i];
-            nextStage = 4;
+
+            // DIRECT USER TO CORRECT PATH BASED ON INPUT
+            if (fightFlightChoice[i] === 'S') {
+                console.log('STAY selected!!! Good choice!');
+                score = score + 1;
+                console.log("score: " + score);
+                console.log('END OF GAME');
+            } else if (fightFlightChoice[i] === 'R') {
+                console.log('R selected!!!');
+                console.log('END OF GAME');
+            } else {
+                // STAY IN STAY OR RUN STAGE
+                console.log('STAY IN S&R**');
+                nextStage = 3;
+            }// END OF DIRECT USER TO CORRECT PATH BASED ON INPUT
+
             // CLEAR INPUT BOX
             document.querySelector('#input').value="";
             return msg;
@@ -173,6 +188,23 @@ var inOrOut = function (currentInput) {
     for (var i = 0; i < inOutChoice.length; i++ ) {
         if (currentInput == inOutChoice[i]) {
             msg = inOutMsg[i];
+            console.log('answer:' + inOutChoice[i]);
+            // DIRECT USER TO CORRECT PATH BASED ON INPUT
+            if (inOutChoice[i] === 'I') {
+                console.log('IN selected!!! Bad Call!');
+                console.log('END OF GAME');
+                nextStage = 4;
+            } else if (inOutChoice[i] === 'O') {
+                console.log('OUT selected!!! Good Call!');
+                console.log('END OF GAME');
+                score = score + 1;
+                nextStage = 4;
+            } else {
+                // STAY IN STAY OR RUN STAGE
+                console.log('STAY IN INorOUT STAGE**');
+                nextStage = 4;
+            }// END OF DIRECT USER TO CORRECT PATH BASED ON INPUT
+
             // CLEAR INPUT BOX
             document.querySelector('#input').value="";
             return msg;
