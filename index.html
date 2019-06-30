@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Simple Role-Playing Adventure</h1>
+    </header>
+    <main>
+        <div class="input-form">
+            <span> Warrior Name: </span>
+            <input class="text-input" id ="warrior-name" type="text"><br><br>
+            <span> Choose your weapon: </span   >
+            <select>
+                <option value = "sword">Sword (2x Damage against Ground Enemies</option>
+                <option value = "bow">Bow (2x Damage against Flying Enemies</option>
+            </select><br><br>
+            <button id="start-button">Start Game!</button>
+        </div>
+
+        <p id = "current-location"></p>
+
+        <div class="location">
+            <button class="location-buttons" id ='warrior-village' value = 'Warrior Village' onclick ='locationTravel(value)'>Warrior Village</button>
+            <button class="location-buttons" id ='warrior-home' value = 'Warrior Home' onclick ='locationTravel(value)'>Warrior Home</button>
+            <button class="location-buttons" id ='village-chief-house' value = 'Village Chief House' onclick ='locationTravel(value)'>Village Chief House</button>
+            <button class="location-buttons" id ='flower-field' value = 'Flower Field' onclick ='locationTravel(value)'>Flower Field</button>
+            <button class="location-buttons" id ='flower-field-left' value = 'Flower Field Left' onclick ='locationTravel(value)'>Flower Field Left</button>
+            <button class="location-buttons" id ='flower-field-right' value = 'Flower Field Right' onclick ='locationTravel(value)'>Flower Field Right</button>
+            <button class="location-buttons" id ='ice-cave' value = 'Ice Cave' onclick ='locationTravel(value)'>Ice Cave</button>
+            <button class="location-buttons" id ='inner-ice-cave' value = 'Ice Cave (Inner)' onclick ='locationTravel(value)'>Ice Cave (Inner)</button>
+            <button class="location-buttons" id ='sun-highway' value = 'Sun Highway' onclick ='locationTravel(value)'>Sun Highway</button>
+            <button class="location-buttons" id ='middle-town' value = 'Middle Town' onclick ='locationTravel(value)'>Middle Town</button>
+            <button class="location-buttons" id ='high-tower' value = 'High Tower' onclick ='locationTravel(value)'>High Tower</button>
+            <button class="location-buttons" id ='high-tower-top' value = 'High Tower (Top)' onclick ='locationTravel(value)'>High Tower Top</button>
+            <button class="location-buttons" id ='middle-town-blacksmith' value = 'Middle Town Blacksmith' onclick ='locationTravel(value)'>Middle Town Blacksmith</button>
+            <button class="location-buttons" id ='middle-town-mayor-house' value = 'Middle Town Mayor House' onclick ='locationTravel(value)'>Middle Town Mayor House</button>
+            <button class="location-buttons" id ='ancient-ruins' value = 'Ancient Ruins' onclick ='locationTravel(value)'>Ancient Ruins</button>
+            <button class="location-buttons" id ='majestic-castle' value = 'Majestic Castle' onclick ='locationTravel(value)'>Majestic Castle</button>
+        </div>
+    </main>
+
+    <script src="display.js"></script>
+    <script src="places.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>

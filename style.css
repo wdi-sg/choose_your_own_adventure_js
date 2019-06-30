@@ -1,0 +1,6 @@
+.location{
+	display: flex;
+	flex-wrap: wrap;
+	max-width: 50%;
+	height: 50%;
+}
