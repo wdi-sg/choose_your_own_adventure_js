@@ -10,7 +10,12 @@ body {
   border:3px solid blue;
 }
 
-#output{
+#story-container {
 	font-family: sans-serif;
   background-color:pink;
+}
+
+#path-container {
+	font-family: sans-serif;
+  background-color: #00FF00;
 }
