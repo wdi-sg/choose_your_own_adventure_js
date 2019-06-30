@@ -1,0 +1,50 @@
+<html>
+<meta charset="utf-8" />
+<head>
+	<title>Choose you own adventure | Pokemon</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="adventure">
+    <pre><span class="art">
+                                  ,'\
+    _.----.        ____         ,'  _\   ___    ___     ____
+_,-'       `.     |    |  /`.   \,-'    |   \  /   |   |    \  |`.
+\      __    \    '-.  | /   `.  ___    |    \/    |   '-.   \ |  |
+ \.    \ \   |  __  |  |/    ,','_  `.  |          | __  |    \|  |
+   \    \/   /,' _`.|      ,' / / / /   |          ,' _`.|     |  |
+    \     ,-'/  /   \    ,'   | \/ / ,`.|         /  /   \  |     |
+     \    \ |   \_/  |   `-.  \    `'  /|  |    ||   \_/  | |\    |
+      \    \ \      /       `-.`.___,-' |  |\  /| \      /  | |   |
+       \    \ `.__,'|  |`-._    `|      |__| \/ |  `.__,'|  | |   |
+        \_.-'       |__|    `-._ |              '-.|     '-.| |   |
+                                `'                            '-._|</span></pre>
+	<p id="question">Hello there! You can now begin your journey as a Pokemon Trainer.<br><br>May I get your name?</br></p>
+	<div id="choices"></div>
+	<input id="user-input">
+	<p id="error"></p>
+</div>
+
+
+<script>
+	document.querySelector('#user-input').addEventListener('change', function (event) {
+		var userInput = document.querySelector('#user-input').value;
+		startAdventure(userInput);
+        document.querySelector('#user-input').value = "";
+	});
+	var displayQuestion = function (data) {
+		var question = document.querySelector('#question');
+		question.innerText = data;
+	}
+	var displayChoices = function (data) {
+		var choices = document.querySelector("#choices");
+		choices.innerText = data;
+	}
+	var displayError = function (data) {
+		var error = document.querySelector("#error");
+		error.innerText = data;
+	}
+</script>
+<script src="script.js"></script>
+</body>
+</html>
