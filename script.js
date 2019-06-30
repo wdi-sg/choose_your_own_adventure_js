@@ -3,12 +3,13 @@ console.log("hello script js");
 //declare starting variables
 var playerName = null;
 var currentPokemon = null;
-var opponentPokemon = null;
+var opponentPokemon = [];
 var bag = ["pokeball","antidote"];
 var pokemonBelt = [];
 var stage = 0;
 var questionComplete = ["0"];
 var battleMode = false;
+var attackMode = false;
 var winCounter = 0
 
 //List of starter pokemon
@@ -93,6 +94,7 @@ function showMoveList(currentPokemon) {
     for (i=0;i<pokemonList.length;i++) {
         if (currentPokemon === pokemonList[i].pokemon) {
         display(`1. ${pokemonList[i].moveList[0]}\n2. ${pokemonList[i].moveList[1]}\n3. ${pokemonList[i].moveList[2]}\n4. ${pokemonList[i].moveList[3]}`);
+        document.getElementById('input').value='';
         }
     }
 }
@@ -100,14 +102,17 @@ function showMoveList(currentPokemon) {
 //Show pokemon available in belt
 function showPokemonBelt(pokemon) {
     if (pokemonBelt.length === 1) {
-        display(`You do not have any other pokemon!`)
+        display(`You do not have any other pokemon!\n\n1. Ability (skill)\n2. Switch Pokemon (switch)\n3. Open Bag (bag)\n4. Escape (run)`);
+        document.getElementById('input').value='';
     } else {
     display(`1. ${pokemonBelt[0]}\n2.${pokemonBelt[1]}`);
+    document.getElementById('input').value='';
 }
 }
 //Show items in bag
 function showBag() {
     display(`1. ${bag[0]}\n2. ${bag[1]}`);
+    document.getElementById('input').value='';
 }
 
 
@@ -139,12 +144,16 @@ function showBag() {
 ////////////Start of Game///////////
 
 display("What is your name, young trainer?");
+counter(`Number of battles won: ${winCounter}`);
 console.log(`stage 0 => choose username`)
 
 var inputHappened = function(currentInput){
     if (battleMode === true) {
         stage = "battle";
         console.log(`Currently in battle`);
+        if (attackMode === true) {
+            stage = "attack";
+        };
     } else if (battleMode === false) {
         stage = questionComplete.length;
         console.log(`${stage} is the current stage`)
@@ -197,7 +206,7 @@ var inputHappened = function(currentInput){
                 display(`What better way to start our adventure than from our hometown.\n\nShould we:\n1. Visit cousin Gary (gary)\n2. Head up north (north)`);
                 completeQuestion(currentInput);
         } else if (currentInput.toLowerCase() === "lavender") {
-                var opponentPokemon = [];
+                // var opponentPokemon = [];
                 opponentPokemon.push(wildPokemonList[Math.floor(Math.random()*3)]);
                 console.log(`first pokemon to fight ${opponentPokemon}`);
                 display(`You head up north to Lavender Town.\n\nUpon entering a grass patch, you encounter your first pokemon.\n\nWild ${opponentPokemon[0].charAt(0).toUpperCase()+opponentPokemon[0].slice(1)} appeared!\n\n 1. Fight\n2. Run`);
@@ -223,7 +232,7 @@ var inputHappened = function(currentInput){
                 display(`It's been a long time since you have seen Gary.\n\nGary challenges you to your first pokemon battle.\n\n1. Accept the challenge (accept)\n2. Tell Gary he's wasting your time and head north (north)`);
                 completeQuestion(currentInput);
         } else if (currentInput.toLowerCase() === "north") {
-                display('You chose north\n\nGame still under construction');
+                display('You head north\n\nGame still under construction');
                 completeQuestion(currentInput);
         }
     }
@@ -231,8 +240,10 @@ var inputHappened = function(currentInput){
     if (stage === 4 && questionComplete[3]==="lavender") {
         console.log("Stage 4 lavender");
         if (currentInput.toLowerCase() === "fight") {
-                display(`You sent out ${pokemonBelt}!\n\nWhat will ${pokemonBelt} do?\n1. Ability\n2. Pokemon\n3. Bag\n4. Escape`);
-                completeQuestion(currentInput);
+                display(`You sent out ${currentPokemon.charAt(0).toUpperCase()+currentPokemon.slice(1)}!\n\nWhat will ${currentPokemon.charAt(0).toUpperCase()+currentPokemon.slice(1)} do?\n1. Ability (skill)\n2. Switch Pokemon (switch)\n3. Open Bag (bag)\n4. Escape (run)`);
+                battleMode = true;
+                document.getElementById('input').value=''
+                // completeQuestion(currentInput);
         } else if (currentInput.toLowerCase() === "run") {
                 display('You ran away');
                 completeQuestion(currentInput);
@@ -266,21 +277,40 @@ var inputHappened = function(currentInput){
 
 
 //////            STAGE 5           ///////
-//Lavender Town storyline -> fight mode
-    if (stage === 5 && questionComplete[4]==="fight") {
-        console.log("Stage 5 lavender");
-        if (currentInput === "ability") {
-            showMoveList(currentPokemon);
-            battleMode = true;
-        } else if (currentInput === "pokemon"){
-            showPokemonBelt();
-            // stage = 5.2;
-        } else if (currentInput === "bag") {
-            showBag();
-        } else if (currentInput === "escape") {
-            display(`You got away safely!`);
+//pallet storyline -> visit gary or head north
+    if (stage === 5 && questionComplete[4]==="gary") {
+        console.log("Stage 5 pallet town");
+        if (currentInput.toLowerCase() === "accept") {
+                opponentPokemon.push("mewtwo");
+                display(`Gary sent out ${opponentPokemon[0].charAt(0).toUpperCase()+opponentPokemon[0].slice(1)}.\n\nGo ${currentPokemon.charAt(0).toUpperCase()+currentPokemon.slice(1)}!\n\nWhat will ${currentPokemon.charAt(0).toUpperCase()+currentPokemon.slice(1)} do?\n1. Ability (skill)\n2. Switch Pokemon (switch)\n3. Open Bag (bag)\n4. Escape (run)`);
+                battleMode = true;
+                document.getElementById('input').value='';
+        } else if (currentInput.toLowerCase() === "north") {
+                display('You head north\n\nGame still under construction');
+                completeQuestion(currentInput);
         }
     }
+
+
+
+
+
+
+//Lavender Town storyline -> fight mode
+    // if (stage === 5 && questionComplete[4]==="fight") {
+    //     console.log("Stage 5 lavender");
+    //     if (currentInput === "skill") {
+    //         showMoveList(currentPokemon);
+    //         attackMode = true;
+    //         document.getElementById('input').value='';
+    //     } else if (currentInput === "switch"){
+    //         showPokemonBelt();
+    //     } else if (currentInput === "bag") {
+    //         showBag();
+    //     } else if (currentInput === "run") {
+    //         display(`You got away safely!`);
+    //     }
+    // }
 
 
 //pewter city storyline  -> avoid or engage
@@ -295,16 +325,34 @@ var inputHappened = function(currentInput){
 
     }
 
-//Battle Mode
+//In Battle
     if (stage === "battle" ) {
-        console.log(`In fight mode now`);
-        if (currentInput === "1") {
-            display(`Pokemon collasped.\n\nYou Won!\n\n1. Continue`);
-            winCounter += 1;
+        console.log(`In battle now`);
+        if (currentInput === "skill") {
+            showMoveList(currentPokemon);
+            attackMode = true;
+        } else if (currentInput === "switch"){
+            showPokemonBelt();
+        } else if (currentInput === "bag") {
+            showBag();
+        } else if (currentInput === "run") {
+            display(`You got away safely!`)
+            ;
+            document.getElementById('input').value='';
         }
     }
 
-
+//Attack Mode
+    if (stage === "attack" ) {
+            console.log(`In attack mode now`);
+            if (currentInput === "1") {
+                display(`${opponentPokemon[0].charAt(0).toUpperCase()+opponentPokemon[0].slice(1)} fainted.\n\nYou Won!\n\n1. Continue`);
+                winCounter += 1;
+                counter(`Number of battles won: ${winCounter}`);
+                battleMode = false;
+                document.getElementById('input').value='';
+            }
+        }
 
 
 

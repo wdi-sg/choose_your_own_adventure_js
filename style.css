@@ -9,7 +9,7 @@ header {
 
 
 .starter{
-  font-size:30px;
+  font-size:28px;
   padding:10px;
   display:block;
   margin:40px auto 0;
@@ -26,7 +26,7 @@ header {
 }
 
 #input{
-	background-color: rgba(255,204,47,1);
+	background-color: rgba(255,204,47,0.8);
   border: 5px solid rgba(30,50,102,0.9);
   color: rgba(30,50,102,0.9);
 }
@@ -37,5 +37,10 @@ header {
   border: 5px solid rgba(30,50,102,0.9);
   text-align: center;
   color: rgba(30,50,102,0.9);
+}
 
+#counter {
+	width: 35%;
+	float: left;
+	font-size: 16px;
 }

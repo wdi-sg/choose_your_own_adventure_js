@@ -13,8 +13,9 @@
         <p class="starter" id="output"></p>
 
         <input class="starter" id="input" placeholder="Enter Option"/>
-        <p id="instructions">Choose options by entering the text in parentheses<p>
 
+        <p id="instructions">Choose options by entering the text in parentheses<p>
+        <p class="starter" id="counter"></p>
     </main>
 
 
@@ -30,6 +31,12 @@
         var output = document.querySelector('#output');
         output.innerText = data;
       }
+
+      var counter = function( data ){
+        var output = document.querySelector('#counter');
+        output.innerText = data;
+      }
+
     </script>
     <script src="script.js"></script>
 
