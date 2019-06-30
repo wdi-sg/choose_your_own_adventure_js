@@ -1,98 +1,170 @@
 console.log("hello script js");
 
-//declare global variables
+//declare starting variables
 var playerName = null;
 var currentPokemon = null;
+var opponentPokemon = null;
+var bag = ["pokeball","antidote"];
+var pokemonBelt = [];
+var stage = 0;
+var questionComplete = ["0"];
+var battleMode = false;
+var winCounter = 0
+
+//List of starter pokemon
 var starterPokemon = ["bulbasaur", "squirtle", "charmander", "pikachu", "charizard", "blastoise", "venasaur"];
+
+//list of possible wild pokemon encounters
 var wildPokemonList = ["caterpie", "rattata","butterfree"];
+
+//List of all pokemon
 var pokemonList = [
     {   "pokemon": "bulbasaur",
-        "moveList": ["growl", "tackle"]
+        "moveList": ["growl", "tackle"],
+        "hitPoints": 200
     },
     {
         "pokemon": "squirtle",
-        "moveList": ["tackle", "tail whip"]
+        "moveList": ["tackle", "tail whip"],
+        "hitPoints": 200
     },
     {
         "pokemon": "charmander",
-        "moveList":["scratch", "growl"]
+        "moveList":["scratch", "growl"],
+        "hitPoints": 200
     },
     {
         "pokemon": "pikachu",
-        "moveList": ["thunder shock", "growl"]
+        "moveList": ["thunder shock", "growl"],
+        "hitPoints": 200
     },
     {
         "pokemon": "blastoise",
-        "moveList": ["hydro pump", "skull bash", "headbutt", "bubble beam"]
+        "moveList": ["hydro pump", "skull bash", "headbutt", "bubble beam"],
+        "hitPoints": 290
     },
     {
         "pokemon": "charizard",
-        "moveList": ["fire spin", "flamethrower", "slash", "wing attack"]
+        "moveList": ["fire spin", "flamethrower", "slash", "wing attack"],
+        "hitPoints": 300
     },
     {
         "pokemon": "venasaur",
-        "moveList": ["petal dance", "solar beam", "razor leaf"]
+        "moveList": ["petal dance", "solar beam", "razor leaf"],
+        "hitPoints": 270
+    },
+    {   "pokemon": "caterpie",
+        "moveList": ["growl", "tackle"],
+        "hitPoints": 200
+    },
+    {   "pokemon": "butterfree",
+        "moveList": ["growl", "tackle"],
+        "hitPoints": 200
+    },
+    {   "pokemon": "rattata",
+        "moveList": ["growl", "tackle"],
+        "hitPoints": 200
     },
 ];
-var opponentPokemon = [];
 
-//battle variables
-var bag = ["pokeball","antidote"];
-var pokemonBelt = [];
+//List of damage by ability
+var abilityDamage = [
+    {
+      "move": "tackle",
+      "damage": 200
+    },
+    {
+      "move": "scratch",
+      "damage": 200
+    }]
 
 
-//variables for stage and questions
-var stage = 0;
-var questionComplete = ["0"];
+// console.log(abilityDamage[0].move);
+// console.log(pokemonList[0].moveList[1]);
+// if (pokemonList[0].moveList[1] === abilityDamage[0].move) {
+//     console.log(`the damage of ${abilityDamage[0].move} is ${abilityDamage[0].damage}`);
+// }
 
-//storyline functions
+//      TO UPDATE ATTACK FUNCTION    //
+// function attack(move) {
+//     for (i=0; i < abilityDamage.length; i++) {
+//         if (abilityDamage[i].move === pokemonList[0].moveList[1]) {
+//             console.log(`the damage of ${abilityDamage[i].move} is ${abilityDamage[i].damage}`);
+//             opponentPokemon
+//         }
+//     }
+// }
+// console.log(abilityDamage[0].move);
+// console.log(pokemonList[0].moveList[1]);
+// if (pokemonList[0].moveList[1] === abilityDamage[0].move) {
+//     console.log(`the damage of ${abilityDamage[0].move} is ${abilityDamage[0].damage}`);
+// }
+
+
+
+
+// //variables for stage and questions
+// var stage = 0;
+// var questionComplete = ["0"];
+
+
+////    Storyline Functions    ////
+//updates completed questions array
 function completeQuestion(currentInput) {
     questionComplete.push(currentInput);
     console.log(questionComplete);
     document.getElementById('input').value='';
 }
 
-function beginAdventure(currentInput) {
-    pokemonBelt.push(currentInput);
-    currentPokemon = pokemonBelt[0];
-    console.log(currentPokemon);
-    console.log(`Player chose ${currentPokemon}`);
-    display(`Great choice, ${playerName.charAt(0).toUpperCase()+playerName.slice(1)}!\nCongrats on choosing your first pokemon ${currentPokemon.charAt(0).toUpperCase()+ currentPokemon.slice(1)}.\n\nNow where would you like to begin your adventure? \n\n1. Pallet Town (pallet)\n2. Lavender Town (lavender)\n3. Saffron City (saffron)\n4. Pewter City (pewter)\n5. Safari Zone (safari)`);
-}
 
-//battle function
-function battleFunctions(currentPokemon) {
-    display(`What will ${currentPokemon} do?\n1. Fight\n2. Pokemon\n3. Bag\n4. Escape`);
-}
-
-//display move list
-function showMoveList(pokemonChose) {
+//Show list of pokemon abilities in battle
+function showMoveList(currentPokemon) {
     for (i=0;i<pokemonList.length;i++) {
         if (currentPokemon === pokemonList[i].pokemon) {
         display(`1. ${pokemonList[i].moveList[0]}\n2. ${pokemonList[i].moveList[1]}\n3. ${pokemonList[i].moveList[2]}\n4. ${pokemonList[i].moveList[3]}`);
         }
     }
 }
-//show pokemon belt
+
+//Show pokemon available in belt
 function showPokemonBelt(pokemon) {
-    if (pokemonBelt=null) {
+    if (pokemonBelt.length === 1) {
         display(`You do not have any other pokemon!`)
     } else {
     display(`1. ${pokemonBelt[0]}\n2.${pokemonBelt[1]}`);
 }
 }
-//open bag
+//Show items in bag
 function showBag() {
     display(`1. ${bag[0]}\n2. ${bag[1]}`);
 }
 
+//           TO UPDATE.    ////
+// //battle function
+// function battleFunctions(currentPokemon) {
+//     display(`What will ${currentPokemon} do?\n1. Fight\n2. Pokemon\n3. Bag\n4. Escape`);
+// }
 
-//start of game
+
+
+//////// POKEMON  ADVENTURES ////////
+////////////Start of Game///////////
+
 display("What is your name, young trainer?");
 console.log(`stage 0 => choose username`)
 
 var inputHappened = function(currentInput){
-    stage = questionComplete.length;
+    if (battleMode === true) {
+        stage = "battle";
+        console.log(`Currently in battle`);
+    } else if (battleMode === false) {
+        stage = questionComplete.length;
+        console.log(`${stage} is the current stage`)
+    };
+
+    //.       TO UPDATE BACK BUTTON.   //
+    // stage = questionComplete.length;
+    // console.log(`${stage} is the current stage`)
     // if (currentInput === "back") {
     //     stage = stage - 1;
     //     questionComplete.pop();
@@ -115,10 +187,14 @@ var inputHappened = function(currentInput){
     if (stage === 2 && questionComplete[1]===playerName) {
         console.log(`stage 2 choose start town`);
         if (currentInput === 'bulbasaur'||currentInput === 'squirtle'||currentInput === 'charmander'||currentInput === 'pikachu') {
-            beginAdventure(currentInput);
+            pokemonBelt.push(currentInput);
+            currentPokemon = pokemonBelt[0];
+            console.log(`Player chose ${currentPokemon}`);
+            display(`Great choice, ${playerName.charAt(0).toUpperCase()+playerName.slice(1)}!\nCongrats on choosing your first pokemon ${currentPokemon.charAt(0).toUpperCase()+ currentPokemon.slice(1)}.\n\nNow where would you like to begin your adventure? \n\n1. Pallet Town (pallet)\n2. Lavender Town (lavender)\n3. Cinabar Island (cinabar)\n4. Pewter City (pewter)\n5. Safari Zone (safari)`);
             completeQuestion(currentInput);
         } else if (currentInput === 'random') {
             pokemonBelt.push(starterPokemon[Math.floor(Math.random()*7)]);
+            currentPokemon = pokemonBelt[0];
             display(`Ahh, taking chances I see, ${playerName.charAt(0).toUpperCase()+playerName.slice(1)}!\nCongrats on acquiring your first pokemon ${pokemonBelt[0].charAt(0).toUpperCase()+pokemonBelt[0].slice(1)}!\n\nNow where would you like to begin your adventure? \n\n1. Pallet Town (pallet)\n2. Lavender Town (lavender)\n3. Cinabar Island (cinabar)\n4. Pewter City (pewter)\n5. Safari Zone (safari)`);
             completeQuestion(currentInput);
         } else {
@@ -133,6 +209,7 @@ var inputHappened = function(currentInput){
                 display(`What better way to start our adventure than from our hometown.\nShould we:\n\n1. Visit cousin Gary\n2. Head up north`);
                 completeQuestion();
         } else if (currentInput.toLowerCase() === "lavender") {
+                var opponentPokemon = [];
                 opponentPokemon.push(wildPokemonList[Math.floor(Math.random()*3)]);
                 console.log(`first pokemon to fight ${opponentPokemon}`);
                 display(`You head up north to Lavender Town.\n\nUpon entering a grass patch, you encounter your first pokemon.\n\nWild ${opponentPokemon[0].charAt(0).toUpperCase()+opponentPokemon[0].slice(1)} appeared!\n\n 1. Fight\n2. Run`);
@@ -151,21 +228,22 @@ var inputHappened = function(currentInput){
 
 
 //STAGE 4
+//pallet storyline -> visit gary or head north
     if (stage === 4 && questionComplete[3]==="pallet") {
         console.log("Stage 4 pallet town");
         if (currentInput.toLowerCase() === "gary") {
                 display(`It's been a long time since you have seen Gary.\n\nGary challenges you to your first pokemon battle.\n\n1. Accept the challenge (accept)\n2. Tell Gary he's wasting your time and head north (north)`);
                 completeQuestion(currentInput);
         } else if (currentInput.toLowerCase() === "north") {
-                display('You chose north');
+                display('You chose north\n\nGame still under construction');
                 completeQuestion(currentInput);
         }
     }
-
+//Lavender Town storyline -> fight or run
     if (stage === 4 && questionComplete[3]==="lavender") {
-        console.log("Stage 4 lavender town");
+        console.log("Stage 4 lavender");
         if (currentInput.toLowerCase() === "fight") {
-                display(`You sent out ${pokemonBelt}!\n\nWhat will ${pokemonBelt} do?\n1. Fight\n2. Pokemon\n3. Bag\n4. Escape`);
+                display(`You sent out ${pokemonBelt}!\n\nWhat will ${pokemonBelt} do?\n1. Ability\n2. Pokemon\n3. Bag\n4. Escape`);
                 completeQuestion(currentInput);
         } else if (currentInput.toLowerCase() === "run") {
                 display('You ran away');
@@ -173,17 +251,19 @@ var inputHappened = function(currentInput){
         }
     }
 
+//Cinabar Island storyline -> drink or surf
     if (stage === 4 && questionComplete[3]==="cinabar") {
         console.log("Stage 4 cinabar");
         if (currentInput.toLowerCase() === "drink") {
-                display(`You reach for your bag and grab a beer by the coast.\n\nAhh tastes great!.`);
+                display(`You reach for your bag and grab a beer by the coast.\n\nAhh tastes great!`);
                 completeQuestion(currentInput);
         } else if (currentInput.toLowerCase() === "surf") {
-                display('Find a pokemon with surf.');
+                display("You don't have any pokemon with the surf ability.");
                 completeQuestion(currentInput);
         }
     }
 
+//Pewter City storyline -> choose gym or cave
     if (stage === 4 && questionComplete[3]==="pewter") {
         console.log("Stage 4 pewter");
         if (currentInput.toLowerCase() === "gym") {
@@ -200,54 +280,46 @@ var inputHappened = function(currentInput){
 
 
 //STAGE 5
+//Lavender Town storyline -> fight mode
     if (stage === 5 && questionComplete[4]==="fight") {
-        console.log("Stage 5");
-        if (currentInput === "fight") {
-            showMoveList(pokemonBelt);
-            // stage = 5.1;
-            // if (stage===5.1 && currentInput==="fight") {
-
-            // }
+        console.log("Stage 5 lavender");
+        if (currentInput === "ability") {
+            showMoveList(currentPokemon);
+            battleMode = true;
         } else if (currentInput === "pokemon"){
             showPokemonBelt();
-            stage = 5.2;
+            // stage = 5.2;
         } else if (currentInput === "bag") {
             showBag();
-        } else {
-            display(`You ran away safely!`);
+        } else if (currentInput === "escape") {
+            display(`You got away safely!`);
         }
-        completeQuestion(currentInput);
-
     }
-//user can choose challenge or avoid trainer
+
+
+//pewter city storyline  -> avoid or engage
     if (stage === 5 && questionComplete[4]==="cave") {
         console.log("Stage 5 to the cave");
         if (currentInput === "challenge") {
                 display(`You approach the pokemon trainer.\n\nHe is not interested in having a pokemon battle.\n\n1. Continue on your journey (cont).`);
         } else if (currentInput === "avoid"){
-            display(`You take a different route and arrive in the forest.`);
+            display(`You take a different route and arrive in the forest.\n\n1. Continue on your journey (cont).`);
         }
         completeQuestion(currentInput);
 
     }
 
+//Battle Mode
+    if (stage === "battle" ) {
+        console.log(`In fight mode now`);
+        if (currentInput === "1") {
+            display(`Pokemon collasped.\n\nYou Won!\n\n1. Continue`);
+            winCounter += 1;
+        }
+    }
 
 
 
-
-
-
-
-
-
-    // for (i=0; i < year.length; i++) {
-    //     if (parseInt(currentInput) === year[i]) {
-    //         console.log("year chose is" + year)
-    //         yearChose.push(year[i]);
-    //         console.log("year chose is" + year);
-    //     }
-    // return;
-    // }
 
 
 
