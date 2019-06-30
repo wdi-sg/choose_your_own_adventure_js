@@ -59,7 +59,7 @@ var player = {
 //initialize enemies for game
 var enemyGoon = {
   name: "Enemy Goon",
-  health:100,
+  health:50,
   damagedone: null,
   fight: function(){
     var damage = Math.floor(Math.random()*11);
@@ -73,9 +73,11 @@ var enemyGoon = {
 var enemyBoss = {
   name: "Goon boss",
   health:120,
+  damagedone: null,
   fight: function(){
     var damage = Math.floor(Math.random()*21);
     console.log(`enemy boss did ${damage} damage!`);
+    this.damagedone = damage;
     player.health -= damage;
     console.log(`player has ${player.health} health left!`);
   },
@@ -245,7 +247,7 @@ var scenarioClone = null;
 //restart game with basic settings
 function restartGame(){
   weaponType = null;
-  currentScenario = null;
+  currentScenario = [];
   backPedal = [];
   storySelect = null;
   battleStatus = 0;
@@ -256,7 +258,7 @@ function restartGame(){
   endState = 0;
   player.health = 100;
   player.weapon = fists;
-  enemyGoon.health = 100;
+  enemyGoon.health = 50;
   enemyBoss.health = 120;
   enemyArray = [enemyGoon, enemyBoss];
   while (document.getElementById("storybox").firstChild) {
@@ -288,7 +290,7 @@ var endMap = {
 }
 //initialize global variables
 var weaponType = null;
-var currentScenario = null;
+var currentScenario = [];
 var backPedal = [];
 var storySelect = null;
 var battleStatus = 0;
@@ -344,12 +346,12 @@ function loadStory(){
   }
   console.log(scenarioClone.length);
   document.getElementById("storycontainer").textContent = scenarioClone[storySelect]["story"];
-  currentScenario = scenarioClone[storySelect];
+  currentScenario.push(scenarioClone[storySelect]);
   //creating interact, fight and traverse options
   for (var i = 0; i < scenarioClone[storySelect]["option"].length; i++){
     var btn = document.createElement("button");
     var para = document.createElement("p");
-    if (hasOwnProperty.call(scenarioClone[storySelect]["option"][i], "fight") && battleStatus === 0){
+    if (hasOwnProperty.call(scenarioClone[storySelect]["option"][i], "fight") && battleStatus === 0 && enemyArray[0] != undefined){
       btn.setAttribute("onClick","fight()");
       btn.setAttribute("display", "block");
       btn.setAttribute("class", "options");
@@ -405,16 +407,20 @@ function loadStory(){
 }
 //fight function whenever user encounters a battle, the go back button is disabled to prevent escape
 function fight(){
-  while (optionNode.firstChild) {
-    optionNode.removeChild(optionNode.firstChild);
-  };
-  var fightbtn = document.createElement("button");
-  fightbtn.textContent = "Attack!";
-  fightbtn.setAttribute("onClick", "battle()");
-  document.getElementById("optionbox").appendChild(fightbtn);
-   var enemyInfo = document.createElement("p");
-   enemyInfo.textContent = `The Enemy is: ${enemyArray[0].name}`;
-  document.getElementById("statbox").appendChild(enemyInfo);
+  if (enemyArray[0] != undefined){
+    while (optionNode.firstChild) {
+      optionNode.removeChild(optionNode.firstChild);
+    };
+    var fightbtn = document.createElement("button");
+    fightbtn.textContent = "Attack!";
+    fightbtn.setAttribute("onClick", "battle()");
+    document.getElementById("optionbox").appendChild(fightbtn);
+     var enemyInfo = document.createElement("p");
+     enemyInfo.textContent = `The Enemy is: ${enemyArray[0].name}`;
+    document.getElementById("statbox").appendChild(enemyInfo);
+  }else {
+    resumeGame();
+  }
 }
 //battle mechanics allow user to engage enemy. click on attack to see outcome of fight.
 function battle(){
@@ -482,42 +488,42 @@ function resumeGame(){
   while (storyNode.firstChild) {
     storyNode.removeChild(storyNode.firstChild);
   };
-  document.getElementById("storycontainer").textContent = currentScenario["story"];
-  for (var i = 0; i < currentScenario["option"].length; i++){
+  document.getElementById("storycontainer").textContent = currentScenario[0]["story"];
+  for (var i = 0; i < currentScenario[0]["option"].length; i++){
     var btn = document.createElement("button");
     var para = document.createElement("p");
-    if (hasOwnProperty.call(currentScenario["option"][i], "fight") && battleStatus === 0){
+    if (hasOwnProperty.call(currentScenario[0]["option"][i], "fight") && battleStatus === 0 && enemyArray[0] != undefined){
       btn.setAttribute("onClick","fight()");
       btn.setAttribute("display", "block");
       btn.setAttribute("class", "options");
       btn.textContent = "Fight!";
       document.getElementById("optionbox").appendChild(btn);
       break;
-    }else if (hasOwnProperty.call(currentScenario["option"][i], "interact")){
-        btn.setAttribute("onClick",currentScenario["option"][i]["response"]);
+    }else if (hasOwnProperty.call(currentScenario[0]["option"][i], "interact")){
+        btn.setAttribute("onClick",currentScenario[0]["option"][i]["response"]);
         btn.setAttribute("display", "block");
         btn.setAttribute("class", "options");
         btn.textContent = "Interact!";
         para.setAttribute("class", "options");
-        para.textContent = currentScenario["option"][i]["interact"];
+        para.textContent = currentScenario[0]["option"][i]["interact"];
         document.getElementById("optionbox").appendChild(btn);
         document.getElementById("optionbox").appendChild(para);
-    } else if (hasOwnProperty.call(currentScenario["option"][i], "traverse")){
-        btn.setAttribute("onClick", currentScenario["option"][i]["response"]);
+    } else if (hasOwnProperty.call(currentScenario[0]["option"][i], "traverse")){
+        btn.setAttribute("onClick", currentScenario[0]["option"][i]["response"]);
         btn.setAttribute("display", "block");
         btn.setAttribute("class", "options");
         btn.textContent = "Travel!";
         para.setAttribute("class", "options");
-        para.textContent = currentScenario["option"][i]["traverse"];
+        para.textContent = currentScenario[0]["option"][i]["traverse"];
         document.getElementById("optionbox").appendChild(btn);
         document.getElementById("optionbox").appendChild(para);
-    } else if (hasOwnProperty.call(currentScenario["option"][i], "weapon") && weaponTaken === 0){
-        btn.setAttribute("onClick", currentScenario["option"][i]["response"]);
+    } else if (hasOwnProperty.call(currentScenario[0]["option"][i], "weapon") && weaponTaken === 0){
+        btn.setAttribute("onClick", currentScenario[0]["option"][i]["response"]);
         btn.setAttribute("display", "block");
         btn.setAttribute("id", "weapon");
         btn.textContent = "Weapon!";
         para.setAttribute("class", "options");
-        para.textContent = currentScenario["option"][i]["weapon"];
+        para.textContent = currentScenario[0]["option"][i]["weapon"];
         document.getElementById("optionbox").appendChild(btn);
         document.getElementById("optionbox").appendChild(para);
     }
@@ -591,6 +597,7 @@ function gameOverWin(){
 
 //function to allow user to go back to previous room. loads from a checkpoint style array(user can only go back to first room but will never come to the current room again.)
 function goBack(){
+  scenarioClone.push(currentScenario[0]);
   console.log("goBack function called")
   while (optionNode.firstChild) {
     optionNode.removeChild(optionNode.firstChild);
@@ -604,7 +611,7 @@ function goBack(){
     for (var i = 0; i < backPedal[backPedal.length-1][0]["option"].length; i++){
       var btn = document.createElement("button");
       var para = document.createElement("p");
-      if (hasOwnProperty.call(backPedal[backPedal.length-1][0]["option"][i], "fight") && battleStatus === 0){
+      if (hasOwnProperty.call(backPedal[backPedal.length-1][0]["option"][i], "fight") && battleStatus === 0 && enemyArray[0] != undefined){
         btn.setAttribute("onClick","fight()");
         btn.setAttribute("display", "block");
         btn.setAttribute("class", "options");
@@ -644,7 +651,6 @@ function goBack(){
   backPedal.pop();
   battleStatus = 0;
   if (backPedal.length > 0 && battleStatus === 0){
-
     var backbtn = document.createElement("button");
     backbtn.setAttribute("onClick","goBack()");
     backbtn.setAttribute("display", "block");
@@ -656,6 +662,7 @@ function goBack(){
 
 //function to load next scenario
 function travel(){
+  currentScenario.pop();
   while (optionNode.firstChild) {
     optionNode.removeChild(optionNode.firstChild);
   };
