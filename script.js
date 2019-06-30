@@ -5,52 +5,59 @@
  *  Each story has 'id', 'text' 'paths'
  *  Each path has 'target' which should point to specific story id and 'text' as display value.
  */
-console.log("hello script js");
+console.log("Welcome to Back to the Future");
 
 
-var inputHappened = function(currentInput){
+// var inputHappened = function(currentInput){
 
-};
+// };
 
 
 // START OF STORIES ARRAY//////////////////////
 var stories = [
+        // PART 1 (2015) - STORIES & PATHS
         {
-          id: 0,
+          id: 2015,
           text: "I see you're a fan of Back to the Future 2. You confronted with your nemesis",
           paths: [
-            {target: 1, text: "Would you rather deal with Biff"},
-            {target: 2, text: "Would you rather deal with Griff?"}
+            {target: 'b', text: "Would you rather deal with Biff"},
+            {target: 'g', text: "Would you rather deal with Griff?"}
           ]
         },
 
         {
-          id: 1,
+          id: 'b',
           text: "Hmm, interesting. Biff is angry and has a cane.",
           paths: [
-            {target: 3, text: "Do you stand and fight?"},
-            {target: 4, text: "Or run away like a coward?"}
+            {target: 's', text: "Do you stand and fight?"},
+            {target: 'r', text: "Or run away like a coward?"}
           ]
         },
 
         {
-          id: 2,
+          id: 'g',
           text: "Griff is asking you to join him for a secret rendezvous. What do you say?",
           paths: [
-            {target: 5, text: "Are you in?"},
-            {target: 6, text: "Or are your out"}
+            {target: 'i', text: "Are you in?"},
+            {target: 'o', text: "Or are your out"}
           ]
         },
 
         {
-          id: 5,
+          id: 'i',
           text: "Bad call. Griff and his cronies rob the Hill Valley bank and frame you for it. No more time travel for you. THE END.",
         },
 
         {
-          id: 6,
+          id: 'o',
           text: "Good call. You deck Griff in the jaw and run away. He gives chase on his hoverboard and ends up in a pile of manure.THE END.",
         },
 
-
 ]// END OF STORIESS ARRAY//////////////////////
+
+// START OF DISPLAYING STORIES
+ for (var i = 0; i < stories.length; i++) {
+    if (stories[i].id == 2015) {
+        console.log (stories[i].paths); // text of path
+    }
+ }
