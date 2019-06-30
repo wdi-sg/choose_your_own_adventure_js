@@ -33,5 +33,14 @@ var stories = [
           ]
         },
 
+        {
+          id: 2,
+          text: "Griff is asking you to join him for a secret party. What do you say?",
+          paths: [
+            {target: 3, text: "Are you in?"},
+            {target: 4, text: "Or are your out"}
+          ]
+        },
+
 
 ]// END OF STORIESS ARRAY//////////////////////
