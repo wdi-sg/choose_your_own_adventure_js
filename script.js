@@ -74,44 +74,56 @@ var inputHappened = function(currentInput){
 
 
 var year = function (currentInput) {
-    console.log("year stage");
+    console.log("stage: year");
     for (var i = 0; i < yearChoice.length; i++ ) {
         if ((currentInput === yearChoice[i]) && (nextStage === 1)) {
             msg = yearMsg[i];
             // nextStage = 1;
             // CLEAR INPUT BOX IF MATCH FOUND
             console.log("nextstage value in year function: ", nextStage);
-            nextStage = nextStage + 1;
-            console.log("nextstage value in year function after update: ", nextStage);
+            // nextStage = nextStage + 1;
+            nextStage = 2;
+            // console.log("nextstage value in year function after update: ", nextStage);
             document.querySelector('#input').value="";
             return msg;
         } else {
             // FUNCTION ONLY RUN TIS PART IF NO MATCH FOUND
             document.querySelector('#input').value="";
-            console.log("nextstage value in year function after else: ", nextStage); // CONSOLE LOG RUNS yearChoice.length TIMES IF NO MATCH FOUND
+            // console.log("nextstage value in year function after else: ", nextStage); // CONSOLE LOG RUNS yearChoice.length TIMES IF NO MATCH FOUND
         }
     }
     // CLEAR INPUT BOX
     // FUNCTION ONLY RUN TIS PART IF NO MATCH FOUND
-    console.log("nextstage value in year function after for loop: ", nextStage);
+    // console.log("nextstage value in year function after for loop: ", nextStage);
     document.querySelector('#input').value="";
 };
 
 var biffOrGriff = function (currentInput) {
+    console.log("stage: biff or giff");
     for (var i = 0; i < charChoice.length; i++ ) {
         if (currentInput === charChoice[i]) {
             msg = charMsg[i];
             // CHECK NEXT STAGE VALUE
-            console.log("nextstage value in biffOrGriff function: ", nextStage);
+            // console.log("nextstage value in biffOrGriff function: ", nextStage); // THIS RAN 2ND
             // UPDATE NEXT STAGE VALUE
-            nextStage = nextStage + 1;
-            console.log("nextstage value in year function after update: ", nextStage);
+            // nextStage = nextStage + 1;
+
+            // ADDED CONDITIONS CHECKING WHICH STAGE TO MOVE ON TO BASED ON INPUT
+            if (currentInput == 'B') {
+                nextStage = 3;
+            } else if (currentInput == 'G') {
+                nextstage = 4;
+            } else {
+                document.querySelector('#input').value="";
+            }
+
+            // console.log("nextstage value in year function after update: ", nextStage); // THIS RAN LAST
             // CLEAR INPUT BOX
             document.querySelector('#input').value="";
             return msg;
         } else {
             document.querySelector('#input').value="";
-            console.log("nextstage value in biffOrGriff function after else: ", nextStage);
+            // console.log("nextstage value in biffOrGriff function after else: ", nextStage); // WEIRD.... THIS RAN 1ST
         }
     }
     // CLEAR INPUT BOX
@@ -120,18 +132,20 @@ var biffOrGriff = function (currentInput) {
 
 
 var stayRun = function (currentInput) {
+    console.log("stage: stay or run");
     for (var i = 0; i < fightFlightChoice.length; i++ ) {
         if (currentInput == fightFlightChoice[i]) {
             msg = fightFlightMsg[i];
             console.log("nextstage value in stayRun function: ", nextStage);
-
-            nextStage = nextStage + 1;
-            console.log("nextstage value in stayRun function after update: ", nextStage);
+            // CHECK NEXT STAGE VALUE
+            // nextStage = nextStage + 1;
+            nextStage = 4;
+            // console.log("nextstage value in stayRun function after update: ", nextStage);
             document.querySelector('#input').value="";
             return msg;
         } else {
             document.querySelector('#input').value="";
-            console.log("nextstage value in stayRun function after else: ", nextStage);
+            // console.log("nextstage value in stayRun function after else: ", nextStage);
         }
     }
     // CLEAR INPUT BOX
@@ -139,18 +153,19 @@ var stayRun = function (currentInput) {
 };
 
 var inOrOut = function (currentInput) {
+    console.log("stage in or out");
     for (var i = 0; i < inOutChoice.length; i++ ) {
         if (currentInput == inOutChoice[i]) {
             msg = inOutMsg[i];
-            console.log("nextstage value in inOrOut function: ", nextStage);
+            // console.log("nextstage value in inOrOut function: ", nextStage);
 
             nextStage = nextStage + 1;
-            console.log("nextstage value in inOrOut function after update: ", nextStage);
+            // console.log("nextstage value in inOrOut function after update: ", nextStage);
             document.querySelector('#input').value="";
             return msg;
         } else {
             document.querySelector('#input').value="";
-            console.log("nextstage value in inOrOut function after else: ", nextStage);
+            // console.log("nextstage value in inOrOut function after else: ", nextStage);
         }
     }
     // CLEAR INPUT BOX
@@ -159,18 +174,19 @@ var inOrOut = function (currentInput) {
 
 // UNDER THE SEA DOES NOT WORK WITH SWTICH CASE AS WE CAME TO THIS STAGE FROM YEAR STAGE WHICH MEAN nextStage is updated to 2. BUT underTheSea is only called when case 5. THIS METHOD OF CASSCADING CHOICES DOES NOT WORK IF THE STORY IS IN A DIFFERENT BRAND OF PATH.
 var underTheSea = function (currentInput) {
+    console.log("stage: under the sea");
     for (var i = 0; i < underTheSeaChoice.length; i++ ) {
         if (currentInput == underTheSeaChoice[i]) {
             msg = underTheSeaMsg[i];
-            console.log("nextstage value in underTheSea function: ", nextStage);
+            // console.log("nextstage value in underTheSea function: ", nextStage);
 
             nextStage = nextStage + 1;
-            console.log("nextstage value in underTheSea function after update: ", nextStage);
+            // console.log("nextstage value in underTheSea function after update: ", nextStage);
             document.querySelector('#input').value="";
             return msg;
         } else {
             document.querySelector('#input').value="";
-            console.log("nextstage value in underTheSea function after else: ", nextStage);
+            // console.log("nextstage value in underTheSea function after else: ", nextStage);
         }
     }
     // CLEAR INPUT BOX
