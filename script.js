@@ -65,9 +65,14 @@ var inputHappened = function(currentInput){
  //        console.log (stories[i].text); // text of path
  //    }
  // }
+var getPaths = function () {
+
+}
+
 
  var playStory = function (stories, currentInput) {
     for (var i = 0; i < stories.length; i++) {
+        // CHECK IF USER INPUT IS EQUAL TO STORY ID
         if (stories[i].id === currentInput) {
             currentText = stories[i].text;
             return currentText;
