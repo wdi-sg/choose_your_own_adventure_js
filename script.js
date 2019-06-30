@@ -37,6 +37,7 @@ function weaponPicked(){
 var player = {
   health:100,
   weapon: fists,
+  damagedone: null,
   target: null,
   score: 0,
   settarget: function(enemy){
@@ -45,6 +46,7 @@ var player = {
   fight: function(){
     var damage = Math.floor(Math.random()*this.weapon.damage);
     console.log(`player did ${damage} damage!`);
+    this.damagedone = damage;
     this.target.health -= damage;
     console.log(`enemy has ${this.target.health} health left!`);
   },
@@ -58,9 +60,11 @@ var player = {
 var enemyGoon = {
   name: "Enemy Goon",
   health:100,
+  damagedone: null,
   fight: function(){
     var damage = Math.floor(Math.random()*11);
     console.log(`enemy did ${damage} damage!`);
+    this.damagedone = damage;
     player.health -= damage;
     console.log(`player has ${player.health} health left!`);
   },
@@ -106,7 +110,24 @@ var enemyArray = [enemyGoon, enemyBoss];
 //     }
 //   }
 // }
-
+var butterflySign = "*****                   *****\n" + " ********  **   **  ********\n" + " ****   ***  ***  ***   ****\n" + "  *************************\n"+"    ****** ******* ******\n"+"      *****************\n"+"      **** ******* ****\n"+"    *********************\n"+"   ** ** *** *** *** ** **\n"+"    ** ****       **** **\n"+`     *****         *****`;
+console.log(butterflySign);
+var fireSign = "           *\n"+"           **\n"+"     *    ** *      *\n"+"    **   *** *      **\n"+"   **   *******    ***\n"+" ****  * ** ** * ****\n"+" *********** *******\n"+"  **** *************\n"+"    ******** *****\n"+`     **********`;
+console.log(fireSign);
+var swordSign = "         **\n"+"         **\n"+"  **      ** ***************************************\n"+" ********* ***************************************\n"+"  **      ** ***********************************\n"+"         **\n"+`         **`;
+console.log(swordSign);
+var questionMark = "      ******\n"+"    **********\n"+"  *************\n"+" ***        ****\n"+"***         *****\n"+"***         *****\n"+"****        *****\n"+" ****      ****\n"+"          ****\n"+"         ****\n"+"        ****\n\n"+"      ****\n"+`      ****`;
+console.log(questionMark);
+var orbSign = "   ************\n"+"  **** ***** ***\n"+" ****************\n"+"**** *** *********\n"+" ****************\n"+"  ******** *****\n"+`   ***********`;
+console.log(orbSign);
+var bookSign ="       ********************\n"+"      ****            ****\n"+"     ********   *********\n"+"    ********   *********\n"+"   ********   *********\n"+"  ********   *********\n"+" ********   *********\n"+`********************`;
+console.log(bookSign);
+var bodySign ="           *                        *\n"+"    *               *       *\n"+"*                                 ****\n"+"**           *************       ******\n"+"****************************************\n"+`****************************************`;
+console.log(bodySign);
+var wellSign="        **************\n"+"        **************\n"+"        **************\n"+"        **************\n"+`********************************`;
+console.log(wellSign);
+var finishSign= "**********   ***  ***   *********      *********   ******  ***   *********\n"+" **********   ***  ***   *********      *********   *** **  ***   ***********\n"+"    ***       ********   ***            ***         *** **  ***   ***     ***\n"+"    ***       ********   *********      *********   *** **  ***   ***     ***\n"+"    ***       ***  ***   ***            ***         ***  ** ***   ***     ***\n"+"    ***       ***  ***   *********      *********   ***   *****   ***********\n"+`    ***       ***  ***   *********      *********   ***   *****   *********`;
+console.log(finishSign);
 //initialize scenario objects and array and clone copy to be used in game
 var scenario = [
   {
@@ -118,19 +139,20 @@ var scenario = [
       response: "travel()"},
       {traverse: "Take the right door.",
       response: "travel()"},
-    ]
-
+    ],
+    asciiart: butterflySign,
   },
   {
     story: "You feel hot in the room. The room is rapidly heating up. What do you do?",
     option:[
       {interact: "Do a sexy dance in the hope that a genie will appear.",
-      response: "response()"},
+      response: "alert(`Well, no genie appeared, but at least you worked up a sweat!`)"},
       {interact: "Take a swig of water left suspiciously in the middle of the room.",
-      response: "response()"},
+      response: "alert(`I am very concerned that you will take a drink that is left in a room for an unknown period of time. I mean, who does that?`)"},
       {traverse: "Exit a door that is on the left of the room",
       response: "travel()"},
-    ]
+    ],
+    asciiart: fireSign,
   },
   {
     story: "Bam! You feel your head getting smacked by something.",
@@ -139,7 +161,8 @@ var scenario = [
       response: "fight()"},
       {traverse: "Use the door on your left.",
       response: "travel()"},
-    ]
+    ],
+    asciiart: swordSign,
   },
   {
     story: "There's a weapon on the shelf that is in the middle of two doors! I'd suggest you take it first!",
@@ -150,42 +173,46 @@ var scenario = [
       response: "travel()"},
       {traverse: "Take the right door.",
       response: "travel()"},
-    ]
+    ],
+    asciiart: questionMark,
   },
   {
-    story: "You see fairy dust floating around as you enter the room. In the middle of a room lies a glowing orb with a sign that says Do Not Touch. What do you do?",
+    story: "You see fairy dust floating around in the room. In the middle lies a glowing orb with a sign that says Do Not Touch. What do you do?",
     option:[
       {interact: "Touch the orb.",
-      response: "response()"},
+      response: "alert(`The orb feels very smooth. It reminds you of that one time you touched a bald person's head.`)"},
       {interact: "Try to catch some fairy dust.",
-      response: "response()"},
+      response: "alert(`Ahhhh... Ahhhh..... AHHHHHHH CHOOOOOOO!`)"},
       {traverse: "Go through a door on the other side of the room.",
       response: "travel()"},
-    ]
+    ],
+    asciiart: orbSign,
   },
   {
     story: "You are in a room filled with books. The place looks dusty and it looks like someone left their burrito lying in the corner of the room.",
     option:[
       {interact: "Taste the burrito.",
-      response: "response()"},
+      response: "alert(`Really? You are going to do that?`)"},
       {interact: "Eat the burrito.",
-      response: "response()"},
+      response: "alert(`Okay, now that is just gross...`)"},
       {interact: "Read one of the books.",
-      response: "response()"},
+      response: "alert(`Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Yep, that's a 'book' alright`)"},
       {traverse: "Step over the stale burrito and into a small door",
       response: "travel()"},
-    ]
+    ],
+    asciiart: bookSign,
   },
   {
     story: "There are several flies hovering around the body that you see lying in the middle of the room.",
     option:[
       {interact: "Search the body.",
-      response: "response()"},
+      response: "alert(`You didn't find anything of value, but at least you got up close and personal with a rotting corpse.`)"},
       {interact: "Smell the body.",
-      response: "response()"},
+      response: "alert(`The body smells like... a dead body... `)"},
       {traverse: "Take the door across the room.",
       response: "travel()"},
-    ]
+    ],
+    asciiart: bodySign,
   },
   {
     story: "You find yourself in danger as someone... or something tries to get at you.",
@@ -194,20 +221,22 @@ var scenario = [
       response: "response()"},
       {traverse: "Use the door across the room.",
       response: "travel()"},
-    ]
+    ],
+    asciiart: swordSign,
   },
   {
     story: "This room is strange. You must wonder what is a well doing in the middle of the room.",
     option:[
       {interact: "Throw a coin down the well.",
-      response: "response()"},
+      response: "alert(`CLING! CLANG! CLING! You've dropped a dollar into the well. No wishes granted for you.`)"},
       {interact: "Draw some water from the well and drink it.",
-      response: "response()"},
+      response: "alert(`The water tastes funny. Did someone do a number two in it?`)"},
       {interact: "Relieve yourself into the well.",
-      response: "response()"},
+      response: "alert(`Well, at least you feel better now`)"},
       {traverse: "Use the trap door located conveniently next to the sign that says trap door",
       response: "travel()"},
-    ]
+    ],
+    asciiart: wellSign,
   }
 ];
 //clone object
@@ -230,6 +259,9 @@ function restartGame(){
   enemyGoon.health = 100;
   enemyBoss.health = 120;
   enemyArray = [enemyGoon, enemyBoss];
+  while (document.getElementById("storybox").firstChild) {
+    document.getElementById("storybox").removeChild(document.getElementById("storybox").firstChild);
+  };
   while (storyNode.firstChild) {
     storyNode.removeChild(storyNode.firstChild);
   };
@@ -251,7 +283,8 @@ var endMap = {
   option:[
     {traverse: "Keep on walking towards the sound of birds chirping in the distance.",
     response: "gameOverWin()"}
-  ]
+  ],
+  asciiart: finishSign,
 }
 //initialize global variables
 var weaponType = null;
@@ -349,6 +382,12 @@ function loadStory(){
         document.getElementById("optionbox").appendChild(para);
     }
   }
+  if (hasOwnProperty.call(scenarioClone[storySelect], "asciiart")){
+    var art = document.createElement("pre")
+    art.setAttribute("display", "inline-block");
+    art.textContent = scenarioClone[storySelect]["asciiart"];
+    document.getElementById("storybox").appendChild(art);
+  }
   if (backPedal[backPedal.length-1] != undefined && battleStatus === 0){
     var backbtn = document.createElement("button");
     backbtn.setAttribute("onClick","goBack()");
@@ -382,6 +421,7 @@ function battle(){
   if (enemy.health > 0){
     enemy.fight();
   }
+  updateDamage();
   updateHealthInfo();
   if (player.health <= 0){
     console.log("enemy wins!")
@@ -397,6 +437,19 @@ function battle(){
     resumeGame();
   }
 }
+
+function updateDamage(){
+  while (storyNode.firstChild){
+    storyNode.removeChild(storyNode.firstChild);
+  }
+  var damageInfo1 = document.createElement("p");
+  var damageInfo2 = document.createElement("p");
+  damageInfo1.textContent = `You did ${player.damagedone} damage to ${enemy.name}!`;
+  damageInfo2.textContent = `${enemy.name} did ${enemy.damagedone} damage to you!`;
+  document.getElementById("storycontainer").appendChild(damageInfo1);
+  document.getElementById("storycontainer").appendChild(damageInfo2);
+}
+
 //as user clicks the fight button, player and enemy health will be update.
 function updateHealthInfo(){
   while (statNode.firstChild) {

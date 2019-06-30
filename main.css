@@ -3,7 +3,7 @@ header{
 }
 #gamecontainer{
     width: 700px;
-    height: 800px;
+    height: 1000px;
     margin: auto;
 }
 #storycontainer{
@@ -45,4 +45,11 @@ button{
   height: 300px;
   width: 100%;
   text-align: center;
+}
+#storybox{
+  height: 400px;
+  width: 100%;
+}
+pre{
+  display:inline-block;
 }
