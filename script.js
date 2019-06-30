@@ -304,9 +304,14 @@ document.getElementById("startadventure").style.visibility = "hidden";
 //initialize game
 function setName(){
   var input = document.getElementById("setname").value;
-  document.getElementById("nameinput").style.visibility = "hidden";
-  document.getElementById("storytext").innerHTML = `${input}!!! This adventure is fraught with perils. Press start to commence your escape of a life time!`;
-  document.getElementById("startadventure").style.visibility = "visible";
+  if (!input){
+    alert("Please enter your name adventurer!")
+  }else{
+    document.getElementById("nameinput").style.visibility = "hidden";
+    document.getElementById("storytext").innerHTML = `${input}!!! This adventure is fraught with perils. Press start to commence your escape of a life time!`;
+    document.getElementById("startadventure").style.visibility = "visible";
+  }
+
 }
 
 //starts the game. Loads player and story settings.
@@ -584,7 +589,7 @@ function gameOverWin(){
   document.getElementById("optionbox").appendChild(btn);
 }
 
-//function to allow user to go back to previous room. loads from a checkpoint style array(user can only go back once for now.)
+//function to allow user to go back to previous room. loads from a checkpoint style array(user can only go back to first room but will never come to the current room again.)
 function goBack(){
   console.log("goBack function called")
   while (optionNode.firstChild) {
@@ -593,58 +598,60 @@ function goBack(){
   while (storyNode.firstChild) {
     storyNode.removeChild(storyNode.firstChild);
   };
-  document.getElementById("storycontainer").textContent = backPedal[backPedal.length-1]["story"];
-  if (backPedal[backPedal.length-1] != undefined){
-    for (var i = 0; i < backPedal[backPedal.length-1]["option"].length; i++){
+
+  if (backPedal.length != undefined){
+    document.getElementById("storycontainer").textContent = backPedal[backPedal.length-1][0]["story"];
+    for (var i = 0; i < backPedal[backPedal.length-1][0]["option"].length; i++){
       var btn = document.createElement("button");
       var para = document.createElement("p");
-      if (hasOwnProperty.call(backPedal[backPedal.length-1]["option"][i], "fight") && battleStatus === 0){
+      if (hasOwnProperty.call(backPedal[backPedal.length-1][0]["option"][i], "fight") && battleStatus === 0){
         btn.setAttribute("onClick","fight()");
         btn.setAttribute("display", "block");
         btn.setAttribute("class", "options");
         btn.textContent = "Fight!";
         document.getElementById("optionbox").appendChild(btn);
         break;
-      }else if (hasOwnProperty.call(backPedal[backPedal.length-1]["option"][i], "interact")){
-          btn.setAttribute("onClick",backPedal[backPedal.length-1]["option"][i]["response"]);
+      }else if (hasOwnProperty.call(backPedal[backPedal.length-1][0]["option"][i], "interact")){
+          btn.setAttribute("onClick",backPedal[backPedal.length-1][0]["option"][i]["response"]);
           btn.setAttribute("display", "block");
           btn.setAttribute("class", "options");
           btn.textContent = "Interact!";
           para.setAttribute("class", "options");
-          para.textContent = backPedal[backPedal.length-1]["option"][i]["interact"];
+          para.textContent = backPedal[backPedal.length-1][0]["option"][i]["interact"];
           document.getElementById("optionbox").appendChild(btn);
           document.getElementById("optionbox").appendChild(para);
-      } else if (hasOwnProperty.call(backPedal[backPedal.length-1]["option"][i], "traverse")){
-          btn.setAttribute("onClick", backPedal[backPedal.length-1]["option"][i]["response"]);
+      } else if (hasOwnProperty.call(backPedal[backPedal.length-1][0]["option"][i], "traverse")){
+          btn.setAttribute("onClick", backPedal[backPedal.length-1][0]["option"][i]["response"]);
           btn.setAttribute("display", "block");
           btn.setAttribute("class", "options");
           btn.textContent = "Travel!";
           para.setAttribute("class", "options");
-          para.textContent = backPedal[backPedal.length-1]["option"][i]["traverse"];
+          para.textContent = backPedal[backPedal.length-1][0]["option"][i]["traverse"];
           document.getElementById("optionbox").appendChild(btn);
           document.getElementById("optionbox").appendChild(para);
-      } else if (hasOwnProperty.call(backPedal[backPedal.length-1]["option"][i], "weapon") && weaponTaken === 0){
-          btn.setAttribute("onClick", backPedal[backPedal.length-1]["option"][i]["response"]);
+      } else if (hasOwnProperty.call(backPedal[backPedal.length-1][0]["option"][i], "weapon") && weaponTaken === 0){
+          btn.setAttribute("onClick", backPedal[backPedal.length-1][0]["option"][i]["response"]);
           btn.setAttribute("display", "block");
           btn.setAttribute("id", "weapon");
           btn.textContent = "Weapon!";
           para.setAttribute("class", "options");
-          para.textContent = backPedal[backPedal.length-1]["option"][i]["weapon"];
+          para.textContent = backPedal[backPedal.length-1][0]["option"][i]["weapon"];
           document.getElementById("optionbox").appendChild(btn);
           document.getElementById("optionbox").appendChild(para);
       }
     }
-    battleStatus = 0;
-    if (backPedal[backPedal.length-1] != undefined && battleStatus === 0){
-      var backbtn = document.createElement("button");
-      backbtn.setAttribute("onClick","goBack()");
-      backbtn.setAttribute("display", "block");
-      backbtn.setAttribute("class", "options");
-      backbtn.textContent = "Go back!";
-      document.getElementById("optionbox").appendChild(backbtn);
-    }
   }
   backPedal.pop();
+  battleStatus = 0;
+  if (backPedal.length > 0 && battleStatus === 0){
+
+    var backbtn = document.createElement("button");
+    backbtn.setAttribute("onClick","goBack()");
+    backbtn.setAttribute("display", "block");
+    backbtn.setAttribute("class", "options");
+    backbtn.textContent = "Go back!";
+    document.getElementById("optionbox").appendChild(backbtn);
+  }
 }
 
 //function to load next scenario
@@ -655,7 +662,7 @@ function travel(){
   while (storyNode.firstChild) {
     storyNode.removeChild(storyNode.firstChild);
   };
-  backPedal = scenarioClone.splice([storySelect], 1);
+  backPedal.push(scenarioClone.splice([storySelect], 1));
   loadStory();
 }
 
