@@ -1,10 +1,11 @@
 console.log("hello script js");
 
 var nextStage = 0;
+
 var playerName;
 var initMsg = "What is your name?";
 
-var msg = "Hello, which year would you like to time travel to? 2015, 1985 or 1955";
+var msg;
 
 var yearChoice = ['2015', '1985', '1955'];
 var yearMsg = ["I see you're a fan of Back to the Future 2. Would you rather deal with Biff, or Griff? **(B/G)**", "Doc has already destroyed the Time Machine at this point. I guess you'll have to wait around until 2015. What name would you like to go by until then?", "I see you're a fan of Back to the Future 1. Your future Mom has just asked you to the Enchantment Under the Sea dance. What do you do?**(Y/N/S)**"];
@@ -34,7 +35,7 @@ var inputHappened = function(currentInput){
             console.log("case 0!");
             promptName(tempInput);
             displayStory("Welcome " + tempInput);
-            displayStory(msg);
+            displayStory("Hello " + tempInput + ", which year would you like to time travel to? 2015, 1985 or 1955");
             console.log("going to case: ", nextStage);
             console.log("hello: ", playerName)
             break;
@@ -81,6 +82,7 @@ var promptName = function(currentInput) {
     return playerName;
 }
 
+// STAGES OF THE GAME
 var year = function (currentInput) {
     console.log("stage: year");
     for (var i = 0; i < yearChoice.length; i++ ) {
