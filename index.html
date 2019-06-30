@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu|VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>HangMan</title>
+</head>
+<body>
+<main>
+    <div class="content">
+
+
+    <div class="displayWrapper">
+        <p class="gamestory" id="output" style="flex-grow: 5">ENTER YOUR NAME</p>
+        <div class="statuswindow" id="window"style="flex-grow: 1">
+            <p class="gamestatus" id="output" style="flex-grow: 5">STATUS</p>
+            <p class="gameprompts" id="output" style="flex-grow: 1">CHOOSE WISELY</p>
+        </div>
+
+
+
+    </div>
+    <div class="inputWrapper">
+
+        <input type="input" class="userinput" id="input" placeholder="input" style="flex-grow: 9" autocomplete="off"/>
+        <input type="submit" class="submitinput" id="btninput" value="GO" style="flex-grow: 1" />
+
+    </div>
+    <div class="controlWrapper" onclick="" onreset="">
+        <a href="#" type="button" class="myButton" id="start" style="flex-grow: 1" onclick="runGame()">START</a>
+        <button href="#" type="button" class="myButton" id="choices" style="flex-grow: 1" onclick="endGame()" >STOP</button>
+        <a href="#" class="myButton" style="flex-grow: 1"  disabled>NONE</a>
+
+    </div>
+    </div>
+</main>
+
+<script src="basicgamestory.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
