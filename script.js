@@ -22,6 +22,10 @@ var fightFlightMsg = ["Good choice. Biff is old and feeble at this point. You pu
 var inOutChoice = ['I', 'O'];
 var inOutMsg = ["Bad call. Griff and his cronies rob the Hill Valley bank and frame you for it. No more time travel for you.", "Good call. You deck Griff in the jaw and run away. He gives chase on his hoverboard and ends up in a pile of manure."];
 
+var underTheSeaChoice = ['Y', 'N', 'S'];
+var underTheSeaMsg = ["Creepy. I hope you have some backup plan in place to get out of this. Until then, you're stuck in 1955", "Honorable. But this also means that your future Dad will never meet your Mom, and therefore you cannot exist.", "Interesting. You set up an elaborate plan for your future Dad to surprise your Mom by beating you up. Despite going horribly awry, the plan ultimately works. You may go back to your own time."];
+
+
 displayStory(msg);
 
 var inputHappened = function(currentInput){
@@ -42,25 +46,26 @@ var inputHappened = function(currentInput){
             console.log("case 1!");
             year(tempInput);
             displayStory(msg);
-            // nextStage = nextStage + 1;
             break;
         case 2:
             console.log("case 2!");
             biffOrGriff(tempInput);
             displayStory(msg);
-            // nextStage = nextStage + 1;
             break;
         case 3:
             console.log("case 3!");
             stayRun(tempInput);
             displayStory(msg);
-            // nextStage = nextStage + 1;
             break;
         case 4:
             console.log("case 4!");
             inOrOut(tempInput);
             displayStory(msg);
-            // nextStage = nextStage + 1;
+            break;
+        case 5:
+            console.log("case 5!");
+            underTheSea(tempInput);
+            displayStory(msg);
             break;
         default:
             displayStory("please enter choice");
@@ -146,6 +151,25 @@ var inOrOut = function (currentInput) {
         } else {
             document.querySelector('#input').value="";
             console.log("nextstage value in inOrOut function after else: ", nextStage);
+        }
+    }
+    // CLEAR INPUT BOX
+    document.querySelector('#input').value="";
+};
+
+var underTheSea = function (currentInput) {
+    for (var i = 0; i < underTheSeaChoice.length; i++ ) {
+        if (currentInput == underTheSeaChoice[i]) {
+            msg = underTheSeaMsg[i];
+            console.log("nextstage value in underTheSea function: ", nextStage);
+
+            nextStage = nextStage + 1;
+            console.log("nextstage value in underTheSea function after update: ", nextStage);
+            document.querySelector('#input').value="";
+            return msg;
+        } else {
+            document.querySelector('#input').value="";
+            console.log("nextstage value in underTheSea function after else: ", nextStage);
         }
     }
     // CLEAR INPUT BOX
