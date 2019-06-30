@@ -1,6 +1,15 @@
-.location{
-	display: flex;
+.location {
+	display: inline-flex;
 	flex-wrap: wrap;
-	max-width: 50%;
-	height: 50%;
+	max-width: 300px;
+	height: 300px;
+	border: 2px solid black;
+}
+
+.action {
+	display: inline-flex;
+	flex-wrap: wrap;
+	max-width: 300px;
+	height: 300px;
+	border: 2px solid black;
 }

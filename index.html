@@ -20,6 +20,10 @@
             <button id="start-button">Start Game!</button>
         </div>
 
+        <p id = "main-quest-display"></p>
+
+        <p id = "side-quest-display"></p>
+
         <p id = "current-location"></p>
 
         <div class="location">
@@ -39,6 +43,14 @@
             <button class="location-buttons" id ='middle-town-mayor-house' value = 'Middle Town Mayor House' onclick ='locationTravel(value)'>Middle Town Mayor House</button>
             <button class="location-buttons" id ='ancient-ruins' value = 'Ancient Ruins' onclick ='locationTravel(value)'>Ancient Ruins</button>
             <button class="location-buttons" id ='majestic-castle' value = 'Majestic Castle' onclick ='locationTravel(value)'>Majestic Castle</button>
+        </div>
+
+        <div class="action">
+            <button class="action-button" id="main-quest" onclick = 'mainQuest()'>Select Main Quest</button>
+            <button class="action-button" id="side-quest" onclick = "sideQuest1()">Select Side Quest 1</button>
+            <button class="action-button" id="side-quest" onclick = "sideQuest2()">Select Side Quest 2</button>
+            <button class="action-button" id="attack" onclick = "attack()">Attack</button>
+            <button class="action-button" id="pick-up" onclick = "pickUp()">Investigate surrounding</button>
         </div>
     </main>
 
