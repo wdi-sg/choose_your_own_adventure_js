@@ -2,17 +2,19 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<link rel = "stylesheet" href= "style.css">
+	<link rel = "stylesheet" href= "style1.css">
 
-	<title>Adventure Quest</title>
+	<title>Finding Poli</title>
 </head>
 <body>
+
 	<div class ="welcome">
 		<h1 id = 'welcome'> Welcome to Robocar Poli! Please tell me your name!</h1>
 		<input type="text" id = "name" autofocus autocomplete="off"  placeholder="Your name">
 	</div>
 
-	<div class = "container" id = "containerOne">
+
+<div class = "container" id = "containerOne">
 		<h4 class = "prompt"> Hello, <span id ="userName"> </span>. Poli is waiting for you at one of these games. You have 30 minutes to find him. Where do you think he is?  Wrong choice delays you 10 minutes or 5 minutes. Good luck! </h4>
 
 		<input type="text" class ="input" id = "name" autofocus autocomplete="off"  placeholder="Type your choice here" oninput="chooseAdventure(event)">
@@ -56,7 +58,8 @@
 	</div>
 
 
-	<div class = "container" id = "containerThree">
+
+<div class = "container" id = "containerThree">
 		<h3 class = "prompt"> Poli is not here but he's nearby. Ask one of Tom's pets to help you find the way. You've lost 5 minutes. You have <span id ="timeLeft_1"></span> minutes. </h3>
 
 		<input type="text" id = "" autofocus autocomplete="off"  placeholder="Type the pet's name here" oninput="chooseAdventure(event)">
@@ -79,23 +82,25 @@
 	</div>
 
 
+
 	<div class = "container" id = "containerFour">
 		<h3 class = "prompt"> Oops! You're lost. You have <span id="timeLeft_2"></span> minutes to get back on track. Maybe one of these toys can help.</h3>
 
 		<input type="text" id = "" autofocus autocomplete="off"  placeholder="Type the bird's name here" oninput="chooseAdventure(event)">
 		<div class = "first" id = "threeOne">
-			<h5>Gabby</h5>
+			<h5>Go back</h5>
 			<img src="#" alt="">
 		</div>
 		<div class = "first" id = "threeTwo">
-			<h5>Forky</h5>
+			<h5>Continue myself</h5>
 			<img src="#" alt="">
 		</div>
 		<div class = "first" id = "threeThree">
-			<h5>Woody</h5>
+			<h5>Ask Woody</h5>
 			<img src="#" alt="">
 		</div>	
 	</div>
+
 
 
 	<div class = "container" id = "containerFive">
@@ -110,6 +115,7 @@
 	</div>
 
 
+
 	<div class = "container" id = "containerSix">
 		<h3 class = "prompt"> Chuck is impulsive, mouthy and get into trouble often. Luckily, he's fast enough to get out of them. You've finally found Poli but he already defeated the pigs. You did not contribute to his victory. </h3>
 
@@ -119,6 +125,7 @@
 		</div>
 		
 	</div>
+
 
 
 	<div class = "container" id = "containerSeven">
@@ -133,20 +140,22 @@
 	</div>
 
 
+
+
 	<div class = "container" id = "containerEight">
 		<h3 class = "prompt"> Sugar is sweet but she doesn't know the way. Try other pets. Or you may go back to the start. You have<span id ="timeLeft_5"></span> minutes.</h3>
 		<input type="text" id = "" autofocus autocomplete="off"  placeholder="Type your choice here" oninput="chooseAdventure(event)">
 
 		<div class = "first" id = "TwoOneOne">
-			<h5>Flip</h5>
+			<h5>Go back </h5>
 			<img src="#" alt="">
 		</div>
 		<div class = "first" id = "TwoOneTwo">
-			<h5>Gus</h5>
+			<h5>Ask Dot</h5>
 			<img src="#" alt="">
 		</div>
 		<div class = "first" id = "TwoOneThree">
-			<h5>Go back</h5>
+			<h5>Continue myself</h5>
 			<img src="#" alt="">
 		</div>	
 	</div>
@@ -173,26 +182,8 @@
 	</div>
 
 
-	<div class = "container" id = "containerTen">
-		<h3 class = "prompt"> Squeak almost finishes his dinner. Do you want to wait? You have<span id ="timeLeft_6"></span> minutes.</h3>
 
-		<input type="text" id = "" autofocus autocomplete="off"  placeholder="Type your choice here" oninput="chooseAdventure(event)">
-
-		<div class = "first" id = "twoThreeOne">
-			<h5>Wait for Squeak</h5>
-			<img src="#" alt="">
-		</div>
-		<div class = "first" id = "twoThreeTwo">
-			<h5>Ask other pet</h5>
-			<img src="#" alt="">
-		</div>
-		<div class = "first" id = "twoThreeThree">
-			<h5>Find my own way</h5>
-			<img src="#" alt="">
-		</div>	
-	</div>
-
-	<div class = "container" id = "containerEleven">
+<div class = "container" id = "containerEleven">
 
 		<h3 class = "prompt"> New kid in the block. Don't know much. What do you want to do now? You have <span id ="timeLeft_7"></span> minutes.</h3>
 
@@ -211,48 +202,6 @@
 			<img src="#" alt="">
 		</div>	
 	</div>
-
-
-	<div class = "container" id = "containerTwele">
-		<h3 class = "prompt"> Woody is always reliable. He can help you call the rescue team to ask. Who do you call? You have <span id ="timeLeft_7"></span> minutes.</h3>
-
-		<input type="text" id = "" autofocus autocomplete="off"  placeholder="Type the bird's name here" oninput="chooseAdventure(event)">
-
-		<div class = "first" id = "threeTwoOne">
-			<h5>Poli</h5>
-			<img src="#" alt="">
-		</div>
-		<div class = "first" id = "threeTwoTwo">
-			<h5>Roy</h5>
-			<img src="#" alt="">
-		</div>
-		<div class = "first" id = "threeTwoThree">
-			<h5>Amber</h5>
-			<img src="#" alt="">
-		</div>	
-	</div>
-
-	<div class = "container" id = "containerThirteen">
-		<h3 class = "prompt"> Hello user! Please choose your mode of transport<span id ="timeLeft_8"></span> minutes.</h3>
-
-		<input type="text" id = "name" autofocus autocomplete="off"  placeholder="Type the bird's name here" oninput="chooseAdventure(event)">
-
-		<div class = "first" id = "threeThreeOne">
-			<h5>Red</h5>
-			<img src="#" alt="">
-		</div>
-		<div class = "first" id = "threeThreeTwo">
-			<h5>Chuck</h5>
-			<img src="#" alt="">
-		</div>
-		<div class = "first" id = "threeThreeThree">
-			<h5>Bomb</h5>
-			<img src="#" alt="">
-		</div>	
-	</div>
-
-
-
 	<script src = "scripts.js"></script>
 </body>
 </html>
