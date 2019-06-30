@@ -25,65 +25,118 @@ var NYSpaceStone = false;
 var NYMindB = false;
 var NYMindC = false;
 
-var life = true;
-var gameStart = false;
+var life = true; //for gameover
+var gameStart = false;//after enter name, change to true
 var userName = "";
-var score = 0;
-var tempHp = 0;
+var score = 0; //keep track of score
+var tempHp = 0; //to recover hp of player after end of battle
 
 //Battle System Variables
 
-var player = { hp : 1000, atk : 100, acc : 0.7, lvl:1};
-var enemyThor = { hp : 500, atk : 70, acc  :0.5, name:"Thor",conclude:false,};
+var player = { hp : 1000, atk : 100, acc : 0.9, lvl:1};
+var enemyThor = [{ hp : 2000, atk : 100, acc  :0.3, name:"Thor",conclude:false}];
+var enemyShield = [{hp : 600, atk : 40, acc  :0.7, name:"Shield Unit 1",conclude:false},{hp : 400, atk : 50, acc  :0.5, name:"Shield Unit 2"},{hp : 500, atk : 45, acc  :0.6, name:"Shield Unit 3"}]
 var battle = false;
-var battleThorWin = false;
-var battleThorLose = false;
 
+
+//function for leveling up player
 var playerLevelUp = function(num){
     player.hp += (100*num);
     player.atk += (10*num);
-    player.accuracy += (0.01*num);
+    player.acc += (0.01*num);
 }
 
+//display battle status of player and enemy so far, as well as choices
 var battleOnDisplay = function(playerData,enemyData){
-    return(`${userName} LVL ${player.lvl}\nHP : ${playerData.hp}\n\nEnemy Thor\nHP : ${enemyData.hp}\n\nChoose your moves:\nA : Punch\nB :  Machine Gun Swipe`);
+    var str = "";
+    for(var i = 0; i<enemyData.length;i++){
+        if(enemyData[i].hp<0)
+            str += `${enemyData[i].name} - HP : 0\n`
+        else
+            str += `${enemyData[i].name} - HP : ${enemyData[i].hp}\n`
+    }
+    return(`${userName} LVL ${player.lvl}\nHP : ${playerData.hp}\n\n${str}\n\nChoose your moves:\nA : Punch\nB :  Machine Gun Swipe`);
 }
 
+//handles enemy atks,misses
+var enemyAtks = function(enemyData){
+    var arr = [];
+    var sum = 0;
+    for (var i = 0; i<enemyData.length;i++){
+        if(enemyData[i].hp>0){
+            if(Math.random()<enemyData[i].acc){
+                arr.push(enemyData[i].atk);
+                sum +=enemyData[i].atk;
+            }
+            else{
+                arr.push(0);
+            }
+        }else
+            arr.push(0);
+    }
+    arr.push(sum)
+    return arr;
+}
+
+var allEnemyDown = function(enemyData){
+    var arr = [];
+    for (var i = 0; i<enemyData.length;i++){
+        if(enemyData[i].hp<=0)
+            arr.push(true)
+        else
+            arr.push(false)
+    }
+    if (arr.includes(false))
+        return false
+    else
+        return true
+}
+
+var enemyDamageCalculation = function(enemyData,enemyDmg){
+    var str = "";
+    for (var i = 0; i<enemyData.length;i++){
+        str += `${enemyData[i].name} caused ${enemyDmg[i]} damage to you.\n`
+    }
+    return str;
+}
+
+var chooseRandomEnemy = function(enemyData){
+    var obj = null;
+    do{
+        obj = enemyData[Math.floor(Math.random()*enemyData.length)]
+    }while(obj.hp <=0)
+    return obj;
+}
+
+//use to handle atks, misses, and check win or lose
 var battleOn = function(currentInput,playerData,enemyData){
     var atkDmg = null;
-    var enemyDmg = null;
-    var randomPlayer = Math.random();
-    var randomEnemy = Math.random();
-    tempHp = playerData.hp;
+    var enemyDmg = enemyAtks(enemyData); //return an array
+    var randomEnemy = chooseRandomEnemy(enemyData);
+    var enemyHp = [];
     switch (currentInput){
         case "A":
-            if(randomPlayer>playerData.acc)
+            if(Math.random()>playerData.acc)
                 atkDmg = 0;
             else
                 atkDmg = Math.round(playerData.atk);
 
-            if(randomEnemy>enemyData.acc)
-                enemyDmg = 0;
-            else
-                enemyDmg = Math.round(enemyData.atk);
 
-            enemyData.hp -=atkDmg;
-            playerData.hp -=enemyDmg;
+            randomEnemy.hp -=atkDmg;
+            playerData.hp -= enemyDmg[enemyDmg.length - 1];
 
             break;
         case "B":
-            if(randomPlayer>playerData.acc)
+            if(Math.random()>playerData.acc)
                 atkDmg = 0;
             else
                 atkDmg = Math.round(playerData.atk*0.7);
 
-            if(randomEnemy>enemyData.acc)
-                enemyDmg = 0;
-            else
-                enemyDmg = Math.round(enemyData.atk);
+            for (var i = 0; i<enemyData.length;i++){
+                enemyData[i].hp -= atkDmg;
+            }
 
-            enemyData.hp -=atkDmg;
-            playerData.hp -=enemyDmg;
+            playerData.hp -=enemyDmg[enemyDmg.length -1];
 
             break;
 
@@ -93,18 +146,32 @@ var battleOn = function(currentInput,playerData,enemyData){
             break;
     }
 
+    if(currentInput === "A"){
+        if(!allEnemyDown(enemyData) && playerData.hp >0){
+            display(`You caused ${atkDmg} damage to ${randomEnemy.name}. \n\n${enemyDamageCalculation(enemyData,enemyDmg)}\n${battleOnDisplay(playerData,enemyData)}`);
+        }else if(!allEnemyDown(enemyData) && playerData.hp <=0){
+            life = false;
+            display("You lost the battle..\n\n"+gameOverMessage());
+        }
+        else if(allEnemyDown(enemyData) && playerData.hp>0){
+            enemyData[0].conclude = true;
+            display("You Won the battle!\n\nPress any key to continue..")
+        }
+    }
+    else if(currentInput === "B"){
+        if(!allEnemyDown(enemyData) && playerData.hp >0){
+            display(`You caused ${atkDmg} damage to all enemies. \n\n${enemyDamageCalculation(enemyData,enemyDmg)}\n${battleOnDisplay(playerData,enemyData)}`);
+        }else if(!allEnemyDown(enemyData) && playerData.hp <=0){
+            life = false;
+            display("You lost the battle..\n\n"+gameOverMessage());
+        }
+        else if(allEnemyDown(enemyData) && playerData.hp>0){
+            enemyData[0].conclude = true;
+            display("You Won the battle!\n\nPress any key to continue..")
+        }
+    }
 
-    if(enemyData.hp>0 && playerData.hp >0){
-        display(`You caused ${atkDmg} damage to ${enemyData.name}. \n${enemyData.name} caused ${enemyDmg} dmg to you.\n\n${battleOnDisplay(playerData,enemyData)}`);
-    }else if(enemyData.hp>0 && playerData.hp <=0){
-        life = false;
-        display("You lost the battle..\n\n"+gameOverMessage());
-    }
-    else if(enemyData.hp <=0 && playerData.hp>0){
-        enemyData.conclude = true;
-        playerData.hp = tempHp;
-        display("You Won the battle!\n\nPress any key to continue..")
-    }
+
 
 }
 
@@ -142,7 +209,7 @@ var checkStones = function(){
 }
 
 
-display("Hi, please enter your name.")
+display("Hi, please enter your name.");
 
 var welcomingMessage = function(currentInput){
     gameStart = true;
@@ -176,7 +243,7 @@ var inputHappened = function(currentInput){
                     choicesAsgardOdin(currentInput);
                 else if (asgardThor){
                     if(battle){
-                        if(enemyThor.conclude){
+                        if(enemyThor[0].conclude){
                             choicesPostThorBattle();
                         }else{
                             battleOn(currentInput,player,enemyThor);
@@ -191,8 +258,15 @@ var inputHappened = function(currentInput){
                 if(NYTimeStone)
                     choicesNYTime(currentInput);
                 else if(NYMindStone){
-                    if(NYMindB)
-                        choicesNYMindB(currentInput);
+                    if(NYMindB){
+                        if(battle){
+                            if(enemyShield[0].conclude){
+                                choicesPostShieldBattle();
+                            }else{
+                                battleOn(currentInput,player,enemyShield);
+                            }
+                        }else
+                            choicesNYMindB(currentInput);}
                     else if (NYMindC)
                         choicesNYMindC(currentInput);
                     else
@@ -363,6 +437,7 @@ var choicesAsgardThor = function(currentInput){
     switch(currentInput){
         case "A":
             battle = true;
+            tempHp = player.hp;
             display("Battle Start!!\n\n"+battleOnDisplay(player,enemyThor));
             break;
         case "B":
@@ -392,6 +467,7 @@ var choicesPostThorBattle = function(){
     battle = false;
     realityStone.found = true;
     player.lvl +=2;
+    player.hp = tempHp;
     playerLevelUp(2);
 
     display(`${scoreAddDisplay(500)}\n\nYou leveled up!\n${userName} LVL${player.lvl}\nHP : ${player.hp}\nAtk : ${player.atk}\nAcc : ${player.acc}\n\nDue to Thor having not fighting for 5 years, you managed to win him and knock him out!\n\nRocket has came back with the reality stone and your team head back to the present time.\n\nChoose your next destination\n\n${choicesDestinationsDisplay()}`);
@@ -524,13 +600,11 @@ var choicesNYMindB = function(currentInput){
             display(scoreAddDisplay(1000)+"\n\nThey really thought you are one of them, and they even protect you and escort you out from the commotion.\n\nLucky!!\n\nYou and Captain America quickly found an opportunity to return to the present time.\n\nPlease choose your next destination:\n"+choicesDestinationsDisplay());
             break;
         case "B":
-            NYMineB = false;
-            NYMindStone = false;
-            choiceNYStonePick = false;
-            mindStone.found = true;
-            score += 500;
-            display(scoreAddDisplay(500)+"\n\nYou used the scepter to control few of them to attack each other. The commotion is big enough for both of you to make your escape.\n\nGreat Work "+userName+"!\n\nYou and Captain America go back to the present time.\n\nChoose your next destination\n"+choicesDestinationsDisplay());
+            battle = true;
+            display("Battle Start!!\n\n"+battleOnDisplay(player,enemyShield));
+            tempHp = player.hp;
             break;
+
         case "C":
             NYMineB = false;
             NYMindStone = false;
@@ -542,6 +616,20 @@ var choicesNYMindB = function(currentInput){
             display(`${invalidInputMessage()}\n\n${choicesNYMindBDisplay()}`);
             break;
     }
+}
+
+var choicesPostShieldBattle = function(currentInput){
+    score += 1000;
+    NYMineB = false;
+    NYMindStone = false;
+    choiceNYStonePick = false;
+    mindStone.found = true;
+    battle = false;
+    player.lvl +=5;
+    player.hp = tempHp;
+    playerLevelUp(5);
+
+    display(`${scoreAddDisplay(1000)}\n\nYou leveled up!\n${userName} LVL${player.lvl}\nHP : ${player.hp}\nAtk : ${player.atk}\nAcc : ${player.acc}\n\nYou managed to beat some of them and create an opening and ran off!\n\nGreat Work ${userName}\n\nYou guys went back to the present time.\n\nChoose your next destination\n\n${choicesDestinationsDisplay()}`);
 }
 
 var choicesNYMindC = function(currentInput){
@@ -671,7 +759,7 @@ var choicesNYMindDisplay = function(){
 }
 
 var choicesNYMindBDisplay = function(){
-    return "A : Nows the time to scream \"HAIL HYDRA\"\nB : Use the scepter!\nC : Tell them you are from the future!"
+    return "A : Nows the time to scream \"HAIL HYDRA\"\nB : Lets Fight!\nC : Tell them you are from the future!"
 }
 
 var choicesNYMindCDisplay = function(){
