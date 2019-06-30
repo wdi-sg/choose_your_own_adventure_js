@@ -1,5 +1,6 @@
 body {
 	font-family: sans-serif;
+	background-color: #f3c446;
 }
 
 .starter{
@@ -7,15 +8,19 @@ body {
   padding:10px;
   display:block;
   margin:40px;
-  border:3px solid blue;
+  border:3px solid #2766a4;
 }
 
 #output {
 	font-family: sans-serif;
+	font-size: 2em;
   background-color:pink;
 }
 
-#path-container {
+#score {
 	font-family: sans-serif;
+	font-size: 1.5em;
+	font-weight: bold;
   background-color: #00FF00;
+  max-width: 200px;
 }
