@@ -28,14 +28,15 @@ var NYMindC = false;
 var life = true;
 var gameStart = false;
 var userName = "";
+var score = 0;
 
 
 //just a function to return destinations choices
 var choicesDestinationsDisplay = function(){
     if(countStones()===6)
-        return "A : New York City (Time/Mind/Space stones)\nB : Vormir (Soul Stone)\nC : Morag (Power Stone)\nD : Asgard (Reality Stone)\nE : Save the World\n\n"+checkStones();
+        return "A : New York City (Time/Mind/Space stones)\nB : Vormir (Soul Stone)\nC : Morag (Power Stone)\nD : Asgard (Reality Stone)\nE : Save the World\n\n"+checkStones()+"\n\n"+reportScore();
     else
-        return "A : New York City (Time/Mind/Space stones)\nB : Vormir (Soul Stone)\nC : Morag (Power Stone)\nD : Asgard (Reality Stone)\n\n"+checkStones();
+        return "A : New York City (Time/Mind/Space stones)\nB : Vormir (Soul Stone)\nC : Morag (Power Stone)\nD : Asgard (Reality Stone)\n\n"+checkStones()+"\n\n"+reportScore();
 
 }
 
@@ -161,8 +162,9 @@ var chooseDestinations = function(currentInput){
                 break;
             }
         case "E":
-            life = 0;
-            display(`You finally saved the world! Congratulations ${userName}!`);
+            life = false;
+            score += 10000000000000000;
+            display(`${scoreAddDisplay(1000000000000000)}\n\nYou finally saved the world! Congratulations ${userName}!\n\n${gameEndScore()}`);
             break;
 
         default:
@@ -187,7 +189,8 @@ var choicesVormir = function(currentInput){
         case "C":
             goToVormir = false;
             soulStone.found = true
-            display("The Three of you pushed Red Skull down the cliff and gotten the Soul Stone. \n\nNice Job "+userName+"!\n\n Your team head back to the present time.\n\nChoose your next destination\n\n"+choicesDestinationsDisplay());
+            score += 500;
+            display(scoreAddDisplay(500)+"\n\nThe Three of you pushed Red Skull down the cliff and gotten the Soul Stone. \n\nNice Job "+userName+"!\n\n Your team head back to the present time.\n\nChoose your next destination\n\n"+choicesDestinationsDisplay());
             break;
         default:
             display(`${invalidInputMessage()}\n\n${choicesVormirDisplay()}`);
@@ -200,11 +203,13 @@ var choicesMorag = function(currentInput){
     switch(currentInput){
         case "A":
             moragChoiceCount += 1;
-            display("Your distraction helped WarMachine to knock out StarLord. Great Job "+userName+"!\n\n"+choicesMoragDescription2()+"\n"+choicesMoragDisplay2());
+            score += 200;
+            display(scoreAddDisplay(200)+"\n\nYour distraction helped WarMachine to knock out StarLord. Great Job "+userName+"!\n\n"+choicesMoragDescription2()+"\n"+choicesMoragDisplay2());
             break;
         case "B":
+            score += 500;
             moragChoiceCount += 1;
-            display("You win StarLord in the dance battle and he give you the key to the Ancient Temple voluntarily.\n\nGreat Job "+userName+"!\n\n"+choicesMoragDescription2()+"\n"+choicesMoragDisplay2());
+            display(scoreAddDisplay(500)+"\n\nYou win StarLord in the dance battle and he give you the key to the Ancient Temple voluntarily.\n\nGreat Job "+userName+"!\n\n"+choicesMoragDescription2()+"\n"+choicesMoragDisplay2());
             break;
         case "C":
             life = false;
@@ -220,19 +225,20 @@ var choicesMorag = function(currentInput){
 var choicesMorag2 = function(currentInput){
     switch(currentInput){
         case "A":
-            life = false;
-            goToMorag = false;
-            display("Nebula doesn't like the idea and throat punched you. \n\n"+gameOverMessage());
+            score -= 100;
+            display(scoreMinusDisplay(100)+"\n\nNebula doesn't like the idea and throat punched you. \n\nTry choosing another option:\n"+choicesMoragDisplay2());
             break;
         case "B":
             goToMorag = false;
             powerStone.found = true;
-            display("You managed to take the stone but it cost your hand. The team thank you for your effort but they think they had better ideas than this. Well too bad "+userName+"..\n\nYour team head back to the present time.\n\nChoose your next destination\n\n"+choicesDestinationsDisplay());
+            score -= 200;
+            display(scoreMinusDisplay(200)+"\n\nYou managed to take the stone but it cost your hand. The team thank you for your effort but they think they had better ideas than this. Well too bad "+userName+"..\n\nYour team head back to the present time.\n\nChoose your next destination\n\n"+choicesDestinationsDisplay());
             break;
         case "C":
+            score += 1000;
             goToMorag = false;
             powerStone.found = true;
-            display("The stone was successfully retrieved without much sacrifices.\n\nGreat Job!\n\nYour team head back to the present time.\n\nChoose your next destination\n\n"+choicesDestinationsDisplay());
+            display(scoreAddDisplay(1000)+"\n\nThe stone was successfully retrieved without much sacrifices.\n\nGreat Job!\n\nYour team head back to the present time.\n\nChoose your next destination\n\n"+choicesDestinationsDisplay());
             break;
         default:
             display(`${invalidInputMessage()}\n\n${choicesMoragDisplay2()}`);
@@ -242,8 +248,9 @@ var choicesMorag2 = function(currentInput){
 var choicesAsgard = function(currentInput){
     switch(currentInput){
         case "A":
+            score += 200;
             asgardThor = true;
-            display("You tried to stop Thor but he has gone uncontrollable and decided to fight you. What would you do "+userName+"?\n"+choicesAsgardThorDisplay());
+            display(scoreAddDisplay(200)+"\n\nYou tried to stop Thor but he has gone uncontrollable and decided to fight you. What would you do "+userName+"?\n"+choicesAsgardThorDisplay());
             break;
         case "B":
             life = false;
@@ -251,8 +258,9 @@ var choicesAsgard = function(currentInput){
             display("You following Rocket actually did not help at all due to your size, and you guys were discovered by the guards!\n\nTouch Luck bro!\n\n"+gameOverMessage());
             break;
         case "C":
+            score += 100;
             asgardOdin = true;
-            display("You don't even know why do you look for Odin..\n\n Odin sees you and ask who you are. What do you answer?\n"+choicesAsgardOdinDisplay());
+            display(scoreAddDisplay(100)+"\n\nYou don't even know why do you look for Odin..\n\n Odin sees you and ask who you are. What do you answer?\n"+choicesAsgardOdinDisplay());
             break;
         default:
             display(`${invalidInputMessage()}\n\n${choicesAsgardDisplay()}`);
@@ -263,16 +271,18 @@ var choicesAsgard = function(currentInput){
 var choicesAsgardThor = function(currentInput){
     switch(currentInput){
         case "A":
+            score += 500;
             goToAsgard = false;
             asgardThor = false;
             realityStone.found = true;
-            display("Due to Thor having not fighting for 5 years, you managed to win him and knock him out!\n\nRocket has came back with the reality stone and your team head back to the present time.\n\nChoose your next destination\n\n"+choicesDestinationsDisplay());
+            display(scoreAddDisplay(500)+"\n\nDue to Thor having not fighting for 5 years, you managed to win him and knock him out!\n\nRocket has came back with the reality stone and your team head back to the present time.\n\nChoose your next destination\n\n"+choicesDestinationsDisplay());
             break;
         case "B":
             goToAsgard = false;
             asgardThor = false;
             realityStone.found = true;
-            display("This calmed Thor down and both of you looked for his mum, Frigga. Frigga consoled Thor and thanked you for helping him. \n\nRocket has came back with the reality stone and your team head back to the present time.\n\nChoose your next destination\n\n"+choicesDestinationsDisplay());
+            score += 1000;
+            display(scoreAddDisplay(1000)+"\n\nThis calmed Thor down and both of you looked for his mum, Frigga. Frigga consoled Thor and thanked you for helping him. \n\nRocket has came back with the reality stone and your team head back to the present time.\n\nChoose your next destination\n\n"+choicesDestinationsDisplay());
             break;
         case "C":
             goToAsgard = false;
@@ -305,7 +315,8 @@ var choicesAsgardOdin = function(currentInput){
             goToAsgard = false;
             asgardOdin = false;
             realityStone.found = true;
-            display("Odin actually listened to your story and let you go in the end.\nRocket finally gotten the reality stone and you guys went back to the present time.\n\nChoose your next destination:\n"+choicesDestinationsDisplay());
+            score += 1000;
+            display(scoreAddDisplay(1000)+"\n\nOdin actually listened to your story and let you go in the end.\nRocket finally gotten the reality stone and you guys went back to the present time.\n\nChoose your next destination:\n"+choicesDestinationsDisplay());
             break;
         default:
             display(`${invalidInputMessage()}\n\n${choicesAsgardOdinDisplay()}`);
@@ -361,16 +372,15 @@ var choicesNYTime = function(currentInput){
             display("You and Hulk souls were being pushed out and were left hanging.\n\nYou both have no way of going back\n\n"+gameOverMessage());
             break;
         case "B":
-            life = false;
-            choiceNYStonePick = false;
-            NYTimeStone = false;
-            display("The Ancient One think that you are a liar and went off. You did not managed to get the stone from her\n\n"+gameOverMessage());
+            score -= 100;
+            display(scoreMinusDisplay(100)+"\n\nThe Ancient One is still not convinced.\n\nWhat should you do?"+choicesNYTimeDisplay());
             break;
         case "C":
             choiceNYStonePick = false;
             NYTimeStone = false;
             timeStone.found = true;
-            display("The Ancient One actually pitied you and give you the Time Stone. What a luck eh "+userName+"?\n\nYou and Hulk head back to present time. \n\nChoose your next destination:\n"+choicesDestinationsDisplay());
+            score += 1000;
+            display(scoreAddDisplay(1000)+"\n\nThe Ancient One actually pitied you and give you the Time Stone. What a luck eh "+userName+"?\n\nYou and Hulk head back to present time. \n\nChoose your next destination:\n"+choicesDestinationsDisplay());
             break;
         default:
             display(`${invalidInputMessage()}\n\n${choicesNYTimeDisplay()}`);
@@ -388,11 +398,13 @@ var choicesNYMind = function(currentInput){
             break;
         case "B":
             NYMindB = true;
-            display("You managed to steal from them, but the whole SHIELD units are chasing both of you. Eventually you are surrounded by them.\n\nWhat do you do next!?\n"+choicesNYMindBDisplay());
+            score += 300;
+            display(scoreAddDisplay(300)+"\n\nYou managed to steal from them, but the whole SHIELD units are chasing both of you. Eventually you are surrounded by them.\n\nWhat do you do next!?\n"+choicesNYMindBDisplay());
             break;
         case "C":
             NYMindC = true;
-            display("You and Captain America went into the lift with them. The SHIELD members find that both of you looked suspicious.\n\nWhat should you do?\n"+choicesNYMindCDisplay());
+            score += 500;
+            display(scoreAddDisplay(500)+"\n\nYou and Captain America went into the lift with them. The SHIELD members find that both of you looked suspicious.\n\nWhat should you do?\n"+choicesNYMindCDisplay());
             break;
         default:
             display(`${invalidInputMessage()}\n\n${choicesNYMindDisplay()}`);
@@ -407,14 +419,16 @@ var choicesNYMindB = function(currentInput){
             NYMindStone = false;
             choiceNYStonePick = false;
             mindStone.found = true;
-            display("They really thought you are one of them, and they even protect you and escort you out from the commotion.\n\nLucky!!\n\nYou and Captain America quickly found an opportunity to return to the present time.\n\nPlease choose your next destination:\n"+choicesDestinationsDisplay());
+            score += 1000;
+            display(scoreAddDisplay(1000)+"\n\nThey really thought you are one of them, and they even protect you and escort you out from the commotion.\n\nLucky!!\n\nYou and Captain America quickly found an opportunity to return to the present time.\n\nPlease choose your next destination:\n"+choicesDestinationsDisplay());
             break;
         case "B":
             NYMineB = false;
             NYMindStone = false;
             choiceNYStonePick = false;
             mindStone.found = true;
-            display("You used the scepter to control few of them to attack each other. The commotion is big enough for both of you to make your escape.\n\nGreat Work "+userName+"!\n\nYou and Captain America go back to the present time.\n\nChoose your next destination\n"+choicesDestinationsDisplay());
+            score += 500;
+            display(scoreAddDisplay(500)+"\n\nYou used the scepter to control few of them to attack each other. The commotion is big enough for both of you to make your escape.\n\nGreat Work "+userName+"!\n\nYou and Captain America go back to the present time.\n\nChoose your next destination\n"+choicesDestinationsDisplay());
             break;
         case "C":
             NYMineB = false;
@@ -436,7 +450,8 @@ var choicesNYMindC = function(currentInput){
             NYMindStone = false;
             choiceNYStonePick = false;
             mindStone.found = true;
-            display("They thought that you are really Hydra and pass you the scepter. Both you and Captain America walked out with a Smirk\n\nGreat Work "+userName+"!\n\nBoth of you then go back to the present time.\n\nChoose your next destination:\n"+choicesDestinationsDisplay());
+            score += 1000;
+            display(scoreAddDisplay(1000)+"\n\nThey thought that you are really Hydra and pass you the scepter. Both you and Captain America walked out with a Smirk\n\nGreat Work "+userName+"!\n\nBoth of you then go back to the present time.\n\nChoose your next destination:\n"+choicesDestinationsDisplay());
             break;
         case "B":
             NYMineC = false;
@@ -450,7 +465,8 @@ var choicesNYMindC = function(currentInput){
             NYMindStone = false;
             choiceNYStonePick = false;
             mindStone.found = true;
-            display("The SHIELD unit quickly pin you down to help Captain America. Captain America then suggests he will bring you into custody with a false report. He also take the scepter with him. You guys quickly fled when given a chance.\n\nGreat Work "+userName+"!\n\nBoth of you go back to the present.\n\nChoose your next destination:\n"+choicesDestinationsDisplay());
+            score += 1000;
+            display(scoreAddDisplay(1000)+"\n\nThe SHIELD unit quickly pin you down to help Captain America. Captain America then suggests he will bring you into custody with a false report. He also take the scepter with him. You guys quickly fled when given a chance.\n\nGreat Work "+userName+"!\n\nBoth of you go back to the present.\n\nChoose your next destination:\n"+choicesDestinationsDisplay());
             break;
         default:
             display(`${invalidInputMessage()}\n\n${choicesNYMindCDisplay()}`);
@@ -464,7 +480,7 @@ var choicesNYSpace = function(currentInput){
             NYSpaceStone = false;
             choiceNYStonePick = false;
             life = false;
-            display("The commotion was successful and Iron Man managed to stole the spacs stone, but Hulk suddenly appeared and threw Iron man off, causing the stone to be take by Loki and he escaped with it.\n\nYou knew this will happen right?\n\n"+gameOverMessage());
+            display("The commotion was successful and Iron Man managed to stole the Space Stone, but Hulk suddenly appeared and threw Iron man off, causing the stone to be take by Loki and he escaped with it.\n\nYou knew this will happen right?\n\n"+gameOverMessage());
             break;
         case "B":
             NYSpaceStone = false;
@@ -476,7 +492,8 @@ var choicesNYSpace = function(currentInput){
             NYSpaceStone = false;
             choiceNYStonePick = false;
             spaceStone.found = true;
-            display("Iron Man and Ant Man helped you to distract the past Avengers members and you managed to steal away the Space stone. You all successfully found an opportunity to escape back to the present as well.\n\nGood Work "+userName+"!\n\nChoose your next destination:\n"+choicesDestinationsDisplay());
+            score += 1000;
+            display(scoreAddDisplay(1000)+"\n\nIron Man and Ant Man helped you to distract the past Avengers members and you managed to steal away the Space stone. You all successfully found an opportunity to escape back to the present as well.\n\nGood Work "+userName+"!\n\nChoose your next destination:\n"+choicesDestinationsDisplay());
             break;
         default:
             display(`${invalidInputMessage()}\n\n${choicesNYSpaceDisplay()}`);
@@ -568,5 +585,21 @@ var invalidInputMessage = function(){
 }
 
 var gameOverMessage = function(){
-    return "Game Over\n\nRefresh to restart the game";
+    return "Game Over\n\n"+gameEndScore()+"\n\nRefresh to restart the game";
+}
+
+var reportScore = function(){
+    return "Your current score is "+score;
+}
+
+var gameEndScore = function(){
+    return "Your final score is "+score;
+}
+
+var scoreAddDisplay = function(scoreGet){
+    return "Score +"+scoreGet;
+}
+
+var scoreMinusDisplay = function(scoreGet){
+    return "Score -"+scoreGet;
 }
