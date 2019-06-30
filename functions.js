@@ -16,7 +16,7 @@ var lunchMeetDone = false;
 //                NOTE: CHANGE THIS FROM INPUT TO PROMPT!
 
 var player = {
-    name: "Jonathan",
+    name: null,
     intelligence: 0,
     guts: 0,
     charm: 0
@@ -102,6 +102,8 @@ var displayDay = function(day){
 var newWeek = function(dayNumber){
     if (dayNumber >= 7) {
         dayNumber = 0;
+    } else {
+        return;
     }
 }
 // all-in-one function to update and push the day, where daysPassed = day you wanna add. dayPassed = 0 to show Monday
@@ -231,7 +233,7 @@ var beforeSchool1 = function(){
 var beforeSchool2 = function(){
     resetPage();
     updateTime(0);
-    mainText = `You've had a rough night and ${properTime} is way too early for anything. You haven't had breakfast. You're terrible at coding and you know it.`;
+    mainText = `You've had a rough night and ${properTime} is way too early for anything. You haven't had breakfast and it's going to be a while before you can catch a break.`;
     choice0 = "Next";
     pushMain();
     pushBtn0(choice0, beforeSchool3);
@@ -294,15 +296,15 @@ var pairWorkResults = function(){
     updateTime(1);
     var successRate = Math.floor((Math.random() * 100) + 1);
     if (successRate >= 80) {
-        mainText = `Completion rate: ${successRate}. <br /> The two of you aced the assignment!`
+        mainText = `Completion rate: ${successRate}%. <br /> The two of you aced the assignment!`
         secText = "Intelligence + 2!";
         player.intelligence += 2;
     } else if (successRate >= 30) {
-        mainText = `Completion rate: ${successRate}. <br /> The two of you muddled through the assignment.`
+        mainText = `Completion rate: ${successRate}%. <br /> The two of you muddled through the assignment.`
         secText = "Intelligence + 1!";
         player.intelligence += 1;
     } else {
-        mainText = `Completion rate: ${successRate}. <br /> It was an absolute nightmare.`
+        mainText = `Completion rate: ${successRate}%. <br /> It was an absolute nightmare.`
         secText = "Intelligence did not increase."
     }
     choice0 = "Next";
