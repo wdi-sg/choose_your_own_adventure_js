@@ -2,8 +2,10 @@ console.log("hello script js");
 
 var nextStage = 0;
 
-var playerName;
+var playerName = "";
 var initMsg = "What is your name?";
+
+var score = 0;
 
 var msg;
 
