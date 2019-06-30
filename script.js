@@ -208,13 +208,18 @@ var checkStones = function(){
         return `Infinity Stones found so far:\n${str}`;
 }
 
+var asciiArt = function(){
+    return "──────────────▐█████───────\n──────▄▄████████████▄──────\n────▄██▀▀────▐███▐████▄────\n──▄██▀───────███▌▐██─▀██▄──\n─▐██────────▐███─▐██───██▌─\n─██▌────────███▌─▐██───▐██─\n▐██────────▐███──▐██────██▌\n██▌────────███▌──▐██────▐██\n██▌───────▐███───▐██────▐██\n██▌───────███▌──▄─▀█────▐██\n██▌──────▐████████▄─────▐██\n██▌──────█████████▀─────▐██\n▐██─────▐██▌────▀─▄█────██▌\n─██▌────███─────▄███───▐██─\n─▐██▄──▐██▌───────────▄██▌─\n──▀███─███─────────▄▄███▀──\n──────▐██▌─▀█████████▀▀────\n──────███──────────────────"
+}
+
+
 
 display("Hi, please enter your name.");
 
 var welcomingMessage = function(currentInput){
     gameStart = true;
     userName = currentInput;
-    display(`Hi ${userName}, Welcome to Avengers:End Game!\n\nYou will be joining the Avengers as a new recruit to help them find the Infinity Stones by travelling back in time.\n\n Lets choose a destination:\n\n${choicesDestinationsDisplay()}`);
+    display(`Hi ${userName}, Welcome to Avengers:End Game!\n\n${asciiArt()}\n\nYou will be joining the Avengers as a new recruit to help them find the Infinity Stones by travelling back in time.\n\n Lets choose a destination:\n\n${choicesDestinationsDisplay()}`);
 }
 
 //display the choices at the begining of the game
@@ -326,7 +331,7 @@ var chooseDestinations = function(currentInput){
         case "E":
             life = false;
             score += 10000000000000000;
-            display(`${scoreAddDisplay(1000000000000000)}\n\nYou finally saved the world! Congratulations ${userName}!\n\n${gameEndScore()}`);
+            display(`${scoreAddDisplay(1000000000000000)}\n\nYou finally saved the world! Congratulations ${userName}!\n\n${gameEndScore()}\n\n${asciiArt()}`);
             break;
 
         default:
