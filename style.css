@@ -101,6 +101,12 @@ h1 {
 	text-decoration: underline;
 }
 
+#refresh {
+	position: absolute;
+	top:28px;
+	left:1150px;
+}
+
 footer {
     padding-top: 41px;
     position: relative;
