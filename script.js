@@ -54,10 +54,9 @@ var currentText;
 
 var inputHappened = function(currentInput){
     playStory(stories, currentInput);
-    display(currentText);
+    displayStory(currentText);
+    displayPath(currentInput)
 };
-
-
 
 // START OF DISPLAYING STORIES
  // for (var i = 0; i < stories.length; i++) {
@@ -65,8 +64,12 @@ var inputHappened = function(currentInput){
  //        console.log (stories[i].text); // text of path
  //    }
  // }
-var getPaths = function () {
-
+var showPath = function () {
+    // var currentPath = [];
+    // show the paths available based on earlier choice
+    var myMsg = stories[0].paths[0].text;
+    console.log(myMsg);
+    //return paths.toString();
 }
 
 
@@ -75,6 +78,7 @@ var getPaths = function () {
         // CHECK IF USER INPUT IS EQUAL TO STORY ID
         if (stories[i].id === currentInput) {
             currentText = stories[i].text;
+            showPath(currentInput);
             return currentText;
         } else {
             currentText = "Please enter choice";
