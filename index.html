@@ -9,6 +9,9 @@
     <!-- Display story / questions -->
     <p class="starter" id="output"></p>
 
+    <!-- Display score  -->
+    <p class="starter" id="score"></p>
+
     <!-- User Input box -->
     <input class="starter" id="input" placeholder="input"/>
 
@@ -21,6 +24,11 @@
       var displayStory = function( data ){
         var output = document.querySelector('#output');
         output.innerText = data;
+      }
+
+      var displayScore = function( score ){
+        var myScore = document.querySelector('#score');
+        myScore.innerText = 'Score: ' + score;
       }
 
     </script>
