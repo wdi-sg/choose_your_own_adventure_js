@@ -3,9 +3,13 @@
 	src: url('Pokemon-GB.woff') format('woff');
 }
 
+/*.underline {
+	text-decoration: underline;
+}*/
+
 .header {
 	text-align: center;
-	margin: 60px;
+  margin: 60px 0 30px 0;
 }
 
 .divider {
@@ -17,7 +21,7 @@
 .output {
 	text-align: center;
 	font-family: 'Pokemon-GB', sans serif;
-	font-size: 20px;
+	font-size: 18px;
 	line-height: 2;
 	background-color: #F5FFFA;
 	max-width: 70%;
@@ -32,10 +36,10 @@
 	font-family: 'Pokemon-GB', sans serif;
 	font-size: 18px;
 	color: black;
-	margin: 50px;
+	margin: 30px 0 20px 0;
 }
 
-.input #userinput {
+.input #user-input {
 	text-align: center;
 	font-size: 20px;
   border: 1px solid black;
@@ -43,7 +47,7 @@
   width: 40%;
 }
 
-.input #enter-button {
+.input #enter-button, #restart {
 	font-family: 'Pokemon-GB', sans serif;
 	font-size: 18px;
 	padding: 10px 20px;
@@ -53,7 +57,7 @@
   box-shadow: 8px 8px 9px -4px rgba(0, 0, 0, 0.8);
 }
 
-.input #enter-button:hover {
+.input #enter-button:hover, #restart:hover {
 	color: white;
 	background-color: black;
 }
