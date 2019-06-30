@@ -109,14 +109,11 @@ var biffOrGriff = function (currentInput) {
             // nextStage = nextStage + 1;
 
             // ADDED CONDITIONS CHECKING WHICH STAGE TO MOVE ON TO BASED ON INPUT
-            if (currentInput == 'B') {
-                nextStage = 3;
-            } else if (currentInput == 'G') {
-                nextstage = 4;
+            if (currentInput === 'G') {
+                nextStage = 4;
             } else {
-                document.querySelector('#input').value="";
+                nextstage = 3;
             }
-
             // console.log("nextstage value in year function after update: ", nextStage); // THIS RAN LAST
             // CLEAR INPUT BOX
             document.querySelector('#input').value="";
@@ -158,8 +155,7 @@ var inOrOut = function (currentInput) {
         if (currentInput == inOutChoice[i]) {
             msg = inOutMsg[i];
             // console.log("nextstage value in inOrOut function: ", nextStage);
-
-            nextStage = nextStage + 1;
+            //nextStage = nextStage + 1;
             // console.log("nextstage value in inOrOut function after update: ", nextStage);
             document.querySelector('#input').value="";
             return msg;
