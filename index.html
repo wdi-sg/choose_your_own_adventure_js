@@ -6,8 +6,11 @@
   <body>
     <h1>Welcome to Back to the Future I, II, III </h1>
 
-    <!-- Display questions -->
-    <p class="starter" id="output"></p>
+    <!-- Display story / questions -->
+    <p class="starter" id="story-container"></p>
+
+    <!-- Display paths -->
+    <p class="starter" id="path-container"></p>
 
     <!-- User Input box -->
     <input class="starter" id="input" placeholder="input"/>
@@ -18,10 +21,16 @@
         inputHappened(currentInput)
       });
 
-      var display = function( data ){
-        var output = document.querySelector('#output');
+      var displayStory = function( data ){
+        var output = document.querySelector('#story-container');
         output.innerText = data;
       }
+
+      var displayPath = function( data ){
+        var output = document.querySelector('#path-container');
+        output.innerText = data;
+      }
+
     </script>
     <script type="text/javascript" src="script.js"></script>
   </body>
