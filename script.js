@@ -96,7 +96,7 @@ function showMoveList(currentPokemon) {
         display(`1. ${pokemonList[i].moveList[0]}\n2. ${pokemonList[i].moveList[1]}\n3. ${pokemonList[i].moveList[2]}\n4. ${pokemonList[i].moveList[3]}`);
         document.getElementById('input').value='';
         }
-    }
+    };
 }
 
 //Show pokemon available in belt
@@ -107,7 +107,7 @@ function showPokemonBelt(pokemon) {
     } else {
     display(`1. ${pokemonBelt[0]}\n2.${pokemonBelt[1]}`);
     document.getElementById('input').value='';
-}
+    }
 }
 //Show items in bag
 function showBag() {
@@ -147,7 +147,7 @@ display("What is your name, young trainer?");
 counter(`Number of battles won: ${winCounter}`);
 console.log(`stage 0 => choose username`)
 
-var inputHappened = function(currentInput){
+var inputHappened = function(currentInput) {
     if (battleMode === true) {
         stage = "battle";
         console.log(`Currently in battle`);
@@ -159,15 +159,6 @@ var inputHappened = function(currentInput){
         console.log(`${stage} is the current stage`)
     };
 
-    //.       TO UPDATE BACK BUTTON.   //
-    // stage = questionComplete.length;
-    // console.log(`${stage} is the current stage`)
-    // if (currentInput === "back") {
-    //     stage = stage - 1;
-    //     questionComplete.pop();
-    //     console.log(questionComplete);
-    //     console.log(stage);
-    // }
 
 ///////    STAGE 1 Choose Pokemon   ///////
     if (stage === 1) {
@@ -218,14 +209,17 @@ var inputHappened = function(currentInput){
             display(`You take a lift from Professor Oak and arrive in Pewter City.\nA huge rock gym stands in front of you.\n\n1. Enter the gym (gym)\n2. Head east towards the cave (cave)`);
             completeQuestion(currentInput);
         } else if (currentInput.toLowerCase() === "safari") {
-            display(`You do not have a safari ticket yet.\n\nGo back to Pallet Town`);
-            completeQuestion(currentInput);
+            display(`You do not have a safari ticket yet.\n\nGo back.`);
+            document.getElementById('input').value='';
+        } else if (currentInput === "back") {
+            display(`Now where would you like to begin your adventure? \n\n1. Pallet Town (pallet)\n2. Lavender Town (lavender)\n3. Cinabar Island (cinabar)\n4. Pewter City (pewter)\n5. Safari Zone (safari)`);
+            document.getElementById('input').value='';
         }
     }
 
 
 //////            STAGE 4           ///////
-//pallet storyline -> visit gary or head north
+//Pallet Town storyline -> visit gary or head north
     if (stage === 4 && questionComplete[3]==="pallet") {
         console.log("Stage 4 pallet town");
         if (currentInput.toLowerCase() === "gary") {
@@ -233,7 +227,10 @@ var inputHappened = function(currentInput){
                 completeQuestion(currentInput);
         } else if (currentInput.toLowerCase() === "north") {
                 display('You head north\n\nGame still under construction');
-                completeQuestion(currentInput);
+                document.getElementById('input').value='';
+        } else if (currentInput === "back") {
+                display(`What better way to start our adventure than from our hometown.\n\nShould we:\n1. Visit cousin Gary (gary)\n2. Head up north (north)`);
+                document.getElementById('input').value='';
         }
     }
 //Lavender Town storyline -> fight or run
@@ -257,8 +254,11 @@ var inputHappened = function(currentInput){
                 display(`You reach for your bag and grab a beer by the coast.\n\nAhh tastes great!`);
                 completeQuestion(currentInput);
         } else if (currentInput.toLowerCase() === "surf") {
-                display("You don't have any pokemon with the surf ability.");
-                completeQuestion(currentInput);
+                display("You don't have any pokemon with the surf ability.\n\nGo back.");
+                document.getElementById('input').value='';
+        } else if (currentInput === "back") {
+                display(`You arrive on Cinabar Island.\nThere is not a soul in sight.\n\nWhat would you do?\n1. Have a drink by the coast (drink)\n2. Surf back to Pallet Town (surf)`);
+                document.getElementById('input').value='';
         }
     }
 
@@ -267,17 +267,21 @@ var inputHappened = function(currentInput){
         console.log("Stage 4 pewter");
         if (currentInput.toLowerCase() === "gym") {
                 display(`Your level is too low to enter this gym!\n\nCome back when you are level 10.`);
-                completeQuestion(currentInput);
+                document.getElementById('input').value='';
         } else if (currentInput.toLowerCase() === "cave") {
-                display('On your way to the cave, you see a another pokemon trainer.\n\n1. Challenge trainer to a fight (challenge)\nTake another route to avoid him (avoid)');
+                display('On your way to the cave, you see a another pokemon trainer.\n\n1. Challenge trainer to a fight (challenge)\n2. Take another route to avoid him (avoid)');
                 completeQuestion(currentInput);
+        } else if (currentInput === "back") {
+                display(`You take a lift from Professor Oak and arrive in Pewter City.\nA huge rock gym stands in front of you.\n\n1. Enter the gym (gym)\n2. Head east towards the cave (cave)`);
+                document.getElementById('input').value='';
         }
     }
 
 
 
+
 //////            STAGE 5           ///////
-//pallet storyline -> visit gary or head north
+//Pallet Town storyline -> visit gary or head north
     if (stage === 5 && questionComplete[4]==="gary") {
         console.log("Stage 5 pallet town");
         if (currentInput.toLowerCase() === "accept") {
@@ -287,33 +291,13 @@ var inputHappened = function(currentInput){
                 document.getElementById('input').value='';
         } else if (currentInput.toLowerCase() === "north") {
                 display('You head north\n\nGame still under construction');
-                completeQuestion(currentInput);
+                // completeQuestion(currentInput);
         }
     }
 
 
 
-
-
-
-//Lavender Town storyline -> fight mode
-    // if (stage === 5 && questionComplete[4]==="fight") {
-    //     console.log("Stage 5 lavender");
-    //     if (currentInput === "skill") {
-    //         showMoveList(currentPokemon);
-    //         attackMode = true;
-    //         document.getElementById('input').value='';
-    //     } else if (currentInput === "switch"){
-    //         showPokemonBelt();
-    //     } else if (currentInput === "bag") {
-    //         showBag();
-    //     } else if (currentInput === "run") {
-    //         display(`You got away safely!`);
-    //     }
-    // }
-
-
-//pewter city storyline  -> avoid or engage
+//Pewter City storyline  -> avoid or engage
     if (stage === 5 && questionComplete[4]==="cave") {
         console.log("Stage 5 to the cave");
         if (currentInput === "challenge") {
@@ -325,7 +309,7 @@ var inputHappened = function(currentInput){
 
     }
 
-//In Battle
+//In Battle mode
     if (stage === "battle" ) {
         console.log(`In battle now`);
         if (currentInput === "skill") {
@@ -342,7 +326,7 @@ var inputHappened = function(currentInput){
         }
     }
 
-//Attack Mode
+//In Attack Mode
     if (stage === "attack" ) {
             console.log(`In attack mode now`);
             if (currentInput === "1") {
@@ -352,21 +336,5 @@ var inputHappened = function(currentInput){
                 battleMode = false;
                 document.getElementById('input').value='';
             }
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-};
+    }
+}
