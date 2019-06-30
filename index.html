@@ -1,37 +1,36 @@
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <h1>Welcome to Back to the Future I, II, III </h1>
+</head>
+<body>
 
-    <!-- Display story / questions -->
-    <p class="starter" id="output"></p>
-
-    <!-- User Input box -->
-    <input class="starter" id="input" placeholder="enter your answers here"/>
-
+    <div class="main-wrapper">
+        <h1>Welcome to Back to the Future I, II, III </h1>
+        <!-- Display story / questions -->
+        <p class="starter" id="output"></p>
+        <!-- User Input box -->
+        <input class="starter" id="input" placeholder="enter your answers here"/>
         <!-- Display score  -->
-    <p class="starter" id="score"></p>
-
+        <p class="starter" id="score"></p>
+    </div>
     <script>
       document.querySelector('#input').addEventListener('change', function(event){
         var currentInput = event.target.value;
         inputHappened(currentInput)
-      });
-
+    });
+      // DISPLAYING STORY FUNCTION
       var displayStory = function( data ){
         var output = document.querySelector('#output');
         output.innerText = data;
-      }
-
-      var displayScore = function( score ){
+    }
+    // DISPLAYING SCORE FUNCTION
+    var displayScore = function( score ){
         var myScore = document.querySelector('#score');
         myScore.innerText = 'Score: ' + score;
-      }
+    }
 
-    </script>
-    <script type="text/javascript" src="script.js"></script>
-  </body>
+</script>
+<script type="text/javascript" src="script.js"></script>
+</body>
 </html>
