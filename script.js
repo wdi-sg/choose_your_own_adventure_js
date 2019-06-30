@@ -1,10 +1,3 @@
-// prompt for playerName - gameQuestion "What is your name?"
-// clear field after input entered
-// player enter name . Taka userInput and store into playerName.
-// prompt "Nice to meet you " + userInput. + " What year would you like to go to?"
-// player enter year . fun checkYear
-
-
 console.log("hello script js");
 
 var nextStage = 1;
@@ -36,12 +29,6 @@ var inputHappened = function(currentInput){
     // CHECK STAGE PLAYER IS IN
     // RUN TIMETRAVEL STAGE ONLY IF CURRENT STAGE IS 0
     switch(nextStage){
-        // case 0:
-        //     console.log("case 0!");
-        //     displayStory(msg);
-        //     nextStage = nextStage + 1;
-        //     console.log(nextStage);
-        //     break;
         case 1:
             console.log("case 1!");
             year(tempInput);
@@ -83,11 +70,10 @@ var year = function (currentInput) {
     for (var i = 0; i < yearChoice.length; i++ ) {
         if ((currentInput === yearChoice[i]) && (nextStage === 1)) {
             msg = yearMsg[i];
-            // nextStage = 1;
             // CLEAR INPUT BOX IF MATCH FOUND
             console.log("nextStage value in year function: ", nextStage);
-            // nextStage = nextStage + 1;
 
+            // DIRECT USER TO CORRECT PATH BASED ON INPUT
             if (yearChoice[i] === '2015') {
                 nextStage = 2;
             } else if (yearChoice[i] === '1985') {
@@ -97,18 +83,16 @@ var year = function (currentInput) {
             } else {
                 document.querySelector('#input').value="";
             }
-            // console.log("nextStage value in year function after update: ", nextStage);
+            // CLEAR INPUT BOX
             document.querySelector('#input').value="";
             return msg;
         } else {
-            // FUNCTION ONLY RUN TIS PART IF NO MATCH FOUND
+            // CLEAR INPUT BOX
             document.querySelector('#input').value="";
-            // console.log("nextStage value in year function after else: ", nextStage); // CONSOLE LOG RUNS yearChoice.length TIMES IF NO MATCH FOUND
         }
     }
     // CLEAR INPUT BOX
     // FUNCTION ONLY RUN TIS PART IF NO MATCH FOUND
-    // console.log("nextStage value in year function after for loop: ", nextStage);
     document.querySelector('#input').value="";
 };
 
@@ -117,13 +101,8 @@ var biffOrGriff = function (currentInput) {
     for (var i = 0; i < charChoice.length; i++ ) {
         if (currentInput === charChoice[i]) {
             msg = charMsg[i];
-            // CHECK NEXT STAGE VALUE
-            // console.log("nextStage value in biffOrGriff function: ", nextStage); // THIS RAN 2ND
-            // UPDATE NEXT STAGE VALUE
-            // nextStage = nextStage + 1;
 
-            // ADDED CONDITIONS CHECKING WHICH STAGE TO MOVE ON TO BASED ON INPUT
-            // HMM... THIS CONDITIONS BELOW DOES NOT ALLOW USER TO PROGRESS TO STAY OR RUN IF THEY CHOOSE 'B'
+            // DIRECT USER TO CORRECT PATH BASED ON INPUT
             if (charChoice[i] === 'G') {
                 console.log('G selected!!!')
                 nextStage = 4;
@@ -137,13 +116,13 @@ var biffOrGriff = function (currentInput) {
                 console.log('STAY IN B&G**')
                 nextStage = 2;
             }
-            // console.log("nextStage value in year function after update: ", nextStage); // THIS RAN LAST
+
             // CLEAR INPUT BOX
             document.querySelector('#input').value="";
             return msg;
         } else {
+            // CLEAR INPUT BOX
             document.querySelector('#input').value="";
-            // console.log("nextStage value in biffOrGriff function after else: ", nextStage); // WEIRD.... THIS RAN 1ST
         }
     }
     // CLEAR INPUT BOX
@@ -156,16 +135,13 @@ var stayRun = function (currentInput) {
     for (var i = 0; i < fightFlightChoice.length; i++ ) {
         if (currentInput == fightFlightChoice[i]) {
             msg = fightFlightMsg[i];
-            console.log("nextStage value in stayRun function: ", nextStage);
-            // CHECK NEXT STAGE VALUE
-            // nextStage = nextStage + 1;
             nextStage = 4;
-            // console.log("nextStage value in stayRun function after update: ", nextStage);
+            // CLEAR INPUT BOX
             document.querySelector('#input').value="";
             return msg;
         } else {
+            // CLEAR INPUT BOX
             document.querySelector('#input').value="";
-            // console.log("nextStage value in stayRun function after else: ", nextStage);
         }
     }
     // CLEAR INPUT BOX
@@ -177,35 +153,31 @@ var inOrOut = function (currentInput) {
     for (var i = 0; i < inOutChoice.length; i++ ) {
         if (currentInput == inOutChoice[i]) {
             msg = inOutMsg[i];
-            // console.log("nextStage value in inOrOut function: ", nextStage);
-            //nextStage = nextStage + 1;
-            // console.log("nextStage value in inOrOut function after update: ", nextStage);
+            // CLEAR INPUT BOX
             document.querySelector('#input').value="";
             return msg;
         } else {
+            // CLEAR INPUT BOX
             document.querySelector('#input').value="";
-            // console.log("nextStage value in inOrOut function after else: ", nextStage);
         }
     }
     // CLEAR INPUT BOX
     document.querySelector('#input').value="";
 };
 
-// UNDER THE SEA DOES NOT WORK WITH SWTICH CASE AS WE CAME TO THIS STAGE FROM YEAR STAGE WHICH MEAN nextStage is updated to 2. BUT underTheSea is only called when case 5. THIS METHOD OF CASSCADING CHOICES DOES NOT WORK IF THE STORY IS IN A DIFFERENT BRAND OF PATH.
 var underTheSea = function (currentInput) {
     console.log("stage: under the sea");
     for (var i = 0; i < underTheSeaChoice.length; i++ ) {
         if (currentInput == underTheSeaChoice[i]) {
             msg = underTheSeaMsg[i];
-            // console.log("nextStage value in underTheSea function: ", nextStage);
 
             nextStage = nextStage + 1;
-            // console.log("nextStage value in underTheSea function after update: ", nextStage);
+            // CLEAR INPUT BOX
             document.querySelector('#input').value="";
             return msg;
         } else {
+            // CLEAR INPUT BOX
             document.querySelector('#input').value="";
-            // console.log("nextStage value in underTheSea function after else: ", nextStage);
         }
     }
     // CLEAR INPUT BOX
