@@ -58,6 +58,11 @@ var inputHappened = function(currentInput){
                 display(`Sorry, you didn't approach the right person for help!\nLooks like you will have to be stuck here until you finished all the assignments!`);
             }
         }
+//q1-choice 1/2:points - choice 3/3:normal staircase - Game Over
+        if ((inputRecord[2].toLowerCase())==="c" ){
+            display(`At the top of the normal staircase is the entrance to 79 Anson Rd Lvl 20.\n\n Stress Monster smiles at you and says, "Time for morning exercise, ${inputRecord[0].toUpperCase()}!"`);
+        }
+
   //q1 - choice 2/3 - Game over
   else if (parseInt(inputRecord[1])=== 2 ){
     display(`Seems like you didn't need anymore happiness, ${inputRecord[0].toUpperCase()}!\nGood to see you so happy, goodbye!`)
