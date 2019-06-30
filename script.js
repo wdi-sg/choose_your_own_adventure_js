@@ -1,6 +1,9 @@
 console.log("hello script js");
 
-var nextStage = 1;
+var nextStage = 0;
+var playerName;
+var initMsg = "What is your name?";
+
 var msg = "Hello, which year would you like to time travel to? 2015, 1985 or 1955";
 
 var yearChoice = ['2015', '1985', '1955'];
@@ -19,16 +22,22 @@ var underTheSeaChoice = ['Y', 'N', 'S'];
 var underTheSeaMsg = ["Creepy. I hope you have some backup plan in place to get out of this. Until then, you're stuck in 1955", "Honorable. But this also means that your future Dad will never meet your Mom, and therefore you cannot exist.", "Interesting. You set up an elaborate plan for your future Dad to surprise your Mom by beating you up. Despite going horribly awry, the plan ultimately works. You may go back to your own time."];
 
 
-displayStory(msg);
+displayStory(initMsg);
 
 var inputHappened = function(currentInput){
     console.log("Input happened!", currentInput);
     var tempInput = currentInput.toUpperCase();
 
-
-    // CHECK STAGE PLAYER IS IN
-    // RUN TIMETRAVEL STAGE ONLY IF CURRENT STAGE IS 0
+    // CHECK STAGE PLAYER IS IN AND DIRECT THEM TO PATH ACCORDINGLY
     switch(nextStage){
+        case 0:
+            console.log("case 0!");
+            promptName(tempInput);
+            displayStory("Welcome " + tempInput);
+            displayStory(msg);
+            console.log("going to case: ", nextStage);
+            console.log("hello: ", playerName)
+            break;
         case 1:
             console.log("case 1!");
             year(tempInput);
@@ -64,6 +73,13 @@ var inputHappened = function(currentInput){
     }
 };
 
+// PROMPT FOR PLAYER NAME
+var promptName = function(currentInput) {
+    playerName = currentInput;
+    document.querySelector('#input').value="";
+    nextStage = 1;
+    return playerName;
+}
 
 var year = function (currentInput) {
     console.log("stage: year");
