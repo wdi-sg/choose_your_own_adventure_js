@@ -1,0 +1,31 @@
+
+
+.main-container {
+	text-align: center;
+	margin: 100px 100px;
+	padding: 20px 20px;
+
+}
+
+.button, .options {
+	background-color: white;
+  color: #002DFA;
+	padding: 20px;
+  border-radius: 5px;
+  border: solid 5px #002DFA;
+  cursor: pointer;
+  font-size: 25px;
+}
+
+.button:hover, .options:hover{
+	background-color: #002DFA;
+	color: white;
+	border: solid 5px #002DFA;
+}
+
+#playArea {
+	font-size: 25px;
+	margin: 100px 0 100px 0;
+	line-height: 2rem;
+
+}
