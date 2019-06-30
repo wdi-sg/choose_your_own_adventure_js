@@ -54,13 +54,13 @@ var inputHappened = function(currentInput){
             console.log("case 3!");
             stayRun(tempInput);
             displayStory(msg);
-            nextStage = nextStage + 1;
+            // nextStage = nextStage + 1;
             break;
         case 4:
             console.log("case 4!");
             inOrOut(tempInput);
             displayStory(msg);
-            nextStage = nextStage + 1;
+            // nextStage = nextStage + 1;
             break;
         default:
             displayStory("please enter choice");
@@ -96,8 +96,17 @@ var biffOrGriff = function (currentInput) {
     for (var i = 0; i < charChoice.length; i++ ) {
         if (currentInput === charChoice[i]) {
             msg = charMsg[i];
-            // nextStage = 2;
+            // CHECK NEXT STAGE VALUE
+            console.log("nextstage value in biffOrGriff function: ", nextStage);
+            // UPDATE NEXT STAGE VALUE
+            nextStage = nextStage + 1;
+            console.log("nextstage value in year function after update: ", nextStage);
+            // CLEAR INPUT BOX
+            document.querySelector('#input').value="";
             return msg;
+        } else {
+            document.querySelector('#input').value="";
+            console.log("nextstage value in biffOrGriff function after else: ", nextStage);
         }
     }
     // CLEAR INPUT BOX
@@ -108,9 +117,16 @@ var biffOrGriff = function (currentInput) {
 var stayRun = function (currentInput) {
     for (var i = 0; i < fightFlightChoice.length; i++ ) {
         if (currentInput == fightFlightChoice[i]) {
-            var msg = fightFlightMsg[i];
-            // nextStage = 3;
+            msg = fightFlightMsg[i];
+            console.log("nextstage value in stayRun function: ", nextStage);
+
+            nextStage = nextStage + 1;
+            console.log("nextstage value in stayRun function after update: ", nextStage);
+            document.querySelector('#input').value="";
             return msg;
+        } else {
+            document.querySelector('#input').value="";
+            console.log("nextstage value in stayRun function after else: ", nextStage);
         }
     }
     // CLEAR INPUT BOX
@@ -120,9 +136,16 @@ var stayRun = function (currentInput) {
 var inOrOut = function (currentInput) {
     for (var i = 0; i < inOutChoice.length; i++ ) {
         if (currentInput == inOutChoice[i]) {
-            var msg = inOutMsg[i];
-            // nextStage = 4;
+            msg = inOutMsg[i];
+            console.log("nextstage value in inOrOut function: ", nextStage);
+
+            nextStage = nextStage + 1;
+            console.log("nextstage value in inOrOut function after update: ", nextStage);
+            document.querySelector('#input').value="";
             return msg;
+        } else {
+            document.querySelector('#input').value="";
+            console.log("nextstage value in inOrOut function after else: ", nextStage);
         }
     }
     // CLEAR INPUT BOX
