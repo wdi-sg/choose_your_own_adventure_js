@@ -19,16 +19,28 @@ function locationTravel (id){
             displayQuestButtons();
             break;
         case 4:
-            displayAttackButton();
+            if (places[currentLocationId].enemyLocated && !places[2].sideQuest.questOne.questComplete && places[2].sideQuest.questOne.questAccept){
+                displayGameLogs(`You have encountered enemy: ${places[currentLocationId].enemy.name}. You can choose to attack or move to another location.`);
+                displayAttackButton();
+            }
             break;
         case 7:
-            displayAttackButton();
+            if (places[currentLocationId].enemyLocated && !places[2].sideQuest.questTwo.questComplete && places[2].sideQuest.questTwo.questAccept){
+                    displayGameLogs(`You have encountered enemy: ${places[currentLocationId].enemy.name}. You can choose to attack or move to another location.`);
+                    displayAttackButton();
+            }
             break;
         case 8:
-            displayAttackButton();
+            if (places[currentLocationId].enemyLocated){
+                    displayGameLogs(`You have encountered enemy: ${places[currentLocationId].enemy.name}. You can choose to attack or move to another location.`);
+                    displayAttackButton();
+            }
             break;
         case 11:
-            displayAttackButton();
+            if (places[currentLocationId].enemyLocated && !places[13].sideQuest.questTwo.questComplete && places[13].sideQuest.questTwo.questAccept){
+                    displayGameLogs(`You have encountered enemy: ${places[currentLocationId].enemy.name}. You can choose to attack or move to another location.`);
+                    displayAttackButton();
+            }
             break;
         case 12:
             displayUpgradeButton();
@@ -37,18 +49,20 @@ function locationTravel (id){
             displayQuestButtons();
             break;
         case 14:
-            displayAttackButton();
+            if (places[currentLocationId].enemyLocated && !places[13].sideQuest.questOne.questComplete && places[13].sideQuest.questOne.questAccept){
+                    displayGameLogs(`You have encountered enemy: ${places[currentLocationId].enemy.name}. You can choose to attack or move to another location.`);
+                    displayAttackButton();
+            }
             break;
         case 15:
-            displayAttackButton();
+            if (places[currentLocationId].enemyLocated && !places[13].mainQuest.questComplete && places[13].mainQuest.questAccept){
+                    displayGameLogs(`You have encountered enemy: ${places[currentLocationId].enemy.name}. You can choose to attack or move to another location.`);
+                    displayAttackButton();
+            }
             break;
         default:
             defaultActionButtons();
             break;
-    }
-
-    if (places[currentLocationId].enemyLocated){
-        displayGameLogs(`You have encountered enemy: ${places[currentLocationId].enemy.name}. You can choose to attack or move to another location.`);
     }
 }
 
@@ -65,17 +79,25 @@ var gameStart= function() {
     if (weaponChoice === 1){
         user.weapon = 'Sword';
         user.attack = 20;
-        console.log(user.attack);
     } else if (weaponChoice === 2){
         user.weapon = 'Bow';
         user.attack = 16;
-        console.log(user.attack);
     }
     displayUserDetails();
 }
 
 //Quest Functions
 var mainQuest = function (){
+    if(places[13].mainQuest.questComplete){
+        displayGameLogs(`You have already won the game. Try the Side Quests if you have not done so.`);
+        return;
+    }
+    places[currentLocationId].mainQuest.questAccept=true;
+    if (currentLocationId===13 && places[2].mainQuest.questAccept) {
+        places[2].mainQuest.questAccept=false;
+        places[2].mainQuest.questComplete=true;
+        places[currentLocationId].mainQuest.questAccept=true;
+    }
     displayMainQuest(currentLocationId);
 }
 
@@ -134,9 +156,11 @@ var attack = function (){
             }
             if (places[currentLocationId].enemy.health <=0){
                 user.gold += places[currentLocationId].enemy.reward;
+                places[currentLocationId].enemyLocated===false;
                 displayUserDetails();
                 displayGameLogs(`You have won ${places[currentLocationId].enemy.name}. You have earned ${places[currentLocationId].enemy.reward} gold.`);
                 if (currentLocationId===15){
+                    places[13].mainQuest.questComplete=true;
                     displayGameLogs('You have won the game');
                 }
                 if (user.sideQuest===true){
