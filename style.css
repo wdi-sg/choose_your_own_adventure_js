@@ -1,0 +1,59 @@
+/*body {
+    position: relative;
+}*/
+
+#main {
+    max-width: 90%;
+    margin: 30px auto;
+    text-align: center;
+    /*position: relative;*/
+    font-family: verdana;
+/*    border: solid 1px red;*/
+}
+
+.starter {
+  padding:10px;
+  display:block;
+  margin:20px auto;
+  border:2px solid #8b8b8b;
+  text-align: center;
+  width: 80%;
+  font-size: 20px;
+  position: relative;
+}
+
+p {
+    display: block;
+    margin:20px auto;
+    text-align: center;
+    max-width: 80%;
+    font-size: 20px;
+}
+
+#output{
+  background-color:#f2f2f2;
+  height: 30px;
+  width: 400px;
+}
+
+#display {
+    border: solid 1px grey;
+    width: 70%;
+    margin: 0 auto;
+    /*position: relative;*/
+
+}
+
+
+h3 {
+
+
+}
+
+#scoreboard {
+    font-size: 12px;
+}
+
+#question {
+    font-style: italic;
+}
