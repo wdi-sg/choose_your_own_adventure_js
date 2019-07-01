@@ -75,7 +75,7 @@ var y1985 = function () {
     if (y1985Count < 1) {
             console.log("Entering year 1985-2014");
         y1985Count++;
-        output = "Doc has already destroyed the Time Machine at this point. I guess you'll have to wait around until 2015. What name would you like to go by until then?";
+        output = "Doc has already destroyed the Time Machine at this point, " + playerName + ". I guess you'll have to wait around until 2015. What name would you like to go by until then?";
         console.log(y1985Count);
         display(output);
     } else if (y1985Count === 1) {
@@ -95,7 +95,7 @@ var y1955 = function() {
     if (y1955Count < 1) {
         console.log("Entering year 1955-1984");
         y1955Count++;
-        output = "I see you're a fan of Back to the Future 1. Your future Mom has just asked you to the Enchantment Under the Sea dance. What do you do? \n Please choose between 'Yes', 'No', or 'Set-up: Set her up with George'.";
+        output = "I see you're a fan of Back to the Future 1, " + playerName + ". Your future Mom has just asked you to the Enchantment Under the Sea dance. What do you do? \n Please choose between 'Yes', 'No', or 'Set-up: Set her up with George'.";
         console.log(y1955Count);
         display(output);
     } else if (parsedInput === "yes" && y1955Count === 1) {
@@ -125,7 +125,7 @@ var y1900 = function() {
     if (y1900Count < 1) {
         console.log("Entering year 1954 and earlier");
         y1900Count++;
-        output = "I see you're a fan of Back to the Future 3. You've run out of gas and can't get back to your own time! How do you power the Time Machine? \n Choose between 'Horses', 'Moonshine', or 'Train'.";
+        output = "I see you're a fan of Back to the Future 3, " + playerName + ". You've run out of gas and can't get back to your own time! How do you power the Time Machine? \n Choose between 'Horses', 'Moonshine', or 'Train'.";
         console.log(y1900Count);
         display(output);
     } else if (parsedInput ==="Horses" && y1900Count === 1) {
