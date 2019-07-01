@@ -2,9 +2,7 @@ var getName= function(){
     player.name = prompt("Welcome to class! Please enter your name");
 }
 getName();
-if (player.name === null){
-    getName();
-}
+
 
 
 

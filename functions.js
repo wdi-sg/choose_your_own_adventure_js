@@ -13,7 +13,6 @@ var lunchMeetDone = false;
 
 
 //-------------------------------------------------------------------NAME FUNCTION-----------------
-//                NOTE: CHANGE THIS FROM INPUT TO PROMPT!
 
 var player = {
     name: null,
@@ -21,16 +20,6 @@ var player = {
     guts: 0,
     charm: 0
 };
-
-//function to set playerName
-//no need to call, inserts on input
-var inputHappened = function(currentInput){
-  playerName = currentInput;
-}
-
-
-
-
 
 //------------------------------------------------------------------TIME FUNCTIONS------------------
 
@@ -94,18 +83,19 @@ var displayDay = function(day){
     document.getElementById('dayBox').innerHTML = day;
 }
 
+//UNSUCCESSFUL
+var newWeek = function(dayNumber){
+    if(dayNumber >= 7) {
+        dayNumber = 0;
+    }
+}
+
+
 //functions to add, set and push over the day
 // addDay(daysPassed);
 // properDay(dayNumber);
 // displayDay(day);
 
-var newWeek = function(dayNumber){
-    if (dayNumber >= 7) {
-        dayNumber = 0;
-    } else {
-        return;
-    }
-}
 // all-in-one function to update and push the day, where daysPassed = day you wanna add. dayPassed = 0 to show Monday
 var updateDay = function(daysPassed){
     addDay(daysPassed);
@@ -222,7 +212,8 @@ var pushSec = function(){
 var beforeSchool1 = function(){
     resetPage();
     resetTime();
-    updateDay(0); //initial value
+    updateDay(0);
+    // updateDay(0); //initial value
     updateTime(9); //initial value
     mainText = `You stand in front of 79 Anson Road with a decision to make.`;
     choice0 = "Next";
