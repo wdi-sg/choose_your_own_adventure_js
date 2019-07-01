@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <p class="starter" id="output"></p>
+    <input class="starter" id="input" placeholder="input"/>
+
+    <script>
+      document.querySelector('#input').addEventListener('keyup', function(event){
+        var currentInput = event.target.value;
+        storyStart(currentInput)  <!__ replaced inputHappened here func __>
+      });
+
+      var display = function( data ){
+        var output = document.querySelector('#output');
+        output.innerText = data;
+      }
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>
