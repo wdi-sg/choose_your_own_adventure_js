@@ -4,13 +4,16 @@ let currentLayer = 0;
 let scenario = 0;
 
 let userName = '';
-let userBar = 0;
-let userItems = '-';
+let userBar = '❤️ ❤️ ❤️ ❤️ ❤️';
+let userEnergy = '🔋 🔋 🔋 🔋 🔋';
 let startCounter = '';
 // -------------------------  AWAITING USER INPUT --------
 let inputHappened = (anInput) => {
     let input = anInput.toUpperCase();
 
+    if (input) {
+        displayStory(`Type 's' to Start Game 😨`);
+    }
     if (startCounter === 'username') {
         userName = anInput;
         startCounter = 'start';
@@ -23,12 +26,12 @@ let inputHappened = (anInput) => {
     if (startCounter === 'start'){
         if (input === 'A' || 'B' || 'C' ){
         checkLayers(input);
+        display2(userBar);
+        display3(userEnergy);
         }
     }
     console.log('currentLayer:' + currentLayer)
     console.log('scenario:' + scenario)
-    display2(userBar);
-    display3(userItems);
     event.target.value = '';
 }
 
@@ -49,11 +52,12 @@ let resetGame = () => {
     scenario = 0;
     userName = '';
     startCounter = '';
+    displayStory('');
     display("Game reset. \n Type 's' to play again.");
 }
 // ----------------  CHECK WHAT LAYER & SCENARIO USER IS IN --
 let layerArr = [0,1,2,3,4,5,6,7];
-let layerArrAfter = ['zeroL','oneL','twoL','threeL','fourL','fiveL'];
+let layerArrAfter = ['zeroL','oneL','twoL','threeL','fourL','fiveL','sixL'];
 let layerAfter = '';
 
 let scenarioArr = [0,1,2,3,4,5,6,7,8,9,10];
