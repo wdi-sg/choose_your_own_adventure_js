@@ -1,3 +1,5 @@
+Play game here: https://wilfredloh.github.io/adventure-game/
+
 # Choose Your Own Adventure!
 
 ![https://media.giphy.com/media/3oEjHFzI1y4erDQ4kE/giphy.gif](https://media.giphy.com/media/3oEjHFzI1y4erDQ4kE/giphy.gif)
