@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title></title>
+</head>
+
+<body>
+
+    <header>
+        <button onclick="playSound()">Play sound</button>
+        <button onclick="stopSound()">Stop sound</button>
+    </header>
+
+    <body>
+        <input class="UI" id="input" placeholder="What is your name?"/>
+        <div class="UI" id="output">
+            <p id="outputText"></p>
+        </div>
+    </body>
+
+
+
+
+                    <!-- Assets Only -->
+    <audio hidden autoplay loop="infinite" muted id="bgm">
+        <source src="assets/GCsound.mp3" type="audio/mpeg">
+    </audio>
+    <script src="script.js"></script>
+</body>
+</html>
