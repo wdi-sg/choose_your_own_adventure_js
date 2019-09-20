@@ -18,7 +18,7 @@ var character = {
                 stats: {
                             hp: 60,
                             power: 50,
-                            speed, 90
+                            speed: 90
                         }
             }
 }
@@ -65,16 +65,40 @@ var demon = [{
 //4 paths to choose from, there after each destination is determined by random, will merge paths by using exact same object keys and values.
 var path = [
         {
-            "fire path": [{}, {}, {}]
+            "fire path": [{
+                            "fire path 1": ["human path", "beast path", "god path"]
+                        }, {
+                            "fire path 2": ["god path", "human path", "beast path"]
+                        }, {
+                            "fire path 3": ["beast path", "beast path", "human path"]
+                        }]
         },
         {
-            "water path": [{}, {}, {}]
+            "water path": [{
+                            "water path 1": ["beast path", "beast path", "human path"]
+                        }, {
+                            "water path 2": ["beast path", "human path", "god path"]
+                        }, {
+                            "water path 3": ["human path", "god path", "beast path"]
+                        }]
         },
         {
-            "earth path": [{}, {}, {}]
+            "earth path": [{
+                            "earth path 1": ["human path", "god path", "beast path"]
+                        }, {
+                            "earth path 2": ["god path", "human path", "beast path"]
+                        }, {
+                            "earth path 3": ["beast path", "beast path", "human path"]
+                        }]
         },
         {
-            "wind path": [{}, {}, {}]
+            "wind path": [{
+                            "wind path 1": ["beast path", "beast path", "human path"]
+                        }, {
+                            "wind path 2": ["beast path", "human path", "god path"]
+                        }, {
+                            "wind path 3": ["human path", "beast path", "god path"]
+                        }]
         },
 
 
