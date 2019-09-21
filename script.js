@@ -10,7 +10,7 @@ while (gameStart === true) {
   );
 
   if (Number(yearSelect) >= 2015) {
-    var BifforGriff = prompt(
+    var BorG = prompt(
       "I see you're a fan of Back to the Future 2. Would you rather deal with Biff, or Griff? (B/G)"
     );
     if (BorG.toUpperCase() === "B") {
@@ -54,7 +54,7 @@ while (gameStart === true) {
     }
   } else if (Number(yearSelect) >= 1955 && Number(yearSelect) <= 1984) {
     var danceOption = prompt(
-      "I see you're a fan of Back to the Future 1. Your future Mom has just asked you to the Enchantment Under the Sea dance. What do you do? (Y/N/S)"
+      "I see you're a fan of Back to the Future 1. Your future Mom has just asked you to the Enchantment Under the Sea dance. What do you do? Say yes, no or do something else (Y/N/S)"
     );
 
     if (danceOption.toUpperCase() === "Y") {
@@ -71,7 +71,7 @@ while (gameStart === true) {
       );
     } else {
       prompt("Please enter a valid response.");
-      // go back to danceOption
+     
     }
   } else if (Number(yearSelect) < 1955) {
     var timeMachine = prompt(
