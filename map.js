@@ -3,20 +3,46 @@ console.log("Map working")
 var player = {
     name: null,
     health: 20,
-    rads: 0,
+    battery: 10,
+    radiation: 0,
     item: [],
 }
 
+var red = 150;
+var blue = 150;
+var green = 150;
+var battleIntro = 0;
+var monsterArr = ["Mutant Rat", "Mutant Dog"];
+var gameStart = true;
+var previousPath = 1;
+var previousRoom = "room1";
+var currentPath = 0;
+var currentRoom = "room1";
+var inputPlaceholder = document.querySelector("#input");
+var narration = null;
+var enterToContinue = false;
+
+var Battery = 10
+var Radiation = -1;
+var winCondition = 0;
+var loseCondition = 0;
+var gameEnd = false;
 
 //Display message on the board
 function display(text){
     var outputText = document.getElementById("outputText");
     outputText.innerText = text;
+    var intensity = Battery;
+    red = 15 * intensity;
+    blue = 15 * intensity;
+    green = 15 * intensity;
+    body.style.backgroundColor = `rgb(${red} , ${green} ,${blue})`
     console.log(monsterArr);
     if(gameEnd === true){
         gameOver();
     }
 }
+
 
 function gameOver(){
     var gameoverText = document.getElementById("gameoverText");
@@ -285,32 +311,15 @@ var path = {
     }
 }
 
-var battleIntro = 0;
-var monsterArr = ["Mutant Rat", "Mutant Dog"];
-var gameStart = true;
-var previousPath = 1;
-var previousRoom = "room1";
-var currentPath = 0;
-var currentRoom = "room1";
-var inputPlaceholder = document.querySelector("#input");
-var narration = null;
-var enterToContinue = false;
-
-var Radiation = -1;
-var winCondition = 0;
-var loseCondition = 0;
-var gameEnd = false;
-
-
-
-
 //Function for map
 function game(input){
     console.log('Current Room: ' + currentRoom);
     console.log('Previous Room: ' + previousRoom);
     // Radiation++;
+    Battery--;
+    console.log(`Battery level: ${Radiation}`)
     console.log(`Radiation level: ${Radiation}`);
-    if(Radiation > 5 || player.health <=0){
+    if(Radiation > 5 || player.health <=0 || player.battery <= 0){
         gameOver();
     }
 
