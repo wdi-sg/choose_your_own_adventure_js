@@ -6,13 +6,14 @@ var player = {
     battery: 10,
     radiation: 0,
     item: [],
+    Bullets: 10,
 }
 
 var red = 150;
 var blue = 150;
 var green = 150;
 var battleIntro = 0;
-var monsterArr = ["Mutant Rat", "Mutant Dog"];
+var monsterArr = []//["Mutant Rat", "Mutant Dog"];
 var gameStart = true;
 var previousPath = 1;
 var previousRoom = "room1";
@@ -22,7 +23,8 @@ var inputPlaceholder = document.querySelector("#input");
 var narration = null;
 var enterToContinue = false;
 
-var Battery = 10
+
+var Battery = 12;
 var Radiation = -1;
 var winCondition = 0;
 var loseCondition = 0;
@@ -37,6 +39,18 @@ function display(text){
     blue = 15 * intensity;
     green = 15 * intensity;
     body.style.backgroundColor = `rgb(${red} , ${green} ,${blue})`
+    if (Radiation <= 0) {
+        var vintensity = 0.1;
+    } else if (Radiation < 10){
+        var vintensity = Radiation;
+    } else {
+        var vintensity = 1;
+    }
+    vol = 0.1 * vintensity
+    bgm.muted = false;
+    bgm.play()
+    bgm.volume = vol;
+
     console.log(monsterArr);
     if(gameEnd === true){
         gameOver();
@@ -50,11 +64,11 @@ function gameOver(){
     document.querySelector('#output').style.visibility = "hidden";
     document.querySelector('#outputText').innerText = "";
     document.querySelector('#gameover').style.visibility = "visible";
-    if (Radiation > 5){
+    if (Radiation > 10){
         gameoverText.innerText = "You have died of Radiation Poisoning";
     } else if (player.health <= 0){
         gameoverText.innerText = "You have died.";
-    } else if (winCondition > 0){
+    } else if (winCondition === 1){
         gameoverText.innerText = "You have won the game";
     } else if (loseCondition === 1) {
         gameoverText.innerText = "Without anyone to undertake the task, the Chernobyl Reactor continued to melt towards the pool. The steam explosion caused thousands of tons of radioactive material to be flung across Europe. Millions died a slow and agonizing death.\nUnable to flee Chernobyl in time, you perished along with the millions of casualties.";
@@ -74,7 +88,7 @@ document.querySelector('#input').addEventListener('keypress',function(event){
         switch(enterToContinue){
             case true:
                 enterToContinue = false;
-                if (currentPath != "battle" && currentPath != "postBattle" && currentPath != 1) {
+                if (currentPath != "battle" && currentPath != "postBattle" && currentPath != 1 && currentPath != "battleBattle") {
                     if(monsterArr.length > 0){
                         var encounter = Math.floor((Math.random()*10)+1);
                         console.log(`encounter rolled: ${encounter}`);
@@ -90,7 +104,7 @@ document.querySelector('#input').addEventListener('keypress',function(event){
                     game()
                 }
 
-                if (currentPath === "battle") {
+                if (currentPath === "battle" || currentPath === "battleBoss") {
                     battle();
                     break;
                 }
@@ -123,7 +137,8 @@ document.querySelector('#input').addEventListener('keypress',function(event){
                     console.log(`Monster hp: ${monsterObj[monsterArr[0]]["hp"]}`);
                     battleIntro = 1;
                     display(narration);
-                } else if (input === "gun"){
+                } else if (input === "gun" && player.Bullets > 0){
+                    player.Bullets--;
                     var dmg = Math.floor((Math.random()*3)+6); //6-8dmg
                     monsterObj[monsterArr[0]]["hp"] = monsterObj[monsterArr[0]]["hp"] - dmg;
                     console.log(`Damage dealt: ${dmg}`);
@@ -135,6 +150,27 @@ document.querySelector('#input').addEventListener('keypress',function(event){
                 enterToContinue = true;
                 break;
 
+            case "battleBoss":
+                if (input === "shiv"){
+                    var dmg = Math.floor((Math.random()*3)+3); //3-5dmg
+                    monsterObj["Mutant"]["hp"] = monsterObj["Mutant"]["hp"] - dmg;
+                    console.log(`Damage dealt: ${dmg}`);
+                    narration = `You slashed Mutant for ${dmg} damage! Press enter to continue`
+                    console.log(`Monster hp: ${monsterObj["Mutant"]["hp"]}`);
+                    battleIntro = 1;
+                    display(narration);
+                } else if (input === "gun" && player.Bullets > 0){
+                    player.Bullets--;
+                    var dmg = Math.floor((Math.random()*3)+6); //6-8dmg
+                    monsterObj["Mutant"]["hp"] = monsterObj["Mutant"]["hp"] - dmg;
+                    console.log(`Damage dealt: ${dmg}`);
+                    narration = `You shot Mutant for ${dmg} damage! Press enter to continue`
+                    console.log(`Monster hp: ${monsterObj["Mutant"]["hp"]}`);
+                    battleIntro = 1;
+                    display(narration);
+                }
+                enterToContinue = true;
+                break;
 
             case 0:
                 if (input === "yes"){
@@ -150,6 +186,7 @@ document.querySelector('#input').addEventListener('keypress',function(event){
                     display(narration);
                     break;
                 }
+                break;
 
             case 1:
                 if(input === "right"){
@@ -171,6 +208,7 @@ document.querySelector('#input').addEventListener('keypress',function(event){
                     display(narration);
                     break;
                 }
+                break;
 
             case 2:
                 if(input === "left"){
@@ -201,6 +239,7 @@ document.querySelector('#input').addEventListener('keypress',function(event){
                     display(narration);
                     break;
                 }
+                break;
 
             case 3:
                 if (input === "up"){
@@ -222,6 +261,7 @@ document.querySelector('#input').addEventListener('keypress',function(event){
                     display(narration);
                     break;
                 }
+                break;
 
             case 4:
                 if (input === "left"){
@@ -252,10 +292,7 @@ document.querySelector('#input').addEventListener('keypress',function(event){
                     display(narration);
                     break;
                 }
-
-            //Probably doesn't need because user can just key return. It is a dead end.
-            case 5:
-            case 6:
+                break;
 
             case 7:
                 if (input === "down"){
@@ -277,6 +314,103 @@ document.querySelector('#input').addEventListener('keypress',function(event){
                     display(narration);
                     break;
                 }
+                break;
+
+            case 8:
+                if (input === "right"){
+                    previousRoom = currentRoom;
+                    previousPath = currentPath;
+                    currentRoom = "room9";
+                    currentPath = 9;
+                    enterToContinue = true;
+                    narration = "You have chosen to move right. Press enter to continue"
+                    display(narration);
+                    break;
+                } else if (input === "left") {
+                    previousRoom = currentRoom;
+                    previousPath = currentPath;
+                    currentRoom = "room10";
+                    currentPath = 10;
+                    enterToContinue = true;
+                    narration = "You have chosen to move left. Press enter to continue"
+                    display(narration);
+                    break;
+                } else if (input === "down") {
+                    previousRoom = currentRoom;
+                    previousPath = currentPath;
+                    currentRoom = "room7";
+                    currentPath = 7;
+                    enterToContinue = true;
+                    narration = "You have chosen to move down. Press enter to continue"
+                    display(narration);
+                    break;
+                }
+                break;
+
+            case 10:
+                if (input === "down"){
+                    previousRoom = currentRoom;
+                    previousPath = currentPath;
+                    currentRoom = "room12";
+                    currentPath = 12;
+                    enterToContinue = true;
+                    narration = "You have chosen to move down. Press enter to continue"
+                    display(narration);
+                    break;
+                } else if (input === "up") {
+                    previousRoom = currentRoom;
+                    previousPath = currentPath;
+                    currentRoom = "room11";
+                    currentPath = 11;
+                    enterToContinue = true;
+                    narration = "You have chosen to move up. Press enter to continue"
+                    display(narration);
+                    break;
+                } else if (input === "right") {
+                    previousRoom = currentRoom;
+                    previousPath = currentPath;
+                    currentRoom = "room8";
+                    currentPath = 8;
+                    enterToContinue = true;
+                    narration = "You have chosen to move right. Press enter to continue"
+                    display(narration);
+                    break;
+                } else if (input === "left") {
+                    previousRoom = currentRoom;
+                    previousPath = currentPath;
+                    currentRoom = "room13";
+                    currentPath = 13;
+                    enterToContinue = true;
+                    narration = "You have chosen to move left. Press enter to continue"
+                    display(narration);
+                    break;
+                }
+                break;
+
+            case 12:
+                if (input === "left"){
+                    previousRoom = currentRoom;
+                    previousPath = currentPath;
+                    currentRoom = "room14";
+                    currentPath = 14;
+                    enterToContinue = true;
+                    narration = "You have chosen to move left. Press enter to continue"
+                    display(narration);
+                    break;
+                } else if (input === "up") {
+                    previousRoom = currentRoom;
+                    previousPath = currentPath;
+                    currentRoom = "room10";
+                    currentPath = 10;
+                    enterToContinue = true;
+                    narration = "You have chosen to move up. Press enter to continue"
+                    display(narration);
+                    break;
+                }
+                break;
+
+            case 14:
+                battle();
         }
     }
 })
@@ -317,9 +451,9 @@ function game(input){
     console.log('Previous Room: ' + previousRoom);
     // Radiation++;
     Battery--;
-    console.log(`Battery level: ${Radiation}`)
+    console.log(`Battery level: ${Battery}`)
     console.log(`Radiation level: ${Radiation}`);
-    if(Radiation > 5 || player.health <=0 || player.battery <= 0){
+    if(Radiation > 10 || player.health <=0){
         gameOver();
     }
 
@@ -408,6 +542,73 @@ function game(input){
             break;
 
         case 8:
+            narration = `You are now in ${path["wetroom"][currentRoom]}. You see a path to the right, left and down`;
+            if(path["visited"][currentRoom] === true){
+                narration = `${narration}\nYou have been here before.`;
+            }
+            narration = `${narration}\n\nChoose:\nright\nleft\ndown`;
+            path["visited"][currentRoom] = true;
+            display(narration)
+            break;
+
+        case 9:
+            narration = `You are now in ${path["wetroom"][currentRoom]}. It is a dead end`;
+            if(path["visited"][currentRoom] === true){
+                narration = `${narration}\nYou have been here before.`;
+            }
+            narration = `${narration}\n\nChoose:\nreturn`;
+            path["visited"][currentRoom] = true;
+            display(narration)
+            break;
+
+        case 10:
+            narration = `You are now in ${path["wetroom"][currentRoom]}. You see a path in all four corners`;
+            if(path["visited"][currentRoom] === true){
+                narration = `${narration}\nYou have been here before.`;
+            }
+            narration = `${narration}\n\nChoose:\nup\ndown\nleft\nright`;
+            path["visited"][currentRoom] = true;
+            display(narration)
+            break;
+
+        case 11:
+            narration = `You are now in ${path["wetroom"][currentRoom]}. It is a dead end`;
+            if(path["visited"][currentRoom] === true){
+                narration = `${narration}\nYou have been here before.`;
+            }
+            narration = `${narration}\n\nChoose:\nreturn`;
+            path["visited"][currentRoom] = true;
+            display(narration)
+            break;
+
+        case 12:
+            narration = `You are now in ${path["wetroom"][currentRoom]}. It is a long and dark tunnel, turning abruptly leftwards. Continue forward?`;
+            if(path["visited"][currentRoom] === true){
+                narration = `${narration}\nYou have been here before.`;
+            }
+            narration = `${narration}\n\nChoose:\nleft\nup`;
+            path["visited"][currentRoom] = true;
+            display(narration)
+            break;
+
+        case 13:
+            narration = `You are now in ${path["wetroom"][currentRoom]}. It is a dead end`;
+            if(path["visited"][currentRoom] === true){
+                narration = `${narration}\nYou have been here before.`;
+            }
+            narration = `${narration}\n\nChoose:\nreturn`;
+            path["visited"][currentRoom] = true;
+            display(narration)
+            break;
+
+        case 14:
+            narration = `You are now in ${path["wetroom"][currentRoom]}. It is the Valve Hall!`;
+            narration = `${narration}\n\nPress enter to continue`;
+            path["visited"][currentRoom] = true;
+            display(narration)
+            break;
+
+        case 15:
             narration = 'Game over';
             display(narration);
             break;
@@ -423,39 +624,67 @@ if (gameStart === true){
 var monsterObj = {
     "Mutant Rat":{
         hp: 10,
-        dmg: Math.floor((Math.random()*2)+1),
+        dmg: Math.floor((Math.random()*3)+1), //1-3 dmg
     },
     "Mutant Dog": {
         hp: 15,
-        dmg: Math.floor((Math.random()*2)+4),
+        dmg: Math.floor((Math.random()*3)+2), //2-4 dmg
+    },
+    "Mutant": {
+        hp: 20,
+        dmg: Math.floor((Math.random()*4)+4), //4-7 dmg
     }
 }
 
 
 function battle(){
-    if(monsterObj[monsterArr[0]]["hp"]>0){
-        if (battleIntro === 0){
-            currentPath = "battle"
-            narration = `A wild ${monsterArr[0]} appeared! What would you do?`
-            battleIntro = 1
-        } else if (battleIntro === 1){
-            var damage = monsterObj[monsterArr[0]]["dmg"];
-            console.log(`Damage taken ${damage}`);
-            narration = `The ${monsterArr[0]} attacked you for ${damage} damage! What do you do next?`
-            player.health = player.health - damage;
-            console.log(`Player Health: ${player.health}`);
-            battleIntro = 2;
+    if(currentPath === 14 || currentPath === "battleBoss"){
+        if(monsterObj["Mutant"]["hp"] > 0){
+            if (battleIntro === 0){
+                currentPath = "battleBoss"
+                narration = `A Mutant has followed and attacks you! What would you do?`
+            } else if (battleIntro === 1){
+                var damage = monsterObj["Mutant"]["dmg"];
+                console.log(`Damage taken ${damage}`);
+                narration = `The Mutant attacked you for ${damage} damage! What do you do next?`
+                player.health = player.health - damage;
+                console.log(`Player Health: ${player.health}`);
+                battleIntro = 2;
+            }
+            if (player.Bullets > 0){
+                narration = narration + "\ngun"
+            }
+            narration = narration + "\nshiv";
+        } else {
+            winCondition = 1;
+            gameOver();
         }
-        narration = narration + "\nshiv\ngun";
-    } else {
-        console.log("It is dead")
-        narration = `The monster died. Press enter to continue`;
-        monsterArr.shift();
-        battleIntro = 0;
-        enterToContinue = true;
-        currentPath = "postBattle";
     }
-    console.log(currentPath);
-    console.log(previousPath);
+
+    // if(monsterObj[monsterArr[0]]["hp"]>0){
+    //     if (battleIntro === 0){
+    //         currentPath = "battle"
+    //         narration = `A wild ${monsterArr[0]} appeared! What would you do?`
+    //     } else if (battleIntro === 1){
+    //         var damage = monsterObj[monsterArr[0]]["dmg"];
+    //         console.log(`Damage taken ${damage}`);
+    //         narration = `The ${monsterArr[0]} attacked you for ${damage} damage! What do you do next?`
+    //         player.health = player.health - damage;
+    //         console.log(`Player Health: ${player.health}`);
+    //         battleIntro = 2;
+    //     }
+    //     if (player.Bullets > 0){
+    //         narration = narration + "\ngun"
+    //     }
+    //     narration = narration + "\nshiv";
+    // } else {
+    //     console.log("It is dead")
+    //     narration = `The monster died. Press enter to continue`;
+    //     monsterArr.shift();
+    //     battleIntro = 0;
+    //     enterToContinue = true;
+    //     currentPath = "postBattle";
+    // }
+    console.log(`Player bullets: ${player.Bullets}`)
     display(narration);
 }

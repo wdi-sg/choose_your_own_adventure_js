@@ -18,3 +18,7 @@ body{
 #outputText{
 	color: white;
 }
+
+#id, #gameover{
+	background-color: white;
+}
