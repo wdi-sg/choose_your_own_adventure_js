@@ -1,13 +1,41 @@
 
 console.log("hello script js");
 
+
 const input = document.getElementById("input");
 input.placeholder = "Please type your name.";
 var inputValues = {
     name:"",
-    door:"",
-    issue:"",
-    boolean:""
+    door:[
+        healthInsurance:{
+            age:{
+                subTwenty:""
+                subForty:""
+                superForty:""
+            },
+            BMI:{
+                under:"",
+                average:"",
+                over:""
+            },
+
+            hobby: {
+                swimWithSharks:"",
+                danceWithSnakes:"",
+                baseJump:""
+            }
+        },
+        familyInsurance:{
+            married:"";
+            kids: "";
+            pets: {
+                sloth:"",
+                orca:"",
+                alligator:""
+            }
+        }
+    ],
+
 };
 var inputCount = 0;
 
@@ -41,5 +69,19 @@ var inputHappened = function(currentInput){
     } else {
         return `Please type either "H" or "F".`
     }
+
+    if (inputCount === 2 && input.value === "A"){
+
+    }
+
+
+
+
+
+
+
+
+
+
 
 };
