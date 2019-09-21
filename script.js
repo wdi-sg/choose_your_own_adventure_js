@@ -23,18 +23,19 @@ var inputHappened = function(currentInput){
 		console.log(storyCount);
 	} else if (storyCount === 1) {
 		name = currentInput;
-		output = "Welcome " + name + ", You wake up in a dark cave. Feeling disorientated, you look around the cave and see three tunnels. Which tunnel will you pick? (L/C/R) \n L eft \n C enter \n R ight";
+		output = "Welcome " + name + ". You wake up in a dark cave. Feeling disorientated, you look around the cave and see three tunnels. Which tunnel will you pick? (L/C/R) \n L eft \n C enter \n R ight";
 		storyCount ++;
 		console.log(storyCount);
 	} else if (storyCount === 2) {
 		output = partA(currentInput);
 		console.log(storyCount);
-	} else if (storyCount === 3) {
+	} else {
 		output = partB(currentInput);
-		console.log(storyCount);
-	} else if (storyCount === 4) {
-		output = partC(currentInput);
-	}
+    console.log(storyCount);
+  }
+	// } else if (storyCount === 4) {
+	// 	output = partC(currentInput);
+	// }
 		return output;
 };
 
@@ -43,10 +44,10 @@ var partA = function(option){
 	output = "You, " + name + ", entered a brightly lit room with matching furnitures. Light is provided by table lamps. Among the first things you notice walking in are an unusual lamp, a large floor mirror, and a black metal door.\n\n What will you do next?(R/S/O)\n R ub the lamp\n S tare into the mirror\n O pen the door";
 	storyCount ++;
 	} else if (option === "C") {
-	output = "At the end of the tunnel is a forest. The forest was small, crowded, and primal. Its canopy was claimed by larch, cedar, and magnolia, who gave just enough light a chance to descent for an overabundance of plants to flourish in the soft, rich soils below.\n In the distance, you see a woman by the river beckoning you come over. A clamor of wild noises, most of which were fleeing animals, echoed in the air, and were out of sync with the swaying of tree tops in the wind.\n\n Now, " + name + ", what is your next move? (W/G/M) W alk towards the sound of wild noises\n G o towards the woman\n M ove away from the sound and the woman";
+	output = "At the end of the tunnel is a forest. The forest was small, crowded, and primal. Its canopy was claimed by larch, cedar, and magnolia, who gave just enough light a chance to descent for an overabundance of plants to flourish in the soft, rich soils below.\n\n In the distance, you see a woman by the river beckoning you come over. A clamor of wild noises, most of which were fleeing animals, echoed in the air, and were out of sync with the swaying of tree tops in the wind.\n\n Now, " + name + ", what is your next move? (W/G/M)\n W alk towards the noises\n G o towards the woman\n M ove away from the sound and the woman";
 	storyCount ++;
 	} else if (option === "R") {
-	output = "You, " + name + ", exit the tunnel through a tall pair of granite doors. Beyond the pair of granite doors lies a large, broken room. It's covered in large bones, dirt and broken stone. Your torch allows you to see broken arrows, rusty swords and the remains of several humans. At the far end of the room, you see a chest in pristine condition. You step closer to inspect it. Wait, you hear a loud bang in the distance from which you came from.\n\n What will you do next? (C/P/I)\n Check the corpses.\n P lunder the chest\n Investigate the loud bang";
+	output = "You, " + name + ", exit the tunnel through a tall pair of granite doors. Beyond the pair of granite doors lies a large, broken room. It's covered in large bones, dirt and broken stone. Your torch allows you to see broken arrows, rusty swords and the remains of several humans. At the far end of the room, you see a chest in pristine condition. You step closer to inspect it. Wait, you hear a loud bang in the distance from which you came from.\n\n What will you do next? (C/P/I)\n C heck the corpses.\n P lunder the chest\n I nvestigate the loud bang";
 	storyCount ++;
 	} else {
 	output = output + "\nThis is not an option";
@@ -57,42 +58,50 @@ var partA = function(option){
 var partB = function(option){
 	var randomNum = Math.floor(Math.random() * 10);
 	if (option === "R") {
-		output = "You rubbed the lamp. Smoke starts to billow out of the lamp. When the smoke clears, you realised that a man has appeared in the room.\n\n" + npcDescriptionMale[randomNum] + "\n\nHe turns to you and says \"Greetings " + name + ". I have been imprisoned in the lamp for centuries. It's about time someone came along and set me free. Hand the lamp over and I will grant you a wish.\"\n\n (H/M/F)\n H and the lamp over\n M ake a wish\n F ight him";
-		storyCount ++;
+		output = "You rubbed the lamp. Smoke starts to billow out of the lamp. When the smoke clears, you realised that a man has appeared in the room.\n\n" + npcDescriptionMale[randomNum] + "\n\nHe turns to you and says \"Greetings " + name + ". I have been imprisoned in the lamp for centuries. It's about time someone came along and take my place.\"\n\nThe lamp begins to start up like a really ancient vaccum.\n\nYour score is " + score + ".\n\n Enter any key to start over";
+		storyCount = 0;
+		score = 0;
 	} else if (option === "S"){
-		output = "You stare into the mirror and instead of your own reflection, you see a man looking back at you.\n\n" + npcDescriptionFemale[randomNum] + "\n\nShe turns to you and says \"Hello " + name + ". Break the mirror and I will lead you out of this place.\"\n (B/R/Q)\n B reak the mirror\n R efuse her\n B ack away slowly";
-		storyCount ++;
+		output = "You peer into the floor mirror and instead of your own reflection, you see a woman looking back at you.\n\n" + npcDescriptionFemale[randomNum] + "\n\nShe turns to you and says \"Hello " + name + ". I have been waiting for you to arrive.\" She reachs out of the floor mirror and pulls you under to join her for eternity. Stuck in mirror with a stranger.\n\n Your score is " + score + ".\n\n Enter any key to start over";
+		storyCount = 0;
+		score = 0;
 	} else if (option === "O"){
-		output = "You try to open the door but it is stuck. You muster up your strength and pull harder. The door collapsed crushing you in the process.\n\n Game Over " + name + ".\n\n Your score is " + score + ". Better luck next time.\n\n Enter any key to start over";
+		output = "You try to open the door but it is stuck. You muster up your strength and pull harder. The door collapsed crushing you in the process.\n\n Game Over, " + name + ".\n\n Your score is " + score + ". Better luck next time.\n\n Enter any key to start over";
 		storyCount = 0;
 		score = 0;
 	} else if (option === "W") {
-		output = "You rubbed the lamp. Smoke starts to billow out of the lamp. When the smoke clears, you realised that a woman has appeared in the room.\n\n" + npcDescriptionFemale[randomNum] + "\n\nShe turns to you and says \"Greetings " + name + ". I have been imprisoned in the lamp for centuries. It's about time someone came along and set me free. Hand the lamp over and I will grant you a wish.\"\n\n (H/M/F)\n H and the lamp over\n Make a the wish\n F ight her" ;
-		storyCount ++;
+    output = "You decide to head towards the noise of fleeing animals and got trampled to death in the stampede. Not a smart choice, " + name + ". You died.\n\n Your score is " + score + ". Better luck next time.\n\n Enter any key to start over";
+    storyCount = 0;
+		score = 0;
 	} else if (option === "G"){
-		output = "You stare into the mirror and instead of your own reflection, you see a woman looking back at you.\n\n" + npcDescriptionFemale[randomNum] + "\n\nShe turns to you and says \"Hello " + name + ". Break the mirror and I will lead you out of this place.\"\n (H/E/A/F)\n H and the lamp over\n E scape towards the door\n A sk about the wish\n F ight her";
-		storyCount ++;
+		output = "You make your way towards the woman by the river.\n\n" + npcDescriptionFemale[randomNum] + "\n\nShe smiles as you move closer. The ground beneath you gave way and you are impaled by a cluster of razor sharp stakes. Seems like the woman is a cannibal. Death by imapling.\n\n Your score is " + score + ". Better luck next time.\n\n Enter any key to start over";
+    storyCount = 0;
+		score = 0;
 	} else if (option === "M"){
-		output = " You muster up your strength and pull harder. The door slowly opens revealing another room. \n\n" + npcDescriptionFemale[randomNum] + "\n\n (H/E/A/F)\n H and the lamp over\n E scape towards the door\n A sk about the wish\n F ight her";
-		storyCount ++;
+		output = "Ignoring the woman and the sound of fleeing animals, you walk in the opposite direction. As you make your way around an enomous tree, you come face to face with a dragon.\n\nBefore you can move a muscle, you were swallowed whole by the dragon. You've died.\n\n" + "Your score is " + score + ". Better luck next time, " + name + ".\n\n Enter any key to start over";
+		storyCount = 0;
+		score = 0;
 	} else if (option === "C") {
-		output = "You rubbed the lamp. Smoke starts to billow out of the lamp. When the smoke clears, you realised that a woman has appeared in the room.\n\n" + npcDescriptionFemale[randomNum] + "\n\nShe turns to you and says \"Greetings " + name + ". I have been imprisoned in the lamp for centuries. It's about time someone came along and set me free. Hand the lamp over and I will grant you a wish.\"\n\n (H/M/F)\n H and the lamp over\n Make a the wish\n F ight her" ;
-		storyCount ++;
+		output = "When you flip over one of the corpses, it opens it's eyes and let out a hungry moan\"Zonbi cerebellum tattered for brein solum oculi cerveau eorum defunctis cerebro go lum cerebro.\"\n\nThe zombie proceeds to take a bite out of your hand.\n\n Congratulations " + name + ", you have joined the army of the dead.\n\n" + "Your score is " + score + ". Better luck next time, " + name + ".\n\n Enter any key to start over";
+		storyCount = 0;
+		score = 0;
 	} else if (option === "P"){
-		output = "You stare into the mirror and instead of your own reflection, you see a woman looking back at you.\n\n" + npcDescriptionFemale[randomNum] + "\n\nShe turns to you and says \"Hello " + name + ". Break the mirror and I will lead you out of this place.\"\n (H/E/A/F)\n H and the lamp over\n E scape towards the door\n A sk about the wish\n F ight her";
-		storyCount ++;
+		output = "As you open the chest, you are quickly grabbed and chewed on by the mimic.\n\nMimics punish greed, taking on the form of chests and gorging on any who seek their hoard. Avarice is their nature.\n\n" + "Your score is " + score + ". Better luck next time, " + name + ".\n\n Enter any key to start over";;
+		storyCount = 0;
+		score = 0;
 	} else if (option === "I"){
-		output = " You muster up your strength and pull harder. The door slowly opens revealing another room. \n\n" + npcDescriptionFemale[randomNum] + "\n\n (H/E/A/F)\n H and the lamp over\n E scape towards the door\n A sk about the wish\n F ight her";
-		storyCount ++;
+		output = " You turn around to see what caused the loud bang. Your eyes widen in shock a split second before a massive boulder rolls over you.\n\n" + name + ", you are now as flat as a pancake.\n\n" + "Your score is " + score + ". Better luck next time, " + name + ".\n\n Enter any key to start over";
+		storyCount = 0;
+		score = 0;
 	} else {
 		output + "\nThis is not an option";
 	}
 	return output;
 }
 
-var partC = function(option) {
+// var partC = function(option) {
 
-}
+// }
 
 // name, world status, score(int), total score(int), health(int), damage(int),
 
