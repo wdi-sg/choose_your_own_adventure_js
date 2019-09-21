@@ -1,35 +1,43 @@
 console.log("Map working")
 
+var player = {
+    name: null,
+    health: 20,
+    rads: 0,
+    item: [],
+}
+
 
 //Display message on the board
 function display(text){
     var outputText = document.getElementById("outputText");
     outputText.innerText = text;
+    console.log(monsterArr);
     if(gameEnd === true){
         gameOver();
     }
 }
 
-// function gameOver(){
-//     var gameoverText = document.getElementById("gameoverText");
-//     document.querySelector('.UI').style.visibility = "hidden";
-//     document.querySelector('#output').style.visibility = "hidden";
-//     document.querySelector('#outputText').innerText = "";
-//     document.querySelector('#gameover').style.visibility = "visible";
-//     if (Radiation > 5){
-//         gameoverText.innerText = "You have died of Radiation Poisoning";
-//     } else if (player.health <= 0){
-//
-//     } else if (winCondition > 0){
-//         gameoverText.innerText = "You have won the game";
-//     } else if (loseCondition === 1) {
-//         gameoverText.innerText = "Without anyone to undertake the task, the Chernobyl Reactor continued to melt towards the pool. The steam explosion caused thousands of tons of radioactive material to be flung across Europe. Millions died a slow and agonizing death.\nUnable to flee Chernobyl in time, you perished along with the millions of casualties.";
-//     }
-//     // var reload = setTimeout(window.prompt("Do you want to reload?"),5000);
-//     // if (reload === "yes"){
-//     //     window.location.reload();
-//     // } Just create a button like sound button, that allows user to replay.
-// }
+function gameOver(){
+    var gameoverText = document.getElementById("gameoverText");
+    document.querySelector('.UI').style.visibility = "hidden";
+    document.querySelector('#output').style.visibility = "hidden";
+    document.querySelector('#outputText').innerText = "";
+    document.querySelector('#gameover').style.visibility = "visible";
+    if (Radiation > 5){
+        gameoverText.innerText = "You have died of Radiation Poisoning";
+    } else if (player.health <= 0){
+        gameoverText.innerText = "You have died.";
+    } else if (winCondition > 0){
+        gameoverText.innerText = "You have won the game";
+    } else if (loseCondition === 1) {
+        gameoverText.innerText = "Without anyone to undertake the task, the Chernobyl Reactor continued to melt towards the pool. The steam explosion caused thousands of tons of radioactive material to be flung across Europe. Millions died a slow and agonizing death.\nUnable to flee Chernobyl in time, you perished along with the millions of casualties.";
+    }
+    // var reload = setTimeout(window.prompt("Do you want to reload?"),5000);
+    // if (reload === "yes"){
+    //     window.location.reload();
+    // } Just create a button like sound button, that allows user to replay.
+}
 
 //Take input
 document.querySelector('#input').addEventListener('keypress',function(event){
@@ -40,23 +48,40 @@ document.querySelector('#input').addEventListener('keypress',function(event){
         switch(enterToContinue){
             case true:
                 enterToContinue = false;
-                if(monsterArr.length === 0){
-                    encounter = Math.random();
-                    console.log(`encounter rolled: ${encounter}`);
+                if (currentPath != "battle" && currentPath != "postBattle" && currentPath != 1) {
+                    if(monsterArr.length > 0){
+                        var encounter = Math.floor((Math.random()*10)+1);
+                        console.log(`encounter rolled: ${encounter}`);
+                        if (10 > encounter){
+                            battle();
+                            break;
+                        }
+                    }
                 }
+
+                if (currentPath === "postBattle") {
+                    currentPath = previousPath;
+                    game()
+                }
+
                 if (currentPath === "battle") {
                     battle();
                     break;
                 }
+
                 game();
                 break;
         }
 
         if (input === "return") {
-            var tmp;
-            tmp = currentRoom;
+            var tmpR;
+            var tmpP;
+            tmpR = currentRoom;
             currentRoom = previousRoom;
-            previousRoom = tmp
+            previousRoom = tmpR;
+            tmpP = currentPath;
+            currentPath = previousPath;
+            previousPath = tmpP
             enterToContinue = true;
             narration = `You have chosen to return to the ${path["room"][currentRoom]}. Press enter to continue`;
             display(narration);
@@ -265,12 +290,12 @@ var monsterArr = ["Mutant Rat", "Mutant Dog"];
 var gameStart = true;
 var previousPath = 1;
 var previousRoom = "room1";
-var currentPath = "battle";
+var currentPath = 0;
 var currentRoom = "room1";
 var inputPlaceholder = document.querySelector("#input");
 var narration = null;
 var enterToContinue = false;
-var encounter = 0;
+
 var Radiation = -1;
 var winCondition = 0;
 var loseCondition = 0;
@@ -279,129 +304,129 @@ var gameEnd = false;
 
 
 
-// //Function for map
-// function game(input){
-//     console.log('Current Room: ' + currentRoom);
-//     console.log('Previous Room: ' + previousRoom);
-//     // Radiation++;
-//     console.log(`Radiation level: ${Radiation}`);
-//     if(Radiation > 5 || player.health <=0){
-//         gameOver();
-//     }
+//Function for map
+function game(input){
+    console.log('Current Room: ' + currentRoom);
+    console.log('Previous Room: ' + previousRoom);
+    // Radiation++;
+    console.log(`Radiation level: ${Radiation}`);
+    if(Radiation > 5 || player.health <=0){
+        gameOver();
+    }
 
 
-//     switch(winCondition){
-//         case 1:
-//             narration = "You have won the game".
-//             gameEnd = true;
-//             display(narration);
-//     }
+    switch(winCondition){
+        case 1:
+            narration = "You have won the game".
+            gameEnd = true;
+            display(narration);
+    }
 
-//     switch(currentPath){
-//         case 0:
-//             narration = "The year is 1986. The Chernobyl Nuclear Plant has just exploded, leaking radiation as far out as Sweden. You are an employee of the Nuclear plant, and have just received a message from your superiors.\n\nAccording to the Soviet Union's team of best physicists, the molten residue is melting through the ground towards a pool of water coolant. If the lava touches the water, it would cause a steam eruption that could render half of Europe inhospitable for thousands of year.\n\nThere were many volunteers to stop this from happening, but no one else knows where the correct valves to drain the pool was. Should you choose to accept this mission, you will most likely die.\n\nAccept this mission?\n- yes\n- no";
-//             display(narration);
-//             break;
+    switch(currentPath){
+        case 0:
+            narration = "The year is 1986. The Chernobyl Nuclear Plant has just exploded, leaking radiation as far out as Sweden. You are an employee of the Nuclear plant, and have just received a message from your superiors.\n\nAccording to the Soviet Union's team of best physicists, the molten residue is melting through the ground towards a pool of water coolant. If the lava touches the water, it would cause a steam eruption that could render half of Europe inhospitable for thousands of year.\n\nThere were many volunteers to stop this from happening, but no one else knows where the correct valves to drain the pool was. Should you choose to accept this mission, you will most likely die.\n\nAccept this mission?\n- yes\n- no";
+            display(narration);
+            break;
 
-//         case 1:
-//             narration = `You are now in ${path["room"][currentRoom]}. You see a path to the left or right`;
-//             if(path["visited"][currentRoom] === true){
-//                 narration = `${narration}\nYou have been here before.`;
-//             }
-//             narration = `${narration}\n\nChoose:\nleft\nright`;
-//             path["visited"][currentRoom] = true;
-//             display(narration);
-//             break;
+        case 1:
+            narration = `You are now in ${path["room"][currentRoom]}. You see a path to the left or right`;
+            if(path["visited"][currentRoom] === true){
+                narration = `${narration}\nYou have been here before.`;
+            }
+            narration = `${narration}\n\nChoose:\nleft\nright`;
+            path["visited"][currentRoom] = true;
+            display(narration);
+            break;
 
-//         case 2:
-//             narration = `You are now in ${path["room"][currentRoom]}. You see a path to the right, left and up.`;
-//             if(path["visited"][currentRoom] === true){
-//                 narration = `${narration}\nYou have been here before.`;
-//             }
-//             narration = `${narration}\n\nChoose:\nright\nleft\nup`;
-//             path["visited"][currentRoom] = true;
-//             display(narration)
-//             break;
+        case 2:
+            narration = `You are now in ${path["room"][currentRoom]}. You see a path to the right, left and up.`;
+            if(path["visited"][currentRoom] === true){
+                narration = `${narration}\nYou have been here before.`;
+            }
+            narration = `${narration}\n\nChoose:\nright\nleft\nup`;
+            path["visited"][currentRoom] = true;
+            display(narration)
+            break;
 
-//         case 3:
-//             narration = `You are now in ${path["room"][currentRoom]}. You see a path to the right, left, and up.`;
-//             if(path["visited"][currentRoom] === true){
-//                 narration = `${narration}\nYou have been here before.`;
-//             }
-//             narration = `${narration}\n\nChoose:\nright\nleft\nup`;
-//             path["visited"][currentRoom] = true;
-//             display(narration)
-//             break;
+        case 3:
+            narration = `You are now in ${path["room"][currentRoom]}. You see a path to the right, left, and up.`;
+            if(path["visited"][currentRoom] === true){
+                narration = `${narration}\nYou have been here before.`;
+            }
+            narration = `${narration}\n\nChoose:\nright\nleft\nup`;
+            path["visited"][currentRoom] = true;
+            display(narration)
+            break;
 
-//         case 4:
-//             narration = `You are now in ${path["room"][currentRoom]}. You see a path to the right, left and up.`;
-//             if(path["visited"][currentRoom] === true){
-//                 narration = `${narration}\nYou have been here before.`;
-//             }
-//             narration = `${narration}\n\nChoose:\nright\nleft\nup`;
-//             path["visited"][currentRoom] = true;
-//             display(narration)
-//             break;
+        case 4:
+            narration = `You are now in ${path["room"][currentRoom]}. You see a path to the right, left and up.`;
+            if(path["visited"][currentRoom] === true){
+                narration = `${narration}\nYou have been here before.`;
+            }
+            narration = `${narration}\n\nChoose:\nright\nleft\nup`;
+            path["visited"][currentRoom] = true;
+            display(narration)
+            break;
 
-//         case 5:
-//             narration = `You are now in ${path["room"][currentRoom]}. It is a dead end`;
-//             if(path["visited"][currentRoom] === true){
-//                 narration = `${narration}\nYou have been here before.`;
-//             }
-//             narration = `${narration}\n\nChoose:\nreturn`;
-//             path["visited"][currentRoom] = true;
-//             display(narration)
-//             break;
+        case 5:
+            narration = `You are now in ${path["room"][currentRoom]}. It is a dead end`;
+            if(path["visited"][currentRoom] === true){
+                narration = `${narration}\nYou have been here before.`;
+            }
+            narration = `${narration}\n\nChoose:\nreturn`;
+            path["visited"][currentRoom] = true;
+            display(narration)
+            break;
 
-//         case 6:
-//             narration = `You are now in ${path["room"][currentRoom]}. It is a dead end`;
-//             if(path["visited"][currentRoom] === true){
-//                 narration = `${narration}\nYou have been here before.`;
-//             }
-//             narration = `${narration}\n\nChoose:\nreturn`;
-//             path["visited"][currentRoom] = true;
-//             display(narration)
-//             break;
+        case 6:
+            narration = `You are now in ${path["room"][currentRoom]}. It is a dead end`;
+            if(path["visited"][currentRoom] === true){
+                narration = `${narration}\nYou have been here before.`;
+            }
+            narration = `${narration}\n\nChoose:\nreturn`;
+            path["visited"][currentRoom] = true;
+            display(narration)
+            break;
 
-//         case 7:
-//             narration = `You are now in ${path["room"][currentRoom]}. You see a path upwards and downwards`;
-//             if(path["visited"][currentRoom] === true){
-//                 narration = `${narration}\nYou have been here before.`;
-//             }
-//             narration = `${narration}\n\nChoose:\nup\ndown`;
-//             path["visited"][currentRoom] = true;
-//             display(narration)
-//             break;
+        case 7:
+            narration = `You are now in ${path["room"][currentRoom]}. You see a path upwards and downwards`;
+            if(path["visited"][currentRoom] === true){
+                narration = `${narration}\nYou have been here before.`;
+            }
+            narration = `${narration}\n\nChoose:\nup\ndown`;
+            path["visited"][currentRoom] = true;
+            display(narration)
+            break;
 
-//         case 8:
-//             narration = 'Game over';
-//             display(narration);
-//             break;
-//     }
-// }
-
-// if (gameStart === true){
-//     gameStart = false;
-//     game()
-// }
-var player = {
-    name: null,
-    health: 20,
-    rads: 0,
-    item: [],
+        case 8:
+            narration = 'Game over';
+            display(narration);
+            break;
+    }
 }
+
+if (gameStart === true){
+    gameStart = false;
+    game()
+}
+
 
 var monsterObj = {
     "Mutant Rat":{
         hp: 10,
         dmg: Math.floor((Math.random()*2)+1),
     },
+    "Mutant Dog": {
+        hp: 15,
+        dmg: Math.floor((Math.random()*2)+4),
+    }
 }
 
 
 function battle(){
     if(monsterObj[monsterArr[0]]["hp"]>0){
         if (battleIntro === 0){
+            currentPath = "battle"
             narration = `A wild ${monsterArr[0]} appeared! What would you do?`
             battleIntro = 1
         } else if (battleIntro === 1){
@@ -415,10 +440,13 @@ function battle(){
         narration = narration + "\nshiv\ngun";
     } else {
         console.log("It is dead")
-        narration = `The monster died`;
+        narration = `The monster died. Press enter to continue`;
+        monsterArr.shift();
+        battleIntro = 0;
+        enterToContinue = true;
+        currentPath = "postBattle";
     }
+    console.log(currentPath);
+    console.log(previousPath);
     display(narration);
 }
-
-
-battle();
