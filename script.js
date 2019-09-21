@@ -27,15 +27,26 @@ switch (playerData.state) {
 
   case "travelYear":
     playerData.travelYear = parseInt(currentInput);
+    // convert to an integer, and check if the input is valid
     if (isNaN(playerData.travelYear)) {
-      playerData.state = "travelYear";
       return "Please enter a date (YYYY)";
-    // playerData.state = "travelYear";
     }
     else {
     return askFilmDetails(playerData.travelYear);
     break;}
-    }
+
+  case "checkBifforGiff":
+    playerData.checkBifforGiff = currentInput;
+    return checkBifforGiff(playerData.checkBifforGiff);
+    break;
+
+  case "checkBifforGiff":
+    playerData.checkBifforGiff = currentInput;
+    return checkBifforGiff(playerData.checkBifforGiff);
+    break;
+}
+
+
   }
 
 var askTravelYear = function (playerName) {
@@ -67,3 +78,19 @@ var askFilmDetails = function (travelYear) {
      }
   return output;
 }
+
+
+var checkBifforGiff = function (check) {
+  if (check === "B"){
+    var output = playerData.name + ", Hmm, interesting. \nBiff is angry and has a cane. \nDo you stand and fight, or run away like a coward? (S/R)";
+    playerData.state = "pickedBiff";
+   }
+   else  if (check==="G"){
+    var output = playerData.name + ", Griff is asking you if you are in, or out. \nWhat do you say? (I/O)";
+    playerData.state = "pickedGiff";
+   }
+   else {
+         return "Please enter B/G.";
+       }
+     return output;
+   }
