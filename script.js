@@ -10,16 +10,15 @@ var pathTaken = [];
 
 var inputHappened = function(currentInput){
 
+
 //track the current steps the User have taken
 step.push(currentInput);
-console.log(step.length);
-console.log(name);
-console.log(characterChosen);
-console.log(step);
-console.log(pathTaken);
-
-//changing all inputs into lower case
-input = currentInput.toLowerCase();
+console.log("--------------------------")
+console.log("Character name chosen is:  " + name);
+console.log("Character class chosen is: " + characterChosen);
+console.log("No. of steps so far is:    " + step.length);
+console.log("Steps so far are:          " + step);
+console.log("Paths taken so far are:    "+ pathTaken);
 
 
 //step 1 is just to get the name
@@ -30,24 +29,22 @@ if (step.length >= 0 && name === ""){
 }
 
 
-//this IF function makes sure that the user have selected the right class before moving on to select the paths. If step length is more than 2 and characterChosen variable is empty, check if the input is warrior, mage or ranger. If it is not, ask them to type in properly.
-if (step.length >= 2 && characterChosen === ""){
-
+//if there are more than 1 elements in the array, check if the SECOND element is the Character classes or not. If yes, proceed, if not, delete their entry and ask them to input correctly. Change second element to LOWERCASE
+if (step.length > 1){
+    //changing all inputs into lower case
+    input = step[1].toLowerCase();
     if (input === "warrior"){
-        characterChosen = input
-        step[1] = characterChosen;
+        characterChosen = "Warrior"
         var status = JSON.stringify(character.warrior.stats);
-        result = "You have chosen to be a Warrior, your stats are as follows: \n\n" + status + "\n\nYou may now choose the path you would like to take \n(Fire Path / Water Path / Earth Path / Wind Path) \n\nPlease make sure you type in the paths correctly to proceed."
+        result = "You have chosen to be a Warrior, your stats are as follows: \n\n" + status + "\n\nYou may now choose the path you would like to take \n(Fire Path / Water Path / Earth Path / Wind Path)"
     } else if (input === "mage"){
-        characterChosen = input
-        step[1] = characterChosen;
+        characterChosen = "Mage"
         var status = JSON.stringify(character.mage.stats);
-        result = "You have chosen to be a Mage, your stats are as follows: \n\n" + status + "\n\nYou may now choose the path you would like to take \n(Fire Path / Water Path / Earth Path / Wind Path) \n\nPlease make sure you type in the paths correctly to proceed."
+        result = "You have chosen to be a Mage, your stats are as follows: \n\n" + status + "\n\nYou may now choose the path you would like to take \n(Fire Path / Water Path / Earth Path / Wind Path)"
     } else if (input === "ranger"){
-        characterChosen = input
-        step[1] = characterChosen;
+        characterChosen = "Ranger"
         var status = JSON.stringify(character.ranger.stats);
-        result = "You have chosen to be a Ranger, your stats are as follows: \n\n" + status + "\n\nYou may now choose the path you would like to take \n(Fire Path / Water Path / Earth Path / Wind Path) \n\nPlease make sure you type in the paths correctly to proceed."
+        result = "You have chosen to be a Ranger, your stats are as follows: \n\n" + status + "\n\nYou may now choose the path you would like to take \n(Fire Path / Water Path / Earth Path / Wind Path)"
     } else{
         step.pop();
         result = "Please choose the correct input! \n\n(Warrior / Mage / Ranger)";
@@ -55,27 +52,29 @@ if (step.length >= 2 && characterChosen === ""){
 }
 
 
-//beginning to code the path function
+//if there are more than 2 elements in the array, check if the THIRD element is the paths to be taken, if is then proceed, if it's something else then delete their input and prompt them to input correctly. Change third element to LOWERCASE.
 if (step.length > 2){
-    if(step[2] === "fire path"){
-        pathTaken = JSON.stringify(path[0])
+    //changing all inputs into lower case
+    input = step[2].toLowerCase();
+    if(input === "fire path"){
+        pathTaken = "Fire Path"
         console.log(pathTaken);
         result = "The Fire Path is one of searing heat and melting flesh, many demons exist here to test your strength " + name + ". \n\nAs a " + characterChosen + ", this will be a tremendous test indeed, however that will not deter you now will it, " + name + "? \n\n Let us march on forward!"
-    } else if (step[2] === "water path"){
-        pathTaken = JSON.stringify(path[1])
+    } else if (input === "water path"){
+        pathTaken = "Water Path"
         console.log(pathTaken);
         result = "The Water Path is one of crashing waves and crushing depths, many sea monsters exist here to test your strength " + name + ". \n\nAs a " + characterChosen + ", this will be a tremendous test indeed, however that will not deter you now will it, " + name + "? \n\n Let us march on forward!"
-    } else if (step[2] === "earth path"){
-        pathTaken = JSON.stringify(path[2])
+    } else if (input === "earth path"){
+        pathTaken = "Earth Path"
         console.log(pathTaken);
         result = "The Earth Path is one of meteoric avalanches and ambushing cliffs, many rock trolls exist here to test your strength " + name + ". \n\nAs a " + characterChosen + ", this will be a tremendous test indeed, however that will not deter you now will it, " + name + "? \n\n Let us march on forward!"
-    } else if (step[2] === "wind path"){
-        pathTaken = JSON.stringify(path[3])
+    } else if (input === "wind path"){
+        pathTaken = "Wind Paths"
         console.log(pathTaken);
         result = "The Wind Path is one of tearing tornadoes and dizzying heights, many sky beasts exist here to test your strength " + name + ". \n\nAs a " + characterChosen + ", this will be a tremendous test indeed, however that will not deter you now will it, " + name + "? \n\n Let us march on forward!"
     } else {
         step.pop();
-        result = "Please choose the correct input! \n\n(Fire water)"
+        result = "Please choose the correct input! \n\n(Fire Path / Water Path/ Earth Path/ Wind Path)"
     };
 };
 
