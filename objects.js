@@ -65,39 +65,31 @@ var demon = [{
 //4 paths to choose from, there after each destination is determined by random, will merge paths by using exact same object keys and values.
 var path =[
         {
-            fire_path: [{
-                            "fire path 1": ["human path", "beast path", "god path"]
-                        }, {
-                            "fire path 2": ["god path", "human path", "beast path"]
-                        }, {
-                            "fire path 3": ["beast path", "beast path", "human path"]
-                        }]
+            fire_path: [
+                            ["Fire Path 1", "Fire Path 2", "Fire Path 3"],
+                            ["Human Path", "Human Path", "Human Path"],
+                            ["Human Path", "God Path", "Beast Path"]
+                     ]
         },
         {
-            water_path: [{
-                            "water path 1": ["beast path", "beast path", "human path"]
-                        }, {
-                            "water path 2": ["beast path", "human path", "god path"]
-                        }, {
-                            "water path 3": ["human path", "god path", "beast path"]
-                        }]
+            water_path: [
+                            ["Water Path 1", "Water Path 2", "Water Path 3"],
+                            ["Human Path", "Human Path", "Human Path"],
+                            ["Human Path", "God Path", "Beast Path"]
+                     ]
         },
         {
-            earth_path: [{
-                            "earth path 1": ["human path", "god path", "beast path"]
-                        }, {
-                            "earth path 2": ["god path", "human path", "beast path"]
-                        }, {
-                            "earth path 3": ["beast path", "beast path", "human path"]
-                        }]
+            earth_path: [
+                            ["Water Path 1", "Water Path 2", "Water Path 3"],
+                            ["Human Path", "Human Path", "Human Path"],
+                            ["Human Path", "God Path", "Beast Path"]
+                     ]
         },
         {
-            wind_path: [{
-                            "wind path 1": ["beast path", "beast path", "human path"]
-                        }, {
-                            "wind path 2": ["beast path", "human path", "god path"]
-                        }, {
-                            "wind path 3": ["human path", "beast path", "god path"]
-                        }]
+            wind_path: [
+                            ["Water Path 1", "Water Path 2", "Water Path 3"],
+                            ["Human Path", "Human Path", "Human Path"],
+                            ["Human Path", "God Path", "Beast Path"]
+                     ]
         },
 ]
