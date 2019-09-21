@@ -48,16 +48,22 @@ var askFilmDetails = function (travelYear) {
   playerData.travelYear = travelYear;
 // do some date checks
   if (playerData.travelYear >= 2015){
-  var output = playerData.name + ", I see you're a fan of Back to the Future 2. \n Would you rather deal with Biff or Griff? (B/G)";
-   playerData.state = "checkBifforGiff";
+    var output = playerData.name + ", I see you're a fan of Back to the Future 2. \n Would you rather deal with Biff or Griff? (B/G)";
+    playerData.state = "checkBifforGiff";
    }
    else  if (playerData.travelYear >= 1985 && playerData.travelYear <=2014){
-  var output = playerData.name + ", Doc has already destroyed the Time Machine at this point. I guess you'll have to wait around until 2015. What name would you like to go by until then?";
-   playerData.state = "changePastName";
+    var output = playerData.name + ", Doc has already destroyed the Time Machine at this point. \nI guess you'll have to wait around until 2015. \nWhat name would you like to go by until then?";
+    playerData.state = "changePastName";
    }
+   else  if (playerData.travelYear >= 1955 && playerData.travelYear <=1984){
+    var output = playerData.name + ", I see you're a fan of Back to the Future 1. \nYour future Mom has just asked you to the Enchantment Under the Sea dance. \nWhat do you do? (Y/N/S)";
+    playerData.state = "askAboutDance";
+   }
+
 // add the new state for the question asked
     else {
-    var output = "Hi " + playerData.name + ", wI see you're a fan of " + playerData.travelYear;
-    }
+      var output = playerData.name + ", I see you're a fan of Back to the Future 3. \nYou've run out of gas and can't get back to your own time! \nHow do you power the Time Machine? (H/M/T)";
+      playerData.state = "askAboutDance";
+     }
   return output;
 }
