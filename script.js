@@ -24,6 +24,7 @@ var inputHappened = function(currentInput){
     return `Welcome to InsureCo, ${inputValues["name"]}!`
   };
 
+//inputs for type of insurance
 //user wants health insurance
   if (inputCount === 1 && input.value === "H") {
     inputValues["door"] = input.value
@@ -31,6 +32,14 @@ var inputHappened = function(currentInput){
     document.getElementById("question").textContent = "Would you like to tell me about your age, BMI or vices? "
     input.placeholder = "Please input A, B or V."
     return `Thank you for selecting Health insurance, ${inputValues["name"]}!`
-  };
+  } else if (inputCount === 1 && input.value === "F") {
+    inputValues["door"] = input.value
+    inputCount ++;
+    document.getElementById("question").textContent = "Would you like to tell me about your spouse, kids or pets? "
+    input.placeholder = "Please input S, K or P."
+    return `Thank you for selecting Family insurance, ${inputValues["name"]}!`
+    } else {
+        return `Please type either "H" or "F".`
+    }
 
 };
