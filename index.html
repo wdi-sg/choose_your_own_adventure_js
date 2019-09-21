@@ -14,20 +14,6 @@
         </p>
 
     <input class="starter" id="input" placeholder="input"/>
-
-    <script>
-      document.querySelector('#input').addEventListener('change', function(event){
-        var currentInput = event.target.value;
-        var output = inputHappened(currentInput);
-        display( output );
-        event.target.value = "";
-      });
-
-      var display = function( data ){
-        var output = document.querySelector('#output');
-        output.innerText = data;
-      }
-    </script>
     <script src="script.js"></script>
   </body>
 </html>
