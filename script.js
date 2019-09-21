@@ -2,23 +2,22 @@
 
 console.log("hello script js");
 alert('Hello. Welcome to THE \'Adventure to Become the Best Living Guitarist in, like, EVER.\' What is your name? Please type CAREFULLY. You only got ONE shot and stupid names are stored FOREVER.')
-var boxes = {
-    bestBox: {
+var boxes = [{
         item: 'pick',
         power: 9999,
         description: 'gamebreaker'
     },
-    averageBox: {
+            {
         item: 'average',
         power: 100,
         description: 'normal'
     },
-    boxOfJunk: {
+            {
         item: 'junk',
         power: 0,
         description: 'it\'s just a box of junk.'
     }
-}
+]
 var playerName;
 var enteredName = 0;
 var approachAxel = 0;
@@ -26,6 +25,17 @@ var goHome = 0;
 var goBar = 0;
 var getBox = 0;
 var rejectBox = 0;
+var givenBox;
+var randomizeBox = function() {
+    var odds = Math.floor(Math.random() * 10)
+   if (odds >= 1 && odds <= 4) {
+    givenBox = boxes[0];
+   } else if (odds > 4 && odds <= 9) {
+    givenBox = boxes[1];
+   } else if (odds === 9) {
+    console.log('nth')
+   } return givenBox;
+}
 
 var inputHappened = function(currentInput){
     playerName = currentInput;
