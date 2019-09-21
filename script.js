@@ -10,17 +10,19 @@ var inputValues = {
     doorQuestions: "",
     doorAnswers: [
         {
-            age:"",
-            BMI:"",
-            hobby:"",
+            age:null,
+            BMI:null,
+            hobby:null,
         },
         {
-            spouse:"",
-            kids:"",
-            pet:"",
+            spouse:null,
+            kids:null,
+            pet:null,
         }
     ]
 }
+
+
 
 var inputCount = 0;
 
@@ -108,7 +110,38 @@ var inputHappened = function(currentInput){
     }
   };
 
+    if (inputCount === 3){
+    console.log(inputCount);
+        if (inputValues.doorQuestions === "A"){
+            if (input.value > 60){
+            inputValues.doorAnswers[0]["age"] = input.value;
+            return `something about how old you are`
+            } else if (input.value <= 20){
+            inputValues.doorAnswers[0]["age"] = input.value;
+            return `something about how young you are`
+            } else {
+            inputValues.doorAnswers[0]["age"] = input.value;
+            return `something about how uninspiring you are`
+            }
 
+        } else if (inputValues.doorQuestions === "B"){
+
+
+        } else if (inputValues.doorQuestions === "H"){
+
+
+        }
+     inputCount ++;
+
+
+
+
+
+
+
+
+
+}
 
 
 
