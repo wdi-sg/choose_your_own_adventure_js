@@ -5,12 +5,7 @@ var inputholder = document.getElementById('input');
 var userInput = [1, 2, 3, 4, 5];
 
 var inputHappened = function (currentInput) {
-  switch (userInput) {
-    case 1: 
-    name = currentInput;
-    nameOption(name);
-    userInput = userInput[0];
-  }
+  
  }
 
 
