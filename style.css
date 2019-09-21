@@ -1,0 +1,56 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  color: red;
+}
+
+.starter {
+  font-size: 30px;
+  margin: 0;
+  /* border: 3px solid blue; */
+}
+
+.input-container {
+  height: 10vh;
+  width: 100vw;
+}
+
+p::before {
+  color: red;
+  content: ">";
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+input {
+  background-color: black;
+  border: 0;
+  color: red;
+  height: 100%;
+  padding-left: 10px;
+  width: 90vw;
+}
+
+input:focus {
+  outline: none;
+}
+
+.input-container::before {
+  color: red;
+  content: ">";
+  font-size: 20px;
+  margin-left: 20px;
+}
+
+.output-container {
+  height: 90vh;
+  width: 100vw;
+  position: relative;
+  border-bottom: 1px solid red;
+}
