@@ -9,16 +9,21 @@ console.log("hello script js");
 var currentState = "start";
 var playerName = null;
 
+var playerData = {
+  state: "start",
+  name: "",
+  travelYear: "",
+}
 
 var inputHappened = function(currentInput){
   console.log( currentInput );
-  console.log(currentState);
-switch (currentState) {
+  console.log(playerData.state);
+switch (playerData.state) {
 // user has just started the game
   case "start":
-    playerName = currentInput;
-    currentState = "travelYear";
-    return askTravelYear(playerName);
+    playerData.name = currentInput;
+    playerData.state = "travelYear";
+    return askTravelYear(playerData.name);
     break;
 
   // case "travelYear":
