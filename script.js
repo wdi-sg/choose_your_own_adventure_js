@@ -63,6 +63,11 @@ switch (playerData.state) {
     playerData.power = currentInput;
     return askAboutPower(currentInput);
     break;
+
+ case "travelWithClara":
+    return travelWithClara(currentInput);
+    break;
+
 }
 
 
@@ -193,6 +198,24 @@ var askAboutPower = function (check) {
    }
    else {
          return "Please enter H/M/T.";
+       }
+     return output;
+   }
+
+
+// decision on taking clara
+
+var travelWithClara = function (check) {
+  if (check === "T"){
+    var output = playerData.name + ", Interesting choice. Unfortunately the Doc can't grab Clara \nand get back to the car in time. \nHe ends up staying in 1855 with her.";
+    playerData.state = "finished";
+   }
+   else  if (check==="L"){
+    var output = playerData.name + ", Smart choice. \nUnfortunately the Doc was deeply in love with Clara, and when he gets back to 1985 he becomes very depressed.";
+    playerData.state = "finished";
+   }
+   else {
+         return "Please enter T/L.";
        }
      return output;
    }
