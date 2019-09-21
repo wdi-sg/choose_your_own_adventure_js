@@ -54,6 +54,10 @@ switch (playerData.state) {
     playerData.changePastName = currentInput;
     return changePastName(playerData.changePastName);
     break;
+
+ case "askAboutDance":
+    return askAboutDance(currentInput);
+    break;
 }
 
 
@@ -143,4 +147,25 @@ var changePastName = function (changePastName) {
     var output = "Welcome to the future, " + changePastName;
     playerData.state = "finished";
     return output;
+   }
+
+
+// enchantment storyline
+var askAboutDance = function (check) {
+  if (check === "Y"){
+    var output = playerData.name + ",  Creepy. I hope you have some backup plan in place to get out of this. \nUntil then, you're stuck in 1955.";
+    playerData.state = "finished";
+   }
+   else  if (check==="N"){
+    var output = playerData.name + ", Honorable. But this also means that your \nfuture Dad will never meet your Mom, and therefore you cannot exist.";
+    playerData.state = "finished";
+   }
+    else  if (check==="S"){
+    var output = playerData.name + ", Interesting. \nYou set up an elaborate plan for your future Dad \nto surprise your Mom by beating you up. Despite going horribly awry, the plan ultimately works. \nYou may go back to your own time.";
+    playerData.state = "finished";
+   }
+   else {
+         return "Please enter Y/N/S.";
+       }
+     return output;
    }
