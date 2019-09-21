@@ -1,0 +1,35 @@
+body {
+	text-align: center;
+	font-family: 'Mansalva', sans-serif;
+	max-width: 80%;
+	margin: auto;
+}
+h1 {
+	font-size: 60px;
+}
+p {
+	font-size: 30px;
+}
+input {
+	border: 1px solid black;
+}
+.starter{
+  font-size:20px;
+  padding:10px;
+  display:block;
+  margin:40px auto;
+  font-family: 'Raleway', sans-serif;
+  max-width: 55%;
+
+}
+p {
+	display: block;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+button {
+	margin: 10px;
+}
