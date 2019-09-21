@@ -130,28 +130,40 @@ var inputHappened = function(currentInput){
                 }
 
             } else if (inputValues.doorQuestions === "B"){
-
+            document.getElementById("question").textContent = "Would you like to tell me about your age or hobby? "
+            input.placeholder = "Please input A or H."
+            inputCount --;
+                if (input.value > 25){
+                inputValues.doorAnswers[0]["BMI"] = input.value;
+                return `ssomething about consider lowering BMI`
+                } else if (input.value <= 18){
+                inputValues.doorAnswers[0]["BMI"] = input.value;
+                return `something about consider raising BMI`
+                } else {
+                inputValues.doorAnswers[0]["BMI"] = input.value;
+                return `something about recognized as normal`
+                }
 
             } else if (inputValues.doorQuestions === "H"){
-
+            document.getElementById("question").textContent = "Would you like to tell me about your age or BMI? "
+            input.placeholder = "Please input A or B."
+            inputCount --;
+                if (input.value === "S"){
+                inputValues.doorAnswers[0]["hobby"] = input.value;
+                return `I hope you use a dive cage.`
+                } else if (input.value === "D"){
+                inputValues.doorAnswers[0]["hobby"] = input.value;
+                return `bad snake pun`
+                } else if (input.value === "B"){
+                inputValues.doorAnswers[0]["hobby"] = input.value;
+                return `Parachutes are just a meaningless expenditure, really.`
+                }
 
             }
-        }
-         inputCount ++;
-
-
-
-
-
-
-
-
-
-    }
-
-
-
-
-
-
+        } else {
+        input.placeholder = "Please input H or F.";
+        document.getElementById("question").textContent = "Would you like to purchase additional Health or Family Insurance?";
+        inputCount -=2;}
     };
+
+}
