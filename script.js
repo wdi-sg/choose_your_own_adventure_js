@@ -202,45 +202,16 @@ var inputHappened = function(currentInput){
             inputCount --;
                 if (input.value === "C"){
                 inputValues.doorAnswers[1]["pet"] = input.value;
-                return `
-           .-._   _ _ _ _ _ _ _ _
-                    .-''-.__.-'00  '-' ' ' ' ' ' ' ' '-.
-                    '.___ '    .   .--_'-' '-' '-' _'-' '._
-                     V: V 'vv-'   '_   '.       .'  _..' '.'.
-                       '=.____.=_.--'   :_.__.__:_   '.   : :
-                               (((____.-'        '-.  /   : :
-                                                 (((-'\ .' /
-                                               _____..'  .'
-                                              '-._____.-'
-                `
+                return `🐊`
                 } else if (input.value === "W"){
                 inputValues.doorAnswers[1]["pet"] = input.value;
                 return `I don't think you're supposed to keep whales in swimming pools. (can I link this to kids to make a statement about eating them?)
-
-
-                                    ','. '. ; : ,','
-                                      '..'.,',..'
-                                         ';.'  ,'
-                                          ;;
-                                          ;'
-                            :._   _.------------.___
-                    __      :__:-'                  '--.
-             __   ,' .'    .'             ______________'.
-           /__ '.-  _\___.'          0  .' .'  .'  _.-_.'
-              '._                     .-': .' _.' _.'_.'
-                 '----'._____________.'_'._:_:_.-'--'
+                人◕ ‿‿ ◕人
 
                 `
                 } else if (input.value === "A"){
                 inputValues.doorAnswers[1]["pet"] = input.value;
-                return `            __
-                                      / _)
-                             _.----._/ /
-                            /         /
-                         __/ (  | (  |
-                        /__.-'|_|--|_|
-
-                        `
+                return `    🦕       `
                 }
 
             }
@@ -248,7 +219,7 @@ var inputHappened = function(currentInput){
 
         else {
         input.placeholder = "Please input H or F.";
-        document.getElementById("question").textContent = "Would you like to purchase additional Health or Family Insurance?";
+        document.getElementById("question").textContent = `Would you like to purchase additional Health or Family Insurance, ${inputValues.name}?`;
         inputCount -=2;}
     };
 
