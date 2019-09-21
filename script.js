@@ -24,6 +24,7 @@ var inputValues = {
 
 
 
+
 var inputCount = 0;
 
 var inputHappened = function(currentInput){
@@ -112,26 +113,31 @@ var inputHappened = function(currentInput){
 
     if (inputCount === 3){
     console.log(inputCount);
-        if (inputValues.doorQuestions === "A"){
-            if (input.value > 60){
-            inputValues.doorAnswers[0]["age"] = input.value;
-            return `something about how old you are`
-            } else if (input.value <= 20){
-            inputValues.doorAnswers[0]["age"] = input.value;
-            return `something about how young you are`
-            } else {
-            inputValues.doorAnswers[0]["age"] = input.value;
-            return `something about how uninspiring you are`
+        if (inputValues.doorAnswers[0]["age"] === null || inputValues.doorAnswers[0]["BMI"] === null|| inputValues.doorAnswers[0]["hobby"]=== null){
+            if (inputValues.doorQuestions === "A"){
+            document.getElementById("question").textContent = "Would you like to tell me about your BMI or hobby? "
+            input.placeholder = "Please input B or H."
+            inputCount --;
+                if (input.value > 60){
+                inputValues.doorAnswers[0]["age"] = input.value;
+                return `something about how old you are`
+                } else if (input.value <= 20){
+                inputValues.doorAnswers[0]["age"] = input.value;
+                return `something about how young you are`
+                } else {
+                inputValues.doorAnswers[0]["age"] = input.value;
+                return `something about how uninspiring you are`
+                }
+
+            } else if (inputValues.doorQuestions === "B"){
+
+
+            } else if (inputValues.doorQuestions === "H"){
+
+
             }
-
-        } else if (inputValues.doorQuestions === "B"){
-
-
-        } else if (inputValues.doorQuestions === "H"){
-
-
         }
-     inputCount ++;
+         inputCount ++;
 
 
 
@@ -141,11 +147,11 @@ var inputHappened = function(currentInput){
 
 
 
-}
+    }
 
 
 
 
 
 
-};
+    };
