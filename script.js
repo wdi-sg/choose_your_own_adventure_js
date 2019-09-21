@@ -37,26 +37,31 @@ switch (playerData.state) {
 
   case "checkBifforGiff":
     playerData.checkBifforGiff = currentInput;
-    return checkBifforGiff(playerData.checkBifforGiff);
+    return checkBifforGiff(currentInput);
     break;
 
   case "pickedBiff":
     playerData.chicken = currentInput;
-    return pickedBiff(playerData.chicken);
+    return pickedBiff(currentInput);
     break;
 
   case "pickedGiff":
     playerData.chicken = currentInput;
-    return pickedGiff(playerData.chicken);
+    return pickedGiff(currentInput);
     break;
 
  case "changePastName":
     playerData.changePastName = currentInput;
-    return changePastName(playerData.changePastName);
+    return changePastName(currentInput);
     break;
 
  case "askAboutDance":
     return askAboutDance(currentInput);
+    break;
+
+ case "askAboutPower":
+    playerData.power = currentInput;
+    return askAboutPower(currentInput);
     break;
 }
 
@@ -166,6 +171,28 @@ var askAboutDance = function (check) {
    }
    else {
          return "Please enter Y/N/S.";
+       }
+     return output;
+   }
+
+
+// powering the time machine storyline
+
+var askAboutPower = function (check) {
+  if (check === "H"){
+    var output = playerData.name + ", Good idea, but no. \nThe time machine needs to get to 88mph. \n12 horsepower ain't gonna cut it.";
+    playerData.state = "finished";
+   }
+   else  if (check==="M"){
+    var output = playerData.name + ", You'd be better off drinking the moonshine. \nDo not pass Go, do not collect $200. \nStuck in 1855.";
+    playerData.state = "finished";
+   }
+    else  if (check==="T"){
+    var output = playerData.name + ", Good call! This plan seems to be working. \nBut wait! Clara wants to go Back to the Future with you at the last moment. \nWhat do you do? (T/L)";
+    playerData.state = "travelWithClara";
+   }
+   else {
+         return "Please enter H/M/T.";
        }
      return output;
    }
