@@ -1,10 +1,31 @@
+// Math.floor(Math.random() * 10)
+
 console.log("hello script js");
 alert('Hello. Welcome to THE \'Adventure to Become the Best Living Guitarist in, like, EVER.\' What is your name? Please type CAREFULLY. You only got ONE shot and stupid names are stored FOREVER.')
+var boxes = {
+    bestBox: {
+        item: 'pick',
+        power: 9999,
+        description: 'gamebreaker'
+    },
+    averageBox: {
+        item: 'average',
+        power: 100,
+        description: 'normal'
+    },
+    boxOfJunk: {
+        item: 'junk',
+        power: 0,
+        description: 'it\'s just a box of junk.'
+    }
+}
 var playerName;
 var enteredName = 0;
 var approachAxel = 0;
 var goHome = 0;
 var goBar = 0;
+var getBox = 0;
+var rejectBox = 0;
 
 var inputHappened = function(currentInput){
     playerName = currentInput;
@@ -20,6 +41,12 @@ var inputHappened = function(currentInput){
         goBar = true;
         return `You're at the bar now. You take a look around and DUDE, Axel wasn't joking - there are shredders EVERYWHERE. A shady-looking hoodied figure walks over. "Hey, you're ${playerName}, right? I've been looking for you. You're the chosen one." He stretches out his hand, in it, a small box. Do you:
         \n ti) Take it. \n hn) Hell no.`
+    } if (currentInput === 'ti' && enteredName && approachAxel && goBar) {
+        getBox = true;
+        return `You take the box. When you look up, the hoodied dude's already gone. "Dude, we get lotsa types in here but that was weird", Axel mutters while shaking his head. `
+    } if (currentInput === 'hn' && enteredName && approachAxel && goBar) {
+        rejectBox = true;
+        return `Live a life of mediocrity forever, why don't you. This is supposed to be an adventure. \n GAME OVER`
     }
      if (currentInput === 'gh' && enteredName) {
         var goHome = true;
