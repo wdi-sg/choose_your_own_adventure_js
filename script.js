@@ -4,42 +4,23 @@ console.log("hello script js");
 
 const input = document.getElementById("input");
 input.placeholder = "Please type your name.";
-// var inputValues = {
-//     name:"",
-//     door:[
-//         {H:{
-//             age:{
-//                 subTwenty:"",
-//                 subForty:"",
-//                 superForty:""
-//             },
-//             BMI:{
-//                 under:"",
-//                 average:"",
-//                 over:""
-//             },
+var inputValues = {
+    name:"",
+    door:"",
+    doorQuestions: [
+        {
+            age:"",
+            BMI:"",
+            hobby:"",
+        },
+        {
+            spouse:"",
+            kids:"",
+            pet:"",
+        }
+    ]
+}
 
-//             hobby: {
-//                 swimWithSharks:"",
-//                 danceWithSnakes:"",
-//                 baseJump:""
-//             }
-//             }
-//         },
-//         {F:{
-//             married:"",
-//             kids: "",
-//             pets: {
-//                 crocodile:"",
-//                 orca:"",
-//                 apatosaurus:""
-//             }
-//             }
-//         }
-//     ],
-// };
-
-var inputValues = [];
 var inputCount = 0;
 
 var inputHappened = function(currentInput){
@@ -52,7 +33,7 @@ var inputHappened = function(currentInput){
     inputCount ++;
     input.placeholder = "Please input H or F."
     document.getElementById("question").textContent = "Would you like to purchase Health insurance or Family insurance?"
-    return `Welcome to InsureCo, ${inputValues[0]}!`
+    return `Welcome to InsureCo, ${inputValues["name"]}!`
   };
 
 //inputs for type of insurance
@@ -64,7 +45,7 @@ var inputHappened = function(currentInput){
         inputCount ++;
         document.getElementById("question").textContent = "Would you like to tell me about your age, BMI or hobby? "
         input.placeholder = "Please input A, B or H."
-        return `Thank you for selecting Health insurance, ${inputValues[0]}!`
+        return `Thank you for selecting Health insurance, ${inputValues["name"]}!`
     }
     //user wants family insurance
     else if (input.value === "F") {
@@ -73,7 +54,7 @@ var inputHappened = function(currentInput){
         inputCount ++;
         document.getElementById("question").textContent = "Would you like to tell me about your spouse, kids or pets? "
         input.placeholder = "Please input S, K or P."
-        return `Thank you for selecting Family insurance, ${inputValues[0]}!`
+        return `Thank you for selecting Family insurance, ${inputValues["name"]}!`
     }
   };
 
@@ -85,21 +66,21 @@ var inputHappened = function(currentInput){
         inputCount ++;
         document.getElementById("question").textContent = "Please tell me your age. ";
         input.placeholder = "Please type your age in numbers."
-        return `Thank you for selecting "age", ${inputValues[0]}!`
+        return `Thank you for selecting "age", ${inputValues["name"]}!`
     } else if (input.value === "B"){
         console.log(inputCount);
         inputValues.push(input.value);
         inputCount ++;
         document.getElementById("question").textContent = "Please tell me your BMI. ";
         input.placeholder = "Please type your BMI in numbers."
-        return `Thank you for selecting "BMI", ${inputValues[0]}!`
+        return `Thank you for selecting "BMI", ${inputValues["name"]}!`
     } else if (input.value === "H"){
         console.log(inputCount);
         inputValues.push(input.value);
         inputCount ++;
         document.getElementById("question").textContent = "Please tell me your hobby. ";
         input.placeholder = `Please input "S", "D" or "B".`
-        return `Thank you for selecting "hobby", ${inputValues[0]}!`
+        return `Thank you for selecting "hobby", ${inputValues["name"]}!`
     }
     // Three branches for Family Insurance
      if (input.value === "S"){
@@ -108,21 +89,21 @@ var inputHappened = function(currentInput){
             inputCount ++;
             document.getElementById("question").textContent = "Are you married? ";
             input.placeholder = `Please type "Y" or "N".`
-            return `Thank you for selecting "spouse", ${inputValues[0]}!`
+            return `Thank you for selecting "spouse", ${inputValues["name"]}!`
     } else if (input.value === "K"){
             console.log(inputCount);
             inputValues.push(input.value);
             inputCount ++;
             document.getElementById("question").textContent = "Do you have kids? ";
             input.placeholder = `Please type "Y" or "N".`
-            return `Thank you for selecting "kids", ${inputValues[0]}!`
+            return `Thank you for selecting "kids", ${inputValues["name"]}!`
     } else if (input.value === "P"){
             console.log(inputCount);
             inputValues.push(input.value);
             inputCount ++;
             document.getElementById("question").textContent = "What kind of pet do you have? ";
             input.placeholder = `Please input "C", "O" or "A".`
-            return `Thank you for selecting "pet", ${inputValues[0]}!`
+            return `Thank you for selecting "pet", ${inputValues["name"]}!`
     }
   };
 
