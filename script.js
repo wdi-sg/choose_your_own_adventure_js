@@ -11,13 +11,28 @@ Ask player which House to be sorted into, after which player needs to find the H
 */
 
 //for easy update of display message
-const input = document.getElementById("input");
+var input = document.getElementById("input");
 
 
+//to store player name
+var player;
+
+
+//start game
+alert("Welcome to Hogswarts. What's your name?");
+input.placeholder = "Enter name";
 
 var inputHappened = function(currentInput){
   console.log( currentInput );
-  var output = "WOW SOMETHING HAPPENED";
-  input.value = "clear";
-  return output;
+
+//store player name
+  player = currentInput.charAt(0).toUpperCase() +  currentInput.slice(1);
+  console.log( "Player: " + player );
+  input.value = "Enter House";
+  return `Hi, ${player}. What House are you in?`;
+
+
+  // var output = "WOW SOMETHING HAPPENED";
+  // input.value = "clear";
+  // return output;
 };
