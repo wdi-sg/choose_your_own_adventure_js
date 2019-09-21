@@ -63,9 +63,9 @@ var demon = [{
 
 
 //4 paths to choose from, there after each destination is determined by random, will merge paths by using exact same object keys and values.
-var path = [
+var path =[
         {
-            "fire path": [{
+            fire_path: [{
                             "fire path 1": ["human path", "beast path", "god path"]
                         }, {
                             "fire path 2": ["god path", "human path", "beast path"]
@@ -74,7 +74,7 @@ var path = [
                         }]
         },
         {
-            "water path": [{
+            water_path: [{
                             "water path 1": ["beast path", "beast path", "human path"]
                         }, {
                             "water path 2": ["beast path", "human path", "god path"]
@@ -83,7 +83,7 @@ var path = [
                         }]
         },
         {
-            "earth path": [{
+            earth_path: [{
                             "earth path 1": ["human path", "god path", "beast path"]
                         }, {
                             "earth path 2": ["god path", "human path", "beast path"]
@@ -92,7 +92,7 @@ var path = [
                         }]
         },
         {
-            "wind path": [{
+            wind_path: [{
                             "wind path 1": ["beast path", "beast path", "human path"]
                         }, {
                             "wind path 2": ["beast path", "human path", "god path"]
@@ -100,7 +100,4 @@ var path = [
                             "wind path 3": ["human path", "beast path", "god path"]
                         }]
         },
-
-
-
 ]
