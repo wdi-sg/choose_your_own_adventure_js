@@ -1,11 +1,9 @@
 console.log("Map working")
-var narration = null;
-var enterToContinue = false
+
 //Display message on the board
 function display(text){
     var outputText = document.getElementById("outputText");
     outputText.innerText = text;
-
 }
 
 //Take input
@@ -13,6 +11,7 @@ document.querySelector('#input').addEventListener('keypress',function(event){
     if(event.key === 'Enter'){
         var input = event.target.value;
         event.target.value =""
+
         switch(enterToContinue){
             case true:
                 enterToContinue = false;
@@ -29,11 +28,39 @@ document.querySelector('#input').addEventListener('keypress',function(event){
                     narration = "You have chosen to move left. Press enter to continue"
                     display(narration);
                     break;
+                } else if (input === "right"){
+                    currentRoom = "room3";
+                    currentPath = 3;
+                    enterToContinue = true;
+                    narration = "You have chosen to move right. Press enter to continue"
+                    display(narration);
+                    break;
+                }
+
+            case 2:
+                if(input === "return"){
+                    currentRoom = "room1";
+                    currentPath = 1;
+                    enterToContinue = true;
+                    narration = "You have chosen to return to the entrance. Press enter to continue"
+                    display(narration);
+                    break;
+                }
+
+            case 3:
+                if(input === "return"){
+                    currentRoom = "room1";
+                    currentPath = 1;
+                    enterToContinue = true;
+                    narration = "You have chosen to return to the entrance. Press enter to continue"
+                    display(narration);
+                    break;
                 }
         }
     }
 })
 
+//Variable for game
 var path = {
     visited: {
         room1: false,
@@ -50,9 +77,13 @@ var path = {
 var gameStart = true
 var currentPath = 1;
 var currentRoom = "room1";
+var inputPlaceholder = document.querySelector("#input");
+var narration = null;
+var enterToContinue = false
 
 
 
+//Function for map
 function game(input){
     switch(currentPath){
         case 1:
@@ -66,8 +97,24 @@ function game(input){
             break;
 
         case 2:
-            narration = `You are now in ${path["room"][currentRoom]}. You see two doors- left or right`;
+            narration = `You are now in ${path["room"][currentRoom]}. It is a dead end`;
+            if(path["visited"][currentRoom] === true){
+                narration = `${narration}\nYou have been here before.`;
+            }
+            narration = `${narration}\n\nChoose:\nreturn`;
+            path["visited"][currentRoom] = true;
             display(narration)
+            break;
+
+        case 3:
+            narration = `You are now in ${path["room"][currentRoom]}. It is a dead end`;
+            if(path["visited"][currentRoom] === true){
+                narration = `${narration}\nYou have been here before.`;
+            }
+            narration = `${narration}\n\nChoose:\nreturn`;
+            path["visited"][currentRoom] = true;
+            display(narration)
+            break;
     }
 }
 
