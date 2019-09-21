@@ -40,9 +40,19 @@ switch (playerData.state) {
     return checkBifforGiff(playerData.checkBifforGiff);
     break;
 
-  case "checkBifforGiff":
-    playerData.checkBifforGiff = currentInput;
-    return checkBifforGiff(playerData.checkBifforGiff);
+  case "pickedBiff":
+    playerData.chicken = currentInput;
+    return pickedBiff(playerData.chicken);
+    break;
+
+  case "pickedGiff":
+    playerData.chicken = currentInput;
+    return pickedGiff(playerData.chicken);
+    break;
+
+ case "changePastName":
+    playerData.changePastName = currentInput;
+    return changePastName(playerData.changePastName);
     break;
 }
 
@@ -74,12 +84,12 @@ var askFilmDetails = function (travelYear) {
 // add the new state for the question asked
     else {
       var output = playerData.name + ", I see you're a fan of Back to the Future 3. \nYou've run out of gas and can't get back to your own time! \nHow do you power the Time Machine? (H/M/T)";
-      playerData.state = "askAboutDance";
+      playerData.state = "askAboutPower";
      }
   return output;
 }
 
-
+/// biff or giff storyline
 var checkBifforGiff = function (check) {
   if (check === "B"){
     var output = playerData.name + ", Hmm, interesting. \nBiff is angry and has a cane. \nDo you stand and fight, or run away like a coward? (S/R)";
@@ -93,4 +103,44 @@ var checkBifforGiff = function (check) {
          return "Please enter B/G.";
        }
      return output;
+   }
+
+
+var pickedBiff = function (check) {
+  if (check === "S"){
+    var output = playerData.name + ", Good choice. Biff is old and feeble at this point. \nYou push him over and he falls in a pile of manure.";
+    playerData.state = "finished";
+   }
+   else  if (check==="R"){
+    var output = playerData.name + ", You get away, but your future son Marty Jr. \nis heckled for the rest of his days for his dad's cowardice.";
+    playerData.state = "finished";
+   }
+   else {
+         return "Please enter S/R.";
+       }
+     return output;
+   }
+
+
+var pickedGiff = function (check) {
+  if (check === "I"){
+    var output = playerData.name + ", DUDE! Bad call. \nGriff and his cronies rob the Hill Valley bank and frame you for it. \nNo more time travel for you.";
+    playerData.state = "finished";
+   }
+   else  if (check==="O"){
+    var output = playerData.name + ", niiiice. \nYou deck Griff in the jaw and run away. \nHe gives chase on his hoverboard and ends up in a pile of manure.";
+    playerData.state = "finished";
+   }
+   else {
+         return "Please enter I/O.";
+       }
+     return output;
+   }
+// end biff or giff storyline
+
+// time machine destroyed
+var changePastName = function (changePastName) {
+    var output = "Welcome to the future, " + changePastName;
+    playerData.state = "finished";
+    return output;
    }
