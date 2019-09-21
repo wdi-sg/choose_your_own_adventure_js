@@ -7,10 +7,10 @@ input.placeholder = "Please type your name.";
 var inputValues = {
     name:"",
     door:[
-        healthInsurance:{
+        {healthInsurance:{
             age:{
-                subTwenty:""
-                subForty:""
+                subTwenty:"",
+                subForty:"",
                 superForty:""
             },
             BMI:{
@@ -24,18 +24,19 @@ var inputValues = {
                 danceWithSnakes:"",
                 baseJump:""
             }
+            }
         },
-        familyInsurance:{
-            married:"";
-            kids: "";
+        {familyInsurance:{
+            married:"",
+            kids: "",
             pets: {
                 sloth:"",
                 orca:"",
                 alligator:""
             }
+            }
         }
     ],
-
 };
 var inputCount = 0;
 
@@ -55,23 +56,26 @@ var inputHappened = function(currentInput){
 //inputs for type of insurance
 //user wants health insurance
   if (inputCount === 1 && input.value === "H") {
+    console.log(inputCount);
     inputValues["door"] = input.value
     inputCount ++;
-    document.getElementById("question").textContent = "Would you like to tell me about your age, BMI or vices? "
-    input.placeholder = "Please input A, B or V."
+    document.getElementById("question").textContent = "Would you like to tell me about your age, BMI or hobby? "
+    input.placeholder = "Please input A, B or H."
     return `Thank you for selecting Health insurance, ${inputValues["name"]}!`
-  } else if (inputCount === 1 && input.value === "F") {
+  } //user wants family insurance
+    else if (inputCount === 1 && input.value === "F") {
+    console.log(inputCount);
     inputValues["door"] = input.value
     inputCount ++;
     document.getElementById("question").textContent = "Would you like to tell me about your spouse, kids or pets? "
     input.placeholder = "Please input S, K or P."
     return `Thank you for selecting Family insurance, ${inputValues["name"]}!`
-    } else {
-        return `Please type either "H" or "F".`
-    }
-
-    if (inputCount === 2 && input.value === "A"){
-
+    } else if (inputCount === 2 && input.value === "A"){
+     console.log(inputCount);
+    inputCount ++;
+    document.getElementById("question").textContent = "Please tell me your age. ";
+    input.placeholder = "Please type your age in numbers."
+    return `Thank you for selecting "age", ${inputValues["name"]}!`
     }
 
 
