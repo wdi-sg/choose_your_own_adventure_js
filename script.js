@@ -33,18 +33,19 @@ if (step.length > 1){
         characterHP = JSON.stringify(character.warrior.stats.hp);
         characterPower = JSON.stringify(character.warrior.stats.power);
         characterSpeed = JSON.stringify(character.warrior.stats.speed);
-        result = "You have chosen to be a Warrior, your stats are as follows: \n\n HP: " + characterHP + "\nPower: " + characterPower +"\nSpeed: " + characterSpeed + "\n\nYou may now choose the path you would like to take \n(Fire Path / Water Path / Earth Path / Wind Path)"
+        result = "You have chosen to be a " + characterChosen + ", your stats are as follows: \n\n HP: " + characterHP + "\nPower: " + characterPower +"\nSpeed: " + characterSpeed + "\n\nYou may now choose the path you would like to take \n(Fire Path / Water Path / Earth Path / Wind Path)"
     } else if (input === "mage"){
         characterChosen = "Mage"
         characterHP = JSON.stringify(character.mage.stats.hp);
         characterPower = JSON.stringify(character.mage.stats.power);
         characterSpeed = JSON.stringify(character.mage.stats.speed);
-        result = "You have chosen to be a Warrior, your stats are as follows: \n\n HP: " + characterHP + "\nPower: " + characterPower +"\nSpeed: " + characterSpeed + "\n\nYou may now choose the path you would like to take \n(Fire Path / Water Path / Earth Path / Wind Path)"    } else if (input === "ranger"){
+        result = "You have chosen to be a " + characterChosen + ", your stats are as follows: \n\n HP: " + characterHP + "\nPower: " + characterPower +"\nSpeed: " + characterSpeed + "\n\nYou may now choose the path you would like to take \n(Fire Path / Water Path / Earth Path / Wind Path)"
+    } else if (input === "ranger"){
         characterChosen = "Ranger"
         characterHP = JSON.stringify(character.ranger.stats.hp);
         characterPower = JSON.stringify(character.ranger.stats.power);
         characterSpeed = JSON.stringify(character.ranger.stats.speed);
-        result = "You have chosen to be a Warrior, your stats are as follows: \n\n HP: " + characterHP + "\nPower: " + characterPower +"\nSpeed: " + characterSpeed + "\n\nYou may now choose the path you would like to take \n(Fire Path / Water Path / Earth Path / Wind Path)"
+        result = "You have chosen to be a " + characterChosen + ", your stats are as follows: \n\n HP: " + characterHP + "\nPower: " + characterPower +"\nSpeed: " + characterSpeed + "\n\nYou may now choose the path you would like to take \n(Fire Path / Water Path / Earth Path / Wind Path)"
     } else{
         step.pop();
         result = "Please choose the correct input! \n\n(Warrior / Mage / Ranger)";
@@ -58,21 +59,34 @@ if (step.length > 2){
     input = step[2].toLowerCase();
     if(input === "fire path"){
         pathTaken = "Fire Path"
-        result = "The Fire Path is one of searing heat and melting flesh, many demons exist here to test your strength " + name + ". \n\nAs a " + characterChosen + ", this will be a tremendous test indeed, however that will not deter you now will it, " + name + "? \n\n Let us march on forward!"
+        result = "The Fire Path is one of searing heat and melting flesh, many demons exist here to test your strength " + name + ". \n\nAs a " + characterChosen + ", this will be a tremendous test indeed, however that will not deter you now will it, " + name + "? \n\n Let us march on forward! \n\nPlease type 'CHIONG AH' to continue"
     } else if (input === "water path"){
         pathTaken = "Water Path"
-        result = "The Water Path is one of crashing waves and crushing depths, many sea monsters exist here to test your strength " + name + ". \n\nAs a " + characterChosen + ", this will be a tremendous test indeed, however that will not deter you now will it, " + name + "? \n\n Let us march on forward!"
+        result = "The Water Path is one of crashing waves and crushing depths, many sea monsters exist here to test your strength " + name + ". \n\nAs a " + characterChosen + ", this will be a tremendous test indeed, however that will not deter you now will it, " + name + "? \n\n Let us march on forward! \n\nPlease type 'CHIONG AH' to continue"
     } else if (input === "earth path"){
         pathTaken = "Earth Path"
-        result = "The Earth Path is one of meteoric avalanches and ambushing cliffs, many rock trolls exist here to test your strength " + name + ". \n\nAs a " + characterChosen + ", this will be a tremendous test indeed, however that will not deter you now will it, " + name + "? \n\n Let us march on forward!"
+        result = "The Earth Path is one of meteoric avalanches and ambushing cliffs, many rock trolls exist here to test your strength " + name + ". \n\nAs a " + characterChosen + ", this will be a tremendous test indeed, however that will not deter you now will it, " + name + "? \n\n Let us march on forward! \n\nPlease type 'CHIONG AH' to continue"
     } else if (input === "wind path"){
         pathTaken = "Wind Paths"
-        result = "The Wind Path is one of tearing tornadoes and dizzying heights, many sky beasts exist here to test your strength " + name + ". \n\nAs a " + characterChosen + ", this will be a tremendous test indeed, however that will not deter you now will it, " + name + "? \n\n Let us march on forward!"
+        result = "The Wind Path is one of tearing tornadoes and dizzying heights, many sky beasts exist here to test your strength " + name + ". \n\nAs a " + characterChosen + ", this will be a tremendous test indeed, however that will not deter you now will it, " + name + "? \n\n Let us march on forward! \n\nPlease type 'CHIONG AH' to continue"
     } else {
         step.pop();
         result = "Please choose the correct input! \n\n(Fire Path / Water Path/ Earth Path/ Wind Path)"
     };
 };
+
+
+//this step is to give some instructions and display the stats. NOT DONE WITH INSTRUCTIONS YET!!!
+if(step.length > 3){
+    //changing all inputs into lower case
+    input = step[3].toLowerCase();
+    if(input === "chiong ah"){
+        result = name + " the " + characterChosen +"\nHP: " + characterHP + "\nPower: " + characterPower +"\nSpeed: " + characterSpeed + "\n\nFrom here on things get tricky, paths diverge and paths converge, you never know where you will end up next or what you will face. \n\nIf you want to run away from the enemy you encounter you may do so, but only ONCE."
+    } else {
+        step.pop();
+        result = "Yooooooo c'mon man you know what you need to do. \nType 'CHIONG AH' to continue "
+    }
+}
 
 
 
