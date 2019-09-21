@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="style.css">
+        <title>Hangover the Game</title>
+    </head>
+    <body>
+        <p class="starter" id="output">
+            The vibration of a phone in your pocket wakes you up. You open your eyes and you're in the dark. You pull out the phone and read the message.
+            <br>
+            <span style="color: red;">Doug: "Shithead. Who are you?"</span>
+            <br><br>
+            <span style="color: blue;">your name?</span>
+        </p>
+
+    <input class="starter" id="input" placeholder="input"/>
+
+    <script>
+      document.querySelector('#input').addEventListener('change', function(event){
+        var currentInput = event.target.value;
+        var output = inputHappened(currentInput);
+        display( output );
+        event.target.value = "";
+      });
+
+      var display = function( data ){
+        var output = document.querySelector('#output');
+        output.innerText = data;
+      }
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>
