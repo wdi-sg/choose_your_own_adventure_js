@@ -14,7 +14,7 @@ var playerData = {
   travelYear: ""
 }
 
-var inputHappened = function(currentInput){
+var inputHappened = (currentInput) =>{
   console.log( currentInput );
   console.log(playerData.state);
 switch (playerData.state) {
@@ -73,12 +73,12 @@ switch (playerData.state) {
 
   }
 
-var askTravelYear = function (playerName) {
+var askTravelYear = (playerName) =>{
   var output = "Hi " + playerName + ", what year would you like to go to? (YYYY)";
   return output;
 }
 
-var askFilmDetails = function (travelYear) {
+var askFilmDetails = (travelYear)=> {
   // add the travel year to the object
   playerData.travelYear = travelYear;
 // do some date checks
@@ -104,7 +104,7 @@ var askFilmDetails = function (travelYear) {
 }
 
 /// biff or giff storyline
-var checkBifforGiff = function (check) {
+var checkBifforGiff = (check)=> {
   if (check === "B"){
     var output = playerData.name + ", Hmm, interesting. \nBiff is angry and has a cane. \nDo you stand and fight, or run away like a coward? (S/R)";
     playerData.state = "pickedBiff";
@@ -120,7 +120,7 @@ var checkBifforGiff = function (check) {
    }
 
 
-var pickedBiff = function (check) {
+var pickedBiff = (check) =>{
   if (check === "S"){
     var output = playerData.name + ", Good choice. Biff is old and feeble at this point. \nYou push him over and he falls in a pile of manure.";
     playerData.state = "finished";
@@ -136,7 +136,7 @@ var pickedBiff = function (check) {
    }
 
 
-var pickedGiff = function (check) {
+var pickedGiff = (check)=> {
   if (check === "I"){
     var output = playerData.name + ", DUDE! Bad call. \nGriff and his cronies rob the Hill Valley bank and frame you for it. \nNo more time travel for you.";
     playerData.state = "finished";
@@ -153,7 +153,7 @@ var pickedGiff = function (check) {
 // end biff or giff storyline
 
 // time machine destroyed
-var changePastName = function (changePastName) {
+var changePastName = (changePastName) => {
     var output = "Welcome to the future, " + changePastName;
     playerData.state = "finished";
     return output;
@@ -161,7 +161,7 @@ var changePastName = function (changePastName) {
 
 
 // enchantment storyline
-var askAboutDance = function (check) {
+var askAboutDance =  (check)=> {
   if (check === "Y"){
     var output = playerData.name + ",  Creepy. I hope you have some backup plan in place to get out of this. \nUntil then, you're stuck in 1955.";
     playerData.state = "finished";
@@ -183,7 +183,7 @@ var askAboutDance = function (check) {
 
 // powering the time machine storyline
 
-var askAboutPower = function (check) {
+var askAboutPower = (check) =>{
   if (check === "H"){
     var output = playerData.name + ", Good idea, but no. \nThe time machine needs to get to 88mph. \n12 horsepower ain't gonna cut it.";
     playerData.state = "finished";
@@ -205,7 +205,7 @@ var askAboutPower = function (check) {
 
 // decision on taking clara
 
-var travelWithClara = function (check) {
+var travelWithClara =  (check)=> {
   if (check === "T"){
     var output = playerData.name + ", Interesting choice. Unfortunately the Doc can't grab Clara \nand get back to the car in time. \nHe ends up staying in 1855 with her.";
     playerData.state = "finished";
