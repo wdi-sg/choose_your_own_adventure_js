@@ -105,5 +105,5 @@ if (score <=5) {
 }
 
 var happyRandomArt = function() {
-  return Math.floor((Math.random() * 6) + 2)
+  return Math.floor((Math.random() * 7) + 2)
 }
