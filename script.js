@@ -46,42 +46,59 @@ var player = {
 // the value in the paths objects corresponds to the index of the item inside the stages array, e.g. 0 in stages[0]
 var stages = [{
         messages: {
-            intro: ["Wake up, ", "playerName", "...\n\n\n\n\n"],
+            intro: ["---", "playerName", "\'s ", "Apartment---\n\n", "Wake up, ", "playerName", "...\n\n\n\n"],
             questions: [],
             choices: [],
-            hints: ["<enter [c] to continue>\n"],
+            hints: ["<Enter c to [c]ontinue>\n"],
         },
         paths: { c: 1 },
         response: null,
     },
     {
         messages: {
-            intro: ["The Matrix has you...\n\n\n\n\n"],
+            intro: ["The Matrix has you...\n\n\n\nFollow the white rabbit.\n\n"],
             questions: [],
             choices: [],
-            hints: ["<enter [c] to continue>\n"],
+            hints: ["[f]ollow\n"],
         },
-        paths: [],
+        paths: { f: 2 },
         response: null,
     },
     {
         messages: {
-            intro: ["Stage 2 intro\n"],
-            questions: ["Stage 2 questions\n"],
-            choices: ["Stage 2 choices\n"],
+            intro: ["---Hotel Lafayette---\n",
+                    "Welcome ", "playerName", ".\n\n",
+                    "As you no doubt have guessed, I am Morpheus.\n\n",
+                    "This is your last chance. After this, there is no going back.\n\n",
+                    "You take the blue pill and the story ends.\n",
+                    "You wake in your bed and you believe whatever you want to believe.\n\n",
+                    "You take the red pill and you stay in Wonderland\n",
+                    "and I show you how deep the rabbit-hole goes.\n\n"],
+            questions: ["Which pill would you take?\n\n"],
+            choices: ["[b]lue OR [r]ed\n"],
             hints: [],
         },
-        paths: [],
+        paths: {b: 3, r: 4},
         response: null,
     },
     {
         messages: {
-            intro: ["Stage 3 intro\n"],
-            questions: ["Stage 3 questions\n"],
-            choices: ["Stage 3 choices\n"],
+            intro: ["You've taken the blue pill.\n\n\n\n\n\n"],
+            questions: [],
+            choices: [],
             hints: [],
         },
-        paths: [],
+        paths: {},
+        response: null,
+    },
+    {
+        messages: {
+            intro: ["You've taken the red pill.\n\n\n\n\n\n"],
+            questions: [],
+            choices: [],
+            hints: [],
+        },
+        paths: {},
         response: null,
     },
 ]
@@ -198,14 +215,14 @@ var inputHappened = function(input) {
         // i.e. whether a particular key exists in all the keys of the currStage.paths object,
         // if the condition is true, i.e. the key exists, e.g. "F" is found in {F: 1, D: 3},
         // then proceed to retrieve the data to be displayed to the player
-        if (currStage.response.toUpperCase() in currStage.paths) {
+        if (currStage.response.toLowerCase() in currStage.paths) {
 
             // the lines below follow the same pattern as above
             // except that instead of assigning next to be 0,
             // we want to assign next according to the player's response,
             // this is done by calling the getNextStage() function
-            // toUpperCase() function is called so that lowercase input from the user is also acceptable
-            next = getNextStage(currStage.response.toUpperCase(), currStage.paths);
+            // toLowerCase() function is called so that uppercase input from the player is also acceptable
+            next = getNextStage(currStage.response.toLowerCase(), currStage.paths);
             nextStage = stages[next];
             // nextStage now holds the data for the next stage that the player will go to
 
