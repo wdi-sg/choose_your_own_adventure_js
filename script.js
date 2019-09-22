@@ -49,9 +49,13 @@ var inputHappened = function(currentInput){
         var playerName = prompt("Please enter your name.");
         console.log("hello " + playerName);
 
-
+        // System assign random number to the array of mystery boxes
         numberGenerator(mysteryBox);
-        console.log(mysteryBox);
+        console.log("Array in mysteryBox: " + mysteryBox);
+
+        // Set item to be the third item in the mystery box
+        var boxItem = mysteryBox[2];
+        console.log("Item is " + boxItem);
 
     } else {
 
