@@ -1,7 +1,9 @@
 "use strict"
 // display() is a function declared within <script> inside index.html
 // display() is used here to display a welcomeMessage at the start of the game
-var welcomeMessage = " --------The Matrix--------\n" + "Enter Your Name & Hit Enter";
+var welcomeMessage =    " --------The Matrix--------\n" +
+                        "Enter Your Name & Hit Enter";
+
 display(welcomeMessage);
 
 // game is an object to store data for the game throughout the game
@@ -35,7 +37,9 @@ var player = {
 // the value in the paths objects corresponds to the index of the item inside the stages array, e.g. 0 in stages[0]
 var stages = [{
         messages: {
-            intro: ["Wake up, ", "playerName", "...\n", "The Matrix has you...\n", "Follow the white rabbit.\n"],
+            intro: ["Wake up, ", "playerName", "...\n",
+                    "The Matrix has you...\n",
+                    "Follow the white rabbit.\n"],
             questions: ["What would you like to do?\n"],
             choices: ["*[F]ollow\n", "*[D]o nothing\n"],
             hints: ["<Hint: hit the letter in the [ ] to continue>\n"],
@@ -121,7 +125,7 @@ var getNextStage = function(response, paths) {
 // main function that is called when a change event is triggered
 var inputHappened = function(input) {
     // console.log("game.stage shown on screen a second ago: ", game.stage);
-    // console.log("input:", input);
+    console.log("input:", input);
     // console.log("player object ", player);
     // console.log("stages object ", stages);
     // console.log("game object ", game);
@@ -187,13 +191,14 @@ var inputHappened = function(input) {
         // i.e. whether a particular key exists in all the keys of the currStage.paths object,
         // if the condition is true, i.e. the key exists, e.g. "F" is found in {F: 1, D: 3},
         // then proceed to retrieve the data to be displayed to the player
-        if (currStage.response in currStage.paths) {
+        if (currStage.response.toUpperCase() in currStage.paths) {
 
             // the lines below follow the same pattern as above
             // except that instead of assigning next to be 0,
             // we want to assign next according to the player's response,
             // this is done by calling the getNextStage() function
-            next = getNextStage(currStage.response, currStage.paths);
+            // toUpperCase() function is called so that lowercase input from the user is also acceptable
+            next = getNextStage(currStage.response.toUpperCase(), currStage.paths);
             nextStage = stages[next];
             // nextStage now holds the data for the next stage that the player will go to
 
