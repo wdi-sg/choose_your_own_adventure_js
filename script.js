@@ -35,10 +35,15 @@
         // If player reaches the 100th step safely, can choose to continue to next level or end the game.
             // Whichever option chosen, bring to end game and cal score
 
-console.log("hello script js");
+console.log("Welcome to Minesweeper v2! Please enter 'Start Game' to proceed.");
 
 // Create an empty array of mystery boxes
 var mysteryBox = [];
+
+var boxItem = 0;
+
+// Create an array to store player's selected choices
+var playerSelectedChoices = [];
 
 var inputHappened = function(currentInput){
 
@@ -54,18 +59,18 @@ var inputHappened = function(currentInput){
         console.log("Array in mysteryBox: " + mysteryBox);
 
         // Set item to be the third item in the mystery box
-        var boxItem = mysteryBox[2];
+        boxItem = mysteryBox[2];
         console.log("Item is " + boxItem);
 
-        var playerChoice = prompt("Please select a number from 1 - 9.");
-        console.log("Player's choice is " + playerChoice);
+        // Player will be prompted to be input choice number as long as he/she does not hit the bomb
+        while(parseInt(playerChoiceInput) !== boxItem){
 
-        if(parseInt(playerChoice) === boxItem) {
-            console.log("You hit the bomb! GAME OVER!");
-        }
+            var playerChoiceInput = prompt("Please select a number from 1 - 9.");
 
-        else {
-            console.log("You are safe!");
+            playerChoice(parseInt(playerChoiceInput));
+            playerSelectedChoices.push(playerChoiceInput);
+
+            console.log("Your choices are: " + playerSelectedChoices);
         }
 
     } else {
@@ -97,4 +102,17 @@ var numberGenerator = function(arr) {
 
     // Run function again
     numberGenerator(arr);
+};
+
+// This function will check if player's input choice matches the specified boxItem value.
+var playerChoice = function(mysteryBoxNumber) {
+
+        if(parseInt(mysteryBoxNumber) !== boxItem) {
+            console.log("You have entered: " + mysteryBoxNumber);
+            console.log("You are safe!");
+
+        } else {
+            console.log("You hit the bomb! Game Over!");
+        }
+
 };
