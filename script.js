@@ -166,6 +166,7 @@ function action(currentInput) {
       "restart"
     ];
     msg = helpMenu;
+    scoreOff = true;
   } else if (currentInput === "navi help") {
     msg = naviArr;
     scoreOff = true;
