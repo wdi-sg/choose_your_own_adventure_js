@@ -40,6 +40,7 @@ var goGuitarShop = 0
 var meetDemons;
 var goHome = 0;
 var orderPizza;
+var getDinnerOutside;
 var goBar = 0;
 var getBox = 0;
 var openedBox;
@@ -169,6 +170,11 @@ var inputHappened = function(currentInput){
      if (currentInput === 'gh' && enteredName) {
         goHome = true;
         return `You decide to go home and watch TV. What do you do? \n\n op) Order pizza. \n go) Go out to get dinner.`
+    } if (currentInput === 'go' && enteredName && goHome) {
+        getDinnerOutside = true;
+        return `You go out to get dinner. While on the way to your favorite Chinese joint, a loud explosion stops you in your path. A demon emerges from the cloud of smoke. \n\nc) Continue`
+    } if (currentInput === 'c' && enteredName && goHome && getDinnerOutside) {
+        return `"${playerName[0]}!", roars the demon. "You have diverged from your true path. Nothing can stop me now. Nothing!" \n\nYou die a slow and painful death. \n\n GAME OVER`
     } if (currentInput === 'op' && enteredName && goHome) {
         orderPizza = true;
         return `You decide to order pizza. Pepperoni or hawaiiwan? \n\n pp) Pepperoni \n hw) Hawaiiwan`
