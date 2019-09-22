@@ -1,8 +1,17 @@
 "use strict"
 // display() is a function declared within <script> inside index.html
 // display() is used here to display a welcomeMessage at the start of the game
-var welcomeMessage =    " --------The Matrix--------\n" +
-                        "Enter Your Name & Hit Enter";
+var welcomeMessage =    "----------The Matrix-----------\n" +
+                        "|\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0 \
+                          \xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0|\n" +
+                        "|\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0 \
+                          \xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0|\n" +
+                        "|\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0 \
+                          \xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0|\n" +
+                        "|\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0 \
+                          \xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0|\n" +
+                        "|\xa0\xa0\xa0\xa0\xa0\xa0\xa0login:\xa0[your name]\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0|\n" +
+                        "-----------------------------------";
 
 display(welcomeMessage);
 
@@ -37,22 +46,20 @@ var player = {
 // the value in the paths objects corresponds to the index of the item inside the stages array, e.g. 0 in stages[0]
 var stages = [{
         messages: {
-            intro: ["Wake up, ", "playerName", "...\n",
-                    "The Matrix has you...\n",
-                    "Follow the white rabbit.\n"],
-            questions: ["What would you like to do?\n"],
-            choices: ["*[F]ollow\n", "*[D]o nothing\n"],
-            hints: ["<Hint: hit the letter in the [ ] to continue>\n"],
+            intro: ["Wake up, ", "playerName", "...\n\n\n\n\n"],
+            questions: [],
+            choices: [],
+            hints: ["<enter [c] to continue>\n"],
         },
-        paths: { F: 1, D: 3 },
+        paths: { c: 1 },
         response: null,
     },
     {
         messages: {
-            intro: ["Welcome, ", "playerName", ". As you no doubt have guessed, I am Morpheus.\n"],
-            questions: ["What would you like to do?\n"],
-            choices: ["[T]alk to Morpheus\n", "[W]alk away\n"],
-            hints: [],
+            intro: ["The Matrix has you...\n\n\n\n\n"],
+            questions: [],
+            choices: [],
+            hints: ["<enter [c] to continue>\n"],
         },
         paths: [],
         response: null,
