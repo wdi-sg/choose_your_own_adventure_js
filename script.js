@@ -3,6 +3,7 @@
 var name = prompt("What is your name?");
 
 if(name !== null){
+    //first question
     var choice1 = prompt(`Hi ${name} !. Do you want to play a game? Find your way out of the murder house. You woke up in a dark room and ahead of you, you see a torchlight and a lamp with a matchbox beside it. Do you 'A', Choose the torchlight or 'B', choose the lamp and light it? `)
 
 }if(choice1 === 'A') {
