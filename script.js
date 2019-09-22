@@ -18,6 +18,11 @@ var inputHappened = (currentInput) =>{
   console.log( currentInput );
   console.log(playerData.state);
 
+// check for blank space
+if (currentInput.replace(/\s+/g, '').length == 0) {
+     return "Please enter something..."; 
+} 
+
 if (playerData.state === "finished"){
     return gameDone();
   }
