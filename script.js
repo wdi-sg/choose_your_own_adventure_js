@@ -3,20 +3,9 @@ console.log("hello script js");
 var name = "";
 var score = 0;
 var storyCount = 0;
-// var yourHealth = 100;
 var output = "";
-// var randomArt = (Math.floor(Math.random) * 5);
-//character object to store data
-// var yourWeapon = "";
-// var randomNum = 0;
-// var randomNPC = 0;
-// var randomWeapon = 0;
 
-// // win cases
-// var winEnding = ["you win a", "you win b", "you win c", "you win d", "you win e"];
-// //lose cases
-// var deadEnding = ["you're dead a", "you're dead b", "you're dead c", "you're dead d", "you're dead e"];
-
+//User Input
 var inputHappened = function(currentInput){
 	if (storyCount === 0){
     getName();
@@ -27,18 +16,17 @@ var inputHappened = function(currentInput){
 	} else {
 		output = partB(currentInput);
   }
-	// } else if (storyCount === 4) {
-	// 	output = partC(currentInput);
-	// }
 		return output;
 };
 
+//prompt user to enter name
 var getName = function(){
   var randomArt = Math.floor((Math.random() * 3) + 2); 
   output = `What is your name?\n\n${asciiArt[randomArt]}`;
   storyCount ++;
 }
 
+//intro
 var intro = function(option){
   var randomArt = Math.floor((Math.random() * 3) + 2); 
 		name = option;
@@ -48,6 +36,7 @@ var intro = function(option){
 }
 
 var partA = function(option){
+  //generate random ascii art for each run
   var randomArt = Math.floor((Math.random() * 3) + 2); 
 	if (option === "L") {
   score = score + 3;
@@ -62,17 +51,17 @@ var partA = function(option){
 	output = `You, ${name}, exit the tunnel through a tall pair of granite doors. Beyond the pair of granite doors lies a large, broken room. It's covered in large bones, dirt and broken stone. Your torch allows you to see broken arrows, rusty swords and the remains of several humans. At the far end of the room, you see a chest in pristine condition. You step closer to inspect it. Wait, you hear a loud bang in the distance from which you came from.\n\n What will you do next? (C/P/I)\n C heck the corpses.\n P lunder the chest\n I nvestigate the loud bang\n\n${asciiArt[randomArt]}`;
 	storyCount ++;
   } 
-  // } else {
-	// output = output + "\nThis is not an option";
-	// }
 	return output;
 }
 
 var partB = function(option){
   var randomNum = Math.floor(Math.random() * 10);
+  //generate random ending for each option
   var randomEnd = Math.floor(Math.random() * 2);
 	if (option === "R") {
+    //track score based on random ending
     score = score + endings.optionR.score[randomEnd];
+    //output is random NPC description, with random ending text and end message based on random ending
     output = `You rubbed the lamp. Smoke starts to billow out of the lamp. When the smoke clears, you realised that a man has appeared in the room.\n\n${npcDescriptionMale[randomNum]}\n\n` + endings.optionR.text[randomEnd] + startOver(randomEnd);
 	} else if (option === "S"){
     score = score + endings.optionS.score[randomEnd];
@@ -99,15 +88,10 @@ var partB = function(option){
     score = score + endings.optionI.score[randomEnd];
 		output = endings.optionI.text[randomEnd] + startOver(randomEnd);
   }
-	// } else {
-	// 	output + "\nThis is not an option";
-  // }
-  console.log(randomEnd)
 	return output;
 }
 
 var startOver = function(endingOption) {
-  console.log(endingOption);
 if (endingOption === 0) {
   var randomArt = Math.floor(Math.random() * 2);
   var append = `\n\nYour score is ${score}. Better luck next time, ${name}. Enter any key to start over.\n\n${asciiArt[randomArt]}`;
@@ -119,73 +103,5 @@ if (endingOption === 0) {
   score = 0;
   return append;
 }
-// var partC = function(option) {
-
-// }
-
-// name, world status, score(int), total score(int), health(int), damage(int),
-
-// waking up in the middle of a dungeon, 3 door ways, which do you pick, to get out, give clues along the way
-// encounter enemies, friends based on random,
-
-// function senarios use switch cases, make dynamic scenarios using random number generator
-
-// combat scenarios
-// treasure chests when opened give weapons, armor, potions (huge, medium, small)
 
 
-// npc use objects in array
-// call npc with random number generator
-
-// player use objects from chests
-// equipments use objects
-
-// loots use chest
-
-// when player attacks enemy and enemy attacks , damage calculator with random number based on percentage of health
-
-
-
-// var storyTemplateFriend = [
-
-// ]
-
-// var npc = [
-//   {
-//     "race": "elf",
-//     "health": "50",
-//     "weapon": [blade,
-
-//     ]
-//       },
-//     },
-//     {
-//       "potions": {
-//           "mana": "mana potions",
-//           "health": "health potions",
-//           "stamina": "stamina potions"
-//       },
-//     },
-//     {
-//       "equipments":{
-//           "armor": "",
-//           "pants": "",
-//           "rings": [],
-//           "boots": "",
-//           "gloves": ""
-//       }
-//     }
-//   ]
-// };
-
-// var x = "0";
-// switch (x) {
-//   case 0:
-//     text = "Off";
-//     break;
-//   case 1:
-//     text = "On";
-//     break;
-//   default:
-//     text = "No value found";
-// }
