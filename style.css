@@ -1,19 +1,46 @@
 body {
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
   background-color: black;
   color: red;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  margin: 0;
+  width: 100vw;
+}
+
+.status {
+  background-color: black;
+  border-bottom: 1px solid red;
+  height: 5vh;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  z-index: 2;
+}
+
+.status-wrapper {
+  align-items: center;
+  display: flex;
+  font-family: monaco, Consolas, Lucida Console, monospace;
+  font-size: 30px;
+  height: 5vh;
+  justify-content: space-around;
+  width: 100vw;
 }
 
 .starter {
   font-size: 30px;
   margin: 0;
-  /* border: 3px solid blue; */
+}
+
+.output-container {
+  border-bottom: 1px solid red;
+  height: 90vh;
+  position: relative;
+  width: 100vw;
 }
 
 .input-container {
@@ -21,11 +48,11 @@ body {
   width: 100vw;
 }
 
-p::before {
+.input-container::before {
   color: red;
   content: ">";
   font-size: 20px;
-  margin-right: 10px;
+  margin-left: 20px;
 }
 
 input {
@@ -41,16 +68,9 @@ input:focus {
   outline: none;
 }
 
-.input-container::before {
+p::before {
   color: red;
   content: ">";
   font-size: 20px;
-  margin-left: 20px;
-}
-
-.output-container {
-  height: 90vh;
-  width: 100vw;
-  position: relative;
-  border-bottom: 1px solid red;
+  margin-right: 10px;
 }
