@@ -1,17 +1,17 @@
 "use strict"
 // display() is a function declared within <script> inside index.html
 // display() is used here to display a welcomeMessage at the start of the game
-var welcomeMessage =    "----------The Matrix-----------\n" +
-                        "|\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0 \
+var welcomeMessage = "----------The Matrix-----------\n" +
+    "|\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0 \
                           \xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0|\n" +
-                        "|\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0 \
+    "|\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0 \
                           \xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0|\n" +
-                        "|\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0 \
+    "|\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0 \
                           \xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0|\n" +
-                        "|\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0 \
+    "|\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0 \
                           \xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0|\n" +
-                        "|\xa0\xa0\xa0\xa0\xa0\xa0\xa0login:\xa0[your name]\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0|\n" +
-                        "-----------------------------------";
+    "|\xa0\xa0\xa0\xa0\xa0\xa0\xa0login:\xa0[your name]\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0|\n" +
+    "-----------------------------------";
 
 display(welcomeMessage);
 
@@ -44,9 +44,9 @@ var player = {
 // stages.paths is an object that stores data about the next stage that the player will go to , given a particular stages.response
 // the key in the paths object corresponds to stages.response
 // the value in the paths objects corresponds to the index of the item inside the stages array, e.g. 0 in stages[0]
-var stages = [{
+var stages = [{ //stage 0 - Wake Up
         messages: {
-            intro: ["---", "playerName", "\'s ", "Apartment---\n\n", "Wake up, ", "playerName", "...\n\n\n\n"],
+            intro: ["---", "playerName", "\'S ", "APARTMENT---\n\n", "Wake up, ", "playerName", "...\n\n\n\n"],
             questions: [],
             choices: [],
             hints: ["<Enter c to [c]ontinue>\n"],
@@ -54,7 +54,7 @@ var stages = [{
         paths: { c: 1 },
         response: null,
     },
-    {
+    {   //stage 1 - Follow The White Rabbit
         messages: {
             intro: ["The Matrix has you...\n\n\n\nFollow the white rabbit.\n\n"],
             questions: [],
@@ -64,36 +64,94 @@ var stages = [{
         paths: { f: 2 },
         response: null,
     },
-    {
+    {   //stage 2 - Rabbit Hole
         messages: {
-            intro: ["---Hotel Lafayette---\n",
-                    "Welcome ", "playerName", ".\n\n",
-                    "As you no doubt have guessed, I am Morpheus.\n\n",
-                    "This is your last chance. After this, there is no going back.\n\n",
-                    "You take the blue pill and the story ends.\n",
-                    "You wake in your bed and you believe whatever you want to believe.\n\n",
-                    "You take the red pill and you stay in Wonderland\n",
-                    "and I show you how deep the rabbit-hole goes.\n\n"],
+            intro: ["---HOTEL LAFAYETTE---\n",
+                "Welcome ", "playerName", ".\n\n",
+                "As you no doubt have guessed, I am MORPHEUS.\n\n",
+                "This is your last chance. After this, there is no going back.\n\n",
+                "You take the *blue* pill and the story ends.\n",
+                "You wake in your bed and you believe whatever you want to believe.\n\n",
+                "You take the *red* pill and you stay in Wonderland\n",
+                "and I show you how deep the rabbit-hole goes.\n\n"
+            ],
             questions: ["Which pill would you take?\n\n"],
             choices: ["[b]lue OR [r]ed\n"],
             hints: [],
         },
-        paths: {b: 3, r: 4},
+        paths: { b: 3, r: 4 },
         response: null,
     },
-    {
+    {   //stage 3 - Blue
         messages: {
-            intro: ["You've taken the blue pill.\n\n\n\n\n\n"],
-            questions: [],
-            choices: [],
+            intro: ["<THE END>\n\n\nYou've taken the blue pill.\n\n\nWelcome back to the Matrix.\n\n\n"],
+            questions: ["Restart the game?\n\n"],
+            choices: ["[y]es"],
             hints: [],
         },
-        paths: {},
+        paths: { y: 0 },
         response: null,
     },
-    {
+    {   //stage 4 - Red
         messages: {
             intro: ["You've taken the red pill.\n\n\n\n\n\n"],
+            questions: [],
+            choices: [],
+            hints: ["[c]ontinue"],
+        },
+        paths: { c: 5 },
+        response: null,
+    },
+    {   //stage 5 - Training
+        messages: {
+            intro: ["---MAIN DECK---\n\n",
+                    "You're plugged in, hanging in one of the suspension chairs.\n\n\n",
+                    "TANK:\n",
+                    "\We're supposed to load all these operations programs first,\n",
+                    "but this is some major boring shit.\n",
+                    "Why don't we start something a little fun?\n",
+                    "How about some combat training?\n\n",
+                    "A tall carousel is loaded with micro discs.\n\n"],
+            questions: ["Choose a disc:\n\n"],
+            choices: ["[K]enpo OR [T]ae Kwan Do OR [D]runken boxing"],
+            hints: [],
+        },
+        paths: {k: 6, t: 7, d: 8},
+        response: null,
+    },
+    { //stage 6 - Kenpo
+        messages: {
+            intro: ["playerName", ":\n", "I know Kenpo.\n\n\n\n"],
+            questions: ["Load more combat training?\n\n"],
+            choices: ["[y]es OR [n]o"],
+            hints: [],
+        },
+        paths: {y: 5, n: 9},
+        response: null,
+    },
+    { //stage 7 - Tae Kwan Do
+        messages: {
+            intro: ["playerName", ":\n", "I know Tae Kwan Do.\n\n\n\n"],
+            questions: ["Load more combat training?\n\n"],
+            choices: ["[y]es OR [n]o"],
+            hints: [],
+        },
+        paths: {y: 5, n: 9},
+        response: null,
+    },
+    { //stage 8 -Drunken Boxing
+        messages: {
+            intro: ["playerName", ":\n", "I know Drunken Boxing.\n\n\n\n"],
+            questions: ["Load more combat training?\n\n"],
+            choices: ["[y]es OR [n]o"],
+            hints: [],
+        },
+        paths: {y: 5, n: 9},
+        response: null,
+    },
+    { //stage 9
+        messages: {
+            intro: [],
             questions: [],
             choices: [],
             hints: [],
@@ -108,7 +166,7 @@ var stages = [{
 var updatePlayerName = function(messages, playerName) {
     for (var i = 0; i < messages.length; i++) {
         if (messages[i] === "playerName") {
-            messages[i] = playerName;
+            messages[i] = playerName.toUpperCase();
         }
     }
     return messages;
@@ -162,8 +220,8 @@ var inputHappened = function(input) {
 
 
     if (!game.started) {
-    // when the game has not started, i.e. when the screen is showing the welcomeMessage and asking for player name
-    // do the following to set up the game:
+        // when the game has not started, i.e. when the screen is showing the welcomeMessage and asking for player name
+        // do the following to set up the game:
         player.name = input; // player input will be stored as player.name
         game.started = true; // end of setup, game.started is now true and the stuff inside this if statement won't be run again
         // console.log("changed game.started to: ", game.started);
