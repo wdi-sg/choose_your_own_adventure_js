@@ -38,9 +38,12 @@
 console.log("Welcome to Minesweeper v2! Please enter 'Start Game' to proceed.");
 
 // Create an empty array of mystery boxes
-var mysteryBox = [];
+var mysteryBox = []; // This mysteryBox will be shown to user to pick from numbers 1 - 9
+var hiddenMysteryBox = mysteryBox; // This mysteryBox will contain the actual box item
 
-var boxItem = 0;
+// Create item and its location
+var boxItemLoc = null;
+var boxItem = "BOMB";
 
 // Create an array to store player's selected choices
 var playerSelectedChoices = [];
@@ -57,10 +60,19 @@ var inputHappened = function(currentInput){
         // System assign random number to the array of mystery boxes
         numberGenerator(mysteryBox);
         console.log("Array in mysteryBox: " + mysteryBox);
+        console.log("This is the hidden one: " + hiddenMysteryBox);
+
+        // Assign boxItem to the hiddenMysteryBox where player cannot see
+        hiddenMysteryBox[2] = boxItem;
+        console.log(hiddenMysteryBox);
+
+        // Verify the location of the bomb
+        boxItemLoc = hiddenMysteryBox.indexOf("BOMB");
+        console.log("Location of the bomb is " + boxItemLoc);
 
         // Set item to be the third item in the mystery box
-        boxItem = mysteryBox[2];
-        console.log("Item is " + boxItem);
+        /*boxItemLoc = mysteryBox["BOMB"];
+        console.log("Item is " + boxItemLoc);
 
         // Player will be prompted to be input choice number as long as he/she does not hit the bomb
         while(parseInt(playerChoiceInput) !== boxItem){
@@ -71,7 +83,7 @@ var inputHappened = function(currentInput){
             playerSelectedChoices.push(playerChoiceInput);
 
             console.log("Your choices are: " + playerSelectedChoices);
-        }
+        }*/
 
     } else {
 
