@@ -9,7 +9,7 @@ var boxes = [{
     },
             {
         item: 'Telecaster of Prince!',
-        dmg: 100,
+        dmg: Math.floor(Math.random() * (120 - 80 + 1)) + 80,
         description: 'Prince has blessed this Tele with soul power.'
     },
             {
@@ -34,8 +34,9 @@ var miniDemons = {
 var enteredName = 0;
 var approachAxel = 0;
 var goElsewhere;
-var iceCream;
-var guitarShop = 0
+var goWharf;
+var goIceCream;
+var goGuitarShop = 0
 var meetDemons;
 var goHome = 0;
 var goBar = 0;
@@ -105,8 +106,12 @@ var inputHappened = function(currentInput){
     } if (currentInput === 'ge' && enteredName && approachAxel) {
         goElsewhere = true;
         return `You decide to go elsewhere. Where do you wanna go? \n\n ic) Go get ice-cream. \n gs) Go to the guitar shop. \n wh) Go to the wharf.`
+    } if (currentInput === 'wh' && enteredName && approachAxel && goElsewhere) {
+        goWharf = true;
+        return `You go to the wharf and listen to the sound of the sea. It's peaceful and all is right with the world. \n\n GAME OVER`
+
     } if (currentInput === 'gs' && enteredName && approachAxel && goElsewhere) {
-        guitarShop = true;
+        goGuitarShop = true;
         return `You go to the guitar shop. A shady-looking hoodied figure approaches. "Hey, you're ${playerName[0]}, right? I've been looking for you. You're the chosen one..." He stretches out his hand, in it, a small box. Do you:
         \n ti) Take it. \n hn) Hell no.`
     } if (currentInput === 'ti' && enteredName && approachAxel && goElsewhere && guitarShop) {
@@ -128,7 +133,7 @@ var inputHappened = function(currentInput){
         rejectBox = true;
         return `You leave the guitar shop and go home, doomed to a life of mediocrity. \n\n GAME OVER`
     } if (currentInput === 'ic' && enteredName && approachAxel && goElsewhere) {
-        iceCream = true;
+        goIceCream = true;
         return `You're at the ice-cream store. Do you get: \n os) One-scoop \n fs) Four-scoops`
     } if (currentInput === 'os' && enteredName && approachAxel && goElsewhere && iceCream) {
         return `You get one-scoop and return home. Nothing interesting happens when you get ice-cream. Much less one-scoop. \n\n GAME OVER`
