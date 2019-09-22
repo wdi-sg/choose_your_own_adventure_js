@@ -28,6 +28,7 @@ var player = {
     hp: 400,
 }
 
+
 var enteredName = 0;
 var approachAxel = 0;
 var goHome = 0;
@@ -38,9 +39,9 @@ var givenBox;
 var playerName = [];
 var randomizeBox = function() {
     var odds = Math.floor(Math.random() * 10)
-   if (odds >= 1 && odds <= 4) {
+   if (odds >= 0 && odds <= 3) {
     givenBox = boxes[0];
-   } else if (odds > 4 && odds <= 9) {
+   } else if (odds === 4 && odds < 9) {
     givenBox = boxes[1];
    } else if (odds === 9) {
     givenBox = boxes[2];
