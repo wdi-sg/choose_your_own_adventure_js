@@ -8,7 +8,7 @@ var boxes = [{
         description: 'Gamebreaker!'
     },
             {
-        item: 'Telecaster of Prince!',
+        item: 'Prince\'s Telecaster!',
         dmg: Math.floor(Math.random() * (120 - 80 + 1)) + 80,
         description: 'Prince has blessed this Tele with soul power.'
     },
@@ -39,6 +39,7 @@ var goIceCream;
 var goGuitarShop = 0
 var meetDemons;
 var goHome = 0;
+var orderPizza;
 var goBar = 0;
 var getBox = 0;
 var openedBox;
@@ -166,8 +167,15 @@ var inputHappened = function(currentInput){
         return `Live a life of being boring forever, why don't you. This is supposed to be an adventure. \n GAME OVER`
     }
      if (currentInput === 'gh' && enteredName) {
-        var goHome = true;
-        return `You decide to go home instead. WEAK, dude. What do you do? \n op) Order pizza. \n bs) You're surfing the net and see some loot boxes. You decide to buy stuff.`
+        goHome = true;
+        return `You decide to go home and watch TV. What do you do? \n\n op) Order pizza. \n go) Go out to get dinner.`
+    } if (currentInput === 'op' && enteredName && goHome) {
+        orderPizza = true;
+        return `You decide to order pizza. Pepperoni or hawaiiwan? \n\n pp) Pepperoni \n hw) Hawaiiwan`
+    } if (currentInput === 'pp' && enteredName && goHome && orderPizza) {
+        return `You order Pepperoni and stay home. Dude, you should really get out more. Nothing interesting ever happens to people who stay at home. \n\n GAME OVER`
+    } if (currentInput === 'hw' && enteredName && goHome && orderPizza) {
+        return `${boss.name} appears in a puff of smoke and strikes you dead. "You shouldn't have chosen the Haiwaiian. Muahaha..." \n\nYou deserve it, really. \n\n GAME OVER`
     } else {
         return `Invalid input`
     }
