@@ -21,14 +21,14 @@ var inputHappened = function(currentInput){
 
 //prompt user to enter name
 var getName = function() {
-  var randomArt = happyRandomArt();; 
+  var randomArt = happyRandomArt();
   output = `What is your name?\n\n${asciiArt[randomArt]}`;
   storyCount ++;
 }
 
 //intro
 var intro = function(option) {
-  var randomArt = happyRandomArt();; 
+  var randomArt = happyRandomArt();
 		name = option;
 		output = `Welcome ${name}. You wake up in a dark cave. Feeling disorientated, you look around the cave and see three tunnels. \n\nWhich tunnel will you pick? (L/C/R) \n L eft \n C enter \n R ight\n\n${asciiArt[randomArt]}`;
     storyCount ++;
