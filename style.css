@@ -2,17 +2,58 @@ body{
 	background-color: rgb(150,150,150);
 }
 
+pre {
+	line-height: 0.75;
+}
+
 .UI{
   font-size:30px;
   padding:10px;
-  display:block;
   margin:40px;
   border:3px solid blue;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#input{
+	width: 20%;
+}
+
+.topUI{
+	font-size:30px;
+  padding:10px;
+  margin:40px;
+  border:3px solid blue;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.stats{
+	border: 3px solid blue;
+	background-color: gray;
+	color: white;
+	width: 60%;
+	margin: auto;
+	padding: 20px;
+}
+
+.statsText{
+	margin: 0 30px;
+	display: inline-block;
+}
+
+#map{
+	width: 50%;
+	margin: 10px auto;
 }
 
 #output{
+	border: solid 3px blue;
+	padding: 10px;
 	background-color: black;
 	color: white;
+	margin: 0 auto;
+	width: 90%;
 }
 
 #outputText{

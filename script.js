@@ -1,16 +1,17 @@
 console.log('hello');
 //Variables for assets
 var bgm = document.getElementById("bgm");
+var gasmask = document.getElementById("gasmask");
 var inputPlaceholder = document.querySelector("#input");
 
 //Functions for assets
 function playSound(){
-    bgm.muted = false;
-    bgm.play();
+    gasmask.muted = false;
+    gasmask.play();
 }
 
 function stopSound(){
-    bgm.muted = true;
+    gasmask.muted = true;
 }
 
 //Variable for game

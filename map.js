@@ -7,6 +7,7 @@ var player = {
     radiation: 0,
     item: [],
     Bullets: 10,
+    map: true,
 }
 
 var red = 150;
@@ -34,11 +35,20 @@ var gameEnd = false;
 function display(text){
     var outputText = document.getElementById("outputText");
     outputText.innerText = text;
+
+    var hpUI = document.getElementById("HP");
+    var batUI = document.getElementById("Battery");
+    var radUI = document.getElementById("Radiation");
+    hpUI.innerText = `Health:\n${player.health}`;
+    batUI.innerText = `Battery:\n${Battery}`;
+    radUI.innerText = `Radiation:\n${Radiation}`;
+
     var intensity = Battery;
     red = 15 * intensity;
     blue = 15 * intensity;
     green = 15 * intensity;
     body.style.backgroundColor = `rgb(${red} , ${green} ,${blue})`
+
     if (Radiation <= 0) {
         var vintensity = 0.1;
     } else if (Radiation < 10){
@@ -48,6 +58,8 @@ function display(text){
     }
     vol = 0.1 * vintensity
     bgm.muted = false;
+    gasmask.muted = false;
+    gasmask.play();
     bgm.play()
     bgm.volume = vol;
 
@@ -88,6 +100,9 @@ document.querySelector('#input').addEventListener('keypress',function(event){
         switch(enterToContinue){
             case true:
                 enterToContinue = false;
+                if (player.map === true){
+                    document.querySelector('#map').style.visibility = "visible";
+                }
                 if (currentPath != "battle" && currentPath != "postBattle" && currentPath != 1 && currentPath != "battleBattle") {
                     if(monsterArr.length > 0){
                         var encounter = Math.floor((Math.random()*10)+1);
@@ -177,7 +192,7 @@ document.querySelector('#input').addEventListener('keypress',function(event){
                     currentRoom = "room1";
                     currentPath = 1;
                     enterToContinue = true;
-                    narration = "Despite knowing what fate have in store for you, you had chosen to accept this suicide mission. Press enter to continue"
+                    narration = "Despite knowing what fate have in store for you, you had chosen to accept this suicide mission. You knew that even if you were to deny the mission, you would still be caught up in the fall out of the explosion.\n\nYou took sometime to prepare- wearing the appropriate suits and bringing along some gears. You can hear your labored breathing through the gas mask, as though every breath you take was a ticking step closer to your death.\n\nAs you reached Chernobyl, your biggest regret began to haunt you- You have yet to bid your love ones farewell. Press enter to continue"
                     display(narration);
                     break;
                 } else if (input === "no"){
@@ -258,6 +273,15 @@ document.querySelector('#input').addEventListener('keypress',function(event){
                     currentPath = 6;
                     enterToContinue = true;
                     narration = "You have chosen to move left. Press enter to continue"
+                    display(narration);
+                    break;
+                } else if (input === "right"){
+                    previousRoom = currentRoom;
+                    previousPath = currentPath;
+                    currentRoom = "room1";
+                    currentPath = 1;
+                    enterToContinue = true;
+                    narration = "You have chosen to move right. Press enter to continue"
                     display(narration);
                     break;
                 }
@@ -475,6 +499,8 @@ function game(input){
             narration = `You are now in ${path["room"][currentRoom]}. You see a path to the left or right`;
             if(path["visited"][currentRoom] === true){
                 narration = `${narration}\nYou have been here before.`;
+            } else {
+                narration = `${narration}\n\nAs you step past the vestibule, you almost instantly felt nausea. As you see the remains of the poor souls caught in the disaster laid strewn across the floor, you begin to wonder if the gas mask was enough to keep you safe for long enough to get the job done. Your eyes started to accilmate to the darkness. Much of the facilities were in ruin. You made sure you took proper care of your steps and not to trip over. Shattering your gas mask now could jepordize the operation.\n\nSuddenly, you hear some rustling, and spot from a far some movement. Strange, you thought. Nothing else should be in here right now. Perhaps your eyes were playing tricks on you.`;
             }
             narration = `${narration}\n\nChoose:\nleft\nright`;
             path["visited"][currentRoom] = true;
@@ -661,30 +687,35 @@ function battle(){
         }
     }
 
-    // if(monsterObj[monsterArr[0]]["hp"]>0){
-    //     if (battleIntro === 0){
-    //         currentPath = "battle"
-    //         narration = `A wild ${monsterArr[0]} appeared! What would you do?`
-    //     } else if (battleIntro === 1){
-    //         var damage = monsterObj[monsterArr[0]]["dmg"];
-    //         console.log(`Damage taken ${damage}`);
-    //         narration = `The ${monsterArr[0]} attacked you for ${damage} damage! What do you do next?`
-    //         player.health = player.health - damage;
-    //         console.log(`Player Health: ${player.health}`);
-    //         battleIntro = 2;
-    //     }
-    //     if (player.Bullets > 0){
-    //         narration = narration + "\ngun"
-    //     }
-    //     narration = narration + "\nshiv";
-    // } else {
-    //     console.log("It is dead")
-    //     narration = `The monster died. Press enter to continue`;
-    //     monsterArr.shift();
-    //     battleIntro = 0;
-    //     enterToContinue = true;
-    //     currentPath = "postBattle";
-    // }
+    if(monsterObj[monsterArr[0]]["hp"]>0){
+        if (battleIntro === 0){
+            currentPath = "battle"
+            narration = `A wild ${monsterArr[0]} appeared! What would you do?`
+        } else if (battleIntro === 1){
+            var damage = monsterObj[monsterArr[0]]["dmg"];
+            console.log(`Damage taken ${damage}`);
+            narration = `The ${monsterArr[0]} attacked you for ${damage} damage! What do you do next?`
+            player.health = player.health - damage;
+            console.log(`Player Health: ${player.health}`);
+            battleIntro = 2;
+        }
+        if (player.Bullets > 0){
+            narration = narration + "\ngun"
+        }
+        narration = narration + "\nshiv";
+    } else {
+        console.log("It is dead")
+        narration = `The ${monsterArr[0]} died.`;
+        if (monsterArr[0] === "Mutant Rat"){
+             player.map = true;
+             narration = narration + "\nYou found a partly digested map in its body! This could come in useful!... provided you have enough battery in your torchlight to see it."
+        }
+        narration = narration + "\nPress enter to continue";
+        monsterArr.shift();
+        battleIntro = 0;
+        enterToContinue = true;
+        currentPath = "postBattle";
+    }
     console.log(`Player bullets: ${player.Bullets}`)
     display(narration);
 }

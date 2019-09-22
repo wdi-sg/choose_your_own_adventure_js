@@ -17,9 +17,71 @@
     </header>
 
     <body>
-        <input class="UI" id="input" placeholder="Choose your action"/>
-        <div class="UI" id="output">
-            <p id="outputText"></p>
+        <div class="topUI">
+            <input class="UI" id="input" placeholder="Choose your action"/>
+            <div class="stats">
+                <p class="statsText" id="HP"></p>
+                <p class="statsText" id="Battery"></p>
+                <p class="statsText" id="Radiation"></p>
+            </div>
+        </div>
+
+        <div class = "UI">
+            <div id="output">
+                <p id="outputText"></p>
+            </div>
+            <div class="UI" id="map" style="visibility: hidden;">
+                <pre>
+                     **
+                     **
+               ~~~~~~**
+               ~     **
+               ~     ****
+               ~     ****
+              ***
+      ***~~~~~***~~~
+     ****     ***  ~
+     ****      ~   ~
+               ~   ~    ***     ***
+               ~   ~~~~~***~~~~~***
+               ~        ***     ***
+               ~         ~
+               ~         ~
+               ~         ~
+               ~         ~
+              **         >
+    &&~~~~~~~~**        &&&
+    &&                  &&&
+    <                    =
+    =======              =
+          =              =
+          =          &&&&&&&&&
+       &&&=&    =====&&&&&&&&&=====
+       &&&>&    =    &&&&&&&&&    =
+       &&&&&    =                 =
+       &&&&&    =                 =
+         =      =                 =
+         =      =                 =
+         =      =                 =
+         =      =                 =
+         =      =      &&&&&      =
+         =  &&&&&&     &&&&&     &&&
+         ===&&&&&&=====&&&&&=====&&&===&
+            &&&&&&     &&&&&     &&&
+                         ^
+                         ^</pre>
+                  <p>
+                      <ul>
+                          Legend
+                          <li>^: Entrance</li>
+                          <li>&: Room</li>
+                          <li>=: Traversable Walkway</li>
+                          <li>>: Slope to basement</li>
+                          <li>~: Traversable water tunnel</li>
+                          <li>*: Flooded chamber</li>
+                      </ul>
+                  </p>
+            </div>
         </div>
         <div class="UI" id="gameover" style="visibility: hidden;">
             <p id="gameoverText">Game Over</p>
@@ -32,6 +94,9 @@
                     <!-- Assets Only -->
     <audio hidden autoplay loop="infinite" muted id="bgm">
         <source src="assets/GCsound.mp3" type="audio/mpeg">
+    </audio>
+    <audio hidden autoplay loop="infinite" muted id="gasmask">
+        <source src="assets/GasMask.mp3" type="audio/mpeg">
     </audio>
     <script src="map.js"></script>
     <!-- <script src="script.js"></script> -->

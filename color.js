@@ -1,5 +1,6 @@
 var body = document.getElementById("body");
 var bgm = document.getElementById("bgm");
+
 var vol = 0;
 
 var batt = 100;
