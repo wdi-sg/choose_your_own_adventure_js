@@ -106,13 +106,14 @@ input.placeholder = "Enter name";
 var inputHappened = function(currentInput){
   console.log( currentInput );
 
+/*
     //check if input is undefined
     if (!isNaN(Number(currentInput))) {
     input.value = "";
     input.placeholder = lastInput;
     return lastOutput;
     }
-
+*/
 
   //check if is new game
   if (gameProgress[gameCounter] === "getName") {
@@ -133,6 +134,7 @@ var inputHappened = function(currentInput){
   //get House of player
   } else if (gameProgress[gameCounter] === "getHouse") {
 
+if (Number(currentInput) > 0 && Number(currentInput) < 5) {
     //store player house
     house = housesOfHogwarts[ Number(currentInput) - 1 ];
     console.log(house);
@@ -153,6 +155,12 @@ var inputHappened = function(currentInput){
     input.placeholder = lastInput;
     lastOutput = `Please report to Professor ${house.head} of ${house.name} House.\nYou are now in the Great Hall.`;
     return lastOutput;
+} else {
+    input.value = "";
+    input.placeholder = lastInput;
+    return lastOutput;
+}
+
 
   //see where player wants to go
   } else if (gameProgress[gameCounter] === "findProfessor") {
