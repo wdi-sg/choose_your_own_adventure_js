@@ -112,29 +112,55 @@ var inputHappened = function(currentInput){
                     input.placeholder = "Please input B or H.";
                     inputValues.doorQuestions = null
                     inputCount --;
+                      if (input.value > 60){
+                            inputValues.doorAnswers[0]["age"] = input.value;
+
+                            return `Thank you for telling me that your age is ${inputValues.doorAnswers[0]["A"]}, ${inputValues["name"]}! something about how old you are`
+                            } else if (input.value <= 20){
+                            inputValues.doorAnswers[0]["age"] = input.value;
+
+                            return `Thank you for telling me that your age is ${inputValues.doorAnswers[0]["A"]}, ${inputValues["name"]}! something about how young you are`
+                            } else {
+                            inputValues.doorAnswers[0]["age"] = input.value;
+
+                            return `Thank you for telling me that your age is ${inputValues.doorAnswers[0]["A"]}, ${inputValues["name"]}! something about how uninspiring you are`
+                            };
                   } else if (inputValues.doorAnswers[0]["B"] !== null && inputValues.doorAnswers[0]["H"] === null){
                     document.getElementById("question").textContent  = "Please tell me about your hobby. "
                     inputValues.doorQuestions = "H"
                     input.placeholder = `Please input "S", "D", or "H".`
+                         if (input.value > 60){
+                            inputValues.doorAnswers[0]["age"] = input.value;
+
+                            return `Thank you for telling me that your age is ${inputValues.doorAnswers[0]["A"]}, ${inputValues["name"]}! something about how old you are`
+                            } else if (input.value <= 20){
+                            inputValues.doorAnswers[0]["age"] = input.value;
+
+                            return `Thank you for telling me that your age is ${inputValues.doorAnswers[0]["A"]}, ${inputValues["name"]}! something about how young you are`
+                            } else {
+                            inputValues.doorAnswers[0]["age"] = input.value;
+
+                            return `Thank you for telling me that your age is ${inputValues.doorAnswers[0]["A"]}, ${inputValues["name"]}! something about how uninspiring you are`
+                            };
                     } else if (inputValues.doorAnswers[0]["B"] !== null && inputValues.doorAnswers[0]["H"] === null){
                     document.getElementById("question").textContent  = "Please tell me about your BMI. "
                     inputValues.doorQuestions = "B"
                     input.placeholder = `Please input your BMI (in numbers).`
 
+                         if (input.value > 60){
+                            inputValues.doorAnswers[0]["age"] = input.value;
 
-  if (input.value > 60){
-                    inputValues.doorAnswers[0]["age"] = input.value;
+                            return `Thank you for telling me that your age is ${inputValues.doorAnswers[0]["A"]}, ${inputValues["name"]}! something about how old you are`
+                            } else if (input.value <= 20){
+                            inputValues.doorAnswers[0]["age"] = input.value;
 
-                    return `Thank you for telling me that your age is ${inputValues.doorAnswers[0]["A"]}, ${inputValues["name"]}! something about how old you are`
-                    } else if (input.value <= 20){
-                    inputValues.doorAnswers[0]["age"] = input.value;
+                            return `Thank you for telling me that your age is ${inputValues.doorAnswers[0]["A"]}, ${inputValues["name"]}! something about how young you are`
+                            } else {
+                            inputValues.doorAnswers[0]["age"] = input.value;
 
-                    return `Thank you for telling me that your age is ${inputValues.doorAnswers[0]["A"]}, ${inputValues["name"]}! something about how young you are`
-                    } else {
-                    inputValues.doorAnswers[0]["age"] = input.value;
+                            return `Thank you for telling me that your age is ${inputValues.doorAnswers[0]["A"]}, ${inputValues["name"]}! something about how uninspiring you are`
+                            };
 
-                    return `Thank you for telling me that your age is ${inputValues.doorAnswers[0]["A"]}, ${inputValues["name"]}! something about how uninspiring you are`
-                    };
 
             //user inputs BMI
             } else if (inputValues.doorQuestions === "B"){
