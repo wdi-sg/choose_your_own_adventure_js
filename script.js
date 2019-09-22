@@ -1,7 +1,7 @@
 // Math.floor(Math.random() * 10)
 // playerName is not working - it keeps getting redefined everytime there's currentInput
 console.log("hello script js");
-alert('Hello. Welcome to \'Guitars and Monsters: The Adventure.\' What is your name? Please type CAREFULLY. You only got ONE shot and stupid names are stored FOREVER.')
+
 var boxes = [{
         item: 'Legendary Stratocaster of Hendrix!',
         dmg: 9999,
@@ -93,7 +93,7 @@ var demonFightCalc = function() {
             return loseMessage;
     }
 }
-
+alert('Hello. Welcome to \'Guitars and Monsters: The Adventure.\' What is your name? Please type CAREFULLY. You only got ONE shot and stupid names are stored FOREVER.')
 var inputHappened = function(currentInput){
     playerName.push(currentInput);
     var welcomeMessage = `Hi ${playerName}! Henceforth commences the face-melting. We might even fight monsters and shit. Let's begin. \n
