@@ -59,66 +59,52 @@ var target;
 
 //to store player location
 var currentLocation;
+var currentLevel;
 
 const hogwartsCastle = [
-    { level: "Dungeon",
-      side: [
-        { part: "Main",
-          rooms: [
-            { location: "Hufflepuff House",
-              professor: "Sprout"
-            },
-            { location: "Slytherin House",
-              professor: "Snape"
-            },
-            { location: "Potions Classroom",
-              professor: "Snape"
-            }
-        ]}
-      ]
-    },
-    { level: "Ground",
-      side: [
-        { part: "East",
-          rooms: [
-            { location: "Transfiguration Classroom",
-              professor: "McGonagall"
-            },
-            { location: "Herbology Classroom",
-              professor: "Sprout"
-            }]
+    [
+        { location: "Hufflepuff House",
+          level: 0,
+          professor: "Sprout"
         },
-        { part: "West",
-          rooms: [
-            { location: "Great Hall",
-              professor: "Dumbledore"
-            }],
-        }
-      ]
-    },
-    { level: "Tower",
-      side: [
-        { part: "East",
-          rooms: [
-            { location: "Charms Classroom",
-              professor: "McGonagall"
-            },
-            { location: "Defence Against the Dark Arts Classroom",
-              professor: "Snape"
-            }]
+        { location: "Potions Classroom",
+          level: 0,
+          professor: "Snape"
         },
-        { part: "West",
-          rooms: [
-            { location: "Gryffindor House",
-              professor: "McGonagall"
-            },
-            { location: "Ravenclaw House",
-              professor: "Filtwick"
-            }]
+        { location: "Slytherin House",
+          level: 0,
+          professor: "Snape"
+        },
+    ],
+    [
+        { location: "Great Hall",
+          level: 1,
+          professor: "Dumbledore"
+        },
+        { location: "Transfiguration Classroom",
+          level: 1,
+          professor: "McGonagall"
+        },
+        { location: "Herbology Classroom",
+          level: 1,
+          professor: "Sprout"
         }
-      ]
-    }
-];
+    ],
+    [
+        { location: "Gryffindor House",
+          level: 2,
+          professor: "McGonagall"
+        },
+        { location: "Ravenclaw House",
+          level: 2,
+          professor: "Filtwick"
+        },
+        { location: "Charms Classroom",
+          level: 2,
+          professor: "Filtwick"
+        }
+    ]
+]
 
 
 
@@ -175,9 +161,10 @@ var inputHappened = function(currentInput){
             console.log("Finding: Professor " + target);
 
             //set default location to Great Hall
-            currentLocation = hogwartsCastle[1].side[1].rooms[0];
-            console.log("Currently at: " + currentLocation.location);
-            console.log("Current Professor: " + currentLocation.professor);
+            currentLocation = hogwartsCastle[1][0];
+            console.log(currentLocation);
+            // console.log("Currently at: " + currentLocation.location);
+            // console.log("Current Professor: " + currentLocation.professor);
 
             input.value = "";
             lastInput = "Exit Great Hall? (Y/N)";
@@ -199,11 +186,24 @@ var inputHappened = function(currentInput){
 
         //check if target is found
         if  ( target !== currentLocation.professor ) {
+
             //if player replies NO to exiting current location
             if (currentInput.toUpperCase() === "N") {
                 input.value = "";
                 input.placeholder = "Exit? (Y/N)";
                 return `You are looking for Professor ${target}\n You are now in ${currentLocation.location}.`;
+
+            //if player replies YES to exiting current location
+            } else if (currentInput.toUpperCase() === "Y") {
+
+                input.value = "";
+                lastInput = "Choose destination.";
+                input.placeholder = lastInput;
+
+                //inform current level available locations
+                lastOutput = `You are now at level ${currentLocation.level}.\n You can choose to go to:\n1) ${hogwartsCastle[currentLocation.level][0].location}\n2) ${hogwartsCastle[currentLocation.level][1].location}\n3) ${hogwartsCastle[currentLocation.level][2].location}.`;
+                return lastOutput;
+
             }
 
         }
