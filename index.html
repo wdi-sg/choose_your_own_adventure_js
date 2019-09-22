@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <p>What year you like to go?</p>
+    <input class="starter" id="input" placeholder="Type your answer"/>
+    <h2>output:</h2>
+    <p class="starter" id="output"></p>
+    <script>
+      document.querySelector('#input').addEventListener('change', function(event){
+        var currentInput = event.target.value;
+        var result = inputHappened(currentInput);
+        event.target.value = "";
+
+        display( result );
+      });
+
+
+      var display = function( data ){
+        var output = document.querySelector('#output');
+        output.innerText = data;
+      }
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>
