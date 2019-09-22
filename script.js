@@ -9,16 +9,19 @@ Ask player which House to be sorted into, after which player needs to find the H
 //for easy update of display message
 const input = document.getElementById("input");
 
+//to store last messages displayed in case of invalid input
+var lastInput;
+var lastOutput;
+
 //to track progress of game
 var gameCounter = 0;
 
 var progressGame = function() {
     gameCounter ++;
     console.log( "Game counter: " + gameCounter);
-    input.value = "";
 }
 
-var gameProgress = ["getName", "getHouse"];
+var gameProgress = ["getName", "getHouse", "findProfessor"];
 
 
 
@@ -49,9 +52,6 @@ const housesOfHogwarts = [
       founder: "Salazar",
       ghost: "Bloody Baron"
     },
-    { name: "Hogwarts",
-      head: "Dumbledore"
-    }
 ];
 
 //to store target
@@ -106,6 +106,14 @@ input.placeholder = "Enter name";
 var inputHappened = function(currentInput){
   console.log( currentInput );
 
+    //check if input is undefined
+    if (!isNaN(Number(currentInput))) {
+    input.value = "";
+    input.placeholder = lastInput;
+    return lastOutput;
+    }
+
+
   //check if is new game
   if (gameProgress[gameCounter] === "getName") {
 
@@ -116,8 +124,11 @@ var inputHappened = function(currentInput){
     //increment game progress
     progressGame();
 
-    input.placeholder = "Enter House";
-    return `Hi, ${player}. What House are you in?\n1) Gryffindor\n2) Hufflepuff\n3) Ravenclaw\n4) Slytherin`;
+    input.value = "";
+    lastInput = "Enter House";
+    input.placeholder = lastInput;
+    lastOutput = `Hi, ${player}. What House are you in?\n1) Gryffindor\n2) Hufflepuff\n3) Ravenclaw\n4) Slytherin`;
+    return lastOutput;
 
   //get House of player
   } else if (gameProgress[gameCounter] === "getHouse") {
@@ -134,14 +145,33 @@ var inputHappened = function(currentInput){
     console.log(target);
 
     //set default location to Great Hall
-    currentLocation = hogwartsCastle[1].side[1].rooms[0].location;
+    currentLocation = hogwartsCastle[1].side[1].rooms[0];
     console.log(currentLocation);
 
-    input.placeholder = "Exit Great Hall? (Y/N)";
-    return `Please report to Professor ${house.head} in ${house.name} House.\nYou are now in the Great Hall.`;
+    input.value = "";
+    lastInput = "Exit Great Hall? (Y/N)";
+    input.placeholder = lastInput;
+    lastOutput = `Please report to Professor ${house.head} of ${house.name} House.\nYou are now in the Great Hall.`;
+    return lastOutput;
 
   //see where player wants to go
+  } else if (gameProgress[gameCounter] === "findProfessor") {
+
+    //check if target is found
+    while ( target !== currentLocation.professor ) {
+        //if player replies NO to exiting current location
+        if (currentInput.toUpperCase === "N") {
+            input.value = "";
+            input.placeholder = "Exit? (Y/N)";
+            return `You are looking for Professor ${target}\n You are now in ${currentLocation.location}.`;
+        }
+
+    }
+
   }
+
+
+}
 
 
 
@@ -149,5 +179,3 @@ var inputHappened = function(currentInput){
   // var output = "WOW SOMETHING HAPPENED";
   // input.value = "clear";
   // return output;
-
-};
