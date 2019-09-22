@@ -150,7 +150,7 @@ var inputHappened = function(currentInput){
             ${boss.name} \n\n Description: ${boss.description} \n Boss HP: ${boss.hp} \n Your HP: ${playerHP} \n\n fb) Fight boss`
     } if (currentInput === 'fb' && enteredName && approachAxel && goBar && getBox && openedBox) {
         fightBoss = true;
-        return fightCalc();
+        return bossFightCalc();
         if (playerWon) {
             return winMessage;
         } else if (playerLost) {
