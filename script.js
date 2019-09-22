@@ -115,14 +115,14 @@ var inputHappened = function(currentInput){
         goGuitarShop = true;
         return `You go to the guitar shop. A shady-looking hoodied figure approaches. "Hey, you're ${playerName[0]}, right? I've been looking for you. You're the chosen one..." He stretches out his hand, in it, a small box. Do you:
         \n ti) Take it. \n hn) Hell no.`
-    } if (currentInput === 'ti' && enteredName && approachAxel && goElsewhere && guitarShop) {
+    } if (currentInput === 'ti' && enteredName && approachAxel && goElsewhere && goGuitarShop) {
         getBox = true;
         randomizeBox();
         return `You open the box, and inside is: \n\n Item: ${givenBox.item} \n Power level: ${givenBox.dmg} \n Description: ${givenBox.description} \n\n Time to give your gear a test drive! Feeling the immense power flowing through your hands, you command your fiercest power stance and let the guitar ring. \n\n Enter (c) to continue`
-    } if (currentInput === 'c' && enteredName && approachAxel && goElsewhere && guitarShop && getBox) {
+    } if (currentInput === 'c' && enteredName && approachAxel && goElsewhere && goGuitarShop && getBox) {
         meetDemons = true;
         return `You leave the guitar shop. There's a sudden explosion - out of the smoke, you see other-worldy figures. Demons! Enter (cc) to continue`
-    } if (currentInput === 'cc' && enteredName && approachAxel && goElsewhere && guitarShop && getBox && meetDemons) {
+    } if (currentInput === 'cc' && enteredName && approachAxel && goElsewhere && goGuitarShop && getBox && meetDemons) {
         fightDemons = true;
         return demonFightCalc();
         if (playerWon) {
@@ -130,7 +130,7 @@ var inputHappened = function(currentInput){
         } else if (playerLost) {
             return loseMessage;
         }
-    } if (currentInput === 'hn' && enteredName && approachAxel && goElsewhere && guitarShop) {
+    } if (currentInput === 'hn' && enteredName && approachAxel && goElsewhere && goGuitarShop) {
         rejectBox = true;
         return `You leave the guitar shop and go home, doomed to a life of mediocrity. \n\n GAME OVER`
     } if (currentInput === 'ic' && enteredName && approachAxel && goElsewhere) {
