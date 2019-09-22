@@ -50,4 +50,35 @@ var asciiArt = [
   "(\\ /) \n ( . . ) \n C('')('')",
   "()_() \n (._.) \n (('')('')",
   "( . /\\_/\\\n .) >^,^<\n( _ ( _ )"
-]
+];
+
+var endings = {
+  "R": [
+    `He turns to you and says \"Greetings. I have been imprisoned in the lamp for centuries. It's about time someone came along and take my place.\"\n\nThe lamp begins to start up like a really ancient vaccum cleaner.`,
+    `dead`
+  ],
+  "S": [
+    `She turns to you and says \"Hello. I have been waiting for you to arrive.\" She reaches out of the floor mirror and pulls you under to join her for eternity. Stuck in mirror with a stranger.`,
+  ],
+  "O": [
+    `You try to open the door but it is stuck. You muster up your strength and pull harder. The door collapsed crushing you in the process.\n\n Game Over.`,
+  ],
+  "W": [
+    `You decide to head towards the noise of fleeing animals and got trampled to death in the stampede. Not a smart choice. You died.` 
+  ],
+  "G": [
+    `She smiles as you move closer. The ground beneath you gave way and you are impaled by a cluster of razor sharp stakes. Seems like the woman is a cannibal. Death by imapalement.`,
+  ],
+  "M": [
+    `Ignoring the woman and the sound of fleeing animals, you walk in the opposite direction. As you make your way around an enomous tree, you come face to face with a dragon.\n\nBefore you can move a muscle, you were swallowed whole by the dragon. You've died.`
+  ],
+  "C": [
+    `When you flip over one of the corpses, it opens it's eyes and lets out a hungry moan,\"Zonbi cerebellum tattered for brein solum oculi cerveau eorum defunctis cerebro go lum cerebro.\"\n\nThe zombie proceeds to take a bite out of your hand.\n\n Congratulations, you have joined the army of the dead.`,
+  ],
+  "P": [
+    `As you open the chest, you are quickly grabbed and chewed on by the mimic.\n\nMimics punish greed, taking on the form of chests and gorging on any who seek their hoard. Avarice is their nature.`,
+  ],
+  "I": [
+    `You turn around to see what caused the loud bang. Your eyes widen in shock a split second before a massive boulder rolls over you.\n\nYou are now as flat as a pancake.`,
+  ],
+};

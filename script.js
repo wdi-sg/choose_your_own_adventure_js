@@ -72,31 +72,31 @@ var partB = function(option){
   var randomNum = Math.floor(Math.random() * 10);
 	if (option === "R") {
     score = score + 2;
-    output = `You rubbed the lamp. Smoke starts to billow out of the lamp. When the smoke clears, you realised that a man has appeared in the room.\n\n${npcDescriptionMale[randomNum]}\n\nHe turns to you and says \"Greetings ${name}. I have been imprisoned in the lamp for centuries. It's about time someone came along and take my place.\"\n\nThe lamp begins to start up like a really ancient vaccum cleaner.` + startOver();
+    output = `You rubbed the lamp. Smoke starts to billow out of the lamp. When the smoke clears, you realised that a man has appeared in the room.\n\n${npcDescriptionMale[randomNum]}\n\n` + endings.R[0] + startOver();
 	} else if (option === "S"){
     score = score + 3;
-		output = `You peer into the floor mirror and instead of your own reflection, you see a woman looking back at you.\n\n${npcDescriptionFemale[randomNum]}\n\nShe turns to you and says \"Hello ${name}. I have been waiting for you to arrive.\" She reachs out of the floor mirror and pulls you under to join her for eternity. Stuck in mirror with a stranger.` + startOver();
+		output = `You peer into the floor mirror and instead of your own reflection, you see a woman looking back at you.\n\n${npcDescriptionFemale[randomNum]}\n\n` + endings.S[0] + startOver();
 	} else if (option === "O"){
     score = score + 1;
-		output = `You try to open the door but it is stuck. You muster up your strength and pull harder. The door collapsed crushing you in the process.\n\n Game Over, ${name}.` + startOver();
+		output =  + startOver();
 	} else if (option === "W") {
     score = score + 1;
-    output = `You decide to head towards the noise of fleeing animals and got trampled to death in the stampede. Not a smart choice, ${name}. You died.` + startOver();
+    output = endings.W[0] + startOver();
 	} else if (option === "G"){
     score = score + 2;
-		output = `You make your way towards the woman by the river.\n\n ${npcDescriptionFemale[randomNum]}\n\nShe smiles as you move closer. The ground beneath you gave way and you are impaled by a cluster of razor sharp stakes. Seems like the woman is a cannibal. Death by imapling.` + startOver();
+		output = `You make your way towards the woman by the river.\n\n ${npcDescriptionFemale[randomNum]}\n\n` + endings.G[0] + startOver();
 	} else if (option === "M"){
     score = score + 3;
-		output = `Ignoring the woman and the sound of fleeing animals, you walk in the opposite direction. As you make your way around an enomous tree, you come face to face with a dragon.\n\nBefore you can move a muscle, you were swallowed whole by the dragon. You've died.` + startOver();
+		output = endings.M[0] + startOver();
 	} else if (option === "C") {
     score = score + 3;
-		output = `When you flip over one of the corpses, it opens it's eyes and lets out a hungry moan,\"Zonbi cerebellum tattered for brein solum oculi cerveau eorum defunctis cerebro go lum cerebro.\"\n\nThe zombie proceeds to take a bite out of your hand.\n\n Congratulations ${name}, you have joined the army of the dead.` + startOver();
+		output = endings.C[0] + startOver();
 	} else if (option === "P"){
     score = score + 1;
-		output = `As you open the chest, you are quickly grabbed and chewed on by the mimic.\n\nMimics punish greed, taking on the form of chests and gorging on any who seek their hoard. Avarice is their nature.` + startOver();
+		output = endings.P[0] + startOver();
 	} else if (option === "I"){
     score = score + 2;
-		output = `You turn around to see what caused the loud bang. Your eyes widen in shock a split second before a massive boulder rolls over you.\n\n ${name}, you are now as flat as a pancake.` + startOver();
+		output = endings.I[0] + startOver();
   }
 	// } else {
 	// 	output + "\nThis is not an option";
@@ -106,10 +106,10 @@ var partB = function(option){
 
 var startOver = function() {
   var randomArt = Math.floor(Math.random() * 2);
-  var apend = `\n\nYour score is ${score}. Better luck next time ${name}. Enter any key to start over.\n\n${asciiArt[randomArt]}`;
+  var append = `\n\nYour score is ${score}. Better luck next time, ${name}. Enter any key to start over.\n\n${asciiArt[randomArt]}`;
   storyCount = 0;
   score = 0;
-  return apend;
+  return append;
 }
 // var partC = function(option) {
 
