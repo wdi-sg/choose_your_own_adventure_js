@@ -1,7 +1,6 @@
 console.log("hello script js");
 
-var mainLocation = ["cabin", "river"];
-var msg;
+
 
 /*var cabin = function(inputHappened){
    if (inputHappened === "cabinet"){
@@ -9,18 +8,41 @@ var msg;
        return output = msg;
      }
 };*/
+var userMainLocation;
+/*var mainPage = {
+    location: ["CABIN", "RIVER"],
+    locationMsg: []
+}*/
+
+
+var atRiver = {
+    crossRiver: "You jump into the river and immediately get pulled downstream by the current. Your head bangs against the sharp rocks and you lose consciousness. You drown. END",
+    getCanoe: "You untie the canoe and drag it to the edge of the river. The killer appears behind you. Quickly, you jump into the canoe and the current rush to bring you downstream. You manage to escape the killer. SAFE.",
+    goBackToCabin: "BRING USER BACK TO CABIN"
+};
+
+var atCabin = {
+    cabinet: "You open the cabinet and can make out a row of shoes inside but it's too dark to really see anything. You can hear the murderer's footsteps quickly gaining momentum. CONTINUE SEARCHING CABINET? / HIDE INSIDE CABINET / TRY THE WINDOW",
+    window: "You push the window up but it doesn't budge. The murderer's footsteps sound closer now. With one final push, you manage to open the window wide enough for you to squeeze into the cabin. You shut the window close. Ask user to press 'ENTER' to ENTER CABIN"
+};
 
 var inputHappened = function(currentInput){
   console.log( currentInput );
+  var mainLocation = ["CABIN", "RIVER"];
+  var msg;
   if (currentInput === mainLocation[0]) {
     msg = "The door is locked. You see a storage cabinet by the door. Maybe the key is hidden inside? The window is slightly open but might not be wide enough for you to squeeze in. CABINET / WINDOW";
     output = msg;
+    userMainLocation = atCabin;
   } else if (currentInput === mainLocation[1]) {
     msg = "The path is slippery and covered with thorny bushes. You cut yourself trying to get through it. Eventually you get to the river and can almost see the other side. To your left, you see a canoe tied to a tree. CROSS RIVER / GET CANOE / GO BACK TO CABIN";
     output = msg;
+    userMainLocation = atRiver;
   }
   return output;
 };
+
+
 
 //When page first loads, display "You're in a dark forest. A mass murder is chasing you. Up ahead, you see a small cabin which looks empty and a narrow path that leads to the river. Where do you want to go?" CABIN / RIVER
 //IF USER CHOOSE CABIN
