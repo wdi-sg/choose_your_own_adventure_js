@@ -1,12 +1,12 @@
 console.log("Map working")
-alert("This game is best played with music on.\n\nThe following is a fictional story inspired by the following\n - International bestseller series: Metro 2033\n - Chernobyl Nuclear Accident")
+alert("This game is best played with music on.\n\nThe following is a fictional story inspired by the following\n - International bestseller series: Metro 2033\n - Chernobyl Nuclear Accident/Chernobyl HBO")
 
 var player = {
     name: "Gopnik",
     oxygen: 10,
     health: 20,
-    battery: 17,
-    radiation: 0,
+    battery: 9,
+    radiation: -2,
     Bullets: 10,
     map: true,
     dry: true,
@@ -37,7 +37,7 @@ var red = 150;
 var blue = 150;
 var green = 150;
 var battleIntro = 0;
-var monsterArr = ["Mutant Rat", "Mutant Dog"];
+var monsterArr = ["Mutant Rat", "Mutant Dog", "Mutant Bear"];
 var gameStart = true;
 var tempPath;
 var encounterOff = false;
@@ -51,54 +51,59 @@ var enterToContinue = false;
 var winCondition = 0;
 var loseCondition = 0;
 var gameEnd = false;
+var random
 
 //Display message on the board
 function display(text){
     var outputText = document.getElementById("outputText");
     var flavourText = document.getElementById("flavourText");
     var fT ="";
-    var random = Math.floor((Math.random()*10)+1);
-    console.log(player.radiation);
-    console.log(player.battery);
-    console.log(player.health);
+    random = Math.floor((Math.random()*10)+1);
 
-    if(currentPath != 0){
-        if(random > 8){
+    if(currentPath != 0 && currentPath != "battle" && currentPath != "battleBoss"){
+        if(random === 8){
             fT = fT + `\n\nSomething creaked behind you! You turned around to see nothing.`
-        } else if (random > 6){
+        } else if (random === 6){
             fT = fT + `\n\nYou shuddered as you feel the peering gaze of something hidden in the dark.`
-        } else if (random > 4){
+        } else if (random === 4){
             fT = fT + `\n\n${player.name}!\nYou heard someone calling you! But that's impossible. You suspect the radiation is beginning to cause hallucination.`
-        } else if (random > 2) {
+        } else if (random === 2) {
             fT = fT + `\n\nYou feel hungry. But you cannot take out your mask here to eat.`
         }
-    }
 
-    if(player.radiation > 20){
-        fT = fT + `\nYou feel extremely giddy and started to hallucinate. Your lungs begin to fail you as you struggle to breath.`
-    } else if (player.radiation > 10){
-        fT = fT + `\nYou head starts throbbing as you find difficulty in balancing yourself.`
-    }
+        if(player.radiation > 20){
+            fT = fT + `\n\nYou feel extremely giddy and started to hallucinate. Your lungs begin to fail you as you struggle to breath.\n`
+        } else if (player.radiation > 10){
+            fT = fT + `\n\nYou head starts throbbing as you find difficulty in balancing yourself.\n`;
+        }
 
-    if (player.battery === 0){
-        fT = fT + `\nYou grope around aimlessly in the dark, barely seeing on the silhouette of the room to guide you through this derelict maze`;
-    } else if(player.battery <= 4){
-        fT = fT + `\nYour torchlight flickers occassionally, as it struggles to keep itself lit.`;
-    } else if(player.battery < 8){
-        fT = fT + `\nYour torchlight begins to dim. You know however, that there is still time for you to find the valve before the worst can happen.`
-    }
+        if (player.battery === 0){
+            fT = fT + `\n\nYou grope around aimlessly in the dark, barely seeing on the silhouette of the room to guide you through this derelict maze\n`;
+        } else if(player.battery <= 2){
+            fT = fT + `\n\nYour torchlight flickers occassionally, as it struggles to keep itself lit.\n`;
+        } else if(player.battery < 5){
+            fT = fT + `\n\nYour torchlight begins to dim. You know however, that there is still time for you to find the valve before the worst can happen.\n`;
+        }
 
-    if(player.health < 6){
-        fT = fT + `\nYou're bleeding profusely. Conciousness slips in and out of your grasp. You worry you may succumb before fulfilling your goals.`
-    } else if (player.health < 11){
-        fT = fT + `\nMoving forward is extremely painful and labourous, but for the sake of many, forward you must move.`
-    } else if (player.health < 16){
-        fT = fT + `\nYour wounds stings, but you manage to shrug off the pain.`
+        if(player.health < 6){
+            fT = fT + `\n\nYou're bleeding profusely. Consciousness slips in and out of your grasp. You worry you may succumb before fulfilling your goals.\n`
+        } else if (player.health < 11){
+            fT = fT + `\n\nMoving forward is extremely painful and labourous, but for the sake of many, you took it in stride.\n`
+        } else if (player.health < 16){
+            fT = fT + `\n\nYour wounds stings, but you manage to shrug off the pain.\n`
+        }
+
+        if (player.oxygen <= 2){
+            fT = fT + `\n\nYou prepare for the worst as the oxygen in your tank steadily drops. You pray that you would somehow manage to make it to the valve room in time.\n`;
+        } else if(player.oxygen <= 4){
+            fT = fT + `\n\nYou feel extremely uneasy, worrying that you will run out of oxygen before you reach your desitination. You try to calm yourself down, so that you wouldn't exacerbate the situation..\n`;
+        } else if(player.oxygen < 8){
+            fT = fT + `\n\nYour tank of oxygen is starting to drop. You begin feeling worried, keeping in mind that once it is gone, there is no replacement for it.\n`;
+        }
     }
 
     flavourText.innerText = fT
     outputText.innerText = text;
-
     var hpUI = document.getElementById("HP");
     var batUI = document.getElementById("Battery");
     var radUI = document.getElementById("Radiation");
@@ -114,32 +119,39 @@ function display(text){
     red = 15 * intensity;
     blue = 15 * intensity;
     green = 15 * intensity;
+    if(red > 150){
+        red = 150;
+        blue = 150;
+        green = 150;
+    }
     body.style.backgroundColor = `rgb(${red} , ${green} ,${blue})`
 
     if (player.radiation <= 0) {
-        var vintensity = 0.1;
+        var vintensity = 1;
     } else if (player.radiation < 10){
         var vintensity = player.radiation;
     } else {
-        var vintensity = 1;
+        var vintensity = 10;
     }
-    vol = 0.1 * vintensity
-    bgm.muted = false;
-    bgm.play()
-    bgm.volume = vol;
+    vol = 0.025 * vintensity
 
-    if (player.dry === true){
-        underwater.muted = true;
-        gasmask.muted = false;
-        gasmask.play();
-    } else {
-        gasmask.muted = true;
-        underwater.muted = false;
-        underwater.play();
-        underwater.volume = 0.5;
+    if (currentPath != 14 && currentPath != "battleBoss"){
+        bgm.muted = false;
+        bgm.play()
+        bgm.volume = vol;
+
+        if (player.dry === true){
+            underwater.muted = true;
+            gasmask.muted = false;
+            gasmask.play();
+            gasmask.volume = 1;
+        } else {
+            gasmask.muted = true;
+            underwater.muted = false;
+            underwater.play();
+            underwater.volume = 0.5;
+        }
     }
-
-    console.log(monsterArr);
     if(gameEnd === true){
         gameOver();
     }
@@ -147,7 +159,6 @@ function display(text){
 
 function restart(){
     var reload = window.prompt("Do you want to reload?");
-    console.log(reload);
     if (reload === "yes") {
         window.location.reload();
     } else if (reload === "secret") {
@@ -158,14 +169,13 @@ function restart(){
 
 function gameOver() {
     var gameoverText = document.getElementById("gameoverText");
-    // document.querySelector('.UI').style.visibility = "hidden";
-    // document.querySelector('#map').style.visibility = "hidden";
     document.querySelector('#map').style.display = "none";
-    // document.querySelector('#output').style.visibility = "hidden";
-    // document.querySelector('#outputText').innerText = "";
-    // document.querySelector('#main').style.visibility = "hidden";
     document.querySelector('#main').style.display = "none";
     document.querySelector('#gameover').style.visibility = "visible";
+    bgm.muted = true;
+    gasmask.muted = true;
+    underwater.muted = true;
+
     if (player.radiation > 30) {
         gameoverText.innerText = "You have died of Radiation Poisoning";
     } else if (player.health <= 0) {
@@ -173,9 +183,17 @@ function gameOver() {
     } else if (player.oxygen <=0){
         gameoverText.innerText = "You have died of asphyxiation.";
     } else if (winCondition === 1) {
-        gameoverText.innerText = "With great remorse, you put an end to Vadim's life. It was a long struggle, but with the water drained, you managed to leave the nuclear plant. You fainted right at the entrance, with your consciousness fading in and out. You vaguely remember that someone pulled you, and you remember moving, and hearing shouting. You remembered seeing some strangers... wearing white surgical masks, surrounding you as you lay comfortably on the soft white bed. Finally, you remembered hearing a long beep- and then there was nothing. You've died.";
+        sad.muted = false;
+        sad.play()
+        sad.volume = 0.25;
+        gameoverText.innerText = "YOU WIN!\n\nEnding 1:\nWith great remorse, you put an end to Vadim's life. When he wasn't looking, you leaped from his back and plunged your shiv deep into his heart. In a dying fit of rage, he used his last bit of energy and swiped at you, causing a deep gash at your chest. After a long struggle, Vadim spasmed his life away, and you managed to put Vadim to rest. The wound was severe, and Vadim's radiated claw most likely meant that radioactive substance has been introduced to your bloodstream. You struggled, but managed to leave the nuclear plant, with the water drained. You fainted right at the entrance, with you fading in and out of consciousness. You could vaguely remember that someone pulled you... You remembered being moved. You heard shouting, you heard siren blaring. You remembered seeing some strangers... wearing white surgical masks, surrounding you as you lay comfortably on the soft white bed. Finally, you remembered hearing a long beep as the life slowly slipped away from you- and then there was nothing. You'll never live to see the fruits of your sacrifices... the millions of lives you've saved...";
+    } else if (winCondition === 2) {
+        relax.muted = false;
+        relax.play()
+        relax.volume = 0.45;
+        gameoverText.innerText = "YOU WIN!\n\nEnding 2:\nWith a final push, you plunged your shiv deep into Vadim's heart. His swung his claws towards you and you braced for impact... only to receive a gentle touch from him. You looked him in the eyes, and saw tears welling up from within. It seemed that he regained his sanity right before his death, Vadim managed to reclaim what tiny sanity he had left within him. He opened his mouth, trying to utter something, but what words he had to say- were only know to him. His hands fell from your cheeks as his body went lifeless. You held back your tears as the friend of yours pass away. You laid him on the floor and closed his eyes, allowing him to rest in peace. You managed to leave the nuclear plant with the water drained, but passed out due to radiation exposure... You fell into a deep coma, unaware of your surroundings, and the aftermath of your actions. Perhaps... someday, you'll see Vadim again.";
     } else if (loseCondition === 1) {
-        gameoverText.innerText = "Without anyone to undertake the task, the Chernobyl Reactor continued to melt towards the pool. The steam explosion caused thousands of tons of radioactive material to be flung across Europe. Millions died a slow and agonizing death.\nUnable to flee Chernobyl in time, you perished along with the millions of casualties in the worst nuclear disaster in human history.";
+        gameoverText.innerText = "Game over...\n\nWithout anyone to undertake the task, the Chernobyl Reactor continued to melt towards the cooling pool. The result was a steam explosion that caused thousands of tonnes of radioactive material to be flung high up into the atmosphere. Thousands in Europe died a slow and agonizing death, with millions more across the world eventually suffered from Radiation-induced cancer.\nUnable to flee Chernobyl in time, you perished along with the millions of casualties in the worst nuclear disaster in human history.";
     }
 }
 
@@ -198,11 +216,10 @@ document.querySelector('#input').addEventListener('keypress',function(event){
                     break;
                 }
 
-                if (currentPath != "battle" && currentPath != "postBattle" && currentRoom != "room1" && currentRoom != "room2" && currentRoom != "room3") {
+                if (currentPath != "battle" && currentPath != "postBattle" && currentRoom != "room1" && player.dry === true) {
                     if(monsterArr.length > 0){
                         var encounter = Math.floor((Math.random()*10)+1);
-                        console.log(`encounter rolled: ${encounter}`);
-                        if (10 > encounter){
+                        if (4 > encounter){
                             encounter =0;
                             battle();
                             break;
@@ -231,7 +248,11 @@ document.querySelector('#input').addEventListener('keypress',function(event){
             currentPath = previousPath;
             previousPath = tmpP
             enterToContinue = true;
-            narration = `You have chosen to return to the ${path["room"][currentRoom]}. Press enter to continue`;
+            if(player.dry === true){
+                narration = `You have chosen to return to the ${path["room"][currentRoom]}. Press enter to continue`;
+            } else {
+                narration = `You have chosen to return to the ${path["wetroom"][currentRoom]}. Press enter to continue`;
+            }
             display(narration);
         }
 
@@ -240,18 +261,14 @@ document.querySelector('#input').addEventListener('keypress',function(event){
                 if (input === "shiv"){
                     var dmg = Math.floor((Math.random()*3)+3); //3-5dmg
                     monsterObj[monsterArr[0]]["hp"] = monsterObj[monsterArr[0]]["hp"] - dmg;
-                    console.log(`Damage dealt: ${dmg}`);
                     narration = `You slashed ${monsterArr[0]} for ${dmg} damage! Press enter to continue`
-                    console.log(`Monster hp: ${monsterObj[monsterArr[0]]["hp"]}`);
                     battleIntro = 1;
                     display(narration);
                 } else if (input === "gun" && player.Bullets > 0){
                     player.Bullets--;
                     var dmg = Math.floor((Math.random()*3)+6); //6-8dmg
                     monsterObj[monsterArr[0]]["hp"] = monsterObj[monsterArr[0]]["hp"] - dmg;
-                    console.log(`Damage dealt: ${dmg}`);
                     narration = `You shot ${monsterArr[0]} for ${dmg} damage! Press enter to continue`
-                    console.log(`Monster hp: ${monsterObj[monsterArr[0]]["hp"]}`);
                     battleIntro = 1;
                     display(narration);
                 }
@@ -262,18 +279,14 @@ document.querySelector('#input').addEventListener('keypress',function(event){
                 if (input === "shiv"){
                     var dmg = Math.floor((Math.random()*3)+3); //3-5dmg
                     monsterObj["Mutant"]["hp"] = monsterObj["Mutant"]["hp"] - dmg;
-                    console.log(`Damage dealt: ${dmg}`);
-                    narration = `You slashed Mutant for ${dmg} damage! Press enter to continue`
-                    console.log(`Monster hp: ${monsterObj["Mutant"]["hp"]}`);
+                    narration = `You slashed Vadim for ${dmg} damage! Vadim growls in pain. Press enter to continue`
                     battleIntro = 1;
                     display(narration);
                 } else if (input === "gun" && player.Bullets > 0){
                     player.Bullets--;
                     var dmg = Math.floor((Math.random()*3)+6); //6-8dmg
                     monsterObj["Mutant"]["hp"] = monsterObj["Mutant"]["hp"] - dmg;
-                    console.log(`Damage dealt: ${dmg}`);
-                    narration = `You shot Mutant for ${dmg} damage! Press enter to continue`
-                    console.log(`Monster hp: ${monsterObj["Mutant"]["hp"]}`);
+                    narration = `You shot Vadim for ${dmg} damage! Vadim squealed as the loud noise and pain tear through him. Press enter to continue`
                     battleIntro = 1;
                     display(narration);
                 }
@@ -566,9 +579,7 @@ var path = {
 
 //Function for map
 function game(input){
-    console.log('Current Room: ' + currentRoom);
-    console.log('Previous Room: ' + previousRoom);
-    // player.radiation++;
+    player.radiation++;
     if(player.dry != true){
         player.oxygen--;
     }
@@ -576,9 +587,8 @@ function game(input){
     if(player.battery > 0){
         player.battery--;
     }
-    console.log(`Battery level: ${player.battery}`)
-    console.log(`Radiation level: ${player.radiation}`);
-    if(player.radiation > 30 || player.health <=0){
+
+    if(player.radiation > 30 || player.health <=0 || player.oxygen <= 0){
         gameOver();
     }
 
@@ -592,7 +602,7 @@ function game(input){
 
     switch(currentPath){
         case 0:
-            narration = "The year is 1986. The Chernobyl Nuclear Plant has just exploded, the fallout of the radiation spread as far as Sweden. You are an employee of the Nuclear plant, and had just received a message from your superiors.\n\nAccording to the Soviet Union's team of best physicists, the molten residue is melting through the ground towards a pool of water coolant. If the lava touches the water, it would cause a steam eruption that could render half of Europe inhospitable for thousands of year.\n\nYou must reach the basement and access the valve hallway to access the pips. There were many volunteers to stop this from happening, but no one else knows where the correct valves to drain the pool was. One incorrect decision, and it may cause another bigger explosion. Should you choose to accept this mission, you will most likely die.\n\nAccept this mission?\n- yes\n- no";
+            narration = "The year is 1986. The reactor 4 in Chernobyl Nuclear Plant has just exploded, the fallout of the radiation spread as far as Sweden. You are an employee of the Nuclear plant, and had just received a message from your superiors.\n\nAccording to the Soviet Union's team of best physicists, the molten residue is melting through the ground towards a pool of water coolant. If the lava touches the water, it would cause a steam eruption that could render half of Europe inhospitable for thousands of year.\n\nYou must reach the basement and access the valve hallway to access the pips. There were many volunteers to stop this from happening, but no one else knows where the correct valves to drain the pool was. One incorrect decision, and it may cause another bigger explosion. Should you choose to accept this mission, you will most likely die.\n\nAccept this mission?\n- yes\n- no";
             display(narration);
             break;
 
@@ -613,7 +623,8 @@ function game(input){
             if(path["visited"][currentRoom] === true){
                 narration = `${narration}\nYou have been here before.`;
             } else {
-                narration = `${narration}\n\nInside of the cupboards of the pantry were cans and jars of food- radiated to say the least. The tap was leaking water, and the used dishes layed untouched. Some of the sandwiches prepared by a colleague laid on the table. Although it has been left out in the open for a few days, no flies or ants were seen. However, there were clear bite marks. You suspect if it was a greedy colleague... or something else that is in the vicinity...\n\nYou also saw a birthday card- ${player.name}! Happy birthday! Me and the Boys got you a present! We know how much you love spiders, so we got an exotic species for your birthday! From your friend- Vadim.`
+                narration = `${narration}\n\nInside of the cupboards of the pantry were cans and jars of food- radiated to say the least. The tap was leaking water, and the used dishes layed untouched. Some of the sandwiches prepared by a colleague laid on the table. Although it has been left out in the open for a few days, no flies or ants were seen. However, there were clear bite marks. You suspect if it was a greedy colleague... or something else that is in the vicinity...\n\nYou also saw a birthday card- ${player.name}! Happy birthday! Me and the Boys got you a present! We know how much you love spiders, so we got an exotic species for your birthday! From your friend- Vadim.\n\nYou also spotted a spare battery. Hopefully it can help you along the way.`
+                player.battery+= 1;
             }
             narration = `${narration}\n\nChoose:\nright\nleft\nup`;
             path["visited"][currentRoom] = true;
@@ -625,7 +636,8 @@ function game(input){
             if(path["visited"][currentRoom] === true){
                 narration = `${narration}\nYou have been here before.`;
             } else {
-                narration = `${narration}\n\nYou remember loafing around in the lounge during breaktime. Vadim, Artyom and you would often complain about the metro system breaking down. You remembered Artyom joking- "The train ride takes so long, it is almost as if I'm living in the metro". Artyom would also boast about his wife Anna, and complain about his father-in-law, Miller, for being strict and possessive of his daughter. But deep down, you and Vadim could tell that Artyom and his father-in-law respects each other`
+                narration = `${narration}\n\nYou remember loafing around in the lounge during breaktime. Vadim, Artyom and you would often complain about the metro system breaking down. You remembered Artyom joking- "The train ride takes so long, it is almost as if I'm living in the metro". Artyom would also boast about his wife Anna, and complain about his father-in-law, Miller, for being strict and possessive of his daughter. But deep down, you and Vadim could tell that Artyom and his father-in-law respects each other.\n\nYou spotted some plasters on the table. Perhaps it can help you.`
+                player.health+= 3;
             }
             narration = `${narration}\n\nChoose:\nright\nleft\nup`;
             path["visited"][currentRoom] = true;
@@ -637,7 +649,8 @@ function game(input){
             if(path["visited"][currentRoom] === true){
                 narration = `${narration}\nYou have been here before.`;
             } else {
-                narration = `${narration}\n\nThe hallway leads to the Elevator room. The receptionist here changes everyday, but you remember one of them very clearly- Ourela. She's often joyous and can be seen around the building treating everyone like a friend. You still remember the Burritos and Potato chips you were regaled with. However, she performs her job seriously, and would kick anyone past their working hours out, for 'security reasons' and 'no loitering' she would say. Your best friend, Vadim, secretly had a crush on her. You wondered if the receptionist was on duty that day, and whether she made it out alive.`
+                narration = `${narration}\n\nThe hallway leads to the Elevator room. The receptionist here changes everyday, but you remember one of them very clearly- Ourela. She's often joyous and can be seen around the building treating everyone like a friend. You still remember the Burritos and Potato chips you were regaled with. However, she performs her job seriously, and would kick anyone past their working hours out, for 'security reasons' and 'no loitering' she would say. Your best friend, Vadim, secretly had a crush on her. You wondered if the receptionist was on duty that day, and whether she made it out alive.\n\nYou also found some bandage to patch yourself up!`
+                player.health += 5;
             }
             narration = `${narration}\n\nChoose:\nright\nleft\nup`;
             path["visited"][currentRoom] = true;
@@ -649,7 +662,10 @@ function game(input){
             if(path["visited"][currentRoom] === true){
                 narration = `${narration}\nYou have been here before.`;
             } else {
-                narration = `${narration}\n\nThis is the fire escape, but the door is to the outside is blocked by cartons and boxes. Like many other companies, despite safety regulations, the fire escape is often treated as an additional storage room. Vadim, Artyom and you would sometime squat here during breaktime and eat some Semechki, drink some shots of Vodka, lviing the true Slavic lifestyle. You wondered how many more lives could have been saved if the fire escape was kept tidy and unblocked. You heard movements and a loud thud sound as something fell from the shelves. You have no reason to be here.`
+                narration = `${narration}\n\nThis is the fire escape, but the door is to the outside is blocked by cartons and boxes. Like many other companies, despite safety regulations, the fire escape is often treated as an additional storage room. You have no reason to be here. Vadim, Artyom and you would sometime squat here during breaktime and eat some Semechki, drink some shots of Vodka, lviing the true Slavic lifestyle. You wondered how many more lives could have been saved if the fire escape was kept tidy and unblocked. You heard movements and a loud thud sound as something fell from the shelves. When you checked it out, you could barely stop yourself from saying: "Opa!"\nThe box containted a first aid kid to patch yourself up, some bullets, and even a handful of batteries!`
+                player.health += 10;
+                player.battery += 5;
+                player.Bullets += 5;
             }
             narration = `${narration}\n\nChoose:\nreturn`;
             path["visited"][currentRoom] = true;
@@ -753,7 +769,7 @@ function game(input){
             break;
 
         case 14:
-            narration = `You are now in ${path["wetroom"][currentRoom]}. After swimming in the darkness for what seemed to be an eternity, you've arrived at your destination! You climbed out of the tunnel and onto solid ground, and begin to find the valve that would drain the facility of its water. The world is saved! You tought to youself, as the water began to drain. However... something lept out from the draining pool of water and attacked you!`;
+            narration = `You are now in ${path["wetroom"][currentRoom]}. After swimming in the darkness for what seemed to be an eternity, you've arrived at your destination! You climbed out of the tunnel and onto solid ground, and begin to find the valve that would drain the facility of its water.\n\nThe world is saved! You thought to youself, as you began to find the right valve. However... something lept out from the pool of water and attacked you!`;
             narration = `${narration}\n\nPress enter to continue`;
             path["visited"][currentRoom] = true;
             display(narration)
@@ -781,6 +797,10 @@ var monsterObj = {
         hp: 15,
         dmg: Math.floor((Math.random()*3)+2), //2-4 dmg
     },
+    "Mutant Bear": {
+        hp: 20,
+        dmg: Math.floor((Math.random()*3)+3), //3-5 dmg
+    },
     "Mutant": {
         hp: 20,
         dmg: Math.floor((Math.random()*4)+4), //4-7 dmg
@@ -790,8 +810,6 @@ var monsterObj = {
 
 
 function battle(){
-    console.log("current Path: "+currentPath);
-    console.log(monsterObj["Mutant"]["hp"]);
     if(currentPath === 14 || currentPath === "battleBoss"){
         if(monsterObj["Mutant"]["hp"] > 0){
             if (battleIntro === 0){
@@ -799,10 +817,8 @@ function battle(){
                 narration = `You couldn't believe your eyes. A terribly mutated monster leapt out to attack you. It bore some ressemblance to... Vadim! You tried to calm him down, but to no avail. His mind too far gone from the mutation, Vadim had been following and attacks you! What would you do?`
             } else if (battleIntro === 1){
                 var damage = monsterObj["Mutant"]["dmg"];
-                console.log(`Damage taken ${damage}`);
-                narration = `The Mutant attacked you for ${damage} damage! What do you do next?`
+                narration = `Vadim attacked you for ${damage} damage! What do you do next?`
                 player.health = player.health - damage;
-                console.log(`Player Health: ${player.health}`);
                 battleIntro = 2;
             }
             if (player.Bullets > 0){
@@ -810,7 +826,11 @@ function battle(){
             }
             narration = narration + "\nshiv";
         } else {
-            winCondition = 1;
+            if (monsterArr.length === 0){
+                winCondition = 2;
+            } else {
+                winCondition = 1;
+            }
             gameOver();
         }
     } else {
@@ -819,16 +839,12 @@ function battle(){
             if (battleIntro === 0){
                 tempPath = currentPath;
                 battleIntro = 1
-                console.log(`tempPath: ${tempPath}`);
-                console.log(`currentPath: ${currentPath}`)
                 currentPath = "battle"
                 narration = `A wild ${monsterArr[0]} appeared! What would you do?`
             } else if (battleIntro === 1){
                 var damage = monsterObj[monsterArr[0]]["dmg"];
-                console.log(`Damage taken ${damage}`);
                 narration = `The ${monsterArr[0]} attacked you for ${damage} damage! What do you do next?`
                 player.health = player.health - damage;
-                console.log(`Player Health: ${player.health}`);
                 battleIntro = 2;
             }
             if (player.Bullets > 0){
@@ -836,16 +852,19 @@ function battle(){
             }
             narration = narration + "\nshiv";
         } else {
-            console.log("It is dead")
-            narration = `The ${monsterArr[0]} died.`;
+            narration = `The ${monsterArr[0]} lies dead on the floor.`;
             if (monsterArr[0] === "Mutant Rat"){
                  player.Bullets += 3
-                 player.battery += 10;
+                 player.battery += 2;
                  narration = narration + "\nYou found within the Rat's body some salvageable parts that it probably swallowed while gnawing around the debris. These could be used as bullets.\nAnd just as you were about to leave... you also spotted a spare battery!"
             } else if (monsterArr[0] === "Mutant Dog"){
+                player.battery += 2
+                player.health += 5;
+                narration = narration + "\nYou found a spare battery entangled within the tuft of hair of the monster.\nAnd just as you were about to leave... you also spotted some plaster! Seeing no other threats, you quickly plastered your wounds."
+            } else if (monsterArr[0] === "Mutant Bear"){
                 player.map = true
                 player.health += 10;
-                narration = narration + "\nYou found a partly digested map in its body! This could come in useful!... provided you have enough battery in your torchlight to see it.\nAnd just as you were about to leave... you also spotted some plaster! You quickly patched up yourself."
+                narration = narration + "\nYou found a partly digested map in its body! This could come in useful!... provided you have enough battery in your torchlight to see it.\nAnd just as you were about to leave... you also spotted a first aid kit! You wasted no time in patching yourself up."
             }
             narration = narration + "\nPress enter to continue";
             monsterArr.shift();
@@ -854,8 +873,5 @@ function battle(){
             currentPath = "postBattle";
         }
     }
-    console.log(`Player bullets: ${player.Bullets}`)
     display(narration);
 }
-
-console.log(`mutant hp: ${Mutant.hp}`)
