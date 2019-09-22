@@ -163,6 +163,7 @@ function action(currentInput) {
       "combat help",
       "speciality help",
       "unknown help",
+      "restart"
     ];
     msg = helpMenu;
   } else if (currentInput === "navi help") {
