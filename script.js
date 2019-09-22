@@ -91,8 +91,8 @@ var partB = function(option){
 	return output;
 }
 
-var startOver = function(endingOption) {
-if (endingOption === 0) {
+var startOver = function() {
+if (score <=5) {
   var randomArt = Math.floor(Math.random() * 2);
   var append = `\n\nYour score is ${score}. Better luck next time, ${name}. Enter any key to start over.\n\n${asciiArt[randomArt]}`;
 } else {
