@@ -2,6 +2,19 @@ console.log("hello script js");
 
 var inputHappened = function(currentInput){
 
+    // Type in "Start Game" (Imagine user clicks on "Start Game" button)
+    if(currentInput === "Start Game") {
+
+        // Prompt user for name
+        var playerName = prompt("Please enter your name.");
+        return "hello " + playerName;
+
+    } else {
+
+        // Prompt user to input exact text to start the game
+        return "Please enter 'Start Game' to proceed.";
+    }
+
 
     /* 1. Minesweeper Concept
 
@@ -15,7 +28,7 @@ var inputHappened = function(currentInput){
     // Switch to player 2
     */
 
-    // Prompt player 2 for name
+
     // Prompt to select a number from 1 - 9 to see if hit bomb
         // If not, return "You are safe. Please select another."
         // If hit bomb, game over
