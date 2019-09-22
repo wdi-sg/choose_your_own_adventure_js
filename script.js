@@ -7,7 +7,7 @@ var output = "";
 
 //User Input
 var inputHappened = function(currentInput){
-	if (storyCount === 0){
+	if (storyCount === 0) {
     getName();
 	} else if (storyCount === 1) {
     output = intro(currentInput);
@@ -20,24 +20,24 @@ var inputHappened = function(currentInput){
 };
 
 //prompt user to enter name
-var getName = function(){
-  var randomArt = Math.floor((Math.random() * 3) + 2); 
+var getName = function() {
+  var randomArt = happyRandomArt();; 
   output = `What is your name?\n\n${asciiArt[randomArt]}`;
   storyCount ++;
 }
 
 //intro
-var intro = function(option){
-  var randomArt = Math.floor((Math.random() * 3) + 2); 
+var intro = function(option) {
+  var randomArt = happyRandomArt();; 
 		name = option;
 		output = `Welcome ${name}. You wake up in a dark cave. Feeling disorientated, you look around the cave and see three tunnels. \n\nWhich tunnel will you pick? (L/C/R) \n L eft \n C enter \n R ight\n\n${asciiArt[randomArt]}`;
     storyCount ++;
     return output;
 }
 
-var partA = function(option){
+var partA = function(option) {
   //generate random ascii art for each run
-  var randomArt = Math.floor((Math.random() * 3) + 2); 
+  var randomArt = happyRandomArt(); 
 	if (option === "L") {
   score = score + 3;
 	output = `You, ${name}, entered a brightly lit room with matching furnitures. Light is provided by table lamps. Among the first things you notice walking in are an unusual lamp, a large floor mirror, and a black metal door.\n\n What will you do next?(R/S/O)\n R ub the lamp\n S tare into the mirror\n O pen the door\n\n${asciiArt[randomArt]}`;
@@ -54,7 +54,7 @@ var partA = function(option){
 	return output;
 }
 
-var partB = function(option){
+var partB = function(option) {
   var randomNum = Math.floor(Math.random() * 10);
   //generate random ending for each option
   var randomEnd = Math.floor(Math.random() * 2);
@@ -63,28 +63,28 @@ var partB = function(option){
     score = score + endings[option].score[randomEnd];
     //output is random NPC description, with random ending text and end message based on random ending
     output = `You rubbed the lamp. Smoke starts to billow out of the lamp. When the smoke clears, you realised that a man has appeared in the room.\n\n${npcDescriptionMale[randomNum]}\n\n` + endings[option].text[randomEnd] + startOver(randomEnd);
-	} else if (option === "S"){
+	} else if (option === "S") {
     score = score + endings[option].score[randomEnd];
 		output = `You peer into the floor mirror and instead of your own reflection, you see a woman looking back at you.\n\n${npcDescriptionFemale[randomNum]}\n\n` + endings[option].text[randomEnd] + startOver(randomEnd);
-	} else if (option === "O"){
+	} else if (option === "O") {
     score = score + endings[option].score[randomEnd];
 		output = endings[option].text[randomEnd] + startOver(randomEnd);
 	} else if (option === "W") {
     score = score + endings[option].score[randomEnd];
-    output = endings.optionW.text[randomEnd] + startOver(randomEnd);
-	} else if (option === "G"){
+    output = endings[option].text[randomEnd] + startOver(randomEnd);
+	} else if (option === "G") {
     score = score + endings[option].score[randomEnd];
 		output = `You make your way towards the woman by the river.\n\n ${npcDescriptionFemale[randomNum]}\n\n` + endings[option].text[randomEnd] + startOver();
-	} else if (option === "M"){
+	} else if (option === "M") {
     score = score + endings[option].score[randomEnd];
 		output = endings[option].text[randomEnd] + startOver(randomEnd);
 	} else if (option === "C") {
     score = score + endings[option].score[randomEnd];
 		output = endings[option].text[randomEnd] + startOver(randomEnd);
-	} else if (option === "P"){
+	} else if (option === "P") {
     score = score + endings[option].score[randomEnd];
 		output = endings[option].text[randomEnd] + startOver(randomEnd);
-	} else if (option === "I"){
+	} else if (option === "I") {
     score = score + endings[option].score[randomEnd];
 		output = endings[option].text[randomEnd] + startOver(randomEnd);
   }
@@ -96,7 +96,7 @@ if (score <=5) {
   var randomArt = Math.floor(Math.random() * 2);
   var append = `\n\nYour score is ${score}. Better luck next time, ${name}. Enter any key to start over.\n\n${asciiArt[randomArt]}`;
 } else {
-  var randomArt = Math.floor((Math.random() * 3) + 2);
+  var randomArt = happyRandomArt();
   var append = `\n\nYour score is ${score}. Well Done, ${name}. Enter any key to start over.\n\n${asciiArt[randomArt]}`;
 }
   storyCount = 0;
@@ -104,4 +104,6 @@ if (score <=5) {
   return append;
 }
 
-
+var happyRandomArt = function() {
+  return Math.floor((Math.random() * 6) + 2)
+}
