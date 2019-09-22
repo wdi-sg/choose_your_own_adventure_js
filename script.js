@@ -3,21 +3,31 @@
 console.log("hello script js");
 alert('Hello. Welcome to \'Guitars and Monsters: The Adventure.\' What is your name? Please type CAREFULLY. You only got ONE shot and stupid names are stored FOREVER.')
 var boxes = [{
-        item: 'Legendary Pick of Hendrix',
-        power: 9999,
-        description: 'Gamebreaker'
+        item: 'Legendary Guitar of Hendrix!',
+        dmg: 9999,
+        description: 'Gamebreaker!!'
     },
             {
-        item: 'John Mayer\'s Pick',
-        power: 100,
-        description: 'John Mayer has imbued this pick with some magic'
+        item: 'John Mayer\'s Pick!',
+        dmg: 100,
+        description: 'John Mayer has imbued this pick with some magic.'
     },
             {
         item: 'junk',
-        power: 0,
+        dmg: 0,
         description: 'It\'s just a box of junk. You\'re screwed.'
     }
 ]
+
+var boss = {
+    name: 'Beezebub',
+    hp: 500,
+    dmg: 80
+}
+var player = {
+    hp: 400,
+}
+
 var enteredName = 0;
 var approachAxel = 0;
 var goHome = 0;
@@ -58,10 +68,12 @@ var inputHappened = function(currentInput){
         getBox = true;
         var results = randomizeBox();
         console.log(results)
-        return `You take the box. When you look up, the hoodied dude's already gone. "Dude, we get lotsa types in here but that was weird", Axel mutters while shaking his head. You look at the box, puzzled. "Well. You better open it." You open the box, and inside is: \n Item: ${givenBox.item} \n Power level: ${givenBox.power} \n Description: ${givenBox.description} \n Well, shit. Time to give your gear a test drive! Feeling the immense power flowing through your hands, you command your best power stance and let the guitar ring`
+        return `You take the box. When you look up, the hoodied dude's already gone. "Dude, we get lot of types in here but that was weird", Axel mutters while shaking his head. You look at the box, puzzled. \n "Well. You better open it."\n You open the box, and inside is: \n Item: ${givenBox.item} \n Power level: ${givenBox.dmg} \n Description: ${givenBox.description} \n Well, shit. Time to give your gear a test drive! Feeling the immense power flowing through your hands, you command your best power stance and let the guitar ring. \n Enter (c) to continue`
+    // } if (currentInput === 'c' && enteredName && approachAxel && goBar && getBox) {
+// insert fight calculation function here
     } if (currentInput === 'hn' && enteredName && approachAxel && goBar) {
         rejectBox = true;
-        return `Live a life of mediocrity forever, why don't you. This is supposed to be an adventure. \n GAME OVER`
+        return `Live a life of being boring forever, why don't you. This is supposed to be an adventure. \n GAME OVER`
     }
      if (currentInput === 'gh' && enteredName) {
         var goHome = true;
