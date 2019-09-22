@@ -4,6 +4,20 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="status" id="status">
+      <div class="status-wrapper">
+        <span class="player-label"
+          >Player: <span class="name" id="name"></span
+        ></span>
+        <span class="location" id="location"></span>
+        <span class="score-label"
+          >Score: <span class="score" id="score">0</span></span
+        >
+        <span class="moves-label"
+          >Moves: <span class="moves" id="moves">0</span></span
+        >
+      </div>
+    </div>
     <div class="starter output-container" id="output-container">
       <!-- <p class="output" id="output"></p> -->
     </div>
@@ -17,6 +31,7 @@
         inputHappened(currentInput);
       });
     </script>
+    <script src="zork.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
