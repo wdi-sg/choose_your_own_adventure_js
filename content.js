@@ -58,75 +58,93 @@ var asciiArt = [
 
 var endings = {
   "R": {
-    score: [2, 4],
+    score: [2, 4, 2],
     text: [
       `He turns to you and says \"Greetings. I have been imprisoned in the lamp for centuries. It's about time someone came along and take my place.\"\n\nThe lamp begins to start up like a really ancient vaccum cleaner.`,
 
-      `Tenderloin turducken kevin beef prosciutto meatloaf. Kielbasa prosciutto corned beef, pork chop t-bone landjaeger biltong sausage. Picanha pig beef ribs ground round landjaeger bacon. Jowl strip steak andouille, rump pig turkey t-bone pastrami short loin.`
+      `Tenderloin turducken kevin beef prosciutto meatloaf. Kielbasa prosciutto corned beef, pork chop t-bone landjaeger biltong sausage. Picanha pig beef ribs ground round landjaeger bacon. Jowl strip steak andouille, rump pig turkey t-bone pastrami short loin.`,
+
+      `Biscuit cookie cupcake cake cotton candy gummies bonbon lemon drops. I love pie cake pudding I love. I love liquorice halvah marzipan croissant cookie marzipan soufflé. Apple pie carrot cake pudding pastry candy canes powder liquorice chocolate cake bonbon. Jelly-o chocolate jelly jelly-o cupcake candy canes jujubes biscuit soufflé. Biscuit pudding toffee cookie lollipop marzipan jujubes liquorice. Macaroon bonbon jelly I love.`
     ],
   },
   "S": {
-    score: [3, 5],
+    score: [3, 5, 1],
     text: [
       `She turns to you and says \"Hello. I have been waiting for you to arrive.\" She reaches out of the floor mirror and pulls you under to join her for eternity. Stuck in mirror with a stranger.`,
 
-      `Meatball pork belly pastrami frankfurter tenderloin, meatloaf salami beef buffalo filet mignon. Buffalo shankle filet mignon, venison pork belly biltong kevin. Drumstick spare ribs boudin short ribs pig cow pork chop cupim ribeye prosciutto ball tip ham hock bresaola.`
+      `Meatball pork belly pastrami frankfurter tenderloin, meatloaf salami beef buffalo filet mignon. Buffalo shankle filet mignon, venison pork belly biltong kevin. Drumstick spare ribs boudin short ribs pig cow pork chop cupim ribeye prosciutto ball tip ham hock bresaola.`,
+
+      `Candy biscuit sweet I love jelly topping. Toffee sesame snaps sesame snaps biscuit. Biscuit marzipan pudding toffee caramels cake I love. Lemon drops halvah caramels I love cake sesame snaps. Sweet cupcake topping. Cake I love soufflé. Candy dessert chocolate. Gummies croissant sweet jelly beans dessert I love tiramisu.`
     ],
   },
   "O": {
-    score: [1, 6],
+    score: [1, 6, 4],
     text: [
       `You try to open the door but it is stuck. You muster up your strength and pull harder. The door collapsed crushing you in the process.\n\n Game Over.`,
 
-      `Fatback meatball sausage chuck kielbasa flank tri-tip brisket salami, venison pork loin. Frankfurter tongue picanha pig t-bone kevin ball tip drumstick ribeye tail tri-tip corned beef sirloin prosciutto pancetta. Short ribs jerky shankle, jowl tenderloin burgdoggen corned beef shank shoulder drumstick doner beef ribs sausage. Leberkas jowl flank cupim.`
+      `Fatback meatball sausage chuck kielbasa flank tri-tip brisket salami, venison pork loin. Frankfurter tongue picanha pig t-bone kevin ball tip drumstick ribeye tail tri-tip corned beef sirloin prosciutto pancetta. Short ribs jerky shankle, jowl tenderloin burgdoggen corned beef shank shoulder drumstick doner beef ribs sausage. Leberkas jowl flank cupim.`,
+
+      `Wafer tiramisu sesame snaps jujubes oat cake. Sugar plum muffin jelly beans. Bonbon dessert croissant lollipop tiramisu liquorice. Sugar plum gummies macaroon I love candy canes. Cupcake liquorice gummi bears ice cream gummi bears cheesecake dessert cookie cookie. Biscuit jelly beans I love wafer sweet. Chocolate bar gingerbread gummies pie muffin cheesecake gingerbread.`
     ],
   },
   "W": {
-    score: [1, 4],
+    score: [1, 4, 6],
     text: [
       `You decide to head towards the noise of fleeing animals and got trampled to death in the stampede. Not a smart choice. You died.`,
 
-      `Flank meatball pork loin, ham venison pork spare ribs jerky. Strip steak doner leberkas capicola venison cow prosciutto short ribs beef buffalo chuck landjaeger andouille. Drumstick brisket cupim, boudin corned beef leberkas burgdoggen tongue ball tip short ribs landjaeger kevin flank biltong picanha.`
+      `Flank meatball pork loin, ham venison pork spare ribs jerky. Strip steak doner leberkas capicola venison cow prosciutto short ribs beef buffalo chuck landjaeger andouille. Drumstick brisket cupim, boudin corned beef leberkas burgdoggen tongue ball tip short ribs landjaeger kevin flank biltong picanha.`,
+
+      `Marshmallow bear claw I love lemon drops jelly beans bonbon I love. Sugar plum cotton candy halvah lemon drops ice cream. Lollipop fruitcake pastry muffin cookie chupa chups. Bear claw jelly sweet roll candy canes donut I love. Cupcake liquorice ice cream apple pie tootsie roll wafer I love gummies biscuit. Marzipan pie apple pie brownie chupa chups I love. Halvah apple pie jelly. I love cheesecake I love liquorice chocolate bar.`
   ],
 },
   "G": {
-    score: [1, 5],
+    score: [1, 5, 3],
     text: [
       `She smiles as you move closer. The ground beneath you gave way and you are impaled by a cluster of razor sharp stakes. Seems like the woman is a cannibal. Death by imapalement.`,
 
-      `Cow prosciutto tongue shoulder, buffalo chuck ground round drumstick picanha ribeye pork ham porchetta. Venison meatball ribeye short loin meatloaf beef ribs. Kielbasa cow jerky swine jowl flank ham fatback burgdoggen boudin ham hock short loin pancetta hamburger prosciutto. Bacon buffalo flank sausage.`
+      `Cow prosciutto tongue shoulder, buffalo chuck ground round drumstick picanha ribeye pork ham porchetta. Venison meatball ribeye short loin meatloaf beef ribs. Kielbasa cow jerky swine jowl flank ham fatback burgdoggen boudin ham hock short loin pancetta hamburger prosciutto. Bacon buffalo flank sausage.`,
+
+      `Biscuit cupcake marshmallow pudding cheesecake oat cake candy cake. Tart soufflé sugar plum halvah sugar plum I love cake. Gingerbread dragée icing chocolate macaroon jujubes gummies. Cupcake fruitcake lemon drops I love macaroon croissant cheesecake muffin.`
     ],
   },
   "M": {
-    score: [3, 6],
+    score: [3, 6, 2],
     text: [
       `Ignoring the woman and the sound of fleeing animals, you walk in the opposite direction. As you make your way around an enomous tree, you come face to face with a dragon.\n\nBefore you can move a muscle, you were swallowed whole by the dragon. You've died.`,
 
-      `Ground round beef shank buffalo jowl swine brisket cupim pork belly pancetta filet mignon ribeye turducken drumstick cow. Cow sirloin tongue ground round frankfurter shoulder.`
+      `Ground round beef shank buffalo jowl swine brisket cupim pork belly pancetta filet mignon ribeye turducken drumstick cow. Cow sirloin tongue ground round frankfurter shoulder.`,
+
+      `Danish sugar plum I love lollipop chupa chups apple pie jelly beans jelly tootsie roll. Ice cream tiramisu dessert apple pie tart cotton candy. Donut sweet roll gummi bears sugar plum. Cake danish sweet roll topping I love I love cake sweet roll marshmallow. Gummies pie sesame snaps pastry wafer. Marshmallow I love biscuit marshmallow chocolate bar.`
     ],
   },
   "C": {
-    score: [3, 5],
+    score: [3, 5, 1],
     text: [
       `When you flip over one of the corpses, it opens it's eyes and lets out a hungry moan,\"Zonbi cerebellum tattered for brein solum oculi cerveau eorum defunctis cerebro go lum cerebro.\"\n\nThe zombie proceeds to take a bite out of your hand.\n\n Congratulations, you have joined the army of the dead.`,
 
-      `Sirloin kielbasa landjaeger filet mignon bacon ground round pastrami turducken corned beef strip steak porchetta salami jowl prosciutto shankle. Pork rump doner beef biltong ham hock meatloaf frankfurter beef ribs pancetta bresaola.`
+      `Sirloin kielbasa landjaeger filet mignon bacon ground round pastrami turducken corned beef strip steak porchetta salami jowl prosciutto shankle. Pork rump doner beef biltong ham hock meatloaf frankfurter beef ribs pancetta bresaola.`,
+
+      `Liquorice lollipop jelly-o pastry caramels sesame snaps cheesecake cheesecake. Bear claw marshmallow topping wafer topping sweet roll. Liquorice tart macaroon croissant gummi bears cookie lemon drops marzipan liquorice. Sweet sugar plum danish dragée. Pie cake topping jelly beans tootsie roll. Topping croissant tart oat cake cake topping chocolate tiramisu pie.`
    ],
   },
   "P": {
-    score: [1, 6],
+    score: [1, 6, 3],
     text: [
       `As you open the chest, you are quickly grabbed and chewed on by the mimic.\n\nMimics punish greed, taking on the form of chests and gorging on any who seek their hoard. Avarice is their nature.`,
 
-      `Spicy jalapeno biltong ham hock tenderloin fatback pork chop pastrami sausage prosciutto shoulder brisket. Shankle corned beef buffalo landjaeger picanha cow. Pig meatloaf capicola kevin tri-tip ribeye pastrami. Leberkas kevin sausage pork belly.`
+      `Spicy jalapeno biltong ham hock tenderloin fatback pork chop pastrami sausage prosciutto shoulder brisket. Shankle corned beef buffalo landjaeger picanha cow. Pig meatloaf capicola kevin tri-tip ribeye pastrami. Leberkas kevin sausage pork belly.`,
+
+      `Cotton candy gummi bears pudding gummies cupcake fruitcake chocolate bar. Cake liquorice oat cake muffin chocolate. Fruitcake dragée pudding carrot cake powder candy canes. Soufflé brownie sweet roll caramels danish cupcake jelly beans marshmallow. Oat cake cupcake gingerbread. Caramels chocolate candy sweet roll.`
     ],
   },
   "I": {
-    score: [2, 4],
+    score: [2, 4, 5],
     text: [
       `You turn around to see what caused the loud bang. Your eyes widen in shock a split second before a massive boulder rolls over you.\n\nYou are now as flat as a pancake.`,
 
-      `Biltong turkey fatback, hamburger andouille ribeye boudin short loin turducken ham hock chuck brisket. Pastrami prosciutto chicken frankfurter short ribs strip steak tongue bacon. Landjaeger spare ribs tongue ham boudin t-bone.`
+      `Biltong turkey fatback, hamburger andouille ribeye boudin short loin turducken ham hock chuck brisket. Pastrami prosciutto chicken frankfurter short ribs strip steak tongue bacon. Landjaeger spare ribs tongue ham boudin t-bone.`,
+
+      `Caramels marzipan candy muffin biscuit cake cupcake jelly beans. Carrot cake jelly beans sesame snaps chocolate bar. Candy canes pie cupcake. Ice cream cupcake chupa chups powder. Topping wafer topping bear claw jujubes halvah danish jelly-o cupcake. Chocolate bar dragée jelly-o soufflé halvah liquorice cake macaroon oat cake.`
     ],
   },
 };

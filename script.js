@@ -57,36 +57,36 @@ var partA = function(option) {
 var partB = function(option) {
   var randomNum = Math.floor(Math.random() * 10);
   //generate random ending for each option
-  var randomEnd = Math.floor(Math.random() * 2);
+  var randomEnd = Math.floor(Math.random() * 3);
 	if (option === "R") {
     //track score based on random ending
     score = score + endings[option].score[randomEnd];
     //output is random NPC description, with random ending text and end message based on random ending
-    output = `You rubbed the lamp. Smoke starts to billow out of the lamp. When the smoke clears, you realised that a man has appeared in the room.\n\n${npcDescriptionMale[randomNum]}\n\n` + endings[option].text[randomEnd] + startOver(randomEnd);
+    output = `You rubbed the lamp. Smoke starts to billow out of the lamp. When the smoke clears, you realised that a man has appeared in the room.\n\n${npcDescriptionMale[randomNum]}\n\n` + endings[option].text[randomEnd] + startOver();
 	} else if (option === "S") {
     score = score + endings[option].score[randomEnd];
-		output = `You peer into the floor mirror and instead of your own reflection, you see a woman looking back at you.\n\n${npcDescriptionFemale[randomNum]}\n\n` + endings[option].text[randomEnd] + startOver(randomEnd);
+		output = `You peer into the floor mirror and instead of your own reflection, you see a woman looking back at you.\n\n${npcDescriptionFemale[randomNum]}\n\n` + endings[option].text[randomEnd] + startOver();
 	} else if (option === "O") {
     score = score + endings[option].score[randomEnd];
-		output = endings[option].text[randomEnd] + startOver(randomEnd);
+		output = endings[option].text[randomEnd] + startOver();
 	} else if (option === "W") {
     score = score + endings[option].score[randomEnd];
-    output = endings[option].text[randomEnd] + startOver(randomEnd);
+    output = endings[option].text[randomEnd] + startOver();
 	} else if (option === "G") {
     score = score + endings[option].score[randomEnd];
 		output = `You make your way towards the woman by the river.\n\n ${npcDescriptionFemale[randomNum]}\n\n` + endings[option].text[randomEnd] + startOver();
 	} else if (option === "M") {
     score = score + endings[option].score[randomEnd];
-		output = endings[option].text[randomEnd] + startOver(randomEnd);
+		output = endings[option].text[randomEnd] + startOver();
 	} else if (option === "C") {
     score = score + endings[option].score[randomEnd];
-		output = endings[option].text[randomEnd] + startOver(randomEnd);
+		output = endings[option].text[randomEnd] + startOver();
 	} else if (option === "P") {
     score = score + endings[option].score[randomEnd];
-		output = endings[option].text[randomEnd] + startOver(randomEnd);
+		output = endings[option].text[randomEnd] + startOver();
 	} else if (option === "I") {
     score = score + endings[option].score[randomEnd];
-		output = endings[option].text[randomEnd] + startOver(randomEnd);
+		output = endings[option].text[randomEnd] + startOver();
   }
 	return output;
 }
