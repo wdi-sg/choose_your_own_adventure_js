@@ -70,43 +70,51 @@ var partA = function(option){
 
 var partB = function(option){
   var randomNum = Math.floor(Math.random() * 10);
+  var randomEnd = Math.floor(Math.random() * 2);
 	if (option === "R") {
-    score = score + 2;
-    output = `You rubbed the lamp. Smoke starts to billow out of the lamp. When the smoke clears, you realised that a man has appeared in the room.\n\n${npcDescriptionMale[randomNum]}\n\n` + endings.R[0] + startOver();
+    score = score + endings.optionR.score[randomEnd];
+    output = `You rubbed the lamp. Smoke starts to billow out of the lamp. When the smoke clears, you realised that a man has appeared in the room.\n\n${npcDescriptionMale[randomNum]}\n\n` + endings.optionR.text[randomEnd] + startOver(randomEnd);
 	} else if (option === "S"){
-    score = score + 3;
-		output = `You peer into the floor mirror and instead of your own reflection, you see a woman looking back at you.\n\n${npcDescriptionFemale[randomNum]}\n\n` + endings.S[0] + startOver();
+    score = score + endings.optionS.score[randomEnd];
+		output = `You peer into the floor mirror and instead of your own reflection, you see a woman looking back at you.\n\n${npcDescriptionFemale[randomNum]}\n\n` + endings.optionS.text[randomEnd] + startOver(randomEnd);
 	} else if (option === "O"){
-    score = score + 1;
-		output =  + startOver();
+    score = score + endings.optionO.score[randomEnd];
+		output = endings.optionO.text[randomEnd] + startOver(randomEnd);
 	} else if (option === "W") {
-    score = score + 1;
-    output = endings.W[0] + startOver();
+    score = score + endings.optionW.score[randomEnd];
+    output = endings.optionW.text[randomEnd] + startOver(randomEnd);
 	} else if (option === "G"){
-    score = score + 2;
-		output = `You make your way towards the woman by the river.\n\n ${npcDescriptionFemale[randomNum]}\n\n` + endings.G[0] + startOver();
+    score = score + endings.optionG.score[randomEnd];
+		output = `You make your way towards the woman by the river.\n\n ${npcDescriptionFemale[randomNum]}\n\n` + endings.optionG.text[randomEnd] + startOver();
 	} else if (option === "M"){
-    score = score + 3;
-		output = endings.M[0] + startOver();
+    score = score + endings.optionM.score[randomEnd];
+		output = endings.optionM.text[randomEnd] + startOver(randomEnd);
 	} else if (option === "C") {
-    score = score + 3;
-		output = endings.C[0] + startOver();
+    score = score + endings.optionC.score[randomEnd];
+		output = endings.optionC.text[randomEnd] + startOver(randomEnd);
 	} else if (option === "P"){
-    score = score + 1;
-		output = endings.P[0] + startOver();
+    score = score + endings.optionP.score[randomEnd];
+		output = endings.optionP.text[randomEnd] + startOver(randomEnd);
 	} else if (option === "I"){
-    score = score + 2;
-		output = endings.I[0] + startOver();
+    score = score + endings.optionI.score[randomEnd];
+		output = endings.optionI.text[randomEnd] + startOver(randomEnd);
   }
 	// } else {
 	// 	output + "\nThis is not an option";
-	// }
+  // }
+  console.log(randomEnd)
 	return output;
 }
 
-var startOver = function() {
+var startOver = function(endingOption) {
+  console.log(endingOption);
+if (endingOption === 0) {
   var randomArt = Math.floor(Math.random() * 2);
   var append = `\n\nYour score is ${score}. Better luck next time, ${name}. Enter any key to start over.\n\n${asciiArt[randomArt]}`;
+} else {
+  var randomArt = Math.floor((Math.random() * 3) + 2);
+  var append = `\n\nYour score is ${score}. Well Done, ${name}. Enter any key to start over.\n\n${asciiArt[randomArt]}`;
+}
   storyCount = 0;
   score = 0;
   return append;
