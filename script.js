@@ -3,14 +3,14 @@
 console.log("hello script js");
 alert('Hello. Welcome to \'Guitars and Monsters: The Adventure.\' What is your name? Please type CAREFULLY. You only got ONE shot and stupid names are stored FOREVER.')
 var boxes = [{
-        item: 'Legendary Guitar of Hendrix!',
+        item: 'Legendary Stratocaster of Hendrix!',
         dmg: 9999,
-        description: 'Gamebreaker!!'
+        description: 'Gamebreaker!!!'
     },
             {
-        item: 'John Mayer\'s Pick!',
+        item: 'Telecaster of Prince!',
         dmg: 100,
-        description: 'John Mayer has imbued this pick with some magic.'
+        description: 'Prince has blessed this Tele with soul power.'
     },
             {
         item: 'junk',
@@ -24,11 +24,21 @@ var boss = {
     hp: 500,
     dmg: 80
 }
-var player = {
-    hp: 400,
+var playerHP = 415;
+
+var fightCalc = function() {
+    while (playerHP > 0 && boss.hp > 0) {
+        playerHP = playerHP - boss.dmg;
+        boss.hp = boss.hp - givenBox.dmg;
+    }
+    if (playerHP > 0 && playerHP > boss.hp) {
+        console.log('this')
+        return `You're left with ${playerHP} hp! You defeated the boss!`;
+    } else if (boss.hp > 0 && boss.hp > playerHP) {
+         console.log('that')
+        return `The boss is left with ${boss.hp}. You don't have any HP left. \n GAME OVER`;
+    }
 }
-
-
 var enteredName = 0;
 var approachAxel = 0;
 var goHome = 0;
@@ -39,9 +49,9 @@ var givenBox;
 var playerName = [];
 var randomizeBox = function() {
     var odds = Math.floor(Math.random() * 10)
-   if (odds >= 0 && odds <= 3) {
+   if (odds >= 0 && odds < 3) {
     givenBox = boxes[0];
-   } else if (odds === 4 && odds < 9) {
+   } else if (odds >= 3 && odds < 9) {
     givenBox = boxes[1];
    } else if (odds === 9) {
     givenBox = boxes[2];
