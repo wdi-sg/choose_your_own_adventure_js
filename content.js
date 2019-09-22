@@ -43,3 +43,11 @@ var npcDescriptionFemale = [
 
 	"This harried woman has almond-shaped white eyes that are like two bleached skulls. Her silky, curly, black hair is very long and is worn in an exotic, carefully-crafted style. She is very tall and has a feminine build. Her skin is deeply-tanned. She has nearly-nonexistent eyebrows. Her wardrobe is risque and elegant, with a lot of red and white."
 ];
+
+var asciiArt = [
+  "..+---+\n...|.....|\n..O....|\n../|\\....|\n../.\\....|\n.........|", 
+  "\\,\\,\\, ';..;' \\,\\,\\,",
+  "(\\ /) \n ( . . ) \n C('')('')",
+  "()_() \n (._.) \n (('')('')",
+  "( . /\\_/\\\n .) >^,^<\n( _ ( _ )"
+]
