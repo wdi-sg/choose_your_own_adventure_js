@@ -82,7 +82,7 @@ var stages = [{ //stage 0 - Wake Up
         paths: { b: 3, r: 4 },
         response: null,
     },
-    { //stage 3 - Blue
+    { //stage 3 - Blue - THE END
         messages: {
             intro: ["\n\n\nWelcome back to the Matrix.\n\n\n",
                     "<THE END>\n\n"],
@@ -103,7 +103,7 @@ var stages = [{ //stage 0 - Wake Up
         paths: { c: 5 },
         response: null,
     },
-    { //stage 5 - Training
+    { //stage 5 - Combat
         messages: {
             intro: ["---MAIN DECK---\n\n",
                 "You're plugged in, hanging in one of the suspension chairs.\n\n\n",
@@ -198,7 +198,7 @@ var stages = [{ //stage 0 - Wake Up
         paths: {},
         response: null,
     },
-    { //stage 12 - I think so
+    { //stage 12 - Are You The One
         messages: {
             intro: ["ORACLE:\n",
                 "So? What do you think?  You think you're the one?\n\n\n\n"
@@ -210,10 +210,10 @@ var stages = [{ //stage 0 - Wake Up
         paths: { y: 14, n: 15 },
         response: null,
     },
-    { //stage 13 - I don't know
+    { //stage 13 - I'm Not The One - THE END
         messages: {
             intro: ["ORACLE:\n",
-                    "Why are you even here?\n\n\n",
+                    "Then you're not.\n\n\n",
                     "Will you please excuse me.\n\n\n",
                     "<THE END>\n\n"],
             questions: [],
@@ -234,7 +234,7 @@ var stages = [{ //stage 0 - Wake Up
         paths: {c: 11},
         response: null,
     },
-    { //stage 15 - I'm not The One
+    { //stage 15 - I'm Not The One - THE END
         messages: {
             intro: ["The Oracle gestures to a wooden plaque,\n",
                 "the kind every grandma has,\n",
