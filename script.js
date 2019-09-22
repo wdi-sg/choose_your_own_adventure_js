@@ -17,6 +17,15 @@ var playerData = {
 var inputHappened = (currentInput) =>{
   console.log( currentInput );
   console.log(playerData.state);
+
+if (playerData.state === "finished"){
+    return gameDone();
+  }
+
+if (currentInput ==="YOLO") {
+      return goYolo();
+}
+
 switch (playerData.state) {
 // user has just started the game
   case "start":
@@ -217,5 +226,25 @@ var travelWithClara =  (check)=> {
    else {
          return "Please enter T/L.";
        }
+     return output;
+   }
+
+var goYolo =  ()=> {
+var diceRoll = Math.floor( Math.random() * 6 ) +1;
+if (diceRoll === 1) {
+  var message = "WOW! You did it! You managed to strike lucky and have saved the future."
+} else {
+  var message = "Sorry dawg... you're luck ran out and were transported into a \ntar pit where you slowly drowned."
+
+}
+var output = "You rolled a " + diceRoll;
+var output = output + "\n" + message;
+playerData.state = "finished";
+     return output;
+
+}
+
+var gameDone=  ()=> {
+  var output = "Game Over";
      return output;
    }
