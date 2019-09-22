@@ -54,7 +54,7 @@ var stages = [{ //stage 0 - Wake Up
         paths: { c: 1 },
         response: null,
     },
-    {   //stage 1 - Follow The White Rabbit
+    { //stage 1 - Follow The White Rabbit
         messages: {
             intro: ["The Matrix has you...\n\n\n\nFollow the white rabbit.\n\n"],
             questions: [],
@@ -64,7 +64,7 @@ var stages = [{ //stage 0 - Wake Up
         paths: { f: 2 },
         response: null,
     },
-    {   //stage 2 - Rabbit Hole
+    { //stage 2 - Rabbit Hole
         messages: {
             intro: ["---HOTEL LAFAYETTE---\n",
                 "Welcome ", "playerName", ".\n\n",
@@ -82,7 +82,7 @@ var stages = [{ //stage 0 - Wake Up
         paths: { b: 3, r: 4 },
         response: null,
     },
-    {   //stage 3 - Blue
+    { //stage 3 - Blue
         messages: {
             intro: ["<THE END>\n\n\nYou've taken the blue pill.\n\n\nWelcome back to the Matrix.\n\n\n"],
             questions: ["Restart the game?\n\n"],
@@ -92,7 +92,7 @@ var stages = [{ //stage 0 - Wake Up
         paths: { y: 0 },
         response: null,
     },
-    {   //stage 4 - Red
+    { //stage 4 - Red
         messages: {
             intro: ["You've taken the red pill.\n\n\n\n\n\n"],
             questions: [],
@@ -102,21 +102,22 @@ var stages = [{ //stage 0 - Wake Up
         paths: { c: 5 },
         response: null,
     },
-    {   //stage 5 - Training
+    { //stage 5 - Training
         messages: {
             intro: ["---MAIN DECK---\n\n",
-                    "You're plugged in, hanging in one of the suspension chairs.\n\n\n",
-                    "TANK:\n",
-                    "\We're supposed to load all these operations programs first,\n",
-                    "but this is some major boring shit.\n",
-                    "Why don't we start something a little fun?\n",
-                    "How about some combat training?\n\n",
-                    "A tall carousel is loaded with micro discs.\n\n"],
+                "You're plugged in, hanging in one of the suspension chairs.\n\n\n",
+                "TANK:\n",
+                "\We're supposed to load all these operations programs first,\n",
+                "but this is some major boring shit.\n",
+                "Why don't we start something a little fun?\n",
+                "How about some combat training?\n\n",
+                "A tall carousel is loaded with micro discs.\n\n"
+            ],
             questions: ["Choose a disc:\n\n"],
             choices: ["[K]enpo OR [T]ae Kwan Do OR [D]runken boxing"],
             hints: [],
         },
-        paths: {k: 6, t: 7, d: 8},
+        paths: { k: 6, t: 7, d: 8 },
         response: null,
     },
     { //stage 6 - Kenpo
@@ -126,7 +127,7 @@ var stages = [{ //stage 0 - Wake Up
             choices: ["[y]es OR [n]o"],
             hints: [],
         },
-        paths: {y: 5, n: 9},
+        paths: { y: 5, n: 9 },
         response: null,
     },
     { //stage 7 - Tae Kwan Do
@@ -136,7 +137,7 @@ var stages = [{ //stage 0 - Wake Up
             choices: ["[y]es OR [n]o"],
             hints: [],
         },
-        paths: {y: 5, n: 9},
+        paths: { y: 5, n: 9 },
         response: null,
     },
     { //stage 8 -Drunken Boxing
@@ -146,10 +147,74 @@ var stages = [{ //stage 0 - Wake Up
             choices: ["[y]es OR [n]o"],
             hints: [],
         },
-        paths: {y: 5, n: 9},
+        paths: { y: 5, n: 9 },
         response: null,
     },
-    { //stage 9
+    { //stage 9 - Nebuchadnezzar
+        messages: {
+            intro: ["---NEBUCHADNEZZAR---\n\n",
+                "MORPHEUS:\n",
+                "How's he doing?\n\n",
+                "TANK:\n",
+                "We just finished the operation programs and he's showing great retention.\n\n",
+                "MORPHEUS:\n",
+                "Good. I want everyone alerted to 12-hour stand-by. We're going in.\n",
+                "playerName", ", it's time for you to know why you're here.\n\n",
+                "playerName", ":\n",
+                "What's he talking about?\n\n",
+                "TANK:\n",
+                "He's taking you into the Matrix to see someone.\n\n",
+                "playerName",":\n",
+                "See who?\n\n"
+            ],
+            questions: ["Who would you like to see?\n\n"],
+            choices: ["The [O]racle OR The [A]rchitect"],
+            hints: [],
+        },
+        paths: {o: 10, a: 11},
+        response: null,
+    },
+    { //stage 10- The Oracle
+        messages: {
+            intro: ["The Oracle"],
+            questions: [],
+            choices: [],
+            hints: [],
+        },
+        paths: {},
+        response: null,
+    },
+    { //stage 11 - The Architect
+        messages: {
+            intro: ["The Architect"],
+            questions: [],
+            choices: [],
+            hints: [],
+        },
+        paths: {},
+        response: null,
+    },
+    { //stage
+        messages: {
+            intro: [],
+            questions: [],
+            choices: [],
+            hints: [],
+        },
+        paths: {},
+        response: null,
+    },
+    { //stage
+        messages: {
+            intro: [],
+            questions: [],
+            choices: [],
+            hints: [],
+        },
+        paths: {},
+        response: null,
+    },
+    { //stage
         messages: {
             intro: [],
             questions: [],
