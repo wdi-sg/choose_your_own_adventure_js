@@ -168,11 +168,11 @@ var stages = [{ //stage 0 - Wake Up
                 "playerName", ":\n",
                 "See who?\n\n"
             ],
-            questions: ["Who would you like to see?\n\n"],
-            choices: ["The [O]racle OR The [A]rchitect"],
-            hints: [],
+            questions: [],
+            choices: ["Guess who.\n\n"],
+            hints: ["[h]int\n\n"],
         },
-        paths: { o: 10, a: 11 },
+        paths: { "the oracle": 10, h: 16},
         response: null,
     },
     { //stage 10- The Oracle
@@ -257,14 +257,16 @@ var stages = [{ //stage 0 - Wake Up
         paths: { r: 0 },
         response: null,
     },
-    { //stage
+    { //stage 16 - Hint - The Oracle
         messages: {
-            intro: [],
+            intro: ["MORPHEUS:\n",
+                    "When the Matrix was first built there was a man born inside that had the ability to change what he wanted, to remake the Matrix as he saw fit.  It was this man that freed the first of us and taught us the secret of the war; control the Matrix and you control the future.\n\n",
+            "When he died, *The Oracle* at the temple of *Zion* prophesied his return and envisioned an end to the war and freedom for our people.  That is why there are those of us that have spent our entire lives searching the Matrix, looking for him.\n\n"],
             questions: [],
-            choices: [],
+            choices: ["[r]eturn"],
             hints: [],
         },
-        paths: {},
+        paths: {r: 9},
         response: null,
     },
     { //stage
@@ -325,7 +327,7 @@ var getNextStage = function(response, paths) {
 // main function that is called when a change event is triggered
 var inputHappened = function(input) {
     // console.log("game.stage shown on screen a second ago: ", game.stage);
-    console.log("input:", input);
+    // console.log("input:", input);
     // console.log("player object ", player);
     // console.log("stages object ", stages);
     // console.log("game object ", game);
@@ -392,7 +394,6 @@ var inputHappened = function(input) {
         // if the condition is true, i.e. the key exists, e.g. "F" is found in {F: 1, D: 3},
         // then proceed to retrieve the data to be displayed to the player
         if (currStage.response.toLowerCase() in currStage.paths) {
-
             // the lines below follow the same pattern as above
             // except that instead of assigning next to be 0,
             // we want to assign next according to the player's response,
