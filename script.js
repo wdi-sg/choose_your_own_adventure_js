@@ -47,7 +47,7 @@ var inputHappened = function(currentInput){
 
         // Prompt user for name
         var playerName = prompt("Please enter your name.");
-        console.log("hello " + playerName);
+        console.log("Hello " + playerName);
 
         // System assign random number to the array of mystery boxes
         numberGenerator(mysteryBox);
@@ -57,11 +57,23 @@ var inputHappened = function(currentInput){
         var boxItem = mysteryBox[2];
         console.log("Item is " + boxItem);
 
+        var playerChoice = prompt("Please select a number from 1 - 9.");
+        console.log("Player's choice is " + playerChoice);
+
+        if(parseInt(playerChoice) === boxItem) {
+            console.log("You hit the bomb! GAME OVER!");
+        }
+
+        else {
+            console.log("You are safe!");
+        }
+
     } else {
 
         // Prompt user to input exact text to start the game
         return "Please enter 'Start Game' to proceed.";
     }
+
 
 };
 
