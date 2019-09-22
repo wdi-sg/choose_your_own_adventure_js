@@ -56,7 +56,7 @@ var demon = [{
                                 stats: {
                                             hp: 200,
                                             power: 200,
-                                            speed: 200
+                                            speed: 140,
                                      }
                              }
             }]
@@ -65,17 +65,17 @@ var demon = [{
 //4 paths to choose from, there after each destination is determined by random, will merge paths by using exact same object keys and values.
 var path = {
             "Fire Path": [["Element Path", "Element Path", "Element Path"],
+                            ["Element Path", "Human Path", "Human Path"],
+                            ["Human Path", "Beast Path", "Beast Path"]],
+            "Water Path": [["Element Path", "Human Path", "Element Path"],
                             ["Element Path", "Element Path", "Human Path"],
-                            ["Human Path", "God Path", "Beast Path"]],
-            "Water Path": [["Element Path", "Element Path", "Element Path"],
+                            ["Human Path", "Beast Path", "Beast Path"]],
+            "Earth Path": [["Element Path", "Human Path", "Element Path"],
                             ["Element Path", "Element Path", "Human Path"],
-                            ["Human Path", "God Path", "Beast Path"]],
-            "Earth Path": [["Element Path", "Element Path", "Element Path"],
-                            ["Element Path", "Element Path", "Human Path"],
-                            ["Human Path", "God Path", "Beast Path"]],
+                            ["Human Path", "Beast Path", "Beast Path"]],
             "Wind Path": [["Element Path", "Element Path", "Element Path"],
-                            ["Element Path", "Element Path", "Human Path"],
-                            ["Human Path", "God Path", "Beast Path"]],
+                            ["Element Path", "Human Path", "Human Path"],
+                            ["Human Path", "Beast Path", "Beast Path"]],
         }
 
 //this is where user encounters the demons according to the path traveled.
@@ -131,7 +131,7 @@ var fightScene = function(){
 
 
 if(input === "fight"){
-        if(characterSpeed > enemySpeed){
+        if(characterSpeed >= enemySpeed){
             var whoMovesFirst = name;
             var whoMovesSecond = enemyName;
         } else {
@@ -143,15 +143,18 @@ if(input === "fight"){
         if (whoMovesFirst === name){
             enemyHP = parseInt(enemyHP) - parseInt(characterPower);
             if (enemyHP > 0) {
+                characterHP = parseInt(characterHP) - parseInt(enemyPower);
+                if (characterHP <= 0){
+                characterHP = 0;
+                };
                 step.pop();
-                characterHP = parseInt(characterHP) - parseInt(enemyPower)
-                result = "Oh no, please type in 'Proceed' to continue"
+                result = "Oh no, the "+ enemyName + " attacked you first! \n\nYou are still alive " + name + " the " + characterChosen + " please type in 'FIGHT' to continue fighting the " + enemyName + "!!"
             }
             if (enemyHP <= 0){
                 enemyHP = 0;
-                    };
+            };
         } else {
-            characterHP = parseInt(characterHP - enemyPower);
+            characterHP = parseInt(characterHP) - parseInt(enemyPower);
             if (characterHP <= 0){
                 characterHP = 0;
                 };
@@ -159,14 +162,13 @@ if(input === "fight"){
 
 
         if (enemyHP === 0){
-            result = name + " the " + characterChosen +"\nHP: " + characterHP + "\nPower: " + characterPower +"\nSpeed: " + characterSpeed + "\n\nAs your speed is " + characterSpeed + " and the " + enemyName + " speed is " + enemySpeed + ", the one who strikes first is " + whoMovesFirst + "!! \n\nCongratulations! You have defeated the " + enemyName + "!! \n\nPlease type 'Proceed' to continue ";
+            result = name + " the " + characterChosen +"\nHP: " + characterHP + "\nPower: " + characterPower +"\nSpeed: " + characterSpeed + "\n\nAs your speed is " + characterSpeed + " and the " + enemyName + " speed is " + enemySpeed + ", the one who strikes first is " + whoMovesFirst + "!!\n\nThe enemy's health is now " + enemyHP + " while yours is " + characterHP + "!!  \n\nCongratulations! You have defeated the " + enemyName + "!! \n\nPlease type 'Proceed' to continue ";
         };
-
 
         if (characterHP === 0){
-            result = name + " the " + characterChosen +"\nHP: " + characterHP + "\nPower: " + characterPower +"\nSpeed: " + characterSpeed + "\n\nAs your speed is " + characterSpeed + " and the " + enemyName + " speed is " + enemySpeed + ", the one who strikes first is " + whoMovesFirst + "!! \n\nIt looks like " + name + " the " + characterChosen + " has been defeated";
+            setTimeout(location.reload.bind(location), 5000);
+            result = name + " the " + characterChosen +"\nHP: " + characterHP + "\nPower: " + characterPower +"\nSpeed: " + characterSpeed + "\n\nAs your speed is " + characterSpeed + " and the " + enemyName + " speed is " + enemySpeed + ", the one who strikes first is " + whoMovesFirst + "!!\n\nThe enemy's health is now " + enemyHP + " while yours is " + characterHP + "!! \n\nIt looks like " + name + " the great " + characterChosen + " has been defeated. \n\nDo not falter " + name + "! The Demon Lord needs to be slain and only you have the power to accomplish this task! \n\nThe page will reload in 5 seconds";
         };
-
 
 
 } else {

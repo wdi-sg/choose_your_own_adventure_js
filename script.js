@@ -15,6 +15,7 @@ var run = "";
 var ranNum = "";
 var ranNumDemon = "";
 
+
 //Variables pertaining to the enemy which i want to track and edit accordingly
 
 var enemy = "";
@@ -37,7 +38,7 @@ step.push(currentInput);
 if (step.length >= 0 && name === ""){
     name = currentInput;
     step[0] = name;
-    result = "Good day " + name + "! Your adventure awaits you! \nPerilous paths will be taken, and only the strong, or the lucky, will survive. Will you be the one? \nGood luck " + name + ", may fortune and the force be with you \n\nPlease type in your Adventurer Class (Warrior / Mage / Ranger)";
+    result = "Good day " + name + "! Your adventure awaits you! \n\nPerilous paths will be taken, and only the strong, or the lucky, will survive. Will you be the one? \n\nGood luck " + name + ", may fortune and the force be with you \n\nPlease type in your Adventurer Class (Warrior / Mage / Ranger)";
 }
 
 
@@ -79,13 +80,13 @@ if (step.length === 3){
         result = "The Fire Path is one of searing heat and melting flesh, many demons exist here to test your strength " + name + ". \n\nAs a " + characterChosen + ", this will be a tremendous test indeed, however that will not deter you now will it, " + name + "? \n\n Let us march on forward! \n\nPlease type 'CHIONG AH' to continue";
     } else if (input === "water path"){
         pathTaken[0] = "Water Path";
-        result = "The Water Path is one of crashing waves and crushing depths, many sea monsters exist here to test your strength " + name + ". \n\nAs a " + characterChosen + ", this will be a tremendous test indeed, however that will not deter you now will it, " + name + "? \n\n Let us march on forward! \n\nPlease type 'CHIONG AH' to continue";
+        result = "The Water Path is one of crashing waves and crushing depths, many demons exist here to test your strength " + name + ". \n\nAs a " + characterChosen + ", this will be a tremendous test indeed, however that will not deter you now will it, " + name + "? \n\n Let us march on forward! \n\nPlease type 'CHIONG AH' to continue";
     } else if (input === "earth path"){
         pathTaken[0] = "Earth Path";
-        result = "The Earth Path is one of meteoric avalanches and ambushing cliffs, many rock trolls exist here to test your strength " + name + ". \n\nAs a " + characterChosen + ", this will be a tremendous test indeed, however that will not deter you now will it, " + name + "? \n\n Let us march on forward! \n\nPlease type 'CHIONG AH' to continue";
+        result = "The Earth Path is one of meteoric avalanches and ambushing cliffs, many demons exist here to test your strength " + name + ". \n\nAs a " + characterChosen + ", this will be a tremendous test indeed, however that will not deter you now will it, " + name + "? \n\n Let us march on forward! \n\nPlease type 'CHIONG AH' to continue";
     } else if (input === "wind path"){
         pathTaken[0] = "Wind Path";
-        result = "The Wind Path is one of tearing tornadoes and dizzying heights, many sky beasts exist here to test your strength " + name + ". \n\nAs a " + characterChosen + ", this will be a tremendous test indeed, however that will not deter you now will it, " + name + "? \n\n Let us march on forward! \n\nPlease type 'CHIONG AH' to continue";
+        result = "The Wind Path is one of tearing tornadoes and dizzying heights, many demons exist here to test your strength " + name + ". \n\nAs a " + characterChosen + ", this will be a tremendous test indeed, however that will not deter you now will it, " + name + "? \n\n Let us march on forward! \n\nPlease type 'CHIONG AH' to continue";
     } else {
         step.pop();
         result = "Please choose the correct input! \n\n(Fire Path / Water Path/ Earth Path/ Wind Path)";
@@ -101,7 +102,7 @@ if(step.length === 4){
         result = name + " the " + characterChosen +"\nHP: " + characterHP + "\nPower: " + characterPower +"\nSpeed: " + characterSpeed + "\n\nThe stats display above will be available from here on, they will help you keep track of your character status. \nYour HP stat is especially important as if it reaches 0, you will have lost this game and you have to start over from the beginning. Additionally, things get tricky from now onwards, paths diverge and paths converge, you never know where you will end up next or what you will face. \n\nNow let us begin!!! The " + pathTaken + " waits for no one! \n\nPlease type 'Proceed' to, you know, proceed. "
     } else {
         step.pop();
-        result = "Yooooooo c'mon man you know what you need to do. \nType 'CHIONG AH' to continue";;
+        result = "Yooooooo c'mon man you know what you need to do. \n\nType 'CHIONG AH' to continue";;
     }
 };
 
@@ -206,8 +207,6 @@ if (step.length === 16){
 };
 
 
-
-
 if (enemyName === "Beast Demon" && enemyHP === 0){
     characterPower = parseInt(characterPower) + 100;
     enemyHP = 20;
@@ -224,8 +223,12 @@ if (enemyName === "Elemental Demon" && enemyHP === 0){
 }
 
 if (enemyName === "Demon Lord" && enemyHP === 0){
-    result = "Congratulations!!!"
+    if (currentInput === "reload"){
+        location.reload();
+    };
+    result = "Congratulations " + name + " the " + characterChosen + "!! You have defeated the Demon Lord!! \n\nYou are indeed the hero we all need but do not deserve. However, there are more perilous paths yet to be taken. \n\nWill you be the one to conquer them all " + name + " the " + characterChosen + "? Let us find out! \n\nPlease type in 'Reload' to play the game again."
 }
+
 
 
 
