@@ -1,11 +1,18 @@
 .starter{
   font-size:30px;
   padding:10px;
-  display:block;
+  display:inline-block;
   margin:40px;
   border:3px solid blue;
 }
-
+.display-box{
+  font-size:30px;
+  padding:10px;
+  display:block;
+  width: 33%;
+  margin:40px;
+  border:3px solid black;
+}
 #output{
   background-color:pink;
 }
@@ -15,4 +22,22 @@
 }
 #nameConfirm{
   display:inline-block;
+  height:30px;
+  width: 100px;
+  border-radius: 10px;
+  background-color: #5bd1d7;
+}
+
+#reset{
+  display:inline-block;
+  height:30px;
+  width: 150px;
+  border-radius: 10px;
+
+}
+img{
+  width: 500px;
+  height: 300px;
+  display: inline-block;
+  margin: 0 0 0 40px;
 }
