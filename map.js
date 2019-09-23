@@ -8,7 +8,7 @@ var player = {
     battery: 9,
     radiation: -2,
     Bullets: 10,
-    map: true,
+    map: false,
     dry: true,
 }
 
