@@ -9,7 +9,7 @@ var display = function( data ){
   var displayElement = document.querySelector('#output');
 
   // get rid of the entire contents
-  displayElement.innerHtml = "";
+  displayElement.innerHTML = "";
 
   // put the data into the div
   output.innerText = data;
