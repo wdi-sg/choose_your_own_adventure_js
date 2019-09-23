@@ -1,0 +1,64 @@
+.starter{
+  font-size:25px;
+  padding:10px;
+  border:3px solid black;
+}
+
+.userBar{
+	width: 30%;
+	margin: 0 auto;
+	display: inline-block;
+}
+
+#story{
+	font-size: 25px;
+}
+
+#emoji{
+	font-size: 40px;
+}
+
+#counter{
+  	letter-spacing: 5px;
+}
+
+#answer{
+	letter-spacing: 5px;
+}
+
+#choices{
+  background-color:orange;
+  width: 75%;
+  margin: 0 auto;
+}
+
+#input{
+	text-align: center;
+}
+
+#extra{
+	color: grey;
+}
+
+img {
+	width: 800px;
+	height: 500px;
+}
+
+*{
+  font-family: Helvetica, Arial, Verdana, sans-serif;
+  letter-spacing: -1px;
+  padding: 5px;
+}
+
+p{
+	font-size: 20px;
+}
+
+body{
+  background: hsla(80,29%,89%,1);
+  color: #222;
+  width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}

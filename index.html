@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div>
+        <div>
+            <h1>Stealth Mission</h1>
+            <img src = "https://i.pinimg.com/originals/86/d3/91/86d3914a4eef001b1a42ee4a89d5e560.jpg">
+            <p><span id="emoji">🕵️</span> Input commands in the text box below</p>
+            <input class="starter" id="input" placeholder="type here"/>
+        </div>
+        <div class ="userBar">
+            <h2>Life Bar</h2>
+            <p class = "starter" id = "lifebar"></p>
+        </div>
+        <div class ="userBar">
+            <h2>Items</h2>
+            <p class = "starter" id = "items"></p>
+        </div>
+        <p id = "story"></p>
+        <h2>Choices</h2>
+        <p class="starter" id="choices"></p>
+
+        <p id="extra">To reset game, enter ' r ' in the text box above</p>
+
+        <script>
+            document.querySelector('#input').addEventListener('change', function(event){
+                var currentInput = event.target.value;
+                inputHappened(currentInput);
+            });
+            var display = function( data ){
+                var output = document.querySelector('#choices');
+                output.innerText = data;
+            }
+            var displayStory = function (story) {
+                let displayedStory = document.querySelector('#story');
+                displayedStory.innerText = story;
+            }
+            var display2 = function( data2 ){
+                let lifebar = document.querySelector('#lifebar');
+                lifebar.innerText = data2;
+            }
+            var display3 = function( data3 ){
+                let items = document.querySelector('#items');
+                items.innerText = data3;
+            }
+        </script>
+    </div>
+    <script src="js/script.js"></script>
+    <script src="js/script2.js"></script>
+  </body>
+</html>
