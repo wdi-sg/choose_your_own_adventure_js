@@ -169,9 +169,6 @@ var inputHappened = function(currentInput){
             console.log(currentLocation);
             currentLevel = currentLocation.level;
 
-            // console.log("Currently at: " + currentLocation.location);
-            // console.log("Current Professor: " + currentLocation.professor);
-
             input.value = "";
             lastInput = "Exit Great Hall? (Y/N)";
             input.placeholder = lastInput;
@@ -200,7 +197,7 @@ var inputHappened = function(currentInput){
             if (currentInput.toUpperCase() === "N") {
                 input.value = "";
                 input.placeholder = "Exit? (Y/N)";
-                return `You are looking for Professor ${target}\n You are now in ${currentLocation.location}.`;
+                return `You are looking for Professor ${target}\nYou are now in ${currentLocation.location}.`;
 
             //if player replies YES to exiting current location
             } else if (currentInput.toUpperCase() === "Y") {
@@ -282,7 +279,7 @@ var display = function( data ){
             displayElement.appendChild( img );
 
             var qns = document.createElement("h4");
-            qns.innerHTML = `Hi, ${player}. What House are you in?\n`;
+            qns.innerHTML = `Hi, ${player}. Which House are you in?\n`;
             displayElement.appendChild( qns );
 
             var whichHse = function() {
@@ -304,10 +301,17 @@ var display = function( data ){
 
         var houseMsg = function() {
 
-            // var p = document.createElement("p");
-            // p.setAttribute("id", "nowShowing");
-            // p.innerHTML = `House Trivia: Do you know who is the founder of ${house.name}?`;
-            // document.body.appendChild(p);
+            var reportTo = document.createElement("h4");
+            reportTo.innerHTML = `Please report to Professor ${target} of ${house.name} House.\n`;
+            displayElement.appendChild( reportTo );
+
+            var currentAt = document.createElement("h4");
+            currentAt.innerHTML = `You are now in the ${currentLocation.location}.`;
+            displayElement.appendChild( currentAt );
+
+            var trivia = document.createElement("h3");
+            trivia.innerHTML = `House Trivia: Do you know who is the founder of ${house.name}?`;
+            document.body.appendChild( trivia );
         }
         houseMsg();
         break;
