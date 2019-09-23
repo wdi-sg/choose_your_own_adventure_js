@@ -4,21 +4,17 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <h1>Journey to the secrets of the Guitar</h1>
-  <h3> On this quest to become the most knowledgeable guitar head history, you'll encounter many obstacles. Will you have what it takes to make it to the end?  </h3>
   <body>
     <input class="starter" id="input" placeholder="date"/>
-    <p class="starter" id="output"></p>
+    <h2>output:</h2>
+    <div class="starter" id="output"></div>
+    <div class="welcomeMessage" id="welcome"></div>
     <script>
       document.querySelector('#input').addEventListener('change', function(event){
         var currentInput = event.target.value;
-        var output = inputHappened(currentInput);
-        display( output );
+        var result = inputHappened(currentInput);
+        display( result );
       });
-
-      var display = function( data ){
-        var output = document.querySelector('#output');
-        output.innerText = data;
-      }
     </script>
     <script src="script.js"></script>
   </body>
