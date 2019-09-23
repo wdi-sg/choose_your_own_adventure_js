@@ -255,8 +255,19 @@ var inputHappened = function(currentInput){
 
 }
 
-
-
   // var output = "WOW SOMETHING HAPPENED";
   // input.value = "clear";
   // return output;
+
+
+//part 2 display
+
+var display = function( data ){
+  var displayElement = document.querySelector('#output');
+
+  // get rid of the entire contents
+  displayElement.innerHTML = "";
+
+  // put the data into the div
+  output.innerText = data;
+};
