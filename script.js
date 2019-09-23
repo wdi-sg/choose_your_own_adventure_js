@@ -1,12 +1,14 @@
 console.log("hello script js");
 
+
 //Guitar Hero
 
 //global variables
 var stage = 0;
-var playerName = prompt ("Welcome to Guitar Hero." + " Enter your name in the box.");
+var name = prompt ("Welcome to Guitar Hero." + " Enter your name in the box.");
 var date = prompt ("We're going to travel back in time to learn the ways of Guitar gods." + " Enter in one of two years, 1969 or 1979, and press enter again");
 
+//guitar players you'll meet
 var Jimi = {
 Age: 27,
 Info: "Hendrix's performance at Woodstock '69 is still considered to be one of the most coveted in rock history"
@@ -27,6 +29,8 @@ Age: 75,
 Info: "In 1979, Jimmy Page, along with Led Zeppelin, performed made a successful concert return to Knebworth, England."
 }
 
+//counter values
+
 function nextStage () {
     stage ++;
 }
@@ -39,19 +43,31 @@ function start() {
     stage = 1;
 }
 
+var display = function( data ){
+    console.log("we've arrived");
+  var displayElement = document.querySelector('#output');
+  // get rid of the entire contents
+  displayElement.innerHTML = "Choose between 1969 and 1979 to get started.";
 
-function startJourney () {
-    if (stage === 0) {
-        var output = name + "," + " You've travelled back to " + date + " to meet either of two guitar gods."
-        nextStage ();
-        display(output);
-        console.log (stage);
-    }
-}
+  // put the data into the div
+  output.innerText = "Null";
+};
 
-startJourney();
+// function startJourney () {
+//     console.log("startJourney");
+//     if (stage === 0) {
+//         var output = name + "," + " You've travelled back to " + date + " to meet either of two guitar gods."
+//         nextStage ();
+//         return display;
+//         console.log (stage);
+//     }
+// }
 
-alert ("enter your chosen date again to start quest");
+// startJourney();
+
+
+
+//beginning of game
 
 var inputHappened = function(currentInput){
   console.log( currentInput );
