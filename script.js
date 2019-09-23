@@ -99,7 +99,7 @@ if(step.length === 4){
     //changing all inputs into lower case
     input = step[3].toLowerCase();
     if(input === "chiong ah"){
-        result = name + " the " + characterChosen +"\nHP: " + characterHP + "\nPower: " + characterPower +"\nSpeed: " + characterSpeed + "\n\nThe stats display above will be available from here on, they will help you keep track of your character status. \nYour HP stat is especially important as if it reaches 0, you will have lost this game and you have to start over from the beginning. Additionally, things get tricky from now onwards, paths diverge and paths converge, you never know where you will end up next or what you will face. \n\nNow let us begin!!! The " + pathTaken + " waits for no one! \n\nPlease type 'Proceed' to, you know, proceed. "
+        result = name + " the " + characterChosen +"\nHP: " + characterHP + "\nPower: " + characterPower +"\nSpeed: " + characterSpeed + "\n\nThe stats display above will be available from here on, they will help you keep track of your character status. \nYour HP stat is especially important as if it reaches 0, it is game over and you have to start over from the beginning. Additionally, things get tricky from now onwards, paths diverge and paths converge, you never know where you will end up next or what you will face. \n\nNow let us begin!!! The " + pathTaken + " waits for no one! \n\nPlease type 'Proceed' to, you know, proceed. "
     } else {
         step.pop();
         result = "Yooooooo c'mon man you know what you need to do. \n\nType 'CHIONG AH' to continue";;

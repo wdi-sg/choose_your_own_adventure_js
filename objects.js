@@ -68,14 +68,14 @@ var path = {
                             ["Element Path", "Human Path", "Human Path"],
                             ["Human Path", "Beast Path", "Beast Path"]],
             "Water Path": [["Element Path", "Human Path", "Element Path"],
-                            ["Element Path", "Element Path", "Human Path"],
+                            ["Human Path", "Element Path", "Human Path"],
                             ["Human Path", "Beast Path", "Beast Path"]],
-            "Earth Path": [["Element Path", "Human Path", "Element Path"],
-                            ["Element Path", "Element Path", "Human Path"],
-                            ["Human Path", "Beast Path", "Beast Path"]],
-            "Wind Path": [["Element Path", "Element Path", "Element Path"],
-                            ["Element Path", "Human Path", "Human Path"],
-                            ["Human Path", "Beast Path", "Beast Path"]],
+            "Earth Path": [["Element Path", "Beast Path", "Element Path"],
+                            ["Beast Path", "Element Path", "Human Path"],
+                            ["Human Path", "God Path", "Beast Path"]],
+            "Wind Path": [["Element Path", "Element Path", "Beast Path"],
+                            ["Element Path", "God Path", "Element Path"],
+                            ["God Path", "Beast Path", "Beast Path"]],
         }
 
 //this is where user encounters the demons according to the path traveled.
@@ -166,8 +166,8 @@ if(input === "fight"){
         };
 
         if (characterHP === 0){
-            setTimeout(location.reload.bind(location), 5000);
-            result = name + " the " + characterChosen +"\nHP: " + characterHP + "\nPower: " + characterPower +"\nSpeed: " + characterSpeed + "\n\nAs your speed is " + characterSpeed + " and the " + enemyName + " speed is " + enemySpeed + ", the one who strikes first is " + whoMovesFirst + "!!\n\nThe enemy's health is now " + enemyHP + " while yours is " + characterHP + "!! \n\nIt looks like " + name + " the great " + characterChosen + " has been defeated. \n\nDo not falter " + name + "! The Demon Lord needs to be slain and only you have the power to accomplish this task! \n\nThe page will reload in 5 seconds";
+            setTimeout(location.reload.bind(location), 10000);
+            result = name + " the " + characterChosen +"\nHP: " + characterHP + "\nPower: " + characterPower +"\nSpeed: " + characterSpeed + "\n\nAs your speed is " + characterSpeed + " and the " + enemyName + " speed is " + enemySpeed + ", the one who strikes first is " + whoMovesFirst + "!!\n\nThe enemy's health is now " + enemyHP + " while yours is " + characterHP + "!! \n\nIt looks like " + name + " the great " + characterChosen + " has been defeated. \n\nDo not falter " + name + "! The Demon Lord needs to be slain and only you have the power to accomplish this task! \n\nThe page will reload in 10 seconds";
         };
 
 
