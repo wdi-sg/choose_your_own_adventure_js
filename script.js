@@ -61,6 +61,12 @@ var target;
 var currentLocation;
 var currentLevel;
 
+var levelName = ["Dungeon", "Ground", "Tower"]
+
+var getLevel = function (level) {
+    return levelName[level];
+}
+
 const hogwartsCastle = [
     [
         { location: "Hufflepuff House",
@@ -163,6 +169,8 @@ var inputHappened = function(currentInput){
             //set default location to Great Hall
             currentLocation = hogwartsCastle[1][0];
             console.log(currentLocation);
+            currentLevel = currentLocation.level;
+
             // console.log("Currently at: " + currentLocation.location);
             // console.log("Current Professor: " + currentLocation.professor);
 
@@ -187,6 +195,9 @@ var inputHappened = function(currentInput){
         //check if target is found
         if  ( target !== currentLocation.professor ) {
 
+        //if player did not choose to change level
+        if (Number(currentInput) !== 0) {
+
             //if player replies NO to exiting current location
             if (currentInput.toUpperCase() === "N") {
                 input.value = "";
@@ -201,16 +212,43 @@ var inputHappened = function(currentInput){
                 input.placeholder = lastInput;
 
                 //inform current level available locations
-                lastOutput = `You are now at level ${currentLocation.level}.\n You can choose to go to:\n1) ${hogwartsCastle[currentLocation.level][0].location}\n2) ${hogwartsCastle[currentLocation.level][1].location}\n3) ${hogwartsCastle[currentLocation.level][2].location}.`;
+                lastOutput = `You are now at level ${currentLevel}.\n You can choose to go to:\n1) Go to another level.\n2) ${hogwartsCastle[currentLevel][0].location}\n3) ${hogwartsCastle[currentLevel][1].location}\n4) ${hogwartsCastle[currentLevel][2].location}.`;
                 return lastOutput;
 
             }
-
         }
+        }
+/*
+        //if player choose to change level
+        } else if (Number(currentInput) === 0) {
+
+            //inform currentLevel
+            //ask which level
+
+        //if player choose a destination
+        } else if (Number(currentInput) > 0 && Number(currentInput) < 5){
+
+            //update currentLocation
+            //check if target = currentLcoation.professor
+                //if target is found
+                } else if ( target === currentLocation.professor ) {
+                    input.value = "";
+                    input.placeholder = "Mission Accomplished!";
+                    return `You have successfully reported to Professor ${target}.`;
+                //else
+                // inform currentLocation
+                // ask if to Exit(Y/N)
+
+        //if invalid entry
+        } else
+
+
+
+*/
         break;
 
-    default:
-        return "Something went wrong!";
+    // default:
+    //     return "Something went wrong!";
 
 
   }
