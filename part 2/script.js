@@ -267,7 +267,7 @@ var display = function( data ){
   displayElement.innerHTML = "";
 
   // put the data into the div
-  output.innerText = data;
+  // output.innerText = data;
 
   switch (gameProgress[gameCounter]) {
 
@@ -278,9 +278,21 @@ var display = function( data ){
 
         var welcomeMsg = function() {
             var img = document.createElement("img");
-            //img.setAttribute("id", "nowShowing");
             img.src = "../image/hogwartscrest.jpeg";
             displayElement.appendChild( img );
+
+            var qns = document.createElement("h4");
+            qns.innerHTML = `Hi, ${player}. What House are you in?\n`;
+            displayElement.appendChild( qns );
+
+            var whichHse = function() {
+                for (var i = 0; i < housesOfHogwarts.length; i++) {
+                    var listHse = document.createElement("h5");
+                    listHse.innerHTML = `${i+1}. ${housesOfHogwarts[i].name}\n`;
+                    displayElement.appendChild( listHse );
+                }
+            }
+            whichHse();
         }
         welcomeMsg();
         break;
@@ -292,13 +304,10 @@ var display = function( data ){
 
         var houseMsg = function() {
 
-//doesn't work, because img is not within a div
-//            document.getElementById("nowShowing").innerHTML = "";
-
-            var p = document.createElement("p");
-            p.setAttribute("id", "nowShowing");
-            p.innerHTML = `Do you know who is the founder of ${house.name}?`;
-            document.body.appendChild(p);
+            // var p = document.createElement("p");
+            // p.setAttribute("id", "nowShowing");
+            // p.innerHTML = `House Trivia: Do you know who is the founder of ${house.name}?`;
+            // document.body.appendChild(p);
         }
         houseMsg();
         break;
