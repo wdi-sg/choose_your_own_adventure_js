@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tiffany Aching's River Adventure</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Mansalva|Raleway&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class = title>
+    <h1>Tiffany Aching's River Adventure</h1>
+    <p>This adventure is based on the opening chapter of Terry Pratchett's book, the Wee Free Men.
+  </div>
+
+    <a href="www.google.com" id="x"><img id="y" src="wee-free-men.jpg" /></a>
+
+    <p class="starter" id="output"></p>
+
+    <input class="starter" id="input" placeholder="input"/>
+
+    <button id = retry>Play Again</button>
+
+    <script>
+
+// runs function if enter is pressed
+      document.querySelector('#input').addEventListener('keypress', function(event) {
+        if (event.keyCode === 13) {
+        var currentInput = event.target.value;
+        var output = inputHappened(currentInput);
+        display(output);
+      }});
+
+// defining function to display output
+      var display = function( data ){
+        var output = document.querySelector('#output');
+        output.innerText = data;
+      }
+// setting up PLAY AGAIN button
+        document.getElementById('retry').addEventListener('click', function() {
+            location.reload();
+            })
+
+
+
+    </script>
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>
