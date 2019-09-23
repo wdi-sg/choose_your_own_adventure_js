@@ -1,19 +1,10 @@
 console.log("hello script js");
 
 
-
-/*var cabin = function(inputHappened){
-   if (inputHappened === "cabinet"){
-        var msg = "You open the cabinet and can make out a row of shoes inside but it's too dark to really see anything. You can hear the murderer's footsteps quickly gaining momentum. CONTINUE SEARCHING CABINET / HIDE INSIDE CABINET / TRY THE WINDOW.";
-       return output = msg;
-     }
-};*/
-var userMainLocation;
-/*var mainPage = {
+var mainPage = {
     location: ["CABIN", "RIVER"],
-    locationMsg: []
-}*/
-
+    locationMsg: ["The door is locked. You see a storage cabinet by the door. Maybe the key is hidden inside? The window is slightly open but might not be wide enough for you to squeeze in. CABINET / WINDOW", "The path is slippery and covered with thorny bushes. You cut yourself trying to get through it. Eventually you get to the river and can almost see the other side. To your left, you see a canoe tied to a tree. CROSS RIVER / GET CANOE / GO BACK TO CABIN"],
+};
 
 var atRiver = {
     crossRiver: "You jump into the river and immediately get pulled downstream by the current. Your head bangs against the sharp rocks and you lose consciousness. You drown. END",
@@ -26,20 +17,44 @@ var atCabin = {
     window: "You push the window up but it doesn't budge. The murderer's footsteps sound closer now. With one final push, you manage to open the window wide enough for you to squeeze into the cabin. You shut the window close. Ask user to press 'ENTER' to ENTER CABIN"
 };
 
+/*function outsideCabin (cabinet, window) {
+    var cabinetSearch = "You find a wrench which looks heavy enough to break the window. You smash open the window and climb inside the cabin.";
+    var cabinetHide = "You crouch inside and manage to close the door just as the murderer appears in front of the cabin. Silence...then. The cabinet door swings open and the murderer starts stabbing you. There's no escape. You die. END";
+    var tryWindow = "";
+    var window = "You push the window up but it doesn't budge. The murderer's footsteps sound closer now. With one final push, you manage to open the window wide enough for you to squeeze into the cabin. You shut the window close.";
+    if (currentInput === "CABINET") {
+        userLocation = cabinetSearch;
+    }
+return userLocation;
+    /*output = "You open the cabinet and can make out a row of shoes inside but it's too dark to really see anything. You can hear the murderer's footsteps quickly gaining momentum. CONTINUE SEARCHING CABINET / HIDE INSIDE CABINET / TRY THE WINDOW";
+
+};*/
 var inputHappened = function(currentInput){
   console.log( currentInput );
-  var mainLocation = ["CABIN", "RIVER"];
-  var msg;
-  if (currentInput === mainLocation[0]) {
-    msg = "The door is locked. You see a storage cabinet by the door. Maybe the key is hidden inside? The window is slightly open but might not be wide enough for you to squeeze in. CABINET / WINDOW";
-    output = msg;
-    userMainLocation = atCabin;
-  } else if (currentInput === mainLocation[1]) {
-    msg = "The path is slippery and covered with thorny bushes. You cut yourself trying to get through it. Eventually you get to the river and can almost see the other side. To your left, you see a canoe tied to a tree. CROSS RIVER / GET CANOE / GO BACK TO CABIN";
-    output = msg;
-    userMainLocation = atRiver;
-  }
-  return output;
+  if(currentInput === mainPage.location[0]){
+    output = mainPage.locationMsg[0];
+
+  } else if(currentInput === mainPage.location[1]){
+    output = mainPage.locationMsg[1];
+        if(currentInput === "CROSS RIVER"){
+            output = atRiver[0];
+        } else if(currentInput === "GET CANOE") {
+            output = atRiver[1];
+        } else if(currentInput === "GO BACK TO CABIN"){
+            output = mainPage.location[0];
+        }
+    }
+    /*switch (atRiver.currentInput) {
+        case "CROSS RIVER":
+        output = "You jump into the river and immediately get pulled downstream by the current. Your head bangs against the sharp rocks and you lose consciousness. You drown. END";
+        break;
+        case "GET CANOE":
+        output = "You untie the canoe and drag it to the edge of the river. The killer appears behind you. Quickly, you jump into the canoe and the current rush to bring you downstream. You manage to escape the killer. SAFE.";
+        break;
+        case "GO BACK TO CABIN":
+        output = mainPage.locationMsg[0];
+        };*/
+    return output;
 };
 
 
