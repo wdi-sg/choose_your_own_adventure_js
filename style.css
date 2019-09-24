@@ -9,3 +9,17 @@
 #output{
   background-color:pink;
 }
+
+.special {
+  font-size: 4rem;
+  color: yellow;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+img {
+  height: 50rem;
+  width: 100%;
+}
+
+
