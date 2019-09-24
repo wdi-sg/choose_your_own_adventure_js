@@ -1,0 +1,72 @@
+body{
+	background-color: rgb(150,150,150);
+	font-family: 'Barlow Condensed', sans-serif;
+}
+
+pre {
+	line-height: 0.75;
+	margin: 10px 10px;
+	width: 100%;
+	font-size: 2vw;
+}
+
+.UI{
+  font-size: 2vw;
+  padding:10px;
+  margin:40px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#input{
+	width: 20%;
+}
+
+.topUI{
+	font-size: 2vw;
+  padding:10px;
+  margin:40px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.stats{
+	background-color: #9F9F9F;
+	color: white;
+	width: 60%;
+	margin: auto;
+	padding: 20px;
+}
+
+.statsText{
+	margin: 0 1.5vw;
+	display: inline-block;
+}
+
+#map{
+	border: 1px solid black;
+	width: 60%;
+	margin: 10px auto;
+}
+
+#output{
+	padding: 10px;
+	background-color: black;
+	color: white;
+	margin: 0 auto;
+	width: 90%;
+	font-size: 2vw;
+	font-weight: bold;
+}
+
+#outputText{
+	color: white;
+}
+
+#id, #gameover{
+	background-color: white;
+}
+
+ul{
+	font-size: 1.5vw;
+}

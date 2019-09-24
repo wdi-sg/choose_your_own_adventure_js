@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title></title>
+</head>
+
+<body id="body">
+
+    <header>
+        <button onclick="restart()">Restart</button>
+    </header>
+
+    <body>
+        <main id="main">
+            <div class="topUI">
+                <input class="UI" id="input" placeholder="Choose your action"/>
+                <div class="stats">
+                    <p class="statsText" id="HP"></p>
+                    <p class="statsText" id="Battery"></p>
+                    <p class="statsText" id="Radiation"></p>
+                    <p class="statsText" id="Oxygen"></p>
+                    <p class="statsText" id="Bullet"></p>
+                </div>
+            </div>
+
+            <div class = "UI">
+                <div id="output">
+                    <p id="outputText"></p>
+                    <p id="flavourText">Hello</p>
+                </div>
+                <div class="UI" id="map" style="visibility: hidden;">
+                    <pre>
+                     **
+                     **
+               ~~~~~~**
+               ~     **
+               ~     ****
+               ~     ****
+              ***
+      ***~~~~~***~~~
+     ****     ***  ~
+     ****      ~   ~
+               ~   ~    ***     ***
+               ~   ~~~~~***~~~~~***
+               ~        ***     ***
+               ~         ~
+               ~         ~
+               ~         ~
+               ~         ~
+              **         >
+    &&~~~~~~~~**        &&&
+    &&                  &&&
+    <                    =
+    =======              =
+          =              =
+          =          &&&&&&&&&
+       &&&=&    =====&&&&&&&&&=====
+       &&&>&    =    &&&&&&&&&    =
+       &&&&&    =                 =
+       &&&&&    =                 =
+         =      =                 =
+         =      =                 =
+         =      =                 =
+         =      =                 =
+         =      =      &&&&&      =
+         =  &&&&&&     &&&&&     &&&
+         ===&&&&&&=====&&&&&=====&&&===&
+            &&&&&&     &&&&&     &&&
+                        ^^^
+                        ^^^</pre>
+                      <p>
+                          <ul>
+                              Legend
+                              <li>^: Entrance</li>
+                              <li>&: Room</li>
+                              <li>=: Traversable Walkway</li>
+                              <li>>: Slope to basement</li>
+                              <li>~: Traversable water tunnel</li>
+                              <li>*: Flooded chamber</li>
+                          </ul>
+                      </p>
+                </div>
+            </div>
+        </main>
+        <div class="UI" id="gameover" style="visibility: hidden;">
+            <p id="gameoverText">Game Over</p>
+        </div>
+    </body>
+
+
+
+
+                    <!-- Assets Only -->
+    <audio hidden autoplay loop="infinite" muted id="bgm">
+        <source src="assets/GCsound.mp3" type="audio/mpeg">
+    </audio>
+    <audio hidden autoplay loop="infinite" muted id="gasmask">
+        <source src="assets/GasMask.mp3" type="audio/mpeg">
+    </audio>
+    <audio hidden autoplay loop="infinite" muted id="underwater">
+        <source src="assets/UnderWater.mp3" type="audio/mpeg">
+    </audio>
+    <audio hidden autoplay loop="infinite" muted id="sad">
+        <source src="assets/BrokenHeart.mp3" type="audio/mpeg">
+    </audio>
+    <audio hidden autoplay loop="infinite" muted id="relax">
+        <source src="assets/Relax.mp3" type="audio/mpeg">
+    </audio>
+    <script src="map.js"></script>
+</body>
+</html>
