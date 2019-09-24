@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <title>Adventure Fable</title>
+  </head>
+  <body>
+    <div class="inputBox">
+    <input class="starter" id="input" placeholder="input"/>
+    </div>
+
+<h2>Output:</h2>
+    <div class="outputBox">
+
+        <p class="ender" id="output"></p>
+
+        <div id="gifs">
+
+        </div>
+    </div>
+
+    <script>
+      document.querySelector('#input').addEventListener('change', function(event){
+        var currentInput = event.target.value;
+        var result = inputHappened(currentInput);
+        display(result);
+        event.target.value = "";
+      });
+
+      var display = function( data ){
+        var output = document.querySelector('#output');
+        output.innerText = data;
+      }
+    </script>
+    <script src="objects.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
