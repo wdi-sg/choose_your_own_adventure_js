@@ -1,0 +1,25 @@
+.starter{
+  font-size:30px;
+  padding:10px;
+  display:block;
+  margin:40px;
+  border:3px solid blue;
+}
+
+#output{
+  background-color:pink;
+}
+
+.special {
+  font-size: 4rem;
+  color: yellow;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+img {
+  height: 50rem;
+  width: 100%;
+}
+
+
