@@ -27,6 +27,18 @@ var inputHappened = function(currentInput){
         stepCounter = stepCounter + 1;
             console.log( "Answer " + stepCounter + ": " + currentInput );
         return messageZero;
+
+        // var image = document.getElementById("output");
+        // var introImage = document.createElement("img");
+        // img.starter.add("picture");
+        // img src = "images/22635-naruto-naruto-logo.png";
+
+
+        // a.href = "http://google.com";
+        // a.textContent = "google.com"
+
+        // document.body.appendChild(a)
+        // document.output.appendChild(a)
         }
 
     else if (stepCounter === 1){
@@ -36,6 +48,11 @@ var inputHappened = function(currentInput){
             stepCounter = stepCounter + 1;
             console.log( "Answer " + stepCounter + ": " + currentInput );
             return messageOne;
+
+            // var a = document.createElement("a");
+            // a.href = "http://google.com/";
+            // a.textContent = "google.com";
+            // document.body.appendChild(a)
         }
         else {
             console.log( "Died at stage: " + stepCounter );
@@ -99,75 +116,3 @@ var inputHappened = function(currentInput){
         }
     }
 };
-
-
-//         currentInput = null
-
-//             var inputHappened = function(currentInput){
-
-//         messageTwo = "Nice!";
-//         messageDie = "You Died!";
-//         counter = counter + 1;
-
-
-//     if (playerReady = "Yes") {
-//         return messageTwo
-//     }
-//     else {
-//         return messageDie
-//     }
-
-//         console.log( "Answer " + counter + ": " + currentInput );
-
-//     currentInput = null
-// }
-
-// };
-
-// var inputHappened = function(currentInput){
-
-//     messageTwo = "Nice!";
-//     messageDie = "You Died!"
-//     counter = counter + 1
-
-//     playerReady = currentInput
-//     if (playerReady = "Yes") {
-//         return messageTwo
-//     }
-//     else {
-//         return messageDie
-//     }
-
-//         console.log( "Answer " + counter + ": " + currentInput );
-
-//     currentInput = null
-
-// }
-
-
-
-
-//   var inputNumber = parseInt(currentInput);
-
-//     if( isNaN(inputNumber) ){
-//       var output = "Sorry thats not a number";
-//       return output;
-//     }
-
-//     if (inputNumber > 25){
-//         var message = "Sorry no such alphabet";
-//         return message;
-//     }
-
-//     if (inputHappened){
-//         var alphabetCalled = alphabet[inputNumber]
-//     }
-//     result = alphabetCalled
-//     return result
-
-//     if (inputHappened){
-//         hello.push(currentInput);
-//         console.log (hello);
-//     }
-
-// };
