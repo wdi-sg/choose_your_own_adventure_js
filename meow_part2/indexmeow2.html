@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="stylemeow2.css">
+   <link href="https://fonts.googleapis.com/css?family=Mansalva&display=swap" rel="stylesheet">
+  </head>
+  <body>
+
+
+    <p id = "question"> A day in the life of a cat. <br>
+
+    Hello! You are a cat. </p>
+    <input class="starter" id="input" placeholder="input"/>
+    <p class="starter" id="output"></p>
+    <marquee behavior = "alternate" scrollamount = "10">
+    <div id = pics>
+        <img id = "img" src = "https://pusheen.com/wp-content/themes/pusheen-custom/img/header-pusheen.gif">
+    </div>
+  </marquee>
+    <script>
+      document.querySelector('#input').addEventListener('keypress', function(event){ if (event.key === "Enter"){
+        var currentInput = event.target.value;
+        var output = inputHappened(currentInput);
+        display( output );
+        document.getElementById("input").value = "";
+      }});
+
+      var display = function( data ){
+        var output = document.querySelector('#output');
+        output.innerHTML = data;
+      }
+    </script>
+    <script src="scriptmeow2.js"></script>
+  </body>
+</html>
