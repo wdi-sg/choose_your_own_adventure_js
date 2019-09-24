@@ -1,0 +1,21 @@
+#question{
+	font-size: 30px;
+	padding: 10px;
+	text-align: center;
+}
+
+.starter{
+  font-size:20px;
+  padding:10px;
+  display:block;
+  margin:40px;
+  border:3px solid blue;
+  width: 95%;
+}
+
+
+
+#output{
+  background-color:pink;
+  white-space: pre;
+}
