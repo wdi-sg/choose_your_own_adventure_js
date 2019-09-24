@@ -1,11 +1,83 @@
-.starter{
-  font-size:30px;
-  padding:10px;
-  display:block;
-  margin:40px;
-  border:3px solid blue;
+body{
+	background: #EDEFEC;
+	font-family: 'Montserrat', sans-serif;
 }
 
-#output{
-  background-color:pink;
+.starter{
+	width: 30%;
+  font-size:35px;
+  padding:5px 10px;
+  display:block;
+  margin:0 auto;
+  border:3px solid #565A5D;
+  background: #EDEFEC;
+  color: #565A5D;
+}
+
+.inputBox{
+	margin-top: 10%;
+}
+
+.ender{
+	width: 40%;
+  font-size:25px;
+  padding:10px;
+  border:3px solid #565A5D;
+  background: #EDEFEC;
+  margin: 2.5%;
+  text-align: left;
+  flex: 1;
+}
+
+.outputBox{
+	width: 100%;
+	text-align: center;
+	display: flex;
+	flex-direction: row;
+}
+
+h2{
+	margin: 5% 5% 2% 5%;
+	display: block;
+}
+
+#gifs{
+	margin: 2.5%;
+	text-align: center;
+	width: 40%;
+	flex: 1;
+}
+
+img{
+	width: 100%;
+}
+
+
+@media only screen and (max-width: 900px) {
+
+		.starter{
+			width: 60%;
+		  font-size:30px;
+		  padding:5px 10px;
+		  display:block;
+		  border:3px solid #565A5D;
+		  background: #EDEFEC;
+		}
+
+
+			#gifs{
+			display: block;
+			text-align: center;
+			width: 80%;
+		}
+
+		.ender{
+			width: 80%;
+		  font-size:15px;
+		  display: block;
+		  border:3px solid #565A5D;
+		  text-align: left;
+		}
+
+
 }
