@@ -3,10 +3,13 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <p>What year you like to go?</p>
-    <input class="starter" id="input" placeholder="Type your answer"/>
-    <h2>output:</h2>
-    <p class="starter" id="output"></p>
+   <!--  <h1 id="title"></h1> -->
+    <!-- <main><p>What year you like to go?</p> -->
+        <!-- <h1 id="dynamic"></h1> -->
+        <input class="hide" id="input" placeholder="Type your answer"/>
+        <!-- <h2>output:</h2> -->
+        <h2 class="hide" id="output"> </h2>
+            <!-- </main> -->
     <script>
       document.querySelector('#input').addEventListener('change', function(event){
         var currentInput = event.target.value;
