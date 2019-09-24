@@ -69,18 +69,14 @@ function appearPara(){
     landingPara.appendChild(t);
     body.appendChild(landingPara);
 }
-
-
-
-
-
-
-
-
-/*var riverImg = document.createElement("img");
+/*document.getElementById('#input').addEventListener('change', appearRiver);
+function appearRiver(currentInput){
+var riverImg = document.createElement("img");
 riverImg = new Image (500,400);
 riverImg.src = "https://www.bestfunforall.com/better/imgs/Trees%20Night%20River%20HD%20wallpaper%20%202.jpg";
-document.body.appendChild(riverImg);*/
+document.body.appendChild(riverImg);
+}*/
+
 
 //When page first loads, display "You're in a dark forest. A mass murder is chasing you. Up ahead, you see a small cabin which looks empty and a narrow path that leads to the river. Where do you want to go?" CABIN / RIVER
 //IF USER CHOOSE CABIN
