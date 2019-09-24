@@ -1,6 +1,6 @@
 console.log("hello script js");
 
-var userAnswer;
+var userAnswer = "";
 var mainPage = {
     location: ["CABIN", "RIVER"],
     locationMsg: ["The cabin door is locked. You see a storage cabinet by the door. Maybe the key is hidden inside? The window is slightly open but might not be wide enough for you to squeeze in. CABINET / WINDOW", "The path is slippery and covered with thorny bushes. You cut yourself trying to get through it. Eventually you get to the river and can almost see the other side. To your left, you see a canoe tied to a tree. CROSS RIVER / GET CANOE / GO BACK TO CABIN"],
@@ -59,16 +59,19 @@ if(currentInput === "CABINET"){
 };*/
     return output;
 };
-
 //On main page, when user click on text box, load this in output box
-document.getElementById('#input').addEventListener('click',appearPara);
 function appearPara(){
     var body = document.querySelector('#output');
     var landingPara = document.createElement('P');
     var t = document.createTextNode("You're in a dark forest. A mass murderer is chasing you. Up ahead, you see a cabin which looks empty and a narrow path that leads to the river. Where do you want to go? CABIN / RIVER");
     landingPara.appendChild(t);
     body.appendChild(landingPara);
-}
+};
+
+var input = document.getElementById('input');
+input.addEventListener('click',appearPara);
+
+/*DOM Image
 /*document.getElementById('#input').addEventListener('change', appearRiver);
 function appearRiver(currentInput){
 var riverImg = document.createElement("img");
