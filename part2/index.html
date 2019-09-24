@@ -4,13 +4,15 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <input class="starter" id="input" placeholder="input"/>
-    <p class="starter" id="output"></p>
+    <input class="starter" id="input" placeholder="login: .............."/>
+    <!-- <p class="starter" id="output"></p> -->
+    <div id="display"></div>
     <script>
       document.querySelector('#input').addEventListener('change', function(event){
         var currentInput = event.target.value;
-        var output = inputHappened(currentInput);
-        display( output );
+        // var output = inputHappened(currentInput);
+        inputHappened(currentInput);
+        // display( output );
       });
 
       var display = function( data ){

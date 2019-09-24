@@ -1,3 +1,31 @@
+/*           Assignment Part 2 - DOM Manipulation            */
+var addToDOM = function(output, id) {
+    var content = document.createElement("p");
+    content.innerText = output;
+    var display = document.querySelector(id);
+
+    if (display.lastChild) {
+        display.removeChild(display.lastChild);
+    }
+
+    display.appendChild(content);
+};
+
+var blink1 = function() {
+    var obj = document.querySelector("#input");
+    obj.placeholder = "login: ..............";
+};
+
+var blink2 = function() {
+    var obj = document.querySelector("#input");
+    obj.placeholder = "";
+};
+
+var blinkInterval1 = setInterval(blink1, 1000);
+var blinkInterval2 = setInterval(blink2, 2000);
+
+
+
 var updatePlayerName = function(messages, playerName) {
     for (var i = 0; i < messages.length; i++) {
         if (messages[i] === "playerName") {
@@ -38,6 +66,7 @@ var inputHappened = function(input) {
         nextStage = stages[next];
         game.stage = next;
         output = getAllMsg(nextStage.messages, player.name);
+        addToDOM(output, "#display");
     } else {
         currStage = stages[game.stage];
         currStage.response = input.toLowerCase();
@@ -46,10 +75,13 @@ var inputHappened = function(input) {
             nextStage = stages[next];
             game.stage = next;
             output = getAllMsg(nextStage.messages, player.name);
+            addToDOM(output, "#display");
         } else {
             output = game.prevOutput;
+            addToDOM(output, "#display");
         }
     }
     game.prevOutput = output;
-    return output;
+    return;
+    // return output;
 };
