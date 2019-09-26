@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Teko&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Survivor: Outwit, Outlast, Outplay</title>
+  </head>
+  <body>
+    <div id = "wrapper">
+        <img src = "pics/logo.jpg"/>
+        <input class="starter" id="input" placeholder="Type your choice here"/>
+        <h2>Welcome to Survivor SEI-19!</h2>
+        <p class="starter" id="output"></p>
+        <script>
+         document.querySelector('#input').addEventListener('change', function(event){
+         var currentInput = event.target.value;
+            inputHappened(currentInput);
+         });
+
+         var display = function( data ){
+         var output = document.querySelector('#output');
+            output.innerText = data;
+         }
+
+        var clearInput = function(msg = "") {
+            var input = document.getElementById("input");
+            input.value = '';
+            input.placeholder = msg;
+        };
+        </script>
+        <script src="script.js"></script>
+    </div>
+  </body>
+</html>

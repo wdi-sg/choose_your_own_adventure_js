@@ -1,0 +1,37 @@
+body{
+  background-image: url("pics/tribal.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.starter{
+  font-size:30px;
+  padding:10px;
+  display:block;
+  border:5px solid #689dec;
+  margin: 40px auto;
+}
+
+#input{
+	font-family: 'Teko', sans-serif;
+	font-size: 25px;
+	text-align: center;
+}
+
+#output{
+  background-color:rgba(192, 226, 210, 0.6);
+  margin: 0 auto;
+  padding: 25px;
+  font-family: 'Teko', sans-serif;
+	font-size: 30px;
+}
+
+#wrapper{
+	text-align:center;
+}
+
+h2{
+	color: white;
+	font-family: 'Teko', sans-serif;
+	font-size: 35px;
+}
