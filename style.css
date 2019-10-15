@@ -1,0 +1,47 @@
+body {
+	background-color: black;
+	color: rgba(255,204,47,1);
+}
+
+header {
+	text-align: center;
+}
+
+
+.starter{
+  font-size:28px;
+  padding:10px;
+  display:block;
+  margin:40px auto 0;
+  border:3px solid blue;
+  text-align: center;
+  font-family: 'Signika', sans-serif;
+}
+
+#instructions {
+	font-size: 14px;
+	padding: 5px;
+	margin:0 auto;
+	text-align: center;
+	font-family: 'Signika', sans-serif;
+}
+
+#input{
+	background-color: rgba(255,204,47,0.8);
+  border: 5px solid rgba(30,50,102,0.9);
+  color: rgba(30,50,102,0.9);
+}
+
+
+#output{
+  background-color: rgba(255,204,47,1);
+  border: 5px solid rgba(30,50,102,0.9);
+  text-align: center;
+  color: rgba(30,50,102,0.9);
+}
+
+#counter {
+	width: 35%;
+	float: left;
+	font-size: 16px;
+}
