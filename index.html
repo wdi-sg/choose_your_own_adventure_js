@@ -1,0 +1,28 @@
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class = 'header'>
+        <img src="images/header-2.jpeg" id="header-frame" height="200px">
+        <br>
+        <img src="images/walking.png" height="80px">
+    </div>
+    <div class="divider">-----------</div>
+    <div class="output" id="output-container">
+    </div>
+    <div class="divider">-----------</div>
+    <div class="input">
+        <h2>Type your input below</h2>
+        <input type="text" id="user-input" onkeydown = "if (event.keyCode == 13){enter.click()}">
+        <br>
+        <input type="button" id ="enter-button"  value ="GO!">
+        <input type="button" id ="restart"  value ="RESTART">
+    <div>
+    <script src="stages.js"></script>
+    <script src="dialog.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
