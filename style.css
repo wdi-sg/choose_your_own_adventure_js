@@ -1,0 +1,23 @@
+.starter{
+    font-size:30px;
+    padding:10px;
+    display:block;
+    border:3px solid blue;
+    margin: auto auto 40px auto;
+    width: 20vw;
+}
+
+#output{
+    background-color:pink;
+    margin: auto;
+    border: 3px solid green;
+    padding: 10px;
+    width: 90vw;
+}
+
+body {
+    margin: 40px auto;
+    width: 95vw;
+    border: 3px solid green;
+    padding: 10px;
+}
