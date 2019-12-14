@@ -1,7 +1,6 @@
 console.log("hello script js");
 
 var choicePrompt = "Please choose from the following:";
-var
 
 ///////////////////////////////////////////////////////
 // Keep track of what people choose during the game. //
@@ -9,8 +8,6 @@ var
 var cerealChosen;
 
 var playerName = "playerName";
-
-var activeGameSegment = gameStory[1]
 
 var listChoices = function (storySegmentObject) {
     var choices = storySegmentObject.choices;
@@ -39,7 +36,7 @@ var gameAction = function(currentInput) {
 var gameStory = [
                     {
     id          :   0,
-    description :   `Please input your name to start this exciting game!`;
+    description :   `Please input your name to start this exciting game!`,
     choices     :   []
                     },
                     {
@@ -77,6 +74,8 @@ var gameStory = [
                         }]
                     }
                 ];
+
+var activeGameSegment = gameStory[1]
 
 display(`${activeGameSegment.description} \n ${choicePrompt} \n ${listChoices(activeGameSegment)} `);
 
