@@ -15,68 +15,119 @@ const game = {
   },
   gameOver: function(){
     document.querySelector('#input').value = "Type restart!"
+  },
+  retry: function(){
+    this.choices.counter = 0
+    document.querySelector('#input').value = ""
+    this.choices.firstChoice = ""
+    this.choices.secondChoice = ""
+  },
+  setText: function(text){
+    document.querySelector("#text").innerHTML = text
   }
 }
 
 // Input function
 var inputHappened = function(currentInput){
-  // Full A Tree
+  // reset game
+  if (currentInput.toLowerCase() === "retry"){
+    game.retry()
+    return `New game!`
+  }
   // A 
   if (currentInput.toLowerCase() === game.choices.a && game.choices.counter === 0) {
     game.resetInput()
     game.choices.firstChoice = currentInput.toLowerCase()
     game.choices.increaseCount()
-    return `A`
+    document.querySelector("#text").innerHTML = "A Wild Bulbasaur appears!!!"
+    return `A - Attack!\nB - Pokeball\nC - Run`
   }
+  // B 
+  if (currentInput.toLowerCase() === game.choices.b && game.choices.counter === 0) {
+      game.resetInput()
+      game.choices.firstChoice = currentInput.toLowerCase()
+      game.choices.increaseCount()
+      return `B`
+    }
+  // C 
+  if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 0) {
+    game.resetInput()
+    game.choices.firstChoice = currentInput.toLowerCase()
+    game.choices.increaseCount()
+    return `C`
+  }
+
+  return gameLogic(currentInput)
+};
+
+const gameLogic = function(currentInput){
+  switch(game.choices.firstChoice){
+    case game.choices.a: return aTree(currentInput)
+    case game.choices.b: return bTree(currentInput)
+    case game.choices.c: return cTree(currentInput)
+  }
+}
+
+const aTree = function(currentInput) {
+  // Full A Tree
   // A -> A
   if (currentInput.toLowerCase() === game.choices.a && game.choices.counter === 1 && game.choices.firstChoice === game.choices.a) {
+    game.setText(`Pikachu uses Thunder! 5 Damage! Bulbasaur 2 HP left!\nBulbasaur uses Tackle! 2 Damage! Pikachu has 8 HP left!`)
     game.resetInput()
     game.choices.secondChoice = currentInput.toLowerCase()
     game.choices.increaseCount()
-    return "A - A"
+    return "A - Attack\nB - Pokeball\nC - Run"
   }
   // A -> A -> A
   if (currentInput.toLowerCase() === game.choices.a && game.choices.counter === 2 && game.choices.firstChoice === game.choices.a && game.choices.secondChoice === game.choices.a ) {
+    game.setText(`Pikachu uses Lightning Bolt! Pikachu's attack missed!\nBulbasaur uses Tackle! Critical Hit! 10 Damage! Pikachu fainted!`)
     game.gameOver()
-    return `A - A - A`
+    return `Game over!`
   }
   // A -> A -> B
   if (currentInput.toLowerCase() === game.choices.b && game.choices.counter === 2 && game.choices.firstChoice === game.choices.a && game.choices.secondChoice === game.choices.a) {
-    return `A - A - B`
+    game.setText(`You throw a POKEBALL!. . . You caught a Bulbasaur!!!`)
+    return `To be continued....`
   }
 
   // A -> A -> C
   if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 2 && game.choices.firstChoice === game.choices.a && game.choices.secondChoice === game.choices.a) {
-    return `A - A - C`
+    game.setText(`You are running into the deep forest......a wild MEWTWO APPEARS and uses PSY ATTACK! You lose your mind and slowly fade.....`)
+    return `Game over!`
   }
   // A -> B
   if (currentInput.toLowerCase() === game.choices.b && game.choices.counter === 1 && game.choices.firstChoice === game.choices.a) {
+    game.setText(`You throw a POKEBALL!. . . Bulbasaur escaped! Bulbasaur uses Razor leaf! 6 Damage! Pikachu has 4 HP left!`)
     game.resetInput()
     game.choices.secondChoice = currentInput.toLowerCase()
     game.choices.increaseCount()
-    return "A - B"
+    return "A - Attack\nB - Pokeball\nC - Run"
   }
   // A -> B -> A
   if (currentInput.toLowerCase() === game.choices.a && game.choices.counter === 2 && game.choices.firstChoice === game.choices.a && game.choices.secondChoice === game.choices.b ) {
+    game.setText(`Pikachu uses Thunder! 5 Damage! Bulbasaur has 2 HP left! Bulbasaur uses Solar Beam! 20 Damage! Overkill! Pikachu fainted!`)
     game.gameOver()
-    return `A - B - A`
+    return `Game over!`
   }
   // A -> B -> B
   if (currentInput.toLowerCase() === game.choices.b && game.choices.counter === 2 && game.choices.firstChoice === game.choices.a && game.choices.secondChoice === game.choices.b ) {
+    game.setText(`You throw a POKEBALL!. . . Bulbasaur escaped! Bulbasaur uses Razor leaf! 6 Damage! Pikachu fainted!`)
     game.gameOver()
-    return `A - B - B`
+    return `Game over!`
   }
   // A -> B -> C
   if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 2 && game.choices.firstChoice === game.choices.a && game.choices.secondChoice === game.choices.b ) {
+    game.setText(`You are running into the deep forest......a wild MEWTWO APPEARS and uses PSY ATTACK! You lose your mind and slowly fade.....`)
     game.gameOver()
-    return `A - B - C`
+    return `Game over!`
   }
   // A -> C
   if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 1 && game.choices.firstChoice === game.choices.a) {
+    game.setText(`You are running into the deep forest......a wild MEWTWO APPEARS and uses PSY ATTACK! You lose your mind and slowly fade.....`)
     game.resetInput()
     game.choices.secondChoice = currentInput.toLowerCase()
     game.choices.increaseCount()
-    return "A - C"
+    return "Game Over"
   }
   // A -> C -> A
   if (currentInput.toLowerCase() === game.choices.a && game.choices.counter === 2 && game.choices.firstChoice === game.choices.a && game.choices.secondChoice === game.choices.c ) {
@@ -93,16 +144,11 @@ var inputHappened = function(currentInput){
     game.gameOver()
     return `A - C - C`
   }
+}
 
+const bTree = function(currentInput){
   // Full B Tree
-  // B 
-  if (currentInput.toLowerCase() === game.choices.b && game.choices.counter === 0) {
-    game.resetInput()
-    game.choices.firstChoice = currentInput.toLowerCase()
-    game.choices.increaseCount()
-    return `B`
-  }
-  // A -> A
+  // B -> A
   if (currentInput.toLowerCase() === game.choices.a && game.choices.counter === 1 && game.choices.firstChoice === game.choices.b) {
     game.resetInput()
     game.choices.secondChoice = currentInput.toLowerCase()
@@ -147,35 +193,17 @@ var inputHappened = function(currentInput){
   }
   // B -> C
   if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 1 && game.choices.firstChoice === game.choices.b) {
+    game.setText(`You are running into the deep forest......a wild MEWTWO APPEARS and uses PSY ATTACK! You lose your mind and slowly fade.....`)
     game.resetInput()
     game.choices.secondChoice = currentInput.toLowerCase()
     game.choices.increaseCount()
-    return "B - C"
+    return "Game over!"
   }
-  // B -> C -> A
-  if (currentInput.toLowerCase() === game.choices.a && game.choices.counter === 2 && game.choices.firstChoice === game.choices.b && game.choices.secondChoice === game.choices.c ) {
-    game.gameOver()
-    return `B - C - A`
-  }
-  // B -> C -> B
-  if (currentInput.toLowerCase() === game.choices.b && game.choices.counter === 2 && game.choices.firstChoice === game.choices.b && game.choices.secondChoice === game.choices.c ) {
-    game.gameOver()
-    return `B - C - B`
-  }
-  // B -> C -> C
-  if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 2 && game.choices.firstChoice === game.choices.b && game.choices.secondChoice === game.choices.c ) {
-    game.gameOver()
-    return `B - C - C`
-  }
+}
 
+const cTree = function(currentInput){
   // Full C Tree
-  // C 
-  if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 0) {
-    game.resetInput()
-    game.choices.firstChoice = currentInput.toLowerCase()
-    game.choices.increaseCount()
-    return `C`
-  }
+
   // C -> A
   if (currentInput.toLowerCase() === game.choices.a && game.choices.counter === 1 && game.choices.firstChoice === game.choices.c) {
     game.resetInput()
@@ -241,4 +269,4 @@ var inputHappened = function(currentInput){
     game.gameOver()
     return `C - C - C`
   }
-};
+}
