@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Cabin Game</title>
+  </head>
+  <body>
+    <header>Choose your Destiny</header>
+    <p id = begin> Please enter your name to start the game.</p>
+    <p id = story> </p>
+    <input class="starter" id="input" placeholder="Input"/>
+    <p class="starter" id="output"></p>
+
+    <script>
+      document.querySelector('#input').addEventListener('change', function(event){
+        var currentInput = event.target.value;
+        var output = inputHappened(currentInput);
+        display( output );
+      });
+
+      var display = function( data ){
+        var output = document.querySelector('#output');
+        output.innerText = data;
+      }
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>
