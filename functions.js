@@ -39,14 +39,18 @@ var getName = function (name) {
 }
 
 
-var introStart = function () {
+var displayIntro = function () {
+    display1("Type anything to continue.");
     display2(introduction);
 }
 
+var introStart = function () {
+    setTimeout(function(){clearOutput1();}, 500); //these 2 are a little faster than intended. Change later when done testing*******
+    setTimeout(function(){displayIntro();}, 500);
+}
 
-
-/*var ranNumGen = function (numRange) {
+var ranNumGen = function (numRange) {
         ranNum = Math.floor(Math.random()*numRange);
         console.log(ranNum);
         return ranNum;
-};*/
+};
