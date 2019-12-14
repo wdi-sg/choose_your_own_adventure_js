@@ -30,24 +30,53 @@ var startTextFlash = function () {
 var stopTextFlash = function () {
     clearInterval(startShow);
     clearInterval(startHide);
+    clearOutputAll();
 }
 
 
+//introduction stuff
 var getName = function (name) {
     player.name = name;
     return player.name;
 }
-
 
 var displayIntro = function () {
     display1("Type anything to continue.");
     display2(introduction);
 }
 
-var introStart = function () {
-    setTimeout(function(){clearOutput1();}, 500); //these 2 are a little faster than intended. Change later when done testing*******
-    setTimeout(function(){displayIntro();}, 500);
+var introIntro = function () {
+    setTimeout(function(){clearOutput1();}, 10); //these 2 are a little faster than intended. Change later when done testing*******
+    setTimeout(function(){displayIntro();}, 10);
 }
+
+var introStart = function () {
+    display1(perkInstruct);
+    display2(perkIntro);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 var ranNumGen = function (numRange) {
         ranNum = Math.floor(Math.random()*numRange);

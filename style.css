@@ -1,4 +1,5 @@
 .starter{
+
   font-size:30px;
   padding:10px;
   display:block;
@@ -6,6 +7,10 @@
   border:3px solid blue;
 }
 
-#output{
-  background-color:pink;
+#output1 {
+    height: 74px;
+}
+
+#output2 {
+    height: 200px;
 }

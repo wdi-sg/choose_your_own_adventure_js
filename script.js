@@ -10,7 +10,6 @@ var inputHappened = function(currentInput)
     {
         document.querySelector('#input').value = "";
         stopTextFlash();
-        clearOutputAll();
         gameStage++;
         display1("Please enter your name")
         return gameStage;
@@ -20,15 +19,30 @@ var inputHappened = function(currentInput)
         clearOutput1();
         display1("Greetings " + player.name + ".");
         document.querySelector('#input').value = "";
-        introStart();
+        introIntro();
         gameStage++;
         return;
     } else if (gameStage === 2)
     {
-
+        introStart();
+        document.querySelector('#input').value = "";
+        gameStage++
         return;
+    } else if (gameStage === 3)
+    {
+        playerInput = currentInput;
+        if (currentInput == 1 || currentInput == 2)
+        {
+            player.perk = currentInput;
+            gameStage++;
+            document.querySelector('#input').value = "";
+            return player.perk;
+        }
+    } else if (gameStage === 4)
+    {
+        console.log("Whats next?");
     }
-return;
+    return;
 };
 
 
