@@ -41,8 +41,6 @@ var achievementUnlockedText = "**ACHIEVEMENT UNLOCKED**\nYou have earned the fol
 var gameIndex = 0;
 var previousChoiceActionText = "";
 
-// We start our story at index 0;
-var activeGameSegment = gameStory["0"]
 
 // Store the player name
 choicesMade.playerName = "playerName";
@@ -69,6 +67,8 @@ var inputHappened = function(currentInput){
 
 var gameAction = function(currentInput) {
 
+    currentInput = currentInput.trim();
+
     if (gameIndex === 0) {
         choicesMade.playerName = currentInput;
         gameIndex = 1;
@@ -77,10 +77,10 @@ var gameAction = function(currentInput) {
     }
 
     // sanitize the input for after the very first choice.
-    currentInput = currentInput.toLowerCase().trim();
+    currentInput = currentInput.toLowerCase();
 
 
-    if (currentInput[0] == 'a') {
+    if (currentInput[0] === 'a') {
         return displayAchievements() + "\n" + printCurrentLocation(gameIndex);
     }
 
@@ -166,7 +166,7 @@ var specialOption = function(inputGameIndex) {
             var breakfastConversation = ""
             var trafficConversation = ""
             if (choicesMade.lateForWork) {
-                trafficConversation = `\n"Hey man, how come you are in so late? You know the boss is gonna be pissed."\n"I know," you reply, "There was a terrible traffic jam on the PIE and I was stuck in it for ages.\n`;
+                trafficConversation = `\n"Hey man, how come you are in so late? You know the boss is gonna be pissed."\n"I know," you reply, "I ${choicesMade.lateForWork}"\n`;
             };
             if (choicesMade['breakfastChosen'] !== "None") {
                 breakfastConversation = `"Yes I had ${choicesMade['breakfastChosen']} this morning."`;
@@ -189,13 +189,13 @@ var specialOption = function(inputGameIndex) {
             if (choicesMade.breakfastChosen === "None") {
                 stomachRumbles = "Partway through the presentation, your stomach gurgles really loudly. Gary stifles a laugh and your boss does not look impressed.";
             } else {
-                stomachRumbles = "You smoothly go through the presentation without a hitch.";
+                stomachRumbles = "You smoothly go through the presentation without a hitch. ";
             }
 
             if (presentationScore === 1) {
-                caughtCheating = "The boss nods in agreement.";
+                caughtCheating = "The boss nods in agreement. ";
             } else if (presentationScore === -1) {
-                caughtCheating = "You hope these inflated numbers impress your colleagues.\nThe boss looks through a stack of papers and shakes his head.";
+                caughtCheating = "You hope these inflated numbers impress your colleagues.\nThe boss looks through a stack of papers and shakes his head. ";
             }
 
             if (choicesMade.lateForWork) {
@@ -206,7 +206,7 @@ var specialOption = function(inputGameIndex) {
                 goingForBeer = " Gary winks at you and mimes drinking a bottle of beer while he is exiting."
             }
 
-            outputToReturn = `The boss says "Very well, let's see what the sales figures are from the last quarter."\n` + bossLateComment +  'You start the presentation and go through the numbers. ' + caughtCheating + stomachRumbles + "\nAt the end of the meeting everybody awkwardly shuffles out silently." + goingForBeer + printCurrentLocation(inputGameIndex);
+            outputToReturn = `The boss says "Very well, let's see what the sales figures are from the last quarter."\n` + bossLateComment +  'You start the presentation and go through the numbers. ' + caughtCheating + stomachRumbles + "\nAt the end of the presentation everybody awkwardly shuffles out in silence." + goingForBeer + printCurrentLocation(inputGameIndex);
             return outputToReturn;
         break;
 
@@ -337,7 +337,7 @@ var gameStory = {
                             choiceId            :   4,
                             confirmation        :   "As soon as you get on the PIE you notice a lot of traffic. It seems there has been a big accident and traffic has slowed to a crawl. You arrive at work 30 minutes late!",
                             variablesToToggle   :   "lateForWork",
-                            variableValue       :   true,
+                            variableValue       :   "got stuck in traffic on the PIE. There was a really bad accident.",
                         },
                         {   choiceDescription   :   "Take the ECP",
                             choiceId            :   4,
@@ -445,7 +445,7 @@ var gameStory = {
                             choiceId            :   4,
                             confirmation        :   "You drive from the airport to your workplace. Because it's a long journey you've arrived late for work!",
                             variablesToToggle   :   "lateForWork",
-                            variableValue       :   true,
+                            variableValue       :   "went to the airport for a last minute getaway. Then thought better of it.",
                         },
                         ]
                     },
@@ -537,8 +537,10 @@ ${stockMarketCrashText}`,
                         },
                     ]
                     },
-
-
 };
+
+// We start our story at index 0 (this has to be after the story declaration);
+var activeGameSegment = gameStory["0"]
+
 
 display(`${activeGameSegment.description} \n ${listChoices(activeGameSegment)} `);
