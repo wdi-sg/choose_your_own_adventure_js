@@ -198,17 +198,33 @@ var specialOption = function(inputGameIndex) {
             return outputToReturn;
         break;
 
+
+            // Summarise all the things that have happened in the game.
         case 13:
+            // calculate your score.
+            var stomachRumbles = "";
+            var caughtCheating = "";
+            var bossLateComment = "";
+
             var bossImpressedScore = 0;
             if (choicesMade.breakfastChosen !== "None") {
                 bossImpressedScore++;
+                stomachRumbles = 'I would suggest you have have something to eat before presenting in future';
             }
-
             bossImpressedScore += choicesMade.fudgeThePresentation;
+
+            if (choicesMade.fudgeThePresentation === 1) {
+                caughtCheating = 'I really appreciate you making the charts my favourite colours.'
+            } else if (choicesMade.fudgeThePresentation === -1) {
+                caughtCheating = 'I am very disappointed that you inflated the numbers. I am going to have to let the team know you lied.'
+            }
 
             if (choicesMade.lateForWork) {
                 bossImpressedScore--;
+                bossLateComment = "I don't appreciate you being tardy this morning.";
             }
+
+            var bossComments = '"' choicesMade.playerName + ', I have some comments to make about your presentation.\nYou nervously gulp in anticipation of bad news'
 
             if (bossImpressedScore < 0) {
                 return "Bad ending, you're fired!"
@@ -487,7 +503,7 @@ ${stockMarketCrashText}`,
                         },]
                     },
 
-            11  :   {
+            11  :   { // End the game, this is just letting you go back to the beginning again.
     description :   ""
     choices     :   [   {   choiceDescription   :   "Choose your breakfast again.",
                             choiceId            :   1,
