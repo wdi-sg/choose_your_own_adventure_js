@@ -61,6 +61,7 @@ var inputHappened = function(currentInput)
         return;
     } else if (gameStage === 5)
     {
+        console.log("test1");
         playerInput = parseInt(currentInput);
         if (playerInput === 1 || playerInput === 2 || playerInput === 3)
         {
@@ -73,6 +74,7 @@ var inputHappened = function(currentInput)
                     display2("Type '1' , '2' or '3'");
                     gameStage++
                     clearInputs();
+                    return;
                     break;
                 case 2:
                     clearOutputAll();
@@ -80,6 +82,7 @@ var inputHappened = function(currentInput)
                     display2("Type '1' , '2' or '3'");
                     gameStage++
                     clearInputs();
+                    return;
                     break;
                 case 3:
                     clearOutputAll();
@@ -87,6 +90,7 @@ var inputHappened = function(currentInput)
                     display2("Type '1' , '2' or '3'");
                     gameStage++
                     clearInputs();
+                    return;
                     break;
                 default:
                     console.log("Something went wrong with 'gameChoices.d1p1'.");
@@ -95,7 +99,8 @@ var inputHappened = function(currentInput)
                     clearInputs();
                     return;
             }
-        } else if (gameStage === 6)
+        }
+    } else if (gameStage === 6)
         {
             console.log("what abt now?")
             playerInput = parseInt(currentInput);
@@ -105,7 +110,7 @@ var inputHappened = function(currentInput)
         {
              case ((gameChoices.d1P1 === 1) && (gameChoices.d1P1C1 === 1)):
                 console.log("How about this?");
-                checkFocus();
+                focusCheck();
                 clearOutputAll();
                 display1(day1P1D1Front1R);
                 display2("Type anything to continue");
@@ -164,7 +169,6 @@ var inputHappened = function(currentInput)
                 display1("Something is wrong");
                 display2("Something is wrong");
                 clearInputs();
-        }
     }
         console.log("123");
         clearInputs();
