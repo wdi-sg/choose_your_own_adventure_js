@@ -284,7 +284,7 @@ var gameStory = {
                     },
 
             1   :   {
-    description :   "Good morning! You walk into the kitchen to get some cereal. What would you like to eat?",
+    description :   "Good morning! You walk into your kitchen to get some breakfast. What would you like to eat?",
     choices     :   [   {   choiceDescription   :   "Cereal",
                             choiceId            :   2,
                             confirmation        :   "You pick up a packet of Corn Flakes from the cupboard. They are delicious!",
@@ -380,7 +380,7 @@ var gameStory = {
                     },
 
             6   :   {
-    description :   `"uh-huh" Gary says "You want to grab a beer after work?"`,
+    description :   `"uh-huh" Gary says, "You want to grab a beer after work?"`,
     choices     :   [   {   choiceDescription   :   "Sure let's do it.",
                             choiceId            :   10,
                             confirmation        :   "With all the stress of the presentation, a beer to celebrate, or commiserate, sounds like a good idea.",
@@ -441,7 +441,7 @@ var gameStory = {
 "Where are you?" he shouts at you down the phone. "You're not at the presentation!"
 "I'm at the airport" you reply "Screw corporate life!"
 "You're fired!" he yells.
-You got fired. Shame that.
+You got fired. Shame.
 ** THE END **
 
 ${achievementUnlockedText}
@@ -500,7 +500,7 @@ ${stockMarketCrashText}`,
                     },
 
             12  :   {
-    description :   `\nYour boss is still in the room after everyone else has left. That window sure looks even more tempting now`,
+    description :   `\nYour boss is still in the room after everyone else has left. That window sure looks even more tempting now.`,
     choices     :   [   {   choiceDescription   :   "Hear what the boss has to say.",
                             choiceId            :   13,
                             confirmation        :   "",
