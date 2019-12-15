@@ -64,4 +64,42 @@ if (IorO.toLowerCase() === "i") {
 if (CK1 === "Calvin Klein") {
     alert("Welcome to the future, Calvin Klein.");
 
-} else alert("${CK1} is a rather peculiar name, but it should do.");
+} else { alert("${CK1} is a rather peculiar name, but it should do.");
+} else if (Number(yearChose) >= 1955 && Number(yearChose) <= 1984) {
+    var seaOption1 = prompt(
+        "I see you're a fan of Back to the Future 1. Your future mom has just asked you to the Enchantment under the sea. (y/n)");
+
+}
+if (seaOption1.toLowerCase() === "y") {
+    alert(
+        "Creepy. I hope you have some backup plan in place to get you out of this. Until then you are stuck in 1955.");
+
+} else if (seaOption1.toLowerCase() === "n") {
+    alert(
+        "Honorable. But this also means your future dad will not be able to meet your future mom, and therefore you cannot exist.")
+} else if (seaOption1.toLowerCase() === "s") {
+    alert(
+        "Interesting. you set up an elaborate plan for your future dad to surprise your mom for beating you up");
+} else {
+    prompt("The game ends and you need to start over.");
+} else if (Number(yearChose) < 1955) {
+    var wildWildWest = prompt(
+        "I see you are a fan of Back to the Future 3. You've run out of gas and can't get back to your own time. How do you choose your mode of transport? (Horse/Moonshine/Train)");
+}
+if (wildWildWest === "h") {
+    alert (
+        "Good idea but no. The time machine needs to get to 88 mph, 12 horse power ain't gonna cut it.");
+} else if (wildWildWest = "m") {
+    alert(
+        "You'd be better off drinking the moonshine. Do not pass Go. Do not collect $200. Stuck in 1855.");
+} else if (wildWildWest = "t") {
+    var Clara = prompt(
+        "Good call! This plan seems to be working. But wait. Clara wants to go back to the future you at the last moment. What do you do? (take her/leave her");
+}
+if (Clara.toLowerCase === "t") {
+    alert(
+        "Interesting choice. Unfortunately the Doc cannot grab clara and get back to the car in time. He ends up stayin with her in 1855.");
+} else if (Clara.toLowerCase === "l") {
+    alert(
+        "Smart choice. Unfortunately the Doc is in love with Clara, and when he gets back to 1985, he becomes very depressed and commit suicide. Game Over! Please try again");
+}
