@@ -14,11 +14,11 @@ choicesMade.jetPlane = false;
 var jetPlaneName = `✈️I'm leaving on a jetplane.✈️`;
 var jetPlaneText = `Leave the corporate life behind on a suspiciously priced plane ticket.`;
 
-choicesMade.promoted = false;
+choicesMade.gotMyselfPromoted = false;
 var gotMyselfPromotedName = "📈STONKS📈";
 var gotMyselfPromotedText = `Aced the presentation so I got promoted!`;
 
-choicesMade.fired = false;
+choicesMade.gotMyselfFired = false;
 var gotMyselfFiredName = `🔥GOT F*I*R*E*D!🔥`;
 var gotMyselfFiredText = `Bombed the presentation so hard I got fired!`;
 
@@ -120,8 +120,8 @@ var checkIsASingleDigitNumber = function(currentInput) {
 /////////////////////////////////////////////////////////
 var displayAchievements = function() {
     var leavingOnAJetplane = (choicesMade.jetPlane) ? jetPlaneText : unknownAchievementText;
-    var gotMyselfFired = (choicesMade.fired) ? gotMyselfFiredText : unknownAchievementText;
-    var gotMyselfPromoted = (choicesMade.promoted) ? gotMyselfPromotedText : unknownAchievementText;
+    var gotMyselfFired = (choicesMade.gotMyselfFired) ? gotMyselfFiredText : unknownAchievementText;
+    var gotMyselfPromoted = (choicesMade.gotMyselfPromoted) ? gotMyselfPromotedText : unknownAchievementText;
     var annoyGaryGetWalloped = (choicesMade.annoyGary) ? annoyGaryGetWallopedText : unknownAchievementText;
     var beeryGood = (choicesMade.beeryGood) ? beeryGoodText : unknownAchievementText;
     var stockMarketCrash = (choicesMade.stockMarketCrash) ? stockMarketCrashText : unknownAchievementText;
@@ -209,34 +209,44 @@ var specialOption = function(inputGameIndex) {
             var bossImpressedScore = 0;
             if (choicesMade.breakfastChosen !== "None") {
                 bossImpressedScore++;
-                stomachRumbles = 'I would suggest you have have something to eat before presenting in future';
+                stomachRumbles = 'I would suggest you have have something to eat before presenting in future. ';
             }
             bossImpressedScore += choicesMade.fudgeThePresentation;
 
             if (choicesMade.fudgeThePresentation === 1) {
-                caughtCheating = 'I really appreciate you making the charts my favourite colours.'
+                caughtCheating = 'I really appreciate you making the charts my favourite colours. '
             } else if (choicesMade.fudgeThePresentation === -1) {
-                caughtCheating = 'I am very disappointed that you inflated the numbers. I am going to have to let the team know you lied.'
-            }
+                caughtCheating = 'I am very disappointed that you inflated the numbers. I am going to have to let the team know you lied. '
+            };
 
             if (choicesMade.lateForWork) {
                 bossImpressedScore--;
-                bossLateComment = "I don't appreciate you being tardy this morning.";
-            }
+                bossLateComment = "I don't appreciate you being tardy this morning. ";
+            };
 
-            var bossComments = '"' choicesMade.playerName + ', I have some comments to make about your presentation.\nYou nervously gulp in anticipation of bad news'
+            var bossComments = 'The boss says "' + choicesMade.playerName + ', I have some comments to make about your presentation."\nYou nervously gulp in anticipation of bad news.\n "' + stomachRumbles + caughtCheating + bossLateComment + 'Unfortunately the numbers have been bad for this quarter. ';
 
             if (bossImpressedScore < 0) {
-                return "Bad ending, you're fired!"
+                bossComments = bossComments + `In light of this, I am going to have to fire you."\nYou've been fired!\n** THE END **\n\n${achievementUnlockedText}\n\n${gotMyselfFiredName}\n${gotMyselfFiredText}`;
+                choicesMade.gotMyselfFired = true;
+                return bossComments + printCurrentLocation(inputGameIndex);
             } else if (bossImpressedScore > 1 ) {
-
                 if (choicesMade.wantsABeer) {
-                    return "Good ending, you're promoted and drinks are on you!"
+                    bossComments = bossComments + `Despite this, I'm going to give you a promotion! I really hope you'll be able to turn this company's fortunes around."\nYou've been promoted! Gary is very happy, as this means that drinks are on you now!\n** THE END **\n\n${achievementUnlockedText}\n\n${gotMyselfPromotedName}\n${gotMyselfPromotedText}\n\n${beeryGoodName}\n${beeryGoodText}`;
+                    choicesMade.gotMyselfPromoted = true;
+                    choicesMade.beeryGood = true;
+                    return bossComments + printCurrentLocation(inputGameIndex);
+                } else {
+                    bossComments = bossComments + `Despite this, I'm going to give you a promotion! I really hope you'll be able to turn this company's fortunes around."\nYou've been promoted!\n** THE END **\n\n${achievementUnlockedText}\n\n${gotMyselfPromotedName}\n${gotMyselfPromotedText}`;
+                    choicesMade.gotMyselfPromoted = true;
+                    return bossComments + printCurrentLocation(inputGameIndex);
                 }
             } else if (choicesMade.wantsABeer) {
-                return "Neither Ending, you're going for a beer with Gary."
+                bossComments = bossComments + `I really hope with hard work we will be able to turn this company's fortunes around."\nAfter work, you go out for a beer with Gary.\n** THE END **\n\n${achievementUnlockedText}\n\n${beeryGoodName}\n${beeryGoodText}`;
+                    choicesMade.beeryGood = true;
+                    return bossComments + printCurrentLocation(inputGameIndex);
             } else {
-                return '"Well that was that" the boss says. You feel like you could have done much better. Or much worse. Would you like to try again?'
+                return '"Well that was that" the boss says. You feel like you could have done much better. Or much worse. Would you like to try again?' + printCurrentLocation(inputGameIndex);
             }
 
         break;
@@ -341,6 +351,8 @@ var gameStory = {
                         {   choiceDescription   :   "Talk to Gary",
                             choiceId            :   6,
                             confirmation        :   "",
+                            variablesToToggle   :   "fudgeThePresentation",
+                            variableValue       :   0,
                         }]
                     },
 
@@ -491,7 +503,7 @@ ${stockMarketCrashText}`,
     description :   `\nYour boss is still in the room after everyone else has left. That window sure looks even more tempting now`,
     choices     :   [   {   choiceDescription   :   "Hear what the boss has to say.",
                             choiceId            :   13,
-                            confirmation        :   "With all the stress of the presentation, a beer to celebrate, or commiserate, sounds like a good idea.",
+                            confirmation        :   "",
                             variablesToToggle   :   "stockMarketCrash",
                             variableValue       :   true,
                         },
@@ -503,8 +515,8 @@ ${stockMarketCrashText}`,
                         },]
                     },
 
-            11  :   { // End the game, this is just letting you go back to the beginning again.
-    description :   ""
+            13  :   { // End the game, this is just letting you go back to the beginning again.
+    description :   "",
     choices     :   [   {   choiceDescription   :   "Choose your breakfast again.",
                             choiceId            :   1,
                             confirmation        :   `By the magic of technology you restart the day.\n`,
