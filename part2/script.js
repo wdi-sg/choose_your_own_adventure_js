@@ -112,6 +112,7 @@ var inputHappened = function(currentInput){
 				opp = pokemon[oppIndex];
 				//* Display Pikachu Image
 				displayOppImage(opp);
+				
 				return "You have chosen "+pokemon[oppIndex].name+" as your opponent! Prepare for battle! Enter your first move"
 			} 
 	}//end switch
@@ -213,6 +214,8 @@ function choiceOfMove(){
 // inBattle function
 function inBattle(yourMoveChoice,opponent){
 
+
+
 	//After move is selected, see if it hits
 	var didIHit = seeIfHits(pokemon[0],whichMove,pokemon[oppIndex])
 	//then opponents'choice of move, hit/miss
@@ -230,6 +233,8 @@ function inBattle(yourMoveChoice,opponent){
 		state.current = state.transit
 		//track no. of battles completed.
 		stage--
+		//Store previous Pikachu's HP
+		var prevHP = pokemon[0].HP;
 
 		if(stage == 0){
 			if (pokemon[0].HP > 0 && pokemon[oppIndex].HP <= 0){
@@ -251,7 +256,7 @@ function inBattle(yourMoveChoice,opponent){
 			displayChoices(choice1,choice2);
 			return pokemon[0].name+" uses "+pokemon[0].Attack[whichMove].name+"\n It "+didIHit+" ! \n"+pokemon[oppIndex].name+" uses \
 	 "+pokemon[oppIndex].Attack[hisMove].name+"\n It "+didItHit+" ! \n"+pokemon[0].name+" HP : \
-	 "+pokemon[0].HP+"\n "+ pokemon[oppIndex].name+" HP : "+pokemon[oppIndex].HP+" \n \n"+"YOU LOSE! Choose your next opponent : "+pokemon[choice1].name+" or "+pokemon[choice2].name 
+	 "+prevHP+"\n "+ pokemon[oppIndex].name+" HP : "+pokemon[oppIndex].HP+" \n \n"+"YOU LOSE! Choose your next opponent : "+pokemon[choice1].name+" or "+pokemon[choice2].name 
 	
 		} else if (pokemon[0].HP > 0 && pokemon[oppIndex].HP <= 0){
 			tracker = tracker.concat("w");
@@ -260,7 +265,7 @@ function inBattle(yourMoveChoice,opponent){
 			displayChoices(choice1,choice2);
 			return pokemon[0].name+" uses "+pokemon[0].Attack[whichMove].name+"\n It "+didIHit+" ! \n"+pokemon[oppIndex].name+" uses \
 	 "+pokemon[oppIndex].Attack[hisMove].name+"\n It "+didItHit+" ! \n"+pokemon[0].name+" HP : \
-	 "+pokemon[0].HP+"\n "+ pokemon[oppIndex].name+" HP : "+pokemon[oppIndex].HP+"\n \n"+"YOU WIN! Choose your next opponent : "+pokemon[choice1].name+" or "+pokemon[choice2].name
+	 "+prevHP+"\n "+ pokemon[oppIndex].name+" HP : "+pokemon[oppIndex].HP+"\n \n"+"YOU WIN! Choose your next opponent : "+pokemon[choice1].name+" or "+pokemon[choice2].name
 	
 		} else {
 			tracker = tracker.concat("l")
@@ -269,7 +274,7 @@ function inBattle(yourMoveChoice,opponent){
 			displayChoices(choice1,choice2);
 			return pokemon[0].name+" uses "+pokemon[0].Attack[whichMove].name+"\n It "+didIHit+" ! \n"+pokemon[oppIndex].name+" uses \
 	 "+pokemon[oppIndex].Attack[hisMove].name+"\n It "+didItHit+" ! \n"+pokemon[0].name+" HP : \
-	 "+pokemon[0].HP+"\n "+ pokemon[oppIndex].name+" HP : "+pokemon[oppIndex].HP+"\n \n"+"DOUBLE-KO! Choose your next opponent : "+pokemon[choice1].name+" or "+pokemon[choice2].name
+	 "+prevHP+"\n "+ pokemon[oppIndex].name+" HP : "+pokemon[oppIndex].HP+"\n \n"+"DOUBLE-KO! Choose your next opponent : "+pokemon[choice1].name+" or "+pokemon[choice2].name
 	
 		}
 	}
@@ -552,7 +557,7 @@ const pokemon = [
 	link: "https://img.pokemondb.net/artwork/large/ninetales.jpg"
 	},
 	{
-	name: "Goldbat",
+	name: "Golbat",
 	HP: 150,
 	Attack: [{
 		name: "Fly",
@@ -564,7 +569,7 @@ const pokemon = [
 		damage: 4,
 		accuracy: 0.99
 		}],
-	link: "https://img.pokemondb.net/artwork/large/goldbat.jpg"
+	link: "https://img.pokemondb.net/artwork/large/golbat.jpg"
 	},
 	{
 	name: "Dugtrio",
