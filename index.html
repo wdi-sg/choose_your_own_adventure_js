@@ -2,12 +2,15 @@
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="style.css">
-        <title>Life of a Coder</title>
+        <title>Life & Times of a Random Coder: Day 1</title>
     </head>
     <body>
+        <h1>Day 1 Of A Random Coder</h1>
         <input class="starter" id="input" placeholder="input"/>
         <p class="starter" id="output1"></p>
         <p class="starter" id="output2"></p>
+        <p class="statsWindow" id="hp"></p>
+        <p class="statsWindow" id="focus"></p>
         <script>
             document.querySelector('#input').addEventListener('change', function(event){
                 var currentInput = event.target.value;
@@ -22,6 +25,16 @@
             var display2 = function(data){
                 var output2 = document.querySelector('#output2');
                 output2.innerText = data;
+            }
+
+            var hpDisplay = function(data){
+                hpOutput = document.querySelector('#hp');
+                hpOutput.innerText = data;
+            }
+
+            var focusDisplay = function(data){
+                focusOutput = document.querySelector('#focus');
+                focusOutput.innerText = data;
             }
         </script>
         <script src="variables.js" charset= "utf-8" type="text/javascript"></script>

@@ -17,12 +17,21 @@ var clearOutput2 = function() {
     display2("");
 };
 
+// use whenever hp value changes
+var updateHp = function() {
+    hpDisplay("Health\n" + player.hp + "/" + player.hpMax);
+};
+
+//use whenever focus is changed
+var updateFocus = function() {
+    focusDisplay("Focus\n" + player.focus + "/" + player.focusMax);
+};
 
 // Flashes the starting text every 2 seconds
 var startTextFlash = function () {
-    display1("Type 'Start' to begin");
-    startShow = setInterval(function(){ display1("Type 'Start' to begin"); }, 2000);
-    setTimeout(function(){ startHide = setInterval(function(){ clearOutput1(); }, 2000); }, 1000);
+    display2("Type 'Start' to begin");
+    startShow = setInterval(function(){ display2("Type 'Start' to begin"); }, 2000);
+    setTimeout(function(){ startHide = setInterval(function(){ clearOutput2(); }, 2000); }, 1000);
     return;
 }
 
@@ -41,18 +50,25 @@ var getName = function (name) {
 }
 
 var displayIntro = function () {
-    display1("Type anything to continue.");
-    display2(introduction);
+    display1(introduction);
+    display2("Type anything to continue.");
 }
 
 var introIntro = function () {
-    setTimeout(function(){clearOutput1();}, 10); //these 2 are a little faster than intended. Change later when done testing*******
+    setTimeout(function(){clearOutput2();}, 10); //these 2 are a little faster than intended. Change later when done testing*******
     setTimeout(function(){displayIntro();}, 10);
 }
 
 var introStart = function () {
-    display1(perkInstruct);
-    display2(perkIntro);
+    display2(perkInstruct);
+    display1(perkIntro);
+}
+
+//Actual start to the game and first branching choice.
+var day1P1 = function () {
+    display1(day1P1D101);
+    display2("Your adventure begins.");
+    setTimeout(function(){display2(day1P1D201);}, 10);//Remember to change when finished testing.
 }
 
 
@@ -74,12 +90,33 @@ var introStart = function () {
 
 
 
-
-
-
-
+// Stuff to do with numbers
 var ranNumGen = function (numRange) {
-        ranNum = Math.floor(Math.random()*numRange);
-        console.log(ranNum);
-        return ranNum;
+    ranNum = Math.floor(Math.random()*numRange);
+    console.log(ranNum);
+    return ranNum;
 };
+
+// using focus to get better results.
+var focusResults = function (rGain) {
+    player.rScore = player.rScore + (rGain * player.focusMulti);
+    player.focus--;
+    updateFocus();
+    return player.rScore;
+}
+
+//Check if player has enough focus.
+var focusCheck = function() {
+    if (player.focus < 0) {
+        alert("You do not have enough 'Focus' to do this action.")
+        return;
+    };
+}
+
+
+
+
+//QOL functions
+var clearInputs = function() {
+    document.querySelector("#input").value = "";
+}
