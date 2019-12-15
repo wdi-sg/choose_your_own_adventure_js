@@ -247,7 +247,7 @@ var inputHappened = function(currentInput){
             return restartMessage;
         } else if (answers[0] === "a" && answers[1] === "b" && currentInput === "a") {
             console.log("attack and chokeslam + chokeslam result + nextmoves results");
-            message = bretmanHart[1].attack.moves.chokeslam.nextMoves.submission.result + "<br> your score is: " + score;
+            message = bretmanHart[1].attack.moves.chokeslam.nextMoves.submission.results + "<br> your score is: " + score;
             answersLogged = answersLogged + answers.push(currentInput);
             score = score + 35;
             steps++;
