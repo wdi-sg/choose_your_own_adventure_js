@@ -33,10 +33,10 @@ var day1P1D1Front3R = "Although this is your first day, you were a little worn o
 var day1P1D1Middle = "You head towards the middle area and find a seat beside one of your classmates. This is your first time encountering this person. What actions would you like to take?\n1. Use your energy to be more friendly\n2. Play it cool and just go with the flow\n3. People are tiring and you just want to focus on your own stuff.";
 
 //R ===> Result 1
-var day1P1D1Middle1R = "Deciding that making a good first impression was a good idea. You attempt to put your best foot forward and give it your all to make good friends during this class. You stick your hand out and introduce yourself with gleeful enthusiasm. Your classmate meets your handshake warmly and you spend the 15 mins before class getting to know each other better. Your efforts seem to not go to waste and your classmate has a good impression of you.";
+var day1P1D1Middle1R = "Deciding that making a good first impression was a good idea. You attempt to put your best foot forward and give it your all to make good friends during this class. You stick your hand out and introduce yourself with gleeful enthusiasm. Your classmate meets your handshake warmly and you spend the 15 mins before class getting to know each other better. Your efforts seem to not go to waste and your classmate has a good impression of you. You gain some good results too due to being able to discuss with your new friend.";
 
 //R Result 2
-var day1P1D1Middle2R = "You play it cool and approach your classmate smoothly. You two introduce yourselves and spend a little time getting to know each other better. Class soon starts and you two get back to trying to pay attention to class.\nYou aren't quite show what sort of impression you have made to your classmate but are hopeful for more opportunities to come to get to know each other better.";
+var day1P1D1Middle2R = "You play it cool and approach your classmate smoothly. You two introduce yourselves and spend a little time getting to know each other better. Class soon starts and you two get back to trying to pay attention to class.\nYou aren't quite sure what sort of impression you have made to your classmate but are hopeful for more opportunities to come to get to know each other better.";
 
 //R Result 3
 var day1P1D1Middle3R = "You set yourself down and just briefly introduce yourselves to each other. Class soon starts and you try your best to pay attention in class. Not spending too much energy on the social aspects of this adventure, you managed to get a little bonus to your focus and results.";
@@ -53,3 +53,38 @@ var day1P1D1Back2R = "Despite being at the back with 'the most distance between 
 
 //R Result 3
 var day1P1D1Back3R = "Last night you didn't get as good of a rest as you thought and so you decided that taking a little of a rest might be the best option you have right now. Not paying as much attention as you would like, your results suffer a little but you feel better prepared for the rest of the day.";
+
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+var p1QuestStart = "You managed to get to the end of the first period of the day. We have a simple question for you to answer and a simple coding exercise for you to do afer as well. When you're ready, just type anything to continue."
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Questions==========================================================================================================================
+
+
+//Question 1
+var quest = ["What are attributes?", "What does HTML stand for?", "What does CSS stand for?", "What are 'Javascript Variables'?"];

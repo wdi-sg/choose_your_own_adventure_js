@@ -105,7 +105,7 @@ var inputHappened = function(currentInput)
             gameChoices.d1P1C1 = playerInput;
             switch (true)
         {
-            case ((gameChoices.d1P1 === 1) && (gameChoices.d1P1C1 === 1) && (player.focus > 1)):
+            case ((gameChoices.d1P1 === 1) && (gameChoices.d1P1C1 === 1) && (player.focus > 2)):
                 clearOutputAll();
                 display1(day1P1D1Front1R);
                 display2("Type anything to continue");
@@ -123,30 +123,41 @@ var inputHappened = function(currentInput)
                 clearOutputAll();
                 display1(day1P1D1Front3R);
                 display2("Type anything to continue");
+                rest();
+                player.rScore = player.rScore + 4;
                 gameStage++;
                 break;
-            case ((gameChoices.d1P1 === 2) && (gameChoices.d1P1C1 === 1) && (player.focus > 1)):
+            case ((gameChoices.d1P1 === 2) && (gameChoices.d1P1C1 === 1) && (player.focus > 2)):
                 clearOutputAll();
                 display1(day1P1D1Middle1R);
                 display2("Type anything to continue");
+                focusResult(6);
+                classmate1.rel++;
+                classmate1.rel++;
                 gameStage++;
                 break;
             case ((gameChoices.d1P1 === 2) && (gameChoices.d1P1C1 === 2)):
                 clearOutputAll();
                 display1(day1P1D1Middle2R);
                 display2("Type anything to continue");
+                player.rScore = player.rScore + 4;
+                classmate1.rel++;
                 gameStage++;
                 break;
             case ((gameChoices.d1P1 === 2) && (gameChoices.d1P1C1 === 3)):
                 clearOutputAll();
                 display1(day1P1D1Middle3R);
                 display2("Type anything to continue");
+                player.rScore = player.rScore + 2;
+                rest();
                 gameStage++;
                 break;
-            case ((gameChoices.d1P1 === 3) && (gameChoices.d1P1C1 === 1) && (player.focus > 1)):
+            case ((gameChoices.d1P1 === 3) && (gameChoices.d1P1C1 === 1) && (player.focus > 2)):
                 clearOutputAll();
                 display1(day1P1D1Back1R);
                 display2("Type anything to continue");
+                player.focus++
+                focusResult(5);
                 gameStage++;
                 break;
             case ((gameChoices.d1P1 === 3) && (gameChoices.d1P1C1 === 2)):
@@ -154,11 +165,15 @@ var inputHappened = function(currentInput)
                 display1(day1P1D1Back1R);
                 display2("Type anything to continue");
                 gameStage++;
+                player.bonus = 1.2;
+                player.rScore = player.rScore + 4
                 break;
             case ((gameChoices.d1P1 === 3) && (gameChoices.d1P1C1 === 3)):
                 clearOutputAll();
                 display1(day1P1D1Back1R);
                 display2("Type anything to continue");
+                rest();
+                player.bonus = 1.5;
                 gameStage++;
                 break;
             default:
@@ -168,8 +183,14 @@ var inputHappened = function(currentInput)
                 return;
     } if else (gameStage === 7)
     {
-        display1();
-        display2();
+        clearOutputAll();
+        display1(p1QuestStart);
+        display2("Type anything to continue.");
+        gameStage++;
+        return;
+    } if else (gameStage === 8)
+    {
+
     }
 }
     clearInputs();

@@ -100,14 +100,14 @@ var ranNumGen = function (numRange) {
 // using focus to get better results.
 var focusResults = function (rGain) {
     player.rScore = player.rScore + (rGain * player.focusMulti);
-    player.focus--;
+    player.focus = player.focus - 2;
     updateFocus();
     return player.rScore;
 };
 
 //Check if player has enough focus.
 var focusCheck = function() {
-    if (player.focus < 1) {
+    if (player.focus < 2) {
         setTimeout(function(){alert("You do not have enough 'Focus' to do this action.")});
     }
 }

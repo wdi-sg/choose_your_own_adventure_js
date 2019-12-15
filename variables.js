@@ -15,8 +15,8 @@ var player = {
     perk: 0,
     hpMax: 100,
     hp: 100,
-    focus: 4,
-    focusMax: 4,
+    focus: 5,
+    focusMax: 5,
     focusMulti: 1.00,
     bonus: 1,
     mScore: 0, //Madness score
