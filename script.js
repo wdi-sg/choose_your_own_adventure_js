@@ -226,7 +226,7 @@ var inputHappened = function(currentInput){
             message = bretmanHart[3].run.moves.running.results + "<br> your score is: " + score;
             answersLogged = answersLogged + answers.push(currentInput);
             score = score - 20;
-            steps = + 4;
+            steps = steps + 4;
             document.querySelector("#input").value = "";
         }  else if (answers[0] === "c" && currentInput === "b") {
             message = bretmanHart[3].run.moves.attack.results;
