@@ -13,7 +13,7 @@ var choicesFactor = {
             {
                 choice: "look for materials",
                 endGame: false,
-                msg: "You decided to look for materials. Next, you decided to...",
+                msg: "You decided to look for materials and succeeded. Next, you decided to...",
                 choices : [
                 {
                     choice:"hunt and forage for food",
@@ -28,13 +28,13 @@ var choicesFactor = {
                 {
                     choice:"attempt to escape",
                     endGame: true,
-                    msg: "You managed to escape successfully even though most of your food almost rotted."
+                    msg: "You managed to escape successfully even though most of your food are almost rotten."
                 }]
             },
             {
                 choice: "hunt and forage for food",
                 endGame: true,
-                msg:"You spend your time hunting and gathering food indefinitely."
+                msg:"You spend your time hunting and gathering food while surviving in the wilderness."
             },
             {
                 choice:"attempt to escape",
