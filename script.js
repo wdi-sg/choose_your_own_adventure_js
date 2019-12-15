@@ -329,7 +329,7 @@ var inputHappened = function(currentInput){
         }  else if (steps === 4) {
             steps = 0;
             answers = [];
-            message = "just in case you didn't see, your score is: " + score + "!<br> input any character and press enter to restart the game.";
+            message = "input any character and press enter to restart the game.";
             document.querySelector("#input").value = "";
         }
     return message;
