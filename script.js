@@ -187,7 +187,7 @@ var specialOption = function(inputGameIndex) {
             }
 
             if (choicesMade.lateForWork) {
-                bossLateComment = "'It's nice of you to grace us with your presence, " + choicesMade.playerName + ".' he adds sarcastically.\n"
+                bossLateComment = `"It's nice of you to grace us with your presence, ` + choicesMade.playerName + `." he adds sarcastically.\n`
             }
 
             if (choicesMade.wantsABeer) {
@@ -226,7 +226,7 @@ var specialOption = function(inputGameIndex) {
                 bossLateComment = "I don't appreciate you being tardy this morning. ";
             };
 
-            var bossComments = 'The boss says "' + choicesMade.playerName + ', I have some comments to make about your presentation."\nYou nervously gulp in anticipation of bad news.\n "' + stomachRumbles + caughtCheating + bossLateComment + 'Unfortunately the numbers have been bad for this quarter. ';
+            var bossComments = 'The boss says "' + choicesMade.playerName + ', I have some comments to make about your presentation."\nYou nervously gulp in anticipation of bad news.\n"' + stomachRumbles + caughtCheating + bossLateComment + 'Unfortunately the numbers have been bad for this quarter. ';
 
             if (bossImpressedScore < 0) {
                 bossComments = bossComments + `In light of this, I am going to have to fire you."\nYou've been fired!\n** THE END **\n\n${achievementUnlockedText}\n\n${gotMyselfFiredName}\n${gotMyselfFiredText}`;
