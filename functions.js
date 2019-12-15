@@ -103,20 +103,30 @@ var focusResults = function (rGain) {
     player.focus--;
     updateFocus();
     return player.rScore;
-}
+};
 
 //Check if player has enough focus.
 var focusCheck = function() {
-    if (player.focus < 0) {
-        alert("You do not have enough 'Focus' to do this action.")
-        return;
-    };
+    if (player.focus < 1) {
+        setTimeout(function(){alert("You do not have enough 'Focus' to do this action.")});
+    }
 }
 
-
-
+//Resting restores focus and hp
+var rest = function() {
+    player.focus++;
+    player.hp = player.hp + (player.hpMax * 0.25);
+    if (player.focus > player.focusMax) {
+        player.focus = player.focusMax;
+    }
+    if (player.hp > player.hpMax) {
+        player.hp = player.hpMax;
+    }
+    updateFocus();
+    updateHp();
+}
 
 //QOL functions
 var clearInputs = function() {
     document.querySelector("#input").value = "";
-}
+};

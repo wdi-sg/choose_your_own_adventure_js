@@ -61,7 +61,6 @@ var inputHappened = function(currentInput)
         return;
     } else if (gameStage === 5)
     {
-        console.log("test1");
         playerInput = parseInt(currentInput);
         if (playerInput === 1 || playerInput === 2 || playerInput === 3)
         {
@@ -102,24 +101,22 @@ var inputHappened = function(currentInput)
         }
     } else if (gameStage === 6)
         {
-            console.log("what abt now?")
             playerInput = parseInt(currentInput);
             gameChoices.d1P1C1 = playerInput;
-            console.log("Is this occurring");
             switch (true)
         {
-             case ((gameChoices.d1P1 === 1) && (gameChoices.d1P1C1 === 1)):
-                console.log("How about this?");
-                focusCheck();
+            case ((gameChoices.d1P1 === 1) && (gameChoices.d1P1C1 === 1) && (player.focus > 1)):
                 clearOutputAll();
                 display1(day1P1D1Front1R);
                 display2("Type anything to continue");
+                focusResult(10);
                 gameStage++;
                 break;
             case ((gameChoices.d1P1 === 1) && (gameChoices.d1P1C1 === 2)):
                 clearOutputAll();
                 display1(day1P1D1Front2R);
                 display2("Type anything to continue");
+                player.rScore = player.rScore + 8; // These are all placeholder numbers. needs balancing
                 gameStage++;
                 break;
             case ((gameChoices.d1P1 === 1) && (gameChoices.d1P1C1 === 3)):
@@ -128,7 +125,7 @@ var inputHappened = function(currentInput)
                 display2("Type anything to continue");
                 gameStage++;
                 break;
-            case ((gameChoices.d1P1 === 2) && (gameChoices.d1P1C1 === 1)):
+            case ((gameChoices.d1P1 === 2) && (gameChoices.d1P1C1 === 1) && (player.focus > 1)):
                 clearOutputAll();
                 display1(day1P1D1Middle1R);
                 display2("Type anything to continue");
@@ -146,7 +143,7 @@ var inputHappened = function(currentInput)
                 display2("Type anything to continue");
                 gameStage++;
                 break;
-            case ((gameChoices.d1P1 === 3) && (gameChoices.d1P1C1 === 1)):
+            case ((gameChoices.d1P1 === 3) && (gameChoices.d1P1C1 === 1) && (player.focus > 1)):
                 clearOutputAll();
                 display1(day1P1D1Back1R);
                 display2("Type anything to continue");
@@ -165,14 +162,18 @@ var inputHappened = function(currentInput)
                 gameStage++;
                 break;
             default:
-                console.log("Something went wrong with 'gameChoices.d1P1C1");
-                display1("Something is wrong");
-                display2("Something is wrong");
+                display1("Please use a valid input");
+                display2("Try another Option");
                 clearInputs();
+                return;
+    } if else (gameStage === 7)
+    {
+        display1();
+        display2();
     }
-        console.log("123");
-        clearInputs();
 }
+    clearInputs();
+    alert("Please use a valid input!");
     return;
 };
 

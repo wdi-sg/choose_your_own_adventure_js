@@ -26,7 +26,7 @@ var day1P1D1Front1R = "You decided that paying close attention was probably the 
 var day1P1D1Front2R = "Deciding that not being too gung-ho was probably not the best bet, you take your time and try to go about at your own pace. Being at the front did help with getting rid of some distractions so you get a little bonus to your results.";
 
 //R - First Day Result of action 3
-var day1P1D1Front3R = "Although this is your first day, you were a little worn out from being a little to anxious last night. That affected your sleep and so you decided to conserve your energy at this point. ";
+var day1P1D1Front3R = "Although this is your first day, you were a little worn out from being a little to anxious last night. That affected your sleep and so you decided to conserve your energy at this point.";
 
 
 // Middle man Approach===============================================================================================================
