@@ -69,7 +69,7 @@ var gameInputProcess = function(currentInput) {
 
 var printCurrentLocation = function(gameNode) {
     activeGameSegment = gameStory[gameNode];
-    return(`${previousChoiceActionText}\n${activeGameSegment.description} \n ${choicePrompt} \n ${listChoices(activeGameSegment)} `);
+    return(`${previousChoiceActionText}\n${activeGameSegment.description}\n\n${choicePrompt} \n ${listChoices(activeGameSegment)} `);
 }
 
 
@@ -127,17 +127,17 @@ var displayAchievements = function() {
     var beeryGood = (choicesMade.beeryGood) ? beeryGoodText : unknownAchievementText;
     var stockMarketCrash = (choicesMade.stockMarketCrash) ? stockMarketCrashText : unknownAchievementText;
     var outputString = `**ACHIEVEMENTS**\n
---${jetPlaneName}--\n
+--${jetPlaneName}--
 ${leavingOnAJetplane}\n
---${gotMyselfFiredName}--\n
+--${gotMyselfFiredName}--
 ${gotMyselfFired}\n
---${gotMyselfPromotedName}--\n
+--${gotMyselfPromotedName}--
 ${gotMyselfPromoted}\n
---${annoyGaryGetWallopedName}--\n
+--${annoyGaryGetWallopedName}--
 ${annoyGaryGetWalloped}\n
---${beeryGoodName}--\n
+--${beeryGoodName}--
 ${beeryGood}\n
---${stockMarketCrashName}--\n
+--${stockMarketCrashName}--
 ${stockMarketCrash}\n`;
 return outputString;
 }
@@ -154,17 +154,14 @@ var specialOption = function(inputGameIndex) {
             var breakfastConversation = ""
             var trafficConversation = ""
             if (choicesMade.lateForWork) {
-                trafficConversation = `\n"Hey man, how come you are in so late? You know the boss is gonna be pissed."
-"I know," you reply, "There was a terrible traffic jam on the PIE and I was stuck in it for ages.\n`;
+                trafficConversation = `\n"Hey man, how come you are in so late? You know the boss is gonna be pissed."\n"I know," you reply, "There was a terrible traffic jam on the PIE and I was stuck in it for ages.\n`;
             };
             if (choicesMade['cerealChosen'] !== "None") {
                 breakfastConversation = `"Yes I had ${choicesMade['cerealChosen']} this morning."`;
             } else {
                 breakfastConversation = `"I skipped breakfast this morning."`;
             };
-            outputToReturn = `You walk up to Gary.\n
-"Hey there ${playerName}. You have breakfast already?"
-${breakfastConversation}${trafficConversation}${printCurrentLocation(inputGameIndex)}`
+            outputToReturn = `You walk up to Gary.\n"Hey there ${playerName}. You have breakfast already?"\n${breakfastConversation}${trafficConversation}${printCurrentLocation(inputGameIndex)}`
 return outputToReturn;
         break;
 
