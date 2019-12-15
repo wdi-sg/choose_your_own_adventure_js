@@ -8,6 +8,10 @@ var ranNum; // stored random number
 var startShow; // For the clear interval function
 var startHide;// Same as above
 var playerInput; //To keep track of some inputs
+var randQuest1 //Selects the question
+var ranAns1;
+var randAnswersOrder;
+var enemyNo; //Which enemy you gonna face.
 
 
 var player = {

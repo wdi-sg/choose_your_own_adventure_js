@@ -74,28 +74,26 @@ var day1P1 = function () {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Stuff to do with numbers
 var ranNumGen = function (numRange) {
     ranNum = Math.floor(Math.random()*numRange);
     console.log(ranNum);
     return ranNum;
 };
+
+//selecting random question
+var questGen = function () {
+    ranNumGen(quest.length);
+    randQuest1 = quest[ranNum];
+    ranAns1 = questAns[ranNum];
+}
+
+//Picking of random Enemy
+var enemyRanGen = function () {
+    ranNumGen(enemies.length - 1);
+    enemyNo = enemies[ranNum];
+    return enemyNo;
+}
 
 // using focus to get better results.
 var focusResults = function (rGain) {

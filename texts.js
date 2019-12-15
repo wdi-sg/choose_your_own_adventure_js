@@ -88,3 +88,8 @@ var p1QuestStart = "You managed to get to the end of the first period of the day
 
 //Question 1
 var quest = ["What are attributes?", "What does HTML stand for?", "What does CSS stand for?", "What are 'Javascript Variables'?"];
+var questAns =
+[[["Attributes are special words used to associate and control elements."], ["\nAttributes are parameters used to control arguments."], ["\nAttributes are used to retrieve data from objects."]],
+[["Hypertext Markup Language"], ["\nHyperlinks Text Markup Language"], ["\nHidden Text Marking Logo"]],
+[["Cascading Style Sheets"], ["\nCanon Style Sheets"], ["\nCreative Style Sheets"]],
+[["Variables are containers for data"], ["\nVariables are numbers"], ["\nVariables are something that changes"]]]

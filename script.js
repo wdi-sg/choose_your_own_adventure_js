@@ -4,8 +4,7 @@ display1(startText);
 startTextFlash();
 
 
-var inputHappened = function(currentInput)
-{
+var inputHappened = function(currentInput) {
     if (currentInput.toLowerCase() === "start" && gameStage === 0)
     {
         clearInputs();
@@ -13,7 +12,8 @@ var inputHappened = function(currentInput)
         gameStage++;
         display2("Please enter your name")
         return gameStage;
-    } else if (gameStage === 1)
+    }
+    else if (gameStage === 1)
     {
         getName(currentInput);
         clearOutput2();
@@ -22,13 +22,15 @@ var inputHappened = function(currentInput)
         introIntro();
         gameStage++;
         return;
-    } else if (gameStage === 2)
+    }
+    else if (gameStage === 2)
     {
         introStart(); //if this doesn't work check introIntro timing.
         clearInputs();
         gameStage++
         return;
-    } else if (gameStage === 3)
+    }
+    else if (gameStage === 3)
     {
         playerInput = currentInput;
         if (currentInput == 1 || currentInput == 2)
@@ -53,13 +55,15 @@ var inputHappened = function(currentInput)
             gameStage++;
             return player.perk;
         }
-    } else if (gameStage === 4)
+    }
+    else if (gameStage === 4)
     {
         day1P1();
         clearInputs();
         gameStage++;
         return;
-    } else if (gameStage === 5)
+    }
+    else if (gameStage === 5)
     {
         playerInput = parseInt(currentInput);
         if (playerInput === 1 || playerInput === 2 || playerInput === 3)
@@ -99,105 +103,138 @@ var inputHappened = function(currentInput)
                     return;
             }
         }
-    } else if (gameStage === 6)
-        {
-            playerInput = parseInt(currentInput);
-            gameChoices.d1P1C1 = playerInput;
-            switch (true)
-        {
-            case ((gameChoices.d1P1 === 1) && (gameChoices.d1P1C1 === 1) && (player.focus > 2)):
-                clearOutputAll();
-                display1(day1P1D1Front1R);
-                display2("Type anything to continue");
-                focusResult(10);
-                gameStage++;
-                break;
-            case ((gameChoices.d1P1 === 1) && (gameChoices.d1P1C1 === 2)):
-                clearOutputAll();
-                display1(day1P1D1Front2R);
-                display2("Type anything to continue");
-                player.rScore = player.rScore + 8; // These are all placeholder numbers. needs balancing
-                gameStage++;
-                break;
-            case ((gameChoices.d1P1 === 1) && (gameChoices.d1P1C1 === 3)):
-                clearOutputAll();
-                display1(day1P1D1Front3R);
-                display2("Type anything to continue");
-                rest();
-                player.rScore = player.rScore + 4;
-                gameStage++;
-                break;
-            case ((gameChoices.d1P1 === 2) && (gameChoices.d1P1C1 === 1) && (player.focus > 2)):
-                clearOutputAll();
-                display1(day1P1D1Middle1R);
-                display2("Type anything to continue");
-                focusResult(6);
-                classmate1.rel++;
-                classmate1.rel++;
-                gameStage++;
-                break;
-            case ((gameChoices.d1P1 === 2) && (gameChoices.d1P1C1 === 2)):
-                clearOutputAll();
-                display1(day1P1D1Middle2R);
-                display2("Type anything to continue");
-                player.rScore = player.rScore + 4;
-                classmate1.rel++;
-                gameStage++;
-                break;
-            case ((gameChoices.d1P1 === 2) && (gameChoices.d1P1C1 === 3)):
-                clearOutputAll();
-                display1(day1P1D1Middle3R);
-                display2("Type anything to continue");
-                player.rScore = player.rScore + 2;
-                rest();
-                gameStage++;
-                break;
-            case ((gameChoices.d1P1 === 3) && (gameChoices.d1P1C1 === 1) && (player.focus > 2)):
-                clearOutputAll();
-                display1(day1P1D1Back1R);
-                display2("Type anything to continue");
-                player.focus++
-                focusResult(5);
-                gameStage++;
-                break;
-            case ((gameChoices.d1P1 === 3) && (gameChoices.d1P1C1 === 2)):
-                clearOutputAll();
-                display1(day1P1D1Back1R);
-                display2("Type anything to continue");
-                gameStage++;
-                player.bonus = 1.2;
-                player.rScore = player.rScore + 4
-                break;
-            case ((gameChoices.d1P1 === 3) && (gameChoices.d1P1C1 === 3)):
-                clearOutputAll();
-                display1(day1P1D1Back1R);
-                display2("Type anything to continue");
-                rest();
-                player.bonus = 1.5;
-                gameStage++;
-                break;
-            default:
-                display1("Please use a valid input");
-                display2("Try another Option");
-                clearInputs();
-                return;
-    } if else (gameStage === 7)
+    }
+    else if (gameStage === 6)
+    {
+        console.log("Stage 6");
+        playerInput = parseInt(currentInput);
+        gameChoices.d1P1C1 = playerInput;
+            switch (true) {
+                case ((gameChoices.d1P1 === 1) && (gameChoices.d1P1C1 === 1) && (player.focus > 2)):
+                    clearOutputAll();
+                    display1(day1P1D1Front1R);
+                    display2("Type anything to continue");
+                    focusResults(10);
+                    break;
+                case ((gameChoices.d1P1 === 1) && (gameChoices.d1P1C1 === 2)):
+                    clearOutputAll();
+                    display1(day1P1D1Front2R);
+                    display2("Type anything to continue");
+                    player.rScore = player.rScore + 8; // These are all placeholder numbers. needs balancing
+                    break;
+                case ((gameChoices.d1P1 === 1) && (gameChoices.d1P1C1 === 3)):
+                    clearOutputAll();
+                    display1(day1P1D1Front3R);
+                    display2("Type anything to continue");
+                    rest();
+                    player.rScore = player.rScore + 4;
+                    break;
+                case ((gameChoices.d1P1 === 2) && (gameChoices.d1P1C1 === 1) && (player.focus > 2)):
+                    clearOutputAll();
+                    display1(day1P1D1Middle1R);
+                    display2("Type anything to continue");
+                    focusResults(6);
+                    classmate1.rel++;
+                    classmate1.rel++;
+                    break;
+                case ((gameChoices.d1P1 === 2) && (gameChoices.d1P1C1 === 2)):
+                    clearOutputAll();
+                    display1(day1P1D1Middle2R);
+                    display2("Type anything to continue");
+                    player.rScore = player.rScore + 4;
+                    classmate1.rel++;
+                    gameStage++;
+                    break;
+                case ((gameChoices.d1P1 === 2) && (gameChoices.d1P1C1 === 3)):
+                    clearOutputAll();
+                    display1(day1P1D1Middle3R);
+                    display2("Type anything to continue");
+                    player.rScore = player.rScore + 2;
+                    rest();
+                    break;
+                case ((gameChoices.d1P1 === 3) && (gameChoices.d1P1C1 === 1) && (player.focus > 2)):
+                    clearOutputAll();
+                    display1(day1P1D1Back1R);
+                    display2("Type anything to continue");
+                    player.focus++
+                    focusResults(5);
+                    break;
+                case ((gameChoices.d1P1 === 3) && (gameChoices.d1P1C1 === 2)):
+                    clearOutputAll();
+                    display1(day1P1D1Back1R);
+                    display2("Type anything to continue");
+                    player.bonus = 1.2;
+                    player.rScore = player.rScore + 4
+                    break;
+                case ((gameChoices.d1P1 === 3) && (gameChoices.d1P1C1 === 3)):
+                    clearOutputAll();
+                    display1(day1P1D1Back1R);
+                    display2("Type anything to continue");
+                    rest();
+                    player.bonus = 1.5;
+                    break;
+                default:
+                    display1("Please use a valid input");
+                    display2("Try another Option");
+                    clearInputs();
+                    return;
+                }
+            gameStage++;
+            clearInputs();
+            return;
+    }
+    else if (gameStage === 7)
     {
         clearOutputAll();
         display1(p1QuestStart);
         display2("Type anything to continue.");
+        clearInputs();
+        gameStage++;
+    }
+    else if (gameStage === 8)
+    {
+        console.log("Quest Time");
+        questGen();
+        display1(randQuest1 + "\n" + ranAns1);
+        display2("Type in your answer");
+        clearInputs();
+        gameStage++;
+    }
+    else if (gameStage === 9)
+    {
+        playerInput = parseInt(currentInput);
+        if (playerInput === 1)
+        {
+            player.rScore = player.rScore + 10;
+            display1("Nice! You got the right answer!");
+            display2("Type anything to continue.");
+            gameStage++;
+            return;
+        }
+        else
+        {
+            display1("Sorry but you got the wrong answer\nThe actual answer is :" + ranAns1[0]);
+            display2("Type anything to continue.");
+            gameStage++;
+            return;
+        }
+    }
+    else if (gameStage === 10)
+    {
+        display1("You encountered a random Programing Question!!");
+        display2("Type 'Start' when you are ready to proceed.")
         gameStage++;
         return;
-    } if else (gameStage === 8)
+    }
+    else if (gameStage === 11 && currentInput.toLowerCase() == "start")
     {
 
     }
+    else
+    {
+        clearInputs();
+    }
 }
-    clearInputs();
-    alert("Please use a valid input!");
-    return;
-};
-
 
 
 //    Useful little thing for clearing inputs
