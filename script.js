@@ -134,7 +134,7 @@ var inputHappened = function(currentInput){
     nameStore.push(currentInput);
     if (steps === 0) {
         steps++;
-        message = "welcome to the royal rumble, " + "<strong>" + nameStore[0] + "</strong>" + "!" + "<br>" + "you will be facing up with 5X WWE champion, bretman <strong>‘the hitman’</strong> hart enters the ring with charisma as he always do as mike choida sounds the bell and signals for start of the match, you:<br><br>" + "select <strong>a</strong> to " + bretmanHart[0].main.scene[0]  + "<br>select <strong>b</strong> to " + bretmanHart[0].main.scene[1] + "<br>or select <strong>c</strong> to " + bretmanHart[0].main.scene[2];
+        message = "welcome to the royal rumble, " + "<strong>" + nameStore[0] + "</strong>" + "!" + "<br>" + "you will be facing up with 5X WWE champion, bretman <strong>‘the hitman’</strong> hart! and as he enters the ring with charisma as he always do as mike chioda sounds the bell and signals for start of the match, you:<br><br>" + "select <strong>a</strong> to " + bretmanHart[0].main.scene[0]  + "<br>select <strong>b</strong> to " + bretmanHart[0].main.scene[1] + "<br>or select <strong>c</strong> to " + bretmanHart[0].main.scene[2];
         document.querySelector("#input").value = "";
         return message;
     } else if (steps === 1) {
