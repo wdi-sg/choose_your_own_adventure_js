@@ -1,0 +1,58 @@
+body {
+    font-family: Helvetica, sans-serif;
+    font-size: 16px;
+    background: #6c2f3f;
+    line-height: 23px;
+    margin-top: 50px;
+}
+
+.container {
+    max-width: 550px;
+    padding: 50px 60px 60px;
+    margin: 0 auto;
+    text-align: center;
+    background-color: rgb(255,255,255,0.9);
+    border-radius: 50%;
+    height: 540px;
+    width: 530px;
+    position: relative;
+}
+
+img {
+    width: 35%;
+    display: block;
+    margin: 0 auto;
+}
+
+.royalrumble {
+    position: absolute;
+    bottom: 30px;
+    left: 34%;
+}
+
+h1 {
+    text-align: center;
+    color: #d99b24;
+    font-size: 30px;
+    line-height: 1.2em;
+}
+
+.starter{
+  font-size:20px;
+  padding: 8px 30px;
+  margin: 20px auto;
+  display:block;
+  border:3px solid #F6839C;
+}
+
+input {
+    margin: 0 auto;
+}
+
+input:focus {
+    outline: none;
+}
+
+#output{
+  background: rgb(213,184,198,0.1);
+}
