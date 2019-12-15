@@ -7,7 +7,7 @@ Using what you know about data types, variables, operators, conditional blocks, 
 
 The game can be as simple or as complicated as you would like to make it.
 
-Below are some basic rules to get you started. 
+Below are some basic rules to get you started.
 
 If you feel comfortable implementing them, you can start to make your game more complex and dynamic.
 
@@ -26,7 +26,7 @@ var randomNumberBetween0and19 = Math.floor(Math.random() * 20);
 ```
 ### Getting Started
 
-Use the unit 1 template here: [https://github.com/wdi-sg/unit1-template/](https://github.com/wdi-sg/unit1-template/) Copy the files into your repo. 
+Use the unit 1 template here: [https://github.com/wdi-sg/unit1-template/](https://github.com/wdi-sg/unit1-template/) Copy the files into your repo.
 
 #### Need Some Inspiration?
 
@@ -87,8 +87,8 @@ Nice to meet you, `Sean`. What year would you like to go to? **(YYYY)**
 ### Further: Keep Score
 * Assign a score for each task in the game. Report the player's score at the end of the game.
 
-### Further: Make Your Game Repeat as many times as the player wants 
-* Have your player repeat a set of challenges or questions over again- if a player enters a situation or room, allow them to leave and come back if they want. 
+### Further: Make Your Game Repeat as many times as the player wants
+* Have your player repeat a set of challenges or questions over again- if a player enters a situation or room, allow them to leave and come back if they want.
 #### Pseudo-coded Example
 * You are in a dark room. Would you like to enter the left door or the right door?
    * (user chooses left door)

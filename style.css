@@ -1,0 +1,35 @@
+body {
+    font-family: Helvetica, sans-serif;
+    font-size: 18px;
+    background: #F0B5B3;
+    line-height: 22px;
+}
+
+.container {
+    max-width: 580px;
+    padding: 20px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    color: #A9B18F;
+    line-height: 1.2em;
+}
+
+.starter{
+  font-size:20px;
+  padding: 8px 30px;
+  margin: 20px auto;
+  display:block;
+  border:3px solid #F6839C;
+}
+
+input {
+    margin: 0 auto;
+}
+
+#output{
+  background: rgb(255,255,255,0.2);
+}
