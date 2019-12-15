@@ -2,19 +2,152 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Signika&display=swap" rel="stylesheet">
   </head>
   <body>
-    <h3>DOM Manipulation Template</h3>
-    <input class="starter" id="input" placeholder="input"/>
-    <h2>output:</h2>
-    <div class="starter" id="output"></div>
+    <div class="main-frame">
+    <a href="https://fontmeme.com/pokemon-font/"><img src="https://fontmeme.com/permalink/191215/544c88496e0fd5cecb3c644b965fc7f8.png" alt="pokemon-font" border="0"></a>
+    <div class="parent-container">
+      <div class="image-container">
+        <img id="pikachu-image"src="https://img.pokemondb.net/artwork/large/pikachu.jpg" height="250">
+        <div class="box">
+        <h4 id="pikachu-name"></h4>
+        <h4 id="php"></h4>
+        <h4 id="moveset1"></h4>
+        <h4 id="moveset2"></h4>
+      </div><!-- close box-->
+      </div><!-- close 1st image-container-->
+      <div class="image-container">
+        <img id="opponent-image"src="">
+        <div class="box">
+        <h4 id="opp-name"></h4>
+        <h4 id="opp-hp"></h4>
+        </div><!-- close box-->
+      </div><!-- close 2nd image-container-->
+    </div><!-- close parent-container-->
+    <div id="clear-line"></div><!-- Provides space to better separate texts.-->
+    <p class="starter" id="output">
+      Welcome!<br>
+      In this adventure, you will fight 3 Pokemon Battles with your trusty Pikachu.<br>
+      For every round, you will choose between 2 opponents, and the choices are dependent on the outcome of the previous rounds.<br><br>
+      Enter "s" to go into battle!
+    </p>
+
+    <input class="starter" id="input" placeholder="Type here.."/>
+     
+    <p class="starter" id="footer">You can meet 42 different Pokemons!<br>Can you meet them all?</p>
+
+    </div><!-- closes mainframe-->
+
     <script>
+      //Event listener which displays the relevant output whenever there is an input.
       document.querySelector('#input').addEventListener('change', function(event){
+
         var currentInput = event.target.value;
-        var result = inputHappened(currentInput)
-        display( result );
+        var output = inputHappened(currentInput);
+        display( output );
+
       });
+
+
+      //Display correct texts and images in the introduction.
+      var displayIntro = function(){
+
+      //Display Pikachu Name
+      var pName = document.querySelector('#pikachu-name');
+      pName.innerText = "Pikachu";
+
+      //Display Pikachu Image
+      var pImage = document.querySelector('#pikachu-image');
+      pImage.setAttribute('src',pokemon[0].link);
+      pImage.setAttribute('height','250');
+
+      //Clear Opponent Image
+      var oImage = document.querySelector('#opponent-image');
+      oImage.setAttribute('src', "");
+      oImage.setAttribute('height','250');
+
+      //Clear Opponent Name
+      var oName = document.querySelector('#opp-name');
+      oName.innerText = "";
+
+      return "Welcome! \n"+
+      "In this adventure, you will fight 3 Pokemon Battles with your trusty Pikachu. \n"+
+      "For every round, you will choose between 2 opponents, and the choices are dependent on the outcome of the previous rounds.\n \n"+"Enter s to go into battle!"
+      }
+
+      var displayChoices = function(c1,c2){
+        
+        //Displays the images of the two pokemon choices
+        var fImage = document.querySelector('#pikachu-image');
+        fImage.setAttribute('src',pokemon[c1].link);
+        fImage.setAttribute('height','250');
+
+        var d1 = document.querySelector('#pikachu-name');
+        d1.innerText = pokemon[c1].name;
+
+        var oImage = document.querySelector('#opponent-image');
+        oImage.setAttribute('src', pokemon[c2].link);
+        oImage.setAttribute('height','250');
+
+        var d2 = document.querySelector('#opp-name');
+        d2.innerText = pokemon[c2].name;
+
+        //Clear in battle texts and images 
+        var ms1 = document.querySelector('#moveset1');
+        ms1.innerText = "";
+
+        var ms2 = document.querySelector('#moveset2');
+        ms2.innerText = "";
+
+        var oHP = document.querySelector('#opp-hp');
+        oHP.innerText = "";
+
+        var pikaHP = document.querySelector('#php');
+        pikaHP.innerText = "";
+
+      }
+
+      //Displays correct images and text during battle.
+      var displayOppImage = function(op){
+        //Image
+        var oImage = document.querySelector('#opponent-image');
+        oImage.setAttribute('src', op.link);
+        oImage.setAttribute('height','250');
+        //Health Points
+        var oHP = document.querySelector('#opp-hp');
+        oHP.innerText = "HP : "+opp.HP;
+
+        var oName = document.querySelector('#opp-name');
+        oName.innerText = opp.name;
+
+        //Display pikachu name
+        var pName = document.querySelector('#pikachu-name');
+        pName.innerText = "Pikachu";
+
+        //Display pikachu image
+        var pImage = document.querySelector('#pikachu-image');
+        pImage.setAttribute('src',pokemon[0].link);
+        pImage.setAttribute('height','250');
+
+        var pikaHP = document.querySelector('#php');
+        pikaHP.innerText = "HP : "+pokemon[0].HP;
+
+        var ms1 = document.querySelector('#moveset1');
+        ms1.innerText = pokemon[0].Attack[0].name+" / "+pokemon[0].Attack[0].damage+" / "+pokemon[0].Attack[0].accuracy
+
+        var ms2 = document.querySelector('#moveset2');
+        ms2.innerText = pokemon[0].Attack[1].name+" / "+pokemon[0].Attack[1].damage+" / "+pokemon[0].Attack[1].accuracy
+
+      }
+
+      //Display text in the textbox
+      var display = function( data ){
+        var output = document.querySelector('#output');
+        output.innerText = data;
+      }
+
     </script>
-    <script src="script.js" charset="utf-8"></script>
+    <script src="script.js"></script>
   </body>
 </html>

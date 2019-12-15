@@ -1,11 +1,52 @@
-.starter{
+.starter {
   font-size:30px;
   padding:10px;
   display:block;
   margin:40px;
-  border:3px solid blue;
+  font-family: 'Signika', sans-serif;  
 }
 
-#output{
-  background-color:pink;
+#output {
+  text-align: center;
+  margin: 0px;
+  height: 480px;
+  width: 600px;
+}
+
+#input {
+	border: solid black 3px;
+	bottom: 20px;
+	width: 600px;
+	margin: 0px;
+}
+
+.image-container {
+  float: left;
+  width: 250px;
+  height: 400px;
+  padding: 5px;
+  font-size: 16px;
+
+}
+
+.parent-container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.main-frame {
+	width: 600px;
+	height: 900px;
+	font-family: helvetica;
+	
+}
+
+#footer {
+	text-align: center;
+}	
+
+#clear-line {
+	height: 20px;
+
 }
