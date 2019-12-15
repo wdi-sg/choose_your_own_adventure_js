@@ -209,8 +209,10 @@ var specialOption = function(inputGameIndex) {
             var bossImpressedScore = 0;
             if (choicesMade.breakfastChosen !== "None") {
                 bossImpressedScore++;
+            } else {
                 stomachRumbles = 'I would suggest you have have something to eat before presenting in future. ';
             }
+
             bossImpressedScore += choicesMade.fudgeThePresentation;
 
             if (choicesMade.fudgeThePresentation === 1) {
