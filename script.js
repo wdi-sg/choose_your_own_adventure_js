@@ -24,6 +24,7 @@ const game = {
 
   gameOver: function () {
     document.querySelector('#input').placeholder = "Type retry!"
+    this.resetInput()
   },
 
   retry: function () {
@@ -120,12 +121,14 @@ const aTree = function (currentInput) {
   if (currentInput.toLowerCase() === game.choices.b && game.choices.counter === 2 && game.choices.firstChoice === game.choices.a && game.choices.secondChoice === game.choices.a) {
     game.setText(`${game.playerName} throws a POKEBALL!. . . ${game.playerName} caught a Bulbasaur!!!`)
     game.increaseScore(10)
+    game.gameOver()
     return `To be continued....`
   }
 
   // A -> A -> C
   if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 2 && game.choices.firstChoice === game.choices.a && game.choices.secondChoice === game.choices.a) {
     game.setText(`${game.playerName} is running into the deep forest......a wild MEWTWO APPEARS and uses PSY ATTACK! ${game.playerName} loses his mind and slowly fades away.....`)
+    game.gameOver()
     game.increaseScore(1)
     return `Game over! - Total score: ${game.score}`
   }
@@ -162,10 +165,10 @@ const aTree = function (currentInput) {
   // A -> C
   if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 1 && game.choices.firstChoice === game.choices.a) {
     game.setText(`${game.playerName} is running into the deep forest......a wild MEWTWO APPEARS and uses PSY ATTACK! ${game.playerName} loses his mind and slowly fade.....`)
-    game.resetInput()
     game.choices.secondChoice = currentInput.toLowerCase()
     game.choices.increaseCount()
     game.increaseScore(1)
+    game.gameOver()
     return `Game over! - Total score: ${game.score}`
   }
 }
@@ -196,6 +199,7 @@ const bTree = function (currentInput) {
   if (currentInput.toLowerCase() === game.choices.b && game.choices.counter === 2 && game.choices.firstChoice === game.choices.b && game.choices.secondChoice === game.choices.a) {
     game.setText(`Team Rocket: "Oh...that is very nice of you, thanks!!!"`)
     game.increaseScore(3)
+    game.gameOver()
     return `Game over! - Total score: ${game.score}`
   }
 
@@ -203,23 +207,21 @@ const bTree = function (currentInput) {
   if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 2 && game.choices.firstChoice === game.choices.b && game.choices.secondChoice === game.choices.a) {
     game.setText(`Giovanni, Team Rocket's Boss appears\nGiovanni: "${game.playerName}, you have Talent...I have a offer you can't refuse. . .`)
     game.increaseScore(1)
+    game.gameOver()
     return `Game over! - Total score: ${game.score}`
   }
   // B -> B
   if (currentInput.toLowerCase() === game.choices.b && game.choices.counter === 1 && game.choices.firstChoice === game.choices.b) {
     game.setText(`As ${game.playerName} go straight, ${game.playerName} finds himself in a thick jungle, making turns, trying to find his way through. . . hours pass, a day passes, and ${game.playerName} slowly feels weak after having used up all resources . . .he finds a spot to rest and slowly falls to the temptation to close his eyes - ${game.playerName} never wakes up...`)
-    game.resetInput()
     game.choices.secondChoice = currentInput.toLowerCase()
-    game.choices.increaseCount()
     game.increaseScore(1)
+    game.gameOver()
     return "Game over! - Total score: ${game.score}"
   }
   // B -> C
   if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 1 && game.choices.firstChoice === game.choices.b) {
     game.setText(`${game.playerName} slowly approaches the mysterious light.....suddenly a wild MEWTWO APPEARS and uses PSY ATTACK! ${game.playerName} loses his mind and slowly fade.....`)
-    game.resetInput()
-    game.choices.secondChoice = currentInput.toLowerCase()
-    game.choices.increaseCount()
+    game.gameOver()
     game.increaseScore(1)
     return "Game over! - Total score: ${game.score}"
   }
@@ -255,6 +257,7 @@ const cTree = function (currentInput) {
   if (currentInput.toLowerCase() === game.choices.b && game.choices.counter === 2 && game.choices.firstChoice === game.choices.c && game.choices.secondChoice === game.choices.a) {
     game.setText(`${game.playerName} throws a POKEBALL!!! . . Magikarp escapes! Magikarp gains 1 XP!<br><br>MAGIKARP IS EVOLVING . . . <br><br>The Gyarados uses Dragon Breath! ${game.playerName} gets engulfed in the light and lose consciousness...`)
     game.increaseScore(1)
+    game.gameOver()
     return `Game over! - Total score: ${game.score}`
   }
 
@@ -262,6 +265,7 @@ const cTree = function (currentInput) {
   if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 2 && game.choices.firstChoice === game.choices.c && game.choices.secondChoice === game.choices.a) {
     game.setText(`People at the lake see ${game.playerName} run from away a Magikarp and start laughing...<br><br>Heartbroken ${game.playerName} leaves the lake, goes home, covers himself in his blanket and never steps out to catch Pokemon again - full of shame!`)
     game.increaseScore(1)
+    game.gameOver()
     return `Game over! - Total score: ${game.score}`
   }
   // C -> B
