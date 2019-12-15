@@ -60,7 +60,7 @@ var listChoices = function (storySegmentObject) {
 
 var gameInputProcess = function(currentInput) {
     var sanitizedInput = currentInput.toLowerCase().trim()
-    return gameAction(currentInput);
+    return gameAction(sanitizedInput);
 }
 
 
