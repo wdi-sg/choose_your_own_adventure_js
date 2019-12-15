@@ -12,7 +12,8 @@ var randQuest1 //Selects the question
 var ranAns1;
 var randAnswersOrder;
 var enemyNo; //Which enemy you gonna face.
-var inBattle = false;
+var inBattle = false; //More checking of game states
+var confirmCheck = false; // For running away.
 
 
 var player = {
@@ -81,7 +82,7 @@ var enemies =
         name: "CODETHULU",
         hpMax: 65535,
         hp: 65535,
-        difficulty: 20,
+        difficulty: 200,
         desc: "A great old one whom complications and depth is immeasurable. Might not be the best thing to tackle starting out.\nBeware the madness and despair that follows.\n^(;,;)^"
     }
 ];

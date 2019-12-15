@@ -106,9 +106,9 @@ var inputHappened = function(currentInput) {
     }
     else if (gameStage === 6)
     {
-        console.log("Stage 6");
         playerInput = parseInt(currentInput);
         gameChoices.d1P1C1 = playerInput;
+        clearInputs();
             switch (true) {
                 case ((gameChoices.d1P1 === 1) && (gameChoices.d1P1C1 === 1) && (player.focus > 2)):
                     clearOutputAll();
@@ -193,7 +193,6 @@ var inputHappened = function(currentInput) {
     }
     else if (gameStage === 8)
     {
-        console.log("Quest Time");
         questGen();
         display1(randQuest1 + "\n" + ranAns1);
         display2("Type in your answer");
@@ -245,16 +244,80 @@ var inputHappened = function(currentInput) {
     }
     else if (gameStage === 12 && inBattle == true)
     {
+        if (currentInput == "YES" && confirmCheck == true)
+        {
+            gameOverGU();
+        }
         switch (parseInt(currentInput))
         {
             case 1:
                 doAttack();
+                checkForDeadPeople();
                 clearInputs();
+                break;
+            case 2:
+                doFocus();
+                checkForDeadPeople();
+                clearInputs();
+                break;
+            case 3:
+                if (confirmCheck === false)
+                {
+                    alert("Are you sure you want to give up?\nThe game will end if you do.\nIf so, please type 'YES' in all caps to confirm.")
+                    confirmCheck = true;
+                    return;
+                }
+                else
+                {
+                    clearInputs();
+                }
         }
     }
-    else
+    else if (gameStage === 13)
+    {
+        switch(parseInt(currentInput))
+        {
+            case 1:
+                display1(readCodenomicon);
+                display2("DESPAIR, DESPAIR, DESPAIR!");
+                clearInputs();
+                gameStage = 65535;
+                inBattle = true;
+                break;
+            case 2:
+                display1("You're pretty tired already and decide that maybe going through such a thick and heavy book might be for a later time.")
+                display2("The day ends and you carry on your way about things.")
+                gameStage = 9999;
+                break;
+            case 3:
+                display1("Unsure what comes over you but you decide to chuck the heavy book away with all your might and into the trash. A shiver rushes through your spine but you feel a weird sense of relief. Who knows what is going on right now.")
+                display2("Welp. Here we are at the end of day 1 right now. Maybe I'll update this at a later time.")
+                gameStage = 9999;
+                break;
+            default:
+                display1("Woops, typed something wrong I'm guessing.\nType 1 to read the codenomicon\nType 2 to keep it for another time.\nType 3 to throw that sucker.");
+                display2("Make your choice.")
+        }
+    }
+    else if (gameStage === 65535)
+    {
+        enemyNo = enemies[5];
+        updateEnemyInfo();
+        display2("Despair");
+        doAttack();
+        alert("YOU GOT THE MADNESS ENDING");
+        gameStage = 42424242;
+    }
+    else if (gameStage > 1000);
+    {
+        display1("This is your Results score " + player.rScore + "\nHope you had some fun with this short game.");
+        display2("Goodnight as I need to sleep!!!");
+    }
+    {
     {
         clearInputs();
+        display2("Not sure but try typing something else!")
+    }
     }
 }
 

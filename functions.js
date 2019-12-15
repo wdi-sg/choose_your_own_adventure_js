@@ -142,6 +142,64 @@ var doAttack = function () {
     return enemyNo.hp;
 }
 
+var doFocus = function () {
+    if (player.focus < 1)
+    {
+        alert("You don't have enough focus to use this");
+    }
+    else
+    {
+        ranNumGen(20*player.focusMulti);
+        enemyNo.hp = enemyNo.hp - (ranNum + 10);
+        player.focus--
+        ranNumGen(10*enemyNo.difficulty)
+        player.hp = player.hp - ranNum;
+        updateHp();
+        updateFocus();
+        updateEnemyInfo();
+    }
+    return;
+}
+
 var updateEnemyInfo = function () {
     display1(enemyNo.name + "\nEnemy Health :" + enemyNo.hp + "\nDesc: " + enemyNo.desc + "\n1. Attack Problem\n2. Use your focus to attack\n3. Give Up");
+}
+
+var gameOverGU = function () {
+    gameStage = 9999;
+    display1("You gave up.\nMaybe in another life you'll do better.");
+    display2("I should make a reset command but it is late and I need to sleep");
+    return;
+}
+
+var gameOverLost = function () {
+    alert("You died");
+    display1("The problem was too great and you went mad over the problem.\nIs this the end?");
+    display2("I need to really make that reset command but my bed calls me.");
+    gameStage = 9999;
+    return;
+}
+
+var victoryBattle = function () {
+    alert("You Won!!")
+    display1("With great patience, insight and a little bit of luck you managed to overcome this programming problem.\nCongrats! You've Won the game. It is a little short right now but maybe in the future more will be done.\nYou got through the day and got the 'CODENOMICON'.\nWould you like to read it? ^(;,;)^");
+    display2("Type '1' to read. Type '2' to keep it away for later.\nType '3' to throw it away.")
+    gameStage++;
+    inBattle = false;
+}
+
+
+var checkForDeadPeople = function () {
+    if (player.hp <= 0)
+    {
+        gameOverLost();
+    }
+    else if (enemyNo.hp <= 0)
+    {
+        victoryBattle();
+    }
+    else
+    {
+        return;
+    }
 }

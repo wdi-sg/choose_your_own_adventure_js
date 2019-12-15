@@ -59,6 +59,9 @@ var day1P1D1Back3R = "Last night you didn't get as good of a rest as you thought
 var p1QuestStart = "You managed to get to the end of the first period of the day. We have a simple question for you to answer and a simple coding exercise for you to do afer as well. When you're ready, just type anything to continue."
 
 
+// CODENOMICON
+var readCodenomicon = "AS YOU FLIP THROUGH THE PAGES OF THE CODENOMICON, YOUR MIND CANNOT COMPREHEND THE DEPTHS AND INFINITUM THAT OF WHICH IS CODING. PAGE AFTER PAGE YOU GROW OLDER AND YOUR HAIR TURNS TO GREY. YOUR EYES GROW DIMMER AND THERE YOU SEE IT. YOU SEE THAT OF WHICH SHOULD NEVER BE SEEN.\n=========================='CODETHULU============================\nIT AWAKENS"
+
 
 
 
