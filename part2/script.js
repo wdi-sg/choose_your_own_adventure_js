@@ -392,7 +392,7 @@ const pokemon = [
 	link: "https://img.pokemondb.net/artwork/large/kyogre.jpg"
 	},
 	{
-	name: "Groundon",
+	name: "Groudon",
 	HP: 125,
 	Attack: [{
 		name: "Earthquake",
@@ -404,7 +404,7 @@ const pokemon = [
 		damage: 29,
 		accuracy: 0.3
 		}],
-	link: "https://img.pokemondb.net/artwork/large/groundon.jpg"
+	link: "https://img.pokemondb.net/artwork/large/groudon.jpg"
 	},
 	{
 	name: "Lugia",
