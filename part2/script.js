@@ -23,16 +23,20 @@ const objects = {
   },
   weapons: {
     normalSword: {
-      damage: Math.floor(Math.random() * (50 - 30) + 30)
+      damage: Math.floor(Math.random() * (50 - 30) + 30),
+      name: "normal sword"
     },
     bluntSword: {
-      damage: Math.floor(Math.random() * 30)
+      damage: Math.floor(Math.random() * 30),
+      name: "blunt sword"
     },
     greaterSword: {
-      damage: Math.floor(Math.random() * (100 - 50) + 50)
+      damage: Math.floor(Math.random() * (100 - 50) + 50),
+      name: "greater sword"
     },
     swordOfVictory: {
-      damage: 500
+      damage: 500,
+      name: "sword of victory"
     }
   }
 };
@@ -49,7 +53,7 @@ var inputHappened = function(currentInput) {
     inputBox.value = "";
     step = 1;
     return `${name}, the alphabets on the left correspond to decisions you can make. 
-    
+
     For now, enter anything to begin.`;
   }
   if (enteredName && step === 1) {
@@ -65,7 +69,7 @@ var inputHappened = function(currentInput) {
     inputBox.value = "";
     step = 3;
     totalScore++;
-    return `You decide to go left. There's a man. He beckons you over. On his left, there's a door. Do you 
+    return `You decide to go left. There's a man. He beckons you over. On his left, there's a door. Do you: 
     
     i) Ignore him, go through the door
     g) Go to him
@@ -76,7 +80,9 @@ var inputHappened = function(currentInput) {
     step = 4;
     totalScore++;
     playerWeapon = objects.weapons.normalSword;
-    return `You go through the door. Demons quickly close in!`;
+    return `You go through the door. Demons quickly close in!
+    
+    Enter any key to continue`;
   } else if (enteredName && step === 3 && currentInput === "g") {
     inputBox.value = "";
     step = 4;
@@ -85,6 +91,8 @@ var inputHappened = function(currentInput) {
     return `The man gives you a weapon.
     
     "You'll need this for the door ahead. Muahaha..."
+
+    You got a ${playerWeapon.name}!
     
     Enter any key to continue`;
   }
@@ -108,6 +116,8 @@ var inputHappened = function(currentInput) {
     return `You decide to approach the lady in white. 
     
     "Hello, ${name}. I've been waiting for you. The road ahead is difficult. It is fortunate that you ran into me - here is a weapon that will help you. Enter this door. Behind this, challenges await."
+
+    You got the ${playerWeapon.name}!
     
     Enter any key to continue`;
   } else if (enteredName && step === 3 && currentInput === "i") {
@@ -148,6 +158,8 @@ var inputHappened = function(currentInput) {
     
     "Thank you, ${name}. I was cursed by a demon to sleep eternally. You saved me. In thanks, have this. You'll need this on your journey. Go through this door. There are demons on the other end. You'll have to defeat them to continue your journey."
 
+    You got the ${playerWeapon.name}!
+
     Enter any key to continue.`;
   } else if (enteredName && step === 3 && currentInput === "c") {
     step = 4;
@@ -166,7 +178,7 @@ var inputHappened = function(currentInput) {
     step = 5;
     totalScore++;
     inputBox.value = "";
-    return `Demons advance on you!
+    return `Demons appear!
 
     Enter any key to do battle.`;
   }
@@ -180,17 +192,17 @@ var inputHappened = function(currentInput) {
           objects.player.hp - objects.monsters.lowerDemons.damage;
         objects.monsters.lowerDemons.hp = objects.monsters.lowerDemons.hp -=
           playerWeapon.damage;
-        return `You attack the monsters!
+        return `You attack the demons with the ${playerWeapon.name}!
 
         Remaining hp: ${objects.player.hp}
-        Monster hp: ${objects.monsters.lowerDemons.hp} `;
+        Demon hp: ${objects.monsters.lowerDemons.hp} `;
       } else {
         objects.monsters.lowerDemons.hp = objects.monsters.lowerDemons.hp -=
           playerWeapon.damage;
-        return `The monsters miss!
+        return `The demons miss! You attack the demons with the ${playerWeapon.name}!
 
         Remaining hp: ${objects.player.hp}
-        Monster hp: ${objects.monsters.lowerDemons.hp}`;
+        Demon hp: ${objects.monsters.lowerDemons.hp}`;
       }
     }
     if (
@@ -214,7 +226,7 @@ var inputHappened = function(currentInput) {
     while (objects.player.hp > 0 && objects.monsters.boss.hp > 0) {
       objects.player.hp -= objects.monsters.boss.damage;
       objects.monsters.boss.hp -= playerWeapon.damage;
-      return `You attack the greater demon! 
+      return `You attack the greater demon with ${playerWeapon.name}! 
 
       Remaining hp: ${objects.player.hp}
       Boss hp: ${objects.monsters.boss.hp}`;
@@ -239,6 +251,13 @@ var inputHappened = function(currentInput) {
   }
 };
 
+function resetValues() {
+  step = 0;
+  objects.player.hp = 100;
+  objects.monsters.lowerDemons.hp = 100;
+  objects.monsters.boss.hp = 500;
+}
+
 var display = function(data) {
   var displayElement = document.querySelector("#output");
   // get rid of the entire contents
@@ -261,9 +280,4 @@ var display = function(data) {
 //   outputBox.innerText = `Your score is ${totalScore}!`;
 // }
 
-function resetValues() {
-  step = 0;
-  objects.player.hp = 100;
-  objects.monsters.lowerDemons.hp = 100;
-  objects.monsters.boss.hp = 500;
-}
+
