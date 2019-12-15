@@ -36,28 +36,32 @@ console.log("hello script js");
 var inputHappened = function(input) {};
 var name = prompt("What is your name, adventurer?")
 
-var yearChose = prompt("Good to meet you, ${"name"}. What year would you like to go to? YYYY)");
+var yearChose = prompt("Good to meet you, ${name} What year would you like to go to? YYYY)");
 
 if (Number(yearChose) >= 2015) {
     var BifforGriff = prompt("I see you're a fan of Back to the 'Future 2, would you rather deal with Biff or Griff? (B/G)");
 };
-if (BorG === "b") {
+if (BorG.toLowerCase() === "b") {
     var SorR = prompt("Hmm interesting. Biff is angry and has a cane. Do you stand and fight or run away like a coward? (S/R)");
 };
-if (SorR === "s") {
+if (SorR.toLowerCase() === "s") {
     var goodChoice1 = alert("Good Choice! Biff is old and feeble at this point. You push him over and he falls over a pile of manure.");
-};
-else if (SorR === "r") {
+} else if(SorR.toLowerCase() === "r") {
     var badChoice1 = alert("You get away, but your future son Marty.Jr is heckled for the rest of his days for his dad's cowardice.");
-};
-else if (BorG === "g") {
+} else if (BorG.toLowerCase() === "g") {
     var IorO = prompt("Griff is asking if you are in or out? (I/O)");
 };
-if (IorO === "i") {
+if (IorO.toLowerCase() === "i") {
     alert (
         "Bad call. Griff and his cronies rob the Valley Hill bank and frame you for it. No more time travel for you.");
-};
-else if (IorO === "o") {
+} else if (IorO.toLowerCase() === "o") {
     alert(
         "Good call. You deck Griff in the jaw and run away. He gives chase on his hoverboard and ends up in a pile of manure.");
-}
+} else if (Number(yearChose) >= 1985 && Number(yearChose) <= 2014) {
+    var CK1 = prompt(
+        "Doc has already destroyed the Time Machine at this point. I guess you'll have to wait around until 2015. What name would you want to go by till that time?");
+};
+if (CK1 === "Calvin Klein") {
+    alert("Welcome to the future, Calvin Klein.");
+
+} else alert("${CK1} is a rather peculiar name, but it should do.");
