@@ -249,12 +249,14 @@ var inputHappened = function(currentInput){
             message = bretmanHart[1].attack.moves.chokeslam.nextMoves.submission.result + scores;
             answersLogged = answersLogged + answers.push(currentInput);
             score = score + 35;
+            steps++;
             document.querySelector("#input").value = "";
         } else if (answers[0] === "a" && answers[1] === "b" && currentInput === "b") {
             console.log("attack and chokeslam + chokeslam result + nextmoves results");
             message = bretmanHart[1].attack.moves.chokeslam.nextMoves.moonsault.results + score;
             answersLogged = answersLogged + answers.push(currentInput);
             score = score - 15;
+            steps++;
             document.querySelector("#input").value = "";
         } else if (answers[0] === "a" && answers[1] === "c" && currentInput === "a") {
             console.log("attack and dropkick + dropkick results + turnbuckle ");
