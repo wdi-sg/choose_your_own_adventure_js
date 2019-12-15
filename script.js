@@ -30,7 +30,7 @@ var bretmanHart = [
         moves: {
             moonsault: {
                 name: "try to attempt a full moonsault",
-                results: "you're a total noob and COMPLETELY butchered the move! you ended up knocking yourself out cold and got stretchered out of the ring. how embarassing!<br><br>"
+                results: "you're a total noob and COMPLETELY butchered the move! you ended up knocking yourself out cold and got stretchered out of the ring. how embarassing!<br>"
             },
             chokeslam: {
                 name: "engage in a chokeslam",
@@ -38,11 +38,11 @@ var bretmanHart = [
                 nextMoves: {
                     submission: {
                         name: "force him into submission by performing his finishing move, <strong>the sharpshooter</strong> on him",
-                        results: "CRITICAL HIT! bretman the hitman hart is rendered completely useless and taps out. you won!<br><br>y"
+                        results: "CRITICAL HIT! bretman the hitman hart is rendered completely useless and taps out. you won!<br>"
                     },
                     moonsault: {
                         name: "perform a moonsault",
-                        results: "you're a total noob and COMPLETELY butchered the move! you ended up knocking yourself out cold and got stretchered out of the ring. how embarassing!<br><br>",
+                        results: "you're a total noob and COMPLETELY butchered the move! you ended up knocking yourself out cold and got stretchered out of the ring. how embarassing!<br>",
                     }
                 },
             },
@@ -52,11 +52,11 @@ var bretmanHart = [
                 nextMoves: {
                     turnbuckles: {
                         name: "climb on to the top of the turnbuckles",
-                        results: "CRITICAL HIT! you performed a perfect moonsault and bretman the hitman hart taps out! you win!<br><br>",
+                        results: "CRITICAL HIT! you performed a perfect moonsault and bretman the hitman hart taps out! you win!<br>",
                     },
                     ringropes: {
                         name: "immediately throw your body against the ring ropes",
-                        results: "yikes! bretman the hitman hart was faking it all along and trips you up on your re-entry, he performs YOUR move with perfection and forces you into submission with his finishing move, <strong>the sharpshooter</strong>! you struggle in his arms and tap out. didn't see that coming!<br><br>",
+                        results: "yikes! bretman the hitman hart was faking it all along and trips you up on your re-entry, he performs YOUR move with perfection and forces you into submission with his finishing move, <strong>the sharpshooter</strong>! you struggle in his arms and tap out. didn't see that coming!<br>",
                     }
                 },
             }
@@ -69,15 +69,15 @@ var bretmanHart = [
         moves: {
             eyepower: {
                 name: "use your eyepower to glare with pulsating eyeballs in hopes of intimidating bretman the hitman hart",
-                results: "wow it seemed to work!! it scared the crap out of bretman the hitman hart and as he starts to retreat backwards into the entrance, you: <br><br>",
+                results: "wow it seemed to work!! it scared the crap out of bretman the hitman hart and as he starts to retreat backwards into the entrance, you: <br>",
                 nextMoves: {
                     submission: {
                         name: "force him into submission by performing his finishing move, <strong>the sharpshooter</strong> on him",
-                        results: "CRITICAL HIT! bretman the hitman hart is rendered completely useless and taps out. you won!<br><br>",
+                        results: "CRITICAL HIT! bretman the hitman hart is rendered completely useless and taps out. you won!<br>",
                     },
                     moonsault: {
                         name: "perform a moonsault",
-                        results: "you're a total noob and COMPLETELY butchered the move! you ended up knocking yourself out cold and got stretchered out of the ring. how embarassing!<br><br>",
+                        results: "you're a total noob and COMPLETELY butchered the move! you ended up knocking yourself out cold and got stretchered out of the ring. how embarassing!<br>",
                     }
                 },
             },
@@ -87,11 +87,11 @@ var bretmanHart = [
                 nextMoves: {
                     persist: {
                         name: "NEVER GIVE UP!! you ignore the haters",
-                        results: "CRITICAL HIT! bretman the hitman hart is rendered completely useless and taps out. you won!<br><br>",
+                        results: "CRITICAL HIT! bretman the hitman hart is rendered completely useless and taps out. you win!<br>",
                     },
                     tapoutearly: {
                         name: "cut your losses and tap out",
-                        results: "you lose!<br><br>",
+                        results: "you lose!<br>",
                     }
                 },
             },
@@ -101,11 +101,11 @@ var bretmanHart = [
                 nextMoves: {
                     grabankles: {
                         name: "wait for the window of opportunity to assist stone cold steve austin by grabbing bretman the hitman hart by the ankles from the bottom of the ring",
-                        results: "ASSIST +1! (too bad this is not the NBA) you managed to gain an assist and trip over bretman the hitman hart where stone cold steve austin performed the stone cold stunner and forced him into submission!<br><br>"
+                        results: "ASSIST +1! (too bad this is not the NBA) you managed to gain an assist and trip over bretman the hitman hart where stone cold steve austin performed the stone cold stunner and forced him into submission!<br>"
                     },
                     flee: {
                         name: "immediately flee",
-                        results: "the crowd started BOO-ing you as you flee-ed out of the ring in shame. how embarassing!<br><br>",
+                        results: "the crowd started BOO-ing you as you flee-ed out of the ring in shame. how embarassing!<br>",
                     }
                 },
             }
@@ -118,11 +118,11 @@ var bretmanHart = [
         moves: {
             running: {
                 name: "continue running",
-                results: "interesting choice, seems like you've not learned your lesson. you collapse in exhaustion and mike chioda had no choice but to stretcher you out of the ring. how embarassing!<br><br>"
+                results: "interesting choice, seems like you've not learned your lesson. you collapse in exhaustion and mike chioda had no choice but to stretcher you out of the ring. how embarassing!<br>"
             },
             attack: {
                 name: "attempt to attack",
-                results: "after gathering yourself and calming down, you've decided to start planning your attack. <br><br> press <strong>a</strong> to continue<br><br>",
+                results: "after gathering yourself and calming down, you've decided to start planning your attack. <br><br> press <strong>a</strong> to continue<br>",
             }
         },
     },
@@ -223,10 +223,10 @@ var inputHappened = function(currentInput){
             document.querySelector("#input").value = "";
         } else if (answers[0] === "c" && currentInput === "a") {
             console.log("continue running");
-            message = bretmanHart[3].run.moves.running.results;
+            message = bretmanHart[3].run.moves.running.results + "<br> your score is: " + score;
             answersLogged = answersLogged + answers.push(currentInput);
             score = score - 20;
-            steps++;
+            steps = + 4;
             document.querySelector("#input").value = "";
         }  else if (answers[0] === "c" && currentInput === "b") {
             message = bretmanHart[3].run.moves.attack.results;
@@ -329,7 +329,7 @@ var inputHappened = function(currentInput){
         }  else if (steps === 4) {
             steps = 0;
             answers = [];
-            message = "your score is: " + score + "<br>";
+            message = "just in case you didn't see, your score is: " + score + "!<br> input any character and press enter to restart the game.";
             document.querySelector("#input").value = "";
         }
     return message;
