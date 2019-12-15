@@ -3,24 +3,30 @@ const game = {
     a: "a",
     b: "b",
     c: "c",
+    d: "d",
     counter: 0,
-    increaseCount: function(){
+    increaseCount: function () {
       this.counter++
     },
     firstChoice: "",
     secondChoice: ""
   },
-  playerName: "",
 
-  resetInput: function(){
+  playerName: "",
+  score: 0,
+  increaseScore: function (score) {
+    this.score = this.score + score
+  },
+
+  resetInput: function () {
     document.querySelector('#input').value = ""
   },
 
-  gameOver: function(){
+  gameOver: function () {
     document.querySelector('#input').placeholder = "Type retry!"
   },
 
-  retry: function(){
+  retry: function () {
     this.choices.counter = 0
     document.querySelector('#input').value = ""
     document.querySelector('#input').placeholder = "Type here"
@@ -28,16 +34,18 @@ const game = {
     this.choices.firstChoice = ""
     this.choices.secondChoice = ""
     this.playerName = ""
+    this.score = 0
   },
 
-  setText: function(text){
+  setText: function (text) {
     document.querySelector("#text").innerHTML = text
   }
 }
 
 // Input function
-var inputHappened = function(currentInput){
-  if (game.choices.counter === 0 && game.playerName === ""){
+var inputHappened = function (currentInput) {
+  // input name
+  if (game.choices.counter === 0 && game.playerName === "") {
     if (currentInput.length < 3 || currentInput === "retry") {
       game.resetInput()
       return `Please type a valid name with at least 3 characters!`
@@ -47,12 +55,12 @@ var inputHappened = function(currentInput){
     return `A - Sneak through the tall grass\nB - Enter the forest\nC - Explore the Lake`
   }
   // reset game
-  if (currentInput.toLowerCase() === "retry"){
+  if (currentInput.toLowerCase() === "retry") {
     game.retry()
     return `Please type a name!`
   }
   // A 
-  if (currentInput.toLowerCase() === game.choices.a && game.choices.counter === 0 && game.playerName !== false) {
+  if (currentInput.toLowerCase() === game.choices.a && game.choices.counter === 0) {
     game.resetInput()
     game.choices.firstChoice = currentInput.toLowerCase()
     game.choices.increaseCount()
@@ -61,33 +69,36 @@ var inputHappened = function(currentInput){
   }
   // B 
   if (currentInput.toLowerCase() === game.choices.b && game.choices.counter === 0) {
-      game.setText(`${ game.playerName } come across a three-way junction. The right path eminates a mysterious light in the distance .....`)
-      game.resetInput()
-      game.choices.firstChoice = currentInput.toLowerCase()
-      game.choices.increaseCount()
-      return `A - Go Left\nB - Go Straight\nC - Go Right`
-    }
+    game.setText(`${ game.playerName } come across a three-way junction. The right path eminates a mysterious light in the distance .....`)
+    game.resetInput()
+    game.choices.firstChoice = currentInput.toLowerCase()
+    game.choices.increaseCount()
+    return `A - Go Left\nB - Go Straight\nC - Go Right\nD - Go back`
+  }
   // C 
   if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 0) {
     game.setText(`As ${game.playerName} comes across the lake, he wonders what to do next...`)
     game.resetInput()
     game.choices.firstChoice = currentInput.toLowerCase()
     game.choices.increaseCount()
-    return `A - Go for a swim\nB - Try to fish\nC - Take a walk around the lake`
+    return `A - Go for a swim\nB - Try to fish\nC - Take a walk around the lake\nD - Go back`
   }
 
   return gameLogic(currentInput)
 };
 
-const gameLogic = function(currentInput){
-  switch(game.choices.firstChoice){
-    case game.choices.a: return aTree(currentInput)
-    case game.choices.b: return bTree(currentInput)
-    case game.choices.c: return cTree(currentInput)
+const gameLogic = function (currentInput) {
+  switch (game.choices.firstChoice) {
+    case game.choices.a:
+      return aTree(currentInput)
+    case game.choices.b:
+      return bTree(currentInput)
+    case game.choices.c:
+      return cTree(currentInput)
   }
 }
 
-const aTree = function(currentInput) {
+const aTree = function (currentInput) {
   // Full A Tree
   // A -> A
   if (currentInput.toLowerCase() === game.choices.a && game.choices.counter === 1 && game.choices.firstChoice === game.choices.a) {
@@ -95,24 +106,28 @@ const aTree = function(currentInput) {
     game.resetInput()
     game.choices.secondChoice = currentInput.toLowerCase()
     game.choices.increaseCount()
+    game.increaseScore(5)
     return "A - Attack\nB - Pokeball\nC - Run"
   }
   // A -> A -> A
-  if (currentInput.toLowerCase() === game.choices.a && game.choices.counter === 2 && game.choices.firstChoice === game.choices.a && game.choices.secondChoice === game.choices.a ) {
+  if (currentInput.toLowerCase() === game.choices.a && game.choices.counter === 2 && game.choices.firstChoice === game.choices.a && game.choices.secondChoice === game.choices.a) {
     game.setText(`Pikachu uses Lightning Bolt! Pikachu's attack missed!\nBulbasaur uses Tackle! Critical Hit! 10 Damage! Pikachu fainted!`)
     game.gameOver()
-    return `Game over!`
+    game.increaseScore(1)
+    return `Game over! - Total score: ${game.score}`
   }
   // A -> A -> B
   if (currentInput.toLowerCase() === game.choices.b && game.choices.counter === 2 && game.choices.firstChoice === game.choices.a && game.choices.secondChoice === game.choices.a) {
     game.setText(`${game.playerName} throws a POKEBALL!. . . ${game.playerName} caught a Bulbasaur!!!`)
+    game.increaseScore(10)
     return `To be continued....`
   }
 
   // A -> A -> C
   if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 2 && game.choices.firstChoice === game.choices.a && game.choices.secondChoice === game.choices.a) {
     game.setText(`${game.playerName} is running into the deep forest......a wild MEWTWO APPEARS and uses PSY ATTACK! ${game.playerName} loses his mind and slowly fades away.....`)
-    return `Game over!`
+    game.increaseScore(1)
+    return `Game over! - Total score: ${game.score}`
   }
   // A -> B
   if (currentInput.toLowerCase() === game.choices.b && game.choices.counter === 1 && game.choices.firstChoice === game.choices.a) {
@@ -120,25 +135,29 @@ const aTree = function(currentInput) {
     game.resetInput()
     game.choices.secondChoice = currentInput.toLowerCase()
     game.choices.increaseCount()
+    game.increaseScore(3)
     return "A - Attack\nB - Pokeball\nC - Run"
   }
   // A -> B -> A
-  if (currentInput.toLowerCase() === game.choices.a && game.choices.counter === 2 && game.choices.firstChoice === game.choices.a && game.choices.secondChoice === game.choices.b ) {
+  if (currentInput.toLowerCase() === game.choices.a && game.choices.counter === 2 && game.choices.firstChoice === game.choices.a && game.choices.secondChoice === game.choices.b) {
     game.setText(`Pikachu uses Thunder! 5 Damage! Bulbasaur has 2 HP left! Bulbasaur uses Solar Beam! 20 Damage! Overkill! Pikachu fainted!`)
     game.gameOver()
-    return `Game over!`
+    game.increaseScore(1)
+    return `Game over! - Total score: ${game.score}`
   }
   // A -> B -> B
-  if (currentInput.toLowerCase() === game.choices.b && game.choices.counter === 2 && game.choices.firstChoice === game.choices.a && game.choices.secondChoice === game.choices.b ) {
+  if (currentInput.toLowerCase() === game.choices.b && game.choices.counter === 2 && game.choices.firstChoice === game.choices.a && game.choices.secondChoice === game.choices.b) {
     game.setText(`${game.playerName} throws a POKEBALL!. . . Bulbasaur escaped! Bulbasaur uses Razor leaf! 6 Damage! Pikachu fainted!`)
     game.gameOver()
-    return `Game over!`
+    game.increaseScore(1)
+    return `Game over! - Total score: ${game.score}`
   }
   // A -> B -> C
-  if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 2 && game.choices.firstChoice === game.choices.a && game.choices.secondChoice === game.choices.b ) {
+  if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 2 && game.choices.firstChoice === game.choices.a && game.choices.secondChoice === game.choices.b) {
     game.setText(`${game.playerName} is running into the deep forest......a wild MEWTWO APPEARS and uses PSY ATTACK! ${game.playerName} loses his mind and slowly fade.....`)
     game.gameOver()
-    return `Game over!`
+    game.increaseScore(1)
+    return `Game over! - Total score: ${game.score}`
   }
   // A -> C
   if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 1 && game.choices.firstChoice === game.choices.a) {
@@ -146,11 +165,12 @@ const aTree = function(currentInput) {
     game.resetInput()
     game.choices.secondChoice = currentInput.toLowerCase()
     game.choices.increaseCount()
-    return "Game Over"
+    game.increaseScore(1)
+    return `Game over! - Total score: ${game.score}`
   }
 }
 
-const bTree = function(currentInput){
+const bTree = function (currentInput) {
   // Full B Tree
   // B -> A
   if (currentInput.toLowerCase() === game.choices.a && game.choices.counter === 1 && game.choices.firstChoice === game.choices.b) {
@@ -162,24 +182,28 @@ const bTree = function(currentInput){
     game.resetInput()
     game.choices.secondChoice = currentInput.toLowerCase()
     game.choices.increaseCount()
+    game.increaseScore(5)
     return "A - Pikachu Thunder\nB - Hand over Pokemon\nC - Steal their Pokemon"
   }
   // B -> A -> A
-  if (currentInput.toLowerCase() === game.choices.a && game.choices.counter === 2 && game.choices.firstChoice === game.choices.b && game.choices.secondChoice === game.choices.a ) {
+  if (currentInput.toLowerCase() === game.choices.a && game.choices.counter === 2 && game.choices.firstChoice === game.choices.b && game.choices.secondChoice === game.choices.a) {
     game.setText(`Team Rocket's blasting off again!`)
+    game.increaseScore(5)
     game.gameOver()
-    return `Game over!`
+    return `Game over! - Total score: ${game.score}`
   }
   // B -> A -> B
   if (currentInput.toLowerCase() === game.choices.b && game.choices.counter === 2 && game.choices.firstChoice === game.choices.b && game.choices.secondChoice === game.choices.a) {
     game.setText(`Team Rocket: "Oh...that is very nice of you, thanks!!!"`)
-    return `Game over!`
+    game.increaseScore(3)
+    return `Game over! - Total score: ${game.score}`
   }
 
   // B -> A -> C
   if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 2 && game.choices.firstChoice === game.choices.b && game.choices.secondChoice === game.choices.a) {
     game.setText(`Giovanni, Team Rocket's Boss appears\nGiovanni: "${game.playerName}, you have Talent...I have a offer you can't refuse. . .`)
-    return `Game over!`
+    game.increaseScore(1)
+    return `Game over! - Total score: ${game.score}`
   }
   // B -> B
   if (currentInput.toLowerCase() === game.choices.b && game.choices.counter === 1 && game.choices.firstChoice === game.choices.b) {
@@ -187,7 +211,8 @@ const bTree = function(currentInput){
     game.resetInput()
     game.choices.secondChoice = currentInput.toLowerCase()
     game.choices.increaseCount()
-    return "Game over!"
+    game.increaseScore(1)
+    return "Game over! - Total score: ${game.score}"
   }
   // B -> C
   if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 1 && game.choices.firstChoice === game.choices.b) {
@@ -195,11 +220,19 @@ const bTree = function(currentInput){
     game.resetInput()
     game.choices.secondChoice = currentInput.toLowerCase()
     game.choices.increaseCount()
-    return "Game over!"
+    game.increaseScore(1)
+    return "Game over! - Total score: ${game.score}"
+  }
+  // B -> D
+  if (currentInput.toLowerCase() === game.choices.d && game.choices.counter === 1 && game.choices.firstChoice === game.choices.b) {
+    game.choices.counter--
+    game.resetInput()
+    game.setText(`You return to the start of your journey`)
+    return `A - Sneak through the tall grass\nB - Enter the forest\nC - Explore the Lake`
   }
 }
 
-const cTree = function(currentInput){
+const cTree = function (currentInput) {
   // Full C Tree
 
   // C -> A
@@ -208,24 +241,28 @@ const cTree = function(currentInput){
     game.resetInput()
     game.choices.secondChoice = currentInput.toLowerCase()
     game.choices.increaseCount()
+    game.increaseScore(3)
     return "A - Attack\nB - Pokeball\nC - Run"
   }
   // C -> A -> A
-  if (currentInput.toLowerCase() === game.choices.a && game.choices.counter === 2 && game.choices.firstChoice === game.choices.c && game.choices.secondChoice === game.choices.a ) {
+  if (currentInput.toLowerCase() === game.choices.a && game.choices.counter === 2 && game.choices.firstChoice === game.choices.c && game.choices.secondChoice === game.choices.a) {
     game.setText(`Pikachu uses Thunder! It is very effective! 30 Damage! Magikarp fainted!\nPikachu gains 25 XP! Level Up! Pikachu learns Swift!`)
     game.gameOver()
-    return `Game over!`
+    game.increaseScore(5)
+    return `Game over! - Total score: ${game.score}`
   }
   // C -> A -> B
   if (currentInput.toLowerCase() === game.choices.b && game.choices.counter === 2 && game.choices.firstChoice === game.choices.c && game.choices.secondChoice === game.choices.a) {
     game.setText(`${game.playerName} throws a POKEBALL!!! . . Magikarp escapes! Magikarp gains 1 XP!<br><br>MAGIKARP IS EVOLVING . . . <br><br>The Gyarados uses Dragon Breath! ${game.playerName} gets engulfed in the light and lose consciousness...`)
-    return `Game over!`
+    game.increaseScore(1)
+    return `Game over! - Total score: ${game.score}`
   }
 
   // C -> A -> C
   if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 2 && game.choices.firstChoice === game.choices.c && game.choices.secondChoice === game.choices.a) {
     game.setText(`People at the lake see ${game.playerName} run from away a Magikarp and start laughing...<br><br>Heartbroken ${game.playerName} leaves the lake, goes home, covers himself in his blanket and never steps out to catch Pokemon again - full of shame!`)
-    return `Game over!`
+    game.increaseScore(1)
+    return `Game over! - Total score: ${game.score}`
   }
   // C -> B
   if (currentInput.toLowerCase() === game.choices.b && game.choices.counter === 1 && game.choices.firstChoice === game.choices.c) {
@@ -233,25 +270,29 @@ const cTree = function(currentInput){
     game.resetInput()
     game.choices.secondChoice = currentInput.toLowerCase()
     game.choices.increaseCount()
+    game.increaseScore(5)
     return "A - Attack\nB - Pokeball\nC - Run"
   }
   // C -> B -> A
-  if (currentInput.toLowerCase() === game.choices.a && game.choices.counter === 2 && game.choices.firstChoice === game.choices.c && game.choices.secondChoice === game.choices.b ) {
+  if (currentInput.toLowerCase() === game.choices.a && game.choices.counter === 2 && game.choices.firstChoice === game.choices.c && game.choices.secondChoice === game.choices.b) {
     game.setText(`Pikachu is charging his Thunder...but Gyarados is faster!<br><br>Gyarados uses Dragon Breath! ${game.playerName} gets engulfed in the light and lose consciousness...`)
     game.gameOver()
-    return `Game over!`
+    game.increaseScore(1)
+    return `Game over! - Total score: ${game.score}`
   }
   // C -> B -> B
-  if (currentInput.toLowerCase() === game.choices.b && game.choices.counter === 2 && game.choices.firstChoice === game.choices.c && game.choices.secondChoice === game.choices.b ) {
+  if (currentInput.toLowerCase() === game.choices.b && game.choices.counter === 2 && game.choices.firstChoice === game.choices.c && game.choices.secondChoice === game.choices.b) {
     game.setText(`${game.playerName} throws a POKEBALL!!! . . . SUCCESS(???????)! ${game.playerName} caught a Gyarados!`)
     game.gameOver()
-    return `Game over!`
+    game.increaseScore(10)
+    return `Game over! - Total score: ${game.score}`
   }
   // C -> B -> C
-  if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 2 && game.choices.firstChoice === game.choices.c && game.choices.secondChoice === game.choices.b ) {
+  if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 2 && game.choices.firstChoice === game.choices.c && game.choices.secondChoice === game.choices.b) {
     game.setText(`${game.playerName} and Pikachu run away as fast as they can, but Gyarados can fly and soon catches up to them! It swoops down, and uses Dragon Breath! ${game.playerName} gets engulfed in the light and loses consciousness...`)
     game.gameOver()
-    return `Game over!`
+    game.increaseScore(3)
+    return `Game over! - Total score: ${game.score}`
   }
   // C -> C
   if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 1 && game.choices.firstChoice === game.choices.c) {
@@ -259,24 +300,35 @@ const cTree = function(currentInput){
     game.resetInput()
     game.choices.secondChoice = currentInput.toLowerCase()
     game.choices.increaseCount()
+    game.increaseScore(3)
     return "A - Attack\nB - Pokeball\nC - Run"
   }
   // C -> C -> A
-  if (currentInput.toLowerCase() === game.choices.a && game.choices.counter === 2 && game.choices.firstChoice === game.choices.c && game.choices.secondChoice === game.choices.c ) {
+  if (currentInput.toLowerCase() === game.choices.a && game.choices.counter === 2 && game.choices.firstChoice === game.choices.c && game.choices.secondChoice === game.choices.c) {
     game.setText(`Pikachu uses Thunder! It is very effective! ${game.playerName}'s dinner is Peking Duck!`)
     game.gameOver()
-    return `Game over!`
+    game.increaseScore(5)
+    return `Game over! - Total score: ${game.score}`
   }
   // C -> C -> B
-  if (currentInput.toLowerCase() === game.choices.b && game.choices.counter === 2 && game.choices.firstChoice === game.choices.c && game.choices.secondChoice === game.choices.c ) {
+  if (currentInput.toLowerCase() === game.choices.b && game.choices.counter === 2 && game.choices.firstChoice === game.choices.c && game.choices.secondChoice === game.choices.c) {
     game.setText(`Giovanni, Team Rocket's Boss appears\nGiovanni: "${game.playerName}, you have Talent...I have a offer you can't refuse. . .`)
     game.gameOver()
-    return `Game over!`
+    game.increaseScore(1)
+    return `Game over! - Total score: ${game.score}`
   }
   // C -> C -> C
-  if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 2 && game.choices.firstChoice === game.choices.c && game.choices.secondChoice === game.choices.c ) {
+  if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 2 && game.choices.firstChoice === game.choices.c && game.choices.secondChoice === game.choices.c) {
     game.setText(`Oily Bodybuilder: "I won't let you escape!<br><br>He proceeds to give ${game.playerName} an oily, naked bear hug and ${game.playerName} sees himself eventually falling in love with the Oily Bodybuilder, spending the rest of his days in his strong, and constantly, heavily oiled arms`)
     game.gameOver()
-    return `Game over!`
+    game.increaseScore(100)
+    return `Game over! - Total score: 100`
+  }
+  // C -> D
+  if (currentInput.toLowerCase() === game.choices.d && game.choices.counter === 1 && game.choices.firstChoice === game.choices.c) {
+    game.choices.counter--
+    game.resetInput()
+    game.setText(`You return to the start of your journey`)
+    return `A - Sneak through the tall grass\nB - Enter the forest\nC - Explore the Lake`
   }
 }
