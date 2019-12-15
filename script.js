@@ -41,6 +41,9 @@ var achievementUnlockedText = "**ACHIEVEMENT UNLOCKED**\nYou have earned the fol
 var gameIndex = 0;
 var previousChoiceActionText = "";
 
+// We start our story at index 0;
+var activeGameSegment = gameStory["0"]
+
 // Store the player name
 choicesMade.playerName = "playerName";
 
@@ -57,17 +60,11 @@ var listChoices = function (storySegmentObject) {
     return result;
 }
 
-
-var gameInputProcess = function(currentInput) {
-    var sanitizedInput = currentInput.toLowerCase().trim()
-    return gameAction(sanitizedInput);
-}
-
-
-var printCurrentLocation = function(gameNode) {
-    activeGameSegment = gameStory[gameNode];
-    return(`${previousChoiceActionText}\n${activeGameSegment.description}\n\n${choicePrompt} \n ${listChoices(activeGameSegment)} `);
-}
+// WOW something happened.
+var inputHappened = function(currentInput){
+    document.querySelector('#input').value = ""
+    return gameAction(currentInput);
+};
 
 
 var gameAction = function(currentInput) {
@@ -78,6 +75,10 @@ var gameAction = function(currentInput) {
         previousChoiceActionText = "Welcome to the game, " + choicesMade.playerName + "!";
         return printCurrentLocation(gameIndex);
     }
+
+    // sanitize the input for after the very first choice.
+    currentInput = currentInput.toLowerCase().trim();
+
 
     if (currentInput[0] == 'a') {
         return displayAchievements() + "\n" + printCurrentLocation(gameIndex);
@@ -93,7 +94,10 @@ var gameAction = function(currentInput) {
 
 }
 
-
+///
+/// Looks at the active story node.
+/// Chooses the index (choiceId) to the destination story node.
+///
 var pickSubOption = function(currentInput) {
     var activeGameSegment = gameStory[gameIndex];
     var choiceIndex = currentInput - 1;
@@ -106,6 +110,14 @@ var pickSubOption = function(currentInput) {
 }
 
 
+// return a nicely formatted string to display on the console.
+var printCurrentLocation = function(gameNode) {
+    activeGameSegment = gameStory[gameNode];
+    return(`${previousChoiceActionText}\n${activeGameSegment.description}\n\n${choicePrompt} \n ${listChoices(activeGameSegment)} `);
+}
+
+//
+// Is the input a single-digit integer that is valid for the active story node?
 var checkIsASingleDigitNumber = function(currentInput) {
     var integerInput = parseInt(currentInput);
     if ((integerInput <= gameStory[gameIndex].choices.length) && (integerInput > 0)) {
@@ -228,26 +240,26 @@ var specialOption = function(inputGameIndex) {
 
             var bossComments = 'The boss says "' + choicesMade.playerName + ', I have some comments to make about your presentation."\nYou nervously gulp in anticipation of bad news.\n"' + stomachRumbles + caughtCheating + bossLateComment + 'Unfortunately the numbers have been bad for this quarter. ';
 
-            if (bossImpressedScore < 0) {
+            if (bossImpressedScore < 0) { // Low score = fired
                 bossComments = bossComments + `In light of this, I am going to have to fire you."\nYou've been fired!\n** THE END **\n\n${achievementUnlockedText}\n\n${gotMyselfFiredName}\n${gotMyselfFiredText}`;
                 choicesMade.gotMyselfFired = true;
                 return bossComments + printCurrentLocation(inputGameIndex);
-            } else if (bossImpressedScore > 1 ) {
-                if (choicesMade.wantsABeer) {
-                    bossComments = bossComments + `Despite this, I'm going to give you a promotion! I really hope you'll be able to turn this company's fortunes around."\nYou've been promoted! Gary is very happy, as this means that drinks are on you now!\n** THE END **\n\n${achievementUnlockedText}\n\n${gotMyselfPromotedName}\n${gotMyselfPromotedText}\n\n${beeryGoodName}\n${beeryGoodText}`;
+            } else if (bossImpressedScore > 1 ) { // High score = promoted
+                if (choicesMade.wantsABeer) { // Have a beer, I don't think this ending is actually reachable
+                    bossComments = bossComments + `Despite this, I'm going to give you a promotion! I really hope you'll be able to turn this company's fortunes around."\nYou've been promoted! Gary is very happy, as this means that drinks are on you now!\n** THE END **\n\n${achievementUnlockedText}\n\n${gotMyselfPromotedName}\n${gotMyselfPromotedText}\n\n${beeryGoodName}\n${beeryGoodText}\n`;
                     choicesMade.gotMyselfPromoted = true;
                     choicesMade.beeryGood = true;
                     return bossComments + printCurrentLocation(inputGameIndex);
-                } else {
-                    bossComments = bossComments + `Despite this, I'm going to give you a promotion! I really hope you'll be able to turn this company's fortunes around."\nYou've been promoted!\n** THE END **\n\n${achievementUnlockedText}\n\n${gotMyselfPromotedName}\n${gotMyselfPromotedText}`;
+                } else { // No beer but still a promotion.
+                    bossComments = bossComments + `Despite this, I'm going to give you a promotion! I really hope you'll be able to turn this company's fortunes around."\nYou've been promoted!\n** THE END **\n\n${achievementUnlockedText}\n\n${gotMyselfPromotedName}\n${gotMyselfPromotedText}\n`;
                     choicesMade.gotMyselfPromoted = true;
                     return bossComments + printCurrentLocation(inputGameIndex);
                 }
-            } else if (choicesMade.wantsABeer) {
-                bossComments = bossComments + `I really hope with hard work we will be able to turn this company's fortunes around."\nAfter work, you go out for a beer with Gary.\n** THE END **\n\n${achievementUnlockedText}\n\n${beeryGoodName}\n${beeryGoodText}`;
+            } else if (choicesMade.wantsABeer) { // Presentation is meh but have a beer with Gary.
+                bossComments = bossComments + `I really hope with hard work we will be able to turn this company's fortunes around."\nAfter work, you go out for a beer with Gary.\n** THE END **\n\n${achievementUnlockedText}\n\n${beeryGoodName}\n${beeryGoodText}\n`;
                     choicesMade.beeryGood = true;
                     return bossComments + printCurrentLocation(inputGameIndex);
-            } else {
+            } else { // The 'worst' ending with no achievement.
                 return '"Well that was that" the boss says. You feel like you could have done much better. Or much worse. Would you like to try again?' + printCurrentLocation(inputGameIndex);
             }
 
@@ -285,7 +297,7 @@ var gameStory = {
     choices     :   []
                     },
 
-            1   :   {
+            1   :   {   // This number is the index of the story node.
     description :   "Good morning! You walk into your kitchen to get some breakfast. What would you like to eat?",
     choices     :   [   {   choiceDescription   :   "Cereal",
                             choiceId            :   2,
@@ -440,7 +452,7 @@ var gameStory = {
 
             8   :   {
     description :   `Just as you board the plane you get a phone call from your boss:
-"Where are you?" he shouts at you down the phone. "You're not at the presentation!"
+"Where are you?" he shouts. "You're not at the presentation!"
 "I'm at the airport" you reply "Screw corporate life!"
 "You're fired!" he yells.
 You got fired. Shame.
@@ -528,17 +540,5 @@ ${stockMarketCrashText}`,
 
 
 };
-
-// We start our story at index 0;
-var activeGameSegment = gameStory["0"]
-
-
-// WOW something happened.
-var inputHappened = function(currentInput){
-    document.querySelector('#input').value = ""
-    output = gameInputProcess(currentInput);
-    return output;
-};
-
 
 display(`${activeGameSegment.description} \n ${listChoices(activeGameSegment)} `);
