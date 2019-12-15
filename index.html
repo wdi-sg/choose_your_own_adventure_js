@@ -4,10 +4,21 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <input class="starter" id="input" placeholder="Type here"/>
-    <p id="text"></p>
-    <p class="starter" id="output">Please type your name
-    </p>
+    <header>
+      <img src="images/header.jpg" alt="" id="header">
+    </header>
+    <div class="image-container">
+      <img src="images/tall-grass.jpg" alt="">
+      <img src="images/forest.png" alt="">
+      <img src="https://66.media.tumblr.com/2882eacbdbd77bf20eadea6a15923d4d/tumblr_nb1rx4dLvc1tfpu96o2_500.gifv" alt="">
+    </div>
+    <div class="container">
+      <input class="starter" id="input" placeholder="Type here"/>
+      <p id="text"></p>
+      <p class="starter" id="output">Please type your name
+      </p>
+    </div>
+
     <script>
       document.querySelector('#input').addEventListener('change', function(event){
         var currentInput = event.target.value;

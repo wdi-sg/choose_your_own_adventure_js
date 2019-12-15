@@ -58,30 +58,50 @@ var inputHappened = function (currentInput) {
   // reset game
   if (currentInput.toLowerCase() === "retry") {
     game.retry()
+    document.querySelector("#text").style.display = "none"
     return `Please type a name!`
   }
   // A 
   if (currentInput.toLowerCase() === game.choices.a && game.choices.counter === 0) {
+    document.querySelector("#text").style.display = "block"
+    game.setText("A Wild Bulbasaur appears!!!")
+    document.querySelector(".image-container").innerHTML = '<img src="images/pikachu.png" id="img1"><br><img src="images/bulbasaur.jpg" id="img2">'
+
+
+    const appear = setInterval(function(){
+      document.querySelector("#img1").style.transform = "translateX(700px)"
+      document.querySelector("#img2").style.transform = "translateX(-700px)"
+      clearInterval(appear)
+    },50)
+    
+
+
     game.resetInput()
     game.choices.firstChoice = currentInput.toLowerCase()
     game.choices.increaseCount()
-    game.setText("A Wild Bulbasaur appears!!!")
+
     return `A - Attack!\nB - Pokeball\nC - Run`
   }
   // B 
   if (currentInput.toLowerCase() === game.choices.b && game.choices.counter === 0) {
+    document.querySelector("#text").style.display = "block"
     game.setText(`${ game.playerName } come across a three-way junction. The right path eminates a mysterious light in the distance .....`)
+
     game.resetInput()
     game.choices.firstChoice = currentInput.toLowerCase()
     game.choices.increaseCount()
+
     return `A - Go Left\nB - Go Straight\nC - Go Right\nD - Go back`
   }
   // C 
   if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 0) {
+    document.querySelector("#text").style.display = "block"
     game.setText(`As ${game.playerName} comes across the lake, he wonders what to do next...`)
+
     game.resetInput()
     game.choices.firstChoice = currentInput.toLowerCase()
     game.choices.increaseCount()
+
     return `A - Go for a swim\nB - Try to fish\nC - Take a walk around the lake\nD - Go back`
   }
 
@@ -108,17 +128,73 @@ const aTree = function (currentInput) {
     game.choices.secondChoice = currentInput.toLowerCase()
     game.choices.increaseCount()
     game.increaseScore(5)
+    document.querySelector("#img1").style.transitionDuration = "0"
+
+    // document.querySelector("#img1").style.transform = "translateX(730px)" 
+
+    setTimeout(function(){
+      const nudgeBack = setInterval(function(){
+        document.querySelector("#img1").style.transform = "translateX(730px)" 
+        clearInterval(nudgeBack)   
+      },5)
+    }, 400)
+
+    setTimeout(function(){
+      const nudgeBack = setInterval(function(){
+        document.querySelector("#img1").style.transform = "translateX(700px)" 
+        clearInterval(nudgeBack)   
+      },1)
+    }, 700)
+
+    setTimeout(function(){
+      const nudgeBack = setInterval(function(){
+        document.querySelector("#img2").style.transform = "translateX(-750px)" 
+        clearInterval(nudgeBack)   
+      },5)
+    }, 900)
+
+    setTimeout(function(){
+      const nudgeBack = setInterval(function(){
+        document.querySelector("#img2").style.transform = "translateX(-700px)" 
+        clearInterval(nudgeBack)   
+      },1)
+    }, 1200)
+    
+
     return "A - Attack\nB - Pokeball\nC - Run"
   }
   // A -> A -> A
   if (currentInput.toLowerCase() === game.choices.a && game.choices.counter === 2 && game.choices.firstChoice === game.choices.a && game.choices.secondChoice === game.choices.a) {
     game.setText(`Pikachu uses Lightning Bolt! Pikachu's attack missed!\nBulbasaur uses Tackle! Critical Hit! 10 Damage! Pikachu fainted!`)
+    
+    setTimeout(function(){
+      const nudgeBack = setInterval(function(){
+        document.querySelector("#img2").style.transform = "translateX(-750px)" 
+        clearInterval(nudgeBack)   
+      },5)
+    }, 400)
+
+    setTimeout(function(){
+      const nudgeBack = setInterval(function(){
+        document.querySelector("#img2").style.transform = "translateX(-700px)" 
+        clearInterval(nudgeBack)   
+      },1)
+    }, 700)
+
+    setTimeout(function(){
+      const nudgeBack = setInterval(function(){
+        document.querySelector("#img1").style.height = "0" 
+        clearInterval(nudgeBack)   
+      },1)
+    }, 700)
+
     game.gameOver()
     game.increaseScore(1)
     return `Game over! - Total score: ${game.score}`
   }
   // A -> A -> B
   if (currentInput.toLowerCase() === game.choices.b && game.choices.counter === 2 && game.choices.firstChoice === game.choices.a && game.choices.secondChoice === game.choices.a) {
+    document.querySelector(".image-container").innerHTML = '<img src="images/success.gif">'
     game.setText(`${game.playerName} throws a POKEBALL!. . . ${game.playerName} caught a Bulbasaur!!!`)
     game.increaseScore(10)
     game.gameOver()
@@ -128,17 +204,34 @@ const aTree = function (currentInput) {
   // A -> A -> C
   if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 2 && game.choices.firstChoice === game.choices.a && game.choices.secondChoice === game.choices.a) {
     game.setText(`${game.playerName} is running into the deep forest......a wild MEWTWO APPEARS and uses PSY ATTACK! ${game.playerName} loses his mind and slowly fades away.....`)
+    document.querySelector(".image-container").innerHTML = '<img src="https://66.media.tumblr.com/69e6ba0730c3873025b5ff8cf25712ea/tumblr_ozlg8z50oz1ubgnvvo1_500.gifv">'
+    
     game.gameOver()
     game.increaseScore(1)
     return `Game over! - Total score: ${game.score}`
   }
   // A -> B
   if (currentInput.toLowerCase() === game.choices.b && game.choices.counter === 1 && game.choices.firstChoice === game.choices.a) {
-    game.setText(`${game.playerName} throws a POKEBALL!. . . Bulbasaur escaped! Bulbasaur uses Razor leaf! 6 Damage! Pikachu has 4 HP left!`)
+    game.setText(`${game.playerName} throws a POKEBALL!. . . Bulbasaur deflected the Pokeball! Bulbasaur uses Razor leaf! 6 Damage! Pikachu has 4 HP left!`)
     game.resetInput()
     game.choices.secondChoice = currentInput.toLowerCase()
     game.choices.increaseCount()
     game.increaseScore(3)
+
+    setTimeout(function(){
+      const nudgeBack = setInterval(function(){
+        document.querySelector("#img2").style.transform = "translateX(-750px)" 
+        clearInterval(nudgeBack)   
+      },5)
+    }, 400)
+
+    setTimeout(function(){
+      const nudgeBack = setInterval(function(){
+        document.querySelector("#img2").style.transform = "translateX(-700px)" 
+        clearInterval(nudgeBack)   
+      },1)
+    }, 700)
+
     return "A - Attack\nB - Pokeball\nC - Run"
   }
   // A -> B -> A
@@ -146,6 +239,42 @@ const aTree = function (currentInput) {
     game.setText(`Pikachu uses Thunder! 5 Damage! Bulbasaur has 2 HP left! Bulbasaur uses Solar Beam! 20 Damage! Overkill! Pikachu fainted!`)
     game.gameOver()
     game.increaseScore(1)
+
+    setTimeout(function(){
+      const nudgeBack = setInterval(function(){
+        document.querySelector("#img1").style.transform = "translateX(730px)" 
+        clearInterval(nudgeBack)   
+      },5)
+    }, 400)
+
+    setTimeout(function(){
+      const nudgeBack = setInterval(function(){
+        document.querySelector("#img1").style.transform = "translateX(700px)" 
+        clearInterval(nudgeBack)   
+      },1)
+    }, 700)
+
+    setTimeout(function(){
+      const nudgeBack = setInterval(function(){
+        document.querySelector("#img2").style.transform = "translateX(-750px)" 
+        clearInterval(nudgeBack)   
+      },5)
+    }, 900)
+
+    setTimeout(function(){
+      const nudgeBack = setInterval(function(){
+        document.querySelector("#img2").style.transform = "translateX(-700px)" 
+        clearInterval(nudgeBack)   
+      },1)
+    }, 1200)
+
+    setTimeout(function(){
+      const nudgeBack = setInterval(function(){
+        document.querySelector("#img1").style.height = "0" 
+        clearInterval(nudgeBack)   
+      },1)
+    }, 1500)
+
     return `Game over! - Total score: ${game.score}`
   }
   // A -> B -> B
@@ -153,11 +282,34 @@ const aTree = function (currentInput) {
     game.setText(`${game.playerName} throws a POKEBALL!. . . Bulbasaur escaped! Bulbasaur uses Razor leaf! 6 Damage! Pikachu fainted!`)
     game.gameOver()
     game.increaseScore(1)
+
+    setTimeout(function(){
+      const nudgeBack = setInterval(function(){
+        document.querySelector("#img2").style.transform = "translateX(-750px)" 
+        clearInterval(nudgeBack)   
+      },5)
+    }, 400)
+
+    setTimeout(function(){
+      const nudgeBack = setInterval(function(){
+        document.querySelector("#img2").style.transform = "translateX(-700px)" 
+        clearInterval(nudgeBack)   
+      },1)
+    }, 700)
+
+    setTimeout(function(){
+      const nudgeBack = setInterval(function(){
+        document.querySelector("#img1").style.height = "0" 
+        clearInterval(nudgeBack)   
+      },1)
+    }, 900)
+
     return `Game over! - Total score: ${game.score}`
   }
   // A -> B -> C
   if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 2 && game.choices.firstChoice === game.choices.a && game.choices.secondChoice === game.choices.b) {
     game.setText(`${game.playerName} is running into the deep forest......a wild MEWTWO APPEARS and uses PSY ATTACK! ${game.playerName} loses his mind and slowly fade.....`)
+    document.querySelector(".image-container").innerHTML = '<img src="https://66.media.tumblr.com/69e6ba0730c3873025b5ff8cf25712ea/tumblr_ozlg8z50oz1ubgnvvo1_500.gifv">'
     game.gameOver()
     game.increaseScore(1)
     return `Game over! - Total score: ${game.score}`
@@ -165,6 +317,7 @@ const aTree = function (currentInput) {
   // A -> C
   if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 1 && game.choices.firstChoice === game.choices.a) {
     game.setText(`${game.playerName} is running into the deep forest......a wild MEWTWO APPEARS and uses PSY ATTACK! ${game.playerName} loses his mind and slowly fade.....`)
+    document.querySelector(".image-container").innerHTML = '<img src="https://66.media.tumblr.com/69e6ba0730c3873025b5ff8cf25712ea/tumblr_ozlg8z50oz1ubgnvvo1_500.gifv">'
     game.choices.secondChoice = currentInput.toLowerCase()
     game.choices.increaseCount()
     game.increaseScore(1)
@@ -216,14 +369,14 @@ const bTree = function (currentInput) {
     game.choices.secondChoice = currentInput.toLowerCase()
     game.increaseScore(1)
     game.gameOver()
-    return "Game over! - Total score: ${game.score}"
+    return `Game over! - Total score: ${game.score}`
   }
   // B -> C
   if (currentInput.toLowerCase() === game.choices.c && game.choices.counter === 1 && game.choices.firstChoice === game.choices.b) {
     game.setText(`${game.playerName} slowly approaches the mysterious light.....suddenly a wild MEWTWO APPEARS and uses PSY ATTACK! ${game.playerName} loses his mind and slowly fade.....`)
     game.gameOver()
     game.increaseScore(1)
-    return "Game over! - Total score: ${game.score}"
+    return `Game over! - Total score: ${game.score}`
   }
   // B -> D
   if (currentInput.toLowerCase() === game.choices.d && game.choices.counter === 1 && game.choices.firstChoice === game.choices.b) {
