@@ -128,3 +128,20 @@ var rest = function() {
 var clearInputs = function() {
     document.querySelector("#input").value = "";
 };
+
+
+
+//Battle functions
+var doAttack = function () {
+    ranNumGen(10);
+    enemyNo.hp = enemyNo.hp - (ranNum + 2);
+    ranNumGen(10*enemyNo.difficulty)
+    player.hp = player.hp - ranNum;
+    updateHp();
+    updateEnemyInfo();
+    return enemyNo.hp;
+}
+
+var updateEnemyInfo = function () {
+    display1(enemyNo.name + "\nEnemy Health :" + enemyNo.hp + "\nDesc: " + enemyNo.desc + "\n1. Attack Problem\n2. Use your focus to attack\n3. Give Up");
+}

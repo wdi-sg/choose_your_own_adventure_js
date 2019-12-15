@@ -208,6 +208,7 @@ var inputHappened = function(currentInput) {
             player.rScore = player.rScore + 10;
             display1("Nice! You got the right answer!");
             display2("Type anything to continue.");
+            clearInputs();
             gameStage++;
             return;
         }
@@ -221,14 +222,35 @@ var inputHappened = function(currentInput) {
     }
     else if (gameStage === 10)
     {
-        display1("You encountered a random Programing Question!!");
+        display1("You encountered a random Programing Problem!!");
         display2("Type 'Start' when you are ready to proceed.")
         gameStage++;
         return;
     }
     else if (gameStage === 11 && currentInput.toLowerCase() == "start")
     {
-
+        enemyRanGen();
+        display1("You've Encountered a!?!?!?!\n" + enemyNo.name)
+        display2("Prepare for battle! Type 'battle' to tackle this problem!");
+        clearInputs();
+        gameStage++
+        return;
+    }
+    else if (gameStage === 12 && currentInput.toLowerCase() == "battle")
+    {
+        updateEnemyInfo();
+        display2("Type '1' '2' or '3' to pick your options.");
+        inBattle = true;
+        clearInputs();
+    }
+    else if (gameStage === 12 && inBattle == true)
+    {
+        switch (parseInt(currentInput))
+        {
+            case 1:
+                doAttack();
+                clearInputs();
+        }
     }
     else
     {

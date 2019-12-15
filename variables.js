@@ -12,6 +12,7 @@ var randQuest1 //Selects the question
 var ranAns1;
 var randAnswersOrder;
 var enemyNo; //Which enemy you gonna face.
+var inBattle = false;
 
 
 var player = {
