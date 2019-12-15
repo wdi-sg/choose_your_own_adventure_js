@@ -32,7 +32,7 @@ const objects = {
       damage: Math.floor(Math.random() * (100 - 50) + 50)
     },
     swordOfVictory: {
-      damage: Math.floor(Math.random() * (300 - 200) + 200)
+      damage: 500
     }
   }
 };
@@ -45,28 +45,49 @@ var inputHappened = function(currentInput) {
     enteredName = true;
   }
   if (enteredName === true && step === 0) {
-    inputBox.value = "";
     totalScore = 0;
+    inputBox.value = "";
     step = 1;
     return `${name}, the alphabets on the left correspond to decisions you can make. 
+    
     For now, enter anything to begin.`;
   }
   if (enteredName && step === 1) {
     inputBox.value = "";
     step = 2;
     totalScore++;
-    return `Groggy and confused, you orient yourself to your surroundings. It's a dark cave. Do you 
+    return `Groggy and confused, you orient yourself to your surroundings. It's a dark cave. Do you: 
 
       l) Go left
       s) Go straight
       r) Go right`;
-  }
-
-  if (enteredName && step === 2 && currentInput === "l") {
+  } else if (enteredName && step === 2 && currentInput === "l") {
+    inputBox.value = "";
     step = 3;
     totalScore++;
-    return `You go left`;
-  } 
+    return `You decide to go left. There's a man. He beckons you over. On his left, there's a door. Do you 
+    
+    i) Ignore him, go through the door
+    g) Go to him
+    `;
+  }
+  if (enteredName && step === 3 && currentInput === "i") {
+    inputBox.value = "";
+    step = 4;
+    totalScore++;
+    playerWeapon = objects.weapons.normalSword;
+    return `You go through the door. Demons quickly close in!`;
+  } else if (enteredName && step === 3 && currentInput === "g") {
+    inputBox.value = "";
+    step = 4;
+    totalScore++;
+    playerWeapon = objects.weapons.bluntSword;
+    return `The man gives you a weapon.
+    
+    "You'll need this for the door ahead. Muahaha..."
+    
+    Enter any key to continue`;
+  }
 
   // straight branch
   else if (enteredName && step === 2 && currentInput === "s") {
@@ -145,7 +166,7 @@ var inputHappened = function(currentInput) {
     step = 5;
     totalScore++;
     inputBox.value = "";
-    return `The demons advance on you!
+    return `Demons advance on you!
 
     Enter any key to do battle.`;
   }
@@ -154,14 +175,23 @@ var inputHappened = function(currentInput) {
     totalScore++;
     while (objects.player.hp > 0 && objects.monsters.lowerDemons.hp > 0) {
       inputBox.value = "";
-      objects.player.hp =
-        objects.player.hp - objects.monsters.lowerDemons.damage;
-      objects.monsters.lowerDemons.hp = objects.monsters.lowerDemons.hp -=
-        playerWeapon.damage;
-      return `You attack the monsters!
+      if (Math.random() > 0.25) {
+        objects.player.hp =
+          objects.player.hp - objects.monsters.lowerDemons.damage;
+        objects.monsters.lowerDemons.hp = objects.monsters.lowerDemons.hp -=
+          playerWeapon.damage;
+        return `You attack the monsters!
 
-      Remaining hp: ${objects.player.hp}
-      Monster hp: ${objects.monsters.lowerDemons.hp} `;
+        Remaining hp: ${objects.player.hp}
+        Monster hp: ${objects.monsters.lowerDemons.hp} `;
+      } else {
+        objects.monsters.lowerDemons.hp = objects.monsters.lowerDemons.hp -=
+          playerWeapon.damage;
+        return `The monsters miss!
+
+        Remaining hp: ${objects.player.hp}
+        Monster hp: ${objects.monsters.lowerDemons.hp}`;
+      }
     }
     if (
       objects.monsters.lowerDemons.hp < objects.player.hp &&
@@ -174,6 +204,7 @@ var inputHappened = function(currentInput) {
       inputBox.value = "";
       resetValues();
       return `You lost! Total score: ${totalScore}
+
       Try again?`;
     }
   }
@@ -184,6 +215,7 @@ var inputHappened = function(currentInput) {
       objects.player.hp -= objects.monsters.boss.damage;
       objects.monsters.boss.hp -= playerWeapon.damage;
       return `You attack the greater demon! 
+
       Remaining hp: ${objects.player.hp}
       Boss hp: ${objects.monsters.boss.hp}`;
     }
@@ -191,14 +223,19 @@ var inputHappened = function(currentInput) {
     if (objects.player.hp <= 0) {
       resetValues();
       return `You lost! Total score: ${totalScore}
+
       Try again?`;
     } else if (objects.monsters.boss.hp <= 0) {
       resetValues();
       return `You win! Total score: ${totalScore}
+
       Play again?`;
     }
   } else {
-    return `Invalid input!`;
+    resetValues();
+    return `Invalid input! Start over, noob!
+    
+    Enter any key to continue`;
   }
 };
 
@@ -210,19 +247,19 @@ var display = function(data) {
   output.innerText = data;
 };
 
-function suspensefullyCalculateScore() {
-  let num = 0;
-  let calculatingScore = setInterval(function() {
-    num++;
-    outputBox.innerText = `Calculating score ${num}`;
-  }, 10);
+// function suspensefullyCalculateScore() {
+//   let num = 0;
+//   let calculatingScore = setInterval(function() {
+//     num++;
+//     outputBox.innerText = `Calculating score ${num}`;
+//   }, 10);
 
-  setInterval(function() {
-    clearInterval(calculatingScore);
-  }, 3000);
+//   setInterval(function() {
+//     clearInterval(calculatingScore);
+//   }, 3000);
 
-  outputBox.innerText = `Your score is ${totalScore}!`;
-}
+//   outputBox.innerText = `Your score is ${totalScore}!`;
+// }
 
 function resetValues() {
   step = 0;
