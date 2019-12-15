@@ -30,7 +30,7 @@ var bretmanHart = [
         moves: {
             moonsault: {
                 name: "try to attempt a full moonsault",
-                results: "you're a total noob and COMPLETELY butchered the move! you ended up knocking yourself out cold and got stretchered out of the ring. how embarassing!<br><br>your total score: " + score
+                results: "you're a total noob and COMPLETELY butchered the move! you ended up knocking yourself out cold and got stretchered out of the ring. how embarassing!<br><br>your total score: "
             },
             chokeslam: {
                 name: "engage in a chokeslam",
@@ -38,11 +38,11 @@ var bretmanHart = [
                 nextMoves: {
                     submission: {
                         name: "force him into submission by performing his finishing move, <strong>the sharpshooter</strong> on him",
-                        results: "CRITICAL HIT! bretman the hitman hart is rendered completely useless and taps out. you won!<br><br>your total score: " + score
+                        results: "CRITICAL HIT! bretman the hitman hart is rendered completely useless and taps out. you won!<br><br>your total score: "
                     },
                     moonsault: {
                         name: "perform a moonsault",
-                        results: "you're a total noob and COMPLETELY butchered the move! you ended up knocking yourself out cold and got stretchered out of the ring. how embarassing!<br><br>your total score: " + score,
+                        results: "you're a total noob and COMPLETELY butchered the move! you ended up knocking yourself out cold and got stretchered out of the ring. how embarassing!<br><br>your total score: ",
                     }
                 },
             },
@@ -52,11 +52,11 @@ var bretmanHart = [
                 nextMoves: {
                     turnbuckles: {
                         name: "climb on to the top of the turnbuckles",
-                        results: "CRITICAL HIT! you performed a perfect moonsault and bretman the hitman hart taps out! you win!<br><br>your total score: " + score,
+                        results: "CRITICAL HIT! you performed a perfect moonsault and bretman the hitman hart taps out! you win!<br><br>your total score: ",
                     },
                     ringropes: {
                         name: "immediately throw your body against the ring ropes",
-                        results: "yikes! bretman the hitman hart was faking it all along and trips you up on your re-entry, he performs YOUR move with perfection and forces you into submission with his finishing move, <strong>the sharpshooter</strong>! you struggle in his arms and tap out. didn't see that coming!<br><br>your total score: " + score,
+                        results: "yikes! bretman the hitman hart was faking it all along and trips you up on your re-entry, he performs YOUR move with perfection and forces you into submission with his finishing move, <strong>the sharpshooter</strong>! you struggle in his arms and tap out. didn't see that coming!<br><br>your total score: ",
                     }
                 },
             }
@@ -73,11 +73,11 @@ var bretmanHart = [
                 nextMoves: {
                     submission: {
                         name: "force him into submission by performing his finishing move, <strong>the sharpshooter</strong> on him",
-                        results: "CRITICAL HIT! bretman the hitman hart is rendered completely useless and taps out. you won!<br><br>your total score: " + score,
+                        results: "CRITICAL HIT! bretman the hitman hart is rendered completely useless and taps out. you won!<br><br>your total score: ",
                     },
                     moonsault: {
                         name: "perform a moonsault",
-                        results: "you're a total noob and COMPLETELY butchered the move! you ended up knocking yourself out cold and got stretchered out of the ring. how embarassing!<br><br>your total score: " + score,
+                        results: "you're a total noob and COMPLETELY butchered the move! you ended up knocking yourself out cold and got stretchered out of the ring. how embarassing!<br><br>your total score: ",
                     }
                 },
             },
@@ -87,11 +87,11 @@ var bretmanHart = [
                 nextMoves: {
                     persist: {
                         name: "NEVER GIVE UP!! you ignore the haters",
-                        results: "CRITICAL HIT! bretman the hitman hart is rendered completely useless and taps out. you won!<br><br>your total score: " + score,
+                        results: "CRITICAL HIT! bretman the hitman hart is rendered completely useless and taps out. you won!<br><br>your total score: ",
                     },
                     tapoutearly: {
                         name: "cut your losses and tap out",
-                        results: "you lose!<br><br>your total score: " + score,
+                        results: "you lose!<br><br>your total score: ",
                     }
                 },
             },
@@ -148,7 +148,7 @@ var inputHappened = function(currentInput){
             // c is dropkick
             message = bretmanHart[1].attack.results + "select <strong>a</strong> to " + bretmanHart[1].attack.moves.moonsault.name  + "<br>select <strong>b</strong> to " + bretmanHart[1].attack.moves.chokeslam.name + " <br>select <strong>c</strong> to " + bretmanHart[1].attack.moves.dropkick.name;
             answersLogged = answersLogged + answers.push(currentInput);
-            score = score + 5;
+            score = score + 20;
             document.querySelector("#input").value = "";
             console.log(score);
         // b = go into defensive mode,
@@ -191,14 +191,14 @@ var inputHappened = function(currentInput){
             message = bretmanHart[1].attack.moves.chokeslam.results + "select <strong>a</strong> to " + bretmanHart[1].attack.moves.chokeslam.nextMoves.submission.name  + "<br>select <strong>b</strong> to " + bretmanHart[1].attack.moves.chokeslam.nextMoves.moonsault.name;
             answersLogged = answersLogged + answers.push(currentInput);
             steps++;
-            score = score + 20;
+            score = score + 25;
             document.querySelector("#input").value = "";
         } else if (answers[0] === "a" && currentInput === "c") {
             console.log("attack and dropkick");
             message = bretmanHart[1].attack.moves.dropkick.results + "select <strong>a</strong> to " + bretmanHart[1].attack.moves.dropkick.nextMoves.turnbuckles.name  + "<br>select <strong>b</strong> to " + bretmanHart[1].attack.moves.dropkick.nextMoves.ringropes.name;
             answersLogged = answersLogged + answers.push(currentInput);
             steps++;
-            score = score + 20;
+            score = score + 25;
             document.querySelector("#input").value = "";
         } else if (answers[0] === "b" && currentInput === "a") {
             console.log("defend and eyepower");
@@ -246,63 +246,63 @@ var inputHappened = function(currentInput){
             return restartMessage;
         } else if (answers[0] === "a" && answers[1] === "b" && currentInput === "a") {
             console.log("attack and chokeslam + chokeslam result + nextmoves results");
-            message = bretmanHart[1].attack.moves.chokeslam.nextMoves.submission.results;
+            message = bretmanHart[1].attack.moves.chokeslam.nextMoves.submission.result + scores;
             answersLogged = answersLogged + answers.push(currentInput);
             score = score + 35;
             document.querySelector("#input").value = "";
         } else if (answers[0] === "a" && answers[1] === "b" && currentInput === "b") {
             console.log("attack and chokeslam + chokeslam result + nextmoves results");
-            message = bretmanHart[1].attack.moves.chokeslam.nextMoves.moonsault.results;
+            message = bretmanHart[1].attack.moves.chokeslam.nextMoves.moonsault.results + score;
             answersLogged = answersLogged + answers.push(currentInput);
             score = score - 15;
             document.querySelector("#input").value = "";
         } else if (answers[0] === "a" && answers[1] === "c" && currentInput === "a") {
             console.log("attack and dropkick + dropkick results + turnbuckle ");
-            message = bretmanHart[1].attack.moves.dropkick.nextMoves.turnbuckles.results;
+            message = bretmanHart[1].attack.moves.dropkick.nextMoves.turnbuckles.results + score;
             answersLogged = answersLogged + answers.push(currentInput);
             score = score + 35;
             steps++;
             document.querySelector("#input").value = "";
         } else if (answers[0] === "a" && answers[1] === "c" && currentInput === "b") {
             console.log("attack and dropkick + dropkick results + ringropes");
-            message = bretmanHart[1].attack.moves.dropkick.nextMoves.ringropes.results;
+            message = bretmanHart[1].attack.moves.dropkick.nextMoves.ringropes.results + score;
             answersLogged = answersLogged + answers.push(currentInput);
             score = score - 25;
             steps++;
             document.querySelector("#input").value = "";
         } else if (answers[0] === "b" && answers[1] === "a" && currentInput === "a") {
             console.log("defend and eyepower + eyepower results + nextmoves results");
-            message = bretmanHart[2].defend.moves.eyepower.nextMoves.submission.results;
+            message = bretmanHart[2].defend.moves.eyepower.nextMoves.submission.results + score;
             answersLogged = answersLogged + answers.push(currentInput);
             score = score + 20;
             steps++;
             document.querySelector("#input").value = " ";
         } else if (answers[0] === "b" && answers[1] === "a" && currentInput === "b") {
             console.log("defend and eyepower + eyepower results + nextmoves results");
-            message = bretmanHart[2].defend.moves.eyepower.nextMoves.moonsault.results;
+            message = bretmanHart[2].defend.moves.eyepower.nextMoves.moonsault.results + score;
             answersLogged = answersLogged + answers.push(currentInput);
             score = score - 15;
             steps++;
             document.querySelector("#input").value = " ";
         } else if (answers[0] === "b" && answers[1] === "b" && currentInput === "a") {
             console.log("defend and fans cheer + persist");
-            message = bretmanHart[2].defend.moves.fanscheer.nextMoves.persist.results;
+            message = bretmanHart[2].defend.moves.fanscheer.nextMoves.persist.results + score;
             answersLogged = answersLogged + answers.push(currentInput);
             score = score - 5;
             steps++;
             document.querySelector("#input").value = " ";
         } else if (answers[0] === "b" && answers[1] === "b" && currentInput === "b") {
             console.log("defend and fans cheer + tap out early");
-            message = bretmanHart[2].defend.moves.fanscheer.nextMoves.tapoutearly.results;
+            message = bretmanHart[2].defend.moves.fanscheer.nextMoves.tapoutearly.results + score;
             answersLogged = answersLogged + answers.push(currentInput);
             score = score - 10;
             steps++;
             document.querySelector("#input").value = " ";
         } else if (answers[0] === "b" && answers[1] === "c" && currentInput === "a") {
             console.log("defend and tagteam + grab ankles");
-            message = bretmanHart[2].defend.moves.tagteam.nextMoves.grabankles.results;
-            answersLogged = answersLogged + answers.push(currentInput);
             score = score + 25;
+            message = bretmanHart[2].defend.moves.tagteam.nextMoves.grabankles.results + score;
+            answersLogged = answersLogged + answers.push(currentInput);
             steps++;
             document.querySelector("#input").value = " ";
         } else if (answers[0] === "b" && answers[1] === "c" && currentInput === "b") {
@@ -335,5 +335,4 @@ var inputHappened = function(currentInput){
     return message;
     return restartGame;
     return nameStore;
-    return score;
 };
