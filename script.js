@@ -1,13 +1,8 @@
 console.log("hello script js");
 
-var number;
-var choicePrompt = "Please choose from the following:";
-
 ///////////////////////////////////////////////////////
 // Keep track of what people choose during the game. //
 ///////////////////////////////////////////////////////
-var cerealChosen;
-
 var choicesMade = {};
 
 //////////////////////////////////////////////
@@ -21,7 +16,7 @@ var jetPlaneText = `Leave the corporate life behind on a suspiciously priced pla
 
 choicesMade.promoted = false;
 var gotMyselfPromotedName = "📈STONKS📈";
-var gotMyselfPromotedText = `Aced the presentated so I got promoted!`;
+var gotMyselfPromotedText = `Aced the presentation so I got promoted!`;
 
 choicesMade.fired = false;
 var gotMyselfFiredName = `🔥GOT F*I*R*E*D!🔥`;
@@ -47,7 +42,9 @@ var gameIndex = 0;
 var previousChoiceActionText = "";
 
 // Store the player name
-var playerName = "playerName";
+choicesMade.playerName = "playerName";
+
+var choicePrompt = "Please choose from the following:";
 
 // Multiple choices for some options, loop through all the options and present them.
 var listChoices = function (storySegmentObject) {
@@ -76,9 +73,9 @@ var printCurrentLocation = function(gameNode) {
 var gameAction = function(currentInput) {
 
     if (gameIndex === 0) {
-        playerName = currentInput;
+        choicesMade.playerName = currentInput;
         gameIndex = 1;
-        previousChoiceActionText = "Welcome to the game, " + playerName + "!";
+        previousChoiceActionText = "Welcome to the game, " + choicesMade.playerName + "!";
         return printCurrentLocation(gameIndex);
     }
 
@@ -118,7 +115,9 @@ var checkIsASingleDigitNumber = function(currentInput) {
     return false;
 }
 
-
+/////////////////////////////////////////////////////////
+/// I am 100% sure there's a better way of doing this ///
+/////////////////////////////////////////////////////////
 var displayAchievements = function() {
     var leavingOnAJetplane = (choicesMade.jetPlane) ? jetPlaneText : unknownAchievementText;
     var gotMyselfFired = (choicesMade.fired) ? gotMyselfFiredText : unknownAchievementText;
@@ -149,6 +148,7 @@ var specialOption = function(inputGameIndex) {
     var outputToReturn = "";
     switch(inputGameIndex) {
 
+
         // going over to talk to Gary.
         case 6:
             var breakfastConversation = ""
@@ -156,19 +156,80 @@ var specialOption = function(inputGameIndex) {
             if (choicesMade.lateForWork) {
                 trafficConversation = `\n"Hey man, how come you are in so late? You know the boss is gonna be pissed."\n"I know," you reply, "There was a terrible traffic jam on the PIE and I was stuck in it for ages.\n`;
             };
-            if (choicesMade['cerealChosen'] !== "None") {
-                breakfastConversation = `"Yes I had ${choicesMade['cerealChosen']} this morning."`;
+            if (choicesMade['breakfastChosen'] !== "None") {
+                breakfastConversation = `"Yes I had ${choicesMade['breakfastChosen']} this morning."`;
             } else {
                 breakfastConversation = `"I skipped breakfast this morning."`;
             };
-            outputToReturn = `You walk up to Gary.\n"Hey there ${playerName}. You have breakfast already?"\n${breakfastConversation}${trafficConversation}${printCurrentLocation(inputGameIndex)}`
-return outputToReturn;
+            outputToReturn = `You walk up to Gary.\n"Hey there ${choicesMade.playerName}. You have breakfast already?"\n${breakfastConversation}${trafficConversation}${printCurrentLocation(inputGameIndex)}`
+            return outputToReturn;
+        break;
+
+
+        // the presentation either goes well or badly depending on previous choices.
+        case 12:
+            var stomachRumbles = "";
+            var caughtCheating = "";
+            var bossLateComment = "";
+            var presentationScore = choicesMade.fudgeThePresentation;
+            var goingForBeer = "";
+
+            if (choicesMade.breakfastChosen === "None") {
+                stomachRumbles = "Partway through the presentation, your stomach gurgles really loudly. Gary stifles a laugh and your boss does not look impressed.";
+            } else {
+                stomachRumbles = "You smoothly go through the presentation without a hitch.";
+            }
+
+            if (presentationScore === 1) {
+                caughtCheating = "The boss nods in agreement.";
+            } else if (presentationScore === -1) {
+                caughtCheating = "You hope these inflated numbers impress your colleagues.\nThe boss looks through a stack of papers and shakes his head.";
+            }
+
+            if (choicesMade.lateForWork) {
+                bossLateComment = "'It's nice of you to grace us with your presence, " + choicesMade.playerName + ".' he adds sarcastically.\n"
+            }
+
+            if (choicesMade.wantsABeer) {
+                goingForBeer = " Gary winks at you and mimes drinking a bottle of beer while he is exiting."
+            }
+
+            outputToReturn = `The boss says "Very well, let's see what the sales figures are from the last quarter."\n` + bossLateComment +  'You start the presentation and go through the numbers. ' + caughtCheating + stomachRumbles + "\nAt the end of the meeting everybody awkwardly shuffles out silently." + goingForBeer + printCurrentLocation(inputGameIndex);
+            return outputToReturn;
+        break;
+
+        case 13:
+            var bossImpressedScore = 0;
+            if (choicesMade.breakfastChosen !== "None") {
+                bossImpressedScore++;
+            }
+
+            bossImpressedScore += choicesMade.fudgeThePresentation;
+
+            if (choicesMade.lateForWork) {
+                bossImpressedScore--;
+            }
+
+            if (bossImpressedScore < 0) {
+                return "Bad ending, you're fired!"
+            } else if (bossImpressedScore > 1 ) {
+
+                if (choicesMade.wantsABeer) {
+                    return "Good ending, you're promoted and drinks are on you!"
+                }
+            } else if (choicesMade.wantsABeer) {
+                return "Neither Ending, you're going for a beer with Gary."
+            } else {
+                return '"Well that was that" the boss says. You feel like you could have done much better. Or much worse. Would you like to try again?'
+            }
+
         break;
 
         // if not a special case we just do the normal current location:
         default:
             return printCurrentLocation(gameIndex);
     }
+
 }
 
 
@@ -198,22 +259,22 @@ var gameStory = {
 
             1   :   {
     description :   "Good morning! You walk into the kitchen to get some cereal. What would you like to eat?",
-    choices     :   [   {   choiceDescription   :   "Weetabix",
+    choices     :   [   {   choiceDescription   :   "Cereal",
                             choiceId            :   2,
-                            confirmation        :   "You pick up the Weetabix from the cupboard. They are delicious!",
-                            variablesToToggle   :   "cerealChosen",
-                            variableValue       :   "Weetabix",
+                            confirmation        :   "You pick up a packet of Corn Flakes from the cupboard. They are delicious!",
+                            variablesToToggle   :   "breakfastChosen",
+                            variableValue       :   "a bowl of Corn Flakes",
                         },
-                        {   choiceDescription   :   "Fruit Loops",
+                        {   choiceDescription   :   "Kaya Toast",
                             choiceId            :   2,
-                            confirmation        :   "You pick up the fruit loops from the cupboard. They are delicious!",
-                            variablesToToggle   :   "cerealChosen",
-                            variableValue       :   "Fruit Loops"
+                            confirmation        :   "You prepare some toast with Kaya spread, it's awesome!",
+                            variablesToToggle   :   "breakfastChosen",
+                            variableValue       :   "a couple slices of Kaya Toast"
                         },
                         {   choiceDescription   :   "Skip Breakfast and go straight to work",
                             choiceId            :   3,
-                            confirmation        :   "You walk straight out the door and go to work",
-                            variablesToToggle   :   "cerealChosen",
+                            confirmation        :   "You walk straight out the door and go to your car.",
+                            variablesToToggle   :   "breakfastChosen",
                             variableValue       :   "None",
                         }]
                     },
@@ -270,19 +331,19 @@ var gameStory = {
             5   :   {
     description :   "Looks like sales are pretty low for the last quarter. The boss is unlikely to be happy with your presentation with these numbers.",
     choices     :   [   {   choiceDescription   :   "Redo graph",
-                            choiceId            :   3,
+                            choiceId            :   10,
                             confirmation        :   "You redo the bar chart with pretty colours and stuff.",
                             variablesToToggle   :   "fudgeThePresentation",
                             variableValue       :   1,
                         },
                         {   choiceDescription   :   "Pad the numbers",
-                            choiceId            :   3,
+                            choiceId            :   10,
                             confirmation        :   "You change the numbers to make it look more flattering.",
                             variablesToToggle   :   "fudgeThePresentation",
                             variableValue       :   -1,
                         },
                         {   choiceDescription   :   "Leave it as is.",
-                            choiceId            :   3,
+                            choiceId            :   10,
                             confirmation        :   "You read over your notes again.",
                             variablesToToggle   :   "fudgeThePresentation",
                             variableValue       :   0,
@@ -293,13 +354,13 @@ var gameStory = {
             6   :   {
     description :   `"uh-huh" Gary says "You want to grab a beer after work?"`,
     choices     :   [   {   choiceDescription   :   "Sure let's do it.",
-                            choiceId            :   3,
+                            choiceId            :   10,
                             confirmation        :   "With all the stress of the presentation, a beer to celebrate, or commiserate, sounds like a good idea.",
                             variablesToToggle   :   "wantsABeer",
                             variableValue       :   true,
                         },
                         {   choiceDescription   :   "Nah",
-                            choiceId            :   3,
+                            choiceId            :   10,
                             confirmation        :   "You decide against getting a beer.",
                             variablesToToggle   :   "wantsABeer",
                             variableValue       :   false,
@@ -338,6 +399,12 @@ var gameStory = {
                             variablesToToggle   :   "jetPlane",
                             variableValue       :   true,
                         },
+                        {   choiceDescription   :   "Let's go to work instead.",
+                            choiceId            :   4,
+                            confirmation        :   "You drive from the airport to your workplace. Because it's a long journey you've arrived late for work!",
+                            variablesToToggle   :   "lateForWork",
+                            variableValue       :   true,
+                        },
                         ]
                     },
 
@@ -345,7 +412,7 @@ var gameStory = {
     description :   `Just as you board the plane you get a phone call from your boss:
 "Where are you?" he shouts at you down the phone. "You're not at the presentation!"
 "I'm at the airport" you reply "Screw corporate life!"
-"You're fired!" he says.
+"You're fired!" he yells.
 You got fired. Shame that.
 ** THE END **
 
@@ -361,6 +428,7 @@ ${jetPlaneText}`,
 
             9   :   {
     description :   `Gary turns red and gets absolutely outranged at the insult.
+Unfortunately the programmer is yet to incorporate a combat system into this game.
 He punches you in the face and you get knocked out! You wake up in hospital, and find out you've both been fired.
 ** THE END **
 
@@ -374,7 +442,59 @@ ${annoyGaryGetWallopedText}`,
                     ]
                     },
 
+            10  :   {
+    description :   "Your alarm goes off, it's time for your presentation to your boss. You're first in the meeting room and get set up. You're so nervous that the window looks awfully tempting...",
+    choices     :   [   {   choiceDescription   :   "Do the presentation",
+                            choiceId            :   12,
+                            confirmation        :   ""
+                        },
+                        {   choiceDescription   :   "Jump through the window.",
+                            choiceId            :   11,
+                            confirmation        :   "You courageously decide to jump through the window and fall to the ground below.",
+                            variablesToToggle   :   "stockMarketCrash",
+                            variableValue       :   true,
+                        },
+                    ]
+                    },
 
+            11  :   {
+    description :   `You land on the ground with a loud *SPLAT* - you are now officially pavement pizza. Even worse, you've also been fired.
+** THE END **
+
+${achievementUnlockedText}
+${stockMarketCrashName}
+${stockMarketCrashText}`,
+    choices     :   [   {   choiceDescription   :   "Choose your breakfast again.",
+                            choiceId            :   1,
+                            confirmation        :   `By the magic of technology you restart the day.\n`,
+                        },
+                    ]
+                    },
+
+            12  :   {
+    description :   `\nYour boss is still in the room after everyone else has left. That window sure looks even more tempting now`,
+    choices     :   [   {   choiceDescription   :   "Hear what the boss has to say.",
+                            choiceId            :   13,
+                            confirmation        :   "With all the stress of the presentation, a beer to celebrate, or commiserate, sounds like a good idea.",
+                            variablesToToggle   :   "stockMarketCrash",
+                            variableValue       :   true,
+                        },
+                        {   choiceDescription   :   "Jump through the window.",
+                            choiceId            :   11,
+                            confirmation        :   "You courageously decide to jump through the window and fall to the ground below.",
+                            variablesToToggle   :   "stockMarketCrash",
+                            variableValue       :   true,
+                        },]
+                    },
+
+            11  :   {
+    description :   ""
+    choices     :   [   {   choiceDescription   :   "Choose your breakfast again.",
+                            choiceId            :   1,
+                            confirmation        :   `By the magic of technology you restart the day.\n`,
+                        },
+                    ]
+                    },
 
 
 };
