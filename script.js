@@ -308,16 +308,10 @@ var inputHappened = function(currentInput) {
         alert("YOU GOT THE MADNESS ENDING");
         gameStage = 42424242;
     }
-    else if (gameStage > 1000);
+    else if (gameStage > 1000)
     {
-        display1("This is your Results score " + player.rScore + "\nHope you had some fun with this short game.");
-        display2("Goodnight as I need to sleep!!!");
-    }
-    {
-    {
-        clearInputs();
-        display2("Not sure but try typing something else!")
-    }
+        showResults();
+        return;
     }
 }
 

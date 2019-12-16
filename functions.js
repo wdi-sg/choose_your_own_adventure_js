@@ -203,3 +203,10 @@ var checkForDeadPeople = function () {
         return;
     }
 }
+
+
+//show results screen
+var showResults = function () {
+    display1("This is your Results score " + player.rScore + "\nHope you had some fun with this short game.");
+    display2("Hope you enjoy this little adventure.");
+}
