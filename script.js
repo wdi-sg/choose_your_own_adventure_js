@@ -1,7 +1,7 @@
 const game = {
   enemies: [{
     name: "Bulbasaur",
-    image: "images/bulbasaur.jpg",
+    image: "images/Bulbasaur.png",
     attacks: ["Razor leaf", "Tackle", "Solar beam"]
   },{
     name: "Squirtle",
@@ -139,44 +139,31 @@ const gameLogic = function (currentInput) {
 
 const aTree = function (currentInput) {
   // Full A Tree
-  // A -> A
+  // A -> A 
   if (currentInput.toLowerCase() === game.choices.a && game.choices.counter === 1 && game.choices.firstChoice === game.choices.a) {
     game.setText(`Pikachu uses Thunder! 5 Damage! ${game.enemies[ran].name} 2 HP left!\n${game.enemies[ran].name} uses ${game.enemies[ran].attacks[ranAtk]}! 2 Damage! Pikachu has 8 HP left!`)
     game.resetInput()
     game.choices.secondChoice = currentInput.toLowerCase()
     game.choices.increaseCount()
     game.increaseScore(5)
-    document.querySelector("#img1").style.transitionDuration = "0"
-
-    // document.querySelector("#img1").style.transform = "translateX(730px)" 
+    document.querySelector("#img1").style.transitionDuration = "0.5s"
+    document.querySelector("#img2").style.transitionDuration = "0.5s"
 
     setTimeout(function(){
-      const nudgeBack = setInterval(function(){
-        document.querySelector("#img1").style.transform = "translateX(730px)" 
-        clearInterval(nudgeBack)   
-      },5)
+      document.querySelector("#img1").style.transform = "translateX(730px)" 
     }, 400)
 
     setTimeout(function(){
-      const nudgeBack = setInterval(function(){
-        document.querySelector("#img1").style.transform = "translateX(700px)" 
-        clearInterval(nudgeBack)   
-      },1)
+      document.querySelector("#img1").style.transform = "translateX(700px)" 
     }, 700)
 
-    setTimeout(function(){
-      const nudgeBack = setInterval(function(){
+      setTimeout(function(){
         document.querySelector("#img2").style.transform = "translateX(-750px)" 
-        clearInterval(nudgeBack)   
-      },5)
-    }, 900)
+      }, 900)
 
-    setTimeout(function(){
-      const nudgeBack = setInterval(function(){
+      setTimeout(function(){
         document.querySelector("#img2").style.transform = "translateX(-700px)" 
-        clearInterval(nudgeBack)   
-      },1)
-    }, 1200)
+      }, 1200)
     
 
     return "A - Attack\nB - Pokeball\nC - Run"
