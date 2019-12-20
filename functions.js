@@ -55,8 +55,8 @@ var displayIntro = function () {
 }
 
 var introIntro = function () {
-    setTimeout(function(){clearOutput2();}, 10); //these 2 are a little faster than intended. Change later when done testing*******
-    setTimeout(function(){displayIntro();}, 10);
+    setTimeout(function(){clearOutput2();}, 1000); //these 2 are a little faster than intended. Change later when done testing*******
+    setTimeout(function(){displayIntro();}, 1000);
 }
 
 var introStart = function () {
@@ -68,7 +68,7 @@ var introStart = function () {
 var day1P1 = function () {
     display1(day1P1D101);
     display2("Your adventure begins.");
-    setTimeout(function(){display2(day1P1D201);}, 10);//Remember to change when finished testing.
+    setTimeout(function(){display2(day1P1D201);}, 1000);//Remember to change when finished testing.
 }
 
 
