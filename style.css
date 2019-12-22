@@ -1,0 +1,38 @@
+body {
+	font-family: sans-serif;
+	background-color: #f3c446;
+}
+
+.main-wrapper {
+	margin: 40px auto 0 auto;
+	border: 1px solid black;
+	max-width: 720px;
+	padding: 40px;
+}
+
+.starter{
+  font-size:1em;
+  padding:10px;
+  display:block;
+  margin:40px;
+}
+
+#input {
+	width: 400px;
+	font-size: 1.2em;
+}
+
+#output {
+	color: #221e23;
+	font-family: sans-serif;
+	font-size: 2em;
+}
+
+#score {
+	color: white;
+	font-family: sans-serif;
+	font-size: 1.5em;
+	/*font-weight: bold;*/
+  background-color: #656a78;
+  max-width: 200px;
+}
