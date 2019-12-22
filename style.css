@@ -1,0 +1,15 @@
+.starter{
+  font-size:30px;
+  padding:10px;
+  display:block;
+  margin:40px;
+  border:3px solid blue;
+}
+
+#output{
+  background-color:pink;
+}
+
+button{
+	margin: 0 40px;
+}
