@@ -1,0 +1,47 @@
+.starter{
+  font-size:30px;
+  padding:10px;
+  display:block;
+  margin:20px;
+  border:3px solid blue;
+}
+ #mainDisplay{
+ 	height: 250px;
+ 	background-color: rgb(171, 205, 239, 0.3);
+ }
+ #secDisplay{
+ 	height: 50px;
+ 	font-size: 30px;
+ 	background-color: rgb(171, 205, 239, 0.6);
+ }
+
+.buttonContainer{
+	text-align: center;
+	background-color: rgb(171, 205, 239);
+	margin: 0 20px;
+	font-size: 30px;
+	padding: 5px;
+	border: 1px solid white;
+}
+
+.btn{
+	position: relative;
+	margin: 0 auto;
+	padding: 5px;
+	margin: 5px;
+	font-family: 'Noto Sans', sans-serif;
+	font-size: 20px;
+}
+
+.everything{
+	max-width: 800px;
+
+	margin: 0 auto;
+	font-family: 'Noto Sans', sans-serif;
+}
+
+.clock{
+	font-family: 'Nova Square', cursive;
+	font-size: 25px;
+	margin-left: 20px;
+}
