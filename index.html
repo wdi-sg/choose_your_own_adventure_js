@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel = "stylesheet" href= "style.css">
+
+	<title>Adventure Quest</title>
+</head>
+<body>
+	<div class ="welcome">
+		<h1 id = 'welcome'> Welcome to Robocar Poli! Please tell me your name!</h1>
+		<input type="text" id = "name" autofocus autocomplete="off"  placeholder="Your name">
+	</div>
+
+	<div class = "container" id = "containerOne">
+		<h4 class = "prompt"> Hello, <span id ="userName"> </span>. Poli is waiting for you at one of these games. You have 30 minutes to find him. Where do you think he is?  Wrong choice delays you 10 minutes or 5 minutes. Good luck! </h4>
+
+		<input type="text" class ="input" id = "name" autofocus autocomplete="off"  placeholder="Type your choice here" oninput="chooseAdventure(event)">
+
+		<div class = "small">
+			<div class = "first" id = "one">
+				<h4>Angry Birds</h4>
+				<img src="http://assets-production.rovio.com/s3fs-public/styles/product_grid_image/public/Game%20icons/abba_icon_0.jpg?sTnq7JGDCPXbsGwQZHWhHpZcypWt5cnG&itok=nEZToLux" alt="">
+			</div>
+			<div class = "first" id = "two">
+				<h4>Tom's Pets</h4>
+				<img src="https://non-cgplus.com/wp-content/uploads/2018/11/My-Talking-Tom-2-hack.jpg" alt="">
+			</div>
+			<div class = "first" id = "three">
+				<h4>Toy Story</h4>
+				<img src="https://upload.wikimedia.org/wikipedia/en/4/4c/Toy_Story_4_poster.jpg" alt="">
+			</div>	
+		</div>
+	</div>
+
+
+	<div class = "container" id = "containerTwo"> You've come to the right place. Poli is on Piggy's Island looking for the stolen eggs. Bring along one of the birds to help him. You have <span id ="timeLeft"></span> minutes.</h3>
+		<input type="text" id = ""  autofocus  autocomplete="off"  placeholder="Type the bird's name here" oninput="chooseAdventure(event)">
+		<div class = "small">
+			<div class = "first" id = "oneOne">
+				<h4>Red </h4> 
+				<p>'I'm Red! The mighty defender of the nest! The smasher of pigs! </p>
+				<img src="https://vignette.wikia.nocookie.net/angrybirds/images/d/df/6CF93531-ACFC-44B8-AD83-BC4AD698B7EE.jpeg/revision/latest/scale-to-width-down/180?cb=20190316021116" alt="Red">
+			</div>
+			<div class = "first" id = "oneTwo">
+				<h4>Chuck </h4>
+				<p> I've got places to go! Birds to meet! Let's see if we can't speed things up a little bit</p>
+				<img src="https://vignette.wikia.nocookie.net/angrybirds/images/d/df/6CF93531-ACFC-44B8-AD83-BC4AD698B7EE.jpeg/revision/latest/scale-to-width-down/180?cb=20190316021116" alt="Chuck">
+			</div>
+			<div class = "first" id = "oneThree">
+				<h4>Bomb</h4>
+				<p> I've got places to go! Birds to meet! Let's see if we can't speed things up a little bit</p>
+				<img src="https://vignette.wikia.nocookie.net/angrybirds/images/d/df/6CF93531-ACFC-44B8-AD83-BC4AD698B7EE.jpeg/revision/latest/scale-to-width-down/180?cb=20190316021116" alt="Chuck">
+			</div>
+		</div>	
+	</div>
+
+
+	<div class = "container" id = "containerThree">
+		<h3 class = "prompt"> Poli is not here but he's nearby. Ask one of Tom's pets to help you find the way. You've lost 5 minutes. You have <span id ="timeLeft_1"></span> minutes. </h3>
+
+		<input type="text" id = "" autofocus autocomplete="off"  placeholder="Type the pet's name here" oninput="chooseAdventure(event)">
+
+		<div class = "first" id = "twoOne">
+			<h4>Sugar</h4>
+			<p>I'm pink. I have a rainbow mane and a unicorn horn.</p>
+			<img src="#" alt="">
+		</div>
+		<div class = "first" id = "twoTwo">
+			<h4>Dot</h4>
+			<p>I'm from Cyber City.</p>
+			<img src="#" alt="">
+		</div>
+		<div class = "first" id = "twoThree">
+			<h4>Squeak</h4>
+			<p>I'm an orange pet with mouse ears</p>
+			<img src="#" alt="">
+		</div>	
+	</div>
+
+
+	<div class = "container" id = "containerFour">
+		<h3 class = "prompt"> Oops! You're lost. You have <span id="timeLeft_2"></span> minutes to get back on track. Maybe one of these toys can help.</h3>
+
+		<input type="text" id = "" autofocus autocomplete="off"  placeholder="Type the bird's name here" oninput="chooseAdventure(event)">
+		<div class = "first" id = "threeOne">
+			<h5>Gabby</h5>
+			<img src="#" alt="">
+		</div>
+		<div class = "first" id = "threeTwo">
+			<h5>Forky</h5>
+			<img src="#" alt="">
+		</div>
+		<div class = "first" id = "threeThree">
+			<h5>Woody</h5>
+			<img src="#" alt="">
+		</div>	
+	</div>
+
+
+	<div class = "container" id = "containerFive">
+		<h4 class = "prompt"> Among other cheery and chirpy birds, Red is a bit of an outcast. His stern looking appearance has kept him at odds with the other birds, but a bit of cynicism is just what Poli needs right now. You've help Poli to find alll the stolen eggs and are rewarded with an alpaca. Hooray!</h>
+
+		
+		<div class = "first" id = "oneOneOne">
+			
+			<img src="#" alt="">
+		</div>
+		
+	</div>
+
+
+	<div class = "container" id = "containerSix">
+		<h3 class = "prompt"> Chuck is impulsive, mouthy and get into trouble often. Luckily, he's fast enough to get out of them. You've finally found Poli but he already defeated the pigs. You did not contribute to his victory. </h3>
+
+		<div class = "first" id = "oneTwoOne">
+			
+			<img src="#" alt="">
+		</div>
+		
+	</div>
+
+
+	<div class = "container" id = "containerSeven">
+
+		<h3 class = "prompt"> Bomb is a cool bird. However, he struggles to control his power - his ability to explode. Too bad, some of the eggs are destroyed in explosion.
+		
+		<div class = "first" id = "oneThreeOne">
+			
+			<img src="#" alt="">
+		</div>
+		
+	</div>
+
+
+	<div class = "container" id = "containerEight">
+		<h3 class = "prompt"> Sugar is sweet but she doesn't know the way. Try other pets. Or you may go back to the start. You have<span id ="timeLeft_5"></span> minutes.</h3>
+		<input type="text" id = "" autofocus autocomplete="off"  placeholder="Type your choice here" oninput="chooseAdventure(event)">
+
+		<div class = "first" id = "TwoOneOne">
+			<h5>Flip</h5>
+			<img src="#" alt="">
+		</div>
+		<div class = "first" id = "TwoOneTwo">
+			<h5>Gus</h5>
+			<img src="#" alt="">
+		</div>
+		<div class = "first" id = "TwoOneThree">
+			<h5>Go back</h5>
+			<img src="#" alt="">
+		</div>	
+	</div>
+
+
+	<div class = "container" id = "containerNine">
+
+		<h3 class = "prompt"> Dot doesn't know how to find Poli, but he knows how to find the angry birds who may know. Do you want to try your luck with Dot? You have <span id ="timeLeft"></span> minutes.</h3>
+
+		<input type="text" id = "" autofocus autocomplete="off"  placeholder="Type the bird's name here" oninput="chooseAdventure(event)">
+
+		<div class = "first" id = "twoTwoOne">
+			<h5>Find the angry bird</h5>
+			<img src="#" alt="">
+		</div>
+		<div class = "first" id = "twoTwoTwo">
+			<h5>Go back</h5>
+			<img src="#" alt="">
+		</div>
+		<div class = "first" id = "twoTwoThree">
+			<h5>Continue on my own</h5>
+			<img src="#" alt="">
+		</div>	
+	</div>
+
+
+	<div class = "container" id = "containerTen">
+		<h3 class = "prompt"> Squeak almost finishes his dinner. Do you want to wait? You have<span id ="timeLeft_6"></span> minutes.</h3>
+
+		<input type="text" id = "" autofocus autocomplete="off"  placeholder="Type your choice here" oninput="chooseAdventure(event)">
+
+		<div class = "first" id = "twoThreeOne">
+			<h5>Wait for Squeak</h5>
+			<img src="#" alt="">
+		</div>
+		<div class = "first" id = "twoThreeTwo">
+			<h5>Ask other pet</h5>
+			<img src="#" alt="">
+		</div>
+		<div class = "first" id = "twoThreeThree">
+			<h5>Find my own way</h5>
+			<img src="#" alt="">
+		</div>	
+	</div>
+
+	<div class = "container" id = "containerEleven">
+
+		<h3 class = "prompt"> New kid in the block. Don't know much. What do you want to do now? You have <span id ="timeLeft_7"></span> minutes.</h3>
+
+		<input type="text" id = "" autofocus autocomplete="off"  placeholder="Type the bird's name here" oninput="chooseAdventure(event)">
+
+		<div class = "first" id = "threeOneOne">
+			<h5>Continue </h5>
+			<img src="#" alt="">
+		</div>
+		<div class = "first" id = "threeOneTwo">
+			<h5>Go back</h5>
+			<img src="#" alt="">
+		</div>
+		<div class = "first" id = "threeOneThree">
+			<h5>Ask other toy</h5>
+			<img src="#" alt="">
+		</div>	
+	</div>
+
+
+	<div class = "container" id = "containerTwele">
+		<h3 class = "prompt"> Woody is always reliable. He can help you call the rescue team to ask. Who do you call? You have <span id ="timeLeft_7"></span> minutes.</h3>
+
+		<input type="text" id = "" autofocus autocomplete="off"  placeholder="Type the bird's name here" oninput="chooseAdventure(event)">
+
+		<div class = "first" id = "threeTwoOne">
+			<h5>Poli</h5>
+			<img src="#" alt="">
+		</div>
+		<div class = "first" id = "threeTwoTwo">
+			<h5>Roy</h5>
+			<img src="#" alt="">
+		</div>
+		<div class = "first" id = "threeTwoThree">
+			<h5>Amber</h5>
+			<img src="#" alt="">
+		</div>	
+	</div>
+
+	<div class = "container" id = "containerThirteen">
+		<h3 class = "prompt"> Hello user! Please choose your mode of transport<span id ="timeLeft_8"></span> minutes.</h3>
+
+		<input type="text" id = "name" autofocus autocomplete="off"  placeholder="Type the bird's name here" oninput="chooseAdventure(event)">
+
+		<div class = "first" id = "threeThreeOne">
+			<h5>Red</h5>
+			<img src="#" alt="">
+		</div>
+		<div class = "first" id = "threeThreeTwo">
+			<h5>Chuck</h5>
+			<img src="#" alt="">
+		</div>
+		<div class = "first" id = "threeThreeThree">
+			<h5>Bomb</h5>
+			<img src="#" alt="">
+		</div>	
+	</div>
+
+
+
+	<script src = "scripts.js"></script>
+</body>
+</html>
