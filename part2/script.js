@@ -1,16 +1,34 @@
-console.log("hello script js");
+console.log("I'M NOT BROKEN!!!!");
+
+
+startTextFlash();
+
+
+
+
+
+
+
+
+
 
 var inputHappened = function(currentInput){
-  console.log( currentInput );
-  return "SOMETHING HAPPENED";
+    if (currentInput.toLowerCase() === "start" && gameStage === 0) {
+        stopTextFlash();
+        document.querySelector('#input').value = "";
+        gameStage++;
+        display(askForName);
+        return gameStage;
+    } else if (gameStage === 1) {
+        getName(currentInput);
+        display("Greetings " + playerName + ".");
+        document.querySelector('#input').value = "";
+        gameStage++;
+        setTimeout(function(){introStart();}, 3000);
+        return; gameStage;
+    }
 };
 
-var display = function( data ){
-  var displayElement = document.querySelector('#output');
 
-  // get rid of the entire contents
-  displayElement.innerHTML = "";
-
-  // put the data into the div
-  output.innerText = data;
-};
+//    Useful little thing for clearing inputs
+//    document.querySelector('#input').value = "";
