@@ -1,0 +1,55 @@
+header{
+  text-align: center;
+}
+#gamecontainer{
+    width: 700px;
+    height: 1000px;
+    margin: auto;
+}
+#storycontainer{
+  width:500px;
+  margin: 50px auto;
+  text-align:center;
+}
+#nameinput{
+  width:500px;
+  margin: auto;
+  text-align: center;
+}
+#actionpanel{
+  text-align: center;
+  width: 500px;
+  margin: 50px auto;
+}
+button{
+  margin: 0 30px;
+}
+#statbox{
+  height: 150px;
+  width: 200px;
+  margin: auto;
+  padding: 2%;
+}
+#optionbox{
+  height: 300px;
+  width: 100%;
+  text-align: center;
+}
+#storytext{
+  text-align: center;
+}
+.options{
+  position:relative;
+}
+#backoption{
+  height: 300px;
+  width: 100%;
+  text-align: center;
+}
+#storybox{
+  height: 400px;
+  width: 100%;
+}
+pre{
+  display:inline-block;
+}
