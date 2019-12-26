@@ -6,8 +6,8 @@ setTimeout(function () {
 }, 1000)
 var output;
 var inputHappened = function (currentInput) {
-  var doctorChoice = ["11", "12", '13'];
-  var planetChoice = ["Skaros", "Mondas", "Earth",];
+  var doctorChoice = [11, 12, 13];
+  var planetChoice = ["Skaros", "Mondas", "Earth"];
   var monsterChoice = ["Daleks", "Cybermen", "Mutant Spiders"];
   var toolChoice = ["Sonic Screwdriver", "Boombox", "Gun"];
 
