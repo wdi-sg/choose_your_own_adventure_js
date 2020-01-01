@@ -1,0 +1,65 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <input class="starter" id="input" placeholder="type HERE!"/>
+    <p class="starter" id="output"></p>
+    <p class="starter1" id="output1"></p>
+    <p class="starter2" id="output2"></p>
+    <p class="starter3" id="output3"></p>
+    <p class="starter4" id="output4"></p>
+    <p class="starter5" id="output5"></p>
+    <p class="starter6" id="output6"></p>
+    <p class="starter7" id="output7"></p>
+    <p class="starter8" id="output8"></p>
+    <script>
+
+      document.querySelector('#input').addEventListener('change', function(event){
+        var currentInput = event.target.value;
+        inputHappened(currentInput)
+      });
+
+      var display = function( data ){
+        var output = document.querySelector('#output');
+        output.innerText = data;
+      }
+      var display1 = function( data1 ){
+        var output1 = document.querySelector('#output1');
+        output1.innerText = data1;
+      }
+      var display2 = function( data2 ){
+        var output2 = document.querySelector('#output2');
+        output2.innerText = data2;
+      }
+      var display3 = function( data3 ){
+        var output3 = document.querySelector('#output3');
+        output3.innerText = data3;
+      }
+      var display4 = function( data4 ){
+        var output4 = document.querySelector('#output4');
+        output4.innerText = data4;
+      }
+      var display5 = function( data5 ){
+        var output5 = document.querySelector('#output5');
+        output5.innerText = data5;
+      }
+      var display6 = function( data6 ){
+        var output6 = document.querySelector('#output6');
+        output6.innerText = data6;
+      }
+      var display7 = function( data7 ){
+        var output7 = document.querySelector('#output7');
+        output7.innerText = data7;
+      }
+      var display8 = function( data8 ){
+        var output8 = document.querySelector('#output8');
+        output8.innerText = data8;
+      }
+    </script>
+    <script src="qna.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
