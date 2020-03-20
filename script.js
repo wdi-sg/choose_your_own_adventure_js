@@ -1,66 +1,109 @@
+// Global state variables
 var name = "";
-var level = 0;
-var currentChoice = 0;
+var currentRoom = "entryWay";
 
-// Level 0: no biggie
-document.querySelector("#output").innerText = "Welcome to the dungeon.\n\n" +
-  "You are in a small and slightly depressing room. What would you like to do? \n\n" +
-  "(1) \n" +
-  "(2) \n" +
-  "(3) ";
+// Dungeon object
 
-var inputHappened = function(choice){
-  var prompt;
-  console.log(`choice at level ${level}: ${choice}`);
-  clearInput();
-  currentChoice = Number(choice);
+/* room prototype
+  room_x_y: {
+    blurb: "",
+    choices: {
+      1: "",
+      2: ""
+    },
+    goTo: {
+      1: "",
+      2: ""
+    }
+  },
+*/
 
-  switch (level) {
-  case 0:
-    prompt = enterDungeon(choice);
-    console.log(output);
-    break;
-  case 1:
-    return levelOne(choice);
-    break;
-  case 2:
-    return levelTwo(choice);
-    break;
-  case 3:
-    return levelThree(choice);
-    break;
-  default:
-    return `You should go no further.`;
+var dungeon = {
+  entryWay: {
+    blurb: "You are in a small and slightly depressing room.",
+    choices: {
+      1: "Take the left door.",
+      2: "Take the right door."
+    },
+    goTo: {
+      1: "room_1_1",
+      2: "room_1_2"
+    }
+  },
+  room_1_1: {
+    blurb: "This is no less bad.",
+    choices: {
+      1: "Pick the sword.",
+      2: "Pick the wand."
+    },
+    goTo: {
+      1: "room_2_1",
+      2: "room_2_2"
+    }
+  },
+    room_1_2: {
+    blurb: "Say, this is pretty nice!",
+    choices: {
+      1: "Arm wrestle.",
+      2: "Order a drink."
+    },
+    goTo: {
+      1: "",
+      2: ""
+    }
   }
-  return prompt;
+};
+
+// Level 0: so it begins
+var choicePrompt = buildPrompt(dungeon[currentRoom]);
+document.querySelector("#output").innerText =
+  "Welcome to the dungeon.\n\n" + choicePrompt;
+
+
+var inputHappened = function(choice) {
+  clearInput();
+  console.log("moving from: " + currentRoom);
+  currentRoom = dungeon[currentRoom].goTo[choice];
+  console.log("moving to: " + currentRoom);
+  choicePrompt = buildPrompt(dungeon[currentRoom]);
+  return choicePrompt;
 }
 
 var clearInput = function () {
   document.querySelector("#input").value = "";
 }
 
-function enterDungeon (choice) {
-  level++;
-  var nextPrompt = "level1";
+function whatNext () {
+  var whatNow = [
+    "What will you do?",
+    "What next, brave adventurer?",
+    "What choice will you make?",
+    "What now?",
+    "The choice lays before you now."
+  ];
 
-  return `You've left the relative safety of the entrance and entered level ${level}.\n` +
-    `${nextPrompt}`;
+  var i = Math.floor(Math.random() * whatNow.length);
+
+  return whatNow[i];
 }
 
-function levelOne (choice) {
-  level++;
-  var nextPrompt = "level2";
-
-  return `You're one level deeper. \n` +
-    `${nextPrompt}`;
+function getBlurb (roomObj) {
+  return roomObj.blurb;
 }
 
-function levelTwo (choice) {
-  level++;
-  return level;
+function getChoices (roomObj) {
+  var choiceObj = roomObj.choices;
+  var choices = [];
+
+  for (var num in choiceObj) {
+    choices.push(`${num}: ${choiceObj[num]}`);
+  }
+  return choices;
 }
 
-function levelThree (choice) {
-  level++;
-  return level;
+function buildPrompt (room) {
+  outStr = getBlurb(room) + "\n\n" +
+    whatNext() + "\n\n" +
+    getChoices(room).join("\n");
+  return outStr;
 }
