@@ -93,7 +93,7 @@ var getItem = function(){
     } else {
         failedAttempts--;
         if (failedAttempts === 0){
-            return `You lose :( Refresh the page to try this game again.`
+            return `You lose :( \n\nRefresh the page to try this game again.`
         } else{
             return `They are all sold out! You have ${failedAttempts} failed attempts left.\n\nTry this aisle again? or another aisle? (Buy / Leave)`;
         }
