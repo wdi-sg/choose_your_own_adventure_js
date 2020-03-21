@@ -9,28 +9,6 @@ const createMonster = (name, health, experience) => {
   return {name, health, experience};
 };
 
-const createGhoul = (object) => {
-  object = {
-    name: "Ghoul",
-    health: 50,
-    experience: 30
-  }
-  return object;
-};
-
-const createSkeleton = (object) => {
-  object = {
-    name: "Skeleton",
-    health: 80,
-    experience: 50
-  }
-  return object;
-}
-
-
-
-
-
 var inputHappened = function(currentInput){
 
   console.log(steps);
@@ -89,13 +67,11 @@ var inputHappened = function(currentInput){
             case "2":
               steps = "visit_inn";
               return `You are currently in an inn, what would you like to drink?
-              \n1. Beer
-              \n2. Soda
-              \n3. Plain ol' water
-              \n4. Back`;
+              \n1. Potion
+              \n2. Back`;
               break;
 
-            case"3":
+            case "3":
             return `Current experience is ${experience}
               \n1. Adventure
               \n2. Visit Inn
@@ -192,7 +168,28 @@ var inputHappened = function(currentInput){
           break;
 
         case "visit_inn":
-          return `success`;
+          switch(currentInput){
+            case "1":
+              playerHealth = 100;
+              return `You drank a potion and you gained back all your health!
+              \n1. Potion
+              \n2. Back`;
+              break;
+
+            case "2":
+              steps = "lobby_selection";
+              return `You went back outside. What do you like to do today?
+              \n1. Adventure
+              \n2. Visit Inn
+              \n3. View experience
+              \n4. Log out`
+              break;
+
+              default:
+                return `Invalid input, please enter again
+                \n1. Potion
+                \n2. Back`
+          }
           break;
 
         case "logout_confirmation":
@@ -210,6 +207,15 @@ var inputHappened = function(currentInput){
               \n3. View experience
               \n4. Log out`;
               break;
+
+            default:
+              steps = "lobby_selection"
+              return `Invalid Input, Please enter again
+                \n1. Adventure
+                \n2. Visit Inn
+                \n3. View experience
+                \n4. Log out`
+                break;
           }
           break;
   }
