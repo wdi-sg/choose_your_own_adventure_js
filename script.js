@@ -3,6 +3,20 @@ var name;
 var lobbySelect;
 var experience = 0;
 var steps = "lobby_start";
+var playerHealth = 100;
+var monster;
+
+var ghoul = {
+  health: 50,
+  attack: Math.floor(Math.random() * 11)
+};
+
+var skeleton = {
+    health: 80,
+    attack: Math.floor(Math.random() * 6)
+}
+
+
 
 
 
@@ -33,12 +47,26 @@ var inputHappened = function(currentInput){
       case "lobby_selection":
         switch(currentInput){
           case "1":
-            steps = "adventure";
-            return `You have decided to go on an adventure, which monster would you like to fight?
-            \n1. Orc
-            \n2. Skeleton
-            \n3. Back`;
+            var rng = Math.floor(Math.random() * 100);
+            if(rng < 50){
+              steps = "skeleton";
+              monster = skeleton;
+              return `You are currently facing:
+              \nSkeleton
+              \nHealth: ${monster.health}
+              \n\n1. Attack
+              \n2. Flee`;
             break;
+          }else if(rng > 50){
+            steps = "ghoul";
+            monster = ghoul;
+            return `You are currently facing:
+            \nGhoul
+            \nHealth: ${monster.health}
+            \n\n1. Attack
+            \n2. Flee`;
+            break;
+          }
 
             case "2":
               steps = "visit_inn";
@@ -71,7 +99,11 @@ var inputHappened = function(currentInput){
         }
         break;
 
-        case "adventure":
+        case "skeleton":
+          return `success`;
+          break;
+
+        case "ghoul":
           return `success`;
           break;
 
