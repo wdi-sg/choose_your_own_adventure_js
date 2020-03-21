@@ -10,20 +10,12 @@
     <div class="starter" id="output"></div>
     <script>
 
-      var display = function( data ){
-        var displayElement = document.querySelector('#output');
-
-        // get rid of the entire contents
-        displayElement.innerHTML = "";
-
-        // put the data into the div
-        output.innerText = data;
-      };
 
       document.querySelector('#input').addEventListener('change', function(event){
         var currentInput = event.target.value;
         var result = inputHappened(currentInput)
         display( result );
+        document.getElementById("input").value = "";
       });
     </script>
     <script src="script.js" charset="utf-8"></script>
