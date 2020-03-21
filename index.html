@@ -7,9 +7,9 @@
     <h3>DOM Manipulation Template</h3>
     <input class="starter" id="input" placeholder="input"/>
     <h2>output:</h2>
-    <div class="starter" id="output"></div>
+    <div class="starter" id="output">Welcome adventurer, please enter your name</div>
     <script>
-
+        document.getElementById("output").value = "Welcome adventurer, please enter your name";
 
       document.querySelector('#input').addEventListener('change', function(event){
         var currentInput = event.target.value;
