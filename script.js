@@ -1,4 +1,4 @@
-var scene = 8;
+var scene = 1;
 var enemy;
 var battleMode = false;
 target.randomTaste(); //Generate random preference for target.
