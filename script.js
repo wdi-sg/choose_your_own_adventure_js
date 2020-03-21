@@ -1,19 +1,30 @@
 console.log("hello script js");
 var name;
-var lobbySelect;
 var experience = 0;
-var steps = "lobby_start";
 var playerHealth = 100;
+var steps = "lobby_start";
 var monster;
 
-var ghoul = {
-  health: 50,
-  attack: Math.floor(Math.random() * 11)
+const createMonster = (name, health, experience) => {
+  return {name, health, experience};
 };
 
-var skeleton = {
+const createGhoul = (object) => {
+  object = {
+    name: "Ghoul",
+    health: 50,
+    experience: 30
+  }
+  return object;
+};
+
+const createSkeleton = (object) => {
+  object = {
+    name: "Skeleton",
     health: 80,
-    attack: Math.floor(Math.random() * 6)
+    experience: 50
+  }
+  return object;
 }
 
 
@@ -25,6 +36,8 @@ var inputHappened = function(currentInput){
   console.log(steps);
   switch(steps){
     case "start":
+      experience = 0;
+      playerHealth = 100;
       steps = "lobby_start";
       return `Welcome adventurer, please enter your name`;
       break;
@@ -48,22 +61,27 @@ var inputHappened = function(currentInput){
         switch(currentInput){
           case "1":
             var rng = Math.floor(Math.random() * 100);
+
             if(rng < 50){
-              steps = "skeleton";
-              monster = skeleton;
+              steps = "fight";
+              monster = createMonster("Skeleton", 80, 50);
               return `You are currently facing:
-              \nSkeleton
+              \n${monster.name}
               \nHealth: ${monster.health}
-              \n\n1. Attack
+
+              \n\nYour Health: ${playerHealth}
+              \n1. Attack
               \n2. Flee`;
             break;
           }else if(rng > 50){
-            steps = "ghoul";
-            monster = ghoul;
+            steps = "fight";
+            monster = createMonster("Ghoul", 50, 30);
             return `You are currently facing:
-            \nGhoul
+            \n${monster.name}
             \nHealth: ${monster.health}
-            \n\n1. Attack
+
+            \n\nYour health: ${playerHealth}
+            \n1. Attack
             \n2. Flee`;
             break;
           }
@@ -99,12 +117,73 @@ var inputHappened = function(currentInput){
         }
         break;
 
-        case "skeleton":
-          return `success`;
-          break;
+        case "fight":
+          switch(currentInput){
+            case "1":
+              var playerDamage = Math.floor(Math.random() * 31);
+              var monsterDamage;
+              monster.health = monster.health - playerDamage;
+              if(monster.health > 0){
+                if(monster.name === "Skeleton"){
+                  monsterDamage = Math.floor(Math.random() * 11);
+                  playerHealth = playerHealth - monsterDamage;;
+                }else if(monster.name === "Ghoul"){
+                  monsterDamage = Math.floor(Math.random() * 6);
+                  playerHealth = playerHealth - monsterDamage;
+                }
+              }
+              if(playerHealth <= 0){
+                steps = "start";
+                return `You dealt ${playerDamage} to ${monster.name}
+                \n${monster.name} dealt ${monsterDamage} to you
+                \nYou have been killed, type anything to restart the game
+                \n\n${monster.name}
+                \nHealth: ${monster.health}
 
-        case "ghoul":
-          return `success`;
+                \n\nYour Health: ${playerHealth}`
+              }else if(monster.health <= 0){
+                steps = "pre-lobby";
+                experience = experience + monster.experience;
+                return `You dealt ${playerDamage} to ${monster.name}
+                \nYou have killed ${monster.name}! You gained ${experience} experience. Type anything to continue.
+                \n\n${monster.name}
+                \nHealth: ${monster.health}
+
+                \n\nYour Health: ${playerHealth}`
+              }
+              return `You dealt ${playerDamage} to ${monster.name}
+              \n${monster.name} dealt ${monsterDamage} to you
+              \n\n${monster.name}
+              \nHealth: ${monster.health}
+
+              \n\nYour Health: ${playerHealth}
+              \n1. Attack
+              \n2. Flee`;
+
+            break;
+
+            case "2":
+              return;
+              break;
+
+              default:
+                return `Invalid Input
+                \n\n${monster.name}
+                \nHealth: ${monster.health}
+
+                \n\nYour Health: ${playerHealth}
+                \n1. Attack
+                \n2. Flee`;
+                break;
+          }
+
+        case "pre-lobby":
+          steps = "lobby_selection";
+          return `Welcome back ${name}, What would you like to do today?
+          \n1. Adventure
+          \n2. Visit Inn
+          \n3. View experience
+          \n4. Log out`;
           break;
 
         case "visit_inn":
