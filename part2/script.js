@@ -1,5 +1,6 @@
 console.log("hello script js");
-var status = "beginning";
+var status = "getting name";
+var username;
 
 var outcomes = {
     coldStorage: {
@@ -60,6 +61,13 @@ var clearInput = function(){
 var inputHappened = function(currentInput){
   console.log( currentInput );
   clearInput();
+  //name getting
+  if (status === "getting name"){
+    username = currentInput;
+    status = "beginning";
+    return `Hey ${username}, it's panic buying season! Get stuff before it runs out!\n\n Which grocery store do you want to go to?\n\nCold Storage / FairPrice / Sheng Siong`
+  }
+
 
   //Cold Storage Beginning
   if (status === "beginning" && inputMatch(currentInput, "cold storage")){
@@ -150,10 +158,9 @@ var inputHappened = function(currentInput){
     status = "game end";
     return outcomes.shengSiong.thirdStage["sell"];
   }
-
-
 };
 
+//Display function
 var display = function( data ){
   var displayElement = document.querySelector('#output');
 
@@ -165,7 +172,6 @@ var display = function( data ){
 };
 
 //Initial Display
-display("It's panic buying season! Get stuff before it runs out!\n\n Which grocery store do you want to go to?\n\nCold Storage / FairPrice / Sheng Siong");
-
+display("What's your name?");
 
 //thinking futher down the line, for dynamism, you can create a supermarkets object, etc. Then you can randomise the outcomes
