@@ -163,7 +163,12 @@ var inputHappened = function(currentInput){
             break;
 
             case "2":
-              return;
+              steps = "lobby_selection"
+              return `You flee from the battle. What do you like to do today
+              \n\n1. Adventure
+              \n2. Visit Inn
+              \n3. View experience
+              \n4. Log out`;
               break;
 
               default:
