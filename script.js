@@ -1,27 +1,27 @@
-var scene = 1;
+var scene = 8;
 var enemy;
 var battleMode = false;
-
 target.randomTaste(); //Generate random preference for target.
-
 function addApproval(input) {
     user.approval += input;
 }
 
+//Function to display scenario, choices & approval where appropriate.
+
 function showScene(number) {
+    //If the scenario has choices, return text, choices, and approval rating (only after the scene where you meet the target.)
     if (scenarios[number].choices) {
-        return `Scene: ${scene} ${br} Approval: ${user.approval} ${p} ${scenarios[number].text} ${p} ${scenarios.display(number)}`;
+        return `${(scene > 8) ? `Approval : ${user.approval} ${p}`:""}  ${scenarios[number].text} ${p} ${scenarios.display(number)}`;
+        //If the scenario doesn't have choices (ie it's an ending.), just return the text.
     } else {
         return `${scenarios[number].text}`
     }
 }
 
-function getUserName(name) {
-  user.name = name;
-}
-
+//Function to reset the game.
 function reset() {
     scene = 1;
+    user.name = null;
     enemy = null;
     trainee.hp = 8;
     user.outfit = null;
@@ -33,28 +33,34 @@ function reset() {
     return showScene(1)
 }
 
+//BATTLE FUNCTION
 function battle(input, enemy) {
     var userMoves = `Choose your moves: ${user.showMoves()}.`;
     var randomNo = getRandomInt(0, 1)
     var userResults = user.attack(input, enemy);
     var enemyResults = enemy.attack(randomNo, user);
+
+    //If enemy HP reaches 0.
     if (enemy.hp <= 0) {
         battleMode = false;
         scene = 4;
         return showScene(4);
+        //If user HP reaches 0.
     } else if (user.hp <= 0) {
-        scene = 3;
+        scene = 3; //bad ending
         battleMode = false;
         return showScene(3);
     }
 
     return `${userResults} ${p} ${enemyResults} ${p} Your HP: ${user.hp} ${br} ${enemy.name} HP: ${enemy.hp} ${p} ${userMoves}`;
 }
-
 document.getElementById("output").innerText = showScene(1);
 
+
+///MAIN FUNCTION
 var inputHappened = function(currentInput) {
     console.log(`Current scene: ${scene}`)
+    var username;
     //Clear all inputs.
     clearInput();
 
@@ -67,11 +73,10 @@ var inputHappened = function(currentInput) {
     var error = `Sorry, that was not a valid input. Please try again. \n\n ${showScene(scene)}`
 
     //Check if battlemode is on
-
     if (battleMode) {
         return battle(currentInput, enemy);
     } else {
-
+        //If battlemode is not on, display scenarios & choices accordingly.
         switch (scene) {
             case 1:
                 if (currentInput === 0) {
@@ -92,7 +97,6 @@ var inputHappened = function(currentInput) {
                     return error
                 }
                 break;
-
             case 2:
                 if (currentInput === 0) {
                     enemy = trainee;
@@ -115,7 +119,7 @@ var inputHappened = function(currentInput) {
                 break;
             case 5:
                 if (currentInput === 0) {
-                    scene = 7;
+                    scene = 7; //bad ending
                 } else if (currentInput === 1) {
                     scene = 6
                 } else {
@@ -136,15 +140,18 @@ var inputHappened = function(currentInput) {
                 }
                 break;
             case 8:
-                getUserName(currentInput);
+                user.name = capitalise(currentInput);
+                console.log(user.name);
                 scene++;
                 if (user.outfit === target.preference) {
                     addApproval(20);
                 } else {
                     addApproval(10);
                 }
+                return `"Alright... ${user.name}. There we go, here's a nametag. Please take a seat inside, you're assigned to table 5!" ${p} You take a seat at table 5. Shortly after, a beautiful woman approaches your table. You see her nametag--she’s your target! ${p} The eager youth slams an hourglass on your table. "You guys get 3 minutes!" ${p} “Hey there..." she squints at your nametag. "${user.name}. How’s it going?” she asks. ${p} (0) Great, nice to meet you! ${br} (1) Is your name Google? Because you have everything I’ve been searching for.`
                 break;
             case 9:
+                console.log(user.name);
                 if (currentInput === 0) {
                     addApproval(10);
                     scene = 11;
@@ -164,7 +171,7 @@ var inputHappened = function(currentInput) {
                     addApproval(10);
                     scene = 14;
                 } else if (currentInput === 2) {
-                    scene = 12;
+                    scene = 12; //bad ending
                 } else {
                     return error;
                 }
@@ -202,7 +209,7 @@ var inputHappened = function(currentInput) {
                     }
                 } else if (currentInput === 1) {
                     if (user.approval < 50) {
-                        scene = 20;
+                        scene = 20; //bad ending
                     } else {
                         scene = 21;
                     }
@@ -238,7 +245,7 @@ var inputHappened = function(currentInput) {
                     if (user.approval >= 70) {
                         scene = 23;
                     } else if (user.approval < 70) {
-                        scene = 27;
+                        scene = 26; //bad ending
                     } else {
                         return error;
                     }
@@ -246,14 +253,14 @@ var inputHappened = function(currentInput) {
                 break;
             case 23:
                 if (currentInput === 0) {
-                    scene = 24;
+                    scene = 24; //bad ending
                 } else if (currentInput === 1) {
-                    scene = 25;
+                    scene = 25; //GOOOD ENDING.
                 } else {
                     return error;
                 }
                 break;
-            //CASES WHERE USER HAS FAILED OR SUCCEEDED, RESET EVERYTHING.
+                //CASES WHERE USER HAS FAILED OR SUCCEEDED, RESET EVERYTHING.
             case 3:
             case 7:
             case 12:

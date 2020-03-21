@@ -11,9 +11,12 @@ function clearInput() {
 var p = `\n\n`
 var br = `\n`
 
+function capitalise(input) {
+    return input[0].toUpperCase() + input.slice(1).toLowerCase();
+  }
+
 var user = {
-    name: "",
-    setName: function(name) {this.name = name;},
+  name: null,
     hp: 15,
     outfit: "",
     moves: [{
