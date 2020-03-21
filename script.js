@@ -20,8 +20,10 @@ const projWk =
   "You are one lucky ducky! It is pair-assignment time and you just so happened to be paired up with eyecandy. This is your big chance to return her ID and make a good first impression! \n \n After approximately half-an-hour of work, you notice that the part she has been working on is a complete mess. Being the OCD straight-A student that you are, you can't help but want and know how to fix it.";
 const train =
   "School is over and you are seated on the train home minding your own business. To your surprise, your eyecandy suddenly boards the train and takes the empty seat next to you. DAYUUUM~ This is your big chance to return her ID and make a good first impression! You muster up your courage and begin talking to her. \n \n Several minutes pass - the conversation is going great and the train is now packed with people. You will be alighting in two stops and have yet to return your eyecandy's ID! You don't want to interrupt her because she is talking about her family. The train reaches the next stop and you notice an elderly lady shuffling onto the train.";
-const CCABattle = "CCA battle scenario.";
-const crying = "Crying on bench scenario.";
+const CCABattle =
+  "CCA is ongoing and you observe the resident douchebag, Lilbrokeowen, talking to your eyecandy. As they speak, you notice eyecandy getting visibly agitated. \n \n You decide to intervene. Lilbrokeowen loses his shit and challenges you to a game of table tennis. Your ego is everything and you cannot afford to lose! Do you wish to play?";
+const crying =
+  "School is over and you notice your eyecandy sitting on a bench alone. As you come closer to her, you realise that she is crying!";
 
 //other variables
 let playerName = false;
@@ -31,7 +33,7 @@ let CCAmateState = 0;
 let points = 0;
 let luckyItemStatus = false;
 
-//functions
+//callback functions
 const assignName = currentInput => {
   if (isNaN(currentInput) === true) {
     playerName = currentInput;
@@ -95,9 +97,11 @@ const luckyItemDrop = () => {
   console.log(luckyNum);
   if (luckyNum % 2 === 0) {
     luckyItemStatus = true;
-    return "You have picked up a one-time use lucky item called: Charisma and Humour. You must use it now or never. To activate, input '" +
+    return (
+      "You have picked up a one-time use lucky item called: Charisma and Humour. You must use it now or never. To activate, input '" +
       useLuckyItem +
       "'. Good luck! \n \n"
+    );
   } else {
     return "";
   }
@@ -105,7 +109,7 @@ const luckyItemDrop = () => {
 
 const ifUseLuckyItem = currentInput => {
   if (luckyItemStatus === true) {
-    points += 5;
+    points += 8;
     luckyItemStatus = false;
     console.log(points);
     return "Lucky item activated. Please proceed with your previously selected input.";
@@ -117,12 +121,15 @@ const ifUseLuckyItem = currentInput => {
 const evalWinCondition = () => {
   console.log(points);
   if (points > 15) {
-    return "This is the end of the game! \n \n Congratulations " + playerName + "! Through sheer force of personality, you have gotten your eyecandy to notice you. \n \n Thank you for playing! Refresh page to play again."
+    return (
+      "This is the end of the game! \n \n Congratulations " +
+      playerName +
+      "! Through sheer force of personality, you have gotten your eyecandy to notice you. \n \n Thank you for playing! Refresh page to play again."
+    );
+  } else {
+    return "This is the end of the game! \n \n Awww man. Despite your heartfelt attempts, you have still not gotten on your eyecandy's radar. \n \n Thank you for playing! Refresh page to play again.";
   }
-  else {
-    return "This is the end of the game! \n \n Awww man. Despite your heartfelt attempts, you have still not gotten on your eyecandy's radar. \n \n Thank you for playing! Refresh page to play again."
-  }
-}
+};
 
 const simulBattle = () => {
   let yourScore = Math.floor(Math.random() * 10);
@@ -132,17 +139,36 @@ const simulBattle = () => {
   if (yourScore === opponentScore) {
     yourScore--;
     points += 2;
-    return "You lost the match with a score of " + yourScore + " : " + opponentScore + ". \n \n"
-  }
-  else if (yourScore > opponentScore) {
+    return (
+      "You lost the match with a score of " +
+      yourScore +
+      " : " +
+      opponentScore +
+      ". \n \n"
+    );
+  } else if (yourScore > opponentScore) {
     points += 5;
-    return "You won the match with a score of " + yourScore + " : " + opponentScore + "! \n \n"
+    return (
+      "You won the match with a score of " +
+      yourScore +
+      " : " +
+      opponentScore +
+      "! \n \n"
+    );
+  } else {
+    return (
+      "You lost the match with a score of " +
+      yourScore +
+      " : " +
+      opponentScore +
+      ". \n \n"
+    );
   }
-  else {
-    return "You lost the match with a score of " + yourScore + " : " + opponentScore + ". \n \n"
-  }
-}
+};
 
+document.getElementById('input').setAttribute("placeholder","Input your 'Name' to begin playing.");
+
+//main function
 var inputHappened = function(currentInput) {
   if (playerName === false) {
     return assignName(currentInput);
@@ -206,23 +232,23 @@ var inputHappened = function(currentInput) {
     points += 3;
     return evalWinCondition();
   } else if (currentInput === tellOk) {
-    points += 6; 
+    points += 6;
     return evalWinCondition();
   } else if (currentInput === offerSeat) {
     points += 5;
     return evalWinCondition();
   } else if (currentInput === continueTalking) {
-    points += 3; 
+    points += 3;
     return evalWinCondition();
   } else if (currentInput === yes) {
-    points += 5; 
+    points += 5;
     let battleResult = simulBattle();
-    let winResult = evalWinCondition ();
+    let winResult = evalWinCondition();
     return battleResult + winResult;
   } else if (currentInput === no) {
-    points += 3; 
+    points += 3;
     return evalWinCondition();
   } else {
-    return "You have entered an invalid input. Please try again or refresh the page to play from the beginning."
+    return "You have entered an invalid input. Please try again or refresh the page to play from the beginning.";
   }
-}
+};

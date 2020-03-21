@@ -1,17 +1,16 @@
 <html>
   <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h3>DOM Manipulation Template</h3>
-    <input class="starter" id="input" placeholder="input"/>
-    <h2>output:</h2>
+    <h1>NOTICE ME, EYECANDY</h1>
+    <input class="starter" id="input" placeholder="input" />
+    <h2>Output:</h2>
     <div class="starter" id="output"></div>
     <script>
-
-      var display = function( data ){
-        var displayElement = document.querySelector('#output');
+      var display = function(data) {
+        var displayElement = document.querySelector("#output");
 
         // get rid of the entire contents
         displayElement.innerHTML = "";
@@ -20,11 +19,13 @@
         output.innerText = data;
       };
 
-      document.querySelector('#input').addEventListener('change', function(event){
-        var currentInput = event.target.value;
-        var result = inputHappened(currentInput)
-        display( result );
-      });
+      document
+        .querySelector("#input")
+        .addEventListener("change", function(event) {
+          var currentInput = event.target.value;
+          var result = inputHappened(currentInput);
+          display(result);
+        });
     </script>
     <script src="script.js" charset="utf-8"></script>
   </body>
