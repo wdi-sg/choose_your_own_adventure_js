@@ -12,7 +12,7 @@ var inputHappened = function(currentInput){
   if (currentRoom === "at home"){
     username = currentInput;
     currentRoom = "outside";
-    return `Hey ${username}, it's panic buying season! The objective is to buy 10 items. You can only failed 20 times!\n\n Which grocery store do you want to go to?\n\nCold Storage / FairPrice / Sheng Siong`
+    return formatText(`Hey ${username}, it's panic buying season! The objective is to buy 10 items. You can only fail 20 times!Which grocery store do you want to go to?Cold Storage / FairPrice / Sheng Siong`)
   }
 
 //Choosing a Grocery Store
@@ -20,7 +20,7 @@ var inputHappened = function(currentInput){
     groceryStore = currentInput.toLowerCase();
     if (groceryStore.includes("cold storage") || groceryStore.includes("fairprice") || groceryStore.includes("sheng siong")){
         currentRoom = groceryStore;
-        return `Welcome to ${currentInput}! Pick an aisle to get stuff! (1/2/3)`;
+        return formatText(`Welcome to ${currentInput}! Pick an aisle to get stuff! (1/2/3)`);
     } else {
         return `Please type in Cold Storage / FairPrice / Sheng Siong`;
     }
@@ -30,7 +30,7 @@ var inputHappened = function(currentInput){
   if (currentRoom === "cold storage" || currentRoom === "fairprice" || currentRoom === "sheng siong"){
     if (currentInput.includes("1") || currentInput.includes("2") || currentInput.includes("3")){
         currentRoom = currentRoom + " aisle " + currentInput;
-        return `You are now in ${currentRoom}. You can try to buy something, or leave the aisle. (Buy / Leave)`
+        return formatText(`You are now in ${currentRoom}. You can try to buy something, or leave the aisle. (Buy / Leave)`);
     } else {
         return `Please type 1 or 2 or 3, to access an aisle`
     }
@@ -42,9 +42,9 @@ var inputHappened = function(currentInput){
         return getItem();
     } else if(currentInput.toLowerCase().includes("leave")){
         currentRoom = groceryStore;
-        return `You are now back in ${currentRoom}'s main area! Pick an aisle to get stuff! (1/2/3)`;
+        return formatText(`You are now back in ${currentRoom}'s main area! Pick an aisle to get stuff! (1/2/3)`);
     } else{
-        return `Sorry, we didn't get that. Type "buy" or "leave" to buy something, or leave the aisle`;
+        return formatText(`Sorry, we didn't get that. Type "buy" or "leave" to buy something, or leave the aisle`);
     }
   }
 
@@ -86,16 +86,16 @@ var getItem = function(){
     if (Math.random() > 0.5){
         scoreCount++;
         if (scoreCount === 10) {
-            return `Congratulations! You win! Take home the prize of another ${randomItem()}`
+            return formatText(`Congratulations! You win! Take home the prize of another ${randomItem()}`)
         } else {
-            return `You managed to buy ${randomItem()}!\n\nYour current score is ${scoreCount}. You have ${failedAttempts} failed attempts left.\n\n Try this aisle again? or another aisle? (Buy / Leave)`;
+            return formatText(`You managed to buy ${randomItem()}!Your current score is ${scoreCount}. You have ${failedAttempts} failed attempts left.Try this aisle again? or another aisle? (Buy / Leave)`);
         }
     } else {
         failedAttempts--;
         if (failedAttempts === 0){
-            return `You lose :( \n\nRefresh the page to try this game again.`
+            return formatText(`You lose :( . Refresh the page to try this game again.`)
         } else{
-            return `They are all sold out! You have ${failedAttempts} failed attempts left.\n\nTry this aisle again? or another aisle? (Buy / Leave)`;
+            return formatText(`They are all sold out! You have ${failedAttempts} failed attempts left. Try this aisle again? or another aisle? (Buy / Leave)`);
         }
     }
 }
@@ -117,7 +117,16 @@ var clearInput = function(){
     document.getElementById('input').value = "";
 }
 
-
+var formatText = function(text){
+    var formattedText ="";
+    for (let char of text){
+        if (char === "!" || char === "." || char === "?"){
+            char = char + "\n\n";
+        }
+        formattedText += char;
+    }
+    return formattedText;
+}
 
 var display = function( data ){
   var displayElement = document.querySelector('#output');
