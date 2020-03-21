@@ -36,7 +36,8 @@ var inputHappened = function(currentInput){
             steps = "adventure";
             return `You have decided to go on an adventure, which monster would you like to fight?
             \n1. Orc
-            \n2. Skeleton`;
+            \n2. Skeleton
+            \n3. Back`;
             break;
 
             case "2":
@@ -44,7 +45,8 @@ var inputHappened = function(currentInput){
               return `You are currently in an inn, what would you like to drink?
               \n1. Beer
               \n2. Soda
-              \n3. Plain ol' water`;
+              \n3. Plain ol' water
+              \n4. Back`;
               break;
 
             case"3":
@@ -78,7 +80,21 @@ var inputHappened = function(currentInput){
           break;
 
         case "logout_confirmation":
-          return `success`;
+          switch(currentInput.toUpperCase()){
+            case "Y":
+              steps = "lobby_start";
+              return `Welcome adventurer, please enter your name`;
+              break;
+
+            case "N":
+              steps = "lobby_selection"
+              return `Welcome ${name}, What would you like to do today?
+              \n1. Adventure
+              \n2. Visit Inn
+              \n3. View experience
+              \n4. Log out`;
+              break;
+          }
           break;
   }
 
