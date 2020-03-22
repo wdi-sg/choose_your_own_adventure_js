@@ -47,13 +47,13 @@ var buildPrompt = function (roomObj) {
 
   if (roomObj.isEnd) {
     outStr = `You're in ${roomObj.dispName}.\n\n` +
-      `${getBlurb(roomObj)}\n\n` +
+      `${roomObj.blurb}\n\n` +
       `Your score is: ${countScore(roomTrail, roomObj)}\n\n` +
       `Refresh to start over.`;
   } else {
     outStr =
       `You're in ${roomObj.dispName}.\n\n` +
-      getBlurb(roomObj) + "\n\n" +
+      `${roomObj.blurb}"\n\n"` +
       whatNext() + "\n\n" +
       `${choiceArr.join("\n")}`;
   }
@@ -78,10 +78,6 @@ var whatNext = function () {
   return whatNow[i];
 }
 
-var getBlurb = function (roomObj) {
-  return roomObj.blurb;
-}
-
 var getChoices = function (roomObj) {
   var choiceObj = roomObj.choices;
   var choices = [];
@@ -104,8 +100,6 @@ var getChoices = function (roomObj) {
 
 var countScore = function (trail, roomObj) {
   var score = 0;
-  console.log(trail);
-  console.log(roomObj);
 
   for (var i = 1; i < trail.length; i++) {
     score += dungeon[trail[i]].score;
