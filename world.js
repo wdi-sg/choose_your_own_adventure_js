@@ -1,22 +1,30 @@
+//World statees.
+var scene = 1;
+var enemy;
+var battleMode = false;
+
+
+//To get a random integer.
 function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
 }
-
 function clearInput() {
     document.getElementById("input").value = "";
 }
 
+//Formatting shortcuts:
 var p = `\n\n`
 var br = `\n`
 
+//To capitalise names.
 function capitalise(input) {
     return input[0].toUpperCase() + input.slice(1).toLowerCase();
 }
 
+//User object:
 var user = {
-  name: "error with name",
     hp: 15,
     outfit: "",
     moves: [{
@@ -47,6 +55,13 @@ var user = {
     }
 }
 
+
+//Function to add approval to user.
+function addApproval(input) {
+    user.approval += input;
+}
+
+//Enemy object:
 var trainee = {
     name: "Hitman Trainee",
     hp: 8,
@@ -68,26 +83,34 @@ var trainee = {
         }
     }
 }
-
+//Enemy 2 object:
 var youngPunk = {
     name: "Young Punk",
     hp: 10,
-    moves: {
-        fannyPackSwing: 2,
-        punch: 1,
-        kick: 2
-    },
-    attack: function(move, enemy) {
-        if (getRandomInt(0, 10) > 3) {
-            enemy.hp -= this.moves[move];
-            return enemy.hp;
-        } else {
-            return "You missed!"
+    moves: [{
+            name: "Punch",
+            power: 1
+        },
+        {
+            name: "Kick",
+            power: 2
+        },
+        {
+          name: "Fanny Pack Swing",
+          power: 3
         }
-
+    ],
+    attack: function(input, enemy) {
+        if (getRandomInt(0, 10) > 3) {
+            user.hp -= this.moves[input].power;
+            return `${this.name} used ${this.moves[input].name}! It hit for ${this.moves[input].power} damage.`;
+        } else {
+            return `${this.name} tried to use ${this.moves[input].name} but missed!`
+        }
     }
 }
 
+//The target/beautiful girl object
 var target = {
     randomTaste: function() {
         if (getRandomInt(0, 10) > 5) {
@@ -99,7 +122,16 @@ var target = {
     preference: ""
 }
 
+//Generate random outfit preference for target.
+target.randomTaste();
+
+
+//Object of all scenario text, choices, and username
 var scenarios = {
+    name: "",
+    addName: function(input) {
+        return this.name = input;
+    },
     1: {
         text: `You are a hitman. Your mission for today is to assassinate the daughter of our city's criminal mastermind. We’re sending you to an event we know they’ll be at today. You'll need to look your best, so please pick an outfit.`,
         choices: [`(Ignore the outfits. I look hot enough with my t-shirt, shorts and flip flops.)`, `Take the classic button down & jeans.`, `Take the pullover and jeans.`]
@@ -129,8 +161,10 @@ var scenarios = {
     8: {
         text: `You arrive at the address provided. There's a notice board outside which reads "Speed Dating Event for Singles 21-35!" ${p} An eager youth comes up to you with a clipboard. "Hey! Welcome to our speed dating event of the year! Can I get your name?"`,
     },
-    9: {
-        text: `"Alright... ${user.name}. There we go, here's a nametag. Please take a seat inside, you're assigned to table 5!" ${p} You take a seat at table 5. Shortly after, a beautiful woman approaches your table. You see her nametag--she’s your target! ${p} The eager youth slams an hourglass on your table. "You guys get 3 minutes!" ${p} “Hey there..." she squints at your nametag. "${user.name}. How’s it going?” she asks.`,
+    9: {//created function to get updated name input.
+        text: function() {
+            return `"Alright... ${scenarios.name}. There we go, here's a nametag. Please take a seat inside, you're assigned to table 5!" ${p} You take a seat at table 5. Shortly after, a beautiful woman approaches your table. You see her nametag--she’s your target! ${p} The eager youth slams an hourglass on your table. "You guys get 3 minutes!" ${p} “Hey there..." she squints at your nametag. "${this.name}. How’s it going?” she asks.`
+        },
         choices: [`Great, nice to meet you!`, `Is your name Google? Because you have everything I’ve been searching for.`]
     },
     10: {
@@ -195,6 +229,7 @@ var scenarios = {
     26: {
         text: `Your target looks disappointed. She swirls her glass, but doesn't take a sip. She gets up and leaves, dumping the contents of the glass in a bin. ${p} You failed! Enter anything to restart.`,
     },
+    //Function to format output of choices.
     display: function(number) {
         var output;
         var text = this[number].text;
@@ -204,4 +239,59 @@ var scenarios = {
         }
         return choicesArray.join('');
     }
+}
+
+
+
+//Function to display scenario text, choices & approval where appropriate.
+function showScene(number) {
+    //If it is the scene where name is referenced, use function to call the scene text.
+    if (number === 9) {
+        var scene9text = scenarios[9].text();
+        return `${(scene > 8) ? `Approval : ${user.approval} ${p}`:""}  ${scenarios[number].text()} ${p} ${scenarios.display(number)}`;
+
+        //If the scenario has choices, return text, choices, and approval rating (only after the scene where you meet the target.)
+    } else if (scenarios[number].choices) {
+        return `${(scene > 8) ? `Approval : ${user.approval} ${p}`:""}  ${scenarios[number].text} ${p} ${scenarios.display(number)}`;
+        //If the scenario is an ending, just return the text, and a final approval rating (after meeting target).
+    } else {
+        return `${(scene > 8) ? `Final Approval : ${user.approval} ${p}`:""} ${scenarios[number].text}`
+    }
+}
+
+
+//Function to reset the game.
+function reset() {
+    scene = 1;
+    user.name = null;
+    enemy = null;
+    trainee.hp = 8;
+    user.outfit = null;
+    user.approval = 0;
+    user.hp = 15;
+    if (user.moves.length > 2) {
+        user.moves.pop();
+    };
+    return showScene(1)
+}
+
+
+//BATTLE FUNCTION
+function battle(input, enemy) {
+    var userMoves = `Choose your move: ${user.showMoves()}.`;
+    var userResults = user.attack(input, enemy);
+    var enemyResults = enemy.attack(getRandomInt(0, enemy.moves.length), user); //Randomizes enemy's attacks.
+
+    //If enemy HP reaches 0, winner can proceed.
+    if (enemy.hp <= 0) {
+        battleMode = false; //exit battlemode.
+        scene = 4;
+        return showScene(4);
+        //If user HP reaches 0, get bad ending.
+    } else if (user.hp <= 0) {
+        scene = 3;
+        battleMode = false;
+        return showScene(3);
+    }
+    return `${userResults} ${p} ${enemyResults} ${p} Your HP: ${user.hp} ${br} ${enemy.name} HP: ${enemy.hp} ${p} ${userMoves}`;
 }
