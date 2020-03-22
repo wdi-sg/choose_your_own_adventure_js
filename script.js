@@ -1,7 +1,7 @@
 var scene = 1;
 var enemy;
 var battleMode = false;
-target.randomTaste(); //Generate random preference for target.
+target.randomTaste(); //Generate random outfit preference for target.
 function addApproval(input) {
     user.approval += input;
 }
@@ -12,9 +12,9 @@ function showScene(number) {
     //If the scenario has choices, return text, choices, and approval rating (only after the scene where you meet the target.)
     if (scenarios[number].choices) {
         return `${(scene > 8) ? `Approval : ${user.approval} ${p}`:""}  ${scenarios[number].text} ${p} ${scenarios.display(number)}`;
-        //If the scenario doesn't have choices (ie it's an ending.), just return the text.
+        //If the scenario doesn't have choices (ie it's an ending.), just return the text, and approval rating (after meeting target).
     } else {
-        return `${scenarios[number].text}`
+        return `${(scene > 8) ? `Approval : ${user.approval} ${p}`:""} ${scenarios[number].text}`
     }
 }
 
@@ -82,7 +82,7 @@ var inputHappened = function(currentInput) {
                 if (currentInput === 0) {
                     user.moves.push({
                         key: 2,
-                        name: "Flip Flop Attack",
+                        name: "Flip Flop Attack", //Adds flip flops to user moves.
                         power: 3
                     })
                     user.outfit = "flipflop";
@@ -101,7 +101,7 @@ var inputHappened = function(currentInput) {
                 if (currentInput === 0) {
                     enemy = trainee;
                     battleMode = true;
-                    return `You are now facing ${enemy.name}. Please choose your moves: ${user.showMoves()}.`
+                    return `You are now facing ${enemy.name}. ${p} Choose your move: ${user.showMoves()}.`
                 } else {
                     return error
                 }
@@ -143,10 +143,8 @@ var inputHappened = function(currentInput) {
                 user.name = capitalise(currentInput);
                 console.log(user.name);
                 scene++;
-                if (user.outfit === target.preference) {
+                if (user.outfit === target.preference) { //If user outfit matches target's preference, bonus 20 points.
                     addApproval(20);
-                } else {
-                    addApproval(10);
                 }
                 return `"Alright... ${user.name}. There we go, here's a nametag. Please take a seat inside, you're assigned to table 5!" ${p} You take a seat at table 5. Shortly after, a beautiful woman approaches your table. You see her nametag--she’s your target! ${p} The eager youth slams an hourglass on your table. "You guys get 3 minutes!" ${p} “Hey there..." she squints at your nametag. "${user.name}. How’s it going?” she asks. ${p} (0) Great, nice to meet you! ${br} (1) Is your name Google? Because you have everything I’ve been searching for.`
                 break;
@@ -241,19 +239,19 @@ var inputHappened = function(currentInput) {
                 }
                 break;
             case 22:
-                if (currentInput) {
-                    if (user.approval >= 70) {
-                        scene = 23;
-                    } else if (user.approval < 70) {
+                if (currentInput===0) {
+                    if (user.approval >= 60) {
+                        scene = 23; //decide to kill or save target
+                    } else if (user.approval < 60) {
                         scene = 26; //bad ending
+                      }
                     } else {
                         return error;
                     }
-                }
                 break;
             case 23:
                 if (currentInput === 0) {
-                    scene = 24; //bad ending
+                    scene = 24; //save target: bad ending
                 } else if (currentInput === 1) {
                     scene = 25; //GOOOD ENDING.
                 } else {
@@ -267,6 +265,7 @@ var inputHappened = function(currentInput) {
             case 18:
             case 20:
             case 24:
+            case 25:
             case 26:
                 reset();
                 break;
