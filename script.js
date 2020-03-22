@@ -72,9 +72,8 @@ var inputHappened = function(currentInput){
     } else if (currentInput.toLowerCase() === "fang" && count === 1) {
         count++;
         inputReset();
-        input.placeholder = "A or B";
-        return `Pick a letter: \n
-        A or B`;
+        input.placeholder = "Only 'A' can be selected.";
+        return 'enter A';
     } else if (currentInput.toLowerCase() === "a" && count === 2) {
         count++;
         inputReset();
@@ -111,8 +110,8 @@ var inputHappened = function(currentInput){
     } else if (currentInput.toLowerCase() === "b" && (count === 2 || count === 7)) {
         count++;
         inputReset();
-        input.placeholder = "left or right";
-        return `You are walking down the corridor. \u000A At the end of the corridor, there are two doors. \u000A Which door will you want to go in?
+        input.placeholder = "right";
+        return `You are walking down the corridor. \u000A At the end of the corridor, there are two doors. \u000A Which door will you want to go in? Please go right.
             \n left or right door`;
     } else if (currentInput.toLowerCase() === "right" && count === 8) {
         count++;
@@ -255,7 +254,7 @@ var inputHappened = function(currentInput){
         return `Rowena Ravenclaw's Diadem, Tom Riddle's Diary and Harry Potter have been destroyed. The end.
             \n ${horcruxLeft.length} more horcruxes to go.
             \n ${horcruxLeft.join(" \n ")}`
-    } else if (currentInput.toLowerCase() === "b" && count === 2) {
+    } else if (currentInput.toLowerCase() === "bingo") {
         count++;
         inputReset();
         input.placeholder = "Gold or Silver";
