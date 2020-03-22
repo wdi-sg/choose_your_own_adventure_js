@@ -1,21 +1,24 @@
 console.log("hello script js");
 
 var userInput;
-var lvl2 = lvl3 = control = shortcut = final = false;
-var random2;
+var lvl2 = lvl3 = control = choose = shortcut = final = false;
+var random5;
 var newInput;
+var choice;
+var name;
+start = false;
 
-document.querySelector('#output').innerText ='Enter a number between 1 to 100 to begin.';
+document.querySelector('#output').innerText ='Hi! Please enter your name to begin.';
 
-var random = Math.floor(Math.random() * 2);
+var random = Math.floor(Math.random() * 5);
 
 var inputHappened = function(currentInput){
   if(final){
     newInput = parseInt(currentInput);
-    random2 = random + 1;
-    console.log(random2);
-    if(newInput === 1 || newInput === 2){
-      if(newInput == random2){
+    random5 = random + 1;
+    console.log(random5);
+    if(newInput >= 1 && newInput <=5){
+      if(newInput == random5){
         final = false;
         return 'Congratulations! You have reached the end. I hope you had fun! Goodbye~';
       }
@@ -73,8 +76,22 @@ var inputHappened = function(currentInput){
       return 'You died because you couldnt follow instructions. Better luck next time!'
     }
   }
+  if(choose){
+    choice = parseInt(currentInput);
+    if(choice === 1){
+    choose = false;
+    shortcut = true;
+    return 'Choose a number from 1 to 10.'
+    }
+    else if (choice === 2){
+      choose = false;
+      lvl2 = true;
+      return 'Welcome to Level 2! \n Please enter a number from 1 to 100.'
+    }
+  }
   if(shortcut){
-    console.log('shortcut')
+    console.log('shortcut');
+    choice = parseInt(userInput);
     newInput = parseInt(currentInput);
     if(newInput <= 10 && newInput >= 1){
       if(newInput % 2 === 1 && newInput > 2){
@@ -91,60 +108,70 @@ var inputHappened = function(currentInput){
         return 'Unfortunately all was for naught, you choked while drinking water and died.'
       }
       else{
-        control = true;
-        shortcut = false;
-        return 'You died because you couldnt follow instructions. Better luck next time!'
-      }
-    }
-    else{
-      control = true;
-      shortcut = false;
-      return 'Try harder next time to follow instructions!'
-    }
-  }
-  userInput = parseInt(currentInput);
-  console.log( userInput );
-  if(!control){
-    if(userInput !== 0){
-      if(userInput <= 100 && userInput >= 1){
-        if(userInput === 1 || userInput === 100){
           control = true;
-          console.log('1/100')
-          return data = 'Splat! The table headbanged you and you died. Thanks for playing!';
+          shortcut = false;
+          return 'You died because you couldnt follow instructions. Better luck next time!'
         }
-        else if(userInput % 5 === 2){
-          //(2,7,12,17,22,27,32,37,42,47,52,57,62,67,72,77,82,87,92,97)
-          console.log('%5=2');
-          console.log(currentInput + 'first input');
-          control = true;
-          lvl2 = true;
-          return "  Well done passing the first round \n Now choose a number from 1 to 100 again.";
-        }
-        else if(userInput % 21 === 2){
-          //(23,44,65,86)
-          shortcut = true;
-          control = true;
-          return 'Congratulations! You have found a shortcut! \n Now choose a number from 1 to 10';
-          }
-          else{
-            control = true;
-            return 'Seems like you got unlucky, good luck trying to fix that!';
-          }
-      }
-      else if(userInput < 1 || userInput > 100 ) {
-        console.log('invalid');
-        control = true;
-        return 'You have entered an invalid character and it killed you.';
       }
       else{
         control = true;
-        return 'Unfortunately you didnt make the cut, so yeah. You died.';
+        shortcut = false;
+        return 'Try harder next time to follow instructions!'
+      }
+  }
+  if(!start){
+  name = currentInput;
+  console.log(name);
+  start = true;
+  return 'Welcome ' + name + '! For the first level, simply pick a number between 1 to 100';
+  }
+  if(start)
+  {
+    userInput = parseInt(currentInput);
+    console.log( userInput );
+    if(!control){
+      if(userInput !== 0){
+        if(userInput <= 100 && userInput >= 1){
+          if(userInput === 1 || userInput === 100){
+            control = true;
+            console.log('1/100')
+            return data = 'Splat! The table headbanged you and you died. Thanks for playing!';
+          }
+          else if(userInput % 5 === 2){
+            //(2,7,12,17,22,27,32,37,42,47,52,57,62,67,72,77,82,87,92,97)
+            console.log('%5=2');
+            console.log(currentInput + 'first input');
+            control = true;
+            lvl2 = true;
+            return " Congrats on making it to level 2! \n Now choose a number from 1 to 100 again.";
+          }
+          else if((userInput % 21) === 2){
+            //(23,44,65,86)
+            choose = true;
+            control = true;
+            return 'Congratulations! You have found a shortcut! \n Choose whether you want to (1) continue to next level normally or (2) enter the shortcut.';
+            }
+            else{
+              control = true;
+              return 'Seems like you got unlucky, good luck trying to fix that!';
+            }
+        }
+        else if(userInput < 1 || userInput > 100 ) {
+          console.log('invalid');
+          control = true;
+          return 'You have entered an invalid character and it killed you.';
+        }
+        else{
+          control = true;
+          return 'Unfortunately you didnt make the cut, so yeah. You died.';
+        }
       }
     }
   }
   if(control){
     if(parseInt(currentInput) === 0){
       control = false;
+      start = false;
       console.log('reset');
       return 'Enter a number between 1 to 100 to begin.'
     }
