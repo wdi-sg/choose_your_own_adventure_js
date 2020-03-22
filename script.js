@@ -60,36 +60,33 @@ var inputHappened = function(currentInput){
     if (parseInt(currentInput) === 1 && count === 0) {
         contPH();
         count++;
-        console.log("Input Start: " +count);
         inputReset();
         input.placeholder = "fang or sword"
         return `Hello ${userName}. Pick a weapon. \u000A Basilisk's Fang or Gryffindor's Sword?\n
-        fang or sword`;
+        fang or sword
+        \n ${horcruxLeft.length} horcruxes to destroy:
+        \n ${horcruxLeft.join(" \n ")}`;
     } else if (currentInput.toLowerCase() === "fang" && count === 1) {
         count++;
-        console.log("Input fang: " +count);
         inputReset();
         input.placeholder = "A or B";
         return `Pick a letter: \n
         A or B`;
     } else if (currentInput.toLowerCase() === "a" && count === 2) {
-        count++
-        console.log("Input A: " +count);
+        count++;
         inputReset();
         input.placeholder = "glass or key";
         return `You have entered the Chamber of Secret? \u000A Pick an item from the room:
             \n glass or key`;
     } else if (currentInput.toLowerCase() === "glass" && count === 3) {
-        count++
-        console.log("Input glass: " +count);
+        count++;
         inputReset();
         input.placeholder = "Y or I";
         return `A secret word is at the bottom of the glass: \u000A What letter is missing?
             \n "Gr_ffindor"
             \n Y or I`;
     } else if (currentInput.toLowerCase() === "y" && count === 4) {
-        count++
-        console.log("Input Y: " +count);
+        count++;
         inputReset();
         horcruxLeft.splice(horcruxLeft.indexOf("Tom Riddle's Diary"),1);
         input.placeholder = "yes or no";
@@ -99,27 +96,23 @@ var inputHappened = function(currentInput){
             \n (Warning: entering "No" will reset the game.)
             \n ${horcruxLeft.join(" \n ")}`;
     } else if (currentInput.toLowerCase() === "yes" && count === 5) {
-        count++
-        console.log("Input Yes: " +count);
+        count++;
         inputReset();
         input.placeholder = "sword or fang";
         return `Pick a weapon. \u000A Gryffindor's Sword or Basilisk's Fang`;
     } else if (currentInput.toLowerCase() === "fang" && count === 6) {
-        count++
-        console.log("Input fang: " +count);
+        count++;
         inputReset();
         input.placeholder = "B or C";
         return "Pick a letter: B or C";
     } else if (currentInput.toLowerCase() === "b" && (count === 2 || count === 7)) {
         count++;
-        console.log("Input b: " +count);
         inputReset();
         input.placeholder = "left or right";
         return `You are walking down the corridor. \u000A At the end of the corridor, there are two doors. \u000A Which door will you want to go in?
             \n left or right door`;
     } else if (currentInput.toLowerCase() === "right" && count === 8) {
         count++;
-        console.log("Input right: " + count);
         inputReset();
         input.placeholder = "Y or I";
         return `Hermione and Ron are in the room solving a missing letter to get to the Chamber of Secret. \u000A You might be able to help her.
@@ -127,29 +120,27 @@ var inputHappened = function(currentInput){
             \n Y or I`
     } else if (currentInput.toLowerCase() === "i" && count === 9) {
         count++;
-        console.log("Input right: " + count);
         inputReset();
         input.placeholder = "Hermione or Ron";
         return `The door to the Chamber of Secrets opened. \u000A One of you have to stay in the room to keep the door open. Who do you choose to bring with you?
             \n Hermione or Ron`
     } else if (currentInput.toLowerCase() === "hermione" && count === 10) {
         count++;
-        console.log("Input Hermione: " + count);
         inputReset();
         horcruxLeft.splice(horcruxLeft.indexOf("Helga Hufflepuff's Cup"),1);
         input.placeholder = "";
-        return `You found the Helga Hufflepuff's cup. Hermione destroyed it with the Basilisk's Fang. \u000A ${horcruxLeft.length} more horcruxes to go. \u000A Continue to other Quest?
+        return `You found the Helga Hufflepuff's cup. Hermione destroyed it with the Basilisk's Fang.
+            \n ${horcruxLeft.length} more horcruxes to go. \u000A Continue to other Quest?
             \n Yes or No
+            \n (Warning: entering "No" will reset the game.)
             \n ${horcruxLeft.join(" \n ")}`
     } else if (currentInput.toLowerCase() === "yes" && count === 11) {
         count++;
-        console.log("Input Yes: " +count);
         inputReset();
         input.placeholder = "sword or book";
         return `Pick a weapon. \u000A Gryffindor's Sword or Book of Spells`;
     } else if (currentInput.toLowerCase() === "sword" && (count === 1 || count === 6 || count === 12)) {
         count++;
-        console.log("Input sword: " +count);
         inputReset();
         input.placeholder = "Hint: starts with m and ends with m"
         return `As you picked up the sword, the Headmaster's office door opened. Albus Dumbledore walked out with Marvolo Gaunt's Ring. To destroy it, you will need to solve the riddle.
@@ -164,7 +155,9 @@ var inputHappened = function(currentInput){
         horcruxLeft.splice(horcruxLeft.indexOf("Marvolo Gaunt's Ring"),1);
         input.placeholder = 'hint: Begins with "b"';
         return `Marvolo Gaunt's Ring has been destroyed. A voice leads you to the Forest of Dean. There, you met Ron who was wearing the Salazar Slytherin's locket. He wouldn't let you have it without answering the riddle.
-        \n ${riddleTwo}`;
+        \n ${riddleTwo}
+        \n ${horcruxLeft.length} more horcruxes to go.
+        \n ${horcruxLeft.join(" \n ")}`;
     } else if ((count === 3 || count === 8 || count === 14) && currentInput.toLowerCase() !== "breath") {
         inputReset();
         return `Nope. Please try again.
@@ -175,7 +168,9 @@ var inputHappened = function(currentInput){
         horcruxLeft.splice(horcruxLeft.indexOf("Salazar Slytherin's Locket"),1);
         input.placeholder = 'Hermione or Neville'
         return `Salazar Slytherin's Locket has been destroyed. Before this, who have you sent to guard Hogwarts.
-            \n Hermione Granger or Neville Longbottom`;
+            \n Hermione Granger or Neville Longbottom
+            \n ${horcruxLeft.length} more horcruxes to go.
+            \n ${horcruxLeft.join(" \n ")}`;
     } else if (currentInput.toLowerCase() === "neville" && (count === 4 || count === 9 || count === 15)) {
         count += 20;
         inputReset();
@@ -189,12 +184,11 @@ var inputHappened = function(currentInput){
         inputReset();
         input.placeholder = "fang or book";
         return `Pick a weapon. \u000A Basilisk's Fang or Book of Spells
-        \n fang or book
-        \n ${horcruxLeft.join(" \n ")}`;
+        \n fang or book`;
     } else if (currentInput === "fang" && (count === 25 || count === 30)) {
         count++;
         inputReset();
-        input.placeholder = "Direction to the Cup.";
+        input.placeholder = "Morse code to the Cup.";
         return `You need to solve the following morse code to get to the Helga Hufflepuff's Cup.
         \n ${morseCode}`;
     } else if ((count === 26 || count === 31) && currentInput.toLowerCase() !== "ace") {
@@ -245,7 +239,8 @@ var inputHappened = function(currentInput){
         horcruxLeft.splice(horcruxLeft.indexOf("Rowena Ravenclaw's Diadem"),1);
         horcruxLeft.splice(horcruxLeft.indexOf("Harry Potter"),1);
         input.placeholder = "You made it.";
-        return `Rowena Ravenclaw's Diadem destroyed. The fire was too wild, that Harry Potter died. \u000A ${horcruxLeft.length} more horcruxes to go.
+        return `Rowena Ravenclaw's Diadem destroyed. The fire was too wild, that Harry Potter died.
+            \n ${horcruxLeft.length} more horcruxes to go.
             \n ${horcruxLeft.join(" \n ")}`
     } else if (currentInput.toLowerCase() === "fiendfyre" && count === 49) {
         count ++;
@@ -254,9 +249,11 @@ var inputHappened = function(currentInput){
         horcruxLeft.splice(horcruxLeft.indexOf("Harry Potter"),1);
         horcruxLeft.splice(horcruxLeft.indexOf("Tom Riddle's Diary"),1);
         input.placeholder = "You made it.";
-        return `Rowena Ravenclaw's Diadem, Tom Riddle's Diary and Harry Potter have been destroyed. All horcruxes are gone. The end. Please enter "no" to reset the game.`
+        return `Rowena Ravenclaw's Diadem, Tom Riddle's Diary and Harry Potter have been destroyed. The end. Please enter "no" to reset the game.
+            \n ${horcruxLeft.length} more horcruxes to go.
+            \n ${horcruxLeft.join(" \n ")}`
     } else if (currentInput.toLowerCase() === "no") {
-        count = 0;
+        count = 1;
         inputReset();
         contPH();
         horcruxLeft = horcrux;
