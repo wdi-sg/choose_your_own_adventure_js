@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -5,6 +6,7 @@
   </head>
   <body>
     <h3>DOM Manipulation Template</h3>
+    <h1 id="name">Hello my friend. What is your Name?</h1>
     <input class="starter" id="input" placeholder="input"/>
     <h2>output:</h2>
     <div class="starter" id="output"></div>
@@ -13,11 +15,8 @@
       var display = function( data ){
         var displayElement = document.querySelector('#output');
 
-        // get rid of the entire contents
-        displayElement.innerHTML = "";
-
-        // put the data into the div
-        output.innerText = data;
+        displayElement.innerHTML = "Good Evening mr friend, today I will grant you a wish to tavel to any year between 0-2050, Which year would you like to go to?";
+        //output.innerText = data;
       };
 
       document.querySelector('#input').addEventListener('change', function(event){
