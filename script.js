@@ -8,6 +8,38 @@ var roomSeen = {
   room0: true
 };
 
+// Level 0: so it begins
+document.querySelector("#output").innerText =
+  "Welcome to the dungeon.\n\n" +
+  "Around here, we like to know the names of those who choose to " +
+  "stake their lives on the tiny chance of success. What's your name?";
+
+var inputHappened = function(choice) {
+  var choicePrompt;
+
+  if (pName === "") {
+    clearInput();
+    pName = choice;
+    choicePrompt = `Welcome to the dungeon, ${pName}.\n\n`+
+      buildPrompt(dungeon.room0);
+    return choicePrompt;
+  }
+
+  clearInput();
+  if (choice.toLowerCase() === "b" && !dungeon[currRoomId].isEnd) {
+    currRoomId = roomTrail.pop();
+  } else {
+    roomTrail.push(currRoomId);
+    currRoomId = dungeon[currRoomId].choices[choice].dest;
+    roomSeen[currRoomId] = true;
+  }
+
+  choicePrompt = buildPrompt(dungeon[currRoomId]);
+  console.log('visited: ', roomSeen);
+  console.log('trail: ' + roomTrail);
+  return choicePrompt;
+}
+
 // helper functions
 var buildPrompt = function (roomObj) {
   var choiceArr = getChoices(roomObj);
@@ -18,14 +50,13 @@ var buildPrompt = function (roomObj) {
       `${getBlurb(roomObj)}\n\n` +
       `Your score is: ${countScore(roomTrail, roomObj)}\n\n` +
       `Refresh to start over.`;
-    return outStr;
+  } else {
+    outStr =
+      `You're in ${roomObj.dispName}.\n\n` +
+      getBlurb(roomObj) + "\n\n" +
+      whatNext() + "\n\n" +
+      `${choiceArr.join("\n")}`;
   }
-
-  outStr =
-    `You're in ${roomObj.dispName}.\n\n` +
-    getBlurb(roomObj) + "\n\n" +
-    whatNext() + "\n\n" +
-    `${choiceArr.join("\n")}`;
 
   return outStr;
 }
@@ -79,40 +110,7 @@ var countScore = function (trail, roomObj) {
   for (var i = 1; i < trail.length; i++) {
     score += dungeon[trail[i]].score;
   }
-
   score += roomObj.score;
 
   return score;
-}
-
-// Level 0: so it begins
-document.querySelector("#output").innerText =
-  "Welcome to the dungeon.\n\n" +
-  "Around here, we like to know the names of those who choose to " +
-  "stake their lives on the tiny chance of success. What's your name?";
-
-var inputHappened = function(choice) {
-  var choicePrompt;
-
-  if (pName === "") {
-    clearInput();
-    pName = choice;
-    choicePrompt = `Welcome to the dungeon, ${pName}.\n\n`+
-      buildPrompt(dungeon.room0);
-    return choicePrompt;
-  }
-
-  clearInput();
-  if (choice.toLowerCase() === "b" && !dungeon[currRoomId].isEnd) {
-    currRoomId = roomTrail.pop();
-  } else {
-    roomTrail.push(currRoomId);
-    currRoomId = dungeon[currRoomId].choices[choice].dest;
-    roomSeen[currRoomId] = true;
-  }
-
-  choicePrompt = buildPrompt(dungeon[currRoomId]);
-  console.log('visited: ', roomSeen);
-  console.log('trail: ' + roomTrail);
-  return choicePrompt;
 }
