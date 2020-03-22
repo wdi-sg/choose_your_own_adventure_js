@@ -1,6 +1,9 @@
 console.log("hello script js");
 
-var clubs = ["Arsenal", "Chelsea", "Manchester United", "Everton", "Liverpool", "Manchester City", "Tottenham Hotspurs"];
+
+
+var gameStatus = 'active';
+
 
 
 var step = 0;
@@ -11,6 +14,8 @@ var reset = function() {
 
 var inputHappened = function(input){
   console.log( input );
+
+  if (gameStatus === 'active'){
     if(step === 0) {
         step++;
         reset();
@@ -35,24 +40,49 @@ var inputHappened = function(input){
             step++;
             reset();
             return "(M)anchester United are may no longer be the club they once used to be but they still have a fantastic following and a good youth setup. The same can be said of (E)verton who are known for giving youth players a chance. Both teams will offer decent game-time. Which club would you pick? ------- Please key in either (M) or (E)";
+        } else if (input =! "L" || input != "M" || input != "S" | input != "G") {
+            reset();
+            return "Please key in one of these alphabets. (L/M/S/G)";
         }
 
  } else if (step === 2) {
     if(input === "A") {
+        gameStatus = "Good luck";
+        reset();
         return "Good choice son! Arsenal play a sexy brand of football! Let me try and get you a trial.";
     } else if (input === "C") {
+        gameStatus = "Good luck";
+        reset();
         return "Chelsea?! That's disappointing. You are destined to fail but sure let's see what they say.";
     } else if (input === "T") {
+        gameStatus = "Good luck";
+        reset();
         return "Tottenham Hotspurs are the worst club on this planet and they are never going to win anything! Also, their fans are rubbish! As your agent, I quit! Hopeless!";
+    } else if (input === "yes") {
+        gameStatus = "Good luck";
+        reset();
+        return "Pep Guardiola is one of the greatest football managers in the business at the moment but it will be hard to get into the side.";
     } else if (input === "y") {
+        gameStatus = "Good luck";
+        reset();
         return "Jurgen Klopp is one of the best managers in town! You will learn a lot from him.";
     } else if (input === "M") {
+        gameStatus = "Good luck";
+        reset();
         return "Good choice, hopefully you will bring this fantastic club back to where it belongs.";
     } else if (input === "E") {
+        reset();
+        gameStatus = "Good luck";
         return "Wise choice. Everton is a people's club and their fans are some of England's most passionate fans. I believe you will grow at this club.";
     } else {
-        return "At this moment I'm afraid I don't know which club is suitable for you. Let me continue my search.";
+        gameStatus = "Good luck";
+        reset();
+        return "Okay let me see if there are any clubs abroad for you.";
     }
  }
+} else {
+    return gameStatus;
+}
+
 
 }
