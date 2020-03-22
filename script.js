@@ -36,6 +36,27 @@ var riddleTwo = `Solve the riddle.
             \n I'm light as a feather, yet the strongest man can't hold me for more than 5 minutes. What am I?
             \n _ _ _ _ _ (5 letters, starts with a "b")`;
 
+var morseCode = `What does the following Morse Code mean?
+        \n .- -.-. .
+        \n A is .-
+        \n B is -...
+        \n C is -.-.
+        \n D is -..
+        \n E is .`;
+
+var mathQuest = `3 + 3 % 2 * 5 = ?`;
+
+var rightWiz = `Please select the right person to help you with.
+\n Ron Weasley (Ron)
+\n Vincent Crabbe (Vin)
+\n Draco Malfoy (Draco)
+\n Cedric Diggory (Ced)`;
+
+var rightSpell = `Please select the right spell.
+\n Incendio
+\n Fiendfyre
+\n Expulso`;
+
 //game start
 
 contPH();
@@ -178,13 +199,12 @@ var inputHappened = function(currentInput){
         count++;
         inputReset();
         input.placeholder = "Direction to the Cup.";
-        return `You ran to into a maze. Please enter the order of direction to get to the Hermione and Helga Hufflepuff's Cup. What does the following Morse Code mean?
-        \n .- -.-. .
-        \n A is .-
-        \n B is -...
-        \n C is -.-.
-        \n D is -..
-        \n E is .`;
+        return `You need to solve the following morse code to get to the Helga Hufflepuff's Cup.
+        \n ${morseCode}`;
+    } else if ((count === 26 || count === 31) && currentInput.toLowerCase() !== "ace") {
+        inputReset();
+        return `Nope. Please try again.
+        \n ${morseCode}`;
     } else if (currentInput.toLowerCase() === "ace" && (count === 26 || count === 31)) {
         count++;
         inputReset();
@@ -193,10 +213,44 @@ var inputHappened = function(currentInput){
         return `You got to the Helga Hufflepuff's Cup and destroyed it. \u000A ${horcruxLeft.length} more horcruxes to go. \u000A Continue to other Quest?
             \n Yes or No
             \n ${horcruxLeft.join(" \n ")}`;
-    } else if (currentInput.toLowerCase() === "yes" && (count === 27 || count === 32)) {
+    } else if (currentInput.toLowerCase() === "yes" && (count === 27 || count === 32 || count === 35)) {
         count++;
         inputReset();
-        input.placeholder = ""
+        input.placeholder = "enter in numerical"
+        return `You wanted to go to the Room of Requirement. Before you can find it, you have to answer a mathematical operation.
+            \n ${mathQuest}`
+    } else if ((count === 28 || count === 32 || count === 35) && parseInt(currentInput) !== 8 ) {
+        inputReset();
+        return `Nope. Please try again.
+        \n ${mathQuest}`;
+    } else if (parseInt(currentInput) === 8 && (count === 28 || count === 32 || count === 35) ) {
+        count++;
+        inputReset();
+        input.placeholder = "enter wiz (Ron or Vin or Draco or Ced)"
+        return `You have entered the Room of Requirement. You have to find the right wizard to help you find Rowena Ravenclaw's Diadem.
+        \n ${rightWiz}`;
+    } else if ((count === 29 || count === 33 || count === 36) && currentInput.toLowerCase() !== "vin" ) {
+        inputReset();
+        return `Nope. Please try again.
+        \n ${rightWiz}`;
+    } else if (currentInput.toLowerCase() === "vin" && (count === 29 || count === 33 || count === 36)) {
+        count++;
+        inputReset();
+        input.placeholder = "Incendio or Fiendfyre or Expulso"
+        return `Rowena Ravenclaw's Diadem found. To destroy it, you need a spell.
+        \n ${rightSpell}`
+    } else if ((count === 30 || count === 34 || count === 37) && currentInput.toLowerCase() !== "fiendfyre") {
+        inputReset();
+        return `Nope. Please try again.
+        \n ${rightSpell}`
+    } else if (currentInput.toLowerCase() === "fiendfyre" && (count === 30 || count === 34 || count === 37)) {
+        count++;
+        inputReset();
+        horcruxLeft.splice(horcruxLeft.indexOf("Rowena Ravenclaw's Diadem"),1);
+        horcruxLeft.splice(horcruxLeft.indexOf("Harry Potter"),1);
+        input.placeholder = "You've made it.";
+        return `Rowena Ravenclaw's Diadem destroyed. The fire was too wild, that Harry Potter died. \u000A ${horcruxLeft.length} more horcruxes to go.
+            \n ${horcruxLeft.join(" \n ")}`
     } else if (currentInput.toLowerCase() === "no") {
         count = 0;
         inputReset();
