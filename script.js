@@ -8,6 +8,8 @@ var userName = "Harry";
 //Array
 var horcrux = ["Tom Riddle's diary", "Marvolo Gaunt's ring", "Salazar Slytherin's locket", "Helga Hufflepuff's cup", "Rowena Ravenclaw's diadem", "Nagini, the snake", "Harry Potter himself"];
 
+var horcruxLeft = horcrux;
+
 //count Variables
 var count = 0;
 
@@ -64,10 +66,11 @@ var inputHappened = function(currentInput){
         count++
         console.log("Input Y: " +count);
         inputReset();
-        horcrux.splice(horcrux.indexOf("Tom Riddle's diary"),1);
+        horcruxLeft.splice(horcrux.indexOf("Tom Riddle's diary"),1);
         input.placeholder = "yes or no";
         return `You found one item. Tom Riddle's diary. \u000A 7 more horcruxes to go. \u000A Continue to other Quest?
-            \n Yes or No`;
+            \n Yes or No
+            \n ${horcruxLeft.join(" \n ")}`;
     } else if (currentInput.toLowerCase() === "yes" && count === 5) {
         count++
         console.log("Input Yes: " +count);
@@ -81,8 +84,36 @@ var inputHappened = function(currentInput){
         input.placeholder = "B or C";
         return "Pick a letter: B or C";
     } else if (currentInput.toLowerCase() === "b" && (count === 2 || count === 7)) {
-        count++
+        count++;
         console.log("Input b: " +count);
+        inputReset();
+        input.placeholder = "left or right";
+        return `You are walking down the corridor. \u000A At the end of the corridor, there are two doors. \u000A Which door will you want to go in?
+            \n left or right door`;
+    } else if (currentInput.toLowerCase() === "right" && count === 8) {
+        count++;
+        console.log("Input right: " + count);
+        inputReset();
+        input.placeholder = "Y or I";
+        return `Hermione and Ron are in the room solving a missing letter to get to the Chamber of Secret. \u000A You might be able to help her.
+            \n F_endFyre.
+            \n Y or I`
+    } else if (currentInput.toLowerCase() === "i" && count === 9) {
+        count++;
+        console.log("Input right: " + count);
+        inputReset();
+        input.placeholder = "Hermione or Ron";
+        return `The door to the Chamber of Secrets opened. \u000A One of you have to stay in the room to keep the door open. Who do you choose to bring with you?
+            \n Hermione or Ron`
+    } else if (currentInput.toLowerCase() === "Hermione" && count === 10) {
+        count++;
+        console.log("Input Hermione: " + count);
+        inputReset();
+        horcruxLeft.splice(horcrux.indexOf("Tom Riddle's diary"),1);
+        input.placeholder = "";
+        return `You found the Helga Hufflepuff's cup. Hermione destroyed it with the Basilisk's Fang. \u000A 6 more horcruxes to go. \u000A Continue to other Quest?
+            \n Yes or No
+            \n ${horcruxLeft.join(" \n ")}`
     } else {
         console.log(count);
         inputReset();
@@ -90,3 +121,9 @@ var inputHappened = function(currentInput){
     };
     console.log("outside " + count);
 };
+
+/*
+ else if () {
+
+    }
+*/
