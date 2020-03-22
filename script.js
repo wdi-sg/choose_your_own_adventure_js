@@ -6,7 +6,7 @@ var input = document.getElementById("input");
 var userName = "Harry";
 
 //Array
-var horcrux = ["Tom Riddle's diary", "Marvolo Gaunt's ring", "Salazar Slytherin's locket", "Helga Hufflepuff's cup", "Rowena Ravenclaw's diadem", "Nagini, the snake", "Harry Potter himself"];
+var horcrux = ["Tom Riddle's Diary", "Marvolo Gaunt's Ring", "Salazar Slytherin's Locket", "Helga Hufflepuff's Cup", "Rowena Ravenclaw's Diadem", "Nagini, the Snake", "Harry Potter"];
 
 var horcruxLeft = horcrux;
 
@@ -27,6 +27,14 @@ var resetPH = function() {
 var contPH = function () {
     input.placeholder = "enter 1 to continue";
 };
+
+var riddleOne = `Solve the riddle.
+            \n What kind of room has no doors or windows?
+            \n _ _ _ _ _ _ _ _ (8 letters)`;
+
+var riddleTwo = `Solve the riddle.
+            \n I'm light as a feather, yet the strongest man can't hold me for more than 5 minutes. What am I?
+            \n _ _ _ _ _ (5 letters, starts with a "b")`;
 
 //game start
 
@@ -66,10 +74,12 @@ var inputHappened = function(currentInput){
         count++
         console.log("Input Y: " +count);
         inputReset();
-        horcruxLeft.splice(horcrux.indexOf("Tom Riddle's diary"),1);
+        horcruxLeft.splice(horcruxLeft.indexOf("Tom Riddle's Diary"),1);
         input.placeholder = "yes or no";
-        return `You found one item. Tom Riddle's diary. \u000A 7 more horcruxes to go. \u000A Continue to other Quest?
+        return `You found one item: Tom Riddle's diary. \u000A You destroyed it with the Basilisk's Fang.
+            \n ${horcruxLeft.length} more horcruxes to go. \u000A Continue to other Quest?
             \n Yes or No
+            \n (Warning: entering "No" will reset the game.)
             \n ${horcruxLeft.join(" \n ")}`;
     } else if (currentInput.toLowerCase() === "yes" && count === 5) {
         count++
@@ -105,15 +115,62 @@ var inputHappened = function(currentInput){
         input.placeholder = "Hermione or Ron";
         return `The door to the Chamber of Secrets opened. \u000A One of you have to stay in the room to keep the door open. Who do you choose to bring with you?
             \n Hermione or Ron`
-    } else if (currentInput.toLowerCase() === "Hermione" && count === 10) {
+    } else if (currentInput.toLowerCase() === "hermione" && count === 10) {
         count++;
         console.log("Input Hermione: " + count);
         inputReset();
-        horcruxLeft.splice(horcrux.indexOf("Tom Riddle's diary"),1);
+        horcruxLeft.splice(horcruxLeft.indexOf("Helga Hufflepuff's Cup"),1);
         input.placeholder = "";
-        return `You found the Helga Hufflepuff's cup. Hermione destroyed it with the Basilisk's Fang. \u000A 6 more horcruxes to go. \u000A Continue to other Quest?
+        return `You found the Helga Hufflepuff's cup. Hermione destroyed it with the Basilisk's Fang. \u000A ${horcruxLeft.length} more horcruxes to go. \u000A Continue to other Quest?
             \n Yes or No
             \n ${horcruxLeft.join(" \n ")}`
+    } else if (currentInput.toLowerCase() === "yes" && count === 11) {
+        count++;
+        console.log("Input Yes: " +count);
+        inputReset();
+        input.placeholder = "sword or book";
+        return `Pick a weapon. \u000A Gryffindor's Sword or Book of Spells`;
+    } else if (currentInput.toLowerCase() === "sword" && (count === 1 || count === 6 || count === 12)) {
+        count++;
+        console.log("Input sword: " +count);
+        inputReset();
+        input.placeholder = "Hint: starts with m and ends with m"
+        return `As you picked up the sword, the Headmaster's office door opened. Albus Dumbledore walked out with Marvolo Gaunt's Ring. To destroy it, you will need to solve the riddle.
+        \n ${riddleOne}`;
+    } else if ((count === 2 || count === 7 || count === 13) && currentInput.toLowerCase() !== "mushroom") {
+        inputReset();
+        return `Nope. Please try again.
+        \n ${riddleOne}`;
+    } else if (currentInput.toLowerCase() === "mushroom" && (count === 2 || count === 7 || count === 13)) {
+        count++;
+        inputReset();
+        horcruxLeft.splice(horcruxLeft.indexOf("Marvolo Gaunt's Ring"),1);
+        input.placeholder = 'hint: Begins with "b"';
+        return `Marvolo Gaunt's Ring has been destroyed. A voice leads you to the Forest of Dean. There, you met Ron who was wearing the Salazar Slytherin's locket. He wouldn't let you have it without answering the riddle.
+        \n ${riddleTwo}`;
+    } else if ((count === 3 || count === 8 || count === 14) && currentInput.toLowerCase() !== "breath") {
+        inputReset();
+        return `Nope. Please try again.
+        \n ${riddleTwo}`;
+    } else if (currentInput.toLowerCase() === "breath" && (count === 3 || count === 8 || count === 14)) {
+        count++;
+        inputReset();
+        horcruxLeft.splice(horcruxLeft.indexOf("Salazar Slytherin's Locket"),1);
+        input.placeholder = 'Hermione or Neville'
+        return `Salazar Slytherin's Locket has been destroyed. Before this, who have you sent to guard Hogwarts.
+            \n Hermione Granger or Neville Longbottom`;
+    } else if (currentInput.toLowerCase() === "neville" && (count === 4 || count === 9 || count === 15)) {
+        count++;
+        inputReset();
+        horcruxLeft.splice(horcruxLeft.indexOf("Nagini, the Snake"),1);
+        input.placeholder = "";
+        return `Nagini, the Snake, has been killed by Neville Longbottom.`;
+    } else if (currentInput.toLowerCase() === "no") {
+        count = 0;
+        inputReset();
+        contPH();
+        horcruxLeft = horcrux;
+        return "Game Reset. Please enter 1 to continue.";
     } else {
         console.log(count);
         inputReset();
