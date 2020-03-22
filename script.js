@@ -1,79 +1,82 @@
 // Global state variables
-var name = "";
-var currentRoom = "entryWay";
-
-// Dungeon object
-
-/* room prototype
-  room_x_y: {
-    blurb: "",
-    choices: {
-      1: "",
-      2: ""
-    },
-    goTo: {
-      1: "",
-      2: ""
-    }
-  },
-*/
+//var previousRoom = ""
+var currentRoom = "entrance";
+var roomTrail = [];
 
 var dungeon = {
-  entryWay: {
-    blurb: "You are in a small and slightly depressing room.",
+  entrance: {
+    name: "entrance",
+    blurb: "It's a small and slightly depressing room, full" +
+      "" +
+      "" +
+      "",
     choices: {
-      1: "Take the left door.",
-      2: "Take the right door."
-    },
-    goTo: {
-      1: "room_1_1",
-      2: "room_1_2"
+      1: {
+        str: "Take the left door",
+        dest: "armoury",
+        score: 1
+      },
+      2: {
+        str: "Take the right door",
+        dest: "tavern",
+        score: 1
+      }
     }
   },
-  room_1_1: {
-    blurb: "This is no less bad.",
+  armoury: {
+    name: "armoury",
+    blurb: "" +
+      "" +
+      "" +
+      "",
     choices: {
-      1: "Pick the sword.",
-      2: "Pick the wand."
-    },
-    goTo: {
-      1: "room_2_1",
-      2: "room_2_2"
+      1: {
+        str: "",
+        dest: "cell",
+        score: 1
+      }
     }
   },
-    room_1_2: {
-    blurb: "Say, this is pretty nice!",
+  tavern: {
+    name: "tavern",
+    blurb: "" +
+      "" +
+      "" +
+      "",
     choices: {
-      1: "Arm wrestle.",
-      2: "Order a drink."
-    },
-    goTo: {
-      1: "",
-      2: ""
     }
-  }
+  },
+  cell: {
+    name: "cell",
+    blurb: "" +
+      "" +
+      "" +
+      "",
+    choices: {
+    }
+  },
+
 };
 
-// Level 0: so it begins
-var choicePrompt = buildPrompt(dungeon[currentRoom]);
-document.querySelector("#output").innerText =
-  "Welcome to the dungeon.\n\n" + choicePrompt;
+// helper functions
+var buildPrompt = function (newRoom) {
 
+  var choiceArr = getChoices(newRoom);
 
-var inputHappened = function(choice) {
-  clearInput();
-  console.log("moving from: " + currentRoom);
-  currentRoom = dungeon[currentRoom].goTo[choice];
-  console.log("moving to: " + currentRoom);
-  choicePrompt = buildPrompt(dungeon[currentRoom]);
-  return choicePrompt;
+  outStr =
+    `You're in the ${newRoom.name}.\n` +
+    getBlurb(newRoom) + "\n\n" +
+    whatNext() + "\n\n" +
+    `${choiceArr.join("\n")}`;
+
+  return outStr;
 }
 
 var clearInput = function () {
   document.querySelector("#input").value = "";
 }
 
-function whatNext () {
+var whatNext = function () {
   var whatNow = [
     "What will you do?",
     "What next, brave adventurer?",
@@ -81,29 +84,50 @@ function whatNext () {
     "What now?",
     "The choice lays before you now."
   ];
-
   var i = Math.floor(Math.random() * whatNow.length);
 
   return whatNow[i];
 }
 
-function getBlurb (roomObj) {
+var getBlurb = function (roomObj) {
   return roomObj.blurb;
 }
 
-function getChoices (roomObj) {
+var getChoices = function (roomObj) {
   var choiceObj = roomObj.choices;
   var choices = [];
 
+
   for (var num in choiceObj) {
-    choices.push(`${num}: ${choiceObj[num]}`);
+    choices.push(`${num}: ${choiceObj[num].str}`);
   }
+
+  if (roomTrail.length !== 0) {
+    console.log("backlink");
+    // push backlink opt
+    var prev = roomTrail[roomTrail.length - 1];
+    choices.push(`B: Go back to the ${dungeon[prev].name}`)
+  }
+
   return choices;
 }
 
-function buildPrompt (room) {
-  outStr = getBlurb(room) + "\n\n" +
-    whatNext() + "\n\n" +
-    getChoices(room).join("\n");
-  return outStr;
+// Level 0: so it begins
+var choicePrompt = buildPrompt(dungeon[currentRoom]);
+document.querySelector("#output").innerText =
+  "Welcome to the dungeon.\n\n" + choicePrompt;
+
+var inputHappened = function(choice) {
+  clearInput();
+
+  if (choice.toLowerCase() === "b") {
+    currentRoom = roomTrail.pop();
+  } else {
+    roomTrail.push(currentRoom);
+    currentRoom = dungeon[currentRoom].choices[choice].dest;
+  }
+
+  choicePrompt = buildPrompt(dungeon[currentRoom]);
+
+  return choicePrompt;
 }
