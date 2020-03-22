@@ -9,3 +9,8 @@
 #output{
   background-color:pink;
 }
+
+#scoreBoard {
+	width: 300px;
+	background-color: lightyellow;
+}
