@@ -1,56 +1,12 @@
+// Global variables
+var pName = "";
+var pScore = 0;
+
 // Global state variables
-//var previousRoom = ""
 var currRoomId = "room0";
 var roomTrail = [];
 var roomSeen = {
   room0: true
-};
-
-var dungeon = {
-  room0: {
-    dispName: "entrance",
-    blurb: "It's a small and slightly depressing room, full " +
-      "of the hopes of adventurers past. And not much else.",
-    choices: {
-      1: {
-        str: "Take the left door",
-        dest: "room_1_1",
-        score: 1
-      },
-      2: {
-        str: "Take the right door",
-        dest: "room_1_2",
-        score: 1
-      }
-    }
-  },
-  room_1_1: {
-    dispName: "armoury",
-    blurb: "" +
-      "",
-    choices: {
-      1: {
-        str: "The cell",
-        dest: "room_2_1",
-        score: 1
-      }
-    }
-  },
-  room_1_2: {
-    dispName: "tavern",
-    blurb: "" +
-      "",
-    choices: {
-    }
-  },
-  room_2_1: {
-    dispName: "cell",
-    blurb: "" +
-      "",
-    choices: {
-    }
-  },
-
 };
 
 // helper functions
@@ -58,7 +14,7 @@ var buildPrompt = function (newRoom) {
   var choiceArr = getChoices(newRoom);
 
   outStr =
-    `You're in the ${newRoom.dispName}.\n` +
+    `You're in the ${newRoom.dispName}.\n\n` +
     getBlurb(newRoom) + "\n\n" +
     whatNext() + "\n\n" +
     `${choiceArr.join("\n")}`;
@@ -94,7 +50,7 @@ var getChoices = function (roomObj) {
   for (var num in choiceObj) {
     var choiceStr = `${num}: ${choiceObj[num].str}`;
     if (roomSeen[choiceObj[num].dest] === true) {
-      choiceStr += ` (the ${dungeon[choiceObj[num].dest].dispName})`;
+      choiceStr += ` (to the ${dungeon[choiceObj[num].dest].dispName})`;
     }
     choices.push(choiceStr);
   }
@@ -108,13 +64,23 @@ var getChoices = function (roomObj) {
 }
 
 // Level 0: so it begins
-var choicePrompt = buildPrompt(dungeon[currRoomId]);
 document.querySelector("#output").innerText =
-  "Welcome to the dungeon.\n\n" + choicePrompt;
+  "Welcome to the dungeon.\n\n" +
+  "Around here, we like to know the names of those who choose to " +
+  "stake their lives on the tiny chance of success. What's your name?";
 
 var inputHappened = function(choice) {
-  clearInput();
+  var choicePrompt;
 
+  if (pName === "") {
+    clearInput();
+    pName = choice;
+    choicePrompt = `Welcome to the dungeon, ${pName}.\n\n`+
+      buildPrompt(dungeon.room0);
+    return choicePrompt;
+  }
+
+  clearInput();
   if (choice.toLowerCase() === "b") {
     currRoomId = roomTrail.pop();
   } else {
@@ -125,7 +91,7 @@ var inputHappened = function(choice) {
 
   choicePrompt = buildPrompt(dungeon[currRoomId]);
 
-  console.log('visited: ' + roomSeen);
+  console.log('visited: ', roomSeen);
   console.log('trail: ' + roomTrail);
   return choicePrompt;
 }
