@@ -16,6 +16,7 @@ var buildPrompt = function (roomObj) {
   if (roomObj.isEnd) {
     outStr = `You're in ${roomObj.dispName}.\n\n` +
       `${getBlurb(roomObj)}\n\n` +
+      `Your score is: ${countScore(roomTrail, roomObj)}\n\n` +
       `Refresh to start over.`;
     return outStr;
   }
@@ -70,6 +71,20 @@ var getChoices = function (roomObj) {
   return choices;
 }
 
+var countScore = function (trail, roomObj) {
+  var score = 0;
+  console.log(trail);
+  console.log(roomObj);
+
+  for (var i = 1; i < trail.length; i++) {
+    score += dungeon[trail[i]].score;
+  }
+
+  score += roomObj.score;
+
+  return score;
+}
+
 // Level 0: so it begins
 document.querySelector("#output").innerText =
   "Welcome to the dungeon.\n\n" +
@@ -88,7 +103,7 @@ var inputHappened = function(choice) {
   }
 
   clearInput();
-  if (choice.toLowerCase() === "b" && !dungeon[currentRoom].isEnd) {
+  if (choice.toLowerCase() === "b" && !dungeon[currRoomId].isEnd) {
     currRoomId = roomTrail.pop();
   } else {
     roomTrail.push(currRoomId);
@@ -97,7 +112,6 @@ var inputHappened = function(choice) {
   }
 
   choicePrompt = buildPrompt(dungeon[currRoomId]);
-
   console.log('visited: ', roomSeen);
   console.log('trail: ' + roomTrail);
   return choicePrompt;

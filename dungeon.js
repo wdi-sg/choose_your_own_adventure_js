@@ -8,13 +8,11 @@ var dungeon = {
     choices: {
       1: {
         str: "Take the stained wood door",
-        dest: "room_1_1",
-        score: 1
+        dest: "room_1_1"
       },
       2: {
         str: "Take the round, red door",
-        dest: "room_1_2",
-        score: 1
+        dest: "room_1_2"
       }
     },
     isEnd: false
@@ -27,15 +25,14 @@ var dungeon = {
     choices: {
       1: {
         str: "Take the ominous door",
-        dest: "room_2_1",
-        score: 1
+        dest: "room_2_1"
       },
       2: {
         str: "Force your way through the barred door",
-        dest: "room_2_2",
-        score: 3
+        dest: "room_2_2"
       }
     },
+    score: 1,
     isEnd: false
   },
   room_1_2: {
@@ -47,15 +44,14 @@ var dungeon = {
     choices: {
       1: {
         str: "Pack your bags",
-        dest: "room_2_3",
-        score: 1
+        dest: "room_2_3"
       },
       2: {
         str: "Find a weapon",
-        dest: "room_2_4",
-        score: 1
+        dest: "room_2_4"
       }
     },
+    score: 2,
     isEnd: false
   },
   room_2_1: {
@@ -66,20 +62,18 @@ var dungeon = {
     choices: {
       1: {
         str: "Open the left cell",
-        dest: "room_3_1",
-        score: 1
+        dest: "room_3_1"
       },
       2: {
         str: "Open the middle cell",
-        dest: "room_3_2",
-        score: 1
+        dest: "room_3_2"
       },
       3: {
         str: "Open the right cell",
-        dest: "room_3_3",
-        score: 1
+        dest: "room_3_3"
       }
     },
+    score: 1,
     isEnd: false
   },
   room_2_2: {
@@ -89,15 +83,14 @@ var dungeon = {
     choices: {
       1: {
         str: "Open the glowing locker",
-        dest: "room_3_4",
-        score: 1
+        dest: "room_3_4"
       },
       2: {
         str: "Go through the wooden door",
-        dest: "room_3_5",
-        score: 1
+        dest: "room_3_5"
       }
     },
+    score: 2,
     isEnd: false
   },
   room_2_3: {
@@ -108,15 +101,14 @@ var dungeon = {
     choices: {
       1: {
         str: "Stay",
-        dest: "room_3_6",
-        score: 1
+        dest: "room_3_6"
       },
       2: {
         str: "Leave in the morning",
-        dest: "room_3_7",
-        score: 1
+        dest: "room_3_7"
       }
     },
+    score: 2,
     isEnd: false
   },
   room_2_4: {
@@ -127,15 +119,14 @@ var dungeon = {
     choices: {
       1: {
         str: "Join them on the job",
-        dest: "room_3_8",
-        score: 1
+        dest: "room_3_8"
       },
       2: {
         str: "Walk away",
-        dest: "room_3_9",
-        score: 1
+        dest: "room_3_9"
       }
     },
+    score: 1,
     isEnd: false
   },
   room_3_1: {
@@ -145,6 +136,7 @@ var dungeon = {
       "anytime soon.",
     choices: {
     },
+    score: 1,
     isEnd: true
   },
   room_3_2: {
@@ -163,6 +155,7 @@ var dungeon = {
       "escaping into the bright sunlight. Perhaps you should just go home.",
     choices: {
     },
+    score: 1,
     isEnd: true
   },
   room_3_4: {
@@ -172,6 +165,7 @@ var dungeon = {
       "absolute void.",
     choices: {
     },
+    score: 1,
     isEnd: true
   },
   room_3_5: {
@@ -183,6 +177,7 @@ var dungeon = {
       "gold, and you never see them again. Time to go home!",
     choices: {
     },
+    score: 2,
     isEnd: true
   },
   room_3_6: {
@@ -193,6 +188,7 @@ var dungeon = {
       "isn't bad.",
     choices: {
     },
+    score: 2,
     isEnd: true
   },
   room_3_7: {
@@ -203,6 +199,7 @@ var dungeon = {
       "the caravan, which is now yours to run, keeps you so busy.",
     choices: {
     },
+    score: 1,
     isEnd: true
   },
   room_3_8: {
@@ -211,6 +208,7 @@ var dungeon = {
       "as you quite calmly set fire to the mayor's house.",
     choices: {
     },
+    score: 1,
     isEnd: true
   },
   room_3_9: {
@@ -220,6 +218,7 @@ var dungeon = {
       "to warn them of the attack, and set defences up.",
     choices: {
     },
+    score: 2,
     isEnd: true
   }
 };
