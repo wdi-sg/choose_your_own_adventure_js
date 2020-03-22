@@ -1,56 +1,51 @@
 // Global state variables
 //var previousRoom = ""
-var currentRoom = "entrance";
+var currRoomId = "room0";
 var roomTrail = [];
+var roomSeen = {
+  room0: true
+};
 
 var dungeon = {
-  entrance: {
-    name: "entrance",
-    blurb: "It's a small and slightly depressing room, full" +
-      "" +
-      "" +
-      "",
+  room0: {
+    dispName: "entrance",
+    blurb: "It's a small and slightly depressing room, full " +
+      "of the hopes of adventurers past. And not much else.",
     choices: {
       1: {
         str: "Take the left door",
-        dest: "armoury",
+        dest: "room_1_1",
         score: 1
       },
       2: {
         str: "Take the right door",
-        dest: "tavern",
+        dest: "room_1_2",
         score: 1
       }
     }
   },
-  armoury: {
-    name: "armoury",
+  room_1_1: {
+    dispName: "armoury",
     blurb: "" +
-      "" +
-      "" +
       "",
     choices: {
       1: {
-        str: "",
-        dest: "cell",
+        str: "The cell",
+        dest: "room_2_1",
         score: 1
       }
     }
   },
-  tavern: {
-    name: "tavern",
+  room_1_2: {
+    dispName: "tavern",
     blurb: "" +
-      "" +
-      "" +
       "",
     choices: {
     }
   },
-  cell: {
-    name: "cell",
+  room_2_1: {
+    dispName: "cell",
     blurb: "" +
-      "" +
-      "" +
       "",
     choices: {
     }
@@ -60,11 +55,10 @@ var dungeon = {
 
 // helper functions
 var buildPrompt = function (newRoom) {
-
   var choiceArr = getChoices(newRoom);
 
   outStr =
-    `You're in the ${newRoom.name}.\n` +
+    `You're in the ${newRoom.dispName}.\n` +
     getBlurb(newRoom) + "\n\n" +
     whatNext() + "\n\n" +
     `${choiceArr.join("\n")}`;
@@ -97,23 +91,24 @@ var getChoices = function (roomObj) {
   var choiceObj = roomObj.choices;
   var choices = [];
 
-
   for (var num in choiceObj) {
-    choices.push(`${num}: ${choiceObj[num].str}`);
+    var choiceStr = `${num}: ${choiceObj[num].str}`;
+    if (roomSeen[choiceObj[num].dest] === true) {
+      choiceStr += ` (the ${dungeon[choiceObj[num].dest].dispName})`;
+    }
+    choices.push(choiceStr);
   }
 
   if (roomTrail.length !== 0) {
-    console.log("backlink");
-    // push backlink opt
     var prev = roomTrail[roomTrail.length - 1];
-    choices.push(`B: Go back to the ${dungeon[prev].name}`)
+    choices.push(`B: Go back to the ${dungeon[prev].dispName}`)
   }
 
   return choices;
 }
 
 // Level 0: so it begins
-var choicePrompt = buildPrompt(dungeon[currentRoom]);
+var choicePrompt = buildPrompt(dungeon[currRoomId]);
 document.querySelector("#output").innerText =
   "Welcome to the dungeon.\n\n" + choicePrompt;
 
@@ -121,13 +116,16 @@ var inputHappened = function(choice) {
   clearInput();
 
   if (choice.toLowerCase() === "b") {
-    currentRoom = roomTrail.pop();
+    currRoomId = roomTrail.pop();
   } else {
-    roomTrail.push(currentRoom);
-    currentRoom = dungeon[currentRoom].choices[choice].dest;
+    roomTrail.push(currRoomId);
+    currRoomId = dungeon[currRoomId].choices[choice].dest;
+    roomSeen[currRoomId] = true;
   }
 
-  choicePrompt = buildPrompt(dungeon[currentRoom]);
+  choicePrompt = buildPrompt(dungeon[currRoomId]);
 
+  console.log('visited: ' + roomSeen);
+  console.log('trail: ' + roomTrail);
   return choicePrompt;
 }
