@@ -8,6 +8,8 @@
     <input class="starter" id="input" placeholder="input"/>
     <h2>output:</h2>
     <div class="starter" id="output"></div>
+    <h2>score:</h2>
+    <div class="starter" id="scoreBoard"></div>
     <script>
 
       var display = function( data ){
@@ -25,6 +27,11 @@
         var result = inputHappened(currentInput)
         display( result );
       });
+
+      document.querySelector('#scoreBoard').addEventListener('change', function(event){
+        var result = inputHappened(currentInput)
+        display( score );
+    });
     </script>
     <script src="script.js" charset="utf-8"></script>
   </body>
