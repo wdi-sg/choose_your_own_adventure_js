@@ -14,9 +14,11 @@ var inputHappened = function(currentInput) {
     }
     //Make default error message.
     var error = `Sorry, that was not a valid input. Please try again. \n\n ${showScene(scene)}`
+
     //Check if battlemode is on, if so, inputs would trigger the battle function.
     if (battleMode) {
         return battle(currentInput, enemy);
+
     } else {
         //If battlemode is not on, display scenarios & accept input for choices accordingly.
         switch (scene) {

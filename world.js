@@ -10,6 +10,7 @@ function getRandomInt(min, max) {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
 }
+
 function clearInput() {
     document.getElementById("input").value = "";
 }
@@ -96,8 +97,8 @@ var youngPunk = {
             power: 2
         },
         {
-          name: "Fanny Pack Swing",
-          power: 3
+            name: "Fanny Pack Swing",
+            power: 3
         }
     ],
     attack: function(input, enemy) {
@@ -161,7 +162,7 @@ var scenarios = {
     8: {
         text: `You arrive at the address provided. There's a notice board outside which reads "Speed Dating Event for Singles 21-35!" ${p} An eager youth comes up to you with a clipboard. "Hey! Welcome to our speed dating event of the year! Can I get your name?"`,
     },
-    9: {//created function to get updated name input.
+    9: { //created function to get updated name input.
         text: function() {
             return `"Alright... ${scenarios.name}. There we go, here's a nametag. Please take a seat inside, you're assigned to table 5!" ${p} You take a seat at table 5. Shortly after, a beautiful woman approaches your table. You see her nametag--she’s your target! ${p} The eager youth slams an hourglass on your table. "You guys get 3 minutes!" ${p} “Hey there..." she squints at your nametag. "${this.name}. How’s it going?” she asks.`
         },
@@ -278,9 +279,16 @@ function reset() {
 
 //BATTLE FUNCTION
 function battle(input, enemy) {
-    var userMoves = `Choose your move: ${user.showMoves()}.`;
+  var userMoves = `Choose your move: ${user.showMoves()}`;
+
+  //If input is more than the highest index of user.moves, or less than 0, return error statement. Else, proceed with battle function.
+  if (input > user.moves.length-1 || input < 0 ) {
+    return `Invalid move. ${p} Your HP: ${user.hp} ${br} ${enemy.name} HP: ${enemy.hp} ${p} ${userMoves}`
+
+  } else {
+    //If input is less than zero or more than the user move numbers displayed, show error message.
     var userResults = user.attack(input, enemy);
-    var enemyResults = enemy.attack(getRandomInt(0, enemy.moves.length), user); //Randomizes enemy's attacks.
+    var enemyResults = enemy.attack(getRandomInt(0, (enemy.moves.length - 1)), user); //Randomizes enemy's attacks.
 
     //If enemy HP reaches 0, winner can proceed.
     if (enemy.hp <= 0) {
@@ -294,4 +302,5 @@ function battle(input, enemy) {
         return showScene(3);
     }
     return `${userResults} ${p} ${enemyResults} ${p} Your HP: ${user.hp} ${br} ${enemy.name} HP: ${enemy.hp} ${p} ${userMoves}`;
+  }
 }
