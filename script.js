@@ -53,6 +53,9 @@ var rightSpell = `Please select the right spell.
 \n Fiendfyre
 \n Expulso`;
 
+var scienceQuest = `Au in the periodic table is what element?
+    \n Gold or Silver`;
+
 //game start
 
 contPH();
@@ -243,15 +246,28 @@ var inputHappened = function(currentInput){
             \n ${horcruxLeft.length} more horcruxes to go.
             \n ${horcruxLeft.join(" \n ")}`
     } else if (currentInput.toLowerCase() === "fiendfyre" && count === 49) {
-        count ++;
+        count++;
         inputReset();
         horcruxLeft.splice(horcruxLeft.indexOf("Rowena Ravenclaw's Diadem"),1);
         horcruxLeft.splice(horcruxLeft.indexOf("Harry Potter"),1);
         horcruxLeft.splice(horcruxLeft.indexOf("Tom Riddle's Diary"),1);
         input.placeholder = "You made it.";
-        return `Rowena Ravenclaw's Diadem, Tom Riddle's Diary and Harry Potter have been destroyed. The end. Please enter "no" to reset the game.
+        return `Rowena Ravenclaw's Diadem, Tom Riddle's Diary and Harry Potter have been destroyed. The end.
             \n ${horcruxLeft.length} more horcruxes to go.
             \n ${horcruxLeft.join(" \n ")}`
+    } else if (currentInput.toLowerCase() === "b" && count === 2) {
+        count++;
+        inputReset();
+        input.placeholder = "Gold or Silver";
+        return `This is Bonus. If you got it, it means, you destroyed all the horcruxes at once.
+        \n ${scienceQuest}`;
+    } else if ((count === 3) && currentInput.toLowerCase() !== "gold") {
+        inputReset();
+        return `Nope. Please try again.
+        \n ${scienceQuest}`;
+    } else if (currentInput.toLowerCase() === "gold" && count === 3) {
+        inputReset();
+        return `You have completely destroyed all 7 horcrux. The end.`
     } else if (currentInput.toLowerCase() === "no") {
         count = 1;
         inputReset();
