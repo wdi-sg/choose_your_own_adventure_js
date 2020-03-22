@@ -48,7 +48,7 @@ var adventureStart = function (currentInput) {
         if (currentInput >= 2015) {
             counter = '011';
             scoreCounter(20);
-            return `I see you're a fan of Back to the Future 2. Would you rather deal with Biff, or Griff? (B/G)`;
+            return `I see you're a fan of Back to the Future 2. Would you rather deal with Biff, or Griff (B/G)`;
         } else if (currentInput >= 1985 && currentInput < 2015) {
             counter = '012';
             scoreCounter(5);
