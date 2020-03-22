@@ -1,6 +1,5 @@
 // Global variables
 var pName = "";
-var pScore = 0;
 
 // Global state variables
 var currRoomId = "room0";
@@ -10,12 +9,20 @@ var roomSeen = {
 };
 
 // helper functions
-var buildPrompt = function (newRoom) {
-  var choiceArr = getChoices(newRoom);
+var buildPrompt = function (roomObj) {
+  var choiceArr = getChoices(roomObj);
+  var outStr;
+
+  if (roomObj.isEnd) {
+    outStr = `You're in ${roomObj.dispName}.\n\n` +
+      `${getBlurb(roomObj)}\n\n` +
+      `Refresh to start over.`;
+    return outStr;
+  }
 
   outStr =
-    `You're in the ${newRoom.dispName}.\n\n` +
-    getBlurb(newRoom) + "\n\n" +
+    `You're in ${roomObj.dispName}.\n\n` +
+    getBlurb(roomObj) + "\n\n" +
     whatNext() + "\n\n" +
     `${choiceArr.join("\n")}`;
 
@@ -50,12 +57,12 @@ var getChoices = function (roomObj) {
   for (var num in choiceObj) {
     var choiceStr = `${num}: ${choiceObj[num].str}`;
     if (roomSeen[choiceObj[num].dest] === true) {
-      choiceStr += ` (to the ${dungeon[choiceObj[num].dest].dispName})`;
+      choiceStr += ` (to ${dungeon[choiceObj[num].dest].dispName})`;
     }
     choices.push(choiceStr);
   }
 
-  if (roomTrail.length !== 0) {
+  if (roomTrail.length !== 0 && !roomObj.isEnd) {
     var prev = roomTrail[roomTrail.length - 1];
     choices.push(`B: Go back to the ${dungeon[prev].dispName}`)
   }
@@ -81,7 +88,7 @@ var inputHappened = function(choice) {
   }
 
   clearInput();
-  if (choice.toLowerCase() === "b") {
+  if (choice.toLowerCase() === "b" && !dungeon[currentRoom].isEnd) {
     currRoomId = roomTrail.pop();
   } else {
     roomTrail.push(currRoomId);
