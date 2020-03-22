@@ -1,59 +1,3 @@
-var scene = 8;
-var enemy;
-var battleMode = false;
-target.randomTaste(); //Generate random outfit preference for target.
-function addApproval(input) {
-    user.approval += input;
-}
-
-//Function to display scenario, choices & approval where appropriate.
-
-function showScene(number) {
-    //If the scenario has choices, return text, choices, and approval rating (only after the scene where you meet the target.)
-    if (scenarios[number].choices) {
-        return `${(scene > 8) ? `Approval : ${user.approval} ${p}`:""}  ${scenarios[number].text} ${p} ${scenarios.display(number)}`;
-        //If the scenario is an ending, just return the text, and a final approval rating (after meeting target).
-    } else {
-        return `${(scene > 8) ? `Final Approval : ${user.approval} ${p}`:""} ${scenarios[number].text}`
-    }
-}
-
-//Function to reset the game.
-function reset() {
-    scene = 1;
-    user.name = null;
-    enemy = null;
-    trainee.hp = 8;
-    user.outfit = null;
-    user.approval = 0;
-    user.hp = 15;
-    if (user.moves.length > 2) {
-        user.moves.pop();
-    };
-    return showScene(1)
-}
-
-//BATTLE FUNCTION
-function battle(input, enemy) {
-    var userMoves = `Choose your move: ${user.showMoves()}.`;
-    var userResults = user.attack(input, enemy);
-    var enemyResults = enemy.attack(getRandomInt(0, 1), user); //Randomizes enemy's attacks.
-
-    //If enemy HP reaches 0.
-    if (enemy.hp <= 0) {
-        battleMode = false;
-        scene = 4;
-        return showScene(4);
-        //If user HP reaches 0.
-    } else if (user.hp <= 0) {
-        scene = 3; //bad ending
-        battleMode = false;
-        return showScene(3);
-    }
-
-    return `${userResults} ${p} ${enemyResults} ${p} Your HP: ${user.hp} ${br} ${enemy.name} HP: ${enemy.hp} ${p} ${userMoves}`;
-}
-
 //Display first scene.
 document.getElementById("output").innerText = showScene(1);
 
@@ -64,20 +8,17 @@ var inputHappened = function(currentInput) {
     var username;
     //Clear all inputs.
     clearInput();
-
     //Make sure input is a number for all scenes apart from 8, where user should input their name.
     if (scene !== 8) {
         currentInput = parseInt(currentInput);
     }
-
     //Make default error message.
     var error = `Sorry, that was not a valid input. Please try again. \n\n ${showScene(scene)}`
-
-    //Check if battlemode is on
+    //Check if battlemode is on, if so, inputs would trigger the battle function.
     if (battleMode) {
         return battle(currentInput, enemy);
     } else {
-        //If battlemode is not on, display scenarios & choices accordingly.
+        //If battlemode is not on, display scenarios & accept input for choices accordingly.
         switch (scene) {
             case 1:
                 if (currentInput === 0) {
@@ -101,7 +42,7 @@ var inputHappened = function(currentInput) {
             case 2:
                 if (currentInput === 0) {
                     enemy = trainee;
-                    battleMode = true;
+                    battleMode = true; //Turn on battle mode.
                     return `You are now facing ${enemy.name}. ${p} Choose your move: ${user.showMoves()}`
                 } else {
                     return error
@@ -141,13 +82,14 @@ var inputHappened = function(currentInput) {
                 }
                 break;
             case 8:
-                user.name = capitalise(currentInput);
-                scene++;
                 if (user.outfit === target.preference) { //If user outfit matches target's preference, bonus 20 points.
                     addApproval(20);
                 }
+                scene++;
+                scenarios.addName(capitalise(currentInput));
                 showScene(9);
                 break;
+
             case 9:
                 console.log(user.name);
                 if (currentInput === 0) {
