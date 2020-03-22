@@ -18,9 +18,15 @@ var scoreCounter = function (points) {
     return score;
 };
 
-var inputHappened = function(currentInput){
+//Format output paragraphs
+var formatPara = function (output) {
+    var formatOutput = output.split('.').join('. \n');
+    return formatOutput;
+}
+
+var inputHappened = function(currentInput) {
     var output = adventureStart(currentInput);
-    return output;
+    return formatPara(output);
 };
 
 var adventureStart = function (currentInput) {
@@ -73,7 +79,7 @@ var adventureStart = function (currentInput) {
             scoreCounter(30);
             return `Griff is asking you if you are in, or out. What do you say? (I/O)`;
         } else {
-            return `Invalid response. Choose again. \n Would you rather deal with Biff, or Griff? (B/G)`;
+            return `Invalid response. Choose again. Would you rather deal with Biff, or Griff? (B/G)`;
         }
     }
 
@@ -101,7 +107,7 @@ var adventureStart = function (currentInput) {
             scoreCounter(100);
             return `Interesting. You set up an elaborate plan for your future Dad to surprise your Mom by beating you up. Despite going horribly awry, the plan ultimately works. You may go back to your own time.`;
         } else {
-            return `Invalid response. Choose again. \n Your future Mom has just asked you to the Enchantment Under the Sea dance. What do you do? (Y/N/S)`;
+            return `Invalid response. Choose again. Your future Mom has just asked you to the Enchantment Under the Sea dance. What do you do? (Y/N/S)`;
         }
     }
 
@@ -121,7 +127,7 @@ var adventureStart = function (currentInput) {
             scoreCounter(100);
             return `Good call! This plan seems to be working. But wait! Clara wants to go Back to the Future with you at the last moment. What do you do? (T/L)`;
         } else {
-            return `Invalid response. Choose again. \n You've run out of gas and can't get back to your own time! How do you power the Time Machine? (H/M/T)`;
+            return `Invalid response. Choose again. You've run out of gas and can't get back to your own time! How do you power the Time Machine? (H/M/T)`;
         }
 
     }
@@ -140,7 +146,7 @@ var adventureStart = function (currentInput) {
             scoreCounter(50);
             return `You get away, but your future son Marty Jr. is heckled for the rest of his days for his dad's cowardice.`;
         } else {
-            return `Invalid response. Choose again. \n Biff is angry and has a cane. Do you stand and fight, or run away like a coward? (S/R)`;
+            return `Invalid response. Choose again. Biff is angry and has a cane. Do you stand and fight, or run away like a coward? (S/R)`;
         }
     }
 
@@ -156,7 +162,7 @@ var adventureStart = function (currentInput) {
             scoreCounter(100);
             return `Good call. You deck Griff in the jaw and run away. He gives chase on his hoverboard and ends up in a pile of manure.`;
         } else {
-            return `Invalid response. Choose again. \n Griff is asking you if you are in, or out. What do you say? (I/O)`;
+            return `Invalid response. Choose again. Griff is asking you if you are in, or out. What do you say? (I/O)`;
         }
     }
 
@@ -172,7 +178,7 @@ var adventureStart = function (currentInput) {
             scoreCounter(50);
             return `Smart choice. Unfortunately the Doc was deeply in love with Clara, and when he gets back to 1985 he becomes very depressed.`;
         } else {
-            return `Invalid response. Choose again. \n But wait! Clara wants to go Back to the Future with you at the last moment. What do you do? (T/L)`;
+            return `Invalid response. Choose again. But wait! Clara wants to go Back to the Future with you at the last moment. What do you do? (T/L)`;
         }
     }
 
