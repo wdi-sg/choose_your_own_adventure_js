@@ -1,4 +1,4 @@
-var scene = 1;
+var scene = 8;
 var enemy;
 var battleMode = false;
 target.randomTaste(); //Generate random outfit preference for target.
@@ -53,6 +53,8 @@ function battle(input, enemy) {
 
     return `${userResults} ${p} ${enemyResults} ${p} Your HP: ${user.hp} ${br} ${enemy.name} HP: ${enemy.hp} ${p} ${userMoves}`;
 }
+
+//Display first scene.
 document.getElementById("output").innerText = showScene(1);
 
 
@@ -140,12 +142,11 @@ var inputHappened = function(currentInput) {
                 break;
             case 8:
                 user.name = capitalise(currentInput);
-                console.log(user.name);
                 scene++;
                 if (user.outfit === target.preference) { //If user outfit matches target's preference, bonus 20 points.
                     addApproval(20);
                 }
-                return `"Alright... ${user.name}. There we go, here's a nametag. Please take a seat inside, you're assigned to table 5!" ${p} You take a seat at table 5. Shortly after, a beautiful woman approaches your table. You see her nametag--she’s your target! ${p} A voice shouts from within the hall: "Your 3 minutes starts now!" ${p} “Hey there..." she squints at your nametag. "${user.name}. How’s it going?” she asks. ${p} (0) Great, nice to meet you! ${br} (1) Is your name Google? Because you have everything I’ve been searching for.`
+                showScene(9);
                 break;
             case 9:
                 console.log(user.name);
@@ -238,15 +239,15 @@ var inputHappened = function(currentInput) {
                 }
                 break;
             case 22:
-                if (currentInput===0) {
+                if (currentInput === 0) {
                     if (user.approval >= 60) {
                         scene = 23; //decide to kill or save target
                     } else if (user.approval < 60) {
                         scene = 26; //bad ending
-                      }
-                    } else {
-                        return error;
                     }
+                } else {
+                    return error;
+                }
                 break;
             case 23:
                 if (currentInput === 0) {
