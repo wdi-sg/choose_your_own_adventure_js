@@ -6,9 +6,13 @@
   <body>
     <input class="starter" id="input" placeholder="input"/>
     <p class="starter" id="output"></p>
+    <div class="starter" id="gameBoard"> 
+      
+    </div>
     <script>
       document.querySelector('#input').addEventListener('change', function(event){
         var a = event.target.value;
+  
         var output = inputHappened(a);
         display( output );
       });
