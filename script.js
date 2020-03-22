@@ -6,7 +6,7 @@ var random5;
 var newInput;
 var choice;
 var name;
-start = false;
+var start = false;
 
 document.querySelector('#output').innerText ='Hi! Please enter your name to begin.';
 
@@ -166,6 +166,10 @@ var inputHappened = function(currentInput){
           return 'Unfortunately you didnt make the cut, so yeah. You died.';
         }
       }
+      else{
+        control = true;
+        return 'That was not an allowed number so you are now disqualified.';
+      }
     }
   }
   if(control){
@@ -173,7 +177,7 @@ var inputHappened = function(currentInput){
       control = false;
       start = false;
       console.log('reset');
-      return 'Enter a number between 1 to 100 to begin.'
+      return 'Hi! Please enter your name to begin.'
     }
     else{
       console.log('reset2')
