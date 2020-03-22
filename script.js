@@ -3,12 +3,24 @@ var outputMessage;
 var inputValue;
 var inputHistory = [];
 var scoreTracker = 0;
+
 let characterStats = {
     name: "",
     weapon: "",
     location: "",
-    opponent: "";
+    opponent: "",
 };
+
+let battleStats = {
+    heroHP: 8,
+    villainHP: 5,
+    heroDie: false,
+    heroWin: false,
+    turnToAttack: false,
+    heroEscape: false,
+    criticalHit: false,
+}
+
 
 
 
@@ -99,26 +111,148 @@ function customEncounter() {
     switch (location) {
         case "Frost Cavern":
             characterStats.opponent = "wights";
-            output += "You encountered a swarm of wights!";
+            output += "You encountered a horde of Wights!";
             break;
         case "Jagged Pass":
             characterStats.opponent = "wildlings";
-            output += "You were attacked by a tribe of Wildlings!";
+            output += "You were ambushed by a tribe of Wildlings!";
             break;
         case "Desolate Forest":
-            characterStats.opponent = "children of the forest";
-            output += "You were ambushed by the Children of The Forest!";
+            characterStats.opponent = "wolves";
+            output += "You were attacked by a pack of Dire Wolves!";
             break;
         default:
-            output += "Theres nothing here";
+            output += "The Night King appears and immediately kills you. Game Over!";
             break;
     }
     return output;
 }
 
-function attackOptions(){
+function attackOptions(input) {
+    var weapon = characterStats.weapon;
+    var output = "\n";
+    input = input.parseInt();
+    switch (input) {
+        case 1:
+            characterStats.opponent = "wights";
+            output += "You encountered a horde of Wights!";
+            break;
+        case 2:
+            characterStats.opponent = "wildlings";
+            output += "You were ambushed by a tribe of Wildlings!";
+            break;
+        case 3:
+            characterStats.opponent = "wolves";
+            output += "You were attacked by a pack of Dire Wolves!";
+            break;
+        default:
+
+            break;
+    }
+    return output;
+}
+
+function startBattle() {
+    var weapon = characterStats.weapon;
+    var opponent = characterStats.opponent;
+    if (battleStats.heroHP <= 0) battleStats.heroDie = true;
+    if (battleStats.villainHP <= 0) battleStats.heroWin = true;
+    while (battleStats.heroDie == false || battleStats.heroWin == true || battleStats.heroEscape == true) {
+
+    }
+}
+
+function battling() {
+
 
 }
+
+function useWeapon() {
+    var damage = 0;
+    var randomNumberBetween0and10 = Math.floor(Math.random() * 10);
+    if (randomNumberBetween0and10 <= 8) {
+        damage += 2;
+        damage += weaponEffective();
+        damage += critical(5)
+        battleStats.villainHP -= damage;
+        console.log(`Dealt ${damage} damage`)
+    } else {
+        battleStats.heroEscape = false;
+    }
+}
+
+function weaponEffective() {
+    var bonusDamage = 0
+    if (characterStats.weapon == "Axe" && characterStats.opponent == "wildlings") {
+        bonusDamage = 1;
+        return bonusDamage
+    } else if (characterStats.weapon == "Axe" && characterStats.opponent == "wights") {
+        bonusDamage = -1;
+        return bonusDamage
+    } else if (characterStats.weapon == "Sword" && characterStats.opponent == "wolves") {
+        bonusDamage = 1;
+        return bonusDamage
+
+    } else if (characterStats.weapon == "Sword" && characterStats.opponent == "wildlings") {
+        bonusDamage = -1;
+        return bonusDamage
+
+    } else if (characterStats.weapon == "Hammer" && characterStats.opponent == "wights") {
+        bonusDamage = 1;
+        return bonusDamage
+
+    } else if (characterStats.weapon == "Hammer" && characterStats.opponent == "wolves") {
+        bonusDamage = -1;
+        return bonusDamage
+
+    } else{
+        bonusDamage = 0;
+        return bonusDamage;
+    }
+}
+
+function shootArrow() {
+    var damage = 0;
+    var randomNumberBetween0and10 = Math.floor(Math.random() * 10);
+    if (randomNumberBetween0and10 <= 6) {
+        damage += 1;
+        damage += critical(3)
+        battleStats.villainHP -= damage;
+        console.log(`Dealt ${damage} damage`)
+    } else {
+        battleStats.heroEscape = false;
+    }
+}
+
+function enemyAttack() {
+    battleStats.heroHP -= 1;
+}
+
+function run() {
+    var randomNumberBetween0and10 = Math.floor(Math.random() * 10);
+    var randomNumberBetween0and10 = Math.floor(Math.random() * 10);
+    if (randomNumberBetween0and10 <= 6) {
+        battleStats.heroEscape = true;
+        console.log("Managed to escape!")
+    } else {
+        battleStats.heroEscape = false;
+        console.log("Couldn't escape!")
+    }
+}
+
+function critical(critRatio) {
+    var getCrit = 0;
+    var randomNumberBetween0and10 = Math.floor(Math.random() * 10);
+    if (randomNumberBetween0and10 <= critRatio) {
+        getCrit = 2;
+        criticalHit = true;
+        console.log("Critical Hit!")
+    } else {
+        criticalHit = false;
+    }
+    return getCrit;
+}
+
 function storyProgression(number) {
     switch (number) {
         case 1:
@@ -126,7 +260,7 @@ function storyProgression(number) {
             var name = characterStats.name;
             outputMessage = (`Ah! ${name} is it? You're in Castle Black now!\nGet ready, we're going beyond the wall! Choose a weapon brother!\n`);
             outputMessage += ("1. Axe\n2. Sword\n3. Hammer")
-            placeHolderEdit("Choose a weapon...");
+            placeHolderEdit("Choose a weapon (#)...");
             break;
         case 2:
             enterWeapon(inputValue);
@@ -135,7 +269,7 @@ function storyProgression(number) {
             if (weapon != "") {
                 outputMessage = (`You seem pretty good with that ${weapon}!\n Let's head out now, where should we patrol?\n`);
                 outputMessage += ("1. Frost Cavern\n2. Jagged Pass\n3. Desolate Forest")
-                placeHolderEdit("Choose a location...");
+                placeHolderEdit("Choose a location (#)...");
             } else {
                 outputMessage = ("That's not a weapon, c'mon now choose!");
                 outputMessage += ("\n1. Axe\n2. Sword\n3. Hammer");
@@ -146,12 +280,12 @@ function storyProgression(number) {
             var location = characterStats.location;
             if (location != "") {
                 outputMessage = (`Alright, we are heading out to the ${location}!\n`);
-                buildAscii(asciiHorse);
+                buildAscii(asciiZombie);
                 outputMessage += "\n1 hour later...\n";
                 outputMessage += customEncounter();
-                outputMessage += "What do we do?";
-                outputMessage += ("\n1. Charge & attack head on!\n2. Draw our bows with flaming arrows!\n3. RUN AWAAAAAYYY!!!!");
-                placeHolderEdit("Input action...");
+                outputMessage += "  What do you do?";
+                outputMessage += ("\n1. Charge & attack head on!\n2. Use bow with flaming arrows!\n3. RUN AWAAAAAYYY!!!!");
+                placeHolderEdit("Choose an action (#)...");
 
             } else {
                 outputMessage = ("Be serious! Where are we going?");
@@ -163,7 +297,7 @@ function storyProgression(number) {
             var location = characterStats.location;
             if (location != "") {
                 outputMessage = (`Alright, we are heading out to the ${location}!\n`);
-                outputMessage += buildAscii(asciiHorse);
+                outputMessage += buildAscii(asciiZombie);
 
                 placeHolderEdit("Choose a location...");
             } else {
@@ -197,10 +331,56 @@ function buildAscii(asciiArt) {
 //    }).join('');
 // }
 
-var asciiHorse = ["            .''",
+var asciiHorse = [
+    "            .''",
     "  ._.-.___.' (`\\",
     " //(        ( `'",
     "'/ )\\ ).__. )",
     "' <' `\\ ._/'\\",
     "   `   \\     \\"
+];
+
+var asciiWolf = [
+    "                     .",
+    "                    / V\\",
+    "                  / `  /",
+    "                 <<   |",
+    "                 /    |",
+    "               /      |",
+    "             /        |",
+    "           /    \\  \\ /",
+    "          (      ) | |",
+    "  ________|   _/_  | |",
+    "<__________\\______)\\__)"
+];
+var asciiZombie = [
+    "      .-.",
+    "     (o.o)",
+    "      |=|",
+    "     __|__",
+    "   //.=|=.\\\\",
+    "  // .=|=. \\\\",
+    "  \\\\ .=|=. //",
+    "   \\\\(_=_)//",
+    "    (:| |:)",
+    "     || ||",
+    "     () ()",
+    "     || ||",
+    "     || ||",
+    "    ==' '=="
+];
+var asciiBarbarian = [
+    "   \\\\\\|||///",
+    " .  ======= ",
+    "/ \\| O   O |",
+    "\\ / \\`___'/ ",
+    " #   _| |_",
+    "(#) (     )  ",
+    " #\\//|* *|\\\\ ",
+    " #\\/(  *  )/   ",
+    " #   =====  ",
+    " #   ( U ) ",
+    " #   || ||",
+    ".#---'| |`----.",
+    "`#----' `-----'"
 ];
