@@ -55,7 +55,7 @@ var inputHappened = function(currentInput){
         input.placeholder = "A or B";
         return `Pick a letter: \n
         A or B`;
-    } else if (currentInput.toLowerCase() === "a" && count === 2 ) {
+    } else if (currentInput.toLowerCase() === "a" && count === 2) {
         count++
         console.log("Input A: " +count);
         inputReset();
@@ -160,11 +160,43 @@ var inputHappened = function(currentInput){
         return `Salazar Slytherin's Locket has been destroyed. Before this, who have you sent to guard Hogwarts.
             \n Hermione Granger or Neville Longbottom`;
     } else if (currentInput.toLowerCase() === "neville" && (count === 4 || count === 9 || count === 15)) {
-        count++;
+        count += 20;
         inputReset();
         horcruxLeft.splice(horcruxLeft.indexOf("Nagini, the Snake"),1);
-        input.placeholder = "";
-        return `Nagini, the Snake, has been killed by Neville Longbottom.`;
+        input.placeholder = "Yes or No";
+        return `Nagini, the Snake, has been killed by Neville Longbottom. \u000A ${horcruxLeft.length} more horcruxes to go. \u000A Continue to other Quest?
+            \n Yes or No
+            \n ${horcruxLeft.join(" \n ")}`;
+    } else if (currentInput.toLowerCase() === "yes" && (count === 24 || count === 29)) {
+        count++;
+        inputReset();
+        input.placeholder = "fang or book";
+        return `Pick a weapon. \u000A Basilisk's Fang or Book of Spells
+        \n fang or book
+        \n ${horcruxLeft.join(" \n ")}`;
+    } else if (currentInput === "fang" && (count === 25 || count === 30)) {
+        count++;
+        inputReset();
+        input.placeholder = "Direction to the Cup.";
+        return `You ran to into a maze. Please enter the order of direction to get to the Hermione and Helga Hufflepuff's Cup. What does the following Morse Code mean?
+        \n .- -.-. .
+        \n A is .-
+        \n B is -...
+        \n C is -.-.
+        \n D is -..
+        \n E is .`;
+    } else if (currentInput.toLowerCase() === "ace" && (count === 26 || count === 31)) {
+        count++;
+        inputReset();
+        horcruxLeft.splice(horcruxLeft.indexOf("Helga Hufflepuff's Cup"),1);
+        input.placeholder = "yes or no";
+        return `You got to the Helga Hufflepuff's Cup and destroyed it. \u000A ${horcruxLeft.length} more horcruxes to go. \u000A Continue to other Quest?
+            \n Yes or No
+            \n ${horcruxLeft.join(" \n ")}`;
+    } else if (currentInput.toLowerCase() === "yes" && (count === 27 || count === 32)) {
+        count++;
+        inputReset();
+        input.placeholder = ""
     } else if (currentInput.toLowerCase() === "no") {
         count = 0;
         inputReset();
