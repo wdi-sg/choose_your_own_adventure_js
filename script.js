@@ -12,9 +12,9 @@ function showScene(number) {
     //If the scenario has choices, return text, choices, and approval rating (only after the scene where you meet the target.)
     if (scenarios[number].choices) {
         return `${(scene > 8) ? `Approval : ${user.approval} ${p}`:""}  ${scenarios[number].text} ${p} ${scenarios.display(number)}`;
-        //If the scenario doesn't have choices (ie it's an ending.), just return the text, and approval rating (after meeting target).
+        //If the scenario is an ending, just return the text, and a final approval rating (after meeting target).
     } else {
-        return `${(scene > 8) ? `Approval : ${user.approval} ${p}`:""} ${scenarios[number].text}`
+        return `${(scene > 8) ? `Final Approval : ${user.approval} ${p}`:""} ${scenarios[number].text}`
     }
 }
 
@@ -35,10 +35,9 @@ function reset() {
 
 //BATTLE FUNCTION
 function battle(input, enemy) {
-    var userMoves = `Choose your moves: ${user.showMoves()}.`;
-    var randomNo = getRandomInt(0, 1)
+    var userMoves = `Choose your move: ${user.showMoves()}.`;
     var userResults = user.attack(input, enemy);
-    var enemyResults = enemy.attack(randomNo, user);
+    var enemyResults = enemy.attack(getRandomInt(0, 1), user); //Randomizes enemy's attacks.
 
     //If enemy HP reaches 0.
     if (enemy.hp <= 0) {
@@ -101,7 +100,7 @@ var inputHappened = function(currentInput) {
                 if (currentInput === 0) {
                     enemy = trainee;
                     battleMode = true;
-                    return `You are now facing ${enemy.name}. ${p} Choose your move: ${user.showMoves()}.`
+                    return `You are now facing ${enemy.name}. ${p} Choose your move: ${user.showMoves()}`
                 } else {
                     return error
                 }
@@ -146,7 +145,7 @@ var inputHappened = function(currentInput) {
                 if (user.outfit === target.preference) { //If user outfit matches target's preference, bonus 20 points.
                     addApproval(20);
                 }
-                return `"Alright... ${user.name}. There we go, here's a nametag. Please take a seat inside, you're assigned to table 5!" ${p} You take a seat at table 5. Shortly after, a beautiful woman approaches your table. You see her nametag--she’s your target! ${p} The eager youth slams an hourglass on your table. "You guys get 3 minutes!" ${p} “Hey there..." she squints at your nametag. "${user.name}. How’s it going?” she asks. ${p} (0) Great, nice to meet you! ${br} (1) Is your name Google? Because you have everything I’ve been searching for.`
+                return `"Alright... ${user.name}. There we go, here's a nametag. Please take a seat inside, you're assigned to table 5!" ${p} You take a seat at table 5. Shortly after, a beautiful woman approaches your table. You see her nametag--she’s your target! ${p} A voice shouts from within the hall: "Your 3 minutes starts now!" ${p} “Hey there..." she squints at your nametag. "${user.name}. How’s it going?” she asks. ${p} (0) Great, nice to meet you! ${br} (1) Is your name Google? Because you have everything I’ve been searching for.`
                 break;
             case 9:
                 console.log(user.name);

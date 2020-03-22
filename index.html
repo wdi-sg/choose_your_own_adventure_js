@@ -2,20 +2,19 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
+
   </head>
   <body>
-    <h3>DOM Manipulation Template</h3>
-    <input class="starter" id="input" placeholder="input"/>
-    <h2>output:</h2>
+    <h1>Hitman Dating Sim</h1>
+    <input class="starter" id="input" placeholder="Enter a number"/>
     <div class="starter" id="output"></div>
     <script>
 
       var display = function( data ){
         var displayElement = document.querySelector('#output');
-
         // get rid of the entire contents
         displayElement.innerHTML = "";
-
         // put the data into the div
         output.innerText = data;
       };

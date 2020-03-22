@@ -1,11 +1,32 @@
-.starter{
-  font-size:30px;
-  padding:10px;
-  display:block;
-  margin:40px;
-  border:3px solid blue;
+body {
+  background-color: black;
+  font-family: 'Inconsolata', monospace;
+
 }
 
-#output{
-  background-color:pink;
+h1 {
+  color: white;
+  margin: 40px;
+  font-variant: small-caps;
+  font-size: 4rem;
+}
+
+.starter{
+  font-size:30px;
+  padding:30px;
+  display:block;
+  margin:40px;
+}
+
+input, #output, .starter {
+  color: white;
+  font-family: 'Inconsolata', monospace;
+  border:3px solid green;
+  background-color: black;
+}
+
+
+
+input:focus {
+  outline: none;
 }

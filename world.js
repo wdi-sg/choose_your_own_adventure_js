@@ -1,7 +1,7 @@
 function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min;
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
 }
 
 function clearInput() {
@@ -13,19 +13,17 @@ var br = `\n`
 
 function capitalise(input) {
     return input[0].toUpperCase() + input.slice(1).toLowerCase();
-  }
+}
 
 var user = {
-  name: null,
+    name: null,
     hp: 15,
     outfit: "",
     moves: [{
-            key: 0,
             name: "Punch",
             power: 2
         },
         {
-            key: 1,
             name: "Kick",
             power: 2
         }
@@ -43,9 +41,9 @@ var user = {
     showMoves: function() {
         var movesArray = [];
         for (var i = 0; i < this.moves.length; i++) {
-            movesArray.push(`${i}) ${this.moves[i].name}`);
+            movesArray.push(`${br}(${i}) ${this.moves[i].name}`);
         }
-        return `${movesArray.join(", ")}`
+        return `${movesArray.join("")}`
     }
 }
 
@@ -53,12 +51,10 @@ var trainee = {
     name: "Hitman Trainee",
     hp: 8,
     moves: [{
-            key: 0,
             name: "Punch",
-            power: 2
+            power: 1
         },
         {
-            key: 1,
             name: "Kick",
             power: 2
         }
@@ -105,7 +101,7 @@ var target = {
 
 var scenarios = {
     1: {
-        text: `You are a hitman. Your mission for today is to assassinate the direct descendant of our city's criminal mastermind. We’re sending you to an event we know they’ll be at today. You'll need to look your best, so please pick an outfit.`,
+        text: `You are a hitman. Your mission for today is to assassinate the daughter of our city's criminal mastermind. We’re sending you to an event we know they’ll be at today. You'll need to look your best, so please pick an outfit.`,
         choices: [`(Ignore the outfits. I look hot enough with my t-shirt, shorts and flip flops.)`, `Take the classic button down & jeans.`, `Take the pullover and jeans.`]
     },
     2: {
@@ -116,11 +112,11 @@ var scenarios = {
         text: `You have been defeated. I'm sorry, but we won't be able to let you proceed with the mission today. Enter anything to start again.`,
     },
     4: {
-        text: `Congrats on winning. Here is the poison. Proceed with the mission.`,
+        text: `You won! Good job with the fight. Here is the poison, which you are to use in her drink when the time is right. Proceed with the mission.`,
         choices: [`Proceed.`]
     },
     5: {
-        text: `You arrive at the address provided. There's a notice board outside which reads "Speed Dating Event for Singles 21-35!" An eager youth comes up to you, eyeing your flipflops. "Hey! I'm sorry, but your outfit is inappropriate. Please go back and change.`,
+        text: `You arrive at the address provided. There's a notice board outside which reads: ${p} "Speed Dating Event for Singles 21-35!" ${p} An eager youth comes up to you, eyeing your flipflops. "Hey! I'm sorry, but your outfit is inappropriate. Please go back and change.`,
         choices: [`My outfit is what? (Beat him up)`, `Go back to headquarters and change.`]
     },
     6: {
@@ -131,7 +127,7 @@ var scenarios = {
         text: "A few people restrain you, and someone calls the police. They find the poison in your pocket, and you get arrested and sent to jail. You failed to even enter the event! Enter anything to start again.",
     },
     8: {
-        text: `You arrive at the address provided. There's a notice board outside which reads "Speed Dating Event for Singles 21-35!" An eager youth comes up to you with a clipboard. "Hey! Welcome to our speed dating event of the year! Can I get your name?"`,
+        text: `You arrive at the address provided. There's a notice board outside which reads "Speed Dating Event for Singles 21-35!" ${p} An eager youth comes up to you with a clipboard. "Hey! Welcome to our speed dating event of the year! Can I get your name?"`,
     },
     9: {
         text: `"Alright... ${user.name}. There we go, here's a nametag. Please take a seat inside, you're assigned to table 5!" ${p} You take a seat at table 5. Shortly after, a beautiful woman approaches your table. You see her nametag--she’s your target! ${p} The eager youth slams an hourglass on your table. "You guys get 3 minutes!" ${p} “Hey there..." she squints at your nametag. "${user.name}. How’s it going?” she asks.`,
@@ -149,12 +145,12 @@ var scenarios = {
         text: `She looks distraught by your joke. "Sorry, please excuse me for a moment.", she smiles. She leaves and never comes back. You have failed your mission! Enter anything to start again.`,
     },
     13: {
-        text: `She shifts uncomfortably in her seat, looking slightly wary. She pauses for a moment, looking down. She seems to be reading something off her palm.  ${p} "..hm.. is there anything you would like to know about me?" she gives an nervous smile. ${p}You should be asking questions. What do you say?`,
-        choices: [`Are you religious? Because you’re the answer to all my prayers.`, `What was the best year of your life so far?`,]
+        text: `She shifts uncomfortably in her seat, looking slightly wary. Looks like that joke missed its mark. ${p} She pauses for a moment, looking down. She seems to be reading something off her palm.  ${p} "..hm.. is there anything you would like to know about me?" she gives an nervous smile. ${p}You should be asking questions. What do you say?`,
+        choices: [`Are you religious? Because you’re the answer to all my prayers.`, `What was the best year of your life so far?`, ]
     },
     14: {
-        text: `"Oh that's interesting!" she pauses for a moment, looking down. She seems to be reading something off her palm. ${p} "..hm.. is there anything you would like to know about me?" she gives an nervous smile. ${p}You should be asking questions. What do you say?`,
-        choices: [`Are you religious? Because you’re the answer to all my prayers.`, `What was the best year of your life so far?`,]
+        text: `"Oh that's interesting!" she smiles. She pauses for a moment, looking down. She seems to be reading something off her palm. ${p} "..hm.. is there anything you would like to know about me?" she gives an nervous smile. ${p}You should be asking questions. What do you say?`,
+        choices: [`Are you religious? Because you’re the answer to all my prayers.`, `What was the best year of your life so far?`, ]
     },
     15: {
         text: `"Hahaha! Well, I wasn't religious until my dad became a pastor.. We used to be dirt poor, and he built the church from nothing. It took a while, but God's really blessed us, and we've been doing extremely well! We even had enough money for my mum to chase her lifelong dream of becoming a Mandopop singer."`,
@@ -202,9 +198,9 @@ var scenarios = {
     display: function(number) {
         var output;
         var text = this[number].text;
-        var choicesArray = [];
-        for (var i=0; i < (this[number].choices).length; i++) {
-            choicesArray.push(`(${i}) ${this[number].choices[i]} \n\n`);
+        var choicesArray = [`Enter one of the following choices:`];
+        for (var i = 0; i < (this[number].choices).length; i++) {
+            choicesArray.push(`${br}(${i}) ${this[number].choices[i]}`);
         }
         return choicesArray.join('');
     }
