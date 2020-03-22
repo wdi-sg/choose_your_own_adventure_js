@@ -38,11 +38,7 @@ var riddleTwo = `Solve the riddle.
 
 var morseCode = `What does the following Morse Code mean?
         \n .- -.-. .
-        \n A is .-
-        \n B is -...
-        \n C is -.-.
-        \n D is -..
-        \n E is .`;
+        \n A is .- \u000A B is -... \u000A C is -.-. \u000A D is -.. \u000A E is .`;
 
 var mathQuest = `3 + 3 % 2 * 5 = ?`;
 
@@ -219,38 +215,46 @@ var inputHappened = function(currentInput){
         input.placeholder = "enter in numerical"
         return `You wanted to go to the Room of Requirement. Before you can find it, you have to answer a mathematical operation.
             \n ${mathQuest}`
-    } else if ((count === 28 || count === 32 || count === 35) && parseInt(currentInput) !== 8 ) {
+    } else if ((count === 28 || count === 33 || count === 35) && parseInt(currentInput) !== 8 ) {
         inputReset();
         return `Nope. Please try again.
         \n ${mathQuest}`;
-    } else if (parseInt(currentInput) === 8 && (count === 28 || count === 32 || count === 35) ) {
+    } else if (parseInt(currentInput) === 8 && (count === 28 || count === 33 || count === 35) ) {
         count++;
         inputReset();
         input.placeholder = "enter wiz (Ron or Vin or Draco or Ced)"
         return `You have entered the Room of Requirement. You have to find the right wizard to help you find Rowena Ravenclaw's Diadem.
         \n ${rightWiz}`;
-    } else if ((count === 29 || count === 33 || count === 36) && currentInput.toLowerCase() !== "vin" ) {
+    } else if ((count === 29 || count === 34 || count === 36) && currentInput.toLowerCase() !== "vin" ) {
         inputReset();
         return `Nope. Please try again.
         \n ${rightWiz}`;
-    } else if (currentInput.toLowerCase() === "vin" && (count === 29 || count === 33 || count === 36)) {
-        count++;
+    } else if (currentInput.toLowerCase() === "vin" && (count === 29 || count === 34 || count === 36)) {
+        count += 20;
         inputReset();
         input.placeholder = "Incendio or Fiendfyre or Expulso"
         return `Rowena Ravenclaw's Diadem found. To destroy it, you need a spell.
         \n ${rightSpell}`
-    } else if ((count === 30 || count === 34 || count === 37) && currentInput.toLowerCase() !== "fiendfyre") {
+    } else if ((count === 49 || count === 54 || count === 56) && currentInput.toLowerCase() !== "fiendfyre") {
         inputReset();
         return `Nope. Please try again.
         \n ${rightSpell}`
-    } else if (currentInput.toLowerCase() === "fiendfyre" && (count === 30 || count === 34 || count === 37)) {
+    } else if (currentInput.toLowerCase() === "fiendfyre" && (count === 54 || count === 56)) {
         count++;
         inputReset();
         horcruxLeft.splice(horcruxLeft.indexOf("Rowena Ravenclaw's Diadem"),1);
         horcruxLeft.splice(horcruxLeft.indexOf("Harry Potter"),1);
-        input.placeholder = "You've made it.";
+        input.placeholder = "You made it.";
         return `Rowena Ravenclaw's Diadem destroyed. The fire was too wild, that Harry Potter died. \u000A ${horcruxLeft.length} more horcruxes to go.
             \n ${horcruxLeft.join(" \n ")}`
+    } else if (currentInput.toLowerCase() === "fiendfyre" && count === 49) {
+        count ++;
+        inputReset();
+        horcruxLeft.splice(horcruxLeft.indexOf("Rowena Ravenclaw's Diadem"),1);
+        horcruxLeft.splice(horcruxLeft.indexOf("Harry Potter"),1);
+        horcruxLeft.splice(horcruxLeft.indexOf("Tom Riddle's Diary"),1);
+        input.placeholder = "You made it.";
+        return `Rowena Ravenclaw's Diadem, Tom Riddle's Diary and Harry Potter have been destroyed. All horcruxes are gone. The end. Please enter "no" to reset the game.`
     } else if (currentInput.toLowerCase() === "no") {
         count = 0;
         inputReset();
