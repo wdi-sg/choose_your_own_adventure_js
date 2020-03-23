@@ -83,7 +83,7 @@ var inputHappened = function(currentInput){
 
     if (  currentInput !== "y" && currentInput !== "n" &&
         currentInput != NaN && currentInput.length > 0 ){
-        var output = "Hey " + currentInput + ", " + "let's begin the game! If yes, input 'Y' and enter, if 'No' input 'N' and enter. "
+        var output = "Hey " + currentInput + ", " + "Welcome to which F1 world champion are you? -- A memory game. First, you can choose your championship winning year. Then, you must answer the following questions correctly that are related to the F1 champion of the year you have chosen. If you get all your answers correctly in sequence, your F1 champion's name will be revealed in the end. Are your ready?  If yes, input 'Y' and enter, if 'No' input 'N' and enter. "
     }
     if( currentInput === "y" ) {
         var output = question1(currentInput) + " if 'Yes', press 'T', if your answer is 'No' press 'Y' and enter"
