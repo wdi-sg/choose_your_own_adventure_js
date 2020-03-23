@@ -62,6 +62,12 @@ You decided to:
 	2) Interrogate everybody.
 	3) Investigate outside the mansion.`,
 
+	basement : `The butler leads you to the basement. Herein lies many massive blocks of ice stored in a freezing room. These ice blocks are broken down into small pieces to make cold drinks for guests during this hot summer. Sometimes, entire blocks of ice are moved into the main hall to keep everyone cool.
+
+	1) Investigate the second storey.
+	2) Interrogate everybody.
+	3) Investigate outside the mansion.`
+
 	interrogate : `You ask everyone if they have noticed anything suspicious during the night. Everyone responds saying they have returned to their bedrooms after the party and have not seen anything weird. This means that even if the businessman is murdered, he was killed silently without any struggle.
 
 	1) Investigate the second storey.
@@ -125,8 +131,10 @@ You decided to:
 
 }
 
-current_step = ['intro']
-previous_step = []
+current_step = [story.intro];
+previous_step = [];
+clue_counter = 0;
+valid = 'Please enter valid option';
 
 
 console.log("hello script js");
@@ -136,21 +144,182 @@ var inputHappened = function(currentInput){
 		return previous_step;
 	};
 
+	if (clue_counter === 3){
+		return story.after_clues;
+	}
+
 	switch (current_step){
-		case 'intro':
-			previous_step = story.intro;
+		case story.intro:
 			if (currentInput === '1'){
+				previous_step = story.intro;
 				return story.endings.one;
 			} else {
+				previous_step = story.intro;
 				return story.sleeping;
 			};
 
-		case `sleeping`:
-			previous_step = story.sleep;
+		case story.sleep:
 			if (currentInput === '1'){
+				previous_step = story.sleep;
 				return story.endings.five;
 			} else {
+				previous_step = story.sleep;
 				return story.bang;
 			};
+
+		case story.bang:
+			if (currentInput === '1'){
+				previous_step = story.bang;
+				return story.balcony;
+			} else {
+				previous_step = story.bang;
+				return story.body;
+			};
+
+		case story.balcony:
+			if (currentInput === '1'){
+				previous_step = story.balcony;
+				return story.body;
+			} else {
+				return valid;
+			};
+
+		case story.body:
+			if (currentInput === '1'){
+				previous_step = story.body;
+				return story.hall_choices;
+			} else {
+				return valid;
+			};
+
+		case story.hall_choices:
+			if (currentInput === '1'){
+				previous_step = story.hall_choices;
+				return story.secondstorey;
+			} else if (currentInput === '2'){
+				previous_step = story.hall_choices;
+				return story.basement;
+			} else if (currentInput === '3'){
+				previous_step = story.hall_choices;
+				return story.interrogate;
+			} else if (currentInput === '4'){
+				previous_step = story.hall_choices;
+				return story.endings.two;
+			} else {
+				return valid;
+			}
+
+		case story.secondstorey:
+			clue_counter++;
+			if (currentInput === '1'){
+				previous_step = story.secondstorey
+				return story.basement;
+			} else if (currentInput === '2'){
+				previous_step = story.secondstorey;
+				return story.interrogate;
+			} else if (currentInput === '3'){
+				previous_step = story.secondstorey;
+				return story.endings.two;
+			} else {
+				return valid;
+			}
+
+		case story.basement:
+			clue_counter++;
+			if (currentInput === '1'){
+				previous_step = story.basement;
+				return story.secondstorey;
+			} else if (currentInput === '2'){
+				previous_step = story.basement;
+				return story.interrogate;
+			} else if (currentInput === '3'){
+				previous_step = story.basement;
+				return story.endings.two;
+			} else {
+				return valid;
+			}
+
+		case story.interrogate:
+			clue_counter++;
+			if (currentInput === '1'){
+				previous_step = story.interrogate;
+				return story.secondstorey;
+			} else if (currentInput === '2'){
+				previous_step = story.interrogate;
+				return story.basement;
+			} else if (currentInput === '3'){
+				previous_step = story.interrogate;
+				return story.endings.two;
+			} else {
+				return valid;
+			}
+
+		case story.after_clues:
+			if (currentInput === '1'){
+				previous_step = story.after_clues;
+				return story.why_wet;
+			} else if (currentInput === '2'){
+				return story.endings.three;
+			} else {
+				return valid;
+			}
+
+		case story.why_wet
+			if (currentInput){
+				return story.hall_explain;
+			}
+
+		case story.hall_explain:
+			if (currentInput === '1'){
+				previous_step = story.hall_explain;
+				return story.endings.four;
+			} else if (currentInput === '2'){
+				previous_step = story.hall_explain;
+				return story.murder_method;
+			} else if (currentInput === '3'){
+				previous_step = story.hall_explain;
+				return story.endings.four;
+			} else {
+				return valid;
+			}
+
+		case story.murder_method:
+			if (currentInput === '1'){
+				previous_step = story.murder_method;
+				return story.endings.four;
+			} else if (currentInput === '2'){
+				previous_step = story.murder_method;
+				return story.endings.four;
+			} else if (currentInput === '3'){
+				previous_step = story.murder_method;
+				return story.doctor;
+			} else if (currentInput === '4'){
+				previous_step = story.murder_method;
+				return story.endings.four;
+			} else {
+				return valid;
+			}
+
+		case story.doctor:
+			if (currentInput === '1'){
+				previous_step = story.doctor;
+				return story.endings.reveal;
+			} else if (currentInput === '2'){
+				previous_step = story.doctor;
+				return story.endings.four;
+			} else if (currentInput === '3'){
+				previous_step = story.doctor;
+				return story.endings.four;
+			} else {
+				return valid;
+			}
+
+		case story.reveal:
+			if (currentInput){
+				return story.conclusion;
+			}
 	}
+}
+
+
 
