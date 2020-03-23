@@ -1,9 +1,10 @@
 console.log("Welcome to The Wall!");
-var outputMessage;
-var inputValue;
-var inputHistory = [];
-var scoreTracker = 0;
+var outputMessage; // Text shown in output window
+var inputValue; // Text inputted by user
+var inputHistory = []; // Tracking all major decisions and progresses the story
+var scoreTracker = 0; // Tracks user score
 
+// Stats for story
 let characterStats = {
     name: "",
     weapon: "",
@@ -11,6 +12,7 @@ let characterStats = {
     opponent: "",
 };
 
+// Stats for battle loop
 let battleStats = {
     heroHP: 8,
     villainHP: 5,
@@ -20,21 +22,25 @@ let battleStats = {
     heroEscape: false,
     criticalHit: false,
 }
+// Game over flag, determines when to end game
 var gameOver = false;
+// Injured flag, determines final story choice
 var injured = false;
 
 
 
 
-initialize();
+initialize(); // Sets all values to default starting
 tagEdit("h3", "Night's Watch Simulator")
 tagEdit("h2", "Story Window:")
 
+// Edits selected tag
 function tagEdit(tag, text) {
     var domSelected = document.getElementsByTagName(tag);
     domSelected[0].innerHTML = text;
 };
 
+// Function that happens on user input
 function inputHappened(currentInput) {
     console.log(currentInput);
     console.log(inputHistory);
@@ -46,6 +52,7 @@ function inputHappened(currentInput) {
     return outputMessage;
 };
 
+// Edits what is shown in output frame
 function display(data) {
     var displayElement = document.querySelector('#output');
 
@@ -56,6 +63,7 @@ function display(data) {
     output.innerText = data;
 };
 
+// Edits input text box placeholder
 function placeHolderEdit(data) {
     var displayElement = document.querySelector('#input');
 
@@ -65,6 +73,7 @@ function placeHolderEdit(data) {
     displayElement.placeholder = data;
 };
 
+// Clears input text box
 function clearInput() {
     var displayElement = document.querySelector('#input');
 
@@ -72,6 +81,7 @@ function clearInput() {
 
 };
 
+// Sets all values to default starting
 function initialize() {
     inputHistory = [];
     display("Oi mate! What's your name?");
@@ -98,10 +108,12 @@ function initialize() {
 
 }
 
+// Name entry
 function enterName(inputName) {
     characterStats.name = inputName;
 }
 
+// Weapon selection
 function enterWeapon(inputWeapon) {
     if (inputWeapon == "1" || inputWeapon.toLowerCase().includes("axe") || inputWeapon.substring(0, 1).toLowerCase() == "a") {
         characterStats.weapon = "Axe";
@@ -115,6 +127,7 @@ function enterWeapon(inputWeapon) {
     }
 }
 
+// Location selection
 function enterLocation(inputLocation) {
     if (inputLocation == "1" || inputLocation.toLowerCase().includes("frost cavern") || inputLocation.substring(0, 1).toLowerCase() == "f") {
         characterStats.location = "Frost Cavern";
@@ -128,6 +141,7 @@ function enterLocation(inputLocation) {
     }
 }
 
+// Opponent generation
 function customEncounter() {
     var location = characterStats.location;
     var randomNumberBetween0and10 = Math.floor(Math.random() * 10);
@@ -159,7 +173,7 @@ function customEncounter() {
     return output;
 }
 
-
+// Initiate battle sequence
 function startBattle() {
     outputMessage = `Your HP: ${battleStats.heroHP} | Enemy HP: ${battleStats.villainHP}\n\n`;
     var inputAction = inputValue;
@@ -183,6 +197,7 @@ function startBattle() {
 
 }
 
+// Individual turn of battle
 function battling(inputAction) {
     inputHistory.pop();
     if (battleStats.heroHP <= 0) battleStats.heroDie = true;
@@ -214,6 +229,7 @@ function battling(inputAction) {
     }
 }
 
+// Generates outcome of battle
 function outcome() {
     var outcome = "";
     if (battleStats.heroWin == true) {
@@ -261,6 +277,7 @@ function outcome() {
     return outcome;
 }
 
+// Determines damage dealt by selected weapon
 function useWeapon() {
     var damage = 0;
     var weapon = characterStats.weapon.toLowerCase();
@@ -275,7 +292,7 @@ function useWeapon() {
         outputMessage += (`You swing your ${weapon} and miss!`);
     }
 }
-
+// Applies strength / weakness
 function weaponEffective() {
     var bonusDamage = 0
     if (characterStats.weapon == "Axe" && characterStats.opponent == "wildlings") {
@@ -312,6 +329,7 @@ function weaponEffective() {
     }
 }
 
+// Determines damage done by arrows
 function shootArrow() {
     var damage = 0;
     var randomNumberBetween0and10 = Math.floor(Math.random() * 10);
@@ -325,12 +343,16 @@ function shootArrow() {
     }
 }
 
+// Determines damage done in enemy turn
 function enemyAttack() {
-    battleStats.heroHP -= 2;
-    return (`The ${characterStats.opponent} attack you dealing 2 damage.`);
+    var damage = 2;
+    damage += critical(2);
+    battleStats.heroHP -= damage;
+    return (`The ${characterStats.opponent} attack you dealing ${damage} damage.`);
 
 }
 
+// Determines chance of escape
 function run() {
     var randomNumberBetween0and10 = Math.floor(Math.random() * 10);
     if (randomNumberBetween0and10 <= 1) {
@@ -342,6 +364,7 @@ function run() {
     }
 }
 
+// Determines critical hit
 function critical(critRatio) {
     var getCrit = 0;
     var randomNumberBetween0and10 = Math.floor(Math.random() * 10);
@@ -356,6 +379,7 @@ function critical(critRatio) {
     return getCrit;
 }
 
+// Prints options based on input history
 function storyProgression(number) {
     switch (number) {
         case 0:
@@ -465,6 +489,7 @@ function storyProgression(number) {
     }
 }
 
+// Builds ascii art from array of lines
 function buildAscii(asciiArt) {
     var output = "";
     asciiArt.forEach(function(element) {
