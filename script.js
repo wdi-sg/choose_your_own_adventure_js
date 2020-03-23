@@ -130,6 +130,11 @@ function enterLocation(inputLocation) {
 
 function customEncounter() {
     var location = characterStats.location;
+    var randomNumberBetween0and10 = Math.floor(Math.random() * 10);
+    if (randomNumberBetween0and10 <= 2) {
+        location = "The Night's King Cometh";
+        gameOver = true;}
+
     var output = "\n";
     switch (location) {
         case "Frost Cavern":
@@ -148,7 +153,7 @@ function customEncounter() {
             output += "You were attacked by a pack of Dire Wolves!";
             break;
         default:
-            output += "The Night King appears and immediately kills you. Game Over!";
+            output += "The Night King appears and immediately kills you.\n\nGame Over! Your Score is 0.";
             break;
     }
     return output;
@@ -186,7 +191,7 @@ function battling(inputAction) {
     if (battleStats.turnToAttack == true) {
         switch (inputAction) {
             case "1":
-                useWeapon(); // statements_1
+                useWeapon();
                 break;
             case "2":
                 shootArrow();
@@ -360,7 +365,7 @@ function storyProgression(number) {
         case 1:
             enterName(inputValue);
             var name = characterStats.name;
-            outputMessage = (`Ah! ${name} is it? You're in Castle Black now!\nGet ready, we're going beyond the wall! Choose a weapon brother!\n`);
+            outputMessage = (`Ah! ${name} is it? You're in Castle Black now!\nGet ready, we're going beyond the wall! \n\nChoose a weapon brother!\n`);
             outputMessage += ("1. Axe\n2. Sword\n3. Hammer")
             placeHolderEdit("Choose a weapon (#)...");
             break;
@@ -369,7 +374,7 @@ function storyProgression(number) {
             var weapon = characterStats.weapon;
             weapon = weapon.toLowerCase();
             if (weapon != "") {
-                outputMessage = (`You seem pretty good with that ${weapon}!\n Let's head out now, where should we patrol?\n`);
+                outputMessage = (`You seem pretty good with that ${weapon}!\n\nLet's head out now, where should we patrol?\n`);
                 outputMessage += ("1. Frost Cavern\n2. Jagged Pass\n3. Desolate Forest")
                 placeHolderEdit("Choose a location (#)...");
             } else {
@@ -386,9 +391,16 @@ function storyProgression(number) {
                 console.log("\n\n1 hour later....");
                 outputMessage += "\n1 hour later...\n";
                 outputMessage += customEncounter();
-                outputMessage += "  What do you do?";
-                outputMessage += ("\n1. Charge & attack head on!\n2. Use bow with flaming arrows!\n3. RUN AWAAAAAYYY!!!!");
+                if(gameOver==false){
+                   outputMessage += "\n\nWhat do you do?";
+                   outputMessage += ("\n1. Charge & attack head on!\n2. Use bow with flaming arrows!\n3. RUN AWAAAAAYYY!!!!");
                 placeHolderEdit("Choose an action (#)...");
+                } else {
+                     outputMessage += "\n\n<< Enter a Name in input to restart >>"
+                placeHolderEdit("Restart...");
+                initialize();
+                }
+
 
             } else {
                 outputMessage = ("Be serious! Where are we going?");
