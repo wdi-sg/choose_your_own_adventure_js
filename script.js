@@ -93,6 +93,7 @@ function initialize() {
         criticalHit: false,
     }
     gameOver = false;
+    scoreTracker = 0;
 
 
 }
@@ -211,33 +212,35 @@ function battling(inputAction) {
 function outcome() {
     var outcome = "";
     if (battleStats.heroWin == true) {
+        scoreTracker += 100
         switch (characterStats.opponent) {
             case "wights":
-                outcome = "You decimated the horde of wights and return to Castle Black."
+                outcome = "You decimated the horde of wights and return to Castle Black.";
                 break;
             case "wildlings":
-                outcome = "You defeated the tribe of wildlings and return to Castle Black."
+                outcome = "You defeated the tribe of wildlings and return to Castle Black.";
                 break;
             case "wolves":
                 outcome = "You slayed the pack of wolves, keeping one as a pet, and return to Castle Black."
-                break;
+                break;;
         }
     } else if (battleStats.heroDie == true) {
         switch (characterStats.opponent) {
             case "wights":
-                outcome = "You couldn't hold the horde back. Overwhelmed by their sheer numbers, you die and join the army of the undead.\n\nGame Over!"
+                outcome = "You couldn't hold the horde back. Overwhelmed by their sheer numbers, you die and join the army of the undead.\n\nGame Over! Your Score is 0."
                 gameOver = true;
                 break;
             case "wildlings":
-                outcome = "The wildlings caught you off guard. You were knocked out and tied up. The wildlings bring you back to their camp as their prisoner.\n\nGame Over!"
+                outcome = "The wildlings caught you off guard. You were knocked out and tied up. The wildlings bring you back to their camp as their prisoner.\n\nGame Over! Your Score is 0."
                 gameOver = true;
                 break;
             case "wolves":
-                outcome = "The wolves were too huge to overcome. You and your troop were ripped limb from limb.\n\nGame Over!"
+                outcome = "The wolves were too huge to overcome. You and your troop were ripped limb from limb.\n\nGame Over! Your Score is 0."
                 gameOver = true;
                 break;
         }
     } else if (battleStats.heroEscape == true) {
+        scoreTracker += 50;
         switch (characterStats.opponent) {
             case "wights":
                 outcome = "You escaped the horde of wights and returned to Castle Black."
@@ -404,7 +407,7 @@ function storyProgression(number) {
 
             break;
         case 5:
-        var outcome;
+            var outcome;
             inputHistory.pop();
             if (injured == false) {
                 outputMessage = "You return to Castle Black, victorious.";
@@ -422,14 +425,20 @@ function storyProgression(number) {
             if (injured == false) {
                 if (inputValue == "1") {
                     outputMessage = "You partied too hard, got so drunk... and later that night fell off the roof. You Died.\n\nGame Over!";
+                    outputMessage += ` Your Score is ${scoreTracker}.`;
                 } else if (inputValue == "2") {
+                    scoreTracker += 1000;
                     outputMessage = "You rest after a tough day. \nYears passed and you eventually become the Lord Commander of the Night's Watch and die of old age.\n\nGame Over!";
+                    outputMessage += ` Your Score is ${scoreTracker}.`;
                 }
             } else if (injured == true) {
                 if (inputValue == "1") {
                     outputMessage = "The Night King raises you from the dead beyond the walls! You start attacking your fellow brothers and one by one they fall.\n\nGame Over!";
+                    outputMessage += ` Your Score is ${scoreTracker}.`;
                 } else if (inputValue == "2") {
+                    scoreTracker += 1000;
                     outputMessage = "The fire restores your strength. Surprise! You're now immortal and have magic powers. Nice.\n\nGame Over!";
+                    outputMessage += ` Your Score is ${scoreTracker}.`
                 }
             }
             gameOver = true;
