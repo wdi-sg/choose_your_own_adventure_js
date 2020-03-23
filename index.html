@@ -4,9 +4,8 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h3>DOM Manipulation Template</h3>
-    <input class="starter" id="input" placeholder="input"/>
-    <h2>output:</h2>
+    <h3>The Witcher - <b>Dragon Ball Edition</b></h3>
+    <input class="starter" id="input" placeholder=""/>
     <div class="starter" id="output"></div>
     <script>
 
@@ -17,7 +16,7 @@
         displayElement.innerHTML = "";
 
         // put the data into the div
-        output.innerText = data;
+        output.innerHTML = data;
       };
 
       document.querySelector('#input').addEventListener('change', function(event){
@@ -26,6 +25,7 @@
         display( result );
       });
     </script>
+    <script src="plots.js"></script>
     <script src="script.js" charset="utf-8"></script>
   </body>
 </html>
