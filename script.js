@@ -49,6 +49,7 @@ const chanceMaker = (lowerLimit, upperLimit, windowSize) => {
   return randomNum > leftWindowLimit && randomNum < rightWindowLimit;
 };
 
+const IS_FIXED_CHOICE = 0;
 let currPlot = null;
 let currStory = null;
 let currChoices = [];
@@ -60,7 +61,7 @@ let plots = null;
 let ballsCollected = 0;
 document.getElementById("output").innerHTML = coverStory;
 const setHtml = (html) => document.getElementById("out").innerHTML = html;
-const getChoicesStr = (plots, choices) => {
+const setChoicesStr = (plots, choices) => {
   let choiceStr = "";
   for (let i = 0; i < choices.length; i++) {
     // first one is always fixed choice
@@ -76,7 +77,7 @@ const getChoicesStr = (plots, choices) => {
 const getPlot = (plots, userChoice, currentChoices) => {
   console.log(`current choices are: ${currentChoices}`);
   console.log("user choice is " + currentChoices[userChoice]);
-  return plots.getPlotById(currentChoices[userChoice]);
+  return plots.getPlotById(currentChoices[userChoice][1]);
 };
 const inputHappened = function (currentInput) {
   console.log("round is :" + round);
@@ -96,7 +97,7 @@ const inputHappened = function (currentInput) {
     currPlot = plots.getRandomPlot();
     currChoices = currPlot.getAllChoices();
     currStory= currPlot.story;
-    currChoicesStr = getChoicesStr(plots, currChoices);
+    currChoicesStr = setChoicesStr(plots, currChoices);
     clearInput();
     round++;
     return `${currStory} <br><hr>\n ${currChoicesStr}`;
@@ -104,15 +105,20 @@ const inputHappened = function (currentInput) {
 
   // starting from round 2, user choices are going to be based on choice
   // todo: move all these into Plot objects
-  // set current plot
   userChoiceId = parseInt(currentInput);
-  console.log(userChoiceId);
-  currPlot = plots.getPlotById(currChoices[userChoiceId][1]);
+
+  // user choose fixed choice
+  if (userChoiceId === IS_FIXED_CHOICE) {
+    let fixedResponse = currChoices[0].get('response');
+    currStory = `${currStory} <br> <hr> ${fixedResponse} <br>`;
+    currChoicesStr = setChoicesStr(plots, currChoices);
+    return `${currStory} <br><hr>\n ${currChoicesStr}`;
+  }
+
+  currPlot = getPlot(plots, userChoiceId, currChoices);
   currStory = currPlot.story;
   currChoices = currPlot.getAllChoices();
-  currChoicesStr = getChoicesStr(plots,currChoices);
-
-
+  currChoicesStr = setChoicesStr(plots,currChoices);
 
   // // set next story to be
   // if (parseInt(currentInput) === 0) {
