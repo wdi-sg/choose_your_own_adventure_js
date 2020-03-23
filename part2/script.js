@@ -39,7 +39,7 @@ var dexterityStatus;
 var intIndex;
 var currentInt;
 
-var regex = RegExp(/[a-z]/i);
+var regex = RegExp(/[a-c]/i);
 
 var displayActions = () => {
     isAtActions = true;
@@ -195,6 +195,10 @@ coworkers.push(amy, charles, gina, terry, rosa, raymond, hitchcock, scully);
     }
 
 //Game mechanics:
+var loadHandler = () => {
+    display(newGameReset());
+}
+
 var display = function( data ){
   var displayElement = document.querySelector('#output');
 
@@ -361,3 +365,5 @@ var inputHappened = function(currentInput){
             return perpPath();
         }
 };
+
+loadHandler();
