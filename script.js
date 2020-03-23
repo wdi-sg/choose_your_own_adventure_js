@@ -66,7 +66,7 @@ You decided to:
 
 	1) Investigate the second storey.
 	2) Interrogate everybody.
-	3) Investigate outside the mansion.`
+	3) Investigate outside the mansion.`,
 
 	interrogate : `You ask everyone if they have noticed anything suspicious during the night. Everyone responds saying they have returned to their bedrooms after the party and have not seen anything weird. This means that even if the businessman is murdered, he was killed silently without any struggle.
 
@@ -264,7 +264,7 @@ var inputHappened = function(currentInput){
 				return valid;
 			}
 
-		case story.why_wet
+		case story.why_wet:
 			if (currentInput){
 				return story.hall_explain;
 			}
