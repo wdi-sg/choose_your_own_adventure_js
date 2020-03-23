@@ -86,18 +86,16 @@ const inputHappened = function (currentInput) {
   if (gameHasStarted && round === 1) {
     setPrompt("Press enter any key to continue ...");
     round++;
-    clearInput();
     nextPlot = plots.getRandomPlot();
     nextChoices = nextPlot.getAllChoices();
+    clearInput();
     return setIntro(userName);
   }
 
-  clearInput();
-
   currPlot = nextPlot;
   currChoices = nextChoices;
-  nextPlot = plots.getPlotById( currChoices[  parseInt(currentInput)][1] );
-  nextChoices = nextPlot.getAllChoices();
+  currStory= currPlot.story;
+  currChoicesStr = getChoicesStr(plots, currChoices);
   // // set next story to be
   // if (parseInt(currentInput) === 0) {
   //   // currPlot remains the same
@@ -107,6 +105,7 @@ const inputHappened = function (currentInput) {
   //   nextStory = `${currStory} <br> ${currChoices[0].get('response')}`;
   // }
   round++;
+  clearInput();
   return `${currStory} <br><hr>\n ${currChoicesStr}`;
 
 };
