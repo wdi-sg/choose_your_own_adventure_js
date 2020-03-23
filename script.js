@@ -156,7 +156,7 @@ function customEncounter() {
 
 
 function startBattle() {
-    outputMessage = "";
+    outputMessage = `Your HP: ${battleStats.heroHP} | Enemy HP: ${battleStats.villainHP}\n\n`;
     var inputAction = inputValue;
     if (battleStats.heroDie == false || battleStats.heroWin == false || battleStats.heroEscape == false) {
         battling(inputAction);
