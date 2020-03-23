@@ -1,31 +1,34 @@
 <html>
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <h3>DOM Manipulation Template</h3>
-    <input class="starter" id="input" placeholder="input"/>
-    <h2>output:</h2>
-    <div class="starter" id="output"></div>
-    <script>
 
-      var display = function( data ){
-        var displayElement = document.querySelector('#output');
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
+</head>
 
-        // get rid of the entire contents
-        displayElement.innerHTML = "";
+<body>
+  <h3>DOM Manipulation Template</h3>
+  <input class="starter" id="input" placeholder="What is your name?" />
+  <h2>output:</h2>
+  <div class="starter" id="output"></div>
+  <script>
 
-        // put the data into the div
-        output.innerText = data;
-      };
+    var display = function (data) {
+      var displayElement = document.querySelector('#output');
 
-      document.querySelector('#input').addEventListener('change', function(event){
-        var currentInput = event.target.value;
-        var result = inputHappened(currentInput)
-        display( result );
-      });
-    </script>
-    <script src="script.js" charset="utf-8"></script>
-  </body>
+      // get rid of the entire contents
+      displayElement.innerHTML = "";
+
+      // put the data into the div
+      output.innerText = data;
+    };
+
+    document.querySelector('#input').addEventListener('change', function (event) {
+      var currentInput = event.target.value;
+      var result = inputHappened(currentInput)
+      display(result);
+    });
+  </script>
+  <script src="script.js" charset="utf-8"></script>
+</body>
+
 </html>
