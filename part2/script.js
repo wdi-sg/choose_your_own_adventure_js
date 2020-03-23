@@ -4,20 +4,27 @@
 var input = document.getElementById("input");
 input.setAttribute("maxlength", "1");
 
-
 var daysLeft = 7;
 var hoursCounter = 0;
 
+    //User character
+var jakePeralta = {
+    stamina: 100,
+    dexterity: 10,
+}
+
 var gameScore = 0;
 var scoreBoard = document.createElement("div");
-scoreBoard.innerText = `Score: ${gameScore}`
-scoreBoard.style["width"] = "5rem";
-scoreBoard.style["height"] = "5rem";
+scoreBoard.innerText = `Score: ${gameScore}\nStamina: ${jakePeralta.stamina}\n Dexterity: ${jakePeralta.dexterity}`
+scoreBoard.style["width"] = "7rem";
+scoreBoard.style["height"] = "4rem";
 scoreBoard.style["border"] = "3px solid red";
 scoreBoard.style["margin-left"] = "40px";
 scoreBoard.style["position"] = "fixed";
 scoreBoard.style["top"] = "20px";
 scoreBoard.style["right"] = "10px";
+scoreBoard.style["text-align"] = "center";
+scoreBoard.style["padding-top"] = "4px";
 document.body.appendChild(scoreBoard);
 
 var gameStarted = false;
@@ -28,11 +35,11 @@ var finishedInt = false;
 var displayOutput = "";
 var characterIndex;
 var characterInPlay;
+var dexterityStatus;
 var intIndex;
 var currentInt;
 
 var regex = RegExp(/[a-z]/i);
-
 
 var displayActions = () => {
     isAtActions = true;
@@ -44,7 +51,7 @@ var displayActions = () => {
 var newGameReset = () => {
     gameScore = 0;
     jakePeralta.stamina = 100;
-    jakePeralta.dexterity = 0;
+    jakePeralta.dexterity = 10;
     displayOutput = "Welcome to this game. You are Jake Peralta, a talented but exceedingly immature detective in the NYPD. Interact with your fellow detectives and coworkers to gain stat boosts, or go out to the field and catch some perps!";
     var startButton = document.createElement("button");
     startButton.innerText = "Start!"
@@ -59,12 +66,6 @@ var newGameReset = () => {
     input.style["display"] = "none";
     return displayOutput;
     }
-
-//User character
-var jakePeralta = {
-    stamina: 100,
-    dexterity: 10,
-}
 
 //Questions
 var createQuestion = question => `\n${question}\n`;
@@ -222,7 +223,7 @@ var inputHappened = function(currentInput){
 
     var workACase = () => {
         hoursCounter = hoursCounter + 2
-        return `Alright! Let's go stake out some perps... \nYou wait patiently in your car some distance away... \nAlas, the perp sees you! \n (*This feature has not been completed yet.)`
+        return `Alright! Let's go stake out some perps... \nYou wait patiently in your car some distance away... \nAlas, the perp sees you! \n\nWhat do you do?\n(a) Run away!\n(b) Chase after him!\n(c) Slowly approach him...`
     }
 
     var actionsPath = () => {
@@ -237,7 +238,7 @@ var inputHappened = function(currentInput){
             if (isWithCoworker) {
                 display(coworkerPath());
             } else if (isWithPerp) {
-                display(perpPath());
+                return perpPath();
             }
         })
 
@@ -254,6 +255,8 @@ var inputHappened = function(currentInput){
                 return hangOutAtBar();
                 break;
             case 'c':
+                input.style["display"] = "inline";
+                document.body.removeChild(proceedButton);
                 isWithPerp = true;
                 return workACase();
                 break;
@@ -296,30 +299,65 @@ var inputHappened = function(currentInput){
 
     var perpPath = () => {
         finishedInt = true;
-            var backButton = document.createElement("button");
-            backButton.innerText = "go back!"
-            backButton.style["margin-left"] = "40px";
-            backButton.style["font-size"] = "1.6rem";
-            backButton.addEventListener("click", () => {
-                document.body.removeChild(backButton);
-                displayActions();
-            })
-            document.body.appendChild(backButton);
-            input.style["display"] = "none";
-            return displayOutput;
-        return "(*This feature has not been completed yet. Wait la.)"
+        var backButton = document.createElement("button");
+        backButton.innerText = "go back!"
+        backButton.style["margin-left"] = "40px";
+        backButton.style["font-size"] = "1.6rem";
+        backButton.addEventListener("click", () => {
+            document.body.removeChild(backButton);
+            displayActions();
+        })
+        document.body.appendChild(backButton);
+        input.style["display"] = "none";
+
+        var runAway = () => {
+            displayActions();
+        }
+
+        var chaseAfter = () => {
+
+        }
+
+        var slowlyApproach = () => {
+            dexterityStatus = jakePeralta.dexterity *(Math.ceil(Math.random() * 10) - 1);
+            if (dexterityStatus > 40){
+                jakePeralta.stamina = jakePeralta.stamina - 1;
+                gameScore = gameScore + 20;
+                scoreBoard.innerText = `Score: ${gameScore}\nStamina: ${jakePeralta.stamina}\n Dexterity: ${jakePeralta.dexterity}`
+                return `You slowly approach the perp. You are dexterous enough to apprehend him even as he struggles. Well done!`
+            } else {
+                jakePeralta.stamina = jakePeralta.stamina - 10;
+                scoreBoard.innerText = `Score: ${gameScore}\nStamina: ${jakePeralta.stamina}\n Dexterity: ${jakePeralta.dexterity}`
+                return `You slowly approach the perp. Unfortunately, he gets the better of you and escapes!`
+            }
+        }
+
+        switch (currentInput.toLowerCase()) {
+            case 'a':
+                return runAway();
+                break;
+            case 'b':
+                isWithCoworker = true;
+                return chaseAfter();
+                break;
+            case 'c':
+                isWithPerp = true;
+                console.log("test");
+                return slowlyApproach();
+                break;
+        }
     }
 
     if (gameStarted === false) {
-        return newGameReset();
-    } else if (isAtActions) {
-        isAtActions = false;
-        return actionsPath();
-    } else if (isWithCoworker) {
-        isWithCoworker = false;
-        return interactionsPath();
-    } else if (isWithPerp) {
-        isWithPerp = false;
-        return;
-    }
+            return newGameReset();
+        } else if (isAtActions) {
+            isAtActions = false;
+            return actionsPath();
+        } else if (isWithCoworker) {
+            isWithCoworker = false;
+            return interactionsPath();
+        } else if (isWithPerp) {
+            isWithPerp = false;
+            return perpPath();
+        }
 };
