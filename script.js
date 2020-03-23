@@ -200,6 +200,7 @@ function startBattle() {
 // Individual turn of battle
 function battling(inputAction) {
     inputHistory.pop();
+
     if (battleStats.heroHP <= 0) battleStats.heroDie = true;
     if (battleStats.villainHP <= 0) battleStats.heroWin = true;
     battleStats.turnToAttack = !battleStats.turnToAttack;
@@ -222,7 +223,7 @@ function battling(inputAction) {
         outputMessage += "\n\n<< Enter anything in input to continue >>"
         placeHolderEdit("Continue...");
     } else if (battleStats.turnToAttack == false) {
-        outputMessage = enemyAttack();
+        enemyAttack();
         outputMessage += "\n\nWhat do you do next?"
         outputMessage += ("\n1. Charge & attack head on!\n2. Use bow with flaming arrows!\n3. RUN AWAAAAAYYY!!!!");
         placeHolderEdit("Choose an action (#)...");
@@ -345,10 +346,10 @@ function shootArrow() {
 
 // Determines damage done in enemy turn
 function enemyAttack() {
-    var damage = 2;
+    var damage = 1;
     damage += critical(2);
     battleStats.heroHP -= damage;
-    return (`The ${characterStats.opponent} attack you dealing ${damage} damage.`);
+    outputMessage += (`The ${characterStats.opponent} attack you dealing ${damage} damage.`);
 
 }
 
