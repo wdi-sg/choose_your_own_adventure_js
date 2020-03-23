@@ -111,14 +111,17 @@ function customEncounter() {
     switch (location) {
         case "Frost Cavern":
             characterStats.opponent = "wights";
+            buildAscii(asciiZombie);
             output += "You encountered a horde of Wights!";
             break;
         case "Jagged Pass":
             characterStats.opponent = "wildlings";
+            buildAscii(asciiBarbarian);
             output += "You were ambushed by a tribe of Wildlings!";
             break;
         case "Desolate Forest":
             characterStats.opponent = "wolves";
+            buildAscii(asciiWolf);
             output += "You were attacked by a pack of Dire Wolves!";
             break;
         default:
@@ -128,54 +131,97 @@ function customEncounter() {
     return output;
 }
 
-function attackOptions(input) {
-    var weapon = characterStats.weapon;
-    var output = "\n";
-    input = input.parseInt();
-    switch (input) {
-        case 1:
-            characterStats.opponent = "wights";
-            output += "You encountered a horde of Wights!";
-            break;
-        case 2:
-            characterStats.opponent = "wildlings";
-            output += "You were ambushed by a tribe of Wildlings!";
-            break;
-        case 3:
-            characterStats.opponent = "wolves";
-            output += "You were attacked by a pack of Dire Wolves!";
-            break;
-        default:
-
-            break;
-    }
-    return output;
-}
 
 function startBattle() {
-    var weapon = characterStats.weapon;
-    var opponent = characterStats.opponent;
+    outputMessage = "";
+    var inputAction = inputValue;
+    if (battleStats.heroDie == false || battleStats.heroWin == false || battleStats.heroEscape == false) {
+        battling(inputAction);
+    }
+    if (battleStats.heroDie == true || battleStats.heroWin == true || battleStats.heroEscape == true) {
+        outputMessage = outcome();
+    }
+
+}
+
+function battling(inputAction) {
+    inputHistory.pop();
     if (battleStats.heroHP <= 0) battleStats.heroDie = true;
     if (battleStats.villainHP <= 0) battleStats.heroWin = true;
-    while (battleStats.heroDie == false || battleStats.heroWin == true || battleStats.heroEscape == true) {
+    battleStats.turnToAttack = !battleStats.turnToAttack;
+    if (battleStats.turnToAttack == true) {
+        switch (inputAction) {
+            case "1":
+                useWeapon(); // statements_1
+                break;
+            case "2":
+                shootArrow();
+                break;
+            case "3":
+                run();
+                break;
+            default:
+                console.log("Invalid action");
+                break;
+        }
+    } else if (battleStats.turnToAttack == false) {
+        outputMessage = enemyAttack();
 
     }
 }
 
-function battling() {
-
-
+function outcome() {
+    var outcome = "";
+    if (battleStats.heroWin == true) {
+        switch (characterStats.opponent) {
+            case "wights":
+                outcome = "You decimated the horde of wights and return to Castle Black."
+                break;
+            case "wildlings":
+                outcome = "You defeated the tribe of wildlings and return to Castle Black."
+                break;
+            case "wolves":
+                outcome = "You slayed the pack of wolves, keeping one as a pet, and return to Castle Black."
+                break;
+        }
+    } else if (battleStats.heroDie == true) {
+        switch (characterStats.opponent) {
+            case "wights":
+                outcome = "You couldn't hold the horde back. Overwhelmed by their sheer numbers, you die and join the army of the undead.\n\nGame Over!"
+                break;
+            case "wildlings":
+                outcome = "The wildlings caught you off guard. You were knocked out and tied up. The wildlings bring you back to their camp as their prisoner.\n\nGame Over!"
+                break;
+            case "wolves":
+                outcome = "The wolves were too huge to overcome. You and your troop were ripped limb from limb.\n\nGame Over!"
+                break;
+        }
+    } else if (battleStats.heroEscape == true) {
+        switch (characterStats.opponent) {
+            case "wights":
+                outcome = "You escaped the horde of wights and returned to Castle Black."
+                break;
+            case "wildlings":
+                outcome = "You escaped the tribe of wildlings and returned to Castle Black."
+                break;
+            case "wolves":
+                outcome = "You escaped the wolves and returned to Castle Black."
+                break;
+        }
+    }
+    return outcome;
 }
 
 function useWeapon() {
     var damage = 0;
+    var weapon = characterStats.weapon.toLowerCase();
     var randomNumberBetween0and10 = Math.floor(Math.random() * 10);
     if (randomNumberBetween0and10 <= 8) {
         damage += 2;
         damage += weaponEffective();
         damage += critical(5)
         battleStats.villainHP -= damage;
-        console.log(`Dealt ${damage} damage`)
+        outputMessage += (`You swing your ${weapon} dealing ${damage} damage`);
     } else {
         battleStats.heroEscape = false;
     }
@@ -185,27 +231,33 @@ function weaponEffective() {
     var bonusDamage = 0
     if (characterStats.weapon == "Axe" && characterStats.opponent == "wildlings") {
         bonusDamage = 1;
+        outputMessage+= "Bonus damage from effective weapon";
         return bonusDamage
     } else if (characterStats.weapon == "Axe" && characterStats.opponent == "wights") {
         bonusDamage = -1;
+        outputMessage+= "Reduced damage from ineffective weapon";
         return bonusDamage
     } else if (characterStats.weapon == "Sword" && characterStats.opponent == "wolves") {
         bonusDamage = 1;
+        outputMessage+= "Bonus damage from effective weapon";
         return bonusDamage
 
     } else if (characterStats.weapon == "Sword" && characterStats.opponent == "wildlings") {
         bonusDamage = -1;
+        outputMessage+= "Reduced damage from ineffective weapon";
         return bonusDamage
 
     } else if (characterStats.weapon == "Hammer" && characterStats.opponent == "wights") {
         bonusDamage = 1;
+        outputMessage+= "Bonus damage from effective weapon";
         return bonusDamage
 
     } else if (characterStats.weapon == "Hammer" && characterStats.opponent == "wolves") {
         bonusDamage = -1;
+        outputMessage+= "Reduced damage from ineffective weapon";
         return bonusDamage
 
-    } else{
+    } else {
         bonusDamage = 0;
         return bonusDamage;
     }
@@ -216,27 +268,28 @@ function shootArrow() {
     var randomNumberBetween0and10 = Math.floor(Math.random() * 10);
     if (randomNumberBetween0and10 <= 6) {
         damage += 1;
-        damage += critical(3)
+        damage += critical(3);
         battleStats.villainHP -= damage;
-        console.log(`Dealt ${damage} damage`)
+        outputMessage += (`You shoot flaming arrows dealing ${damage} damage.`)
     } else {
-        battleStats.heroEscape = false;
+        outputMessage += (`Your arrows missed!`)
     }
 }
 
 function enemyAttack() {
-    battleStats.heroHP -= 1;
+    battleStats.heroHP -= 2;
+    return (`The ${characterStats.opponent} attack you dealing 2 damage.`);
+
 }
 
 function run() {
     var randomNumberBetween0and10 = Math.floor(Math.random() * 10);
-    var randomNumberBetween0and10 = Math.floor(Math.random() * 10);
     if (randomNumberBetween0and10 <= 6) {
         battleStats.heroEscape = true;
-        console.log("Managed to escape!")
+        outputMessage = ("Managed to escape!")
     } else {
         battleStats.heroEscape = false;
-        console.log("Couldn't escape!")
+        outputMessage = ("Couldn't escape!")
     }
 }
 
@@ -246,7 +299,8 @@ function critical(critRatio) {
     if (randomNumberBetween0and10 <= critRatio) {
         getCrit = 2;
         criticalHit = true;
-        console.log("Critical Hit!")
+        outputMessage = ("Critical Hit!\n")
+        console.log("Critical Hit!\n")
     } else {
         criticalHit = false;
     }
@@ -280,7 +334,8 @@ function storyProgression(number) {
             var location = characterStats.location;
             if (location != "") {
                 outputMessage = (`Alright, we are heading out to the ${location}!\n`);
-                buildAscii(asciiZombie);
+                buildAscii(asciiHorse);
+                console.log("\n\n1 hour later....");
                 outputMessage += "\n1 hour later...\n";
                 outputMessage += customEncounter();
                 outputMessage += "  What do you do?";
@@ -292,20 +347,14 @@ function storyProgression(number) {
                 outputMessage += ("\n1. Frost Cavern\n2. Jagged Pass\n3. Desolate Forest")
             }
             break;
-        case 4:
-            enterLocation(inputValue);
-            var location = characterStats.location;
-            if (location != "") {
-                outputMessage = (`Alright, we are heading out to the ${location}!\n`);
-                outputMessage += buildAscii(asciiZombie);
 
-                placeHolderEdit("Choose a location...");
-            } else {
-                outputMessage = ("Be serious! Where are we going?");
-                outputMessage += ("\n1. Frost Cavern\n2. Jagged Pass\n3. Desolate Forest")
-            }
+            case 4:
+            startBattle();
+
             break;
+
         default:
+            inputHistory.pop();
             alert("Path not written yet")
             break;
     }
