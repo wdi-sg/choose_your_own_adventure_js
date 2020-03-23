@@ -11,8 +11,12 @@
     <script>
       document.querySelector('#input').addEventListener('change', function(event){
         var currentInput = event.target.value;
-        var result = inputHappened(currentInput)
-        display( result );
+        if (!regex.test(currentInput)) {
+            alert `Please enter only a, b or c`;
+        } else {
+            var result = inputHappened(currentInput)
+            display( result );
+        }
       });
     </script>
     <script src="script.js" charset="utf-8"></script>

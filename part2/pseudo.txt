@@ -1,0 +1,27 @@
+Game Summary:
+1. Play as Jake Peralta, the infantile but talented detective protagonist from Brooklyn 99!
+
+2. Characters
+	2a. Colleagues/Friends:
+		2a.1: Charles Boyle;
+		2a.2: Amy Santiago;
+		2a.3: Charles Boyle;
+		2a.4: Gina Linetti;
+		2a.5: Raymond Holt;
+		2a.6: Hitchcock;
+		2a.7: Scully;
+		2a.8: Terry Jeffords
+
+	2b. Perps/Villains:
+		2b.1: Random perp:
+		2b.2: Pontiac Bandit
+
+3. Game Mechanics:
+	3a. Jake has 24 hours a day. He can choose to (1) work a case; (2) hang out in the office; (3) go to the bar (Shaw's); (4) rest. Working a case will bring Jake face to face with Perp/Villain. Arresting perp and villain will add to your score. Allowing them to escape will subtract from your score. Hanging out in the office and going to the bar will allow Jake to meet different colleagues/friends. Resting will recharge Jake's health. At the end of the week, your score will be tallied and you will be given a corresponding rank.
+
+	3b. When meeting colleagues/friends, Jake is given a situation, then faced with 3 options. Choosing different options yields different effects on Jake's parameters.
+
+	3c. Jake's parameters:
+		3c1. Health - this can be affected both positively and adversely by interactions with colleagues and friends. Only affected negatively by perps and villains. Once health is 0 you will lose the game.
+		3c2. Dexterity - this will affect your chance of arresting the perps, as well as the chance of getting attacked by perps. Can be increased or decreased from various interactions.
+		3c3. Score - arresting perps will add to score score. Letting escape reduces score. Element of randomness here because all perps should give same score (except Pontiac Bandit) but they have different (somewhat randomised) difficulties.
