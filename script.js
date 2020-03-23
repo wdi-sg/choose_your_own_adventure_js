@@ -17,7 +17,7 @@ You decided to:
 		five : `You pretended to be asleep. When you wake up, you found the police here and the businessman dead. The police declared the whole incident a suicide. You left the mansion with great sadness. <END>.`
 	},
 
-	sleeping: `You entered the huge mansion, situated in the middle of the wilderness. You know that the businessman lives in this secluded place together with his wife, two year old kid, the butler and a female housekeeper. After dinner and many rounds of alcohol, the businessman invited everyone to stay the night since it is turning late, and there is no street lighting along the way road leading to the city. You accepted the request and soon fall asleep. In the middle of the night, you heard a knock. 
+	sleep: `You entered the huge mansion, situated in the middle of the wilderness. You know that the businessman lives in this secluded place together with his wife, two year old kid, the butler and a female housekeeper. After dinner and many rounds of alcohol, the businessman invited everyone to stay the night since it is turning late, and there is no street lighting along the way road leading to the city. You accepted the request and soon fall asleep. In the middle of the night, you heard a knock. 
 
 	You decided to:
 
@@ -131,16 +131,23 @@ You decided to:
 
 }
 
+output.innerText = story.intro;
 current_step = [story.intro];
 previous_step = [];
 clue_counter = 0;
-valid = 'Please enter valid option';
+valid = 'Please enter valid option. Type back to go back.';
+
+const clearinput = function(){
+	document.querySelector('#input').value = "";
+}
 
 
 console.log("hello script js");
 
 var inputHappened = function(currentInput){
 	if (currentInput === 'back'){
+		clearinput();
+		current_step = previous_step;
 		return previous_step;
 	};
 
@@ -148,178 +155,270 @@ var inputHappened = function(currentInput){
 		return story.after_clues;
 	}
 
-	switch (current_step){
-		case story.intro:
-			if (currentInput === '1'){
-				previous_step = story.intro;
-				return story.endings.one;
-			} else {
-				previous_step = story.intro;
-				return story.sleeping;
-			};
+	if (current_step == story.intro){
+		if (currentInput === '1'){
+			previous_step = story.intro;
+			current_step = story.endings.one;
+			clearinput();
+			return current_step;
+		} else {
+			previous_step = story.intro;
+			current_step = story.sleep;
+			clearinput();
+			return current_step;
+		};
+	};
 
-		case story.sleep:
-			if (currentInput === '1'){
-				previous_step = story.sleep;
-				return story.endings.five;
-			} else {
-				previous_step = story.sleep;
-				return story.bang;
-			};
+	if (current_step == story.sleep){
+		if (currentInput === '1'){
+			previous_step = story.sleep;
+			current_step = story.endings.five;
+			clearinput();
+			return current_step;
+		} else {
+			previous_step = story.sleep;
+			current_step = story.bang;
+			clearinput();
+			return current_step;
+		};
+	};	
 
-		case story.bang:
-			if (currentInput === '1'){
-				previous_step = story.bang;
-				return story.balcony;
-			} else {
-				previous_step = story.bang;
-				return story.body;
-			};
+	if (current_step == story.bang){
+		if (currentInput === '1'){
+			previous_step = story.bang;
+			current_step = story.balcony;
+			clearinput();
+			return current_step;
+		} else {
+			previous_step = story.bang;
+			current_step = story.body;
+			clearinput();
+			return current_step;
+		};
+	};
 
-		case story.balcony:
-			if (currentInput === '1'){
-				previous_step = story.balcony;
-				return story.body;
-			} else {
-				return valid;
-			};
+	if (current_step == story.balcony){
+		if (currentInput === '1'){
+			previous_step = story.balcony;
+			current_step = story.body;
+			clearinput();
+			return current_step;
+		} else {
+			clearinput();
+			return valid;
+		};
+	};
 
-		case story.body:
-			if (currentInput === '1'){
-				previous_step = story.body;
-				return story.hall_choices;
-			} else {
-				return valid;
-			};
+	if (current_step == story.body){
+		if (currentInput === '1'){
+			previous_step = story.body;
+			current_step = story.hall_choices;
+			clearinput();
+			return current_step;
+		} else {
+			clearinput();
+			return valid;
+		};
+	};
 
-		case story.hall_choices:
-			if (currentInput === '1'){
-				previous_step = story.hall_choices;
-				return story.secondstorey;
-			} else if (currentInput === '2'){
-				previous_step = story.hall_choices;
-				return story.basement;
-			} else if (currentInput === '3'){
-				previous_step = story.hall_choices;
-				return story.interrogate;
-			} else if (currentInput === '4'){
-				previous_step = story.hall_choices;
-				return story.endings.two;
-			} else {
-				return valid;
-			}
+	if (current_step == story.hall_choices){
+		if (currentInput === '1'){
+			previous_step = story.hall_choices;
+			current_step = story.secondstorey;
+			clearinput();
+			return current_step;
+		} else if (currentInput === '2'){
+			previous_step = story.hall_choices;
+			current_step = story.basement;
+			clearinput();
+			return current_step;
+		} else if (currentInput === '3'){
+			previous_step = story.hall_choices;
+			current_step = story.interrogate;
+			clearinput();
+			return current_step;
+		} else if (currentInput === '4'){
+			previous_step = story.hall_choices;
+			current_step = story.endings.two;
+			clearinput();
+			return current_step;
+		} else {
+			clearinput();
+			return valid;
+		};
+	};
 
-		case story.secondstorey:
-			clue_counter++;
-			if (currentInput === '1'){
-				previous_step = story.secondstorey
-				return story.basement;
-			} else if (currentInput === '2'){
-				previous_step = story.secondstorey;
-				return story.interrogate;
-			} else if (currentInput === '3'){
-				previous_step = story.secondstorey;
-				return story.endings.two;
-			} else {
-				return valid;
-			}
+	if (current_step == story.secondstorey){
+		clue_counter++;
+		if (currentInput === '1'){
+			previous_step = story.secondstorey
+			current_step = story.basement;
+			clearinput();
+			return current_step;
+		} else if (currentInput === '2'){
+			previous_step = story.secondstorey;
+			current_step = story.interrogate;
+			clearinput();
+			return current_step;
+		} else if (currentInput === '3'){
+			previous_step = story.secondstorey;
+			current_step = story.endings.two;
+			clearinput();
+			return current_step;
+		} else {
+			clearinput();
+			return valid;
+		};
+	};
 
-		case story.basement:
-			clue_counter++;
-			if (currentInput === '1'){
-				previous_step = story.basement;
-				return story.secondstorey;
-			} else if (currentInput === '2'){
-				previous_step = story.basement;
-				return story.interrogate;
-			} else if (currentInput === '3'){
-				previous_step = story.basement;
-				return story.endings.two;
-			} else {
-				return valid;
-			}
+	if (current_step == story.basement){
+		clue_counter++;
+		if (currentInput === '1'){
+			previous_step = story.basement;
+			current_step = story.secondstorey;
+			clearinput();
+			return current_step;
+		} else if (currentInput === '2'){
+			previous_step = story.basement;
+			current_step = story.interrogate;
+			clearinput();
+			return current_step;
+		} else if (currentInput === '3'){
+			previous_step = story.basement;
+			current_step = story.endings.two;
+			clearinput();
+			return current_step;
+		} else {
+			clearinput();
+			return valid;
+		};
+	};
 
-		case story.interrogate:
-			clue_counter++;
-			if (currentInput === '1'){
-				previous_step = story.interrogate;
-				return story.secondstorey;
-			} else if (currentInput === '2'){
-				previous_step = story.interrogate;
-				return story.basement;
-			} else if (currentInput === '3'){
-				previous_step = story.interrogate;
-				return story.endings.two;
-			} else {
-				return valid;
-			}
+	if (current_step == story.interrogate){
+		clue_counter++;
+		if (currentInput === '1'){
+			previous_step = story.interrogate;
+			current_step = story.secondstorey;
+			clearinput();
+			return current_step;
+		} else if (currentInput === '2'){
+			previous_step = story.interrogate;
+			current_step = story.basement;
+			clearinput();
+			return current_step;
+		} else if (currentInput === '3'){
+			previous_step = story.interrogate;
+			current_step = story.endings.two;
+			clearinput();
+			return current_step;
+		} else {
+			clearinput();
+			return valid;
+		};
+	};
 
-		case story.after_clues:
-			if (currentInput === '1'){
-				previous_step = story.after_clues;
-				return story.why_wet;
-			} else if (currentInput === '2'){
-				return story.endings.three;
-			} else {
-				return valid;
-			}
+	if (current_step == story.after_clues){
+		if (currentInput === '1'){
+			previous_step = story.after_clues;
+			current_step = story.why_wet;
+			clearinput();
+			return current_step;
+		} else if (currentInput === '2'){
+			current_step = story.endings.three;
+			clearinput();
+			return current_step;
+		} else {
+			clearinput();
+			return valid;
+		};
+	};
 
-		case story.why_wet:
+
+	if (current_step == story.why_wet){
+		if (currentInput){
+			current_step = story.hall_explain;
+			clearinput();
+			return current_step
+		};
+	};
+
+	if (current_step == story.hall_esplain){
+		if (currentInput === '1'){
+			previous_step = story.hall_explain;
+			current_step = story.endings.four;
+			clearinput();
+			return current_step;
+		} else if (currentInput === '2'){
+			previous_step = story.hall_explain;
+			current_step = story.murder_method;
+			clearinput();
+			return current_step;
+		} else if (currentInput === '3'){
+			previous_step = story.hall_explain;
+			current_step = story.endings.four;
+			clearinput();
+			return current_step;
+		} else {
+			clearinput();
+			return valid;
+		};
+	};
+
+
+	if (current_step == story.murder_method){
+		if (currentInput === '1'){
+			previous_step = story.murder_method;
+			current_step = story.endings.four;
+			clearinput();
+			return current_step;
+		} else if (currentInput === '2'){
+			previous_step = story.murder_method;
+			current_step = story.endings.four;
+			clearinput();
+			return current_step;
+		} else if (currentInput === '3'){
+			previous_step = story.murder_method;
+			current_step = story.doctor;
+			clearinput();
+			return current_step;
+		} else if (currentInput === '4'){
+			previous_step = story.murder_method;
+			current_step = story.endings.four;
+			clearinput();
+			return current_step;
+		} else {
+			clearinput();
+			return valid;
+		};
+	};
+
+	if (current_step == story.doctor){
+		if (currentInput === '1'){
+			previous_step = story.doctor;
+			current_step = story.endings.reveal;
+			clearinput();
+			return current_step;
+		} else if (currentInput === '2'){
+			previous_step = story.doctor;
+			current_step = story.endings.four;
+			clearinput();
+			return current_step;
+		} else if (currentInput === '3'){
+			previous_step = story.doctor;
+			current_step = story.endings.four;
+			clearinput();
+			return current_step;
+		} else {
+			clearinput();
+			return valid;
+		};
+	};
+
+	if (current_step == story.endings.reveal){
 			if (currentInput){
-				return story.hall_explain;
-			}
-
-		case story.hall_explain:
-			if (currentInput === '1'){
-				previous_step = story.hall_explain;
-				return story.endings.four;
-			} else if (currentInput === '2'){
-				previous_step = story.hall_explain;
-				return story.murder_method;
-			} else if (currentInput === '3'){
-				previous_step = story.hall_explain;
-				return story.endings.four;
-			} else {
-				return valid;
-			}
-
-		case story.murder_method:
-			if (currentInput === '1'){
-				previous_step = story.murder_method;
-				return story.endings.four;
-			} else if (currentInput === '2'){
-				previous_step = story.murder_method;
-				return story.endings.four;
-			} else if (currentInput === '3'){
-				previous_step = story.murder_method;
-				return story.doctor;
-			} else if (currentInput === '4'){
-				previous_step = story.murder_method;
-				return story.endings.four;
-			} else {
-				return valid;
-			}
-
-		case story.doctor:
-			if (currentInput === '1'){
-				previous_step = story.doctor;
-				return story.endings.reveal;
-			} else if (currentInput === '2'){
-				previous_step = story.doctor;
-				return story.endings.four;
-			} else if (currentInput === '3'){
-				previous_step = story.doctor;
-				return story.endings.four;
-			} else {
-				return valid;
-			}
-
-		case story.reveal:
-			if (currentInput){
+				clearinput();
 				return story.conclusion;
-			}
-	}
-}
-
-
+			};
+	};
+};
 

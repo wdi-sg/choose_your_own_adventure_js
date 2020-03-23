@@ -4,13 +4,15 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h3>DOM Manipulation Template</h3>
+    <h1>Murder at the snowy mountain mansion</h1>
     <input class="starter" id="input" placeholder="input"/>
-    <h2>output:</h2>
+    <h2>Plot:</h2>
     <div class="starter" id="output"></div>
+    <h2>Important Clues Investigated:</h2>
+    <div class="starter" id="output2"></div>
     <script>
 
-      var display = function( data ){
+      var display = function(data){
         var displayElement = document.querySelector('#output');
 
         // get rid of the entire contents
@@ -20,10 +22,23 @@
         output.innerText = data;
       };
 
+      var display2 = function(data){
+        var displayElement = document.querySelector('#output2');
+
+        // get rid of the entire contents
+        displayElement.innerHTML = "";
+
+        // put the data into the div
+        output2.innerText = data;
+      };
+
+
+
       document.querySelector('#input').addEventListener('change', function(event){
         var currentInput = event.target.value;
         var result = inputHappened(currentInput)
-        display( result );
+        display(result);
+        display2(clue_counter);
       });
     </script>
     <script src="script.js" charset="utf-8"></script>
