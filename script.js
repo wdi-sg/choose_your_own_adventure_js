@@ -3,13 +3,15 @@ console.log("hello script js");
 var userName;
 var options = ["a", "b", "c"];
 var selectedOption;
+var secondOption;
+var thirdOption;
 
 var inputHappened = function (currentInput) {
 
-  userName = currentInput;
+  userName = currentInput.toString();
   console.log(userName);
-  var firstOption = "Welcome to Paradise Island!\nWhat would you like to do today? \nA: Go for a swim at Shark Reef \nB: Go for a drive at Minacious Ravine\nC: Trek at Murderous Mountain\n(Input A, B or C)";
-  var intro = "Nice to meet you " + userName + "!\n" + firstOption;
+  var beningin = "Welcome to Paradise Island!\nWhat would you like to do today? \nA: Go for a swim at Shark Reef \nB: Go for a drive at Minacious Ravine\nC: Trek at Murderous Mountain\n(Input A, B or C)";
+  var intro = "Nice to meet you " + userName + "!\n" + beningin;
   var sharkReefOptions = "You have arrived at Shark Reef. \nDo you (A) Join up with a tour to get a good look around or,\n(B) Venture on your own to the corals\n(Input A or B)";
   var sharkReefOptionA = "The tour guide ushers you onto the speed boat. As it starts to sail off, you notice how disorientated the boat captain looks. \nYou sit helplessly and hold on to dear life as the drunk captain tries to navigate through the sudden choppy waves. The boat capsizes and sinks, no one survives. \nThe End!";
   var sharkReefOptionB = "You venture to the lagoon nearby. It is relatively deep. \nThe allure of the colourful corals overwhelm you. You take a dive. \nAs you swim back up to the surface, you feel intense pain, only to realise the water has turned red. It's called Shark Reef for a reason. \nThe End!";
@@ -23,53 +25,61 @@ var inputHappened = function (currentInput) {
   var mountainsB1A = "To unlock further levels, please make full purchase at the respective authorised dealer.";
 
 
-
-  console.log(intro);
   // selectedOption = currentInput.toString();
   currentInput = currentInput.toLowerCase();
-  return intro;
+  selectedOption = currentInput;
+  console.log(selectedOption);
 
-  if (currentInput === 'a') {
+  //Shark Reef
+  if (selectedOption === 'a') {
+    selectedOption = "";
     console.log(selectedOption);
-    return sharkReefOptions;
-    console.log(sharkReefOptions);
-    if (selectedOption === 'a') {
-      return sharkReefOptionA;
+
+    if (secondOption == 'a') {
       console.log(sharkReefOptionA);
-    } else if (selectedOption === 'b') {
-      return sharkReefOptionB;
+      return sharkReefOptionA;
+    }
+
+    if (selectedOption == 'b') {
       console.log(sharkReefOptionB);
+      return sharkReefOptionB;
     };
-  };
+
+    console.log(sharkReefOptions);
+    return sharkReefOptions;
+  }
+  // Minacious Ravine
   if (selectedOption === 'b') {
-    return ravineOptions;
     console.log(ravineOptions);
+    return ravineOptions;
     if (selectedOption === 'a') {
-      return ravineA;
       console.log(ravineA);
+      return ravineA;
     } else if (selectedOption === 'b') {
-      return ravineB;
       console.log(ravineB);
+      return ravineB;
     };
-  };
+  }
+  // Murderous Mountains
   if (selectedOption === 'c') {
-    return mountainsOptions;
     console.log(mountainsOptions);
+    return mountainsOptions;
     if (selectedOption === 'a') {
-      return mountainsA;
       console.log(mountainsA);
+      return mountainsA;
     } else if (selectedOption === 'b') {
-      return mountainsB;
       console.log(mountainsB);
+      return mountainsB;
       if (selectedOption === 'a') {
-        return mountainsB1;
         console.log(mountainsB1);
+        return mountainsB1;
       } else if (selectedOption === 'b') {
-        return mountainsB2;
         console.log(mountainsB2);
+        return mountainsB2;
       };
     };
   };
+  console.log(intro);
+  return intro;
 };
-}
 
