@@ -57,6 +57,7 @@ let currChoices = [];
 let currChoicesStr = null;
 let nextChoicesStr = null;
 let nextChoices = null;
+let userChoiceId = null;
 let gameHasStarted = false;
 let round = 0;
 let plots = null;
@@ -75,27 +76,54 @@ const getChoicesStr = (plots, choices) => {
   }
   return choiceStr;
 };
+
+const getPlot = (plots, userChoice, currentChoices) => {
+  console.log(`current choices are: ${currentChoices}`);
+  console.log("user choice is " + currentChoices[userChoice]);
+  return plots.getPlotById(currentChoices[userChoice]);
+};
 const inputHappened = function (currentInput) {
+  console.log("round is :" + round);
   if (!gameHasStarted) {
     userName = currentInput;
     gameHasStarted = true;
-    round++;
     plots = new Plots(allPlots);
     plots.shufflePlots();
-  }
-  if (gameHasStarted && round === 1) {
     setPrompt("Press enter any key to continue ...");
-    round++;
-    nextPlot = plots.getRandomPlot();
-    nextChoices = nextPlot.getAllChoices();
+
     clearInput();
+    round++;
     return setIntro(userName);
   }
 
+  if (round === 1) {
+    // special handling for round 2 as user input is anykey
+    currPlot = plots.getRandomPlot();
+    currChoices = currPlot.getAllChoices();
+    currStory= currPlot.story;
+    currChoicesStr = getChoicesStr(plots, currChoices);
+    clearInput();
+    return `${currStory} <br><hr>\n ${currChoicesStr}`;
+  }
+
+  // starting from round 2, user choices are going to be based on choice
+  // todo: move all these into Plot objects
+  // set current plot
   currPlot = nextPlot;
   currChoices = nextChoices;
   currStory= currPlot.story;
   currChoicesStr = getChoicesStr(plots, currChoices);
+  // end current set
+  // prepare the next plot to be displayed after use key in a number
+  userChoiceId = parseInt(currentInput);
+  nextPlot = plots.getPlotById(currChoices[userChoiceId][1]);
+  nextStory = nextPlot.story;
+  nextChoices = nextPlot.getAllChoices();
+  console.log(`User choice id is ${userChoiceId}`);
+  console.log(`next plot is ${nextPlot}`);
+  console.log(`current plot is ${currPlot}`);
+
+
   // // set next story to be
   // if (parseInt(currentInput) === 0) {
   //   // currPlot remains the same

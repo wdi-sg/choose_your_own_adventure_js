@@ -59,6 +59,7 @@ class Plot {
 
   addFixedChoice(choice) {
     this.fixedChoice = new Map(choice);
+    this.numChoices++;
   }
 
   // return all choices in array
@@ -102,7 +103,6 @@ let plot5 = new Plot(4, "Pay a visit at Borsody Auction House", "You are now loo
   "Long past their days of trading cattle, they now dealt exclusively in jewels, artwork, antiques, and collector items. However, these auctions were only held every 3 months and always on a Friday, making people show up in droves.<br>" +
   "It looks like an auction is going on.");
 plot5.addFixedChoice([["choice", "Join the auction"], ["response", "To your utter astonishment, the item being actioned is one of the Dragon Balls! <br> You bought the dragon ball without hesitation."],["type", "reward"] ]);
-
 
 
 allPlots = [plot1, plot2, plot3, plot4, plot5];
