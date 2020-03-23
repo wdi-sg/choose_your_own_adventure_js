@@ -90,13 +90,14 @@ var enemy = [
 console.log("Hi, what is your name?")
 
 
+
 var inputHappened = function(currentInput){
   //Ask name
   if(name === ""){
     name = currentInput;
     init();
-    console.log ("Who would you like to choose as your companion. Sam, Boromir, Gandalf or Golumn? (S / B / Ga / Go)");
-    return `Your name is ${name}`;
+    // console.log ("Who would you like to choose as your companion. Sam, Boromir, Gandalf or Golumn? (S / B / Ga / Go)");
+    return `Your name is ${name}. \n Who would you like to choose as your companion. Sam, Boromir, Gandalf or Golumn? (S / B / Ga / Go)`;
   }
 
   //Ask Companion
@@ -104,21 +105,20 @@ var inputHappened = function(currentInput){
     companion = currentInput;
     init();
     if(currentInput === "S"){
-        console.log(`Sam has been eyeing your ring of power over the past few days. Would ${name} let Sam carry his ring when he feels tired? (y / n)`);
-        return `${name} chose Sam`;
+        // console.log(`Sam has been eyeing your ring of power over the past few days. Would ${name} let Sam carry his ring when he feels tired? (y / n)`);
+        return `${name} chose Sam \n\n Sam has been eyeing your ring of power over the past few days. Would ${name} let Sam carry his ring when he feels tired? (y / n)`;
     }
     else if(currentInput === "B"){
-        console.log(`Boromir tells ${name} that one does not simply take the ring to mordor. He offers to help carry ${name}'s ring. (y / n)`);
-        return `${name} chose Boromir`;
+        return `${name} chose Boromir \n\n Boromir tells ${name} that one does not simply take the ring to mordor. He offers to help carry ${name}'s ring. (y / n)`;
     }
     else if(currentInput === "Ga"){
-        console.log("Gandalf suggests that they take route of the dwarves because the current path is too treacherous (y / n)");
-        return `${name} chose Gandalf`;
+        // console.log("Gandalf suggests that they take route of the dwarves because the current path is too treacherous (y / n)");
+        return `${name} chose Gandalf \n\n Gandalf suggests that they take route of the dwarves because the current path is too treacherous (y / n)`;
     }
 
     else if(currentInput === "Go"){
-        console.log(`Golumn says he will be loyal to the precious and offers to lead ${name} to mordor. (y / n)`);
-        return `${name} chose Golumn`;
+        // console.log(`Golumn says he will be loyal to the precious and offers to lead ${name} to mordor. (y / n)`);
+        return `${name} chose Golumn \n\n Golumn says he will be loyal to the precious and offers to lead ${name} to mordor. (y / n)`;
     }
   }
 
@@ -126,9 +126,9 @@ var inputHappened = function(currentInput){
   if (companion === 'S' && sam.carryRing === "") {
     sam.carryRing = currentInput;
     if(sam.carryRing === "y"){
-        console.log(`${name} let Sam carry his ring. Sam now hesitates when ${name} ask for it back. It seems as if Sam wants to keep it for himself. \n\n Ignore the situation and continue. \n\n Take it back from him and ask him to go back to the Shire. (ignore / shire)`);
+        // console.log(`${name} let Sam carry his ring. Sam now hesitates when ${name} ask for it back. It seems as if Sam wants to keep it for himself. \n\n Ignore the situation and continue. \n\n Take it back from him and ask him to go back to the Shire. (ignore / shire)`);
         init()
-        return;
+        return `${name} let Sam carry his ring. Sam now hesitates when ${name} ask for it back. It seems as if Sam wants to keep it for himself. \n\n Ignore the situation and continue. \n\n Take it back from him and ask him to go back to the Shire. (ignore / shire)`;
     }
     else{
         // OUTCOME 5
@@ -176,8 +176,8 @@ var inputHappened = function(currentInput){
     init()
 
     if (gandalf.path === "y") {
-      console.log(`The path is compromised. The orcs have taken over. ${name} is now deciding whether to escape, fight or go back to the previous treacherous path. (escape / fight / back)`);
-      return (`${name} chose the route of the dwarves`);
+      // console.log(`The path is compromised. The orcs have taken over. ${name} is now deciding whether to escape, fight or go back to the previous treacherous path. (escape / fight / back)`);
+      return (`${name} chose the route of the dwarves \n\n The path is compromised. The orcs have taken over. ${name} is now deciding whether to escape, fight or go back to the previous treacherous path. (escape / fight / back)`);
     }
     else if (gandalf.path === "n"){
         //Outcome 2
@@ -190,8 +190,8 @@ var inputHappened = function(currentInput){
     gandalf.fight = currentInput
     init();
     if(gandalf.fight === "fight"){
-        console.log(`${name} now faces an army of ${enemy[0].type}. ${name} can run back to the treacherous path or roll a 10 face dice and fight. \n If the number is greater than 5, the enemy receives damage. If not, ${name} receives damage(run / fight)`);
-        return;
+        // console.log(`${name} now faces an army of ${enemy[0].type}. ${name} can run back to the treacherous path or roll a 10 face dice and fight. \n If the number is greater than 5, the enemy receives damage. If not, ${name} receives damage(run / fight)`);
+        return `${name} now faces an army of ${enemy[0].type}. ${name} can run back to the treacherous path or roll a 10 face dice and fight. \n If the number is greater than 5, the enemy receives damage. If not, ${name} receives damage(run / fight)`;
     }
   };
 
@@ -209,23 +209,23 @@ var inputHappened = function(currentInput){
         else if(gandalf.orc === "run"){
             gandalf.init();
             gandalf.path = "y"
-            console.log(`${name} is now deciding whether to escape, fight or go back to the previous treacherous path. (escape / fight / back)`);
-            return `${name} chose to run from the fight.`
+            // console.log(`${name} is now deciding whether to escape, fight or go back to the previous treacherous path. (escape / fight / back)`);
+            return `${name} chose to run from the fight. \n\n ${name} is now deciding whether to escape, fight or go back to the previous treacherous path. (escape / fight / back)`
         }
   };
 
   //fight balrog
   if (gandalf.fight === "escape" && gandalf.reDirect === false){
-      console.log(`${name} successfully escapes, ${name} now faces the Balrog who is blocking his escape. Should ${name} escape first or, because of his Asian values, let Gandalf jump first? (you / gandalf)`)
+      // console.log(`${name} successfully escapes, ${name} now faces the Balrog who is blocking his escape. Should ${name} escape first or, because of his Asian values, let Gandalf jump first? (you / gandalf)`)
       gandalf.reDirect = true;
-      return `${name} chose to escape.`
+      return `${name} chose to escape. \n\n ${name} successfully escapes, ${name} now faces the Balrog who is blocking his escape. Should ${name} escape first or, because of his Asian values, let Gandalf jump first? (you / gandalf)`
   };
 
   // go back treacherous path
   if (gandalf.fight === "back"){
       gandalf.init();
-      console.log("Gandalf suggests that they take route of the dwarves because the current path is too treacherous (y / n)");
-      return `${name} went back to the treacherous path`;
+      // console.log("Gandalf suggests that they take route of the dwarves because the current path is too treacherous (y / n)");
+      return `${name} went back to the treacherous path \n\n Gandalf suggests that they take route of the dwarves because the current path is too treacherous (y / n)`;
   };
 
 
@@ -251,8 +251,8 @@ var inputHappened = function(currentInput){
     init();
 
     if(golumn.guide === "y"){
-        console.log(`${name} sees Golumn trying to steal his ring. Does ${name} tell him off, or does ${name} hit Golumn on the head and threaten him? (scold / hit)`)
-        return `${name} lets Golumn be his guide`;
+        // console.log(`${name} sees Golumn trying to steal his ring. Does ${name} tell him off, or does ${name} hit Golumn on the head and threaten him? (scold / hit)`)
+        return `${name} lets Golumn be his guide \n\n ${name} sees Golumn trying to steal his ring. Does ${name} tell him off, or does ${name} hit Golumn on the head and threaten him? (scold / hit)`;
     }
     else if(golumn.guide === "n"){
         //Outcome 3
