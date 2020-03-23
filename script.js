@@ -49,14 +49,10 @@ const chanceMaker = (lowerLimit, upperLimit, windowSize) => {
   return randomNum > leftWindowLimit && randomNum < rightWindowLimit;
 };
 
-let nextPlot = null;
-let nextStory = null;
 let currPlot = null;
 let currStory = null;
 let currChoices = [];
 let currChoicesStr = null;
-let nextChoicesStr = null;
-let nextChoices = null;
 let userChoiceId = null;
 let gameHasStarted = false;
 let round = 0;
@@ -90,38 +86,32 @@ const inputHappened = function (currentInput) {
     plots = new Plots(allPlots);
     plots.shufflePlots();
     setPrompt("Press enter any key to continue ...");
-
     clearInput();
     round++;
     return setIntro(userName);
   }
 
   if (round === 1) {
-    // special handling for round 2 as user input is anykey
+    // special handling for round 1 as user next plot is not based on user choice
     currPlot = plots.getRandomPlot();
     currChoices = currPlot.getAllChoices();
     currStory= currPlot.story;
     currChoicesStr = getChoicesStr(plots, currChoices);
     clearInput();
+    round++;
     return `${currStory} <br><hr>\n ${currChoicesStr}`;
   }
 
   // starting from round 2, user choices are going to be based on choice
   // todo: move all these into Plot objects
   // set current plot
-  currPlot = nextPlot;
-  currChoices = nextChoices;
-  currStory= currPlot.story;
-  currChoicesStr = getChoicesStr(plots, currChoices);
-  // end current set
-  // prepare the next plot to be displayed after use key in a number
   userChoiceId = parseInt(currentInput);
-  nextPlot = plots.getPlotById(currChoices[userChoiceId][1]);
-  nextStory = nextPlot.story;
-  nextChoices = nextPlot.getAllChoices();
-  console.log(`User choice id is ${userChoiceId}`);
-  console.log(`next plot is ${nextPlot}`);
-  console.log(`current plot is ${currPlot}`);
+  console.log(userChoiceId);
+  currPlot = plots.getPlotById(currChoices[userChoiceId][1]);
+  currStory = currPlot.story;
+  currChoices = currPlot.getAllChoices();
+  currChoicesStr = getChoicesStr(plots,currChoices);
+
 
 
   // // set next story to be
