@@ -15,7 +15,9 @@ var jakePeralta = {
 
 var gameScore = 0;
 var scoreBoard = document.createElement("div");
-scoreBoard.innerText = `Score: ${gameScore}\nStamina: ${jakePeralta.stamina}\n Dexterity: ${jakePeralta.dexterity}`
+var displayScore = () => {
+    scoreBoard.innerText = `Score: ${gameScore}\nStamina: ${jakePeralta.stamina}\n Dexterity: ${jakePeralta.dexterity}`
+}
 scoreBoard.style["width"] = "7rem";
 scoreBoard.style["height"] = "4rem";
 scoreBoard.style["border"] = "3px solid red";
@@ -66,6 +68,7 @@ var newGameReset = () => {
     input.style["display"] = "none";
     return displayOutput;
     }
+
 
 //Questions
 var createQuestion = question => `\n${question}\n`;
@@ -196,6 +199,7 @@ coworkers.push(amy, charles, gina, terry, rosa, raymond, hitchcock, scully);
 
 //Game mechanics:
 var loadHandler = () => {
+    displayScore();
     display(newGameReset());
 }
 
@@ -210,6 +214,21 @@ var display = function( data ){
 };
 
 var inputHappened = function(currentInput){
+
+    var proceedButton = document.createElement("button");
+    proceedButton.innerText = "proceed"
+    proceedButton.style["margin-left"] = "40px";
+    proceedButton.style["padding"] = "6px";
+    proceedButton.style["font-size"] = "1.6rem";
+    proceedButton.addEventListener("click", () => {
+        document.body.removeChild(proceedButton);
+        input.style["display"] = "inline";
+        if (isWithCoworker) {
+            display(coworkerPath());
+        } else if (isWithPerp) {
+            return perpPath();
+        }
+    })
 
     var goToOffice = () => {
         hoursCounter = hoursCounter + 4
@@ -231,21 +250,6 @@ var inputHappened = function(currentInput){
     }
 
     var actionsPath = () => {
-        var proceedButton = document.createElement("button");
-        proceedButton.innerText = "proceed"
-        proceedButton.style["margin-left"] = "40px";
-        proceedButton.style["padding"] = "6px";
-        proceedButton.style["font-size"] = "1.6rem";
-        proceedButton.addEventListener("click", () => {
-            document.body.removeChild(proceedButton);
-            input.style["display"] = "inline";
-            if (isWithCoworker) {
-                display(coworkerPath());
-            } else if (isWithPerp) {
-                return perpPath();
-            }
-        })
-
         input.style["display"] = "none";
         document.body.appendChild(proceedButton);
 
@@ -290,12 +294,12 @@ var inputHappened = function(currentInput){
         switch (currentInput.toLowerCase()) {
             case currentInt.correctAnswer:
                 gameScore = gameScore + currentInt.scoreBonus;
-                scoreBoard.innerText = `Score: ${gameScore}`
+                displayScore();
                 return `"You are correct!" \nJake receives ${currentInt.scoreBonus} points.`
                 break;
             default:
                 gameScore = gameScore - currentInt.scoreBonus;
-                scoreBoard.innerText = `Score: ${gameScore}`
+                displayScore();
                 return `"That's obviously wrong. What were you thinking? \nJake loses ${currentInt.scoreBonus} points"`
                 break;
         }
@@ -327,11 +331,11 @@ var inputHappened = function(currentInput){
             if (dexterityStatus > 40){
                 jakePeralta.stamina = jakePeralta.stamina - 1;
                 gameScore = gameScore + 20;
-                scoreBoard.innerText = `Score: ${gameScore}\nStamina: ${jakePeralta.stamina}\n Dexterity: ${jakePeralta.dexterity}`
+                displayScore();
                 return `You slowly approach the perp. You are dexterous enough to apprehend him even as he struggles. Well done!`
             } else {
                 jakePeralta.stamina = jakePeralta.stamina - 10;
-                scoreBoard.innerText = `Score: ${gameScore}\nStamina: ${jakePeralta.stamina}\n Dexterity: ${jakePeralta.dexterity}`
+                displayScore();
                 return `You slowly approach the perp. Unfortunately, he gets the better of you and escapes!`
             }
         }
