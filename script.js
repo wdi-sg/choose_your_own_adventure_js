@@ -20,6 +20,8 @@ let battleStats = {
     heroEscape: false,
     criticalHit: false,
 }
+var gameOver = false;
+var injured = false;
 
 
 
@@ -71,8 +73,28 @@ function clearInput() {
 };
 
 function initialize() {
+    inputHistory = [];
     display("Oi mate! What's your name?");
     placeHolderEdit("Input name...");
+    characterStats = {
+        name: "",
+        weapon: "",
+        location: "",
+        opponent: "",
+    };
+
+    battleStats = {
+        heroHP: 8,
+        villainHP: 5,
+        heroDie: false,
+        heroWin: false,
+        turnToAttack: false,
+        heroEscape: false,
+        criticalHit: false,
+    }
+    gameOver = false;
+
+
 }
 
 function enterName(inputName) {
@@ -137,9 +159,20 @@ function startBattle() {
     var inputAction = inputValue;
     if (battleStats.heroDie == false || battleStats.heroWin == false || battleStats.heroEscape == false) {
         battling(inputAction);
+
     }
     if (battleStats.heroDie == true || battleStats.heroWin == true || battleStats.heroEscape == true) {
         outputMessage = outcome();
+        inputHistory.push(outputMessage);
+
+        if (gameOver == true) {
+            outputMessage += "\n\n<< Enter a Name in input to restart >>"
+            placeHolderEdit("Restart...");
+            initialize();
+        } else {
+            outputMessage += "\n\n<< Enter anything in input to continue >>"
+            placeHolderEdit("Continue...");
+        }
     }
 
 }
@@ -161,12 +194,17 @@ function battling(inputAction) {
                 run();
                 break;
             default:
+                outputMessage = "You stood still, frozen in fear..."
                 console.log("Invalid action");
                 break;
         }
+        outputMessage += "\n\n<< Enter anything in input to continue >>"
+        placeHolderEdit("Continue...");
     } else if (battleStats.turnToAttack == false) {
         outputMessage = enemyAttack();
-
+        outputMessage += "\n\nWhat do you do next?"
+        outputMessage += ("\n1. Charge & attack head on!\n2. Use bow with flaming arrows!\n3. RUN AWAAAAAYYY!!!!");
+        placeHolderEdit("Choose an action (#)...");
     }
 }
 
@@ -188,12 +226,15 @@ function outcome() {
         switch (characterStats.opponent) {
             case "wights":
                 outcome = "You couldn't hold the horde back. Overwhelmed by their sheer numbers, you die and join the army of the undead.\n\nGame Over!"
+                gameOver = true;
                 break;
             case "wildlings":
                 outcome = "The wildlings caught you off guard. You were knocked out and tied up. The wildlings bring you back to their camp as their prisoner.\n\nGame Over!"
+                gameOver = true;
                 break;
             case "wolves":
                 outcome = "The wolves were too huge to overcome. You and your troop were ripped limb from limb.\n\nGame Over!"
+                gameOver = true;
                 break;
         }
     } else if (battleStats.heroEscape == true) {
@@ -221,9 +262,9 @@ function useWeapon() {
         damage += weaponEffective();
         damage += critical(5)
         battleStats.villainHP -= damage;
-        outputMessage += (`You swing your ${weapon} dealing ${damage} damage`);
+        outputMessage += (`You swing your ${weapon} dealing ${damage} damage!`);
     } else {
-        battleStats.heroEscape = false;
+        outputMessage += (`You swing your ${weapon} and miss!`);
     }
 }
 
@@ -231,30 +272,30 @@ function weaponEffective() {
     var bonusDamage = 0
     if (characterStats.weapon == "Axe" && characterStats.opponent == "wildlings") {
         bonusDamage = 1;
-        outputMessage+= "Bonus damage from effective weapon";
+        outputMessage += "Bonus damage from effective weapon!\n";
         return bonusDamage
     } else if (characterStats.weapon == "Axe" && characterStats.opponent == "wights") {
         bonusDamage = -1;
-        outputMessage+= "Reduced damage from ineffective weapon";
+        outputMessage += "Reduced damage from ineffective weapon.\n";
         return bonusDamage
     } else if (characterStats.weapon == "Sword" && characterStats.opponent == "wolves") {
         bonusDamage = 1;
-        outputMessage+= "Bonus damage from effective weapon";
+        outputMessage += "Bonus damage from effective weapon!\n";
         return bonusDamage
 
     } else if (characterStats.weapon == "Sword" && characterStats.opponent == "wildlings") {
         bonusDamage = -1;
-        outputMessage+= "Reduced damage from ineffective weapon";
+        outputMessage += "Reduced damage from ineffective weapon.\n";
         return bonusDamage
 
     } else if (characterStats.weapon == "Hammer" && characterStats.opponent == "wights") {
         bonusDamage = 1;
-        outputMessage+= "Bonus damage from effective weapon";
+        outputMessage += "Bonus damage from effective weapon!\n";
         return bonusDamage
 
     } else if (characterStats.weapon == "Hammer" && characterStats.opponent == "wolves") {
         bonusDamage = -1;
-        outputMessage+= "Reduced damage from ineffective weapon";
+        outputMessage += "Reduced damage from ineffective weapon.\n";
         return bonusDamage
 
     } else {
@@ -270,7 +311,7 @@ function shootArrow() {
         damage += 1;
         damage += critical(3);
         battleStats.villainHP -= damage;
-        outputMessage += (`You shoot flaming arrows dealing ${damage} damage.`)
+        outputMessage += (`You shoot flaming arrows dealing ${damage} damage!`)
     } else {
         outputMessage += (`Your arrows missed!`)
     }
@@ -284,7 +325,7 @@ function enemyAttack() {
 
 function run() {
     var randomNumberBetween0and10 = Math.floor(Math.random() * 10);
-    if (randomNumberBetween0and10 <= 6) {
+    if (randomNumberBetween0and10 <= 1) {
         battleStats.heroEscape = true;
         outputMessage = ("Managed to escape!")
     } else {
@@ -299,7 +340,7 @@ function critical(critRatio) {
     if (randomNumberBetween0and10 <= critRatio) {
         getCrit = 2;
         criticalHit = true;
-        outputMessage = ("Critical Hit!\n")
+        outputMessage += ("Critical Hit!\n")
         console.log("Critical Hit!\n")
     } else {
         criticalHit = false;
@@ -309,6 +350,10 @@ function critical(critRatio) {
 
 function storyProgression(number) {
     switch (number) {
+        case 0:
+            initialize();
+            inputHistory = [];
+            break;
         case 1:
             enterName(inputValue);
             var name = characterStats.name;
@@ -348,11 +393,50 @@ function storyProgression(number) {
             }
             break;
 
-            case 4:
+        case 4:
             startBattle();
+            var randomNumberBetween0and10 = Math.floor(Math.random() * 10);
+            if (randomNumberBetween0and10 <= 5) {
+                injured = true;
+            } else {
+                injured = false;
+            }
 
             break;
+        case 5:
+        var outcome;
+            inputHistory.pop();
+            if (injured == false) {
+                outputMessage = "You return to Castle Black, victorious.";
+                outcome = outputMessage;
+                outputMessage += "\n\nWhat happens next?\n1. Party Hard!\n2. Go to Sleep.";
 
+            } else {
+                outputMessage = "You return to Castle Black, wounded and moments before death.";
+                outcome = outputMessage;
+                outputMessage += "\n\nWhat happens next?\n1. Dump your body in a pit.\n2. Burn your body on a pyre.";
+            }
+            inputHistory.push(outcome);
+            break;
+        case 6:
+            if (injured == false) {
+                if (inputValue == "1") {
+                    outputMessage = "You partied too hard, got so drunk... and later that night fell off the roof. You Died.\n\nGame Over!";
+                } else if (inputValue == "2") {
+                    outputMessage = "You rest after a tough day. \nYears passed and you eventually become the Lord Commander of the Night's Watch and die of old age.\n\nGame Over!";
+                }
+            } else if (injured == true) {
+                if (inputValue == "1") {
+                    outputMessage = "The Night King raises you from the dead beyond the walls! You start attacking your fellow brothers and one by one they fall.\n\nGame Over!";
+                } else if (inputValue == "2") {
+                    outputMessage = "The fire restores your strength. Surprise! You're now immortal and have magic powers. Nice.\n\nGame Over!";
+                }
+            }
+            gameOver = true;
+            outputMessage += "\n\n<< Enter a Name in input to restart >>"
+            placeHolderEdit("Restart...");
+            initialize();
+            break;
         default:
             inputHistory.pop();
             alert("Path not written yet")
