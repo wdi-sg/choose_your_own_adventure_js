@@ -18,15 +18,7 @@ var scoreBoard = document.createElement("div");
 var displayScore = () => {
     scoreBoard.innerText = `Score: ${gameScore}\nStamina: ${jakePeralta.stamina}\n Dexterity: ${jakePeralta.dexterity}`
 }
-scoreBoard.style["width"] = "7rem";
-scoreBoard.style["height"] = "4rem";
-scoreBoard.style["border"] = "3px solid red";
-scoreBoard.style["margin-left"] = "40px";
-scoreBoard.style["position"] = "fixed";
-scoreBoard.style["top"] = "20px";
-scoreBoard.style["right"] = "10px";
-scoreBoard.style["text-align"] = "center";
-scoreBoard.style["padding-top"] = "4px";
+scoreBoard.setAttribute("style", "width: 7rem; height: 4rem; border: 3px solid red; margin-left: 40px; position: fixed; top: 20px; right: 10px; text-align: center; padding-top: 4px;")
 document.body.appendChild(scoreBoard);
 
 var gameStarted = false;
