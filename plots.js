@@ -48,13 +48,13 @@ class Plot {
     this.choice = choice; // the choice to be displayed to user
     this.story = story; // the story to show
     this.type = type; // there are be move, suicide (terminate game)
-    this.choices = new Map();
+    this.choices = [];
     this.fixedChoice = null;
     this.numChoices = 0;
   }
 
   addChoice (plotId) {
-    this.choices.set(this.numChoices++, plotId);
+    this.choices[this.numChoices++]= plotId;
   }
 
   addFixedChoice(choice) {
@@ -64,7 +64,8 @@ class Plot {
 
   // return all choices in array
   getAllChoices() {
-    return [this.fixedChoice, ...this.choices];
+    this.choices[0] = this.fixedChoice;
+    return this.choices;
   }
 
 }
