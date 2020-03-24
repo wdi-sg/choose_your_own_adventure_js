@@ -1,11 +1,30 @@
-.starter{
-  font-size:30px;
-  padding:10px;
-  display:block;
-  margin:40px;
-  border:3px solid blue;
+body {
+    text-align: center;
+    margin: 10px auto;
+    padding: 30px
 }
 
-#output{
-  background-color:pink;
+h3 {
+    font-size: 20px;
+    text-transform: uppercase;
+    color: darkgrey;
+}b {
+    color: darkred;
+ }
+.starter {
+    font-size: 30px;
+    padding: 10px;
+    display: block;
+    margin:0 auto;
+}
+
+#output {
+    font-size: 26px;
+    background: black;
+    color: white;
+    text-align: left;
+    width: 800px;
+    min-height: 400px;
+    margin:25px auto;
+    padding:30px;
 }
