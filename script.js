@@ -53,7 +53,7 @@ var buildPrompt = function (roomObj) {
   } else {
     outStr =
       `You're in ${roomObj.dispName}.\n\n` +
-      `${roomObj.blurb}"\n\n"` +
+      `${roomObj.blurb}\n\n"` +
       whatNext() + "\n\n" +
       `${choiceArr.join("\n")}`;
   }
