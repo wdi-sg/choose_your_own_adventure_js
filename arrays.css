@@ -1,0 +1,38 @@
+.starter{
+  font-size:30px;
+  padding:10px;
+  display:block;
+  margin:40px;
+  border:3px solid blue;
+}
+
+#output{
+  background-color:pink;
+}
+
+.biggestBox{
+    height: 250px;
+    width: 300px;
+    position: relative;
+    background-color: grey;
+    border: 10px;
+    border-color: green;
+}
+
+.bigBox{
+  display: table;
+  clear: both;
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.otherBox{
+  display:inline-block;
+  width:50%;
+  background-color:pink;
+  box-sizing:border-box;
+  float:left;
+  padding:10px;
+}
