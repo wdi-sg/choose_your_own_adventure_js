@@ -1,3 +1,4 @@
+var username = "";
 var state = {};
 var header = document.getElementById("header");
 var buttonGroup = document.getElementById("btn-group");
@@ -16,7 +17,14 @@ function selectOption(id) {
   displayButton(id);
 }
 
-startGame();
+//startGame();
+
+document.getElementById("lets-play-button").addEventListener('click', function(event) {
+    username = document.querySelector("#input").value;
+    buttonGroup.lastElementChild.remove();// Destroy all previous buttons
+    document.querySelector("#input").remove();
+    startGame();
+});
 
 // HELP FUNCTIONS //
 function getTextNode(id) {
@@ -28,7 +36,7 @@ function getTextNode(id) {
 }
 
 function displayQuestion(id) {
-  header.innerHTML = getTextNode(id).text;
+  header.innerHTML = username + ", " + getTextNode(id).text;
 }
 
 function displayButton(id) {
@@ -39,13 +47,16 @@ function displayButton(id) {
   }
 
   for (let i = 0; i < getTextNode(id).option.length; i++) {
+    console.log("Are we going to create button for: " + getTextNode(id).option[i].buttonText);
     if (checkState(id, i)) { //
+        console.log("Going to create button for " + getTextNode(id).option[i].buttonText);
         const button = document.createElement("button");
         button.innerHTML = getTextNode(id).option[i].buttonText;
 
         button.onclick = function() {
           selectOption(getTextNode(id).option[i].nextNode);
-          state = getTextNode(id).option[i].state; // make it to new state
+          // state = getTextNode(id).option[i].state; // make it to new state
+          state = Object.assign(state, getTextNode(id).option[i].state);
           console.log(state);
         }
 
@@ -55,38 +66,20 @@ function displayButton(id) {
 }
 
 function checkState(id, index) {
-    if (getTextNode(id).option[index].hasOwnProperty("requiredStates")) {
+    if (getTextNode(id).option[index].hasOwnProperty("requiredStates")) {console.log("This is a required state");
         let keys = Object.keys(getTextNode(id).option[index].requiredStates); // states in required states must be true
-        keys.forEach(key => {
-            if (state[key] == true) {
+        console.log("The keys in the required state are: " + keys);
+
+        for (let i = 0; i < keys.length; i++) {
+           console.log("For " + keys + " there is " + state[keys[i]]);
+            if (state[keys[i]]) {
+                console.log("Returning true..");
                 return true;
             }
-        });
+        }
         return false;
     }
     else {
-        return true; // required state does not exist, this is a normal text button
+        return true;
     }
 }
-
-// function checkState(id) {
-//     // check if the current state contains the required state
-//     // or there is no required state for this id
-//     // if yes, then display the button
-//     // if no, then do not display the button, and change to the next option
-//     for (let i = 0; i < getTextNode(id).length; i++) {
-//         // the current selected button's one of the option requires a state (bottom)
-//         if (getTextNode{id}.option[i].hasOwnProperty("requiredStates")) {
-//             // check if your current state has this property a not
-//             let keys = Object.keys(getTextNode{id}.option[i].requiredStates);
-//             for (let j = 0; j < states.length; i++) {
-//                 keys.forEach( key => {
-//                     if (states[key] == getTextNode{id}.option[i][key]) {
-//                         return true;
-//                     }
-//                 })
-//             }
-//         }
-//     }
-//     return false;
-// }

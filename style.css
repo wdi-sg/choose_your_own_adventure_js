@@ -25,3 +25,10 @@ button, #button-grp {
   font-family: 'Gloria Hallelujah', cursive;
   border-radius: 10px;
 }
+
+input {
+    border-radius: 10px;
+    height: 40px;
+    text-align: center;
+    font-family: 'Gloria Hallelujah', cursive;
+}
