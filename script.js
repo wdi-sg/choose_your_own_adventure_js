@@ -49,10 +49,9 @@ class Room {
 
     this.roomElement = document.createElement("input");
     this.roomLabelElement = document.createElement("label");
-    this.roomElement.name = this.roomId;
+    this.roomElement.name = "room";
     this.roomElement.type = "radio";
-    this.roomElement.id = `${this.roomId}`;
-    this.roomElement.value = `${this.roomValue}`;
+      this.roomElement.value = `${this.roomValue}`;
     this.roomLabelElement.innerText = `${this.labelText}`;
     document.querySelector(".container").appendChild(this.roomElement);
     document.querySelector(".container").appendChild(this.roomLabelElement);
