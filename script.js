@@ -5,6 +5,7 @@ startButton.value = "start";
 startButton.innerHTML = "start";
 startButton.className = "startButton";
 document.querySelector(".container").appendChild(startButton);
+const outputMsg = document.querySelector(".output");
 
 // ------------------------------ Msgs----------------------//
 
@@ -14,32 +15,34 @@ const hallMsg =
 //-------------------Function---------------------//
 
 const startGame = (e) => {
-
-  document.querySelector(".output").innerHTML = `${hallMsg}`;
+  outputMsg.innerHTML = `${hallMsg}`;
   const kitchen = new Room("Kitchen");
   const livingroom = new Room("livingroom");
-  const bathroom = new Room ("bathroom");
+  const bathroom = new Room("bathroom");
 
   totalRooms["kitchen"] = kitchen;
   totalRooms["livingroom"] = livingroom;
   totalRooms["bathroom"] = bathroom;
 
-  
   console.log(totalRooms);
 
   document.querySelector(".startButton").remove();
 };
 
+const chooseRoom = (e) => {
+outputMsg.innerHTML = `${kitchenMsg}`;
+
+};
+
 //------------------Event Listener----------------//
 
 startButton.addEventListener("click", startGame);
+kitchen.addEventListener("onchange", chooseRoom);
 
 //----------------------------Constructor-------------------//
 
 class Room {
-  constructor( roomId) {
-   
-
+  constructor(roomId) {
     this.roomId = roomId;
     this.roomValue = roomId;
     this.labelText = roomId;
@@ -52,6 +55,5 @@ class Room {
     this.roomLabel.innerText = `${this.labelText}`;
     document.querySelector(".container").appendChild(this.room);
     document.querySelector(".container").appendChild(this.roomLabel);
-    
   }
 }
