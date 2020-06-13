@@ -11,14 +11,18 @@ const outputMsg = document.querySelector(".output");
 
 const hallMsg =
   " You are in the hall of this hunted house, choose the room to which you want to go:";
+  const kitchenMsg ="You are in the kitchen, there is a dead body in the floor, click it to find clues"
+
+  const livingroomMsg = "There are a lot of things here, click to find the clue";
+  const bathroomMsg = "what is the secret word"
 
 //-------------------Function---------------------//
 
 const startGame = (e) => {
   outputMsg.innerHTML = `${hallMsg}`;
-  const kitchen = new Room("Kitchen");
-  const livingroom = new Room("livingroom");
-  const bathroom = new Room("bathroom");
+  const kitchen = new Room("Kitchen", kitchenMsg);
+  const livingroom = new Room("livingroom", livingroomMsg);
+  const bathroom = new Room("bathroom", bathroomMsg);
 
   totalRooms["kitchen"] = kitchen;
   totalRooms["livingroom"] = livingroom;
@@ -29,31 +33,36 @@ const startGame = (e) => {
   document.querySelector(".startButton").remove();
 };
 
-const chooseRoom = (e) => {
-outputMsg.innerHTML = `${kitchenMsg}`;
 
-};
 
 //------------------Event Listener----------------//
 
 startButton.addEventListener("click", startGame);
-kitchen.addEventListener("onchange", chooseRoom);
 
 //----------------------------Constructor-------------------//
 
 class Room {
-  constructor(roomId) {
+  constructor(roomId, msg) {
     this.roomId = roomId;
     this.roomValue = roomId;
     this.labelText = roomId;
+    this.outputMsg = msg;
 
-    this.room = document.createElement("input");
-    this.roomLabel = document.createElement("label");
-    this.room.type = "radio";
-    this.room.id = `${this.roomId}`;
-    this.room.value = `${this.roomValue}`;
-    this.roomLabel.innerText = `${this.labelText}`;
-    document.querySelector(".container").appendChild(this.room);
-    document.querySelector(".container").appendChild(this.roomLabel);
+    this.roomElement = document.createElement("input");
+    this.roomLabelElement = document.createElement("label");
+    this.roomElement.type = "radio";
+    this.roomElement.id = `${this.roomId}`;
+    this.roomElement.value = `${this.roomValue}`;
+    this.roomLabelElement.innerText = `${this.labelText}`;
+    document.querySelector(".container").appendChild(this.roomElement);
+    document.querySelector(".container").appendChild(this.roomLabelElement);
+
+
+
+    const chooseRoom = (e) => {
+      outputMsg.innerHTML = `${this.msg}`;
+      
+      };
+      this.roomElement.addEventListener('onchange', chooseRoom);
   }
 }
