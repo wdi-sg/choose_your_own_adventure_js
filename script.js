@@ -21,7 +21,7 @@ const bathroomMsg = "what is the secret word";
 
 const startGame = (e) => {
   outputMsgElement.innerHTML = `${hallMsg}`;
-  const kitchen = new Room("Kitchen", kitchenMsg);
+  const kitchen = new Room("kitchen", kitchenMsg);
   const livingroom = new Room("livingroom", livingroomMsg);
   const bathroom = new Room("bathroom", bathroomMsg);
 
@@ -49,6 +49,7 @@ class Room {
 
     this.roomElement = document.createElement("input");
     this.roomLabelElement = document.createElement("label");
+    this.roomElement.name = this.roomId;
     this.roomElement.type = "radio";
     this.roomElement.id = `${this.roomId}`;
     this.roomElement.value = `${this.roomValue}`;
