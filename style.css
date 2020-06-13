@@ -1,21 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap');
 
 body {
-  background:grey;
-  margin: 0;
   color: white;
   text-align: center;
   font-family: 'Gloria Hallelujah', cursive;
+  background-image: url("1052.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 150px;
 }
 
 h1 {
   font-weight: 200;
   font-style: 26px;
   margin: 10px;
-}
-
-#myaudio {
-    background-image: ;
+  background-color: pink;
 }
 
 button, #button-grp {
@@ -27,11 +26,32 @@ button, #button-grp {
   font-family: 'Gloria Hallelujah', cursive;
   border-radius: 10px;
   border-color: black;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
 }
 
 input {
     border-radius: 10px;
+    border: 2px solid black;
     height: 40px;
     text-align: center;
     font-family: 'Gloria Hallelujah', cursive;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+}
+
+#content {
+    padding: 10px;
+    max-width: 400px;
+    background-color: grey;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin: auto;
+    background: rgba(105, 105, 105, 0.6);
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (max-width: 992px) {
+    body {
+        background-size: 150vmin;
+    }
 }
