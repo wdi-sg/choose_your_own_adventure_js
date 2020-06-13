@@ -3,8 +3,15 @@ var state = {};
 var header = document.getElementById("header");
 var buttonGroup = document.getElementById("btn-group");
 
+document.getElementById("lets-play-button").addEventListener('click', function(event) {
+    username = document.querySelector("#input").value;
+    buttonGroup.lastElementChild.remove();// Destroy all previous buttons
+    document.querySelector("#input").remove();
+    startGame();
+});
+
 function startGame() {
-  state = {};
+  state = { wand: false, keys: false, book: false };
   displayQuestion(1);
   displayButton(1);
 }
@@ -16,15 +23,6 @@ function selectOption(id) {
   displayQuestion(id);
   displayButton(id);
 }
-
-//startGame();
-
-document.getElementById("lets-play-button").addEventListener('click', function(event) {
-    username = document.querySelector("#input").value;
-    buttonGroup.lastElementChild.remove();// Destroy all previous buttons
-    document.querySelector("#input").remove();
-    startGame();
-});
 
 // HELP FUNCTIONS //
 function getTextNode(id) {
@@ -47,33 +45,29 @@ function displayButton(id) {
   }
 
   for (let i = 0; i < getTextNode(id).option.length; i++) {
-    console.log("Are we going to create button for: " + getTextNode(id).option[i].buttonText);
-    if (checkState(id, i)) { //
-        console.log("Going to create button for " + getTextNode(id).option[i].buttonText);
+    if (checkState(id, i)) {
         const button = document.createElement("button");
         button.innerHTML = getTextNode(id).option[i].buttonText;
 
         button.onclick = function() {
           selectOption(getTextNode(id).option[i].nextNode);
-          // state = getTextNode(id).option[i].state; // make it to new state
           state = Object.assign(state, getTextNode(id).option[i].state);
           console.log(state);
         }
-
         buttonGroup.append(button);
     }
   }
 }
 
 function checkState(id, index) {
-    if (getTextNode(id).option[index].hasOwnProperty("requiredStates")) {console.log("This is a required state");
-        let keys = Object.keys(getTextNode(id).option[index].requiredStates); // states in required states must be true
-        console.log("The keys in the required state are: " + keys);
-
+    if (getTextNode(id).option[index].hasOwnProperty("requiredStates")) {
+        let keys = Object.entries(getTextNode(id).option[index].requiredStates); // states in required states must be true
+        // keys is the 2d array of what is required [["keys", true], [keys]]
+        console.log(keys);
         for (let i = 0; i < keys.length; i++) {
-           console.log("For " + keys + " there is " + state[keys[i]]);
-            if (state[keys[i]]) {
-                console.log("Returning true..");
+            console.log("The value of this key in states" + keys[0][i] + " is " + state[keys[i][0]]);
+            console.log("The required state is: " + keys[i][1])
+            if (state[keys[i][0]] == keys[i][1]) {
                 return true;
             }
         }
