@@ -44,7 +44,9 @@ function displayButton(id) {
       child = buttonGroup.lastElementChild;
   }
 
-  for (let i = 0; i < getTextNode(id).option.length; i++) {
+  let randomNumber = getRandomNumber(getTextNode(id).option.length);
+  // for (let i = 0; i < getTextNode(id).option.length; i++) {
+  for (let i = 0; i < randomNumber; i++) {
     if (checkState(id, i)) {
         const button = document.createElement("button");
         button.innerHTML = getTextNode(id).option[i].buttonText;
@@ -76,4 +78,17 @@ function checkState(id, index) {
     else {
         return true;
     }
+}
+
+function getRandomNumber(arrayLength) {
+    // number returned must be 2 or larger
+    // if array length is 1, return 1,
+    // if the array length is 2, return 2
+    if (arrayLength == 1 || arrayLength == 2) {
+        return arrayLength;
+    }
+    let diff = arrayLength - 2;
+    let random = 2 + Math.floor(Math.random() * (arrayLength - diff));
+    console.log("Random number is: " + random);
+    return random;
 }
