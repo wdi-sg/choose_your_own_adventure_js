@@ -5,9 +5,16 @@ var buttonGroup = document.getElementById("btn-group");
 
 document.getElementById("lets-play-button").addEventListener('click', function(event) {
     username = document.querySelector("#input").value;
-    buttonGroup.lastElementChild.remove();// Destroy all previous buttons
-    document.querySelector("#input").remove();
-    startGame();
+    if (validateInput(username) == "") {
+        header.innerHTML = "Oops! Invalid input, please try again ~";
+        document.querySelector("#input").value = "";
+    }
+    else {
+        username = validateInput(username);
+        buttonGroup.lastElementChild.remove();
+        document.querySelector("#input").remove();
+        startGame();
+    }
 });
 
 function startGame() {
@@ -24,7 +31,6 @@ function selectOption(id) {
   displayButton(id);
 }
 
-// HELP FUNCTIONS //
 function getTextNode(id) {
   for (let i = 0; i < textNodes.length; i++) {
     if (textNodes[i].id === id) {
@@ -45,7 +51,6 @@ function displayButton(id) {
   }
 
   let randomNumber = getRandomNumber(getTextNode(id).option.length);
-  // for (let i = 0; i < getTextNode(id).option.length; i++) {
   for (let i = 0; i < randomNumber; i++) {
     if (checkState(id, i)) {
         const button = document.createElement("button");
@@ -81,9 +86,6 @@ function checkState(id, index) {
 }
 
 function getRandomNumber(arrayLength) {
-    // number returned must be 2 or larger
-    // if array length is 1, return 1,
-    // if the array length is 2, return 2
     if (arrayLength == 1 || arrayLength == 2) {
         return arrayLength;
     }
@@ -91,4 +93,16 @@ function getRandomNumber(arrayLength) {
     let random = 2 + Math.floor(Math.random() * (arrayLength - diff));
     console.log("Random number is: " + random);
     return random;
+}
+
+function validateInput(input) {
+    var inputArray = [];
+    if (isNaN(input) && input != "") {
+        inputArray = input.split("");
+        inputArray[0] = inputArray[0].toUpperCase();
+        for (let i = 1; i < inputArray.length; i++) {
+            inputArray[i] = inputArray[i].toLowerCase();
+        }
+    }
+    return inputArray.join("");
 }
