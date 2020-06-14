@@ -4,28 +4,11 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h3>DOM Manipulation Template</h3>
-    <input class="starter" id="input" placeholder="input"/>
-    <h2>output:</h2>
-    <div class="starter" id="output"></div>
-    <script>
-
-      var display = function( data ){
-        var displayElement = document.querySelector('#output');
-
-        // get rid of the entire contents
-        displayElement.innerHTML = "";
-
-        // put the data into the div
-        output.innerText = data;
-      };
-
-      document.querySelector('#input').addEventListener('change', function(event){
-        var currentInput = event.target.value;
-        var result = inputHappened(currentInput)
-        display( result );
-      });
-    </script>
-    <script src="script.js" charset="utf-8"></script>
+    <h3>WELCOME TO VAXXIN DUNGEON</h3>
+      <div id = "text" style = "text-transform: capitalize;"  >Text</div>
+      <input id="input" placeholder = "Type In Your Name Here">
+      <div id = "buttonBox">
+      </div>
+      <script src="script.js" charset="utf-8"></script>
   </body>
 </html>
