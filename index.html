@@ -4,13 +4,21 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h3>DOM Manipulation Template</h3>
-    <input class="starter" id="input" placeholder="input"/>
-    <h2>output:</h2>
-    <div class="starter" id="output"></div>
-    <script>
+    <h3>virtual adventure time</h3>
+    <input id="input" placeholder="username"/>
 
-      var display = function( data ){
+
+    <div id="output"></div>
+
+
+        <input type="button" class="option-btn" id="button1" value="option1"/>
+        <input type="button" class="option-btn" id="button2" value="option2"/>
+        <input type="button" class="option-btn" id="button3" value="option3"/>
+
+
+
+    <script>
+       var display = function( data ){
         var displayElement = document.querySelector('#output');
 
         // get rid of the entire contents
@@ -19,12 +27,30 @@
         // put the data into the div
         output.innerText = data;
       };
-
-      document.querySelector('#input').addEventListener('change', function(event){
+       document.querySelector('#input').addEventListener('change', function(event){
         var currentInput = event.target.value;
         var result = inputHappened(currentInput)
         display( result );
       });
+
+      document.querySelector('#button1').addEventListener('click', function(event){
+        var currentInput = event.target.value;
+        var result = inputHappened(currentInput)
+        display( result );
+      });
+        document.querySelector('#button2').addEventListener('click', function(event){
+        var currentInput = event.target.value;
+        var result = inputHappened(currentInput)
+        display( result );
+      });
+        document.querySelector('#button3').addEventListener('click', function(event){
+        var currentInput = event.target.value;
+        var result = inputHappened(currentInput)
+        display( result );
+      });
+
+
+
     </script>
     <script src="script.js" charset="utf-8"></script>
   </body>
