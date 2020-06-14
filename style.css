@@ -25,6 +25,10 @@ background-color:#ffeb39;
 }
 
 /* id = output therefore need # */
-#show{  
-  background-color:pink;
+#output{  
+  background-color:rgb(164, 165, 168);
+}
+
+#results{  
+  background-color:rgb(164, 165, 168);
 }

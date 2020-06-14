@@ -9,10 +9,9 @@ var baked = document.getElementById("baked");
 // var ginger = document.getElementById("ginger"); 
 // var random = document.getElementById("random"); 
 
-var show = document.getElementById("show");                    // show outcome in box
 
-bolognese.addEventListener("click", start1()); 
-baked.addEventListener("click", start2());  
+// bolognese.addEventListener("click", start1()); 
+// baked.addEventListener("click", start2());  
 // avocado.addEventListener("click", start3());  
 // roasted.addEventListener("click", start4());  
 // half.addEventListener("click", start5());  
@@ -22,27 +21,113 @@ baked.addEventListener("click", start2());
 // ginger.addEventListener("click", start9());  
 // random.addEventListener("click", start10());  
 
-addEventListener('change', function(){})
+ var output = document.querySelector('#output');   
+ var results  = document.querySelector('#results');  
+ 
+ function displayI(xx){
+   output.innerText = xx ;
+}
+ function displayR(xx){
+   results.innerText = xx ;
+}
+// display(currentInput);              // ------ display current input
 
-function start1(){
-    show.innerText = (
-    "choose 5 ingredients.. macaroni/lemon/tomatoes/ginger/minced meat/pepper/salt"
-    )}
+// function start1(){
+//     show.innerText = (
+//     "
+//     )}
     
-function start2(){
-  show.innerText = (
-    "choose 3 ingredients.. salmon/lemon/tomatoes/ginger/minced meat/pepper/salt/butter/garlic"
-    )}
+// function start2(){
+//   show.innerText = (
+//   )}
 
-function confirm() {
-  var x = document.getElementById("baked");
-  if (display()) {
-     console.log("yes") ;
-  } else {
-    console.log("no") ;
+var state = 0
+var invalid = "Input Invalid, choose dish again"
+var bolog = "choose ingredients.. \n tomatoes / ginger / minced meat / salt / butter / fettuccine"
+var baked = "choose ingredients.. \n salmon / lemon / minced meat / ginger /  / pepper / salt / butter"
+var avocado = "choose ingredients.. \n milk / avocado / tomatoes / minced meat / sugar"
+var roasted = "choose ingredients.. \n cashew nuts / salt / rocks / minced meat / cumin / salt"
+var half = "choose ingredients.. \n water / salt / rocks / eggs / sugar / salt  "
+var mushroom = "choose ingredients.. \n water / glutinous rice / couscous / eggs / mushroom / pessimon "
+var aglio = "choose ingredients.. \n water / glutinous rice / spaghetti / eggs / garlic / red pepper flakes "
+var sumatran = "choose ingredients.. \n beef / lime leaves / galangal / rempah / chilli  "
+var ginger = "choose ingredients.. \n seasame oil / garlic / pork / beehoon / chilli / ginger "
+var correct = "Congrats, you are a master chef! or so you think.."
+// console.log("choose 5 ingredients..\nmacaroni/lemon/tomatoes/ginger/minced meat/pepper/salt")  
+
+// document.querySelector('bolognese').addEventListener('click', function(event){
+//   console
+// })
+
+var input2 = document.querySelector('#input2').value
+//    console.log(input2)
+document.querySelector('#input2').addEventListener('change', function(event){
+  if(input2 === "Bolognese"){
+    var currentInput = event.target.value;
+    if(currentInput === "fettuccine"||"tomatoes"||"minced meat"||"salt"||"pepper"){
+      displayR(correct)            
+    }
+    else{console.log("hi")
+    }
   }
- }
-  
+  else if(input2 === "Baked"){
+    if(currentInput === "fettuccine"||"tomatoes"||"minced meat"||"salt"||"pepper"){
+      displayR(correct)                
+    }
+    else{console.log("hi")
+    }
+  }
+  else{
+    displayR("are you sure")
+  }
+})
+
+document.querySelector('#input').addEventListener('change', function(event){
+  var currentInput = event.target.value;
+  //-------------------------------------------------------------------------------------BOLOG
+  if(state === 0 ){
+        if(currentInput === "Bolognese"){
+            displayI("choose..fettuccine/tomatoes/minced meat/salt/pepper")
+        }
+   //-------------------------------------------------------------------------------------BAKED
+        else if(currentInput === "Baked"){
+            displayI("choose..fettuccine/tomatoes/minced meat/salt/pepper")
+        }
+  //-------------------------------------------------------------------------------------AVOCADO
+        else if(currentInput === "Avocado"){
+            displayI("choose..fettuccine/tomatoes/minced meat/salt/pepper")
+        }
+  //-------------------------------------------------------------------------------------ROASTED
+        else if(currentInput === "Roasted"){
+            displayI("choose..fettuccine/tomatoes/minced meat/salt/pepper")
+        }
+    //-------------------------------------------------------------------------------------HALF
+        else if(currentInput === "Half"){
+            displayI("choose..fettuccine/tomatoes/minced meat/salt/pepper")
+        }
+    //-------------------------------------------------------------------------------------MUSHROOM
+        else if(currentInput === "Mushroom"){
+            displayI("choose..fettuccine/tomatoes/minced meat/salt/pepper")
+        }
+    //-------------------------------------------------------------------------------------AGLIO
+        else if(currentInput === "Aglio"){
+            displayI("choose..fettuccine/tomatoes/minced meat/salt/pepper")
+        }
+    //-------------------------------------------------------------------------------------SUMATRAN
+        else if(currentInput === "Sumatran"){
+            displayI("choose..fettuccine/tomatoes/minced meat/salt/pepper")
+        }
+    //-------------------------------------------------------------------------------------GINGER
+        else if(currentInput === "Ginger"){
+            displayI("choose..fettuccine/tomatoes/minced meat/salt/pepper")
+        }
+        else{displayI(invalid)
+        }
+  }
+  else{displayI(invalid)
+  }
+})
+
 
 // -------------------- function confirm() {
 //   var x = document.getElementById("baked");
@@ -56,45 +141,4 @@ function confirm() {
 
 // ------------------(Math.random()*1) for select one randomly
 
-// ------------------- EVENT LISTENERS 
-// document.querySelector('#input').addEventListener('change', function(event)
-// {
-//   var currentInput = event.target.value;
-//   var output = currentInput ;
-//   display(output);
-//   if(currentInput === "1"){
-//     console.log("yes")  
-//     }
-//   else{
-//     console.log("no")
-//     }
-// });
-
    
-
-
-var inputHappened = function(currentInput){
-  if(inputHappened === "1"){
-    console.log('hi')
-  }
-  else{
-    console.log('bye')
-  };    
-  return "SOMETHING HAPPENED";
-}
-console.log("hello script js");
-
-
- var display = function( data ){
-        var displayElement = document.querySelector('#output');
-        // get rid of the entire contents
-        displayElement.innerHTML = "";
-        // put the data into the div
-        output.innerText = data;
-      };
-
-      document.querySelector('#input').addEventListener('change', function(event){
-        var currentInput = event.target.value;
-        var result = inputHappened(currentInput)
-        display( result );
-      })
