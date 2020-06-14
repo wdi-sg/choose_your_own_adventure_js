@@ -36,6 +36,9 @@ function selectOption(id) {
   if (id == -1) { // reset
     return startGame();
   }
+  if (id == 0) { // attack mode
+    attackMode();
+  }
   // displayItems();
   displayQuestion(id);
   displayButton(id);
@@ -128,18 +131,25 @@ function validateInput(input) {
     return inputArray.join("");
 }
 
-function attackMode() {
-    // ask the user what type of weapon they want to use when the attack just begins
-    // the mage will attack you every 10 seconds
-    // she might miss or she might strike
-
-
-}
 // book is used to heal
 // wand is used to cast spells/ attack
-// need to have a health bar
 
 // takes in the current live and updates the lives
+
+// optional: display current inventory before start of attack
+// when the user clicks on this, the attack mode comes in
+// a new HTML page is loaded: your live, you, the witch, the witch's live
+// start off with the mage attack you: we probably need an attack function from witch
+// then a drop down box appears, you choose the weapon, auto attacks
+// after you attack, the mage attacks, the drop down box disables
+// if your life or the mage's lives == 0, then the game ends displaying the correct message
+
+function attackMode() {
+    // optiona: display current inventory
+    window.location.replace("game.html");
+
+}
+
 // ITEMS FUNCTION //
 function displayItems() {
     let itemsEmoji = [0x1F9D0, 0x1F5DD, 0x1F4DC];
