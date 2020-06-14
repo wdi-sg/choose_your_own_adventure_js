@@ -1,31 +1,27 @@
 <html>
   <head>
-    <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h3>DOM Manipulation Template</h3>
-    <input class="starter" id="input" placeholder="input"/>
-    <h2>output:</h2>
-    <div class="starter" id="output"></div>
-    <script>
+    <div class="container">
+      <h2>choose your own adventure</h2>
+        <h5>inspired by Haruki Murakami's Norwegian Wood</h5>
+    
+      <!-- input -->
+      <div id="question">
+        <h4></h4>
+      </div>
 
-      var display = function( data ){
-        var displayElement = document.querySelector('#output');
+      <div id="answer">
+        <input class="user-input" type="text" id="user-input" placeholder="answer"/>
+        <button id="submit-btn" onclick="submitName()">Submit</button>
+      </div>
 
-        // get rid of the entire contents
-        displayElement.innerHTML = "";
-
-        // put the data into the div
-        output.innerText = data;
-      };
-
-      document.querySelector('#input').addEventListener('change', function(event){
-        var currentInput = event.target.value;
-        var result = inputHappened(currentInput)
-        display( result );
-      });
-    </script>
-    <script src="script.js" charset="utf-8"></script>
+      <div id="reset">
+        <button id="reset-btn" onclick="resetGame()">Restart</button>
+      </div>
+    </div>
+    
+    <script src="script.js"></script>
   </body>
 </html>
