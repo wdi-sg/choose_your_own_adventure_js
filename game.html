@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="game.css">
+  </head>
+
+  <body>
+    <h1>A Black Mirror Game:</h1>
+    <h2>Bandersnatch</h2>
+
+    <div id="gameIntro">
+    <p id="intro">You're a young programmer, working on a video game called 'Bandersnatch'. The game is an adaptation of your favourite fantasy novel. You think the author is a genius, but wonder why many don't share the same sentiment. Perhaps, because the author had slain his wife after 'Bandersnatch' became his mental breaking point..</p>
+
+    <button id="start-button" onclick="hideIntro();showFirstQuestion();"><span class="bracket">[</span> start <span class="bracket">]</span></button>
+    </div>
+
+    <div id="firstqns">
+    <p>Rise and shine, <span class="user-name"></span>! It's 10am. Let's get breakfast before that interview at Tuckersoft. Pick a cereal.</p>
+
+    <button onclick="hideFirstQuestion();showSecondQuestion();">Kellog's Frosties</button>
+    <button onclick="hideFirstQuestion();showSecondQuestion();">Quaker's Sugar Puffs</button>
+    </div>
+
+    <div id="secondqns">
+    <p>Oops, you're running late!<br> Better get going.</p>
+
+    <button onclick="hideSecondQuestion();showDitch();">Ditch the Interview</button>
+    <button onclick="hideSecondQuestion();showTakeBus();">Take the bus to Tuckersoft</button>
+    </div>
+
+    <div id="ditch">
+    <p>Dead End.<br>You lost the job offer.</p>
+
+    <a href="index.html" class="restart">Restart</a>
+    </div>
+
+    <div id="takebus">
+    <p>Pick music during commute.</p>
+    <button onclick="hideTakeBus();showThirdQuestion();">"Hold me now"<br> Thompson Twins</button>
+    <button onclick="hideTakeBus();showThirdQuestion();">"Here comes the rain again"<br> Eurythmics</button>
+    </div>
+
+    <div id="enterbuilding">
+    <p>You entered the Tuckersoft building and met Mohan Tucker<br> with Colin Ritman, the famous<br> game creator you're a fan of.</p>
+
+    <button>Introduce yourself and<br> present 'Bandersnatch'</button>
+    <button>Leave the building</button>
+    </div>
+
+    <script src="script.js" charset="utf-8"></script>
+  </body>
+</html>
