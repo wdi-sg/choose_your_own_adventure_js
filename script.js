@@ -38,7 +38,7 @@ let inputHappened = function (currentInput) {
     );
   }else{
     clearinput();
-    return "Type without number."
+    return "Type without number and space."
   }
   }
   
