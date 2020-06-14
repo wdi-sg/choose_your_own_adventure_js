@@ -1,6 +1,41 @@
 console.log("hello script js");
 
+//misc. function
+
+//prompt user to key in name
+var name = prompt("Key in your name");
+
+//display message in h4 which id="message"
+function displayName(){
+    document.getElementById("message").innerHTML = "Hi " + name + ", key your option below: ";
+}
+
+displayName();
+
+function displayError(){
+    document.getElementById("error-message").innerHTML = "* Please key in the correct input below.";
+}
+
+
+//display start message in the output box
+function startMessage(message){
+    output.innerText = message;
+}
+
+startMessage("Nice to meet you, " + name + ". What year would you like to go to? (YYYY)");
+
+
+//reset the input after entry
+function inputReset(){
+    document.getElementById('input').value = "";
+}
+
+
+//main function
+
 var currentStatus = "";
+
+var score = 0;
 
 //levels object
 var levels = {
@@ -57,166 +92,198 @@ var levels = {
     }
 };
 
-//misc. function
-
-//prompt user to key in name
-var name = prompt("Key in your name");
-
-//display message in h4 which id="message"
-function displayName(){
-    document.getElementById("message").innerHTML = "Hi " + name + ", key your option below: ";
-}
-
-displayName();
-
-//display start message in the output box
-function startMessage(message){
-    output.innerText = message;
-}
-
-startMessage("Nice to meet you, " + name + ". What year would you like to go to? (YYYY)");
-
-//reset the input after entry
-function inputReset(){
-    document.getElementById('input').value = "";
-}
-
-
-
-//main function
 
 function inputHappened(currentInput){
     console.log( currentInput );
 
     inputReset();
 
-    var year = currentInput;
-    //convert currentInput to all UPPERCASE
     var input = currentInput.toUpperCase();
     console.log(input);
 
     // >= 2015
     //optionOne - questionOne
-    if (year >= 2015){
+    if (currentInput >= 2015){
         currentStatus = "optionOne - questionOne";
         console.log(currentStatus);
+        score++;
+        console.log(score);
         return levels["optionOne"]["questionOne"];
     }
+
+    // >= 2015
     //optionOne - partOne - questionTwo
     if (currentStatus === "optionOne - questionOne" && input === "B"){
-        currentStatus = "partOne - questionTwo";
+        currentStatus = "optionOne - partOne - questionTwo";
         console.log(currentStatus);
+        score++;
+        console.log(score);
         return levels["optionOne"]["partOne"]["questionTwo"];
     }
+    // >= 2015
     //optionOne - partOne - questionTwo - one
-    if (currentStatus === "partOne - questionTwo" && input === "S"){
+    if (currentStatus === "optionOne - partOne - questionTwo" && input === "S"){
         currentStatus = "end";
         console.log(currentStatus);
-        return levels["optionOne"]["partOne"]["one"];
+        score++;
+        console.log(score);
+        return levels["optionOne"]["partOne"]["one"] + " Total score: " + score;
     }
+    // >= 2015
     //optionOne - partOne - questionTwo - two
-    if (currentStatus === "partOne - questionTwo" && input === "R"){
+    if (currentStatus === "optionOne - partOne - questionTwo" && input === "R"){
         currentStatus = "end";
         console.log(currentStatus);
-        return levels["optionOne"]["partOne"]["two"];
+        score--;
+        console.log(score);
+        return levels["optionOne"]["partOne"]["two"] + " Total score: " + score;
     }
+
+    // >= 2015
     //optionOne - partTwo - questionTwo
-    if (currentStatus === "questionOne" && input === "G"){
-        currentStatus = "partTwo - questionTwo";
+    if (currentStatus === "optionOne - questionOne" && input === "G"){
+        currentStatus = "optionOne - partTwo - questionTwo";
         console.log(currentStatus);
+        score++;
+        console.log(score);
         return levels["optionOne"]["partTwo"]["questionTwo"];
     }
+    // >= 2015
     //optionOne - partTwo - questionTwo - one
-    if (currentStatus === "partTwo - questionTwo" && input === "I"){
+    if (currentStatus === "optionOne - partTwo - questionTwo" && input === "I"){
         currentStatus = "end";
         console.log(currentStatus);
-        return levels["optionOne"]["partTwo"]["one"];
+        score--;
+        console.log(score);
+        return levels["optionOne"]["partTwo"]["one"] + " Total score: " + score;
     }
+    // >= 2015
     //optionOne - partTwo - questionTwo - two
-    if (currentStatus === "partTwo - questionTwo" && input === "O"){
+    if (currentStatus === "optionOne - partTwo - questionTwo" && input === "O"){
         currentStatus = "end";
         console.log(currentStatus);
-        return levels["optionOne"]["partTwo"]["two"];
+        score++;
+        console.log(score);
+        return levels["optionOne"]["partTwo"]["two"] + " Total score: " + score;
     }
 
     // 1985-2014
     //optionTwo - questionOne
-    if (year >= 1985 && year <= 2014){
+    if (currentInput >= 1985 && year <= 2014){
         currentStatus = "optionTwo - questionOne";
         console.log(currentStatus);
+        score++;
+        console.log(score);
         return levels["optionTwo"]["questionOne"];
     }
+
+    // 1985-2014
     //optionTwo - partOne
     if (currentStatus === "optionTwo - questionOne" && input === "CALVIN KLEIN"){
         currentStatus = "end";
         console.log(currentStatus);
-        return levels["optionTwo"]["partOne"];
+        score++;
+        console.log(score);
+        return levels["optionTwo"]["partOne"] + " Total score: " + score;
     } else if (currentStatus === "optionTwo - questionOne" && input != "CALVIN KLEIN"){
         console.log(currentStatus);
+        score--;
+        console.log(score);
         return "Wrong answer, try again! Think of the brand, CK."
     }
 
     // 1955-1984
     //optionThree - questionOne
-    if (year >= 1955 && year <= 1984){
+    if (currentInput >= 1955 && year <= 1984){
         currentStatus = "optionThree - questionOne";
         console.log(currentStatus);
+        score++;
+        console.log(score);
         return levels["optionThree"]["questionOne"];
     }
+    // 1955-1984
     //optionThree - partOne
     if (currentStatus = "optionThree - questionOne" && input === "Y"){
         currentStatus = "end";
         console.log(currentStatus);
-        return levels["optionThree"]["partOne"];
+        score -= 2;
+        console.log(score);
+        return levels["optionThree"]["partOne"] + " Total score: " + score;
     }
+    // 1955-1984
     //optionThree - partTwo
     if (currentStatus = "optionThree - questionOne" && input === "N"){
         currentStatus = "end";
         console.log(currentStatus);
-        return levels["optionThree"]["partTwo"];
+        score--;
+        console.log(score);
+        return levels["optionThree"]["partTwo"] + " Total score: " + score;
     }
+    // 1955-1984
     //optionThree - partThree
     if (currentStatus = "optionThree - questionOne" && input === "S"){
         currentStatus = "end";
         console.log(currentStatus);
-        return levels["optionThree"]["partThree"];
+        score++;
+        console.log(score);
+        return levels["optionThree"]["partThree"] + " Total score: " + score;
     }
 
     // < 1955
     //optionFour - questionOne
-    if (year < 1955){
+    if (currentInput < 1955){
         currentStatus = "optionFour - questionOne";
         console.log(currentStatus);
+        score++;
+        console.log(score);
         return levels["optionFour"]["questionOne"];
     }
+
+    // < 1955
     //optionFour - partOne
     if (currentStatus = "optionFour - questionOne" && input === "H"){
         currentStatus = "end";
         console.log(currentStatus);
-        return levels["optionFour"]["partOne"];
+        score--;
+        console.log(score);
+        return levels["optionFour"]["partOne"] + " Total score: " + score;
     }
+    // < 1955
     //optionFour - partTwo
     if (currentStatus = "optionFour - questionOne" && input === "M"){
         currentStatus = "end";
         console.log(currentStatus);
-        return levels["optionFour"]["partTwo"];
+        score -= 2;
+        console.log(score);
+        return levels["optionFour"]["partTwo"] + " Total score: " + score;
     }
+
+    // < 1955
     //optionFour - partThree - questionTwo
     if (currentStatus = "optionFour - questionOne" && input === "T"){
         currentStatus = "optionFour - partThree - questionTwo";
         console.log(currentStatus);
+        score++;
+        console.log(score);
         return levels["optionFour"]["partThree"]["questionTwo"];
     }
+
+    // < 1955
     //optionFour - partThree - one
     if (currentStatus = "optionFour - partThree - questionTwo" && input === "G"){
         currentStatus = "end";
         console.log(currentStatus);
-        return levels["optionFour"]["partThree"]["two"];
+        score--;
+        console.log(score);
+        return levels["optionFour"]["partThree"]["two"] + " Total score: " + score;
     }
+    // < 1955
     //optionFour - partThree - two
     if (currentStatus = "optionFour - partThree - questionTwo" && input === "L"){
         currentStatus = "end";
         console.log(currentStatus);
-        return levels["optionFour"]["partThree"]["two"];
+        score++;
+        console.log(score);
+        return levels["optionFour"]["partThree"]["two"] + " Total score: " + score;
     }
 }

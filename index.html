@@ -4,18 +4,15 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h3>DOM Manipulation Template</h3>
-    <h4 id="message"></h4>
+    <h2>Back to the Future</h3>
+    <h3 id="message"></h4>
+    <h3 id="error-message"></h4>
     <input class="starter" id="input" placeholder="input"/>
     <h2>output:</h2>
     <div class="starter" id="output"></div>
     <script>
-
       var display = function( data ){
         var displayElement = document.querySelector('#output');
-
-        // get rid of the entire contents
-        displayElement.innerHTML = "";
 
         // put the data into the div
         output.innerText = data;
