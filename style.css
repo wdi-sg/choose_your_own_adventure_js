@@ -1,20 +1,29 @@
 .starter{
-  font-size:16px;
-  padding:20px;
-  display:block;
-  margin:40px;
-  border:2px solid #808080;
-  width: 500px;
+  padding: 20px;
+  display: block;
+  margin: 40px;
+  border: 2px solid #808080;
+  width: 400px;
+  font-size: 16px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.sleepCatto{ 
+  width: 700px; 
+  height: 50px; 
+  padding: 0px 100px 10px 10px;
+  margin-top: 0px;
+  position: fixed;
+  float: right;
 }
 
 #output{
-  padding:20px;
-  display:block;
-  margin:40px;
-  border:2px solid #808080;
-  width: 500px;
-  background-color:rgb(255, 255, 255);
+  padding: 20px;
+  display: block;
+  margin: 40px;
+  border: 2px solid #808080;
+  width: 400px;
+  background-color: rgb(255, 255, 255);
   font-size: 16px;
   font-family: Georgia, 'Times New Roman', Times, serif;
-
 }
