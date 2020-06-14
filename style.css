@@ -9,3 +9,12 @@
 #output{
   background-color:pink;
 }
+
+h1{
+  font-family: Georgia, 'Times New Roman', Times, serif; 
+  font-style: italic;
+}
+
+strong {
+  color: steelblue;
+}
