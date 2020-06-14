@@ -1,11 +1,23 @@
-.starter{
-  font-size:30px;
-  padding:10px;
-  display:block;
-  margin:40px;
-  border:3px solid blue;
+html {
+  background-color: salmon;
+  text-align: center;
+}
+#input{
+  font-size: 30px;
+  padding: 10px;
+  display: flex;
+  align-self: center;
+  margin: 40px;
+  border: 3px solid rgb(0, 0, 0);
+}
+#submit-button {
+  background-color: blue;
+}
+#story-text {
+  margin-top: 30px;
 }
 
-#output{
-  background-color:pink;
+.option-btn {
+  background-color: aquamarine;
+  padding: 15px;
 }
