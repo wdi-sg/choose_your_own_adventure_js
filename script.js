@@ -13,11 +13,15 @@ let outcomes = {
 };
 
 let resetButton = document.querySelector(".btn-success");
-// resetButton.style.visibility = "hidden";
+resetButton.style.visibility = "hidden";
 
 let inputHappened = function (currentInput) {
   //Type userName & Question 1
+ 
   if (currentQuestion === 0) {
+    //validation
+    let letters = /^[a-zA-Z]*$/g;
+    if(letters.test(currentInput)===true){
     currentQuestion++;
     let userNameFirstLetter = currentInput.slice(0, 1);
     userNameFirstLetter = userNameFirstLetter.toUpperCase();
@@ -32,8 +36,12 @@ let inputHappened = function (currentInput) {
       userNameFull +
       ". Welcome to the simple ingredient choosing game. Do guess what kind of italian dish you will be making while picking the ingredient one by one. Please choose your first ingredient - (1. Yellow Noodle, 2. Bucatini, 3. Fusilli)"
     );
+  }else{
+    clearinput();
+    return "Type without number."
   }
-
+  }
+  
   //Question 2
   if (currentQuestion === 1) {
     if (parseInt(currentInput) === 1) {
@@ -161,9 +169,9 @@ let inputHappened = function (currentInput) {
     document.querySelector("h1").innerHTML = "<strong>Chef Adventure Game:</strong> Picking the right ingredients for <strong>Carbonara!</strong>";
     document.getElementById("input").style.visibility = "hidden";
     document.querySelector("h3").style.visibility = "hidden";
-    document.querySelector("h2").innerHTML =
-      "Ingredient Selected: " + array[0] + ", " + array[1] + ", " + array[2] + ", " + array[3] + " and " + array[4] ;
-    //resetButton.style.visibility = "visible";
+    document.querySelector("h2").innerText =
+      "Ingredient Selected: " + array[0] + ", " + array[1] + ", " + array[2] + ", " + array[3] + " and " + array[4] + "  ";
+    resetButton.style.visibility = "visible";
     console.log(array);
     if (scoreCount === 10) {
       return "Chef " + userNameFull + ", " + outcomes.perfect;
@@ -180,15 +188,17 @@ let inputHappened = function (currentInput) {
 };
 
 //Restart the game
-// resetButton.addEventListener("click", function () {
-//   document.getElementById("input").style.visibility = "visible";
-//   document.querySelector("h3").style.visibility = "visible";
-//   resetButton.style.visibility = "hidden";
-//   scoreCount = 0;
-//   currentQuestion = 0;
-//   document.querySelector("h3").innerHTML = "Type Your Name";
-//   document.querySelector("#output").innerHTML = "";
-// });
+resetButton.addEventListener("click", function () {
+  document.getElementById("input").style.visibility = "visible";
+  document.querySelector("h3").style.visibility = "visible";
+  resetButton.style.visibility = "hidden";
+  scoreCount = 0;
+  currentQuestion = 0;
+  document.querySelector("h3").innerHTML = "Type Your Name";
+  document.querySelector("h2").innerHTML = "Output: ";
+  document.querySelector("h1").innerHTML = "<strong>Chef Adventure Game:</strong> Picking the right ingredients for ___________";
+  document.querySelector("#output").innerHTML = "";
+});
 
 let display = function (data) {
   let displayElement = document.querySelector("#output");
