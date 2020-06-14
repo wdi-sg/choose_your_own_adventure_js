@@ -2,12 +2,14 @@ console.log("hello script js");
 
 //START
 var welcomeMsg = "What is your name?";
+
 display(welcomeMsg);
 
 //User details
 var userName;
+var hitPoints = 10;
 
-//USER INTERACTION
+//MANAGE USER INTERACTION
 var counter=0;
 var currSceneId = "";
 var inputHappened = function(currentInput){
@@ -22,11 +24,12 @@ var inputHappened = function(currentInput){
   if(counter===1){
     currSceneId = "start"
     outputMsg = startScene.getMessage(currentInput);
+    userName = currentInput;
   } else {  //in other scenes
     //validate that input is correct
     //set currScene
      nextSceneId = getNextSceneId(currSceneId,currentInput);
-     outputMsg = getScene(nextSceneId).getMessage();
+     outputMsg = getScene(nextSceneId).getMessage(userName);
      currSceneId = nextSceneId;
   }
   return outputMsg;
@@ -54,7 +57,7 @@ var getNextSceneId = function(currSceneId, keyword){
     var selectedSceneId = null;
     getScene(currSceneId).next.forEach( e => {
         var scene = getScene(e);
-        if(keyword.toUpperCase()==scene.keyword)
+        if(keyword.toUpperCase()==scene.keyword.toUpperCase())
             selectedSceneId = scene.id;
     } );
     return selectedSceneId;
