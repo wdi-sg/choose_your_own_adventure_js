@@ -47,7 +47,7 @@ function showOption(option) {
 
 //Takes in option selected
 function selectOption (option) {
-    if ('stealthMode' in option){
+    if ('willpowerRoll' in option){
         option.setNextText();
         var nextTextNodeId = option.nextText;
     } else {var nextTextNodeId = option.nextText}
@@ -190,10 +190,10 @@ const textNodes = [
            options: [
                {
                    text: '--Roll the dice-- Try to get up and go to bed.',
-                   stealthMode: true,
+                   willpowerRoll: true,
                    nextText: 0,
                    setNextText: function (status) {
-                       status = stealthOutcome();
+                       status = willpowerOutcome();
                        if (status === 'escape'){
                            this.nextText = 8}
                            else if (status === 'die')
