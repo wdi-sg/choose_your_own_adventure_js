@@ -9,18 +9,17 @@ var baked = document.getElementById("baked");
 // var ginger = document.getElementById("ginger"); 
 // var random = document.getElementById("random"); 
 
-
-// bolognese.addEventListener("click", start1()); 
-// baked.addEventListener("click", start2());  
-// avocado.addEventListener("click", start3());  
-// roasted.addEventListener("click", start4());  
-// half.addEventListener("click", start5());  
-// mushroom.addEventListener("click", start6());  
-// aglio.addEventListener("click", start7()); 
-// sumatran.addEventListener("click", start8());  
-// ginger.addEventListener("click", start9());  
-// random.addEventListener("click", start10());  
-
+// var food = document.getElementById('food').value;
+// var dishh;
+// if(food =='Fixed Rate'){
+//     rate_value = document.getElementById('avocado').value;
+// }else if(rates =='Variable Rate'){
+//     rate_value = document.getElementById('roasted').value;
+// }else if(rates =='Multi Rate'){
+//     rate_value = document.getElementById('r3').value;
+// }  
+// document.getElementById('results').innerHTML = rate_value;
+ 
  var output = document.querySelector('#output');   
  var results  = document.querySelector('#results');  
  
@@ -30,16 +29,6 @@ var baked = document.getElementById("baked");
  function displayR(xx){
    results.innerText = xx ;
 }
-// display(currentInput);              // ------ display current input
-
-// function start1(){
-//     show.innerText = (
-//     "
-//     )}
-    
-// function start2(){
-//   show.innerText = (
-//   )}
 
 var state = 0
 var invalid = "Input Invalid, choose dish again"
@@ -53,32 +42,63 @@ var aglio = "choose ingredients.. \n water / glutinous rice / spaghetti / eggs /
 var sumatran = "choose ingredients.. \n beef / lime leaves / galangal / rempah / chilli  "
 var ginger = "choose ingredients.. \n seasame oil / garlic / pork / beehoon / chilli / ginger "
 var correct = "Congrats, you are a master chef! or so you think.."
-// console.log("choose 5 ingredients..\nmacaroni/lemon/tomatoes/ginger/minced meat/pepper/salt")  
+var sure = "Are you sure"
 
+// console.log("choose 5 ingredients..\nmacaroni/lemon/tomatoes/ginger/minced meat/pepper/salt")  
 // document.querySelector('bolognese').addEventListener('click', function(event){
 //   console
 // })
 
-var input2 = document.querySelector('#input2').value
-//    console.log(input2)
+
+// "milk"||"avocado"||"tomatoes"||"minced meat"||"sugar"
+// "cashew nuts"||"salt"||"rocks"||"minced meat"||"cumin"||"salt"
+// "water"||"salt"||"rocks"||"eggs"||"sugar"||"salt  "
+// "glutinous rice"||"water"||"couscous"||"eggs"||"mushroom"||"pessimon "
+// "water"||"glutinous rice"||"spaghetti"||"eggs"||"garlic"||"red pepper flakes "
+// "beef"||"lime leaves"||"galangal"||"rempah"||"chilli"
+// "seasame oil"||"garlic"||"pork"||"beehoon"||"chilli"||"ginger "
+
+ 
+// var input2 = document.querySelector('#input2').value
+// console.log(input2)
+
 document.querySelector('#input2').addEventListener('change', function(event){
-  if(input2 === "Bolognese"){
+  if(state==1){
     var currentInput = event.target.value;
-    if(currentInput === "fettuccine"||"tomatoes"||"minced meat"||"salt"||"pepper"){
-      displayR(correct)            
+    console.log(currentInput)
+    if(currentInput === "tomatoes"||"ginger"||"minced meat"||"salt"||"butter"||"fettuccine"){
+        displayR(correct)
     }
-    else{console.log("hi")
+    else if(currentInput === "salmon"||"lemon"||"minced meat"||"ginger"||"pepper"||"salt"||"butter"){
+        displayR(baked)
     }
-  }
-  else if(input2 === "Baked"){
-    if(currentInput === "fettuccine"||"tomatoes"||"minced meat"||"salt"||"pepper"){
-      displayR(correct)                
+    else if(currentInput === "Avocado"){
+        displayR(avocado)
     }
-    else{console.log("hi")
+    else if(currentInput === "Roasted"){
+        displayR(roasted )
+    }
+    else if(currentInput === "Half"){
+        displayR(half)
+    }
+    else if(currentInput === "Mushroom"){
+        displayR(mushroom)
+    }
+    else if(currentInput === "Aglio"){
+        displayR(aglio)
+    }
+    else if(currentInput === "Sumatran"){
+        displayR(sumatran)
+    }
+    else if(currentInput === "Ginger"){
+        displayR(ginger)
+    }
+    else{
+        displayR("are you sure")
     }
   }
   else{
-    displayR("are you sure")
+  displayR(invalid)  
   }
 })
 
@@ -87,44 +107,54 @@ document.querySelector('#input').addEventListener('change', function(event){
   //-------------------------------------------------------------------------------------BOLOG
   if(state === 0 ){
         if(currentInput === "Bolognese"){
-            displayI("choose..fettuccine/tomatoes/minced meat/salt/pepper")
+            displayI(bolog)
+            state = 1
         }
    //-------------------------------------------------------------------------------------BAKED
         else if(currentInput === "Baked"){
-            displayI("choose..fettuccine/tomatoes/minced meat/salt/pepper")
+            displayI(baked)
+            state = 1
         }
   //-------------------------------------------------------------------------------------AVOCADO
         else if(currentInput === "Avocado"){
-            displayI("choose..fettuccine/tomatoes/minced meat/salt/pepper")
+            displayI(avocado)
+            state = 1
         }
   //-------------------------------------------------------------------------------------ROASTED
         else if(currentInput === "Roasted"){
-            displayI("choose..fettuccine/tomatoes/minced meat/salt/pepper")
+            displayI(roasted)
+            state = 1
         }
     //-------------------------------------------------------------------------------------HALF
         else if(currentInput === "Half"){
-            displayI("choose..fettuccine/tomatoes/minced meat/salt/pepper")
+            displayI(half)
+            state = 1
         }
     //-------------------------------------------------------------------------------------MUSHROOM
         else if(currentInput === "Mushroom"){
-            displayI("choose..fettuccine/tomatoes/minced meat/salt/pepper")
+            displayI(mushroom)
+            state = 1
         }
     //-------------------------------------------------------------------------------------AGLIO
         else if(currentInput === "Aglio"){
-            displayI("choose..fettuccine/tomatoes/minced meat/salt/pepper")
+            displayI(aglio)
+            state = 1
         }
     //-------------------------------------------------------------------------------------SUMATRAN
         else if(currentInput === "Sumatran"){
-            displayI("choose..fettuccine/tomatoes/minced meat/salt/pepper")
+            displayI(sumatran)
+            state = 1
         }
     //-------------------------------------------------------------------------------------GINGER
         else if(currentInput === "Ginger"){
-            displayI("choose..fettuccine/tomatoes/minced meat/salt/pepper")
+            displayI(ginger)
+            state = 1
         }
         else{displayI(invalid)
         }
   }
   else{displayI(invalid)
+ 
   }
 })
 
