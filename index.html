@@ -1,31 +1,43 @@
 <html>
   <head>
-    <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h3>DOM Manipulation Template</h3>
-    <input class="starter" id="input" placeholder="input"/>
-    <h2>output:</h2>
-    <div class="starter" id="output"></div>
+  <h1> Chef Level Validation</h1>
+
+  <!-- ---------------- 1.SLECTION SECTION ----------------  -->
+  <p class="heading">1. Choose dish to cook:</p>
+  <ul >
+    <input type="radio" name="dish" id="bolognese"> Bolognese Fettuccine </br>
+    <input type="radio" name="dish" id="baked"> Baked Garlic Butter Salmon </br>
+    <input type="radio" name="dish" id="avocado"> Avocado Smoothie </br>
+    <input type="radio" name="dish" id="roasted"> Roasted Cashew Nuts </br>
+    <input type="radio" name="dish" id="half"> Half Boiled Eggs </br>
+    <input type="radio" name="dish" id="mushroom"> Mushroom Risotto </br>
+    <input type="radio" name="dish" id="aglio"> Aglio Olio </br>
+    <input type="radio" name="dish" id="sumatran"> Sumatran Rendang </br>
+    <input type="radio" name="dish" id="ginger"> Ginger Seasame Oil Braised  Pork </br>
+    <input type="radio" name="dish" id="random"> * Select One Randomly * </br>
+  </ul>
+ <input class="starter" id="input"/>
+  <!-- <button id="confirm" onclick="confirm()"> Confirm </button> -->
+
+<!-- ---------------- 2. Ingredints list SECTION ----------------  -->
+  <P class="heading">2. Ingredients List:</P>
+<p class="starter" id="output"></p>
+
+<!-- ---------------- 3.INPUT SECTION ----------------  -->
+  <p class="heading">3. Input Ingredients:</p>
+  <input class="starter" id="input2"/>
+
+
+<!-- ---------------- 4. RESULTS SECTION ----------------  -->
+  <P class="heading">4. Results:</P>
+  <p class="starter" id="results"></p>
+  
     <script>
-
-      var display = function( data ){
-        var displayElement = document.querySelector('#output');
-
-        // get rid of the entire contents
-        displayElement.innerHTML = "";
-
-        // put the data into the div
-        output.innerText = data;
-      };
-
-      document.querySelector('#input').addEventListener('change', function(event){
-        var currentInput = event.target.value;
-        var result = inputHappened(currentInput)
-        display( result );
-      });
     </script>
-    <script src="script.js" charset="utf-8"></script>
+    <script src="script.js"></script>
   </body>
 </html>
+
