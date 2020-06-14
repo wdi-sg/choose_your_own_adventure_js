@@ -1,0 +1,133 @@
+@keyframes flickerAnimation {
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+
+@font-face {
+    font-family: 'sabofilled';
+    src: url('/Users/nuramirahsham/Desktop/GENERAL_ASSEMBLY/git-practice/choose_your_own_adventure_js/webfontkit-20200614-015843/sabo-filled-webfont.woff2') format('woff2'),
+         url('/Users/nuramirahsham/Desktop/GENERAL_ASSEMBLY/git-practice/choose_your_own_adventure_js/webfontkit-20200614-015843/sabo-filled-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'saboregular';
+    src: url('/Users/nuramirahsham/Desktop/GENERAL_ASSEMBLY/git-practice/choose_your_own_adventure_js/webfontkit-20200614-015843/sabo-regular-webfont.woff2') format('woff2'),
+         url('/Users/nuramirahsham/Desktop/GENERAL_ASSEMBLY/git-practice/choose_your_own_adventure_js/webfontkit-20200614-015843/sabo-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+html {
+	background-image: url('/Users/nuramirahsham/Desktop/GENERAL_ASSEMBLY/git-practice/choose_your_own_adventure_js/bg.png');
+	background-size: 100%;
+	background-color: black;
+	text-transform: uppercase;
+}
+
+body {
+	position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-family: 'sabofilled', monospace;
+  text-align: center;
+  font-size: 20px;
+}
+
+h1 {
+  font-size: 20px;
+  letter-spacing: 1px;
+  margin: 3px;
+}
+
+h2 {
+	font-family: 'saboregular', monospace;
+	font-size: 40px;
+	margin: 5px;
+	text-overflow: clip;
+  letter-spacing: 3px;
+  text-shadow: -2px -2px 1px rgba(30,242,241, 0.9) , 2px 2px 1px rgba(246,5,10,0.9);
+}
+
+#intro {
+	font-size: 24px;
+	line-height: 32px;
+	color: rgb(30,242,241);
+	margin-top: 40px;
+}
+
+.bracket {
+	display: inline;
+	font-size: 30px;
+}
+
+#start-button {
+	background-color: black;
+	border: none;
+	color: white;
+	font-family: 'sabofilled', monospace;
+	font-size: 24px;
+}
+
+#start-button:hover {
+	color: rgb(246,5,10);
+}
+
+#gameIntro {
+	display: block;
+}
+
+div {
+	display: none;
+	font-size: 26px;
+	line-height: 32px;
+	color: rgb(30,242,241);
+	margin-top: 40px;
+}
+
+button {
+	background-color: black;
+	border: 2px solid white;
+	border-radius: 12px;
+	color: white;
+	font-family: 'sabofilled', monospace;
+	font-size: 24px;
+	padding: 15px;
+	margin: 10px;
+}
+
+button:hover {
+	color: black;
+	background-color: white;
+}
+
+#ditch p {
+	font-size: 30px;
+	color: rgb(246,5,10);
+	margin-bottom: 50px;
+}
+
+.restart {
+	background-color: black;
+	border: 2px solid white;
+	border-radius: 12px;
+	color: white;
+	font-family: 'sabofilled', monospace;
+	font-size: 24px;
+	padding: 10px;
+	text-decoration: none;
+}
+
+.restart:hover {
+	color: black;
+	background-color: white;
+}
+
+#takebus button {
+	padding: 10px 30px;
+}
