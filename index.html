@@ -4,10 +4,10 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h3>DOM Manipulation Template</h3>
-    <input class="starter" id="input" placeholder="input"/>
+    <h3>"Choose" your own adventure</h3>
     <h2>output:</h2>
     <div class="starter" id="output"></div>
+    <input class="starter" id="input" placeholder="input"/>
     <script>
 
       var display = function( data ){
@@ -20,12 +20,17 @@
         output.innerText = data;
       };
 
-      document.querySelector('#input').addEventListener('change', function(event){
-        var currentInput = event.target.value;
-        var result = inputHappened(currentInput)
-        display( result );
+      document.querySelector('#input').addEventListener('keyup', function(event){
+        if(event.key==="Enter"){
+           var currentInput = event.target.value;
+            var result = inputHappened(currentInput)
+            display( result );
+            event.target.value = ""
+        }
       });
     </script>
+    <script src="ascii_art.js" charset="utf-8"></script>
     <script src="script.js" charset="utf-8"></script>
+    <script src="game_data.js" charset="utf-8"></script>
   </body>
 </html>
