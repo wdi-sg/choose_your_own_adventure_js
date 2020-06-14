@@ -183,6 +183,10 @@ const textNodes = [
                    requiredState: function(currentState) { return currentState.omen},
                    setState: {salt: true}
                },
+                {
+                   text: 'Investigate',
+                   nextText: 10,
+               },
                {
                    text: 'Back',
                    nextText: 2,
