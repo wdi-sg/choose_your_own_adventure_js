@@ -1,31 +1,16 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h3>DOM Manipulation Template</h3>
-    <input class="starter" id="input" placeholder="input"/>
-    <h2>output:</h2>
+    <h1>Picking the right ingredients for Carbonara Game</h1>
+    <h2>Output:  <button type="reset" class="btn btn-success">Restart?</button></h2>
     <div class="starter" id="output"></div>
-    <script>
+    <h3>Type Your Name</h3>
+    <input class="starter" id="input" placeholder="input"/>
 
-      var display = function( data ){
-        var displayElement = document.querySelector('#output');
-
-        // get rid of the entire contents
-        displayElement.innerHTML = "";
-
-        // put the data into the div
-        output.innerText = data;
-      };
-
-      document.querySelector('#input').addEventListener('change', function(event){
-        var currentInput = event.target.value;
-        var result = inputHappened(currentInput)
-        display( result );
-      });
-    </script>
     <script src="script.js" charset="utf-8"></script>
   </body>
 </html>
