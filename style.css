@@ -1,3 +1,7 @@
+body{
+  padding: 15px;
+}
+
 .starter{
   font-size:30px;
   padding:10px;
@@ -8,4 +12,14 @@
 
 #output{
   background-color:pink;
+}
+
+h1{
+  font-family: Georgia, 'Times New Roman', Times, serif; 
+  font-style: italic;
+  padding-bottom: 25px;
+}
+
+strong {
+  color: steelblue;
 }
