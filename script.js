@@ -1,7 +1,7 @@
 var username = "";
-var state = {};
 var lives = 5; // current lives
 var maxLives = 5; // max lives
+var state = {};
 var header = document.getElementById("header");
 var buttonGroup = document.getElementById("btn-group");
 let health = [0x1F970, 0x1F60D, 0x1F63B, 0x1F496, 0x1F498];
@@ -37,7 +37,9 @@ function selectOption(id) {
     return startGame();
   }
   if (id == 0) { // attack mode
-    attackMode();
+    localStorage.setItem('state', JSON.stringify(state));
+    return attackMode();
+    console.log("id is " + 0);
   }
   // displayItems();
   displayQuestion(id);
@@ -77,7 +79,7 @@ function displayButton(id) {
           displayHealth(id, i);
           state = Object.assign(state, getTextNode(id).option[i].state);
           console.log(state);
-          displayItems();
+          displayItems("items");
         }
         buttonGroup.append(button);
     }
@@ -131,37 +133,23 @@ function validateInput(input) {
     return inputArray.join("");
 }
 
-// book is used to heal
-// wand is used to cast spells/ attack
-
-// takes in the current live and updates the lives
-
-// optional: display current inventory before start of attack
-// when the user clicks on this, the attack mode comes in
-// a new HTML page is loaded: your live, you, the witch, the witch's live
-// start off with the mage attack you: we probably need an attack function from witch
-// then a drop down box appears, you choose the weapon, auto attacks
-// after you attack, the mage attacks, the drop down box disables
-// if your life or the mage's lives == 0, then the game ends displaying the correct message
-
-function attackMode() {
-    // optiona: display current inventory
-    window.location.replace("game.html");
-
-}
-
 // ITEMS FUNCTION //
-function displayItems() {
+function displayItems(id) {
     let itemsEmoji = [0x1F9D0, 0x1F5DD, 0x1F4DC];
     // wand key book
-    const item = document.getElementById("items");
-    items.innerHTML = "";
+    console.log("Display item is called");
+    const item = document.getElementById(id);
+    item.innerHTML = "";
     let entries = Object.entries(state);
+    console.log(Object.keys(state).length);
+    console.log(item);
     for (let i = 0; i < Object.keys(state).length; i++) {
         if (entries[i][1]) { // if item state is true
-            items.innerHTML += String.fromCodePoint(itemsEmoji[i]);
+            item.innerHTML += String.fromCodePoint(itemsEmoji[i]);
+            console.log("Displaying: " + String.fromCodePoint(itemsEmoji[i]));
         }
     }
+    console.log("Function ends");
 }
 
 // HEALTH FUNCTIONS //
@@ -193,3 +181,15 @@ function displayFullHealth() {
       console.log(String.fromCodePoint(health[i]));
     }
 }
+
+function attackMode() {
+    // optional: display current inventory
+    console.log("attack mode called");
+    window.location.replace("game.html");
+    state = JSON.parse(localStorage.getItem('state'));
+    document.getElementById("user-game").innerHTML = username;
+    displayItems("items-game");
+    console.log("attack mode called")
+}
+
+
