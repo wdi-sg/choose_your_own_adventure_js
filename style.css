@@ -1,3 +1,8 @@
+h3 {
+  font-size: 20px;
+  font-family: 'Novo Mono', monospace;
+}
+
 .starter{
   padding: 20px;
   display: block;
@@ -5,7 +10,7 @@
   border: 2px solid #808080;
   width: 400px;
   font-size: 16px;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: 'Novo Mono', monospace;
 }
 
 .sleepCatto{ 
@@ -25,5 +30,5 @@
   width: 400px;
   background-color: rgb(255, 255, 255);
   font-size: 16px;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: 'Novo Mono', monospace;
 }
