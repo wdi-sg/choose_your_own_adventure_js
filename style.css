@@ -27,6 +27,11 @@ h3 {
 	font-family: 'Roboto', sans-serif;
 }
 
+p {
+	font-family: 'Roboto', sans-serif;
+	font-size: 20px;
+}
+
 .starter{
   font-size:30px;
   padding:10px;
@@ -114,5 +119,11 @@ a:active .icon-arrow {
 
 #input, #output{
 	font-family: 'Roboto', sans-serif;
-  background-color: white;
+	font-size: 20px;
+  background-color: rgba(238, 238, 238, 0.3);
+}
+
+#choice, #begin{
+	font-family: 'Roboto', sans-serif;
+	font-size: 20px;;
 }

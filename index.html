@@ -8,52 +8,64 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h1>A footballer's journey</h1>
-    <h3>Let's see if you have what it takes to become a pro and sign a contract in one of the best clubs in the World!<br></h3>
+    <div id='game-introduction'>
+        <h1>A footballer's journey</h1>
+        <h3>Let's see if you have what it takes to  sign a contract in one of the best clubs in the World!<br>
+        </h3>
+    </div>
 
-    <input class="starter" id="input" placeholder="Answer here"/>
+        <div class="starter" id="output">
+            <p><span id="message"></span></p>
+            <p><span id="outputs"></span></p>
+        </div>
 
-    <div id="start-button">
+        <div id="begin">
 
-    <a href="javascript:;">
-        <svg class="icon-arrow before">
-            <use xlink:href="#arrow"></use>
-        </svg>
-        <span class="label">Start your journey</span>
-        <svg class="icon-arrow after">
-            <use xlink:href="#arrow"></use>
-        </svg>
-    </a>
-<svg style="display: none;">
-  <defs>
-    <symbol id="arrow" viewBox="0 0 35 15">
-      <title>Arrow</title>
-      <path d="M27.172 5L25 2.828 27.828 0 34.9 7.071l-7.07 7.071L25 11.314 27.314 9H0V5h27.172z "/>
-    </symbol>
-  </defs>
-</svg>
-</div>
+            <a href="javascript:;">
+                <svg class="icon-arrow before">
+                    <use xlink:href="#arrow"></use>
+                </svg>
+                <span class="label">Start the journey</span>
+                <svg class="icon-arrow after">
+                    <use xlink:href="#arrow"></use>
+                </svg>
+            </a>
+            <svg style="display: none;">
+              <defs>
+                <symbol id="arrow" viewBox="0 0 35 15">
+                  <title>Arrow</title>
+                  <path d="M27.172 5L25 2.828 27.828 0 34.9 7.071l-7.07 7.071L25 11.314 27.314 9H0V5h27.172z "/>
+                </symbol>
+              </defs>
+            </svg>
+        </div>
 
-    <h2>Result</h2>
-    <div class="starter" id="output"></div>
-    <script>
+        <h2>What next?</h2>
 
-      var display = function( data ){
-        var displayElement = document.querySelector('#output');
+        <input class="starter" id="input" placeholder="state your choice here"/>
 
-        // get rid of the entire contents
-        displayElement.innerHTML = "";
+        <div id="choice">
 
-        // put the data into the div
-        output.innerText = data;
-      };
+            <a href="javascript:;">
+                <svg class="icon-arrow before">
+                    <use xlink:href="#arrow"></use>
+                </svg>
+                <span class="label">Run the wheel of fate</span>
+                <svg class="icon-arrow after">
+                    <use xlink:href="#arrow"></use>
+                </svg>
+            </a>
+            <svg style="display: none;">
+              <defs>
+                <symbol id="arrow" viewBox="0 0 35 15">
+                  <title>Arrow</title>
+                  <path d="M27.172 5L25 2.828 27.828 0 34.9 7.071l-7.07 7.071L25 11.314 27.314 9H0V5h27.172z "/>
+                </symbol>
+              </defs>
+            </svg>
+        </div>
 
-      document.querySelector('#input').addEventListener('change', function(event){
-        var currentInput = event.target.value;
-        var result = inputHappened(currentInput)
-        display( result );
-      });
-    </script>
+
     <script src="script.js" charset="utf-8"></script>
   </body>
 </html>
