@@ -410,6 +410,7 @@ const textNodes = [
            options: [
                 {
                    text: 'Try again',
+                   setState: {knife: false, butcherKnife:false, motherSong: false, salt: false, omen: false},
                    nextText: 1
                },
            ]
