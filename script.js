@@ -12,6 +12,9 @@ var hitPoints = 10;
 //MANAGE USER INTERACTION
 var counter=0;
 var currSceneId = "";
+var inFightScene = false;
+var gameOver = false;
+
 var inputHappened = function(currentInput){
   console.log( currentInput );
   console.log("counter: "+ counter);
@@ -25,6 +28,26 @@ var inputHappened = function(currentInput){
     currSceneId = "start"
     outputMsg = startScene.getMessage(currentInput);
     userName = currentInput;
+  } else if(gameOver==true && currentInput.toUpperCase()!="F"){
+    outputMsg = "Please press [F] to pay respects."
+  } else if (gameOver==true && currentInput.toUpperCase()=="F") {
+    outputMsg = getScene("start").getMessage(userName);
+    currSceneId = "start";
+    gameOver = false;
+  } else if(currSceneId=="hi") {
+    console.log("entered fight scene")
+    if(fightUserResponsesKey.slice(0,-1).includes(currentInput.toUpperCase())){
+        var idx = fightUserResponsesKey.indexOf(currentInput.toUpperCase());
+        var dmg = getDamage();
+        removeUserResponse(idx);
+        outputMsg = getFightResponse(dmg,idx);
+        removeSDAResponse(idx);
+    } else if (fightUserResponsesKey.slice(-1).includes(currentInput.toUpperCase())){
+        nextSceneId = "recover"
+        outputMsg = getScene(nextSceneId).getMessage(userName);
+        currSceneId = nextSceneId;
+    }
+    // outputMsg = "FIGHT SCENE";
   } else {  //in other scenes
     //validate that input is correct
     //set currScene

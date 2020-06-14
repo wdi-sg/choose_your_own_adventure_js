@@ -194,7 +194,30 @@ var hiScene = {
         return this.art+this.getBaseMessage(p)+this.getOptionMessage();
     },
     getBaseMessage: function(p){
-        return "You smile at him. And he notices your smile. \nAs he approaches, you realise that he's not your friend but a Safe Distancing Ambassador. He also notices your smile because YOU'RE NOT WEARING A MASK."
+        return "You smile at him. And he notices your smile. \n\nAs he approaches, you realise that he's not your friend but a Safe Distancing Ambassador. He also notices your smile because YOU'RE NOT WEARING A MASK. \n\nHe walks towards you and begins writing you a ticket.\n\nYou panic and do one of the following options:\n"
+    },
+    getOptionMessage: function(p){
+        var str="";
+        for(var i = 0; i < fightUserResponses.length; i++){
+            str+="\n - "+ fightUserResponses[i];
+        }
+        return str;
+    },
+    art:""
+    };
+
+var recoverScene = {
+    id:"recover",
+    next: [],
+    action: "",
+    get keyword() {
+        return this.action.match(/\[([A-Za-z])\]/)[1];
+    },
+    getMessage: function(p){    //message to display when user enters this scene
+        return this.art+this.getBaseMessage(p)+this.getOptionMessage();
+    },
+    getBaseMessage: function(p){
+        return "'Wow that worked!' You thought, but no, you were actually just having a dream. Remember to mask up next time, "+p+"."
     },
     getOptionMessage: function(p){
         var str="";
@@ -205,6 +228,73 @@ var hiScene = {
     },
     art:""
     };
+
+var fightUserResponses = [
+"Claim you're a [S]overeign and that you're a 'We the people' (whatever that means).",
+"Claim [i]nsanity.",
+"Claim that the Safe Distancing Ambassador is being [r]acist.",
+"Start doing [j]umping jacks and claim you're warming up for a run",
+"[C]over your eyes and hope everything goes away."
+]
+var fightUserResponsesKey = fightUserResponses.map(e => {
+    return (e.match(/\[([A-Za-z])\]/)[1]).toUpperCase();
+});
+var fightSDAResponses = [
+"Lol, that won't work, we've had someone else tried that already.",
+"Yeah, given your affinity with cats i wouldn't be surprised. but still, no.",
+"Please don't bring race into this - besides we are of the same race - the Human Race.",
+"Lol, who are you kidding? You don't even look like you workout."
+]
+
+var removeUserResponse = function(idx){
+    // var idx = fightUserResponsesKey.indexOf(key);
+    fightUserResponses.splice(idx,1);
+    fightUserResponsesKey.splice(idx,1);
+    return;
+}
+
+var removeSDAResponse = function(idx){
+    fightSDAResponses.splice(idx,1);
+};
+
+var getSDAResponse = function(idx){
+    var resp = fightSDAResponses[idx];
+    return resp;
+};
+
+var getDamage = function(){
+    var damage = Math.floor(Math.random() * 10);
+    var res = hitPoints - damage;
+    hitPoints = Math.max(res,0);
+    return damage;
+};
+
+var getFightResponse = function(dmg,idx){
+    var str =""
+    str+="Safe Distancing Ambassador:\n\n" + "    '"+getSDAResponse(idx)+"'\n\n";
+    str+="You got hurt "+ dmg +"hp by his response. Your life now is "+hitPoints+"hp.\n\n"
+    if(hitPoints===0){
+        gameOver=true;
+        str+="GAME OVER. YOU DIED. Press [F] to pay respects.";
+        return str;
+    }
+    str+="Try something else:"+ hiScene.getOptionMessage();
+    return str;
+};
+//BATTLE LOOP
+    //if not the first time
+        //if response is 1 to 4
+            //remove response from array
+            //generate random damage
+            //reduce hp by damage amount
+                //if hp <= 0 gameOver message - game ends here
+            //show corresponding ambassdor reply
+        //if response is 5
+            //set scene to recovery scene as per usual method
+
+//IT WORKED
+
+
 
 //ADD ALL SCENES MASTER ARRAY
 var allScenes = [];
@@ -217,6 +307,7 @@ allScenes.push(abScene);
 allScenes.push(catScene);
 allScenes.push(outScene);
 allScenes.push(hiScene);
+allScenes.push(recoverScene);
 
 //LINK SCENES TOGETHER
 startScene.next.push("workout");
@@ -242,35 +333,10 @@ catScene.next.push('hi');
 
 sleepScene.next.push('start');
 
+recoverScene.next.push('start');
+
 //ADD ASCII ART
 abScene.art = absArt;
 runScene.art = runArt;
 coffeeScene.art = coffeeArt;
 catScene.art = catArt;
-
-//BATTLE LOOP
-//if currentscene is hi scene
-    //if first time entering scene
-    //show available responses
-
-    //if not the first time
-    //capture the response, and reply accordingly
-        //if response is 1 to 4
-        //remove response from array
-        //generate random damage
-        //reduce hp by damage amount
-        //show corresponding ambassdor reply
-
-//1claim you're a sovereign  and that you're "We the people"
-//2claim insanity
-//3claim that the safe distancing ambassador is racist
-//4start doing jumping jacks and claim you're warming up for a run
-//5cover your eyes
-
-
-//lol, that won't work, we've had someone else tried that already.
-//yeah, given your affinity with cats i wouldn't be surprised. but still, no.
-//please don't bring race into this. besides we are of the same race
-//oh who are you kidding? you don't even look like you workout.
-
-//IT WORKED
