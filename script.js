@@ -28,12 +28,15 @@ var inputHappened = function(currentInput){
     currSceneId = "start"
     outputMsg = startScene.getMessage(currentInput);
     userName = currentInput;
+    //game over but user didn't press f
   } else if(gameOver==true && currentInput.toUpperCase()!="F"){
     outputMsg = "Please press [F] to pay respects."
+    //game over, user press f, send user back to start
   } else if (gameOver==true && currentInput.toUpperCase()=="F") {
     outputMsg = getScene("start").getMessage(userName);
     currSceneId = "start";
     gameOver = false;
+    //if reaches fight scene, begin loop
   } else if(currSceneId=="hi") {
     console.log("entered fight scene")
     if(fightUserResponsesKey.slice(0,-1).includes(currentInput.toUpperCase())){
@@ -42,10 +45,12 @@ var inputHappened = function(currentInput){
         removeUserResponse(idx);
         outputMsg = getFightResponse(dmg,idx);
         removeSDAResponse(idx);
+        //fight scene will exit only upon life 0 or user chooses correct selection
     } else if (fightUserResponsesKey.slice(-1).includes(currentInput.toUpperCase())){
         nextSceneId = "recover"
         outputMsg = getScene(nextSceneId).getMessage(userName);
         currSceneId = nextSceneId;
+        setGameVariables();
     }
     // outputMsg = "FIGHT SCENE";
   } else {  //in other scenes

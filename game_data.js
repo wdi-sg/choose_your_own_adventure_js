@@ -229,23 +229,37 @@ var recoverScene = {
     art:""
     };
 
-var fightUserResponses = [
-"Claim you're a [S]overeign and that you're a 'We the people' (whatever that means).",
-"Claim [i]nsanity.",
-"Claim that the Safe Distancing Ambassador is being [r]acist.",
-"Start doing [j]umping jacks and claim you're warming up for a run",
-"[C]over your eyes and hope everything goes away."
-]
-var fightUserResponsesKey = fightUserResponses.map(e => {
-    return (e.match(/\[([A-Za-z])\]/)[1]).toUpperCase();
-});
-var fightSDAResponses = [
-"Lol, that won't work, we've had someone else tried that already.",
-"Yeah, given your affinity with cats i wouldn't be surprised. but still, no.",
-"Please don't bring race into this - besides we are of the same race - the Human Race.",
-"Lol, who are you kidding? You don't even look like you workout."
-]
 
+//FIGHT SCENE VARIABLES
+var fightUserResponses = [];
+var fightUserResponsesKey = [];
+var fightSDAResponses = [];
+
+var setGameVariables = function(){
+    fightUserResponses = [
+    "Claim you're a [S]overeign and that you're a 'We the people' (whatever that means).",
+    "Claim [i]nsanity.",
+    "Claim that the Safe Distancing Ambassador is being [r]acist.",
+    "Start doing [j]umping jacks and claim you're warming up for a run",
+    "[C]over your eyes and hope everything goes away."
+    ]
+    fightUserResponsesKey = fightUserResponses.map(e => {
+        return (e.match(/\[([A-Za-z])\]/)[1]).toUpperCase();
+    });
+    fightSDAResponses = [
+    "Lol, that won't work, we've had someone else tried that already.",
+    "Yeah, given your affinity with cats i wouldn't be surprised. but still, no.",
+    "Please don't bring race into this - besides we are of the same race - the Human Race.",
+    "Lol, who are you kidding? You don't even look like you workout."
+    ]
+    hitPoints=10;
+}
+
+setGameVariables();
+
+
+
+//FIGHT SCENE FUNCTIONS
 var removeUserResponse = function(idx){
     // var idx = fightUserResponsesKey.indexOf(key);
     fightUserResponses.splice(idx,1);
@@ -262,6 +276,7 @@ var getSDAResponse = function(idx){
     return resp;
 };
 
+//Assign random damage and update hitpoints
 var getDamage = function(){
     var damage = Math.floor(Math.random() * 10);
     var res = hitPoints - damage;
@@ -275,26 +290,14 @@ var getFightResponse = function(dmg,idx){
     str+="You got hurt "+ dmg +"hp by his response. Your life now is "+hitPoints+"hp.\n\n"
     if(hitPoints===0){
         gameOver=true;
+        //reset game variables
+        setGameVariables();
         str+="GAME OVER. YOU DIED. Press [F] to pay respects.";
         return str;
     }
     str+="Try something else:"+ hiScene.getOptionMessage();
     return str;
 };
-//BATTLE LOOP
-    //if not the first time
-        //if response is 1 to 4
-            //remove response from array
-            //generate random damage
-            //reduce hp by damage amount
-                //if hp <= 0 gameOver message - game ends here
-            //show corresponding ambassdor reply
-        //if response is 5
-            //set scene to recovery scene as per usual method
-
-//IT WORKED
-
-
 
 //ADD ALL SCENES MASTER ARRAY
 var allScenes = [];
