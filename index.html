@@ -2,30 +2,26 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
-  <body>
-    <h3>DOM Manipulation Template</h3>
-    <input class="starter" id="input" placeholder="input"/>
-    <h2>output:</h2>
-    <div class="starter" id="output"></div>
-    <script>
+  <body style='margin: 0 20% 0 20%; background-color: peachpuff;'>
+    <img src='https://www.herocollector.com/Content/ArticleImages/01b6004e-8855-4a68-bb38-b9209f43613a.jpg'></img>
+    <div id='intro'>
+      <h2 class='text-center' id='title'>ALLAMAGOOSA</h2>
+      <p>Premise: You're a crewmember on a spaceship, and because the spaceship is headed back to Earth, all significant items will have to be accounted for. The head inspector has ticked off all save one -- an 'off-og'. He has no idea what it is and has tasked you to find this missing item before the spaceship makes a timeleap back to Earth. That leaves you with precisely 10 hours.</p>
+      <p>You can begin by going around the ship to look for the item and ask people questions. Enter "help" to see the commands.</p>  
+    </div>
+    <br />
+    <div id='main-text'>
+      <div id='running-text'></div>
+      <input class="starter" id="input" placeholder="input"/>
+      <div class="starter" id="output"></div>
+    </div>
+    <div id='space-below' style='margin-bottom: 500px;'></div>
+    <p style='float: right;'>A short story by Eric Frank Russell</p>
 
-      var display = function( data ){
-        var displayElement = document.querySelector('#output');
-
-        // get rid of the entire contents
-        displayElement.innerHTML = "";
-
-        // put the data into the div
-        output.innerText = data;
-      };
-
-      document.querySelector('#input').addEventListener('change', function(event){
-        var currentInput = event.target.value;
-        var result = inputHappened(currentInput)
-        display( result );
-      });
-    </script>
+    <script></script>
     <script src="script.js" charset="utf-8"></script>
   </body>
 </html>

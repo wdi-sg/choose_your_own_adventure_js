@@ -1,11 +1,32 @@
-.starter{
-  font-size:30px;
-  padding:10px;
-  display:block;
-  margin:40px;
-  border:3px solid blue;
+body {
+  color: #323232;
+  font-weight: 300;
+  height: 100vh;
+  margin: 0 200px 0 200px;
+  display: block;
+  align-items: center;
+  justify-content: center;
+  text-align: justify;
+  font-family: Helvetica neue, roboto;
+  background-color: peachpuff;
 }
 
-#output{
-  background-color:pink;
+#title {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+#main-text {
+  text-align: left;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h1 {
+  font-weight: 200;
+  font-style: 26px;
+  margin: 10px;
 }
