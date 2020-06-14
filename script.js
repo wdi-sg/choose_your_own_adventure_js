@@ -121,7 +121,7 @@ var thirdLevel = function(){
 }
 
 var fourthLevel = function(){
-    var gameText = "Fourth LEVEL!!!WTFBBQ";
+    var gameText = "A tunnel lies to your left, and stairs down on your right. You faintly hear the sound of something growling..";
     buttonChanger("button2","Back");
     //document.getElementById("button1").disabled = false;
     return gameText;
