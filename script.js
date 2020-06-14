@@ -62,7 +62,10 @@ let game = {
     lessThanEqual1984: {
         question: "I see you're a fan of Back to the Future 1. Your future Mom has just asked you to the Enchantment Under the Sea dance. What do you do? (Y/N/S)",
         Y: {
-            end: "Creepy. I hope you have some backup plan in place to get out of this. Until then, you're stuck in 1955."
+            question: "Creepy. I hope you have some backup plan in place to get out of this. Until then, you're stuck in 1955.........\n\n Do you wish to go back to previous option for a second chance? (YES/NO)",
+            yNo: {
+                end: "You shall be stuck in 1955 forever!"
+            }
         },
         N: {
             end: "Honorable. But this also means that your future Dad will never meet your Mom, and therefore you cannot exist."
@@ -77,7 +80,10 @@ let game = {
             end: "Good idea, but no. The time machine needs to get to 88mph. 12 horsepower ain't gonna cut it."
         },
         M: {
-            end: "You'd be better off drinking the moonshine. Do not pass Go, do not collect $200. Stuck in 1855"
+            question: "You'd be better off drinking the moonshine. Do not pass Go, do not collect $200. Stuck in 1855.........\n\n Do you wish to go back to previous option for a second chance? (YES/NO)",
+            mNo: {
+                end: "You shall be stuck in 1855 forever!"
+            }
         },
         T: {
             question: "Good call! This plan seems to be working. But wait! Clara wants to go Back to the Future with you at the last moment. What do you do? (R/L)",
@@ -141,11 +147,11 @@ function inputHappened(currentInput) {
         if (selectedOption === 'S') {
             step = '1ABS';
             score++;
-            return game.greaterThanEqual2015.B.S.end + " Total Score: " + score;
+            return game.greaterThanEqual2015.B.S.end + " \n\nTotal Score: " + score;
         } else if (selectedOption === 'R') {
             step = '1ABR';
             score--;
-            return game.greaterThanEqual2015.B.R.end + " Total Score: " + score;
+            return game.greaterThanEqual2015.B.R.end + " \n\nTotal Score: " + score;
         }
         else {
             alert("Key in the correct input!");
@@ -157,11 +163,11 @@ function inputHappened(currentInput) {
         if (selectedOption === 'I') {
             step = '1AGI';
             score--;
-            return game.greaterThanEqual2015.G.I.end + " Total Score: " + score;
+            return game.greaterThanEqual2015.G.I.end + " \n\nTotal Score: " + score;
         } else if (selectedOption === 'O') {
             step = '1AGO';
             score++;
-            return game.greaterThanEqual2015.G.O.end + " Total Score: " + score;
+            return game.greaterThanEqual2015.G.O.end + " \n\nTotal Score: " + score;
         }
         else {
             alert("Key in the correct input!");
@@ -173,7 +179,7 @@ function inputHappened(currentInput) {
         if (selectedOption === 'CALVIN KLEIN') {
             step = '1BCK';
             score++;
-            return game.lessThanEqual2014.calvinKlein.end + " Total Score: " + score;
+            return game.lessThanEqual2014.calvinKlein.end + " \n\nTotal Score: " + score;
         } else {
             alert("Key in the correct input! Think of the brand name: CK");
             return game.lessThanEqual2014.question;
@@ -184,18 +190,33 @@ function inputHappened(currentInput) {
         if (selectedOption === 'Y') {
             step = '1CY';
             score -= 2;
-            return game.lessThanEqual1984.Y.end + " Total Score: " + score;
+            return game.lessThanEqual1984.Y.question;
         } else if (selectedOption === 'N') {
             step = '1CN';
             score--;
-            return game.lessThanEqual1984.N.end + " Total Score: " + score;
+            return game.lessThanEqual1984.N.end + " \n\nTotal Score: " + score;
         } else if (selectedOption === 'S') {
             step = '1CS';
             score++;
-            return game.lessThanEqual1984.S.end + " Total Score: " + score;
+            return game.lessThanEqual1984.S.end + " \n\nTotal Score: " + score;
         } else {
             alert("Key in the correct input!");
             return game.lessThanEqual1984.question;
+        }
+    }
+
+    if (step === '1CY') {
+        if (selectedOption === 'YES') {
+            step = '1C';
+            score += 2;
+            return game.lessThanEqual1984.question;
+        } else if (selectedOption === 'NO') {
+            step = '1CNO';
+            score -= 2;
+            return game.lessThanEqual1984.Y.yNo.end + " \n\nTotal Score: " + score;
+        } else {
+            alert ("This is your last chance!")
+            return game.lessThanEqual1984.Y.end;
         }
     }
 
@@ -203,11 +224,11 @@ function inputHappened(currentInput) {
         if (selectedOption === 'H') {
             step = '1DH';
             score--;
-            return game.lessThan1955.H.end + " Total Score: " + score;
+            return game.lessThan1955.H.end + " \n\nTotal Score: " + score;
         } else if (selectedOption === 'M') {
             step = '1DM';
             score -= 2;
-            return game.lessThan1955.M.end + " Total Score: " + score;
+            return game.lessThan1955.M.question ;
         } else if (selectedOption === 'T') {
             step = '1DT';
             score++;
@@ -218,15 +239,30 @@ function inputHappened(currentInput) {
         }
     }
 
+    if (step === '1DM') {
+        if (selectedOption === 'YES') {
+            step = '1D';
+            score += 2;
+            return game.lessThan1955.question;
+        } else if (selectedOption === 'NO') {
+            step = '1DNO';
+            score -= 2;
+            return game.lessThan1955.M.mNo.end + " \n\nTotal Score: " + score;
+        } else {
+            alert ("This is your last chance!")
+            return game.lessThan1955.M.end;
+        }
+    }
+
     if (step === '1DT') {
         if (selectedOption === 'R') {
             step = '1DTG';
             score++;
-            return game.lessThan1955.T.R.end + " Total Score: " + score;
+            return game.lessThan1955.T.R.end + " \n\nTotal Score: " + score;
         } else if (selectedOption === 'L') {
             step = '1DTL';
             score++;
-            return game.lessThan1955.T.L.end + " Total Score: " + score;
+            return game.lessThan1955.T.L.end + " \n\nTotal Score: " + score;
         } else {
             alert("Key in the correct input!");
             return game.lessThan1955.T.question;
