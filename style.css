@@ -1,11 +1,94 @@
-.starter{
-  font-size:30px;
-  padding:10px;
-  display:block;
-  margin:40px;
-  border:3px solid blue;
+@keyframes flickerAnimation {
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
 }
 
-#output{
-  background-color:pink;
+@font-face {
+    font-family: 'sabofilled';
+    src: url('/Users/nuramirahsham/Desktop/GENERAL_ASSEMBLY/git-practice/choose_your_own_adventure_js/webfontkit-20200614-015843/sabo-filled-webfont.woff2') format('woff2'),
+         url('/Users/nuramirahsham/Desktop/GENERAL_ASSEMBLY/git-practice/choose_your_own_adventure_js/webfontkit-20200614-015843/sabo-filled-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'saboregular';
+    src: url('/Users/nuramirahsham/Desktop/GENERAL_ASSEMBLY/git-practice/choose_your_own_adventure_js/webfontkit-20200614-015843/sabo-regular-webfont.woff2') format('woff2'),
+         url('/Users/nuramirahsham/Desktop/GENERAL_ASSEMBLY/git-practice/choose_your_own_adventure_js/webfontkit-20200614-015843/sabo-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+html {
+	background-image: url('/Users/nuramirahsham/Desktop/GENERAL_ASSEMBLY/git-practice/choose_your_own_adventure_js/bg.png');
+	background-size: 100%;
+	background-color: black;
+	text-transform: uppercase;
+}
+
+body {
+	position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-family: 'sabofilled', monospace;
+  text-align: center;
+}
+
+h1 {
+  font-size: 32px;
+  letter-spacing: 1px;
+  margin: 3px;
+}
+
+h2 {
+	font-family: 'saboregular', monospace;
+	font-size: 80px;
+	margin: 5px;
+	text-overflow: clip;
+  letter-spacing: 3px;
+  text-shadow: -2.5px -2.5px 1px rgba(30,242,241, 0.9) , 2.5px 2.5px 1px rgba(246,5,10,0.9);
+}
+
+p {
+	font-size: 18px;
+	letter-spacing: 2px;
+}
+
+.animate-flicker {
+	animation: flickerAnimation .5s infinite;
+}
+@keyframes flickerAnimation {
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+
+.input {
+	margin: 60px;
+}
+
+.bracket {
+	display: inline;
+	font-size: 30px;
+}
+
+#input-name {
+	border: 3px solid rgb(30,242,241);
+	width: 320px;
+	height: 50px;
+	background-color: black;
+	margin-top: 10px;
+	font-family: 'sabofilled', monospace;
+	text-align: center;
+	color: rgb(30,242,241);
+	font-size: 21px;
+	letter-spacing: 1px;
+}
+
+::placeholder {
+	color: rgba(30, 242, 241, 0.7);
 }
