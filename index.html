@@ -1,20 +1,38 @@
 <html>
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
     </style>
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h1>A quest to make the wine of your dreams</h1>
-    <h4>A quest to help you find the perfect vineyard for you based on your personality.<br/><br/> Ready? Steady. C'est parti!</h4>
-
-
+    <h1>A footballer's journey</h1>
+    <h3>Let's see if you have what it takes to become a pro and sign a contract in one of the best clubs in the World!<br></h3>
 
     <input class="starter" id="input" placeholder="Answer here"/>
 
+    <div id="start-button">
+
+    <a href="javascript:;">
+        <svg class="icon-arrow before">
+            <use xlink:href="#arrow"></use>
+        </svg>
+        <span class="label">Start your journey</span>
+        <svg class="icon-arrow after">
+            <use xlink:href="#arrow"></use>
+        </svg>
+    </a>
+<svg style="display: none;">
+  <defs>
+    <symbol id="arrow" viewBox="0 0 35 15">
+      <title>Arrow</title>
+      <path d="M27.172 5L25 2.828 27.828 0 34.9 7.071l-7.07 7.071L25 11.314 27.314 9H0V5h27.172z "/>
+    </symbol>
+  </defs>
+</svg>
+</div>
 
     <h2>Result</h2>
     <div class="starter" id="output"></div>

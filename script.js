@@ -6,3 +6,12 @@ var inputHappened = function(currentInput){
 };
 
 
+//---------------- DOM ----------------
+
+let input = document.getElementById('input');
+let output = document.getElementById('output');
+
+
+
+
+//---------------- FUNCTIONS ----------------
