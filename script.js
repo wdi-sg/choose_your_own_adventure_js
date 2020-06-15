@@ -1,4 +1,5 @@
 console.log("hello script js");
+var ifBossExists = true;
 
 var player = { //player object to store player values
     name: "",
@@ -17,7 +18,7 @@ var inputHappened = function(currentInput){ //captures the button that was press
     return textFill;
 
 };
-var processInput = function(input){
+var processInput = function(input){ //process the button's input to determine the currentlevel. saves into array before moving up to next level.
     if(input == "Left"){
         if(currentLevel == 2 || currentLevel == 6){
             player.level.push(currentLevel);
@@ -150,7 +151,16 @@ var seventhLevel = function(){
 }
 
 var finalLevel = function(){
-    var gameText = "final boss time. pew pew pew. Press back to run like a chicken!"
+    var gameText = ""
+    if(ifBossExists){
+        if(player.items.includes("Axe")){
+            gameText = "An angry, green, ogre charges at you. You panic and swing your axe blindly - somehow you manage to bury it in the ogre's head. Congratulations!";
+        } else {
+            gameText = "An angry, green, ogre charges at you. You are unarmed, press back to run like a chicken!";
+        }
+    } else {
+        gameText = "An empty cave where an ugly ogre used to make it's lair in. Press back to leave.";
+    }
     buttonChanger("button2","Back");
     return gameText;
 }
