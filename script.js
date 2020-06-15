@@ -91,3 +91,12 @@ function showThirdQuestion() {
         thirdQuestion.style.display = "none";
     }
 }
+
+function hideThirdQuestion() {
+    var thirdQuestion = document.querySelector('#enterbuilding');
+    if (thirdQuestion.style.display = "block") {
+        thirdQuestion.style.display = "none";
+    } else {
+        thirdQuestion.style.display = "block";
+    }
+}
