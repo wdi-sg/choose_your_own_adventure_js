@@ -1,6 +1,6 @@
 var text = document.getElementById("text")
 var input = document.getElementById("input")
-var buttonBox = document.getElementById("buttonBox")
+var button = document.getElementById("button")
 var userName;
 
 input.onkeypress = function(event){
@@ -19,9 +19,9 @@ var changeText = function(words){
 
 //set the number of options and create buttons
 var changeButtons = function(buttonList) {
-  buttonBox.innerHTML = "";
+  button.innerHTML = "";
   for (var i = 0; i <buttonList.length; i++ ) {
-    buttonBox.innerHTML += "<button onClick="+buttonList[i][1]+">" + buttonList[i][0] + "</button>";
+    button.innerHTML += "<button onClick="+buttonList[i][1]+">" + buttonList[i][0] + "</button>";
   }
 }
 
