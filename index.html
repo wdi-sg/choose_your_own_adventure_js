@@ -1,31 +1,19 @@
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h3>DOM Manipulation Template</h3>
-    <input class="starter" id="input" placeholder="input"/>
-    <h2>output:</h2>
-    <div class="starter" id="output"></div>
-    <script>
+    <div class = "container">
+      <div class = "output">
+    "Welcome to the house of the terror, try to escape if you can. To escape alive you have to find the key hidden in one of the rooms. but be careful, enemies are waiting to attack you. Good luck!!";
+      </div>
 
-      var display = function( data ){
-        var displayElement = document.querySelector('#output');
+    
+    </div>
 
-        // get rid of the entire contents
-        displayElement.innerHTML = "";
-
-        // put the data into the div
-        output.innerText = data;
-      };
-
-      document.querySelector('#input').addEventListener('change', function(event){
-        var currentInput = event.target.value;
-        var result = inputHappened(currentInput)
-        display( result );
-      });
     </script>
-    <script src="script.js" charset="utf-8"></script>
+    <script src="script2.js" charset="utf-8"></script>
   </body>
 </html>

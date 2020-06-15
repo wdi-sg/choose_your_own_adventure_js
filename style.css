@@ -1,9 +1,25 @@
-.starter{
-  font-size:30px;
+.container{
+  font-size:24px;
+  color: white;
   padding:10px;
   display:block;
   margin:40px;
   border:3px solid blue;
+  background-color: rgb(94, 85, 85);
+}
+.roomContainer{
+
+  font-size:24px;
+  padding:10px;
+  display:block;
+  margin:40px;
+  border:3px solid blue;
+
+}
+.enemies{
+  background-color: aquamarine;
+  width: 50px;
+  height: 50px;
 }
 
 #output{
