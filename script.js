@@ -7,9 +7,13 @@ var buttonGroup = document.getElementById("btn-group");
 let health = [0x1F970, 0x1F60D, 0x1F63B, 0x1F496, 0x1F498];
 var healthBar = document.getElementById("health");
 
-document.getElementById("inventory").style.visibility = "hidden";
+// document.getElementById("inventory").style.visibility = "hidden";
+if (document.getElementById("inventory")) {
+    document.getElementById("inventory").style.display = "none";
+}
 
-document.getElementById("lets-play-button").addEventListener('click', function(event) {
+if (document.getElementById("lets-play-button")) {
+    document.getElementById("lets-play-button").addEventListener('click', function(event) {
     username = document.querySelector("#input").value;
     if (validateInput(username) == "") { // validates name
         header.innerHTML = "Oops! Invalid input, please try again ~";
@@ -19,13 +23,18 @@ document.getElementById("lets-play-button").addEventListener('click', function(e
         username = validateInput(username);
         destroyAllButtons();
         document.querySelector("#input").remove();
-        document.getElementById("inventory").style.visibility = "visible";
+        // document.getElementById("inventory").style.visibility = "visible";
+        document.getElementById("inventory").style.display = "initial";
         startGame();
     }
-});
+    });
+}
+
+if (document.getElementById("items-game")) {
+    // attackMode();
+}
 
 function startGame() {
-  console.log("The game restarts");
   state = { wand: false, keys: false, book: false };
   displayFullHealth();
   displayQuestion(1);
@@ -186,10 +195,10 @@ function attackMode() {
     // optional: display current inventory
     console.log("attack mode called");
     window.location.replace("game.html");
-    state = JSON.parse(localStorage.getItem('state'));
+    state = Object.assign(state, JSON.parse(localStorage.getItem('state')));
+    console.log("The state is: " + state);
     document.getElementById("user-game").innerHTML = username;
     displayItems("items-game");
-    console.log("attack mode called")
+    console.log("attack mode called");
 }
-
 
