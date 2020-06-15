@@ -1,11 +1,46 @@
-.starter{
-  font-size:30px;
-  padding:10px;
-  display:block;
-  margin:40px;
-  border:3px solid blue;
+*,*::before,*::after {
+    box-sizing: border-box;
+    font-family: sans-serif;
 }
 
-#output{
-  background-color:pink;
+body {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: hsl(0, 0%, 82%);
+}
+
+.container{
+    width: 800px;
+    max-width: 80%;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 2px;
+}
+
+.btn-grid {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn {
+    background-color: hsl(0, 0%, 54%);
+    border: 1px solid hsl(0, 0%, 27%);
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: white;
+    font-weight: bold;
+    outline: none;
+}
+
+.btn:hover {
+    border: 2px solid hsl(0, 0%, 12%);
+    border-radius: 5px;
 }
