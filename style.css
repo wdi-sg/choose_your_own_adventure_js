@@ -1,11 +1,105 @@
-.starter{
-  font-size:30px;
-  padding:10px;
-  display:block;
-  margin:40px;
-  border:3px solid blue;
+@import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap');
+
+body {
+  color: white;
+  text-align: center;
+  font-family: 'Gloria Hallelujah', cursive;
+  background-image: url("1052.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 150px;
+  padding-bottom: 300px;
 }
 
-#output{
-  background-color:pink;
+h1 {
+  font-weight: 200;
+  font-style: 26px;
+  margin: 10px;
+  position: absolute;
+  top: 10px;
+}
+
+button, #button-grp {
+  background-color: black;
+  padding: 10px;
+  font-size: 15px;
+  color: white;
+  margin: 15px;
+  font-family: 'Gloria Hallelujah', cursive;
+  border-radius: 10px;
+  border-color: black;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+}
+
+input {
+    border-radius: 10px;
+    border: 2px solid black;
+    height: 40px;
+    text-align: center;
+    font-family: 'Gloria Hallelujah', cursive;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+}
+
+#content {
+    padding: 10px;
+    max-width: 400px;
+    background-color: grey;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin: auto;
+    background: rgba(105, 105, 105, 0.6);
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+    /*filter : url(#wavy);*/
+}
+
+#inventory {
+    position: absolute;
+    width: 150px;
+    height: 60px;
+    background: rgba(105, 105, 105, 0.3);
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+    right: 20px;
+    top: 20px;
+    border: 2px solid black;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+#inventory p {
+    padding: 0;
+    margin: 0;
+}
+
+svg {
+    width: 0;
+    height: 0;
+}
+
+/*game */
+
+#game-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+    background-color: pink;
+    margin: 0px;
+    padding: 0px;
+}
+
+.game-col {
+    background-color: red;
+    border: 2px solid black;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+    padding: 50px;
+    border-radius: 10px;
+    height: 40vh;
+    width: 100vh;
+}
+
+@media screen and (max-width: 992px) {
+    .game-col {
+        width: 1000px;
+    }
 }

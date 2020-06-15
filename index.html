@@ -1,31 +1,47 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+   <title>Mage and I!</title>
   </head>
+
   <body>
-    <h3>DOM Manipulation Template</h3>
-    <input class="starter" id="input" placeholder="input"/>
-    <h2>output:</h2>
-    <div class="starter" id="output"></div>
-    <script>
+    <div id="inventory">
+        <p id="health">100</p>
+        <p id="items"></p>
+    </div>
+    <div id="content">
+      <p id="header">Hello there! What's your name?</p>
+      <input id="input" type="text">
 
-      var display = function( data ){
-        var displayElement = document.querySelector('#output');
+<!--     <div id="scene">
+      <div data-depth="0.2">
+          <li><img src="star.png"></li>
+      </div>
+    </div> -->
+    <div id="btn-group">
+        <button id="lets-play-button">Let's play!</button>
+    </div>
+    </div>
 
-        // get rid of the entire contents
-        displayElement.innerHTML = "";
+    <div id="wave" class="animated-wave"></div>
 
-        // put the data into the div
-        output.innerText = data;
-      };
-
-      document.querySelector('#input').addEventListener('change', function(event){
-        var currentInput = event.target.value;
-        var result = inputHappened(currentInput)
-        display( result );
-      });
-    </script>
-    <script src="script.js" charset="utf-8"></script>
   </body>
+  <script type="text/javascript" src="weapons.js"></script>
+  <script type="text/javascript" src="textNodes.js"></script>
+  <script type="text/javascript" src="script.js"></script>
+  <script type="text/javascript" src="parallax.js"></script>
+<!--   <script type="text/javascript">
+      var scene = document.getElementById('scene');
+      var parallax = new Parallax(scene);
+  </script> -->
+<!--   <svg>
+    <filter id="wavy">
+        <feTurbulence x="0" y="0" baseFrequency="0.02" numOctaves="5" seed="2">
+        <animate attributeName="baseFrequency" dur="60s" values="0.02;0.05;0.02" repeatCount = "indefinite"/>
+    </feTurbulence>
+    <feDisplacementMap in="SourceGraphic" scale="30">
+    </filter>
+  </svg> -->
 </html>
