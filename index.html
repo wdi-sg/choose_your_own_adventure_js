@@ -4,8 +4,9 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h3>DOM Manipulation Template</h3>
-    <input class="starter" id="input" placeholder="input"/>
+
+    <h3>What is your name?</h3>
+    <input class="starter" id="name" />
     <h2>output:</h2>
     <div class="starter" id="output"></div>
     <script>
@@ -20,9 +21,9 @@
         output.innerText = data;
       };
 
-      document.querySelector('#input').addEventListener('change', function(event){
-        var currentInput = event.target.value;
-        var result = inputHappened(currentInput)
+      document.querySelector('#name').addEventListener('change', function(event){
+        var name = event.target.value;
+        var result = question1(name);
         display( result );
       });
     </script>
