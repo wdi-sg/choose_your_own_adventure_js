@@ -95,7 +95,6 @@ class Room {
     document.querySelector("body").appendChild(this.enemyContainer);
 
     this.creatingRoomsButtons();
-    this.creatingEnemies();
     //setInterval(this.movingEnemies, 2000);
   }
   creatingRoomsButtons() {
@@ -114,28 +113,6 @@ class Room {
       this.roomOptEl[i].addEventListener("change", this.controllingRooms);
     }
   }
-  creatingEnemies() {
-    if (this.numEnemies !== 0) {
-      for (let i = 0; i <= this.numEnemies; i++) {
-        const enemyEl = document.createElement("div");
-        enemyEl.id = `enemy[${i}]`;
-        enemyEl.className = "enemies";
-        this.enemyContainer.appendChild(enemyEl);
-        enemyEl.addEventListener("click", this.shootingEnemies);
-      }
-    }
-  }
-
-  movingEnemies() {
-    console.log("hello");
-    this.enemyX = this.enemyX + 1;
-
-    this.enemyEl.style. left = this.enemyX
-    this.enemyY = Math.sin(this.enemyX);
-    this.enemyEl.style.top = this.enemyY;
-  }
-
-  shootingEnemies(e) {}
 
   controllingRooms = (e) => {
     document.querySelector(".output").innerText = "";
@@ -151,3 +128,32 @@ class Room {
 }
 
 const hall = new Room(totalRooms.hall.connectingRooms, totalRooms.hall.msg);
+
+class Enemy {
+  constructor() {
+    this.x = x;
+    this.y = y;
+
+
+
+    enemyEl.addEventListener("click", this.shootingEnemies);
+  }
+  creatingEnemies() {
+    if (this.numEnemies !== 0) {
+      for (let i = 0; i <= this.numEnemies; i++) {
+        this.enemyEl = document.createElement("div");
+        this.enemyEl.id = `enemy[${i}]`;
+        this.enemyEl.className = "enemies";
+        this.enemyContainer.appendChild(enemyEl);
+      }
+    }
+  }
+
+  movingEnemies() {
+    console.log("hello");
+    this.enemyX = this.enemyX + 1;
+    this.enemyEl.style.left = this.enemyX;
+    this.enemyY = Math.sin(this.enemyX);
+    this.enemyEl.style.top = this.enemyY;
+  }
+}
