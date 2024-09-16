@@ -6,8 +6,11 @@
   <body>
     <h3>DOM Manipulation Template</h3>
     <input class="starter" id="input" placeholder="input"/>
+    <input id="button1" type="button" value="ONE"/>
+    <input id="button2" type="button" value="TWO"/>
+    <input id="button3" type="button" value="THREE"/>
     <h2>output:</h2>
-    <div class="starter" id="output"></div>
+    <div class="starter" id="output">You hear noises coming from a cave, press any button to continue...</div>
     <script>
 
       var display = function( data ){
@@ -19,12 +22,29 @@
         // put the data into the div
         output.innerText = data;
       };
-
-      document.querySelector('#input').addEventListener('change', function(event){
+      document.querySelector('#button1').addEventListener('click',function(event){
+        //first button clicked, run first option function here
         var currentInput = event.target.value;
         var result = inputHappened(currentInput)
         display( result );
       });
+      document.querySelector('#button2').addEventListener('click',function(event){
+        //second button clicked, run second option function here
+        var currentInput = event.target.value;
+        var result = inputHappened(currentInput)
+        display( result );
+      });
+      document.querySelector('#button3').addEventListener('click',function(event){
+        //third button clicked, run third option function here
+        var currentInput = event.target.value;
+        var result = inputHappened(currentInput)
+        display( result );
+      });
+      /* document.querySelector('#input').addEventListener('change', function(event){
+        var currentInput = event.target.value;
+        var result = inputHappened(currentInput)
+        display( result );
+      }); */
     </script>
     <script src="script.js" charset="utf-8"></script>
   </body>
